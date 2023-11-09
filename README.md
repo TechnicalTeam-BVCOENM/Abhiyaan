@@ -1,6 +1,6 @@
-# darpan
+# Darpan
 
-A new Flutter project.
+Bharati Vidyapeeth College of Engineering, Navi Mumbai.
 
 ## Getting Started
 
