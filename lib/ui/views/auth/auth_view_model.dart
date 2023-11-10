@@ -8,6 +8,6 @@ class AuthViewModel extends BaseViewModel {
   final TextEditingController emailIdTextController = TextEditingController();
 
   void toHomePage(BuildContext context) {
-    _navigationService.navigateTo(Routes.homeView);
+    _navigationService.navigateTo(Routes.bottomNavView);
   }
 }
