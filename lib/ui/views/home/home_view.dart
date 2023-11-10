@@ -1,6 +1,4 @@
 import 'package:darpan/file_exporter.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 part 'home_view_model.dart';
 
 class HomeView extends StatelessWidget {

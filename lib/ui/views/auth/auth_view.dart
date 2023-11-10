@@ -36,6 +36,7 @@ class AuthView extends StatelessWidget {
                       height: 70,
                     ),
                     TextFormField(
+                      controller: model.emailIdTextController,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 15, vertical: 15),
