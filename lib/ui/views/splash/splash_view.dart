@@ -40,7 +40,8 @@ class SplashView extends StatelessWidget {
               ),
             ],
           ),
-        ));
+        ),
+        backgroundColor: Color(0xFFD6D5FA),);
       },
     );
   }
