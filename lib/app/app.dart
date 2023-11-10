@@ -1,4 +1,5 @@
 import 'package:darpan/services/local_storage_service.dart';
+import 'package:darpan/theme/theme_service.dart';
 import 'package:darpan/ui/views/auth/auth_view.dart';
 import 'package:darpan/ui/views/profile/profile_view.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -15,7 +16,8 @@ import 'package:darpan/ui/views/splash/splash_view.dart';
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),
-    LazySingleton(classType: LocalStorageService)
+    LazySingleton(classType: LocalStorageService),
+    LazySingleton(classType: ThemeService)
   ],
   logger: StackedLogger(),
 )
