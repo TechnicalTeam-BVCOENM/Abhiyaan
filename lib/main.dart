@@ -12,9 +12,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Darpan',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          scaffoldBackgroundColor: ColorThemeClass.backgroundColor,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: ColorThemeClass.backgroundColor,
+            foregroundColor: ColorThemeClass.secondaryBlackColor,
+          )),
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
       initialRoute: Routes.splashView,
