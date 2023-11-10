@@ -1,5 +1,6 @@
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/theme/responsive_utils.dart';
+import 'package:darpan/utils/extension.dart';
 part 'auth_view_model.dart';
 
 class AuthView extends StatelessWidget {
@@ -13,7 +14,7 @@ class AuthView extends StatelessWidget {
         return GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
           child: Scaffold(
-            backgroundColor: ColorThemeClass.backgroundColor,
+            backgroundColor: context.colorScheme.backgroundColor,
             body: Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
               child: SingleChildScrollView(
@@ -30,7 +31,7 @@ class AuthView extends StatelessWidget {
                     ),
                     Text(
                       'Sign In',
-                      style: FontThemeClass().large(),
+                      style: model.fontTheme.large(context),
                     ),
                     const SizedBox(
                       height: 70,
@@ -45,11 +46,12 @@ class AuthView extends StatelessWidget {
                               Radius.circular(15),
                             ),
                             borderSide: BorderSide.none),
-                        fillColor: ColorThemeClass.secondaryWhiteColor,
+                        fillColor: context.colorScheme.secondaryWhiteColor,
                         filled: true,
-                        focusColor: ColorThemeClass.secondaryWhiteColor,
+                        focusColor: context.colorScheme.secondaryWhiteColor,
                         hintText: 'Student Email ID',
-                        hintStyle: FontThemeClass().subHeading2(),
+                        hintStyle: model.fontTheme.subHeading2(
+                            context, context.colorScheme.secondarySectionColor),
                       ),
                     ),
                     const SizedBox(
@@ -68,7 +70,8 @@ class AuthView extends StatelessWidget {
                         filled: true,
                         focusColor: Colors.white,
                         hintText: 'Password',
-                        hintStyle: FontThemeClass().subHeading2(),
+                        hintStyle: model.fontTheme.subHeading2(
+                            context, context.colorScheme.secondarySectionColor),
                       ),
                     ),
                     Align(
@@ -78,8 +81,8 @@ class AuthView extends StatelessWidget {
                             const EdgeInsetsDirectional.symmetric(vertical: 10),
                         child: Text(
                           'Forget password?',
-                          style: FontThemeClass()
-                              .subHeading2(color: ColorThemeClass.primaryColor),
+                          style: model.fontTheme.subHeading2(
+                              context, context.colorScheme.primaryColor),
                         ),
                       ),
                     ),
@@ -94,7 +97,7 @@ class AuthView extends StatelessWidget {
                           minimumSize: MaterialStateProperty.all(
                               const Size(double.infinity, 50)),
                           backgroundColor: MaterialStateProperty.all(
-                              ColorThemeClass.primaryColor),
+                              context.colorScheme.primaryColor),
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40.0),
@@ -104,7 +107,7 @@ class AuthView extends StatelessWidget {
                         child: Text(
                           'Sign In',
                           style: FontThemeClass().heading(
-                              color: ColorThemeClass.secondaryWhiteColor),
+                              context, context.colorScheme.secondaryWhiteColor),
                         ),
                       ),
                     ),
@@ -115,12 +118,12 @@ class AuthView extends StatelessWidget {
                         text: TextSpan(
                           text: 'Problem with sign in? ',
                           style: FontThemeClass().subHeading2(
-                              color: ColorThemeClass.secondaryBlackColor),
+                              context, context.colorScheme.secondaryBlackColor),
                           children: <TextSpan>[
                             TextSpan(
                               text: 'Report issue',
                               style: FontThemeClass().subHeading2(
-                                  color: ColorThemeClass.primaryColor),
+                                  context, context.colorScheme.primaryColor),
                             ),
                           ],
                         ),
