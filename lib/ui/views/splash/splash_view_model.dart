@@ -6,6 +6,6 @@ class SplashViewModel extends BaseViewModel {
 
   void init(BuildContext context) async {
     await Future.delayed(3.seconds);
-    _navigationService.navigateTo(Routes.homeView);
+    _navigationService.navigateTo(Routes.authView);
   }
 }
