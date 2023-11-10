@@ -1,4 +1,5 @@
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/theme/responsive_utils.dart';
 part 'auth_view_model.dart';
 
 class AuthView extends StatelessWidget {
@@ -10,52 +11,51 @@ class AuthView extends StatelessWidget {
       viewModelBuilder: () => AuthViewModel(),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: const Color.fromRGBO(236, 236, 255, 1),
+          backgroundColor: ColorThemeClass.backgroundColor,
           body: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 50.0, vertical: 100),
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const CircleAvatar(
-                  radius: 130,
-                  backgroundColor: Colors.white,
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 45),
+                  width: ResponsiveUtils.screenWidth(context) * 0.6,
+                  child: Image.asset(
+                    'assets/images/logo.png',
+                  ),
                 ),
-                const Text(
+                Text(
                   'Sign In',
-                  style: TextStyle(
-                      fontSize: 35,
-                      color: Color.fromRGBO(113, 110, 237, 1),
-                      fontWeight: FontWeight.w900),
+                  style: FontThemeClass().large(),
                 ),
                 const SizedBox(
                   height: 70,
                 ),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                    border: OutlineInputBorder(
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 15),
+                    border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(15),
                         ),
                         borderSide: BorderSide.none),
-                    fillColor: Colors.white,
+                    fillColor: ColorThemeClass.secondaryWhiteColor,
                     filled: true,
-                    focusColor: Colors.white,
+                    focusColor: ColorThemeClass.secondaryWhiteColor,
                     hintText: 'Student Email ID',
-                    hintStyle: TextStyle(color: Colors.grey),
+                    hintStyle: FontThemeClass().subHeading2(),
                   ),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                    border: OutlineInputBorder(
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 15),
+                    border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(15),
                         ),
@@ -64,18 +64,18 @@ class AuthView extends StatelessWidget {
                     filled: true,
                     focusColor: Colors.white,
                     hintText: 'Password',
-                    hintStyle: TextStyle(color: Colors.grey),
+                    hintStyle: FontThemeClass().subHeading2(),
                   ),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.centerRight,
                   child: Padding(
-                    padding: EdgeInsetsDirectional.symmetric(vertical: 10),
+                    padding:
+                        const EdgeInsetsDirectional.symmetric(vertical: 10),
                     child: Text(
                       'Forget password?',
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: Color.fromRGBO(113, 110, 237, 1)),
+                      style: FontThemeClass()
+                          .subHeading2(color: ColorThemeClass.primaryColor),
                     ),
                   ),
                 ),
@@ -89,35 +89,32 @@ class AuthView extends StatelessWidget {
                       minimumSize: MaterialStateProperty.all(
                           const Size(double.infinity, 50)),
                       backgroundColor: MaterialStateProperty.all(
-                        const Color.fromRGBO(113, 110, 237, 1),
-                      ),
+                          ColorThemeClass.primaryColor),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40.0),
                         ),
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       'Sign In',
-                      style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                      style: FontThemeClass()
+                          .heading(color: ColorThemeClass.secondaryWhiteColor),
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsetsDirectional.symmetric(vertical: 10),
                   child: RichText(
-                    text: const TextSpan(
+                    text: TextSpan(
                       text: 'Problem with sign in? ',
-                      style: TextStyle(fontSize: 15, color: Colors.black54),
+                      style: FontThemeClass().subHeading2(
+                          color: ColorThemeClass.secondaryBlackColor),
                       children: <TextSpan>[
                         TextSpan(
                           text: 'Report issue',
-                          style: TextStyle(
-                              fontSize: 15,
-                              color: Color.fromRGBO(113, 110, 237, 1)),
+                          style: FontThemeClass()
+                              .subHeading2(color: ColorThemeClass.primaryColor),
                         ),
                       ],
                     ),

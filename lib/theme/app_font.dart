@@ -7,6 +7,16 @@ class FontThemeClass {
     fontWeight: FontWeight.bold,
     color: ColorThemeClass.secondaryBlackColor,
   );
+  TextStyle large({
+    Color color = ColorThemeClass.primaryColor,
+  }) {
+    return TextStyle(
+      fontSize: 32,
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.w800,
+      color: color,
+    );
+  }
 
   TextStyle heading({
     Color color = ColorThemeClass.secondaryBlackColor,
