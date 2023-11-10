@@ -1,4 +1,5 @@
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/utils/extension.dart';
 part 'home_view_model.dart';
 
 class HomeView extends StatelessWidget {
@@ -13,13 +14,13 @@ class HomeView extends StatelessWidget {
           appBar: AppBar(
             centerTitle: false,
             title: Text('Hey ${model.user} 👋',
-                style: FontThemeClass().appBarText),
+                style: model.fontTheme.appBarText(context)),
             automaticallyImplyLeading: false,
             elevation: 0,
             actions: [
               IconButton(
                 splashRadius: 24,
-                splashColor: ColorThemeClass.backgroundColor,
+                splashColor: context.colorScheme.backgroundColor,
                 icon: const Icon(Icons.notifications_none_rounded, size: 24),
                 onPressed: () {},
               )
@@ -62,9 +63,9 @@ class HomeView extends StatelessWidget {
                       child: SmoothPageIndicator(
                         controller: model.pageController,
                         count: model.currentIndex,
-                        effect: const JumpingDotEffect(
-                          dotColor: ColorThemeClass.secondarySectionColor,
-                          activeDotColor: ColorThemeClass.primaryColor,
+                        effect: JumpingDotEffect(
+                          dotColor: context.colorScheme.secondarySectionColor,
+                          activeDotColor: context.colorScheme.primaryColor,
                           dotHeight: 8,
                           dotWidth: 8,
                           // expansionFactor: 4,
@@ -79,7 +80,7 @@ class HomeView extends StatelessWidget {
                     height: 135,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
-                      color: ColorThemeClass.secondaryWhiteColor,
+                      color: context.colorScheme.secondaryWhiteColor,
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
@@ -92,7 +93,7 @@ class HomeView extends StatelessWidget {
                       margin: const EdgeInsets.symmetric(vertical: 8),
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                        color: ColorThemeClass.secondaryWhiteColor,
+                        color: context.colorScheme.secondaryWhiteColor,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Column(
@@ -104,16 +105,16 @@ class HomeView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(model.departmentUpdatesList[i].name,
-                                    style: const TextStyle(
-                                      color: ColorThemeClass.primaryColor,
+                                    style: TextStyle(
+                                      color: context.colorScheme.primaryColor,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w800,
                                     )),
                                 Text(
                                   "Posted ${model.departmentUpdatesList[i].date}",
-                                  style: const TextStyle(
-                                    color:
-                                        ColorThemeClass.secondarySectionColor,
+                                  style: TextStyle(
+                                    color: context
+                                        .colorScheme.secondarySectionColor,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -126,7 +127,7 @@ class HomeView extends StatelessWidget {
                                 horizontal: 12.0, vertical: 8),
                             child: Text(
                               "${model.departmentUpdatesList[i].description}...",
-                              style: FontThemeClass().paragraph(),
+                              style: model.fontTheme.paragraph(context),
                             ),
                           ),
                         ],
@@ -152,7 +153,8 @@ class SectionText extends StatelessWidget {
       margin: const EdgeInsets.only(top: 18, bottom: 8),
       child: Text(
         title,
-        style: FontThemeClass().subHeading2(),
+        style: FontThemeClass()
+            .subHeading2(context, context.colorScheme.secondarySectionColor),
       ),
     );
   }

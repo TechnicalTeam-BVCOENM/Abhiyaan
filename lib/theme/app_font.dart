@@ -1,71 +1,63 @@
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/utils/extension.dart';
 
 class FontThemeClass {
-  TextStyle appBarText = const TextStyle(
-    fontSize: 26,
-    fontFamily: 'Poppins',
-    fontWeight: FontWeight.bold,
-    color: ColorThemeClass.secondaryBlackColor,
-  );
-  TextStyle large({
-    Color color = ColorThemeClass.primaryColor,
-  }) {
-    return TextStyle(
-      fontSize: 32,
-      fontFamily: 'Poppins',
-      fontWeight: FontWeight.w800,
-      color: color,
-    );
-  }
-
-  TextStyle heading({
-    Color color = ColorThemeClass.secondaryBlackColor,
-  }) {
+  TextStyle appBarText(BuildContext context) {
     return TextStyle(
       fontSize: 26,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.bold,
-      color: color,
+      color: context.colorScheme.secondaryBlackColor,
     );
   }
 
-  TextStyle heading2({
-    Color color = ColorThemeClass.secondaryBlackColor,
-  }) {
+  TextStyle large(BuildContext context) {
+    return TextStyle(
+      fontSize: 32,
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.w800,
+      color: context.colorScheme.primaryColor,
+    );
+  }
+
+  TextStyle heading(BuildContext context, Color? color) {
+    return TextStyle(
+      fontSize: 26,
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.bold,
+      color: color ?? context.colorScheme.secondaryBlackColor,
+    );
+  }
+
+  TextStyle heading2(BuildContext context) {
     return TextStyle(
       fontSize: 24,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.w600,
-      color: color,
+      color: context.colorScheme.secondaryBlackColor,
     );
   }
 
-  TextStyle heading3({
-    Color color = ColorThemeClass.secondaryBlackColor,
-  }) {
+  TextStyle heading3(BuildContext context) {
     return TextStyle(
       fontSize: 20,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.w400,
-      color: color,
+      color: context.colorScheme.secondaryBlackColor,
     );
   }
 
-  TextStyle subHeading({
-    Color color = ColorThemeClass.secondarySectionColor,
-  }) {
+  TextStyle subHeading(BuildContext context) {
     return TextStyle(
       fontSize: 16,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.w700,
       letterSpacing: 0.1,
-      color: color,
+      color: context.colorScheme.secondarySectionColor,
     );
   }
 
-  TextStyle subHeading2({
-    Color color = ColorThemeClass.secondarySectionColor,
-  }) {
+  TextStyle subHeading2(BuildContext context, Color color) {
     return TextStyle(
       fontSize: 14,
       fontFamily: 'Poppins',
@@ -74,15 +66,14 @@ class FontThemeClass {
     );
   }
 
-  TextStyle paragraph({
-    double? size = 14,
-    Color color = ColorThemeClass.secondaryBlackColor,
-  }) {
+  TextStyle paragraph(
+    BuildContext context,
+  ) {
     return TextStyle(
-      fontSize: size,
+      fontSize: 14,
       letterSpacing: 0.5,
       fontFamily: 'Poppins',
-      color: color,
+      color: context.colorScheme.secondaryBlackColor,
     );
   }
 }

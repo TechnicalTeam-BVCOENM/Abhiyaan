@@ -2,6 +2,8 @@ part of 'home_view.dart';
 
 class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
+  final fontTheme = FontThemeClass();
+
   String user = "Sachin";
   int currentIndex = 3;
 
