@@ -1,25 +1,10 @@
 import 'package:darpan/file_exporter.dart';
-import 'package:darpan/theme/app_color.dart';
-import 'package:darpan/theme/app_font.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 part 'home_view_model.dart';
 
-// ignore: must_be_immutable
 class HomeView extends StatelessWidget {
-  static var name;
-
-  HomeView({super.key});
-  PageController _controller = PageController();
-
- 
- // ignore: non_constant_identifier_names
- List<DepartmentUpdates> departmentUpdatesList =[
-  DepartmentUpdates(name: "Placement", description: "A TCS company will be arrived on 17 of December 2023.  This company require Software Develop", date:"Today"  ),
-  DepartmentUpdates(name: "Placement", description: "A TCS company will be arrived on 17 of December 2023.  This company require Software Develop", date:"20-08-23"   ),
-  DepartmentUpdates(name: "Placement", description: "A TCS company will be arrived on 17 of December 2023.  This company require Software Develop", date: "18-09-23" ),
- ];
-
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +14,8 @@ class HomeView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             centerTitle: false,
-            title:
-                Text('Hey ${model.user} 👋', style: FontThemeClass().appBarText),
+            title: Text('Hey ${model.user} 👋',
+                style: FontThemeClass().appBarText),
             automaticallyImplyLeading: false,
             elevation: 0,
             actions: [
@@ -56,7 +41,7 @@ class HomeView extends StatelessWidget {
                     height: 220,
                     child: PageView.builder(
                         itemCount: model.currentIndex,
-                        controller: _controller,
+                        controller: model.pageController,
                         pageSnapping: true,
                         itemBuilder: (context, index) {
                           return Container(
@@ -77,7 +62,7 @@ class HomeView extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 9.0),
                     child: Center(
                       child: SmoothPageIndicator(
-                        controller: _controller,
+                        controller: model.pageController,
                         count: model.currentIndex,
                         effect: const JumpingDotEffect(
                           dotColor: ColorThemeClass.secondarySectionColor,
@@ -112,7 +97,7 @@ class HomeView extends StatelessWidget {
                         color: ColorThemeClass.secondaryWhiteColor,
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Column(  
+                      child: Column(
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(
@@ -120,18 +105,17 @@ class HomeView extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                Text(model.departmentUpdatesList[i].name,
+                                    style: const TextStyle(
+                                      color: ColorThemeClass.primaryColor,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w800,
+                                    )),
                                 Text(
-                                  departmentUpdatesList[i].name,
-                                  style:const TextStyle(
-                                    color: ColorThemeClass.primaryColor,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w800,
-                                  )
-                                ),
-                                Text(
-                                  "Posted ${departmentUpdatesList[i].date}",
-                                   style:const TextStyle(
-                                    color: ColorThemeClass.secondarySectionColor,
+                                  "Posted ${model.departmentUpdatesList[i].date}",
+                                  style: const TextStyle(
+                                    color:
+                                        ColorThemeClass.secondarySectionColor,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -143,8 +127,8 @@ class HomeView extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 12.0, vertical: 8),
                             child: Text(
-                              "${departmentUpdatesList[i].description}...",
-                               style: FontThemeClass().paragraph(),
+                              "${model.departmentUpdatesList[i].description}...",
+                              style: FontThemeClass().paragraph(),
                             ),
                           ),
                         ],
@@ -175,4 +159,3 @@ class SectionText extends StatelessWidget {
     );
   }
 }
-

@@ -1,4 +1,3 @@
-import 'package:darpan/theme/app_color.dart';
 import 'file_exporter.dart';
 
 void main() {
@@ -15,12 +14,11 @@ class MyApp extends StatelessWidget {
       title: 'Darpan',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: ColorThemeClass.backgroundColor,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: ColorThemeClass.backgroundColor,
-          foregroundColor: ColorThemeClass.secondaryBlackColor,
-        )
-      ),
+          scaffoldBackgroundColor: ColorThemeClass.backgroundColor,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: ColorThemeClass.backgroundColor,
+            foregroundColor: ColorThemeClass.secondaryBlackColor,
+          )),
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
       initialRoute: Routes.splashView,

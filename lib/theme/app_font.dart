@@ -1,5 +1,4 @@
 import 'package:darpan/file_exporter.dart';
-import 'package:darpan/theme/app_color.dart';
 
 class FontThemeClass {
   TextStyle appBarText = const TextStyle(
