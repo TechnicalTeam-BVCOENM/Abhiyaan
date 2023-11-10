@@ -18,6 +18,8 @@ dependencies:
   easy_widgets: ^0.0.7
   logger:
   smooth_page_indicator: ^1.1.0
+  injectable: ^2.3.2
+  get_storage: ^2.1.1
 
 dev_dependencies:
   flutter_test:
