@@ -1,8 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
-import 'package:darpan/utils/extension.dart';
-import 'home_view_component.dart';
+import '../../../theme/responsive_utils.dart';
 part 'home_view_model.dart';
 part 'home_view_component.dart';
 
@@ -78,7 +77,6 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
                   // Quick Links
                   const SectionText(title: "Quick Links"),
                   horizontalStoryRow(context, model.quickLinksList,50),

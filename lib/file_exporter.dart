@@ -12,6 +12,8 @@ export 'package:darpan/services/local_storage_service.dart';
 // Theme
 export 'package:darpan/theme/app_color.dart';
 export 'package:darpan/theme/app_font.dart';
+export 'package:darpan/utils/extension.dart';
+
 
 // Dependencies
 export 'package:stacked/stacked.dart';
