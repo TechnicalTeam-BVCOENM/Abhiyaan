@@ -71,7 +71,7 @@ class BottomNavView extends StatelessWidget {
                       ),
                       const BottomNavigationBarItem(
                         label: '',
-                        icon: Icon(Icons.person_2_outlined),
+                        icon: Icon(Icons.calendar_month_outlined),
                         activeIcon: BottomNavActiveIcon(
                           icon: Icons.calendar_month_outlined,
                           text: "Event",
