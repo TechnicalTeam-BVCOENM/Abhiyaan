@@ -23,6 +23,7 @@ dependencies:
   expandable_text: ^2.3.0
   firebase_core: ^2.22.0
   cloud_firestore: ^4.9.2
+  carousel_slider: ^4.2.1
   firebase_auth: ^4.13.0
 
 dev_dependencies:
