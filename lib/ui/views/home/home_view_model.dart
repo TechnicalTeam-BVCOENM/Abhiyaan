@@ -28,19 +28,23 @@ class HomeViewModel extends BaseViewModel {
   ];
 
   // Container expand controller
-  bool isExpanded = false;
-  var expandedHeight = 90.hWise;
-  var maxLines = 2;
-  void toggleExpand() {
-    isExpanded = !isExpanded;
-    if (isExpanded) {
-      expandedHeight = 200.hWise;
-      maxLines = 10;
-    } else {
-      expandedHeight = 90.hWise;
-      maxLines = 2;
+  void toggleExpand(i) {
+    try {
+      departmentUpdatesList[i].isExpanded =
+          !departmentUpdatesList[i].isExpanded;
+      if (departmentUpdatesList[i].isExpanded) {
+        departmentUpdatesList[i].expandedHeight = 125.hWise;
+        departmentUpdatesList[i].maxLines = 4;
+        departmentUpdatesList[i].overflow = false;
+      } else {
+        departmentUpdatesList[i].expandedHeight = 100.hWise;
+        departmentUpdatesList[i].maxLines = 2;
+        departmentUpdatesList[i].overflow = true;
+      }
+      notifyListeners();
+    } catch (e) {
+      debugPrint(e.toString());
     }
-    notifyListeners();
   }
 
   Future<void> signOut() async {
@@ -61,10 +65,18 @@ class DepartmentUpdates {
   late String name;
   late String description;
   late String date;
+  bool isExpanded;
+  double expandedHeight;
+  int maxLines;
+bool overflow;
 
   DepartmentUpdates({
     required this.name,
     required this.description,
     required this.date,
+    this.isExpanded = false,
+    this.expandedHeight = 100.0,
+    this.maxLines = 2,
+    this.overflow = true,
   });
 }

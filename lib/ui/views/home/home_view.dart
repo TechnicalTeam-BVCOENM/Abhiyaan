@@ -5,7 +5,7 @@ import 'package:darpan/utils/extension.dart';
 part 'home_view_model.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -96,53 +96,74 @@ class HomeView extends StatelessWidget {
                     const SectionText(
                       title: "Department Updates",
                     ),
-                    for (var i = 0; i < model.currentIndex; i++)
-                      Container(
-                        height: model.expandedHeight,
-                        margin: const EdgeInsets.symmetric(vertical: 8),
-                        width: ResponsiveUtils.screenWidth(context).wWise,
-                        decoration: BoxDecoration(
-                          color: context.colorScheme.secondaryWhiteColor,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Column(
-                          children: [
-                            // Card Header
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12.0, vertical: 8),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    model.departmentUpdatesList[i].name,
-                                    style: FontThemeClass().subHeading(context,
-                                        context.colorScheme.primaryColor),
-                                  ),
-                                  Text(
-                                    "Posted ${model.departmentUpdatesList[i].date}",
-                                    style: FontThemeClass().smallSubHeading(
-                                      context,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            // Card Body
-                            Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12.0, vertical: 8),
-                                child: InkWell(
-                                  onTap: () => model.toggleExpand(),
-                                  child: Text(
-                                    model.departmentUpdatesList[1].description,
-                                    maxLines: model.maxLines,
-                                  ),
-                                )),
-                          ],
-                        ),
+                    for (var i = 0; i < model.departmentUpdatesList.length; i++)
+                    Container(
+                      height: model.departmentUpdatesList[i].expandedHeight,
+                      margin: const EdgeInsets.symmetric(vertical: 8),
+                      width: ResponsiveUtils.screenWidth(context),
+                      decoration: BoxDecoration(
+                        color: context.colorScheme.secondaryWhiteColor,
+                        borderRadius: BorderRadius.circular(12),
                       ),
+                      child: Column(
+                        children: [
+                          // Card Header
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12.0, vertical: 8),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  model.departmentUpdatesList[i].name,
+                                  style: model.fontTheme.subHeading(context, context.colorScheme.primaryColor),
+                                ),
+                                Text(
+                                  "Posted ${model.departmentUpdatesList[i].date}",
+                                  style: model.fontTheme.smallSubHeading(context),
+                                ),
+                              ],
+                            ),
+                          ),
+                          // Card Body
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12.0, vertical: 8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Text(
+                                  model.departmentUpdatesList[i].description,
+                                  style:
+                                      model.fontTheme.smallSubHeading(context),
+                                  maxLines:
+                                      model.departmentUpdatesList[i].isExpanded ? model.departmentUpdatesList[i].maxLines : 2,
+                                  overflow: model.departmentUpdatesList[i].overflow ? TextOverflow.ellipsis : null,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    model.toggleExpand(i);
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        model.departmentUpdatesList[i].isExpanded
+                                            ? 'Show less'
+                                            : 'Show more',
+                                        style:  TextStyle(
+                                          color: context.colorScheme.primaryColor, // You can customize the color
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
