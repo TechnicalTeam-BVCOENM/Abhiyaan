@@ -5,7 +5,7 @@ class FontThemeClass {
   TextStyle appBarText(BuildContext context) {
     return TextStyle(
       fontSize: 26,
-      fontFamily: 'Poppins',
+      fontFamily: 'Outfit',
       fontWeight: FontWeight.bold,
       color: context.colorScheme.secondaryBlackColor,
     );
@@ -14,7 +14,7 @@ class FontThemeClass {
   TextStyle large(BuildContext context) {
     return TextStyle(
       fontSize: 32,
-      fontFamily: 'Poppins',
+      fontFamily: 'Outfit',
       fontWeight: FontWeight.w800,
       color: context.colorScheme.primaryColor,
     );
@@ -23,7 +23,7 @@ class FontThemeClass {
   TextStyle heading(BuildContext context, Color? color) {
     return TextStyle(
       fontSize: 26,
-      fontFamily: 'Poppins',
+      fontFamily: 'Outfit',
       fontWeight: FontWeight.bold,
       color: color ?? context.colorScheme.secondaryBlackColor,
     );
@@ -32,7 +32,7 @@ class FontThemeClass {
   TextStyle heading2(BuildContext context) {
     return TextStyle(
       fontSize: 24,
-      fontFamily: 'Poppins',
+      fontFamily: 'Outfit',
       fontWeight: FontWeight.w600,
       color: context.colorScheme.secondaryBlackColor,
     );
@@ -41,28 +41,36 @@ class FontThemeClass {
   TextStyle heading3(BuildContext context) {
     return TextStyle(
       fontSize: 20,
-      fontFamily: 'Poppins',
+      fontFamily: 'Outfit',
       fontWeight: FontWeight.w400,
       color: context.colorScheme.secondaryBlackColor,
     );
   }
 
-  TextStyle subHeading(BuildContext context) {
+  TextStyle subHeading(BuildContext context, Color? color) {
     return TextStyle(
       fontSize: 16,
-      fontFamily: 'Poppins',
+      fontFamily: 'Outfit',
       fontWeight: FontWeight.w700,
       letterSpacing: 0.1,
-      color: context.colorScheme.secondarySectionColor,
+      color: color ?? context.colorScheme.secondarySectionColor,
     );
   }
 
   TextStyle subHeading2(BuildContext context, Color color) {
     return TextStyle(
       fontSize: 14,
-      fontFamily: 'Poppins',
+      fontFamily: 'Outfit',
       fontWeight: FontWeight.w500,
       color: color,
+    );
+  }
+  TextStyle smallSubHeading(BuildContext context, [Color? color]) {
+    return TextStyle(
+      fontSize: 12,
+      fontFamily: 'Outfit',
+      fontWeight: FontWeight.w500,
+      color: color ?? context.colorScheme.secondarySectionColor,
     );
   }
 
@@ -72,7 +80,7 @@ class FontThemeClass {
     return TextStyle(
       fontSize: 14,
       letterSpacing: 0.5,
-      fontFamily: 'Poppins',
+      fontFamily: 'Outfit',
       color: context.colorScheme.secondaryBlackColor,
     );
   }
