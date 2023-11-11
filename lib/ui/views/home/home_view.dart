@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/theme/responsive_utils.dart';
 import 'package:darpan/utils/extension.dart';
@@ -42,40 +43,36 @@ class HomeView extends StatelessWidget {
                       title: "Highlights",
                     ),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: 220.hWise,
-                      child: PageView.builder(
-                          itemCount: model.currentIndex,
-                          controller: model.pageController,
-                          pageSnapping: true,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: const EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                image: const DecorationImage(
-                                  image: NetworkImage(
-                                    'https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg',
-                                  ),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            );
-                          }),
+                      height: 10.hWise,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 9.0),
+                    SizedBox(
+                      width: 450.wWise,
                       child: Center(
-                        child: SmoothPageIndicator(
-                          controller: model.pageController,
-                          count: model.currentIndex,
-                          effect: JumpingDotEffect(
-                            dotColor: context.colorScheme.secondarySectionColor,
-                            activeDotColor: context.colorScheme.primaryColor,
-                            dotHeight: 8,
-                            dotWidth: 8,
-                            // expansionFactor: 4,
-                          ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CarouselSlider.builder(
+                              itemCount: model.urlImages.length,
+                              itemBuilder: (context, index, realIndex) {
+                                final urlImage = model.urlImages[index];
+                                // final carouselText = carouselTexts[index];
+                                return CarouselUtils.buildImage(
+                                    context, urlImage, index);
+                              },
+                              options: CarouselOptions(
+                                  height: 220.hWise,
+                                  onPageChanged: (index, reason) =>
+                                      model.updateActiveIndex(index),
+                                  autoPlay: true,
+                                  autoPlayInterval: const Duration(seconds: 3),
+                                  viewportFraction: 1),
+                            ),
+                            SizedBox(
+                              height: 20.hWise,
+                            ),
+                            CarouselUtils.buildIndicator(context,
+                                model.activeIndex, model.urlImages.length),
+                          ],
                         ),
                       ),
                     ),
@@ -125,7 +122,7 @@ class HomeView extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                            ),                    
+                            ),
                             // Card Body
                             Padding(
                                 padding: const EdgeInsets.symmetric(
