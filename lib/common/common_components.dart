@@ -19,3 +19,58 @@ class SectionText extends StatelessWidget {
     );
   }
 }
+
+Container horizontalStoryRow(
+    BuildContext context, List model, double borderRadius) {
+  FontThemeClass fontTheme = FontThemeClass();
+  return Container(
+    padding: const EdgeInsets.symmetric(vertical: 4),
+    height: 120.hWise,
+    width: MediaQuery.of(context).size.width,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            itemCount: model.length,
+            itemBuilder: (context, idx) {
+              return Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      debugPrint("Tapped$idx");
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(8, 4, 8, 8),
+                      height: 80.hWise,
+                      width: 80.wWise,
+                      decoration: BoxDecoration(
+                        color: context.colorScheme.secondarySectionColor,
+                        borderRadius: BorderRadius.circular(borderRadius),
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            model[idx].imageUrl,
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    model[idx].title,
+                    style: fontTheme.smallSubHeading(
+                      context,
+                      context.colorScheme.secondaryBlackColor,
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+      ],
+    ),
+  );
+}
