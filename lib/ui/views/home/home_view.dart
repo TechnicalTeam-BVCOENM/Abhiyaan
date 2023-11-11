@@ -1,4 +1,5 @@
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/theme/responsive_utils.dart';
 import 'package:darpan/utils/extension.dart';
 part 'home_view_model.dart';
 
@@ -12,33 +13,37 @@ class HomeView extends StatelessWidget {
       builder: (context, model, child) {
         return SafeArea(
           child: Scaffold(
-            appBar: AppBar(
-              centerTitle: false,
-              title: Text('Hey ${model.user} 👋',
-                  style: model.fontTheme.appBarText(context)),
-              automaticallyImplyLeading: false,
-              elevation: 0,
-              actions: [
-                IconButton(
-                  splashRadius: 24,
-                  splashColor: context.colorScheme.backgroundColor,
-                  icon: const Icon(Icons.notifications_none_rounded, size: 24),
-                  onPressed: () {},
-                )
-              ],
-            ),
             body: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Hey ${model.user} 👋',
+                              style: model.fontTheme.appBarText(context)),
+                          IconButton(
+                            splashRadius: 30,
+                            splashColor: context.colorScheme.backgroundColor,
+                            icon: Icon(
+                              Icons.notifications_none_rounded,
+                              size: 24.hWise,
+                            ),
+                            onPressed: () {},
+                          )
+                        ],
+                      ),
+                    ),
                     const SectionText(
                       title: "Highlights",
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
-                      height: 220,
+                      height: 220.hWise,
                       child: PageView.builder(
                           itemCount: model.currentIndex,
                           controller: model.pageController,
@@ -78,7 +83,7 @@ class HomeView extends StatelessWidget {
                       title: "Activity",
                     ),
                     Container(
-                      height: 135,
+                      height: 135.hWise,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         color: context.colorScheme.secondaryWhiteColor,
@@ -90,15 +95,16 @@ class HomeView extends StatelessWidget {
                     ),
                     for (var i = 0; i < model.currentIndex; i++)
                       Container(
-                        height: 135,
+                        height: model.expandedHeight,
                         margin: const EdgeInsets.symmetric(vertical: 8),
-                        width: MediaQuery.of(context).size.width,
+                        width: ResponsiveUtils.screenWidth(context).wWise,
                         decoration: BoxDecoration(
                           color: context.colorScheme.secondaryWhiteColor,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Column(
                           children: [
+                            // Card Header
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12.0, vertical: 8),
@@ -106,32 +112,31 @@ class HomeView extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(model.departmentUpdatesList[i].name,
-                                      style: TextStyle(
-                                        color: context.colorScheme.primaryColor,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w800,
-                                      )),
+                                  Text(
+                                    model.departmentUpdatesList[i].name,
+                                    style: FontThemeClass().subHeading(context,
+                                        context.colorScheme.primaryColor),
+                                  ),
                                   Text(
                                     "Posted ${model.departmentUpdatesList[i].date}",
-                                    style: TextStyle(
-                                      color: context
-                                          .colorScheme.secondarySectionColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
+                                    style: FontThemeClass().smallSubHeading(
+                                      context,
                                     ),
                                   ),
                                 ],
                               ),
-                            ),
+                            ),                    
+                            // Card Body
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12.0, vertical: 8),
-                              child: Text(
-                                "${model.departmentUpdatesList[i].description}...",
-                                style: model.fontTheme.paragraph(context),
-                              ),
-                            ),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 8),
+                                child: InkWell(
+                                  onTap: () => model.toggleExpand(),
+                                  child: Text(
+                                    model.departmentUpdatesList[1].description,
+                                    maxLines: model.maxLines,
+                                  ),
+                                )),
                           ],
                         ),
                       ),
@@ -142,23 +147,6 @@ class HomeView extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class SectionText extends StatelessWidget {
-  const SectionText({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 18, bottom: 8),
-      child: Text(
-        title,
-        style: FontThemeClass()
-            .subHeading2(context, context.colorScheme.secondarySectionColor),
-      ),
     );
   }
 }
