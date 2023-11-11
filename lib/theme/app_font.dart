@@ -20,7 +20,7 @@ class FontThemeClass {
     );
   }
 
-  TextStyle heading(BuildContext context, Color? color) {
+  TextStyle heading(BuildContext context,[ Color? color]) {
     return TextStyle(
       fontSize: 26,
       fontFamily: 'Outfit',
