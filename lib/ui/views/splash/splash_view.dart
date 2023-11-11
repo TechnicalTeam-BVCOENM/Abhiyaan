@@ -1,4 +1,5 @@
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/utils/extension.dart';
 part 'splash_view_model.dart';
 
 class SplashView extends StatelessWidget {
@@ -10,14 +11,14 @@ class SplashView extends StatelessWidget {
       viewModelBuilder: () => SplashViewModel(),
       onViewModelReady: (model) => model.init(context),
       builder: (context, model, child) {
-        return const Scaffold(
+        return  Scaffold(
             body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               // Add your photo here
               Image(
-                image: AssetImage('assets/darpan_photo.png'),
+                image: AssetImage('assets/images/logo.png'),
               ),
 
               SizedBox(
@@ -25,23 +26,17 @@ class SplashView extends StatelessWidget {
                       16.0), // Add some space between the photo and the text
               Text(
                 'Darpan', // Your App name
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24.0,
-                ),
+                style: FontThemeClass().heading(context)
               ),
               SizedBox(height: 8.0),
               Text(
                 'BVCOENM',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 18.0,
-                ),
+                style: FontThemeClass().smallSubHeading(context,context.colorScheme.secondaryBlackColor)
               ),
             ],
           ),
         ),
-        backgroundColor: Color(0xFFD6D5FA),);
+       );
       },
     );
   }

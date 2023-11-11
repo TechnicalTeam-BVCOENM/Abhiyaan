@@ -80,7 +80,7 @@ class AuthView extends StatelessWidget {
                         padding:
                             const EdgeInsetsDirectional.symmetric(vertical: 10),
                         child: Text(
-                          'Forget password?',
+                          'Forgot password?',
                           style: model.fontTheme.subHeading2(
                               context, context.colorScheme.primaryColor),
                         ),
