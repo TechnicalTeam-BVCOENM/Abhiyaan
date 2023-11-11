@@ -1,6 +1,8 @@
 part of 'home_view.dart';
 
 class HomeViewModel extends BaseViewModel {
+  final _authenticationService = locator<AuthenticationService>();
+  final _navigationService = locator<NavigationService>();
   final log = getLogger('HomeViewModel');
   final fontTheme = FontThemeClass();
   final currentIndex = 3;
@@ -55,6 +57,17 @@ class HomeViewModel extends BaseViewModel {
   void updateActiveIndex(int newIndex) {
     _activeIndex = newIndex;
     notifyListeners();
+  }
+  Future<void> signOut() async {
+    setBusy(true);
+    final success = await _authenticationService.signOut();
+    if (success) {
+      log.i('sign out success');
+      _navigationService.clearStackAndShow(Routes.authView);
+    } else {
+      log.i('sign out failed');
+    }
+    setBusy(false);
   }
 }
 
