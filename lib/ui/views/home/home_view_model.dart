@@ -1,9 +1,11 @@
 part of 'home_view.dart';
 
 class HomeViewModel extends BaseViewModel {
+  final _authenticationService = locator<AuthenticationService>();
+  final _navigationService = locator<NavigationService>();
   final log = getLogger('HomeViewModel');
   final fontTheme = FontThemeClass();
-  final currentIndex =3;
+  final currentIndex = 3;
   String user = "Sachin";
 
   final PageController pageController = PageController();
@@ -28,7 +30,7 @@ class HomeViewModel extends BaseViewModel {
   // Container expand controller
   bool isExpanded = false;
   var expandedHeight = 90.hWise;
- var maxLines = 2;
+  var maxLines = 2;
   void toggleExpand() {
     isExpanded = !isExpanded;
     if (isExpanded) {
@@ -39,6 +41,18 @@ class HomeViewModel extends BaseViewModel {
       maxLines = 2;
     }
     notifyListeners();
+  }
+
+  Future<void> signOut() async {
+    setBusy(true);
+    final success = await _authenticationService.signOut();
+    if (success) {
+      log.i('sign out success');
+      _navigationService.clearStackAndShow(Routes.authView);
+    } else {
+      log.i('sign out failed');
+    }
+    setBusy(false);
   }
 }
 
