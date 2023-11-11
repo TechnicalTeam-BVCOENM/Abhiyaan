@@ -1,11 +1,13 @@
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
-import 'package:darpan/theme/responsive_utils.dart';
+// import 'package:darpan/theme/responsive_utils.dart';
 import 'package:darpan/utils/extension.dart';
+
+import 'home_view_component.dart';
 part 'home_view_model.dart';
 
 class HomeView extends StatelessWidget {
-   const HomeView({super.key});
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +84,49 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
                     ),
+                    const SectionText(title: "Quick Links"),
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      height: 120.hWise,
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 5,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        debugPrint("Tapped");
+                                      },
+                                      child: Container(
+                                        margin: const EdgeInsets.all(8.0),
+                                        height: 80,
+                                        width: 80,
+                                        decoration: BoxDecoration(
+                                          color:
+                                              context.colorScheme.secondaryWhiteColor,
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        child:
+                                             Icon(Icons.calendar_month_outlined,
+                                            color: context.colorScheme.primaryColor,),
+                                      ),
+                                    ),
+                                    const Text("Calender"),
+                                  ],
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     const SectionText(
                       title: "Activity",
                     ),
@@ -97,73 +142,7 @@ class HomeView extends StatelessWidget {
                       title: "Department Updates",
                     ),
                     for (var i = 0; i < model.departmentUpdatesList.length; i++)
-                    Container(
-                      height: model.departmentUpdatesList[i].expandedHeight,
-                      margin: const EdgeInsets.symmetric(vertical: 8),
-                      width: ResponsiveUtils.screenWidth(context),
-                      decoration: BoxDecoration(
-                        color: context.colorScheme.secondaryWhiteColor,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Column(
-                        children: [
-                          // Card Header
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12.0, vertical: 8),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  model.departmentUpdatesList[i].name,
-                                  style: model.fontTheme.subHeading(context, context.colorScheme.primaryColor),
-                                ),
-                                Text(
-                                  "Posted ${model.departmentUpdatesList[i].date}",
-                                  style: model.fontTheme.smallSubHeading(context),
-                                ),
-                              ],
-                            ),
-                          ),
-                          // Card Body
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12.0, vertical: 8),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Text(
-                                  model.departmentUpdatesList[i].description,
-                                  style:
-                                      model.fontTheme.smallSubHeading(context),
-                                  maxLines:
-                                      model.departmentUpdatesList[i].isExpanded ? model.departmentUpdatesList[i].maxLines : 2,
-                                  overflow: model.departmentUpdatesList[i].overflow ? TextOverflow.ellipsis : null,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    model.toggleExpand(i);
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        model.departmentUpdatesList[i].isExpanded
-                                            ? 'Show less'
-                                            : 'Show more',
-                                        style:  TextStyle(
-                                          color: context.colorScheme.primaryColor, // You can customize the color
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                      UpdateCards(i: i, model: model),
                   ],
                 ),
               ),
