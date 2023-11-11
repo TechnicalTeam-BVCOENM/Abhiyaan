@@ -12,6 +12,7 @@ export 'package:darpan/services/local_storage_service.dart';
 // Theme
 export 'package:darpan/theme/app_color.dart';
 export 'package:darpan/theme/app_font.dart';
+export 'package:darpan/utils/extension.dart';
 
 // Dependencies
 export 'package:stacked/stacked.dart';
@@ -21,3 +22,6 @@ export 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 //Components
 export 'package:darpan/common/common_components.dart';
+
+// assets
+export 'package:darpan/utils/constant_assets.dart';

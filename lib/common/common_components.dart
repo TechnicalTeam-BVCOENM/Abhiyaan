@@ -1,5 +1,4 @@
-import '../file_exporter.dart';
-import 'package:darpan/utils/extension.dart';
+import "package:darpan/file_exporter.dart";
 
 class SectionText extends StatelessWidget {
   const SectionText({Key? key, required this.title}) : super(key: key);
