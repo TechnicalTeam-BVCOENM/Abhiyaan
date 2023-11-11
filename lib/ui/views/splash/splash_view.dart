@@ -11,32 +11,29 @@ class SplashView extends StatelessWidget {
       viewModelBuilder: () => SplashViewModel(),
       onViewModelReady: (model) => model.init(context),
       builder: (context, model, child) {
-        return  Scaffold(
-            body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // Add your photo here
-              Image(
-                image: AssetImage('assets/images/logo.png'),
-              ),
+        return Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                // Add your photo here
+                const Image(
+                  image: AssetImage('assets/images/logo.png'),
+                ),
 
-              SizedBox(
-                  height:
-                      16.0), // Add some space between the photo and the text
-              Text(
-                'Darpan', // Your App name
-                style: FontThemeClass().heading(context)
-              ),
-              SizedBox(height: 8.0),
-              Text(
-                'BVCOENM',
-                style: FontThemeClass().smallSubHeading(context,context.colorScheme.secondaryBlackColor)
-              ),
-            ],
+                const SizedBox(
+                    height:
+                        16.0), // Add some space between the photo and the text
+                Text('Darpan', // Your App name
+                    style: FontThemeClass().heading(context)),
+                const SizedBox(height: 8.0),
+                Text('BVCOENM',
+                    style: FontThemeClass().smallSubHeading(
+                        context, context.colorScheme.secondaryBlackColor)),
+              ],
+            ),
           ),
-        ),
-       );
+        );
       },
     );
   }
