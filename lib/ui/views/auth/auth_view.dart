@@ -1,4 +1,5 @@
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
 import 'package:darpan/utils/extension.dart';
 part 'auth_view_model.dart';
@@ -58,6 +59,7 @@ class AuthView extends StatelessWidget {
                       height: 15,
                     ),
                     TextFormField(
+                      controller: model.passwordTextController,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 15, vertical: 15),
@@ -90,8 +92,9 @@ class AuthView extends StatelessWidget {
                       padding:
                           const EdgeInsetsDirectional.symmetric(vertical: 10),
                       child: TextButton(
-                        onPressed: () {
-                          model.toHomePage(context);
+                        onPressed: () async {
+                          await model.login(model.emailIdTextController.text,
+                              model.passwordTextController.text);
                         },
                         style: ButtonStyle(
                           minimumSize: MaterialStateProperty.all(

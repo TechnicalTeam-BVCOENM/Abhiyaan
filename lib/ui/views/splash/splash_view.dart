@@ -1,5 +1,6 @@
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/utils/extension.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 part 'splash_view_model.dart';
 
 class SplashView extends StatelessWidget {
@@ -9,7 +10,7 @@ class SplashView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SplashViewModel>.nonReactive(
       viewModelBuilder: () => SplashViewModel(),
-      onViewModelReady: (model) => model.init(context),
+      onViewModelReady: (model) => model.init(),
       builder: (context, model, child) {
         return Scaffold(
           body: Center(

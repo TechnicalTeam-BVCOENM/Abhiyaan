@@ -1,4 +1,5 @@
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
 import 'package:darpan/utils/extension.dart';
 part 'home_view_model.dart';
@@ -33,7 +34,9 @@ class HomeView extends StatelessWidget {
                               Icons.notifications_none_rounded,
                               size: 24.hWise,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              model.signOut();
+                            },
                           )
                         ],
                       ),
@@ -125,7 +128,7 @@ class HomeView extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                            ),                    
+                            ),
                             // Card Body
                             Padding(
                                 padding: const EdgeInsets.symmetric(
