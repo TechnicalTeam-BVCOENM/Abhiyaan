@@ -4,6 +4,7 @@ import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
 import 'package:darpan/utils/extension.dart';
 part 'home_view_model.dart';
+part 'home_view_component.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -49,7 +50,7 @@ class HomeView extends StatelessWidget {
                       height: 10.hWise,
                     ),
                     SizedBox(
-                      width: 450.wWise,
+                      width: 460.wWise,
                       child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
