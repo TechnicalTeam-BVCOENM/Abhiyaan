@@ -25,6 +25,8 @@ dependencies:
   cloud_firestore: ^4.9.2
   carousel_slider: ^4.2.1
   firebase_auth: ^4.13.0
+  cached_network_image: ^3.3.0
+  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:
