@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "601824246739",
+    "project_id": "darpan-b94d6",
+    "storage_bucket": "darpan-b94d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601824246739:android:d48a1e766d36a5bb0b4d26",
+        "android_client_info": {
+          "package_name": "com.bvcoenm.darpan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBH-E6avJchvbbI0pZlEtPMuArCqcrav0k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
