@@ -1,7 +1,6 @@
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/utils/extension.dart';
-
 import 'home_view_component.dart';
 part 'home_view_model.dart';
 
@@ -28,7 +27,7 @@ class HomeView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Hey ${model.user} 👋',
-                            style: model.fontTheme.appBarText(context)),
+                            style:fontTheme.appBarText(context),),
                         IconButton(
                           splashRadius: 30,
                           splashColor: context.colorScheme.backgroundColor,
@@ -80,63 +79,13 @@ class HomeView extends StatelessWidget {
                           activeDotColor: context.colorScheme.primaryColor,
                           dotHeight: 8,
                           dotWidth: 8,
-                          // expansionFactor: 4,
                         ),
                       ),
                     ),
                   ),
                   // Quick Links
                   const SectionText(title: "Quick Links"),
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    height: 120.hWise,
-                    width: MediaQuery.of(context).size.width,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 5,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      debugPrint("Tapped");
-                                    },
-                                    child: Container(
-                                      margin: const EdgeInsets.all(8.0),
-                                      height: 80.hWise,
-                                      width: 80.wWise,
-                                      decoration: BoxDecoration(
-                                        color: context
-                                            .colorScheme.secondaryWhiteColor,
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      child: Icon(
-                                        Icons.calendar_month_outlined,
-                                        color: context.colorScheme.primaryColor,
-                                        size: 35.wWise,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    "Abhiyaan",
-                                    style: fontTheme.subHeading2(
-                                        context,
-                                        context
-                                            .colorScheme.secondaryBlackColor),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  horizontalStoryRow(context, model.quickLinksList,50),
                   // Activity
                   const SectionText(
                     title: "Activity",
@@ -164,3 +113,5 @@ class HomeView extends StatelessWidget {
     );
   }
 }
+
+ 

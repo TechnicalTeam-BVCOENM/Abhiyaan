@@ -1,7 +1,6 @@
 part of 'home_view.dart';
 
 class HomeViewModel extends BaseViewModel {
-
   // Variables / constants
   String user = "Sachin";
   final _authenticationService = locator<AuthenticationService>();
@@ -10,7 +9,6 @@ class HomeViewModel extends BaseViewModel {
   final fontTheme = FontThemeClass();
   final currentIndex = 3;
   List<DepartmentUpdates> departmentUpdatesList = [
-
     DepartmentUpdates(
         name: "Placement",
         description:
@@ -28,6 +26,29 @@ class HomeViewModel extends BaseViewModel {
         date: "18-09-23"),
   ];
   final PageController pageController = PageController();
+
+  List<QuickLinksModel> quickLinksList = [
+    QuickLinksModel(
+      imageUrl: "https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg",
+      title: "College Website",
+      routeUrl: 'https://www.google.com/',
+    ),
+    QuickLinksModel(
+      imageUrl: "https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg",
+      title: "Abhiyaan",
+      routeUrl: 'https://www.google.com/',
+    ),
+    QuickLinksModel(
+      imageUrl: "https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg",
+      title: "Event",
+      routeUrl: 'https://www.google.com/',
+    ),
+    QuickLinksModel(
+      imageUrl: "https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg",
+      title: "Blogs",
+      routeUrl: 'https://www.google.com/',
+    ),
+  ];
 
   // Methods
   void toggleExpand(i) {
@@ -48,6 +69,7 @@ class HomeViewModel extends BaseViewModel {
       debugPrint(e.toString());
     }
   }
+
   Future<void> signOut() async {
     setBusy(true);
     final success = await _authenticationService.signOut();
@@ -69,7 +91,7 @@ class DepartmentUpdates {
   bool isExpanded;
   double expandedHeight;
   int maxLines;
-bool overflow;
+  bool overflow;
 
   DepartmentUpdates({
     required this.name,
@@ -82,4 +104,14 @@ bool overflow;
   });
 }
 
+class QuickLinksModel {
+  late String imageUrl;
+  late String title;
+  late String routeUrl;
 
+  QuickLinksModel({
+    required this.imageUrl,
+    required this.title,
+    required this.routeUrl,
+  });
+}

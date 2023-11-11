@@ -59,8 +59,8 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
                   children: [
                     Text(
                       model.departmentUpdatesList[i].isExpanded
-                          ? 'Show less'
-                          : 'Show more',
+                          ? 'Read less'
+                          : 'Read more',
                       style: TextStyle(
                         color: context.colorScheme
                             .primaryColor, // You can customize the color
@@ -76,3 +76,4 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
     ),
   );
 }
+
