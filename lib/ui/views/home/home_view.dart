@@ -1,8 +1,10 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/utils/extension.dart';
 import 'home_view_component.dart';
 part 'home_view_model.dart';
+part 'home_view_component.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -42,43 +44,37 @@ class HomeView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Highlights
-                  const SectionText(
-                    title: "Highlights",
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 220.hWise,
-                    child: PageView.builder(
-                        itemCount: model.currentIndex,
-                        controller: model.pageController,
-                        pageSnapping: true,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: const EdgeInsets.only(left: 8.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              image: const DecorationImage(
-                                image: NetworkImage(
-                                  'https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg',
-                                ),
-                                fit: BoxFit.cover,
-                              ),
+                    SizedBox(
+                      height: 10.hWise,
+                    ),
+                    SizedBox(
+                      width: 460.wWise,
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CarouselSlider.builder(
+                              itemCount: model.urlImages.length,
+                              itemBuilder: (context, index, realIndex) {
+                                final urlImage = model.urlImages[index];
+                                // final carouselText = carouselTexts[index];
+                                return CarouselUtils.buildImage(
+                                    context, urlImage, index);
+                              },
+                              options: CarouselOptions(
+                                  height: 220.hWise,
+                                  onPageChanged: (index, reason) =>
+                                      model.updateActiveIndex(index),
+                                  autoPlay: true,
+                                  autoPlayInterval: const Duration(seconds: 3),
+                                  viewportFraction: 1),
                             ),
-                          );
-                        }),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 9.0),
-                    child: Center(
-                      child: SmoothPageIndicator(
-                        controller: model.pageController,
-                        count: model.currentIndex,
-                        effect: JumpingDotEffect(
-                          dotColor: context.colorScheme.secondarySectionColor,
-                          activeDotColor: context.colorScheme.primaryColor,
-                          dotHeight: 8,
-                          dotWidth: 8,
+                            SizedBox(
+                              height: 20.hWise,
+                            ),
+                            CarouselUtils.buildIndicator(context,
+                                model.activeIndex, model.urlImages.length),
+                          ],
                         ),
                       ),
                     ),

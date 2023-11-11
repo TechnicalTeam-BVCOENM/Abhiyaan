@@ -70,6 +70,22 @@ class HomeViewModel extends BaseViewModel {
     }
   }
 
+  final List<String> urlImages = [
+    'https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg',
+    'https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg',
+    'https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg',
+    'https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg',
+  ];
+
+  int _activeIndex = 0;
+
+  int get activeIndex => _activeIndex;
+
+  void updateActiveIndex(int newIndex) {
+    _activeIndex = newIndex;
+    notifyListeners();
+  }
+
   Future<void> signOut() async {
     setBusy(true);
     final success = await _authenticationService.signOut();
