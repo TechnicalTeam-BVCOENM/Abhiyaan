@@ -1,4 +1,5 @@
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/ui/views/event/event_view.dart';
 import 'package:darpan/ui/views/home/home_view.dart';
 import 'package:darpan/ui/views/profile/profile_view.dart';
 import 'package:darpan/utils/extension.dart';
