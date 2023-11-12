@@ -1,5 +1,4 @@
 import 'package:darpan/file_exporter.dart';
-import 'package:darpan/utils/extension.dart';
 
 class FontThemeClass {
   TextStyle appBarText(BuildContext context) {

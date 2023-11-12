@@ -1,6 +1,5 @@
 import 'package:darpan/firebase_options.dart';
 import 'package:darpan/theme/theme_service.dart';
-import 'package:darpan/utils/extension.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'file_exporter.dart';

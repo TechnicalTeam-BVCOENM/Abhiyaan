@@ -8,6 +8,7 @@ class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
   final fontTheme = FontThemeClass();
   final currentIndex = 3;
+
   List<DepartmentUpdates> departmentUpdatesList = [
     DepartmentUpdates(
         name: "Placement",

@@ -1,7 +1,6 @@
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
-import 'package:darpan/utils/extension.dart';
 part 'auth_view_model.dart';
 
 class AuthView extends StatelessWidget {

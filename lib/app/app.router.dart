@@ -5,6 +5,7 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:darpan/ui/views/academics/academics_view.dart' as _i4;
 import 'package:darpan/ui/views/auth/auth_view.dart' as _i5;
 import 'package:darpan/ui/views/bottom_nav/bottom_nav_view.dart' as _i7;
@@ -29,6 +30,8 @@ class Routes {
 
   static const bottomNavView = '/bottom-nav-view';
 
+  static const eventView = '/event-view';
+
   static const all = <String>{
     splashView,
     homeView,
@@ -36,6 +39,7 @@ class Routes {
     authView,
     profileView,
     bottomNavView,
+    eventView,
   };
 }
 
@@ -65,6 +69,10 @@ class StackedRouter extends _i1.RouterBase {
       Routes.bottomNavView,
       page: _i7.BottomNavView,
     ),
+    _i1.RouteDef(
+      Routes.eventView,
+      page: _i7.EventView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
@@ -80,6 +88,7 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
+
     _i4.AcademicsView: (data) {
       return _i8.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.AcademicsView(),
@@ -101,6 +110,13 @@ class StackedRouter extends _i1.RouterBase {
     _i7.BottomNavView: (data) {
       return _i8.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.BottomNavView(),
+
+        settings: data,
+      );
+    },
+    _i7.EventView: (data) {
+      return _i8.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i7.EventView(),
         settings: data,
       );
     },
@@ -198,6 +214,20 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToEventView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.eventView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithSplashView([
     int? routerId,
     bool preventDuplicates = true,
@@ -276,6 +306,20 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.bottomNavView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithEventView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.eventView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
