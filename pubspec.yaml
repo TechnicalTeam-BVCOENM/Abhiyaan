@@ -38,6 +38,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/academics/
 
   uses-material-design: true
   # fonts:

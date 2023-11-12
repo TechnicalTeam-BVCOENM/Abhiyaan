@@ -6,7 +6,6 @@ import 'package:darpan/theme/responsive_utils.dart';
 import 'package:darpan/ui/views/event/event_view.dart';
 
 import '../../../common/common_component_model.dart';
-
 part 'home_view_model.dart';
 part 'home_view_component.dart';
 
@@ -51,8 +50,10 @@ class HomeView extends StatelessWidget {
                       ],
                     ),
                   ),
+
                   // Carousel
                   const SectionText(title: 'Highlights'),
+
                   SizedBox(
                     width: 460.wWise,
                     child: Center(
@@ -89,6 +90,7 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                   ),
+
                   // Quick Links
                   const SectionText(title: "Quick Links"),
                   quickLinksList(context, model.quickLinksList),
