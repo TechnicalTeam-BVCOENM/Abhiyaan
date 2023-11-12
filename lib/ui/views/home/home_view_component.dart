@@ -149,7 +149,7 @@ Row quickLinksList(BuildContext context, List model, [double? borderRadius]) {
                 GestureDetector(
                   onTap: () {
                     debugPrint("Tapped$idx");
-                    handleQuickLinksNavigation(model, idx);
+                    handleQuickLinksNavigation(model,idx);
                   },
                   child: Container(
                     margin: const EdgeInsets.only(bottom:8),

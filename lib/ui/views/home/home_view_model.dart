@@ -32,22 +32,22 @@ class HomeViewModel extends BaseViewModel {
     QuickLinksModel(
       icon: Icons.web,
       title: "BCOENM",
-      routeUrl: 'https://bvcoenm.edu.in/',
+      url: 'https://bvcoenm.edu.in/',
     ),
     QuickLinksModel(
       icon: Icons.web,
       title: "Abhiyaan",
-      routeUrl: 'https://abhiyaan-2023.netlify.app/',
+      url: 'https://abhiyaan-2023.netlify.app/',
     ),
     QuickLinksModel(
       icon: Icons.event,
       title: "Event",
-      routeView: const EventView(),
+      view: const EventView(),
     ),
     QuickLinksModel(
       icon: Icons.pages,
       title: "Blogs",
-      routeUrl: 'https://www.dev.com/',
+      url: 'https://www.dev.com/',
     ),
   ];
 
@@ -102,17 +102,17 @@ class HomeViewModel extends BaseViewModel {
 
 void handleQuickLinksNavigation(List model, int i) {
   try {
-    if (model[i].routeUrl != '' && model[i].routeUrl != null) {
+    if (model[i].url != '' && model[i].url != null) {
       debugPrint("Route Url");
       UrlLauncher externalUrlHandler = UrlLauncher();
       externalUrlHandler.launchBrowserUrlHandler(
-        Uri.parse(model[i].routeUrl),
+        Uri.parse(model[i].url),
       );
-    } else if (model[i].routeView != '' && model[i].routeView != null) {
+    } else if (model[i].view != '' && model[i].view != null) {
       final navigationService = locator<NavigationService>();
 
       debugPrint("Page View");
-      navigationService.navigateToView(model[i].routeView);
+      navigationService.navigateToView(model[i].view);
     } else {
       debugPrint("Error");
     }
@@ -145,13 +145,13 @@ class DepartmentUpdates {
 class QuickLinksModel {
   late IconData icon;
   late String title;
-  late String routeUrl;
-  late Widget routeView;
+  late String url;
+  late Widget view;
 
   QuickLinksModel({
     required this.icon,
     required this.title,
-    this.routeUrl = '',
-    this.routeView = const HomeView(),
+    this.url = '',
+    this.view = const HomeView(),
   });
 }
