@@ -1,13 +1,11 @@
 import '../../../file_exporter.dart';
 part 'event_view_model.dart';
 
-
 class EventView extends StatelessWidget {
   const EventView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    FontThemeClass fontTheme = FontThemeClass();
     return ViewModelBuilder<EventViewModel>.reactive(
       viewModelBuilder: () => EventViewModel(),
       builder: (context, model, child) {

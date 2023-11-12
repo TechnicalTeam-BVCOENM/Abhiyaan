@@ -9,9 +9,6 @@ class HomeViewModel extends BaseViewModel {
   final fontTheme = FontThemeClass();
   final currentIndex = 3;
 
-  String user = "Sachin";
-
-
   List<DepartmentUpdates> departmentUpdatesList = [
     DepartmentUpdates(
         name: "Placement",
@@ -135,4 +132,3 @@ class QuickLinksModel {
     required this.routeUrl,
   });
 }
-

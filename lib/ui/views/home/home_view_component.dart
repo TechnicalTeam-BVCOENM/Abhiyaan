@@ -1,6 +1,3 @@
-import 'package:darpan/file_exporter.dart';
-import 'package:darpan/utils/extension.dart';
-
 part of 'home_view.dart';
 
 Container updatesCard(HomeViewModel model, int i, BuildContext context) {
@@ -82,10 +79,8 @@ class CarouselUtils {
           BuildContext context, int activeIndex, int length) =>
       AnimatedSmoothIndicator(
         effect: JumpingDotEffect(
-
           dotHeight: 8.hWise,
           dotWidth: 8.wWise,
-
           dotColor: context.colorScheme.secondarySectionColor,
           activeDotColor: context.colorScheme.primaryColor,
         ),
@@ -107,7 +102,6 @@ class CarouselUtils {
                 width: 350,
                 maxHeightDiskCache: 1500,
                 fit: BoxFit.cover,
-
               ),
               Container(
                 decoration: BoxDecoration(
