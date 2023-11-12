@@ -19,3 +19,30 @@ class SectionText extends StatelessWidget {
     );
   }
 }
+
+void showmessage(context, String message) {
+  try {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      duration: const Duration(milliseconds: 500),
+      backgroundColor: Theme.of(context).colorScheme.backgroundColor,
+      content: Container(
+        width: 200.wWise,
+        height: 40.hWise,
+        decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.secondaryLPurpleColor,
+            borderRadius: BorderRadius.circular(10)),
+        child: Center(
+          child: Text(
+            message,
+            style: FontThemeClass().subHeading(
+                context, Theme.of(context).colorScheme.secondaryBlackColor),
+          ),
+        ),
+      ),
+    ));
+  } catch (e) {
+    for (var i = 0; i < 100; i++) {
+      debugPrint("error is $e");
+    }
+  }
+}
