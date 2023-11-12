@@ -15,9 +15,9 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.reactive(
       viewModelBuilder: () => HomeViewModel(),
       builder: (context, model, child) {
-        return SafeArea(
-          child: Scaffold(
-            body: SingleChildScrollView(
+        return Scaffold(
+          body: SafeArea(
+            child: SingleChildScrollView(
               physics: const ClampingScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 18.0),
               child: Column(
@@ -58,23 +58,29 @@ class HomeView extends StatelessWidget {
                           CarouselSlider.builder(
                             itemCount: model.urlImages.length,
                             itemBuilder: (context, index, realIndex) {
-                              final urlImage = model.urlImages[index];
                               return CarouselUtils.buildImage(
-                                  context, urlImage, index);
+                                context,
+                                model.urlImages[index],
+                                index,
+                              );
                             },
                             options: CarouselOptions(
-                                height: 220.hWise,
-                                onPageChanged: (index, reason) =>
-                                    model.updateActiveIndex(index),
-                                autoPlay: true,
-                                autoPlayInterval: const Duration(seconds: 3),
-                                viewportFraction: 1),
+                              height: 220.hWise,
+                              onPageChanged: (index, reason) =>
+                                  model.updateActiveIndex(index),
+                              autoPlay: true,
+                              autoPlayInterval: const Duration(seconds: 3),
+                              viewportFraction: 1,
+                            ),
                           ),
                           SizedBox(
                             height: 20.hWise,
                           ),
-                          CarouselUtils.buildIndicator(context,
-                              model.activeIndex, model.urlImages.length),
+                          CarouselUtils.buildIndicator(
+                            context,
+                            model.activeIndex,
+                            model.urlImages.length,
+                          ),
                         ],
                       ),
                     ),
