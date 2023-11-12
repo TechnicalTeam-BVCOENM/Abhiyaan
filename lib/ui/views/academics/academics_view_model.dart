@@ -30,7 +30,7 @@ class AcademicsViewModel extends BaseViewModel {
   final List<AcademicsUpdates> academicsUpdatesList = [
     AcademicsUpdates(
       title: "Term Test 1",
-      postedOn: "10-10-2023",
+      postedOn: "29-7-2023",
       description: "Practical exam is hold from 8th of August to 10th of August.",
     ),
     AcademicsUpdates(
@@ -46,7 +46,7 @@ class AcademicsViewModel extends BaseViewModel {
     AcademicsUpdates(
       title: "Semester Timetable",
       postedOn: "Today",
-      description: "Semester exams are hold from 5th of November to 18th of November.",
+      description: "Semester exam is hold from 5th of November to 18th of November.",
     ),
   ];
 }
