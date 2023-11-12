@@ -1,8 +1,6 @@
 import 'package:darpan/file_exporter.dart';
-import 'package:darpan/utils/extension.dart';
-import 'package:flutter/material.dart';
-import 'academics_viewmodel.dart';
-import 'package:path/path.dart';
+
+part 'academics_view_model.dart';
 
 class AcademicsView extends StatelessWidget {
   const AcademicsView({super.key});
@@ -13,122 +11,149 @@ class AcademicsView extends StatelessWidget {
       viewModelBuilder: () => AcademicsViewModel(),
       builder: (context, model, child) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              "Academics",
-              style: model.fontTheme.appBarText(context),
-            ),
-            centerTitle: true,
-            elevation: 0,
-          ),
-          body: SingleChildScrollView(
+          // ** 1 ** //
+
+          // appBar: AppBar(
+          //   elevation: 0,
+          //   centerTitle: true,
+          //   backgroundColor: context.colorScheme.secondaryLPurpleColor,
+          //   title: Text(
+          //     "Academics",
+          //     style: model.fontTheme.heading3(context).copyWith(
+          //           color: context.colorScheme.primaryColor,
+          //           fontWeight: FontWeight.bold,
+          //         ),
+          //   ),
+          // ),
+          body: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: Container(
-                      height: 408.0, // Set your desired height
-                      child: MyGrid(),
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              child: CustomScrollView(
+                physics: const BouncingScrollPhysics(),
+                scrollBehavior: const MaterialScrollBehavior().copyWith(overscroll: false),
+                slivers: [
+                  // ** 2 ** //
+
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 18.0),
+                      child: Text(
+                        "Academics",
+                        textAlign: TextAlign.center,
+                        style: model.fontTheme.appBarText(context).copyWith(
+                              color: context.colorScheme.primaryColor,
+                            ),
+                      ),
                     ),
                   ),
-                  const SectionText(
-                    title: "Academic Updates",
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(15),
-                    height: 135.hWise,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.secondaryWhiteColor,
-                      borderRadius: BorderRadius.circular(12),
+                  SliverToBoxAdapter(child: SizedBox(height: 8.hWise)),
+                  SliverGrid(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 16.0,
+                      // crossAxisSpacing: 16.0,
+                    ),
+                    delegate: SliverChildBuilderDelegate(
+                      childCount: 9,
+                      (BuildContext context, int index) {
+                        return GestureDetector(
+                          onTap: () {
+                            // Functionality remaining
+                            debugPrint("Tapped $index");
+                          },
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 94.hWise,
+                                width: 94.wWise,
+                                decoration: BoxDecoration(
+                                  color: context.colorScheme.secondaryLPurpleColor,
+                                  borderRadius: BorderRadius.circular(25),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 5,
+                                      color: context.colorScheme.secondaryLPurpleColor,
+                                      offset: const Offset(0, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: Center(
+                                  child: Image(
+                                    image: AssetImage(model.gridListImages[index]),
+                                    fit: BoxFit.contain,
+                                    height: 72.hWise,
+                                    width: 72.wWise,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 8.hWise),
+                              Text(
+                                model.gridListTitle[index],
+                                style: model.fontTheme
+                                    .subHeading2(
+                                      context,
+                                      context.colorScheme.secondarySectionColor,
+                                    )
+                                    .copyWith(fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                                softWrap: false,
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.all(15),
-                    height: 135.hWise,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.secondaryWhiteColor,
-                      borderRadius: BorderRadius.circular(12),
+                  SliverToBoxAdapter(child: SizedBox(height: 12.hWise)),
+                  const SliverToBoxAdapter(
+                    child: SectionText(title: "Academics Updates"),
+                  ),
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      childCount: model.academicsUpdatesList.length,
+                      (BuildContext context, int index) {
+                        return Card(
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            side: BorderSide(
+                              color: context.colorScheme.secondaryLPurpleColor,
+                              width: 1.0,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      model.academicsUpdatesList[index].title,
+                                      style: model.fontTheme.subHeading(context, context.colorScheme.primaryColor),
+                                    ),
+                                    Text(
+                                      "Posted on ${model.academicsUpdatesList[index].postedOn}",
+                                      style: model.fontTheme.smallSubHeading(context),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 12.hWise),
+                                Text(model.academicsUpdatesList[index].description),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.all(15),
-                    height: 135.hWise,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.secondaryWhiteColor,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  SizedBox(height: 10.hWise),
+                  SliverToBoxAdapter(child: SizedBox(height: 8.hWise)),
                 ],
               ),
             ),
           ),
-        );
-      },
-    );
-  }
-}
-
-final List<String> assets = [
-  'assets/images/timetable.png',
-  'assets/images/syllabus.png',
-  'assets/images/student section.png',
-  'assets/images/class notes.png',
-  'assets/images/practicals.png',
-  'assets/images/PYQ.png',
-  'assets/images/courses.png',
-  'assets/images/result.png',
-  'assets/images/attendance.png',
-];
-
-class MyGrid extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      itemCount: assets.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        childAspectRatio: 1.0,
-      ),
-      itemBuilder: (context, index) {
-        String imageName = basenameWithoutExtension(assets[index]);
-
-        return Column(
-          children: [
-            Container(
-              margin: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: context.colorScheme.secondaryLPurpleColor,
-                borderRadius: BorderRadius.circular(35.0),
-              ),
-              child: Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    assets[index],
-                    height: 93.0, // Adjust the height as needed
-                  ),
-                  SizedBox(height: 6.0), // Add spacing between image and text
-                ],
-              ),
-            ),
-            // SizedBox(height: 1.0), // Add spacing between GridView items
-            Text(
-              imageName,
-              style: TextStyle(
-                fontSize: 16,
-                fontFamily: 'Outfit',
-                fontWeight: FontWeight.w700,
-                letterSpacing: 0.1,
-                color: context.colorScheme.secondarySectionColor,
-              ),
-            ),
-          ],
         );
       },
     );

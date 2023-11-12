@@ -23,3 +23,6 @@ export 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 //Components
 export 'package:darpan/common/common_components.dart';
+
+// assets path
+export 'package:darpan/utils/assets_constants.dart';
