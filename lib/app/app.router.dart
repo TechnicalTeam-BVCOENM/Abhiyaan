@@ -5,17 +5,17 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-
 import 'package:darpan/ui/views/academics/academics_view.dart' as _i4;
 import 'package:darpan/ui/views/auth/auth_view.dart' as _i5;
 import 'package:darpan/ui/views/bottom_nav/bottom_nav_view.dart' as _i7;
+import 'package:darpan/ui/views/event/event_view.dart' as _i8;
 import 'package:darpan/ui/views/home/home_view.dart' as _i3;
 import 'package:darpan/ui/views/profile/profile_view.dart' as _i6;
 import 'package:darpan/ui/views/splash/splash_view.dart' as _i2;
-import 'package:flutter/material.dart' as _i8;
+import 'package:flutter/material.dart' as _i9;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i9;
+import 'package:stacked_services/stacked_services.dart' as _i10;
 
 class Routes {
   static const splashView = '/';
@@ -71,52 +71,50 @@ class StackedRouter extends _i1.RouterBase {
     ),
     _i1.RouteDef(
       Routes.eventView,
-      page: _i7.EventView,
+      page: _i8.EventView,
     ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.SplashView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.SplashView(),
         settings: data,
       );
     },
     _i3.HomeView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.HomeView(),
         settings: data,
       );
     },
-
     _i4.AcademicsView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.AcademicsView(),
         settings: data,
       );
     },
     _i5.AuthView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.AuthView(),
         settings: data,
       );
     },
     _i6.ProfileView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.ProfileView(),
         settings: data,
       );
     },
     _i7.BottomNavView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.BottomNavView(),
-
         settings: data,
       );
     },
-    _i7.EventView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i7.EventView(),
+    _i8.EventView: (data) {
+      return _i9.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i8.EventView(),
         settings: data,
       );
     },
@@ -129,7 +127,7 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i9.NavigationService {
+extension NavigatorStateExtension on _i10.NavigationService {
   Future<dynamic> navigateToSplashView([
     int? routerId,
     bool preventDuplicates = true,
