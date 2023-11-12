@@ -1,5 +1,4 @@
 import 'package:darpan/file_exporter.dart';
-import 'package:darpan/utils/extension.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 part 'splash_view_model.dart';
 

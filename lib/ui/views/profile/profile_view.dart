@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:darpan/file_exporter.dart';
-import 'package:darpan/utils/extension.dart';
 import 'package:flutter/services.dart';
 part 'profile_view_model.dart';
 
@@ -119,6 +118,7 @@ class ProfileView extends StatelessWidget {
                               onPressed: () async {
                                 await Clipboard.setData(
                                     const ClipboardData(text: "21121017"));
+                                // ignore: use_build_context_synchronously
                                 showmessage(context, "Copied");
                               },
                               child: Image.asset(
