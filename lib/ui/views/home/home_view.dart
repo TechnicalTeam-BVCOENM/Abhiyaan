@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget {
                           style: fontTheme.appBarText(context),
                         ),
                         IconButton(
-                          splashRadius: 30,
+                          splashRadius: 30.wWise,
                           splashColor: context.colorScheme.backgroundColor,
                           icon: Icon(
                             Icons.notifications_none_rounded,

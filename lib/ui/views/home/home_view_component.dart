@@ -9,6 +9,10 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
     decoration: BoxDecoration(
       color: context.colorScheme.secondaryWhiteColor,
       borderRadius: BorderRadius.circular(12),
+      border: Border.all(
+        color: context.colorScheme.secondaryLPurpleColor.withOpacity(0.7),
+        width: 1,
+      ),
     ),
     child: Column(
       children: [
@@ -75,7 +79,7 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
   );
 }
 
-// Carousel 
+// Carousel
 class CarouselUtils {
   static Widget buildIndicator(
           BuildContext context, int activeIndex, int length) =>
@@ -124,13 +128,10 @@ class CarouselUtils {
       );
 }
 
-
 // Quick Links
-Row quickLinksList(BuildContext context, List model,
-    [double? borderRadius]) {
+Row quickLinksList(BuildContext context, List model, [double? borderRadius]) {
   FontThemeClass fontTheme = FontThemeClass();
   return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
     children: [
       Expanded(
         child: GridView.builder(
@@ -151,18 +152,18 @@ Row quickLinksList(BuildContext context, List model,
                     handleQuickLinksNavigation(model, idx);
                   },
                   child: Container(
-                    margin: const EdgeInsets.fromLTRB(8, 4, 8, 8),
+                    margin: const EdgeInsets.only(bottom:8),
                     height: 60.hWise,
                     width: 60.wWise,
                     decoration: BoxDecoration(
                       color: context.colorScheme.secondaryLPurpleColor,
                       borderRadius: BorderRadius.circular(borderRadius ?? 18),
                     ),
-                    child:
-                      Icon(model[idx].icon,
-                      size: 35.wWise,
+                    child: Icon(
+                      model[idx].icon,
+                      size: 36.wWise,
                       color: context.colorScheme.primaryColor,
-                      ),
+                    ),
                   ),
                 ),
                 Text(
