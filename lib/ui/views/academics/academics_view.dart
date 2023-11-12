@@ -21,68 +21,109 @@ class AcademicsView extends StatelessWidget {
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18),
-            child: ListView(
-              children: [
-                GridView.builder(
+            child: CustomScrollView(
+              slivers: [
+                SliverGrid(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
-                    // crossAxisSpacing: 24.0,
                     mainAxisSpacing: 16.0,
                   ),
-                  itemCount: 9,
-                  padding: const EdgeInsets.symmetric(vertical: 18),
-                  // shrinkWrap: true, // Use shrinkWrap to limit the height of the GridView
-                  // physics: const NeverScrollableScrollPhysics(), // Disable GridView scrolling
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        // functionality remaining
-                        debugPrint("Tapped $index");
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 94.hWise,
-                            width: 94.wWise,
-                            decoration: BoxDecoration(
-                              color: context.colorScheme.secondaryPurpleColor,
-                              borderRadius: BorderRadius.circular(25),
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 5,
-                                  color: context.colorScheme.secondaryPurpleColor,
-                                  offset: const Offset(0, 3),
+                  delegate: SliverChildBuilderDelegate(
+                    childCount: 9,
+                    (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          // Functionality remaining
+                          debugPrint("Tapped $index");
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 94.hWise,
+                              width: 94.wWise,
+                              decoration: BoxDecoration(
+                                color: context.colorScheme.secondaryPurpleColor,
+                                borderRadius: BorderRadius.circular(25),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 5,
+                                    color: context.colorScheme.secondaryPurpleColor,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Image(
+                                  image: AssetImage(model.gridListImages[index]),
+                                  fit: BoxFit.contain,
+                                  height: 72.hWise,
+                                  width: 72.wWise,
                                 ),
-                              ],
-                            ),
-                            child: Center(
-                              child: Image(
-                                image: AssetImage(model.gridListImages[index]),
-                                fit: BoxFit.contain,
-                                height: 72.hWise,
-                                width: 72.wWise,
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            model.gridListTitle[index],
-                            style: model.fontTheme
-                                .subHeading2(
-                                  context,
-                                  context.colorScheme.secondarySectionColor,
-                                )
-                                .copyWith(fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                            softWrap: false,
-                          ),
-                        ],
-                      ),
-                    );
-                  },
+                            const SizedBox(height: 12),
+                            Text(
+                              model.gridListTitle[index],
+                              style: model.fontTheme
+                                  .subHeading2(
+                                    context,
+                                    context.colorScheme.secondarySectionColor,
+                                  )
+                                  .copyWith(fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
+                              softWrap: false,
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
-                const SectionText(title: "Academics Updates"),
+                const SliverToBoxAdapter(
+                  child: SectionText(title: "Academics Updates"),
+                ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    childCount: model.academicsUpdatesList.length,
+                    (BuildContext context, int index) {
+                      return Card(
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          side: BorderSide(
+                            color: context.colorScheme.secondaryPurpleColor,
+                            width: 1.0,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    model.academicsUpdatesList[index].title,
+                                    style: model.fontTheme.subHeading(context, context.colorScheme.primaryColor),
+                                  ),
+                                  Text(
+                                    "Posted ${model.academicsUpdatesList[index].postedOn}",
+                                    style: model.fontTheme.smallSubHeading(context),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 12.hWise),
+                              Text(model.academicsUpdatesList[index].description),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                // SliverToBoxAdapter(child: SizedBox(height: 64.hWise)),
               ],
             ),
           ),
