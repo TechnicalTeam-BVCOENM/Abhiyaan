@@ -3,7 +3,6 @@ import 'package:darpan/utils/extension.dart';
 
 part of 'home_view.dart';
 
-
 Container updatesCard(HomeViewModel model, int i, BuildContext context) {
   return Container(
     height: model.departmentUpdatesList[i].expandedHeight,
@@ -78,14 +77,15 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
   );
 }
 
-
 class CarouselUtils {
   static Widget buildIndicator(
           BuildContext context, int activeIndex, int length) =>
       AnimatedSmoothIndicator(
         effect: JumpingDotEffect(
+
           dotHeight: 8.hWise,
           dotWidth: 8.wWise,
+
           dotColor: context.colorScheme.secondarySectionColor,
           activeDotColor: context.colorScheme.primaryColor,
         ),

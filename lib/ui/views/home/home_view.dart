@@ -1,12 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
-
 import 'package:darpan/theme/responsive_utils.dart';
-import 'package:darpan/ui/views/home/home_view_component.dart';
-
 import 'package:darpan/utils/extension.dart';
-import 'home_view_component.dart';
+
 part 'home_view_model.dart';
 part 'home_view_component.dart';
 
@@ -22,6 +19,7 @@ class HomeView extends StatelessWidget {
         return SafeArea(
           child: Scaffold(
             body: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 18.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,8 +30,10 @@ class HomeView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Hey ${model.user} 👋',
-                            style:fontTheme.appBarText(context),),
+                        Text(
+                          'Hey ${model.user} 👋',
+                          style: fontTheme.appBarText(context),
+                        ),
                         IconButton(
                           splashRadius: 30,
                           splashColor: context.colorScheme.backgroundColor,
@@ -48,44 +48,41 @@ class HomeView extends StatelessWidget {
                       ],
                     ),
                   ),
-                    SizedBox(
-                      height: 10.hWise,
-                    ),
-                    SizedBox(
-                      width: 460.wWise,
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CarouselSlider.builder(
-                              itemCount: model.urlImages.length,
-                              itemBuilder: (context, index, realIndex) {
-                                final urlImage = model.urlImages[index];
-                                // final carouselText = carouselTexts[index];
-                                return CarouselUtils.buildImage(
-                                    context, urlImage, index);
-                              },
-                              options: CarouselOptions(
-                                  height: 220.hWise,
-                                  onPageChanged: (index, reason) =>
-                                      model.updateActiveIndex(index),
-                                  autoPlay: true,
-                                  autoPlayInterval: const Duration(seconds: 3),
-                                  viewportFraction: 1),
-                            ),
-                            SizedBox(
-                              height: 20.hWise,
-                            ),
-                            CarouselUtils.buildIndicator(context,
-                                model.activeIndex, model.urlImages.length),
-                          ],
-                        ),
+                  // Carousel
+                  const SectionText(title: 'Highlights'),
+                  SizedBox(
+                    width: 460.wWise,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CarouselSlider.builder(
+                            itemCount: model.urlImages.length,
+                            itemBuilder: (context, index, realIndex) {
+                              final urlImage = model.urlImages[index];
+                              return CarouselUtils.buildImage(
+                                  context, urlImage, index);
+                            },
+                            options: CarouselOptions(
+                                height: 220.hWise,
+                                onPageChanged: (index, reason) =>
+                                    model.updateActiveIndex(index),
+                                autoPlay: true,
+                                autoPlayInterval: const Duration(seconds: 3),
+                                viewportFraction: 1),
+                          ),
+                          SizedBox(
+                            height: 20.hWise,
+                          ),
+                          CarouselUtils.buildIndicator(context,
+                              model.activeIndex, model.urlImages.length),
+                        ],
                       ),
                     ),
                   ),
                   // Quick Links
                   const SectionText(title: "Quick Links"),
-                  horizontalStoryRow(context, model.quickLinksList,50),
+                  horizontalStoryRow(context, model.quickLinksList, 50),
                   // Activity
                   const SectionText(
                     title: "Activity",
@@ -113,5 +110,3 @@ class HomeView extends StatelessWidget {
     );
   }
 }
-
- 
