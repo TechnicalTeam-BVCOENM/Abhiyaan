@@ -5,11 +5,12 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:darpan/ui/views/auth/auth_view.dart' as _i4;
-import 'package:darpan/ui/views/bottom_nav/bottom_nav_view.dart' as _i6;
-import 'package:darpan/ui/views/event/event_view.dart' as _i7;
+
+import 'package:darpan/ui/views/academics/academics_view.dart' as _i4;
+import 'package:darpan/ui/views/auth/auth_view.dart' as _i5;
+import 'package:darpan/ui/views/bottom_nav/bottom_nav_view.dart' as _i7;
 import 'package:darpan/ui/views/home/home_view.dart' as _i3;
-import 'package:darpan/ui/views/profile/profile_view.dart' as _i5;
+import 'package:darpan/ui/views/profile/profile_view.dart' as _i6;
 import 'package:darpan/ui/views/splash/splash_view.dart' as _i2;
 import 'package:flutter/material.dart' as _i8;
 import 'package:flutter/material.dart';
@@ -20,6 +21,8 @@ class Routes {
   static const splashView = '/';
 
   static const homeView = '/home-view';
+
+  static const academicsView = '/academics-view';
 
   static const authView = '/auth-view';
 
@@ -32,6 +35,7 @@ class Routes {
   static const all = <String>{
     splashView,
     homeView,
+    academicsView,
     authView,
     profileView,
     bottomNavView,
@@ -50,16 +54,20 @@ class StackedRouter extends _i1.RouterBase {
       page: _i3.HomeView,
     ),
     _i1.RouteDef(
+      Routes.academicsView,
+      page: _i4.AcademicsView,
+    ),
+    _i1.RouteDef(
       Routes.authView,
-      page: _i4.AuthView,
+      page: _i5.AuthView,
     ),
     _i1.RouteDef(
       Routes.profileView,
-      page: _i5.ProfileView,
+      page: _i6.ProfileView,
     ),
     _i1.RouteDef(
       Routes.bottomNavView,
-      page: _i6.BottomNavView,
+      page: _i7.BottomNavView,
     ),
     _i1.RouteDef(
       Routes.eventView,
@@ -80,21 +88,29 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i4.AuthView: (data) {
+
+    _i4.AcademicsView: (data) {
       return _i8.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i4.AuthView(),
+        builder: (context) => const _i4.AcademicsView(),
         settings: data,
       );
     },
-    _i5.ProfileView: (data) {
+    _i5.AuthView: (data) {
       return _i8.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i5.ProfileView(),
+        builder: (context) => const _i5.AuthView(),
         settings: data,
       );
     },
-    _i6.BottomNavView: (data) {
+    _i6.ProfileView: (data) {
       return _i8.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i6.BottomNavView(),
+        builder: (context) => const _i6.ProfileView(),
+        settings: data,
+      );
+    },
+    _i7.BottomNavView: (data) {
+      return _i8.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i7.BottomNavView(),
+
         settings: data,
       );
     },
@@ -136,6 +152,20 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.homeView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToAcademicsView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.academicsView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -220,6 +250,20 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.homeView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithAcademicsView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.academicsView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
