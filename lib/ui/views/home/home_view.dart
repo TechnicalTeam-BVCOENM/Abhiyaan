@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
-import 'package:darpan/utils/extension.dart';
 part 'home_view_model.dart';
 part 'home_view_component.dart';
 
@@ -60,7 +59,6 @@ class HomeView extends StatelessWidget {
                           CarouselSlider.builder(
                             itemCount: model.urlImages.length,
                             itemBuilder: (context, index, realIndex) {
-
                               return CarouselUtils.buildImage(
                                 context,
                                 model.urlImages[index],
@@ -75,18 +73,15 @@ class HomeView extends StatelessWidget {
                               autoPlayInterval: const Duration(seconds: 3),
                               viewportFraction: 1,
                             ),
-
                           ),
                           SizedBox(
                             height: 20.hWise,
                           ),
-
                           CarouselUtils.buildIndicator(
                             context,
                             model.activeIndex,
                             model.urlImages.length,
                           ),
-
                         ],
                       ),
                     ),
