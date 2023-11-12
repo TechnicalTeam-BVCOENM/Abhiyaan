@@ -32,7 +32,15 @@ class FontThemeClass {
     return TextStyle(
       fontSize: 24,
       fontFamily: 'Outfit',
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w500,
+      color: context.colorScheme.secondaryBlackColor,
+    );
+  }
+   TextStyle profileheading(BuildContext context) {
+    return TextStyle(
+      fontSize: 22,
+      fontFamily: 'Outfit',
+      fontWeight: FontWeight.w500,
       color: context.colorScheme.secondaryBlackColor,
     );
   }
@@ -48,7 +56,7 @@ class FontThemeClass {
 
   TextStyle heading4(BuildContext context) {
     return TextStyle(
-      fontSize: 18,
+      fontSize: 16,
       fontFamily: 'Outfit',
       fontWeight: FontWeight.w500,
       color: context.colorScheme.secondaryBlackColor,

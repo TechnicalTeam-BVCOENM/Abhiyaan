@@ -153,14 +153,15 @@ void showmessage(context, String message) {
       backgroundColor: Colors.transparent,
       content: Center(
         child: Container(
-          padding: EdgeInsets.only(left: 70, right: 70, top: 10, bottom: 10),
+          padding:
+              const EdgeInsets.only(left: 70, right: 70, top: 8, bottom: 8),
           height: 40.hWise,
           decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.secondaryLPurpleColor,
               borderRadius: BorderRadius.circular(10)),
           child: Text(
             message,
-            style: FontThemeClass().subHeading(
+            style: FontThemeClass().subHeading2(
                 context, Theme.of(context).colorScheme.secondaryBlackColor),
           ),
         ),

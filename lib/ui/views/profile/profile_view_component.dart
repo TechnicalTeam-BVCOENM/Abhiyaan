@@ -17,8 +17,8 @@ class ProfileDetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 70.hWise,
-      margin: EdgeInsets.only(bottom: 18.wWise),
+      height: 65.hWise,
+      margin: EdgeInsets.only(bottom: 15.wWise),
       decoration: BoxDecoration(
           color: context.colorScheme.secondaryWhiteColor,
           borderRadius: BorderRadius.circular(20)),
@@ -27,7 +27,7 @@ class ProfileDetailsCard extends StatelessWidget {
           SizedBox(
             width: 25.wWise,
           ),
-          Image.asset(width: 22.wWise, leading),
+          Image.asset(width: 20.wWise, leading),
           SizedBox(
             width: 38.wWise,
           ),
@@ -44,7 +44,7 @@ class ProfileDetailsCard extends StatelessWidget {
               ),
               Text(
                 value,
-                style: FontThemeClass().subHeading2(
+                style: FontThemeClass().smallSubHeading(
                     context, context.colorScheme.secondarySectionColor),
               ),
             ],
@@ -56,7 +56,7 @@ class ProfileDetailsCard extends StatelessWidget {
                 // ignore: use_build_context_synchronously
                 showmessage(context, "Copied");
               },
-              child: Image.asset(width: 22, AssetImagePath.copy)),
+              child: Image.asset(width: 20, AssetImagePath.copy)),
           const SizedBox(
             width: 10,
           )

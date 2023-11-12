@@ -65,13 +65,13 @@ class ProfileView extends StatelessWidget {
                             children: [
                               Text(
                                 "Sachin Rathod",
-                                style: FontThemeClass().heading2(context),
+                                style: FontThemeClass().profileheading(context),
                               ),
                               SizedBox(
                                 height: 8.hWise,
                               ),
                               Text("BE COMPS",
-                                  style: FontThemeClass().subHeading(
+                                  style: FontThemeClass().subHeading2(
                                       context,
                                       context
                                           .colorScheme.secondarySectionColor))
