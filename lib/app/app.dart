@@ -4,6 +4,7 @@ import 'package:darpan/theme/theme_service.dart';
 import 'package:darpan/ui/views/academics/academics_view.dart';
 import 'package:darpan/ui/views/auth/auth_view.dart';
 import 'package:darpan/ui/views/bottom_nav/bottom_nav_view.dart';
+import 'package:darpan/ui/views/event/event_view.dart';
 import 'package:darpan/ui/views/profile/profile_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -17,7 +18,8 @@ import 'package:darpan/ui/views/splash/splash_view.dart';
     MaterialRoute(page: AuthView),
     MaterialRoute(page: ProfileView),
     MaterialRoute(page: BottomNavView),
-    MaterialRoute(page: AcademicsView)
+    MaterialRoute(page: AcademicsView),
+    MaterialRoute(page: EventView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

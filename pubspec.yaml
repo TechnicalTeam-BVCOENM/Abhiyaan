@@ -20,10 +20,12 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   injectable: ^2.3.2
   get_storage: ^2.1.1
-  expandable_text: ^2.3.0
   firebase_core: ^2.22.0
   cloud_firestore: ^4.9.2
+  carousel_slider: ^4.2.1
   firebase_auth: ^4.13.0
+  cached_network_image: ^3.3.0
+  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:
@@ -32,23 +34,11 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
-  # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
     - assets/images/
     - assets/images/academics/
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
   uses-material-design: true
   # fonts:
   #   - family: Schyler
