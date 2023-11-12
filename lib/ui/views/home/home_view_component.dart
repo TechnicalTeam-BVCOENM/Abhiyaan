@@ -1,5 +1,6 @@
 part of 'home_view.dart';
 
+// Department Updates Card
 Container updatesCard(HomeViewModel model, int i, BuildContext context) {
   return Container(
     height: model.departmentUpdatesList[i].expandedHeight,
@@ -74,6 +75,7 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
   );
 }
 
+// Carousel 
 class CarouselUtils {
   static Widget buildIndicator(
           BuildContext context, int activeIndex, int length) =>
@@ -120,4 +122,60 @@ class CarouselUtils {
           ),
         ),
       );
+}
+
+
+// Quick Links
+Row quickLinksList(BuildContext context, List model,
+    [double? borderRadius]) {
+  FontThemeClass fontTheme = FontThemeClass();
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Expanded(
+        child: GridView.builder(
+          shrinkWrap: true,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
+            crossAxisSpacing: 4.0,
+            mainAxisSpacing: 4.0,
+          ),
+          itemCount: model.length,
+          itemBuilder: (context, idx) {
+            return Column(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    debugPrint("Tapped$idx");
+                    handleQuickLinksNavigation(model, idx);
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(8, 4, 8, 8),
+                    height: 60.hWise,
+                    width: 60.wWise,
+                    decoration: BoxDecoration(
+                      color: context.colorScheme.secondaryLPurpleColor,
+                      borderRadius: BorderRadius.circular(borderRadius ?? 18),
+                    ),
+                    child:
+                      Icon(model[idx].icon,
+                      size: 35.wWise,
+                      color: context.colorScheme.primaryColor,
+                      ),
+                  ),
+                ),
+                Text(
+                  model[idx].title,
+                  style: fontTheme.smallSubHeading(
+                    context,
+                    context.colorScheme.secondaryBlackColor,
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ),
+    ],
+  );
 }
