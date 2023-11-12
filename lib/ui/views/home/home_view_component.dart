@@ -134,6 +134,7 @@ Row quickLinksList(BuildContext context, List model,
     children: [
       Expanded(
         child: GridView.builder(
+          physics: const ClampingScrollPhysics(),
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4,
