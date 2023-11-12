@@ -60,33 +60,6 @@ class SectionText extends StatelessWidget {
   }
 }
 
-void showmessage(context, String message) {
-  try {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      duration: const Duration(milliseconds: 500),
-      backgroundColor: Theme.of(context).colorScheme.backgroundColor,
-      content: Container(
-        width: 200.wWise,
-        height: 40.hWise,
-        decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondaryLPurpleColor,
-            borderRadius: BorderRadius.circular(10)),
-        child: Center(
-          child: Text(
-            message,
-            style: FontThemeClass().subHeading(
-                context, Theme.of(context).colorScheme.secondaryBlackColor),
-          ),
-        ),
-      ),
-    ));
-  } catch (e) {
-    for (var i = 0; i < 100; i++) {
-      debugPrint("error is $e");
-    }
-  }
-}
-
 class CachedNetworkImageWidget extends StatelessWidget {
   final String imageUrl;
   final double height;
@@ -170,4 +143,30 @@ Container horizontalStoryRow(
       ],
     ),
   );
+}
+
+void showmessage(context, String message) {
+  try {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      elevation: 0,
+      duration: const Duration(milliseconds: 500),
+      backgroundColor: Colors.transparent,
+      content: Center(
+        child: Container(
+          padding: EdgeInsets.only(left: 70, right: 70, top: 10, bottom: 10),
+          height: 40.hWise,
+          decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondaryLPurpleColor,
+              borderRadius: BorderRadius.circular(10)),
+          child: Text(
+            message,
+            style: FontThemeClass().subHeading(
+                context, Theme.of(context).colorScheme.secondaryBlackColor),
+          ),
+        ),
+      ),
+    ));
+  } catch (e) {
+    debugPrint("error is $e");
+  }
 }
