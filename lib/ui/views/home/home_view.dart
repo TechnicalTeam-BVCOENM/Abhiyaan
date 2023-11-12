@@ -17,6 +17,7 @@ class HomeView extends StatelessWidget {
         return SafeArea(
           child: Scaffold(
             body: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 18.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
