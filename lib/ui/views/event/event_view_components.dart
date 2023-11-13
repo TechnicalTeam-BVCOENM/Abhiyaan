@@ -118,14 +118,19 @@ class EventDateContainer extends StatelessWidget {
         ),
         // Event Date
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               event.day.toString(),
-              style: fontTheme.large(context, FontWeight.w600),
+                            textAlign: TextAlign.center,
+
+              style: fontTheme.large(context, FontWeight.w800),
             ),
             Text(
               event.month,
-              style: fontTheme.subHeading2(
+              textAlign: TextAlign.center,
+              style: fontTheme.subHeading(
                   context, context.colorScheme.secondarySectionColor),
             ),
           ],

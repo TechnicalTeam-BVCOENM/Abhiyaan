@@ -3,7 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class UrlLauncher {
 
-   _launchURL(Uri url) async {
+   launchURL(Uri url) async {
   if (await canLaunchUrl(url)) {
     await launchUrl(url);
   } else {
@@ -11,7 +11,7 @@ class UrlLauncher {
   }
 }
 
-_launchEmail(String email) async {
+launchEmail(String email) async {
    Uri sendMail = Uri.parse("mailto:$email");
   if (await canLaunchUrl(sendMail)) {
     await launchUrl(sendMail);
@@ -20,6 +20,6 @@ _launchEmail(String email) async {
   }
 }
 
-get launchBrowserUrlHandler => _launchURL;
-get launchEmailHandler => _launchEmail;
+// get launchBrowserUrlHandler => _launchURL;
+// get launchEmailHandler => _launchEmail;
 }

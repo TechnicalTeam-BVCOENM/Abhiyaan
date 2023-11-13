@@ -105,7 +105,7 @@ void handleQuickLinksNavigation(List model, int i) {
     if (model[i].url != '' && model[i].url != null) {
       debugPrint("Route Url");
       UrlLauncher externalUrlHandler = UrlLauncher();
-      externalUrlHandler.launchBrowserUrlHandler(
+      externalUrlHandler.launchURL(
         Uri.parse(model[i].url),
       );
     } else if (model[i].view != '' && model[i].view != null) {
