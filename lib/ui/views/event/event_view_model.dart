@@ -44,6 +44,7 @@ class EventViewModel extends BaseViewModel {
     return currentMonth;
   }
   
+
   void getTodaysEvent() {
     for (EventModel event in eventsList) {
       if (event.month == getCurrentMonth() && event.day == DateTime.now().day) {
@@ -75,4 +76,5 @@ class EventModel {
     required this.imageUrl,
 
   });
+
 }
