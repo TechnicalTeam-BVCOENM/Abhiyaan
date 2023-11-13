@@ -1,10 +1,12 @@
+// ignore_for_file: avoid_init_to_null, prefer_typing_uninitialized_variables
+
 part of 'event_view.dart';
 
 // Event Time and location component
 class EventDetails {
-  Row _eventLocation(BuildContext context) {
-    FontThemeClass fontTheme = FontThemeClass();
+  FontThemeClass fontTheme = FontThemeClass();
 
+  Row _eventLocation(BuildContext context) {
     return Row(
       children: [
         Icon(
@@ -27,8 +29,6 @@ class EventDetails {
   }
 
   Row _eventTime(BuildContext context) {
-    FontThemeClass fontTheme = FontThemeClass();
-
     return Row(
       children: [
         Icon(
@@ -60,22 +60,44 @@ class EventDetails {
     );
   }
 
+  Padding eventTitle(BuildContext context, String title, EdgeInsets padding) {
+    return Padding(
+      padding: padding,
+      child: Text(
+        title,
+        style: fontTheme.heading(context),
+      ),
+    );
+  }
+
   get eventLocation => _eventLocation;
   get eventTime => _eventTime;
   get eventImage => _eventImage;
 }
 
+// ignore: must_be_immutable
 class EventDateContainer extends StatelessWidget {
-  const EventDateContainer({
+  var top;
+  var bottom;
+  var right;
+  var left;
+
+  EventDateContainer({
     super.key,
+     this.top = null,
+     this.right = null,
+     this.bottom = null,
+     this.left  = null,
   });
 
   @override
   Widget build(BuildContext context) {
     FontThemeClass fontTheme = FontThemeClass();
     return Positioned(
-      top: 120.hWise,
-      left: 20.wWise,
+      top: top,
+      left: left,
+      bottom: bottom,
+      right: right,
       child: Container(
         height: 60.hWise,
         width: 60.wWise,
@@ -117,65 +139,79 @@ class EventCardInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FontThemeClass fontTheme = FontThemeClass();
     EventDetails eventDetails = EventDetails();
-
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Positioned(
+      child: SizedBox(
+        height: 250.hWise,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
           children: [
+            // Event Image
+            eventDetails.eventImage(
+              context,
+              "https://imgs.search.brave.com/y2ve9MehABcSRTFjQYPcwpiFeueug4jPMSBV80j3lew/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXRteXVuaS5j/b20vYXp1cmUvY29s/bGVnZS1pbWFnZS9i/aWcvYmhhcmF0aS12/aWR5YXBlZXRocy1p/bnN0aXR1dGUtb2Yt/bWFuYWdlbWVudC1z/dHVkaWVzLXJlc2Vh/cmNoLWJ2aW1zci1t/dW1iYWkuanBn",
+              160.hWise,
+              ResponsiveUtils.screenWidth(context),
+            ),
+            SizedBox(
+              height: 28.hWise,
+            ),
             // Event Info
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Event Title
-                Padding(
-                  padding: EdgeInsets.only(left: 22.padL.left),
-                  child: Text(
-                    "Abhiyaan",
-                    style: fontTheme.heading(context),
-                  ),
-                ),
-                SizedBox(
-                  height: 4.hWise,
-                ),
-                //  Event Time and Location
-                Padding(
-                  padding: EdgeInsets.only(left: 20.padL.left),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      eventDetails.eventTime(context),
-                      SizedBox(
-                        width: 8.wWise,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Event Info
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Event Title
+                        eventDetails.eventTitle(context, 'Abhiyaan',
+                            EdgeInsets.only(left: 22.padL.left)),
+                        SizedBox(
+                          height: 4.hWise,
+                        ),
+                        //  Event Time and Location
+                        Padding(
+                          padding: EdgeInsets.only(left: 20.padL.left),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              eventDetails.eventTime(context),
+                              SizedBox(
+                                width: 8.wWise,
+                              ),
+                              eventDetails.eventLocation(context),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    // Event Button
+                    Padding(
+                      padding: EdgeInsets.only(right: 8.padR.right),
+                      child: Transform.rotate(
+                        angle: 180 * 314 / 22,
+                        child: IconButton(
+                          onPressed: () {},
+                          splashRadius: 20.wWise,
+                          tooltip: "Details",
+                          icon: Icon(
+                            Icons.send_rounded,
+                            size: 36.wWise,
+                            color: context.colorScheme.primaryColor,
+                          ),
+                        ),
                       ),
-                      eventDetails.eventLocation(context),
-                    ],
-                  ),
+                    )
+                  ],
                 )
               ],
             ),
-            // Event Button
-            Padding(
-              padding: EdgeInsets.only(right: 8.padR.right),
-              child: Transform.rotate(
-                angle: 180 * 314 / 22,
-                child: IconButton(
-                  onPressed: () {},
-                  splashRadius: 20.wWise,
-                  tooltip: "Details",
-                  icon: Icon(
-                    Icons.send_rounded,
-                    size: 36.wWise,
-                    color: context.colorScheme.primaryColor,
-                  ),
-                ),
-              ),
-            )
           ],
-        )
-      ],
+        ),
+      ),
     );
   }
 }

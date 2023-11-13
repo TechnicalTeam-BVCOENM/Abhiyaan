@@ -8,8 +8,6 @@ class EventView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    EventDetails eventDetails = EventDetails();
-
     return ViewModelBuilder<EventViewModel>.reactive(
       viewModelBuilder: () => EventViewModel(),
       builder: (context, model, child) {
@@ -36,30 +34,12 @@ class EventView extends StatelessWidget {
                     child: Stack(
                       children: [
                         // Event Image and Info
-                        Positioned(
-                          child: SizedBox(
-                            height: 250.hWise,
-                            width: MediaQuery.of(context).size.width,
-                            child: Column(
-                              children: [
-                                // Event Image
-                                 eventDetails.eventImage(
-                                  context,
-                                  "https://imgs.search.brave.com/y2ve9MehABcSRTFjQYPcwpiFeueug4jPMSBV80j3lew/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXRteXVuaS5j/b20vYXp1cmUvY29s/bGVnZS1pbWFnZS9i/aWcvYmhhcmF0aS12/aWR5YXBlZXRocy1p/bnN0aXR1dGUtb2Yt/bWFuYWdlbWVudC1z/dHVkaWVzLXJlc2Vh/cmNoLWJ2aW1zci1t/dW1iYWkuanBn",
-                                  160.hWise,
-                                  ResponsiveUtils.screenWidth(context),
-                                ),
-                                SizedBox(
-                                  height: 28.hWise,
-                                ),
-                                // Event Info
-                                const EventCardInfo(),
-                              ],
-                            ),
-                          ),
-                        ),
+                        const EventCardInfo(),
                         // Event Date
-                        const EventDateContainer(),
+                        EventDateContainer(
+                          top: 120.wWise,
+                          left: 20.wWise,
+                        ),
                       ],
                     ),
                   )
@@ -71,8 +51,4 @@ class EventView extends StatelessWidget {
       },
     );
   }
-
-  
 }
-
-
