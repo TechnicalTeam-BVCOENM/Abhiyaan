@@ -42,7 +42,49 @@ class EventView extends StatelessWidget {
                         ),
                       ],
                     ),
-                  )
+
+                  ),
+                  const Align(
+                      alignment: Alignment.bottomLeft,
+                      child: SectionText(title: "Sponsors")),
+                  const Align(
+                      alignment: Alignment.bottomLeft,
+                      child: SectionText(title: "Upcoming Events")),
+                  Container(
+                    height: 200.hWise,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            clipBehavior: Clip.hardEdge,
+                            shape: ShapeBorder.lerp(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                                1),
+                            child: Stack(
+                              children: [
+                                // Event Image and Info
+                                const EventCardUpcoming(),
+                                // Event Date
+                                EventDateUContainer(
+                                  top: 6.wWise,
+                                  left: 6.wWise,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
                 ],
               ),
             ),
