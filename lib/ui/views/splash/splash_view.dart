@@ -18,7 +18,7 @@ class SplashView extends StatelessWidget {
               children: <Widget>[
                 // Add your photo here
                 const Image(
-                  image: AssetImage(AssetImagePath.logo),
+                  image: AssetImage(AssetImagePath.logoImg),
                 ),
 
                 const SizedBox(

@@ -26,7 +26,7 @@ class AuthView extends StatelessWidget {
                   SizedBox(
                     width: ResponsiveUtils.screenWidth(context) * 0.6,
                     child: Image.asset(
-                      AssetImagePath.logo,
+                      AssetImagePath.logoImg,
                     ),
                   ),
                   const Expanded(child: Text("")),
