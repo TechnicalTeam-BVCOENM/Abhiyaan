@@ -15,7 +15,7 @@ class ProfileView extends StatelessWidget {
             appBar: AppBar(
               actions: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => model.navigateToSettingsView(),
                   child: SizedBox(
                     width: 33.wWise,
                     child: Image.asset(AssetImagePath.settingImg),
@@ -51,9 +51,12 @@ class ProfileView extends StatelessWidget {
                             child: CachedNetworkImage(
                               width: 85.wWise,
                               fit: BoxFit.cover,
-                              imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1K8v6grZ-ZUVMNO5SLPpv1757dIoupO612SvpYZfpzndi3Vg6QnqrxRQal1PHqZtdhBE&usqp=CAU",
-                              placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
-                              errorWidget: (context, url, error) => const Icon(Icons.error),
+                              imageUrl:
+                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1K8v6grZ-ZUVMNO5SLPpv1757dIoupO612SvpYZfpzndi3Vg6QnqrxRQal1PHqZtdhBE&usqp=CAU",
+                              placeholder: (context, url) => const Center(
+                                  child: CircularProgressIndicator.adaptive()),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
                             ),
                           ),
                           SizedBox(
@@ -69,7 +72,11 @@ class ProfileView extends StatelessWidget {
                               SizedBox(
                                 height: 8.hWise,
                               ),
-                              Text("BE COMPS", style: FontThemeClass().subHeading2(context, context.colorScheme.secondarySectionColor))
+                              Text("BE COMPS",
+                                  style: FontThemeClass().subHeading2(
+                                      context,
+                                      context
+                                          .colorScheme.secondarySectionColor))
                             ],
                           )
                         ],
