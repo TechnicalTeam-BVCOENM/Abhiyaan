@@ -5,7 +5,7 @@ class FontThemeClass {
     return TextStyle(
       fontSize: 26,
       fontFamily: 'Outfit',
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.w500,
       color: context.colorScheme.secondaryBlackColor,
     );
   }
@@ -32,7 +32,15 @@ class FontThemeClass {
     return TextStyle(
       fontSize: 24,
       fontFamily: 'Outfit',
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w500,
+      color: context.colorScheme.secondaryBlackColor,
+    );
+  }
+   TextStyle profileheading(BuildContext context) {
+    return TextStyle(
+      fontSize: 22,
+      fontFamily: 'Outfit',
+      fontWeight: FontWeight.w500,
       color: context.colorScheme.secondaryBlackColor,
     );
   }
@@ -42,6 +50,15 @@ class FontThemeClass {
       fontSize: 20,
       fontFamily: 'Outfit',
       fontWeight: FontWeight.w400,
+      color: context.colorScheme.secondaryBlackColor,
+    );
+  }
+
+  TextStyle heading4(BuildContext context) {
+    return TextStyle(
+      fontSize: 16,
+      fontFamily: 'Outfit',
+      fontWeight: FontWeight.w500,
       color: context.colorScheme.secondaryBlackColor,
     );
   }
