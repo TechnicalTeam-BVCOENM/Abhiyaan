@@ -1,6 +1,78 @@
 part of 'event_view.dart';
 
 class EventViewModel extends BaseViewModel {
+  // Variables
   final log = getLogger('EventViewModel');
+  EventModel? todayEvent;
+
+  // Init Method
+  void init() {
+    getTodaysEvent();
+    notifyListeners();
+  }
+
+  // List
+  final List<EventModel> eventsList = [
+    EventModel(
+      title: 'Abhiyaan',
+      time: '10:00 AM',
+      day: 20,
+      month: 'May',
+      imageUrl:
+          'https://imgs.search.brave.com/y2ve9MehABcSRTFjQYPcwpiFeueug4jPMSBV80j3lew/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXRteXVuaS5j/b20vYXp1cmUvY29s/bGVnZS1pbWFnZS9i/aWcvYmhhcmF0aS12/aWR5YXBlZXRocy1p/bnN0aXR1dGUtb2Yt/bWFuYWdlbWVudC1z/dHVkaWVzLXJlc2Vh/cmNoLWJ2aW1zci1t/dW1iYWkuanBn',
+      location: 'Location 1',
+    ),
+    EventModel(
+      title: 'CESA',
+      time: '2:30 PM',
+      day: 13,
+      month: 'Nov',
+      imageUrl:
+          'https://imgs.search.brave.com/naQcU43e9tgthZ_RRInjFZjKgnNxm8W09L3uTjUs44Q/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/YnZ1bml2ZXJzaXR5/LmVkdS5pbi9kb21t/dW1iYWkvaW1hZ2Vz/L2Fib3V0LWhvbWUu/anBn',
+      location: 'Qudrangle',
+    ),
+  ];
+
+  // Methods
+  String getCurrentMonth() {
+    int currentMonthNumber = DateTime.now().month;
+    int currentYear = DateTime.now().year;
+    String currentMonth = DateFormat('MMMM')
+        .format(DateTime(currentYear, currentMonthNumber, 1))
+        .substring(0, 3);
+    debugPrint(currentMonth);
+    return currentMonth;
+  }
   
+  void getTodaysEvent() {
+    for (EventModel event in eventsList) {
+      if (event.month == getCurrentMonth() && event.day == DateTime.now().day) {
+        todayEvent = event;
+        break;
+      }
+    }
+  }
+
+}
+
+
+// Models
+class EventModel {
+  String title;
+  String time;
+  int day;
+  String month;
+  String imageUrl;
+
+  String location;
+
+  EventModel({
+    required this.title,
+    required this.time,
+    required this.day,
+    required this.month,
+    required this.location,
+    required this.imageUrl,
+
+  });
 }
