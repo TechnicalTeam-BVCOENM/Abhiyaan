@@ -2,7 +2,6 @@ part of '../settings/settings_view.dart';
 
 class SettingsViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
-  final log = getLogger('SplashViewModel');
 
   navigateToProfile() {
     _navigationService.replaceWith(Routes.profileView);
