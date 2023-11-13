@@ -109,9 +109,9 @@ class EventDateContainer extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: context.colorScheme.secondarySectionColor.withOpacity(0.4),
-              spreadRadius: 2,
+              spreadRadius: 1,
               blurRadius: 2,
-              offset: const Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 1), // changes position of shadow
             ),
           ],
           borderRadius: BorderRadius.circular(12),
@@ -191,7 +191,7 @@ class EventCardInfo extends StatelessWidget {
                             children: [
                               eventDetails.eventTime(context , event.time),
                               SizedBox(
-                                width: 8.wWise,
+                                width: 18.wWise,
                               ),
                               eventDetails.eventLocation(context, event.location),
                             ],
