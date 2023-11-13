@@ -36,8 +36,8 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/
     - assets/images/
+    - assets/images/profile/
     - assets/images/academics/
 
   uses-material-design: true
