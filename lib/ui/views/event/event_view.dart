@@ -1,14 +1,15 @@
 import 'package:darpan/theme/responsive_utils.dart';
-
 import '../../../file_exporter.dart';
 part 'event_view_model.dart';
+part 'event_view_components.dart';
 
 class EventView extends StatelessWidget {
   const EventView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    FontThemeClass fontTheme = FontThemeClass();
+    EventDetails eventDetails = EventDetails();
+
     return ViewModelBuilder<EventViewModel>.reactive(
       viewModelBuilder: () => EventViewModel(),
       builder: (context, model, child) {
@@ -42,162 +43,23 @@ class EventView extends StatelessWidget {
                             child: Column(
                               children: [
                                 // Event Image
-                                CachedNetworkImageWidget(
-                                  imageUrl:
-                                      "https://imgs.search.brave.com/y2ve9MehABcSRTFjQYPcwpiFeueug4jPMSBV80j3lew/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXRteXVuaS5j/b20vYXp1cmUvY29s/bGVnZS1pbWFnZS9i/aWcvYmhhcmF0aS12/aWR5YXBlZXRocy1p/bnN0aXR1dGUtb2Yt/bWFuYWdlbWVudC1z/dHVkaWVzLXJlc2Vh/cmNoLWJ2aW1zci1t/dW1iYWkuanBn",
-                                  height: 160.hWise,
-                                  width: ResponsiveUtils.screenWidth(context),
-                                  maxHeightDiskCache:
-                                      ResponsiveUtils.screenWidth(context),
+                                 eventDetails.eventImage(
+                                  context,
+                                  "https://imgs.search.brave.com/y2ve9MehABcSRTFjQYPcwpiFeueug4jPMSBV80j3lew/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXRteXVuaS5j/b20vYXp1cmUvY29s/bGVnZS1pbWFnZS9i/aWcvYmhhcmF0aS12/aWR5YXBlZXRocy1p/bnN0aXR1dGUtb2Yt/bWFuYWdlbWVudC1z/dHVkaWVzLXJlc2Vh/cmNoLWJ2aW1zci1t/dW1iYWkuanBn",
+                                  160.hWise,
+                                  ResponsiveUtils.screenWidth(context),
                                 ),
                                 SizedBox(
                                   height: 28.hWise,
                                 ),
                                 // Event Info
-                                Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            // Title
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 22.padL.left),
-                                              child: Text(
-                                                "Abhiyaan",
-                                                style:
-                                                    fontTheme.heading2(context),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 4.hWise,
-                                            ),
-                                            //  Time and Location
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 20.padL.left),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Icon(
-                                                        Icons.timer,
-                                                        size: 18.wWise,
-                                                        color: context
-                                                            .colorScheme
-                                                            .primaryColor,
-                                                      ),
-                                                      SizedBox(
-                                                        width: 4.wWise,
-                                                      ),
-                                                      Text(
-                                                        "11:00 AM",
-                                                        style: fontTheme
-                                                            .subHeading2(
-                                                          context,
-                                                          context.colorScheme
-                                                              .primaryColor,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    width: 8.wWise,
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Icon(
-                                                        Icons.location_on,
-                                                        size: 18.wWise,
-                                                        color: context
-                                                            .colorScheme
-                                                            .primaryColor,
-                                                      ),
-                                                      SizedBox(
-                                                        width: 4.wWise,
-                                                      ),
-                                                      Text(
-                                                        "Qudrangle",
-                                                        style: fontTheme
-                                                            .subHeading2(
-                                                          context,
-                                                          context.colorScheme
-                                                              .primaryColor,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding:  EdgeInsets.only(right: 8.padR.right),
-                                          child: Transform.rotate(
-                                            angle: 180 * 314 / 22,
-                                            child: InkWell(
-                                              onTap: () {},
-                                              child:  Icon(
-                                                Icons.send_rounded,
-                                                size: 36.wWise,
-                                                color: context.colorScheme.primaryColor,
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
+                                const EventCardInfo(),
                               ],
                             ),
                           ),
                         ),
-                        // Event floating Date
-                        Positioned(
-                          top: 120.hWise,
-                          left: 20.wWise,
-                          child: Container(
-                            height: 60.hWise,
-                            width: 60.wWise,
-                            decoration: BoxDecoration(
-                              color: context.colorScheme.secondaryWhiteColor,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: context
-                                      .colorScheme.secondarySectionColor
-                                      .withOpacity(0.4),
-                                  spreadRadius: 2,
-                                  blurRadius: 2,
-                                  offset: const Offset(
-                                      0, 3), // changes position of shadow
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "26",
-                                  style:
-                                      fontTheme.large(context, FontWeight.w600),
-                                ),
-                                Text(
-                                  "Feb",
-                                  style: fontTheme.subHeading2(context,
-                                      context.colorScheme.secondaryBlackColor),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        // Event Date
+                        const EventDateContainer(),
                       ],
                     ),
                   )
@@ -209,4 +71,8 @@ class EventView extends StatelessWidget {
       },
     );
   }
+
+  
 }
+
+
