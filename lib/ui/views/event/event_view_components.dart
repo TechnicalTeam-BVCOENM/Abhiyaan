@@ -4,7 +4,9 @@ part of 'event_view.dart';
 class EventDetails {
   FontThemeClass fontTheme = FontThemeClass();
 
-  Row _eventLocation(BuildContext context, String location) {
+  Row _eventLocation(BuildContext context, String location, {double gap = 4}) {
+    assert(location.isNotEmpty, "Time should not be null or empty");
+
     return Row(
       children: [
         Icon(
@@ -13,7 +15,7 @@ class EventDetails {
           color: context.colorScheme.primaryColor.withOpacity(0.8),
         ),
         SizedBox(
-          width: 4.wWise,
+          width: gap.wWise,
         ),
         Text(
           location,
@@ -26,7 +28,8 @@ class EventDetails {
     );
   }
 
-  Row _eventTime(BuildContext context, String time) {
+  Row _eventTime(BuildContext context, String time, {double gap = 4}) {
+    assert(time.isNotEmpty, "Time should not be null or empty");
     return Row(
       children: [
         Icon(
@@ -35,7 +38,7 @@ class EventDetails {
           color: context.colorScheme.primaryColor.withOpacity(0.8),
         ),
         SizedBox(
-          width: 4.wWise,
+          width: gap.wWise,
         ),
         Text(
           time,
@@ -50,6 +53,10 @@ class EventDetails {
 
   CachedNetworkImageWidget _eventImage(
       BuildContext context, String imageUrl, double height, double width) {
+    assert(imageUrl.isNotEmpty, "Time should not be null or empty");
+    assert(height != 0 && width != 0 && height < width,
+        "Height should be greater than 0");
+
     return CachedNetworkImageWidget(
       imageUrl: imageUrl,
       height: height,
@@ -58,12 +65,14 @@ class EventDetails {
     );
   }
 
-  Padding eventTitle(BuildContext context, String title, EdgeInsets padding) {
+  Padding eventTitle(BuildContext context, String title, EdgeInsets padding,
+      {double fontSize = 26}) {
     return Padding(
       padding: padding,
       child: Text(
         title,
-        style: fontTheme.heading(context),
+        textAlign: TextAlign.center,
+        style: fontTheme.heading(context, size: fontSize),
       ),
     );
   }
@@ -74,87 +83,87 @@ class EventDetails {
 }
 
 //UC
-class UCEventDetails {
-  FontThemeClass fontTheme = FontThemeClass();
+// class UCEventDetails {
+//   FontThemeClass fontTheme = FontThemeClass();
 
-  Row _eventLocation(BuildContext context) {
-    return Row(
-      children: [
-        Icon(
-          Icons.location_on,
-          size: 12.wWise,
-          color: context.colorScheme.primaryColor.withOpacity(0.8),
-        ),
-        SizedBox(
-          width: 4.wWise,
-        ),
-        Text(
-          "Qudrangle",
-          style: fontTheme.smallSubHeading(
-            context,
-            context.colorScheme.primaryColor.withOpacity(0.8),
-          ),
-        ),
-      ],
-    );
-  }
+//   Row _eventLocation(BuildContext context) {
+//     return Row(
+//       children: [
+//         Icon(
+//           Icons.location_on,
+//           size: 12.wWise,
+//           color: context.colorScheme.primaryColor.withOpacity(0.8),
+//         ),
+//         SizedBox(
+//           width: 4.wWise,
+//         ),
+//         Text(
+//           "Qudrangle",
+//           style: fontTheme.smallSubHeading(
+//             context,
+//             context.colorScheme.primaryColor.withOpacity(0.8),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
 
-  Row _eventTime(BuildContext context) {
-    return Row(
-      children: [
-        Icon(
-          Icons.timer,
-          size: 12.wWise,
-          color: context.colorScheme.primaryColor.withOpacity(0.8),
-        ),
-        SizedBox(
-          width: 4.wWise,
-        ),
-        Text(
-          "11:00 AM",
-          style: fontTheme.smallSubHeading(
-            context,
-            context.colorScheme.primaryColor.withOpacity(0.8),
-          ),
-        ),
-      ],
-    );
-  }
+//   Row _eventTime(BuildContext context) {
+//     return Row(
+//       children: [
+//         Icon(
+//           Icons.timer,
+//           size: 12.wWise,
+//           color: context.colorScheme.primaryColor.withOpacity(0.8),
+//         ),
+//         SizedBox(
+//           width: 4.wWise,
+//         ),
+//         Text(
+//           "11:00 AM",
+//           style: fontTheme.smallSubHeading(
+//             context,
+//             context.colorScheme.primaryColor.withOpacity(0.8),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
 
-  CachedNetworkImageWidget _eventImage(
-      BuildContext context, String imageUrl, double height, double width) {
-    return CachedNetworkImageWidget(
-      imageUrl: imageUrl,
-      height: height,
-      width: width,
-      maxHeightDiskCache: ResponsiveUtils.screenWidth(context),
-    );
-  }
+//   CachedNetworkImageWidget _eventImage(
+//       BuildContext context, String imageUrl, double height, double width) {
+//     return CachedNetworkImageWidget(
+//       imageUrl: imageUrl,
+//       height: height,
+//       width: width,
+//       maxHeightDiskCache: ResponsiveUtils.screenWidth(context),
+//     );
+//   }
 
-  Padding eventTitle(BuildContext context, String title, EdgeInsets padding) {
-    return Padding(
-      padding: padding,
-      child: Text(
-        title,
-        style: fontTheme.heading(context),
-      ),
-    );
-  }
+//   Padding eventTitle(BuildContext context, String title, EdgeInsets padding) {
+//     return Padding(
+//       padding: padding,
+//       child: Text(
+//         title,
+//         style: fontTheme.heading(context),
+//       ),
+//     );
+//   }
 
-  Padding eventUTitle(BuildContext context, String title, EdgeInsets padding) {
-    return Padding(
-      padding: padding,
-      child: Text(
-        title,
-        style: fontTheme.profileheading(context),
-      ),
-    );
-  }
+//   Padding eventUTitle(BuildContext context, String title, EdgeInsets padding) {
+//     return Padding(
+//       padding: padding,
+//       child: Text(
+//         title,
+//         style: fontTheme.profileheading(context),
+//       ),
+//     );
+//   }
 
-  get eventLocation => _eventLocation;
-  get eventTime => _eventTime;
-  get eventImage => _eventImage;
-}
+//   get eventLocation => _eventLocation;
+//   get eventTime => _eventTime;
+//   get eventImage => _eventImage;
+// }
 
 class EventDateContainer extends StatelessWidget {
   final double? top;
@@ -176,6 +185,7 @@ class EventDateContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FontThemeClass fontTheme = FontThemeClass();
+    EventViewModel model = EventViewModel();
     return Positioned(
       top: top,
       left: left,
@@ -207,66 +217,9 @@ class EventDateContainer extends StatelessWidget {
               style: fontTheme.large(context, FontWeight.w800),
             ),
             Text(
-              "Feb",
+             model.getMonthName(event.month, event.year) ,
               style: fontTheme.subHeading2(
                   context, context.colorScheme.secondaryBlackColor),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class EventDateUContainer extends StatelessWidget {
-  final double? top;
-  final double? bottom;
-  final double? right;
-  final double? left;
-  const EventDateUContainer({
-    Key? key,
-    this.top,
-    this.right,
-    this.bottom,
-    this.left,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    FontThemeClass fontTheme = FontThemeClass();
-    return Positioned(
-      top: top,
-      left: left,
-      bottom: bottom,
-      right: right,
-      child: Container(
-        height: 50.hWise,
-        width: 50.wWise,
-        decoration: BoxDecoration(
-          color: context.colorScheme.secondaryWhiteColor,
-          boxShadow: [
-            BoxShadow(
-              color: context.colorScheme.secondarySectionColor.withOpacity(0.4),
-              spreadRadius: 2,
-              blurRadius: 2,
-              offset: const Offset(0, 3), // changes position of shadow
-            ),
-          ],
-          borderRadius: BorderRadius.circular(8),
-        ),
-        // Event Date
-        child: Column(
-          children: [
-            Text(
-              "26",
-              style:
-                  fontTheme.heading(context, context.colorScheme.primaryColor),
-            ),
-            Text(
-              "Feb",
-              textAlign: TextAlign.center,
-              style: fontTheme.subHeading(
-                  context, context.colorScheme.secondarySectionColor),
             ),
           ],
         ),
@@ -364,24 +317,27 @@ class EventCardInfo extends StatelessWidget {
 }
 
 class EventCardUpcoming extends StatelessWidget {
+  final EventModel model;
+
   const EventCardUpcoming({
     super.key,
+    required this.model,
   });
 
   @override
   Widget build(BuildContext context) {
-    UCEventDetails uceventDetails = UCEventDetails();
+    EventDetails eventDetails = EventDetails();
     return Positioned(
       child: SizedBox(
-        height: 175.hWise,
-        width: 200.wWise,
+        height: 180.hWise,
+        width: 260.wWise,
         child: Column(
           children: [
             // Event Image
-            uceventDetails.eventImage(
+            eventDetails.eventImage(
               context,
-              "https://imgs.search.brave.com/y2ve9MehABcSRTFjQYPcwpiFeueug4jPMSBV80j3lew/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXRteXVuaS5j/b20vYXp1cmUvY29s/bGVnZS1pbWFnZS9i/aWcvYmhhcmF0aS12/aWR5YXBlZXRocy1p/bnN0aXR1dGUtb2Yt/bWFuYWdlbWVudC1z/dHVkaWVzLXJlc2Vh/cmNoLWJ2aW1zci1t/dW1iYWkuanBn",
-              125.hWise,
+              model.imageUrl,
+              130.hWise,
               ResponsiveUtils.screenWidth(context),
             ),
             SizedBox(
@@ -389,39 +345,38 @@ class EventCardUpcoming extends StatelessWidget {
             ),
             // Event Info
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Event Info
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Event Title
-                        uceventDetails.eventUTitle(
-                            context,
-                            'Abhiyaan',
-                            EdgeInsets.only(
-                                left: 15.padL.left, top: 4.padT.top)),
+                // Event Title
+                eventDetails.eventTitle(
+                  context,
+                  model.title,
+                  EdgeInsets.only(left: 15.padL.left),
+                  fontSize: 26.0,
+                ),
 
-                        //  Event Time and Location
-                        Padding(
-                          padding: EdgeInsets.only(left: 15.padL.left),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              uceventDetails.eventTime(context),
-                              SizedBox(
-                                height: 8.wWise,
-                              ),
-                              uceventDetails.eventLocation(context),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                    // Event Button
-                  ],
+                //  Event Time and Location
+                Padding(
+                  padding: EdgeInsets.only(left: 12.padL.left),
+                  child: Column(
+                    children: [
+                      // Time
+                      eventDetails.eventTime(
+                        context,
+                        gap: 10.0,
+                        model.time,
+                      ),
+                      SizedBox(
+                        height: 6.wWise,
+                      ),
+                      // Location
+                      eventDetails.eventLocation(
+                        context,
+                        model.location,
+                        gap: 2.0,
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),

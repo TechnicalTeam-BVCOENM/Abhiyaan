@@ -19,9 +19,9 @@ class FontThemeClass {
     );
   }
 
-  TextStyle heading(BuildContext context, [Color? color]) {
+  TextStyle heading(BuildContext context, {Color? color , double size = 26}) {
     return TextStyle(
-      fontSize: 26,
+      fontSize: size,
       fontFamily: 'Outfit',
       fontWeight: FontWeight.bold,
       color: color ?? context.colorScheme.secondaryBlackColor,
