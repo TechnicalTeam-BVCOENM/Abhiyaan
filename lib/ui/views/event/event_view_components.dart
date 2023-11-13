@@ -346,6 +346,7 @@ class EventCardUpcoming extends StatelessWidget {
             // Event Info
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // Event Title
                 eventDetails.eventTitle(
@@ -354,10 +355,10 @@ class EventCardUpcoming extends StatelessWidget {
                   EdgeInsets.only(left: 15.padL.left),
                   fontSize: 26.0,
                 ),
-
+              
                 //  Event Time and Location
                 Padding(
-                  padding: EdgeInsets.only(left: 12.padL.left),
+                  padding: EdgeInsets.only(left: 12.padL.left , right: 16.padR.right),
                   child: Column(
                     children: [
                       // Time
