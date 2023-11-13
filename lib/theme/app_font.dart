@@ -10,11 +10,11 @@ class FontThemeClass {
     );
   }
 
-  TextStyle large(BuildContext context) {
+  TextStyle large(BuildContext context,[FontWeight ? fontWeight]) {
     return TextStyle(
       fontSize: 32,
       fontFamily: 'Outfit',
-      fontWeight: FontWeight.w800,
+      fontWeight: fontWeight ?? FontWeight.w800,
       color: context.colorScheme.primaryColor,
     );
   }

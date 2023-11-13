@@ -16,15 +16,15 @@ class AcademicsViewModel extends BaseViewModel {
   ];
 
   final gridListImages = [
-    AssetImagePath.timetable,
-    AssetImagePath.syllabus,
-    AssetImagePath.studentSection,
-    AssetImagePath.classNotes,
-    AssetImagePath.practicals,
-    AssetImagePath.pyqs,
-    AssetImagePath.courses,
-    AssetImagePath.results,
-    AssetImagePath.attendance,
+    AssetImagePath.timetableImg,
+    AssetImagePath.syllabusImg,
+    AssetImagePath.studentSectionImg,
+    AssetImagePath.classNotesImg,
+    AssetImagePath.practicalsImg,
+    AssetImagePath.pyqsImg,
+    AssetImagePath.coursesImg,
+    AssetImagePath.resultsImg,
+    AssetImagePath.attendanceImg,
   ];
 
   final List<AcademicsUpdates> academicsUpdatesList = [

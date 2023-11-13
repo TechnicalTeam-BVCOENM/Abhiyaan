@@ -73,6 +73,7 @@ class EventDetails {
   get eventImage => _eventImage;
 }
 
+
 //UC
 class UCEventDetails {
   FontThemeClass fontTheme = FontThemeClass();
@@ -158,17 +159,22 @@ class UCEventDetails {
 
 class EventDateContainer extends StatelessWidget {
   final double? top;
+
   final double? bottom;
   final double? right;
   final double? left;
 
+
   const EventDateContainer({
+
     Key? key,
     this.top,
     this.right,
     this.bottom,
     this.left,
   }) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -198,6 +204,7 @@ class EventDateContainer extends StatelessWidget {
           children: [
             Text(
               "26",
+
               style: fontTheme.large(
                 context,
               ),
@@ -257,6 +264,7 @@ class EventDateUContainer extends StatelessWidget {
               "26",
               style:
                   fontTheme.heading(context, context.colorScheme.primaryColor),
+
             ),
             Text(
               "Feb",
@@ -353,6 +361,7 @@ class EventCardInfo extends StatelessWidget {
     );
   }
 }
+
 
 class EventCardUpcoming extends StatelessWidget {
   const EventCardUpcoming({

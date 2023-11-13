@@ -42,6 +42,7 @@ class EventView extends StatelessWidget {
                         ),
                       ],
                     ),
+
                   ),
                   const Align(
                       alignment: Alignment.bottomLeft,
@@ -83,6 +84,7 @@ class EventView extends StatelessWidget {
                       },
                     ),
                   ),
+
                 ],
               ),
             ),
