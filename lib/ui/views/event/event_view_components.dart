@@ -4,8 +4,7 @@ part of 'event_view.dart';
 class EventDetails {
   FontThemeClass fontTheme = FontThemeClass();
 
-
-  Row _eventLocation(BuildContext context , String location) {
+  Row _eventLocation(BuildContext context, String location) {
     return Row(
       children: [
         Icon(
@@ -27,7 +26,7 @@ class EventDetails {
     );
   }
 
-  Row _eventTime(BuildContext context , String time) {
+  Row _eventTime(BuildContext context, String time) {
     return Row(
       children: [
         Icon(
@@ -73,7 +72,6 @@ class EventDetails {
   get eventTime => _eventTime;
   get eventImage => _eventImage;
 }
-
 
 //UC
 class UCEventDetails {
@@ -164,12 +162,9 @@ class EventDateContainer extends StatelessWidget {
   final double? bottom;
   final double? right;
   final double? left;
-      final EventModel event;
-
-
+  final EventModel event;
 
   const EventDateContainer({
-
     Key? key,
     this.top,
     this.right,
@@ -177,8 +172,6 @@ class EventDateContainer extends StatelessWidget {
     this.left,
     required this.event,
   }) : super(key: key);
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -209,12 +202,9 @@ class EventDateContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-
               event.day.toString(),
-                            textAlign: TextAlign.center,
-
+              textAlign: TextAlign.center,
               style: fontTheme.large(context, FontWeight.w800),
-
             ),
             Text(
               "Feb",
@@ -271,10 +261,9 @@ class EventDateUContainer extends StatelessWidget {
               "26",
               style:
                   fontTheme.heading(context, context.colorScheme.primaryColor),
-
             ),
             Text(
-              event.month,
+              "Feb",
               textAlign: TextAlign.center,
               style: fontTheme.subHeading(
                   context, context.colorScheme.secondarySectionColor),
@@ -287,7 +276,7 @@ class EventDateUContainer extends StatelessWidget {
 }
 
 class EventCardInfo extends StatelessWidget {
-      final EventModel event;
+  final EventModel event;
 
   const EventCardInfo({
     super.key,
@@ -335,11 +324,12 @@ class EventCardInfo extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              eventDetails.eventTime(context , event.time),
+                              eventDetails.eventTime(context, event.time),
                               SizedBox(
                                 width: 18.wWise,
                               ),
-                              eventDetails.eventLocation(context, event.location),
+                              eventDetails.eventLocation(
+                                  context, event.location),
                             ],
                           ),
                         )
@@ -372,7 +362,6 @@ class EventCardInfo extends StatelessWidget {
     );
   }
 }
-
 
 class EventCardUpcoming extends StatelessWidget {
   const EventCardUpcoming({
@@ -442,7 +431,3 @@ class EventCardUpcoming extends StatelessWidget {
     );
   }
 }
-
-
-
-

@@ -26,36 +26,34 @@ class EventView extends StatelessWidget {
                     child: SectionText(title: "Ongoing Events"),
                   ),
                   Card(
-
-                      clipBehavior: Clip.hardEdge,
-                      shadowColor: context.colorScheme.secondaryLPurpleColor.withOpacity(0.8),
-                      elevation: 4,
-                      shape: ShapeBorder.lerp(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18),
+                    clipBehavior: Clip.hardEdge,
+                    shadowColor: context.colorScheme.secondaryLPurpleColor
+                        .withOpacity(0.8),
+                    elevation: 4,
+                    shape: ShapeBorder.lerp(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        1),
+                    child: todaysEvent != null
+                        ? Stack(
+                            children: [
+                              EventCardInfo(
+                                event: todaysEvent,
+                              ),
+                              EventDateContainer(
+                                top: 120.wWise,
+                                left: 20.wWise,
+                                event: todaysEvent,
+                              ),
+                            ],
+                          )
+                        : const CircularLoadingIndicator(
+                            height: 200,
                           ),
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                          1),
-                      child: todaysEvent != null
-                          ? Stack(
-                              children: [
-                                EventCardInfo(
-                                  event: todaysEvent,
-                                ),
-                                EventDateContainer(
-                                  top: 120.wWise,
-                                  left: 20.wWise,
-                                  event: todaysEvent,
-                                ),
-                              ],
-                            )
-                          : const CircularLoadingIndicator(
-                              height: 200,
-                            ))
-                    ),
-
                   ),
                   const Align(
                       alignment: Alignment.bottomLeft,
@@ -63,7 +61,7 @@ class EventView extends StatelessWidget {
                   const Align(
                       alignment: Alignment.bottomLeft,
                       child: SectionText(title: "Upcoming Events")),
-                  Container(
+                  SizedBox(
                     height: 200.hWise,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -97,7 +95,6 @@ class EventView extends StatelessWidget {
                       },
                     ),
                   ),
-
                 ],
               ),
             ),
