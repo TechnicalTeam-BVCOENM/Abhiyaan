@@ -1,7 +1,11 @@
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
+import 'package:darpan/ui/views/event/event_view.dart';
+
+import '../../../common/common_component_model.dart';
 part 'home_view_model.dart';
 part 'home_view_component.dart';
 
@@ -33,7 +37,7 @@ class HomeView extends StatelessWidget {
                           style: fontTheme.appBarText(context),
                         ),
                         IconButton(
-                          splashRadius: 30,
+                          splashRadius: 30.wWise,
                           splashColor: context.colorScheme.backgroundColor,
                           icon: Icon(
                             Icons.notifications_none_rounded,
@@ -89,7 +93,7 @@ class HomeView extends StatelessWidget {
 
                   // Quick Links
                   const SectionText(title: "Quick Links"),
-                  horizontalStoryRow(context, model.quickLinksList, 50),
+                  quickLinksList(context, model.quickLinksList),
                   // Activity
                   const SectionText(
                     title: "Activity",

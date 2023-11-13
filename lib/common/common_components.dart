@@ -1,10 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import '../file_exporter.dart';
 
 //tools
-
 class CircularLoadingIndicator extends StatelessWidget {
   final double height;
 
@@ -39,8 +37,7 @@ void showMessage(String message) {
       fontSize: 16.0);
 }
 
-//designs
-
+// Section Name Text
 class SectionText extends StatelessWidget {
   const SectionText({Key? key, required this.title}) : super(key: key);
   final String title;
@@ -89,6 +86,7 @@ class CachedNetworkImageWidget extends StatelessWidget {
     );
   }
 }
+
 
 Container horizontalStoryRow(
     BuildContext context, List model, double borderRadius) {
@@ -171,3 +169,4 @@ void showmessage(context, String message) {
     debugPrint("error is $e");
   }
 }
+

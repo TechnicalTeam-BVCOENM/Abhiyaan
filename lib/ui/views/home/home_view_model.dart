@@ -30,24 +30,24 @@ class HomeViewModel extends BaseViewModel {
 
   List<QuickLinksModel> quickLinksList = [
     QuickLinksModel(
-      imageUrl: "https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg",
-      title: "College Website",
-      routeUrl: 'https://www.google.com/',
+      icon: Icons.web,
+      title: "BCOENM",
+      url: 'https://bvcoenm.edu.in/',
     ),
     QuickLinksModel(
-      imageUrl: "https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg",
+      icon: Icons.web,
       title: "Abhiyaan",
-      routeUrl: 'https://www.google.com/',
+      url: 'https://abhiyaan-2023.netlify.app/',
     ),
     QuickLinksModel(
-      imageUrl: "https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg",
+      icon: Icons.event,
       title: "Event",
-      routeUrl: 'https://www.google.com/',
+      view: const EventView(),
     ),
     QuickLinksModel(
-      imageUrl: "https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg",
+      icon: Icons.pages,
       title: "Blogs",
-      routeUrl: 'https://www.google.com/',
+      url: 'https://www.dev.com/',
     ),
   ];
 
@@ -100,6 +100,27 @@ class HomeViewModel extends BaseViewModel {
   }
 }
 
+void handleQuickLinksNavigation(List model, int i) {
+  try {
+    if (model[i].url != '' && model[i].url != null) {
+      debugPrint("Route Url");
+      UrlLauncher externalUrlHandler = UrlLauncher();
+      externalUrlHandler.launchBrowserUrlHandler(
+        Uri.parse(model[i].url),
+      );
+    } else if (model[i].view != '' && model[i].view != null) {
+      final navigationService = locator<NavigationService>();
+
+      debugPrint("Page View");
+      navigationService.navigateToView(model[i].view);
+    } else {
+      debugPrint("Error");
+    }
+  } catch (e) {
+    debugPrint(e.toString());
+  }
+}
+
 // Models
 class DepartmentUpdates {
   late String name;
@@ -122,13 +143,15 @@ class DepartmentUpdates {
 }
 
 class QuickLinksModel {
-  late String imageUrl;
+  late IconData icon;
   late String title;
-  late String routeUrl;
+  late String url;
+  late Widget view;
 
   QuickLinksModel({
-    required this.imageUrl,
+    required this.icon,
     required this.title,
-    required this.routeUrl,
+    this.url = '',
+    this.view = const HomeView(),
   });
 }

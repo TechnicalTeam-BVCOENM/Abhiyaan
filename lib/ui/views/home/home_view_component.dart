@@ -1,5 +1,6 @@
 part of 'home_view.dart';
 
+// Department Updates Card
 Container updatesCard(HomeViewModel model, int i, BuildContext context) {
   return Container(
     height: model.departmentUpdatesList[i].expandedHeight,
@@ -8,6 +9,10 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
     decoration: BoxDecoration(
       color: context.colorScheme.secondaryWhiteColor,
       borderRadius: BorderRadius.circular(12),
+      border: Border.all(
+        color: context.colorScheme.secondaryLPurpleColor.withOpacity(0.7),
+        width: 1,
+      ),
     ),
     child: Column(
       children: [
@@ -74,6 +79,7 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
   );
 }
 
+// Carousel
 class CarouselUtils {
   static Widget buildIndicator(
           BuildContext context, int activeIndex, int length) =>
@@ -120,4 +126,58 @@ class CarouselUtils {
           ),
         ),
       );
+}
+
+// Quick Links
+Row quickLinksList(BuildContext context, List model, [double? borderRadius]) {
+  FontThemeClass fontTheme = FontThemeClass();
+  return Row(
+    children: [
+      Expanded(
+        child: GridView.builder(
+          physics: const ClampingScrollPhysics(),
+          shrinkWrap: true,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
+            crossAxisSpacing: 4.0,
+            mainAxisSpacing: 4.0,
+          ),
+          itemCount: model.length,
+          itemBuilder: (context, idx) {
+            return Column(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    debugPrint("Tapped$idx");
+                    handleQuickLinksNavigation(model,idx);
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom:8),
+                    height: 60.hWise,
+                    width: 60.wWise,
+                    decoration: BoxDecoration(
+                      color: context.colorScheme.secondaryLPurpleColor,
+                      borderRadius: BorderRadius.circular(borderRadius ?? 18),
+                    ),
+                    child: Icon(
+                      model[idx].icon,
+                      size: 36.wWise,
+                      color: context.colorScheme.primaryColor,
+                    ),
+                  ),
+                ),
+                Text(
+                  model[idx].title,
+                  style: fontTheme.smallSubHeading(
+                    context,
+                    context.colorScheme.secondaryBlackColor,
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ),
+    ],
+  );
 }
