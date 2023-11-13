@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_init_to_null, prefer_typing_uninitialized_variables
-
 part of 'event_view.dart';
 
 // Event Time and location component
@@ -75,20 +73,21 @@ class EventDetails {
   get eventImage => _eventImage;
 }
 
-// ignore: must_be_immutable
 class EventDateContainer extends StatelessWidget {
-  var top;
-  var bottom;
-  var right;
-  var left;
+ final double? top;
+  final double? bottom;
+  final double? right;
+  final double? left;
 
-  EventDateContainer({
-    super.key,
-     this.top = null,
-     this.right = null,
-     this.bottom = null,
-     this.left  = null,
-  });
+
+   const EventDateContainer({
+    Key? key,
+    this.top,
+    this.right,
+    this.bottom,
+    this.left,
+  }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
