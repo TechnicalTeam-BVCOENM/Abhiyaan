@@ -5,7 +5,8 @@ class UrlLauncher {
 
    launchURL(Uri url) async {
   if (await canLaunchUrl(url)) {
-    await launchUrl(url);
+    await launchUrl(url,
+    mode: LaunchMode.externalApplication);
   } else {
     throw 'Could not launch $url';
   }
@@ -14,7 +15,7 @@ class UrlLauncher {
 launchEmail(String email) async {
    Uri sendMail = Uri.parse("mailto:$email");
   if (await canLaunchUrl(sendMail)) {
-    await launchUrl(sendMail);
+    await launchUrl(sendMail, mode: LaunchMode.externalApplication);
   } else {
     throw 'Could not launch $email';
   }

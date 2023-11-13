@@ -32,7 +32,7 @@ class HomeViewModel extends BaseViewModel {
     QuickLinksModel(
       icon: Icons.web,
       title: "BCOENM",
-      url: 'https://bvcoenm.edu.in/',
+      url: 'https://www.bvcoenm.edu.in/',
     ),
     QuickLinksModel(
       icon: Icons.web,
