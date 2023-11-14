@@ -9,6 +9,7 @@ class EventView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FontThemeClass fontTheme = FontThemeClass();
     return ViewModelBuilder<EventViewModel>.reactive(
       viewModelBuilder: () => EventViewModel(),
       onViewModelReady: (viewModel) => viewModel.init(),
@@ -20,11 +21,9 @@ class EventView extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 18.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Align(
-                    alignment: Alignment.bottomLeft,
-                    child: SectionText(title: "Ongoing Events"),
-                  ),
+                  const SectionText(title: "Ongoing Events"),
                   Card(
                     clipBehavior: Clip.hardEdge,
                     shadowColor: context.colorScheme.secondaryLPurpleColor
@@ -51,45 +50,68 @@ class EventView extends StatelessWidget {
                               ),
                             ],
                           )
-                        : const CircularLoadingIndicator(
-                            height: 200,
+                        : SizedBox(
+                            height: 200.hWise,
+                            width: ResponsiveUtils.screenWidth(context),
+                            child: Center(
+                              child: Column(
+                                children: [
+                                  CachedNetworkImageWidget(
+                                    imageUrl:
+                                        "https://imgs.search.brave.com/DGoVUPXpo3OwVAbBbgF3oGz3MUcz_cPZrzmfvO7iRrc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG5p/Lmljb25zY291dC5j/b20vaWxsdXN0cmF0/aW9uL3ByZW1pdW0v/dGh1bWIvc2VhcmNo/LXJlc3VsdC1ub3Qt/Zm91bmQtMjEzMDM1/NS0xODAwOTIwLnBu/Zz9mPXdlYnA",
+                                    height: 150.hWise,
+                                    width: 150.wWise,
+                                    maxHeightDiskCache:
+                                        ResponsiveUtils.screenWidth(context),
+                                  ),
+                                  Text(
+                                    "No Ongoing Events",
+                                    style: fontTheme.heading(context,
+                                        size: 20,
+                                        color: context
+                                            .colorScheme.secondarySectionColor),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                   ),
-                  const Align(
-                      alignment: Alignment.bottomLeft,
-                      child: SectionText(title: "Sponsors")),
-                  const Align(
-                      alignment: Alignment.bottomLeft,
-                      child: SectionText(title: "Upcoming Events")),
+                  const SectionText(title: "Sponsors"),
+                  const SectionText(title: "Upcoming Events"),
                   SizedBox(
                     height: 200.hWise,
                     child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
-                      itemCount: 5,
+                      itemCount: model.remainigEvents.length,
                       itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                            clipBehavior: Clip.hardEdge,
-                            shape: ShapeBorder.lerp(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18),
-                                ),
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18),
-                                ),
-                                1),
-                            child: Stack(
-                              children: [
-                                // Event Image and Info
-                                const EventCardUpcoming(),
-                                // Event Date
-                                EventDateUContainer(
-                                  top: 6.wWise,
-                                  left: 6.wWise,
-                                ),
-                              ],
-                            ),
+                        return Card(
+                          clipBehavior: Clip.hardEdge,
+                          shadowColor: context.colorScheme.secondaryLPurpleColor
+                              .withOpacity(0.8),
+                          elevation: 4,
+                          shape: ShapeBorder.lerp(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              1),
+                          child: Stack(
+                            children: [
+                              // Event Image and Info
+                              EventCardUpcoming(
+                                model: model.remainigEvents[index],
+                              ),
+                              // Event Date
+                              EventDateContainer(
+                                top: 8.wWise,
+                                left: 8.wWise,
+                                event: model.remainigEvents[index],
+                              ),
+                            ],
                           ),
                         );
                       },
