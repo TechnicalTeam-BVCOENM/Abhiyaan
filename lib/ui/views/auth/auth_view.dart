@@ -110,7 +110,7 @@ class AuthView extends StatelessWidget {
                       child: Text(
                         'Sign In',
                         style: FontThemeClass().heading(
-                            context, context.colorScheme.secondaryWhiteColor),
+                            context, color: context.colorScheme.secondaryWhiteColor),
                       ),
                     ),
                   ),
