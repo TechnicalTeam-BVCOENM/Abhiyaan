@@ -1,6 +1,7 @@
 part of '../settings/settings_view.dart';
 
 class SettingsViewModel extends BaseViewModel {
+  final log = getLogger('SettingsView');
   final _navigationService = locator<NavigationService>();
 
   navigateToProfile() {
