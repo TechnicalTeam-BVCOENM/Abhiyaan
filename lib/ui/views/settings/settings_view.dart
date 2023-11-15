@@ -22,7 +22,7 @@ class SettingsView extends StatelessWidget {
             ),
             centerTitle: true,
             leading: IconButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => model._navigationService.back(),
               icon: const Icon(Icons.arrow_back_ios),
             ),
           ),
