@@ -17,7 +17,7 @@ class ProfileView extends StatelessWidget {
                 TextButton(
                   onPressed: () => model.navigateToSettingsView(),
                   child: SizedBox(
-                    width: 33.wWise,
+                    width: 28.wWise,
                     child: Image.asset(AssetImagePath.settingImg),
                   ),
                 ),
@@ -98,7 +98,7 @@ class ProfileView extends StatelessWidget {
                       value: "125rathodsachin@gmail.com",
                     ),
                     const ProfileDetailsCard(
-                      leading: AssetImagePath.misImg,
+                      leading: AssetImagePath.prnImg,
                       title: "PRN Number",
                       value: "123456781234",
                     ),

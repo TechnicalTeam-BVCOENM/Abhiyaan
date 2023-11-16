@@ -5,12 +5,14 @@ class AssetImagePath {
   static const String practicalsImg = 'assets/images/academics/practicals.png';
   static const String pyqsImg = 'assets/images/academics/pyqs.png';
   static const String resultsImg = 'assets/images/academics/results.png';
-  static const String studentSectionImg = 'assets/images/academics/student_section.png';
+  static const String studentSectionImg =
+      'assets/images/academics/student_section.png';
   static const String syllabusImg = 'assets/images/academics/syllabus.png';
   static const String timetableImg = 'assets/images/academics/timetable.png';
   static const String copyImg = 'assets/images/profile/copy.png';
   static const String settingImg = 'assets/images/profile/setting.png';
   static const String misImg = 'assets/images/profile/mis.png';
+  static const String prnImg = 'assets/images/profile/prn_no.png';
   static const String idImg = 'assets/images/profile/id.png';
   static const String instagramImg = 'assets/images/profile/instagram.png';
   static const String libraryImg = 'assets/images/profile/library.png';

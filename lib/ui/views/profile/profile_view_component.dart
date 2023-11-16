@@ -27,9 +27,9 @@ class ProfileDetailsCard extends StatelessWidget {
           SizedBox(
             width: 25.wWise,
           ),
-          Image.asset(width: 20.wWise, leading),
+          Image.asset(width: 30.wWise, leading),
           SizedBox(
-            width: 38.wWise,
+            width: 32.wWise,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -56,7 +56,7 @@ class ProfileDetailsCard extends StatelessWidget {
                 // ignore: use_build_context_synchronously
                 showmessage(context, "Copied");
               },
-              child: Image.asset(width: 20, AssetImagePath.copyImg)),
+              child: Image.asset(width: 18, AssetImagePath.copyImg)),
           const SizedBox(
             width: 10,
           )
