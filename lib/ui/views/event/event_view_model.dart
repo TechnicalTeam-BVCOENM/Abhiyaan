@@ -1,11 +1,15 @@
 part of 'event_view.dart';
 
+class BrandModel {
+  final String imageUrl;
+  BrandModel({required this.imageUrl});
+}
+
 class EventViewModel extends BaseViewModel {
   // Variables
   final log = getLogger('EventViewModel');
   EventModel? todayEvent;
   List<EventModel> remainigEvents = [];
-
   // Init Method
   void init() {
     getTodaysEvent();
@@ -66,6 +70,27 @@ class EventViewModel extends BaseViewModel {
     ),
   ];
 
+  final List<BrandModel> brands = [
+    BrandModel(
+      imageUrl:
+          'https://imgs.search.brave.com/PH2aMidbf55D3f5OjcucErBN-WaxA5R73Y87-bEZfns/rs:fit:860:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy84/Lzg5L0xvZ28tQmVS/ZWFsLnBuZw',
+    ),
+    BrandModel(
+      imageUrl:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png',
+    ),
+    BrandModel(
+      imageUrl:
+          'https://e7.pngegg.com/pngimages/384/715/png-clipart-lokmat-pune-nashik-newspaper-lokmat-pune-thumbnail.png',
+    ),
+    BrandModel(
+      imageUrl:
+          'https://brandlogos.net/wp-content/uploads/2013/03/monster-energy-eps-vector-logo.png',
+    ),
+
+    // Add more BrandModel instances as needed
+  ];
+
   // Methods
   String getCurrentMonth() {
     int currentMonthNumber = DateTime.now().month;
@@ -83,37 +108,34 @@ class EventViewModel extends BaseViewModel {
     return currentMonth;
   }
 
- void getTodaysEvent() {
-  todayEvent = null;  // Initialize todayEvent to null or a default value.
+  void getTodaysEvent() {
+    todayEvent = null; // Initialize todayEvent to null or a default value.
 
-  for (EventModel event in eventsList) {
-    DateTime now = DateTime.now();
-    if (getMonthName(event.month, event.year) == getCurrentMonth() &&
-        event.day == now.day &&
-        event.year == now.year) {
-      todayEvent = event;
-      break;
+    for (EventModel event in eventsList) {
+      DateTime now = DateTime.now();
+      if (getMonthName(event.month, event.year) == getCurrentMonth() &&
+          event.day == now.day &&
+          event.year == now.year) {
+        todayEvent = event;
+        break;
+      }
     }
   }
-}
 
-
- void getRemainingEvents() {
+  void getRemainingEvents() {
     for (EventModel event in eventsList) {
-        if (event.year > DateTime.now().year ||
-            (event.year == DateTime.now().year && 
-             (event.month > DateTime.now().month || 
-              (event.month == DateTime.now().month && 
-               event.day > DateTime.now().day)))) {
-            remainigEvents.add(event);
-        }
+      if (event.year > DateTime.now().year ||
+          (event.year == DateTime.now().year &&
+              (event.month > DateTime.now().month ||
+                  (event.month == DateTime.now().month &&
+                      event.day > DateTime.now().day)))) {
+        remainigEvents.add(event);
+      }
     }
-
 
     //Doc:  This is sorting according to year, month and date
     remainigEvents.sort((a, b) {
-      int yearComparison =
-          a.year.compareTo(b.year); 
+      int yearComparison = a.year.compareTo(b.year);
       if (yearComparison == 0) {
         int monthComparison = a.month.compareTo(b.month);
         if (monthComparison == 0) {

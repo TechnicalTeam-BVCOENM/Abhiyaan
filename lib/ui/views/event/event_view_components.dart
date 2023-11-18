@@ -387,3 +387,34 @@ class EventCardUpcoming extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+class BrandCard extends StatelessWidget {
+  final BrandModel brand;
+
+  BrandCard({required this.brand});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100,
+      height: 100,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 90.0, // Adjust the height as needed
+              child: Image.network(
+                brand.imageUrl,
+                fit: BoxFit.cover,
+              ),
+            ),
+           
+          ],
+        ),
+      
+    );
+  }
+}
