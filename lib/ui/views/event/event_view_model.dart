@@ -18,8 +18,8 @@ class EventViewModel extends BaseViewModel {
       title: 'Abhiyaan',
       time: '10:00 AM',
       year: 2024,
-      day: 20,
-      month: 5,
+      day: 17,
+      month: 11,
       imageUrl:
           'https://imgs.search.brave.com/y2ve9MehABcSRTFjQYPcwpiFeueug4jPMSBV80j3lew/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXRteXVuaS5j/b20vYXp1cmUvY29s/bGVnZS1pbWFnZS9i/aWcvYmhhcmF0aS12/aWR5YXBlZXRocy1p/bnN0aXR1dGUtb2Yt/bWFuYWdlbWVudC1z/dHVkaWVzLXJlc2Vh/cmNoLWJ2aW1zci1t/dW1iYWkuanBn',
       location: 'Quadrangle',
@@ -28,7 +28,7 @@ class EventViewModel extends BaseViewModel {
       title: 'CESA',
       time: '2:30 PM',
       year: 2023,
-      day: 15,
+      day: 18,
       month: 11,
       imageUrl:
           'https://imgs.search.brave.com/naQcU43e9tgthZ_RRInjFZjKgnNxm8W09L3uTjUs44Q/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/YnZ1bml2ZXJzaXR5/LmVkdS5pbi9kb21t/dW1iYWkvaW1hZ2Vz/L2Fib3V0LWhvbWUu/anBn',
@@ -83,22 +83,33 @@ class EventViewModel extends BaseViewModel {
     return currentMonth;
   }
 
-  void getTodaysEvent() {
-    for (EventModel event in eventsList) {
-      if (getMonthName(event.month, event.year) == getCurrentMonth() && event.day == DateTime.now().day) {
-        todayEvent = event;
-        break;
-      }
+ void getTodaysEvent() {
+  todayEvent = null;  // Initialize todayEvent to null or a default value.
+
+  for (EventModel event in eventsList) {
+    DateTime now = DateTime.now();
+    if (getMonthName(event.month, event.year) == getCurrentMonth() &&
+        event.day == now.day &&
+        event.year == now.year) {
+      todayEvent = event;
+      break;
     }
   }
+}
 
-  void getRemainingEvents() {
 
+ void getRemainingEvents() {
     for (EventModel event in eventsList) {
-      if (event.day != DateTime.now().day || getMonthName(event.month, event.year) != getCurrentMonth()) {
-        remainigEvents.add(event);
-      }
+        if (event.year > DateTime.now().year ||
+            (event.year == DateTime.now().year && 
+             (event.month > DateTime.now().month || 
+              (event.month == DateTime.now().month && 
+               event.day > DateTime.now().day)))) {
+            remainigEvents.add(event);
+        }
     }
+
+
     //Doc:  This is sorting according to year, month and date
     remainigEvents.sort((a, b) {
       int yearComparison =
