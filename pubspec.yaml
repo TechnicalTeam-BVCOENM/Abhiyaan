@@ -29,6 +29,7 @@ dependencies:
   url_launcher: ^6.2.1
   intl: ^0.18.1
   flutter_native_splash: ^2.3.5
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
