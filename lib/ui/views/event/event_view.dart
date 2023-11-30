@@ -85,26 +85,22 @@ class EventView extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: model.brands.length,
                       itemBuilder: (context, index) {
-                        return Card(
-                          clipBehavior: Clip.hardEdge,
-                          shadowColor: context.colorScheme.secondaryLPurpleColor
-                              .withOpacity(0.8),
-                          elevation: 4,
-                          shape: ShapeBorder.lerp(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18),
-                              ),
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18),
-                              ),
-                              1),
-                          child: Stack(
-                            children: [
-                              // Sponsors Card
-                              BrandCard(brand: model.brands[index]),
-                            ],
-                          ),
-                        );
+                        return BrandCard(brand: model.brands[index]);
+                        // Card(
+                        //   clipBehavior: Clip.hardEdge,
+                        //   shadowColor: context.colorScheme.secondaryLPurpleColor
+                        //       .withOpacity(0.8),
+                        //   elevation: 4,
+                        //   shape: ShapeBorder.lerp(
+                        //       RoundedRectangleBorder(
+                        //         borderRadius: BorderRadius.circular(18),
+                        //       ),
+                        //       RoundedRectangleBorder(
+                        //         borderRadius: BorderRadius.circular(18),
+                        //       ),
+                        //       1),
+                        //   child: BrandCard(brand: model.brands[index]),
+                        // );
                       },
                     ),
                   ),

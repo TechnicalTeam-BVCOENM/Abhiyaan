@@ -4,10 +4,14 @@ part of 'event_view.dart';
 class EventDetails {
   FontThemeClass fontTheme = FontThemeClass();
 
-  Row _eventLocation(BuildContext context, String location, {double gap = 4}) {
+  Row _eventLocation(
+    BuildContext context,
+    String location,
+  ) {
     assert(location.isNotEmpty, "Time should not be null or empty");
 
     return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Icon(
           Icons.location_on,
@@ -15,7 +19,7 @@ class EventDetails {
           color: context.colorScheme.primaryColor.withOpacity(0.8),
         ),
         SizedBox(
-          width: gap.wWise,
+          width: 2,
         ),
         Text(
           location,
@@ -28,9 +32,10 @@ class EventDetails {
     );
   }
 
-  Row _eventTime(BuildContext context, String time, {double gap = 4}) {
+  Row _eventTime(BuildContext context, String time) {
     assert(time.isNotEmpty, "Time should not be null or empty");
     return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Icon(
           Icons.timer,
@@ -38,7 +43,7 @@ class EventDetails {
           color: context.colorScheme.primaryColor.withOpacity(0.8),
         ),
         SizedBox(
-          width: gap.wWise,
+          width: 2,
         ),
         Text(
           time,
@@ -217,7 +222,7 @@ class EventDateContainer extends StatelessWidget {
               style: fontTheme.large(context, FontWeight.w800),
             ),
             Text(
-             model.getMonthName(event.month, event.year) ,
+              model.getMonthName(event.month, event.year),
               style: fontTheme.subHeading2(
                   context, context.colorScheme.secondaryBlackColor),
             ),
@@ -329,8 +334,8 @@ class EventCardUpcoming extends StatelessWidget {
     EventDetails eventDetails = EventDetails();
     return Positioned(
       child: SizedBox(
-        height: 180.hWise,
-        width: 260.wWise,
+        height: 200.hWise,
+        width: 200.wWise,
         child: Column(
           children: [
             // Event Image
@@ -353,18 +358,18 @@ class EventCardUpcoming extends StatelessWidget {
                   context,
                   model.title,
                   EdgeInsets.only(left: 15.padL.left),
-                  fontSize: 26.0,
+                  fontSize: 18.0,
                 ),
-              
+
                 //  Event Time and Location
                 Padding(
-                  padding: EdgeInsets.only(left: 12.padL.left , right: 16.padR.right),
+                  padding:
+                      EdgeInsets.only(left: 12.padL.left, right: 16.padR.right),
                   child: Column(
                     children: [
                       // Time
                       eventDetails.eventTime(
                         context,
-                        gap: 10.0,
                         model.time,
                       ),
                       SizedBox(
@@ -374,7 +379,6 @@ class EventCardUpcoming extends StatelessWidget {
                       eventDetails.eventLocation(
                         context,
                         model.location,
-                        gap: 2.0,
                       ),
                     ],
                   ),
@@ -388,10 +392,6 @@ class EventCardUpcoming extends StatelessWidget {
   }
 }
 
-
-
-
-
 class BrandCard extends StatelessWidget {
   final BrandModel brand;
 
@@ -399,22 +399,23 @@ class BrandCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 100,
-      height: 100,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      child: Container(
+        width: 80,
+        height: 80,
         child: Column(
           children: [
             SizedBox(
-              height: 90.0, // Adjust the height as needed
+              height: 80.0, // Adjust the height as needed
               child: Image.network(
                 brand.imageUrl,
                 fit: BoxFit.cover,
               ),
             ),
-           
           ],
         ),
-      
+      ),
     );
   }
 }
