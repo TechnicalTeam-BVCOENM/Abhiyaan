@@ -15,4 +15,6 @@ extension ColorSchemeExtension on ColorScheme {
   Color get unSelectedBottomNavIcon => const Color(0xFF9DB2CE);
 
   Color get selectedBottomNavIconbg => const Color(0xFF4E4BD7).withOpacity(0.1);
+
+  Color get primaryDarkColor => const Color(0xFF1C1A63);
 }
