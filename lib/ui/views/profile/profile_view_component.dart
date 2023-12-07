@@ -28,9 +28,9 @@ class ProfileDetailsCard extends StatelessWidget {
           SizedBox(
             width: 25.wWise,
           ),
-          Image.asset(width: 30.wWise, leading),
+          Image.asset(width: 35.wWise, leading),
           SizedBox(
-            width: 32.wWise,
+            width: 28.wWise,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -57,7 +57,7 @@ class ProfileDetailsCard extends StatelessWidget {
                 // ignore: use_build_context_synchronously
                 showmessage(context, "Copied");
               },
-              child: Image.asset(width: 18, AssetImagePath.copyImg)),
+              child: Image.asset(width: 17, AssetImagePath.copyImg)),
           const SizedBox(
             width: 10,
           )
@@ -70,20 +70,16 @@ class ProfileDetailsCard extends StatelessWidget {
 class SocialLinks extends StatelessWidget {
   final String iconpath;
   final String url;
-  const SocialLinks({
-    Key? key,
-    required this.iconpath,
-    required this.url
-  }) : super(key: key);
+  const SocialLinks({Key? key, required this.iconpath, required this.url})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return TextButton(
         onPressed: () {
-UrlLauncher externalUrlHandler = UrlLauncher();
-      externalUrlHandler.launchURL(
-        Uri.parse(url),
-      );
-
+          UrlLauncher externalUrlHandler = UrlLauncher();
+          externalUrlHandler.launchURL(
+            Uri.parse(url),
+          );
         },
         child: Container(
           width: 45.wWise,
