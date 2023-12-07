@@ -38,9 +38,9 @@ class SettingsView extends StatelessWidget {
                         model,
                         context,
                         title: model.settings[0].title,
-                        trailingIcon: CupertinoSwitch(
+                        trailingIcon: Switch.adaptive(
                           value: model._themeService.valueListenable.value,
-                          trackColor: context.colorScheme.secondarySectionColor,
+                          // trackColor: context.colorScheme.secondarySectionColor,
                           onChanged: (val) => model.changeTheme(),
                           activeColor: context.colorScheme.primaryColor,
                         ),
