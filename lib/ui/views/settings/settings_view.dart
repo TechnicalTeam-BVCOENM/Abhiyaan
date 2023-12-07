@@ -1,5 +1,7 @@
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/theme/theme_service.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get_storage/get_storage.dart';
 part 'settings_view_model.dart';
 part 'settings_view_components.dart';
 
@@ -21,10 +23,6 @@ class SettingsView extends StatelessWidget {
               style: model.fontTheme.heading(context),
             ),
             centerTitle: true,
-            leading: IconButton(
-              onPressed: () => model._navigationService.back(),
-              icon: const Icon(Icons.arrow_back_ios),
-            ),
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
@@ -41,7 +39,7 @@ class SettingsView extends StatelessWidget {
                         context,
                         title: model.settings[0].title,
                         trailingIcon: CupertinoSwitch(
-                          value: model.isDark,
+                          value: model._themeService.valueListenable.value,
                           trackColor: context.colorScheme.secondarySectionColor,
                           onChanged: (val) => model.changeTheme(),
                           activeColor: context.colorScheme.primaryColor,

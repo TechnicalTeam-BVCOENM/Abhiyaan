@@ -30,7 +30,8 @@ class AcademicsView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 18.0),
               child: CustomScrollView(
                 physics: const BouncingScrollPhysics(),
-                scrollBehavior: const MaterialScrollBehavior().copyWith(overscroll: false),
+                scrollBehavior:
+                    const MaterialScrollBehavior().copyWith(overscroll: false),
                 slivers: [
                   // ** 2 ** //
 
@@ -48,7 +49,8 @@ class AcademicsView extends StatelessWidget {
                   ),
                   SliverToBoxAdapter(child: SizedBox(height: 8.hWise)),
                   SliverGrid(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       mainAxisSpacing: 16.0,
                       // crossAxisSpacing: 16.0,
@@ -65,22 +67,25 @@ class AcademicsView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                height: 94.hWise,
+                                height: 90.hWise,
                                 width: 94.wWise,
                                 decoration: BoxDecoration(
-                                  color: context.colorScheme.secondaryLPurpleColor,
+                                  color:
+                                      context.colorScheme.secondaryLPurpleColor,
                                   borderRadius: BorderRadius.circular(25),
                                   boxShadow: [
                                     BoxShadow(
                                       blurRadius: 5,
-                                      color: context.colorScheme.secondaryLPurpleColor,
+                                      color: context
+                                          .colorScheme.secondaryLPurpleColor,
                                       offset: const Offset(0, 3),
                                     ),
                                   ],
                                 ),
                                 child: Center(
                                   child: Image(
-                                    image: AssetImage(model.gridListImages[index]),
+                                    image:
+                                        AssetImage(model.gridListImages[index]),
                                     fit: BoxFit.contain,
                                     height: 72.hWise,
                                     width: 72.wWise,
@@ -123,25 +128,30 @@ class AcademicsView extends StatelessWidget {
                             ),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 16.0, horizontal: 12.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       model.academicsUpdatesList[index].title,
-                                      style: model.fontTheme.subHeading(context, context.colorScheme.primaryColor),
+                                      style: model.fontTheme.subHeading(context,
+                                          context.colorScheme.primaryColor),
                                     ),
                                     Text(
                                       "Posted on ${model.academicsUpdatesList[index].postedOn}",
-                                      style: model.fontTheme.smallSubHeading(context),
+                                      style: model.fontTheme
+                                          .smallSubHeading(context),
                                     ),
                                   ],
                                 ),
                                 SizedBox(height: 12.hWise),
-                                Text(model.academicsUpdatesList[index].description),
+                                Text(model
+                                    .academicsUpdatesList[index].description),
                               ],
                             ),
                           ),

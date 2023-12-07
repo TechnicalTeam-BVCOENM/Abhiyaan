@@ -3,7 +3,7 @@ part of 'home_view.dart';
 // Department Updates Card
 Container updatesCard(HomeViewModel model, int i, BuildContext context) {
   return Container(
-    height: model.departmentUpdatesList[i].expandedHeight,
+    height: model.departmentUpdates[i].expandedHeight,
     margin: const EdgeInsets.symmetric(vertical: 8),
     width: ResponsiveUtils.screenWidth(context),
     decoration: BoxDecoration(
@@ -23,12 +23,12 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                model.departmentUpdatesList[i].name,
+                model.departmentUpdates[i].title,
                 style: model.fontTheme
                     .subHeading(context, context.colorScheme.primaryColor),
               ),
               Text(
-                "Posted ${model.departmentUpdatesList[i].date}",
+                "Posted ${DateFormat("MMM d").format((model.departmentUpdates[i].date).toDate())}",
                 style: model.fontTheme.smallSubHeading(context),
               ),
             ],
@@ -42,12 +42,12 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
             children: [
               // Card Body Text
               Text(
-                model.departmentUpdatesList[i].description,
+                model.departmentUpdates[i].description,
                 style: model.fontTheme.smallSubHeading(context),
-                maxLines: model.departmentUpdatesList[i].isExpanded
-                    ? model.departmentUpdatesList[i].maxLines
+                maxLines: model.departmentUpdates[i].isExpanded
+                    ? model.departmentUpdates[i].maxLines
                     : 2,
-                overflow: model.departmentUpdatesList[i].overflow
+                overflow: model.departmentUpdates[i].overflow
                     ? TextOverflow.ellipsis
                     : null,
               ),
@@ -60,7 +60,7 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      model.departmentUpdatesList[i].isExpanded
+                      model.departmentUpdates[i].isExpanded
                           ? 'Read less'
                           : 'Read more',
                       style: TextStyle(
@@ -159,18 +159,23 @@ Row quickLinksList(BuildContext context, List model, [double? borderRadius]) {
                       color: context.colorScheme.secondaryLPurpleColor,
                       borderRadius: BorderRadius.circular(borderRadius ?? 18),
                     ),
-                    child: Icon(
-                      model[idx].icon,
-                      size: 36.wWise,
-                      color: context.colorScheme.primaryColor,
+                    child: Image.asset(
+                      model[idx].imageUrl,
+                      width: 36.wWise,
+                      height: 36.wWise,
                     ),
+                    // Icon(
+                    //   model[idx].icon,
+                    //   size: 36.wWise,
+                    //   color: context.colorScheme.primaryColor,
+                    // ),
                   ),
                 ),
                 Text(
                   model[idx].title,
                   style: fontTheme.smallSubHeading(
                     context,
-                    context.colorScheme.secondaryBlackColor,
+                    context.colorScheme.primaryDarkColor,
                   ),
                 ),
               ],

@@ -28,12 +28,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeService = locator<ThemeService>();
     return ValueListenableBuilder(
-        valueListenable: themeService.brightnessListner,
+        valueListenable: themeService.valueListenable,
         builder: ((context, value, child) {
           return MaterialApp(
             title: 'Darpan',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
+                brightness: themeService.brightness,
                 scaffoldBackgroundColor: context.colorScheme.backgroundColor,
                 appBarTheme: AppBarTheme(
                   backgroundColor: context.colorScheme.backgroundColor,

@@ -3,6 +3,8 @@ part of '../settings/settings_view.dart';
 class SettingsViewModel extends BaseViewModel {
   final log = getLogger('SettingsView');
   final _navigationService = locator<NavigationService>();
+  final _localStorageService = locator<LocalStorageService>();
+  final _themeService = locator<ThemeService>();
 
   navigateToProfile() {
     _navigationService.replaceWith(Routes.profileView);
@@ -11,10 +13,9 @@ class SettingsViewModel extends BaseViewModel {
   final fontTheme = FontThemeClass();
   Color blue = Colors.blue;
   var isDark = false;
-  changeTheme() {
-    isDark = !isDark;
-    // Theme changing logic
-    rebuildUi();
+  changeTheme() async {
+    _themeService.updateTheme();
+    notifyListeners();
   }
 
   changePassword() {

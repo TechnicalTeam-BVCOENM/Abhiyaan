@@ -6,11 +6,11 @@ class FontThemeClass {
       fontSize: 26,
       fontFamily: 'Outfit',
       fontWeight: FontWeight.w500,
-      color: context.colorScheme.secondaryBlackColor,
+      color: context.colorScheme.primaryDarkColor,
     );
   }
 
-  TextStyle large(BuildContext context,[FontWeight ? fontWeight]) {
+  TextStyle large(BuildContext context, [FontWeight? fontWeight]) {
     return TextStyle(
       fontSize: 32,
       fontFamily: 'Outfit',
@@ -19,7 +19,7 @@ class FontThemeClass {
     );
   }
 
-  TextStyle heading(BuildContext context, {Color? color , double size = 26}) {
+  TextStyle heading(BuildContext context, {Color? color, double size = 26}) {
     return TextStyle(
       fontSize: size,
       fontFamily: 'Outfit',
@@ -36,7 +36,8 @@ class FontThemeClass {
       color: context.colorScheme.secondaryBlackColor,
     );
   }
-   TextStyle profileheading(BuildContext context) {
+
+  TextStyle profileheading(BuildContext context) {
     return TextStyle(
       fontSize: 22,
       fontFamily: 'Outfit',
