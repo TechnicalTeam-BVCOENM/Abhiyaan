@@ -20,3 +20,11 @@ class AssetImagePath {
   static const String linkedinImg = 'assets/images/profile/linkedin.png';
   static const String logoImg = 'assets/images/logo.png';
 }
+
+class AssetUrls {
+  static const instagramUrl =
+      "https://www.instagram.com/bvcoenm/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==";
+  static const linkedinUrl =
+      "https://www.linkedin.com/school/bharati-vidyapeeth-college-of-engineering-navi-mumbai/";
+  static const twitterUrl = "https://x.com/bvcoenm?s=20";
+}

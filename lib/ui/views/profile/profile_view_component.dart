@@ -1,3 +1,4 @@
+import 'package:darpan/common/common_component_model.dart';
 import 'package:flutter/services.dart';
 import 'package:darpan/file_exporter.dart';
 
@@ -68,14 +69,22 @@ class ProfileDetailsCard extends StatelessWidget {
 
 class SocialLinks extends StatelessWidget {
   final String iconpath;
+  final String url;
   const SocialLinks({
     Key? key,
     required this.iconpath,
+    required this.url
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () {},
+        onPressed: () {
+UrlLauncher externalUrlHandler = UrlLauncher();
+      externalUrlHandler.launchURL(
+        Uri.parse(url),
+      );
+
+        },
         child: Container(
           width: 45.wWise,
           height: 45.hWise,

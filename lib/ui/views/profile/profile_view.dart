@@ -108,12 +108,15 @@ class ProfileView extends StatelessWidget {
                       children: [
                         SocialLinks(
                           iconpath: AssetImagePath.instagramImg,
+                          url: AssetUrls.instagramUrl,
                         ),
                         SocialLinks(
                           iconpath: AssetImagePath.linkedinImg,
+                          url: AssetUrls.linkedinUrl,
                         ),
                         SocialLinks(
                           iconpath: AssetImagePath.xImg,
+                          url: AssetUrls.twitterUrl,
                         ),
                       ],
                     ),
