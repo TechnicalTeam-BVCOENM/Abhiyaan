@@ -79,8 +79,7 @@ class AuthView extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.symmetric(vertical: 10),
+                      padding: const EdgeInsetsDirectional.only(top: 10),
                       child: Text(
                         'Forgot password?',
                         style: model.fontTheme.subHeading2(
@@ -109,14 +108,12 @@ class AuthView extends StatelessWidget {
                       ),
                       child: Text(
                         'Sign In',
-                        style: FontThemeClass().heading(
-                            context, color: context.colorScheme.secondaryWhiteColor),
+                        style: FontThemeClass().heading(context,
+                            color: context.colorScheme.secondaryWhiteColor),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.symmetric(vertical: 10),
+                  SizedBox(
                     child: RichText(
                       text: TextSpan(
                         text: 'Problem with sign in? ',
@@ -131,7 +128,8 @@ class AuthView extends StatelessWidget {
                         ],
                       ),
                     ),
-                  )
+                  ),
+                  const Expanded(child: Text(""))
                 ],
               ),
             ),
