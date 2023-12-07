@@ -18,7 +18,7 @@ class EventDetails {
           size: 18.wWise,
           color: context.colorScheme.primaryColor.withOpacity(0.8),
         ),
-        SizedBox(
+        const SizedBox(
           width: 2,
         ),
         Text(
@@ -42,7 +42,7 @@ class EventDetails {
           size: 18.wWise,
           color: context.colorScheme.primaryColor.withOpacity(0.8),
         ),
-        SizedBox(
+        const SizedBox(
           width: 2,
         ),
         Text(
@@ -395,13 +395,13 @@ class EventCardUpcoming extends StatelessWidget {
 class BrandCard extends StatelessWidget {
   final BrandModel brand;
 
-  BrandCard({required this.brand});
+  const BrandCard({super.key, required this.brand});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: Container(
+      child: SizedBox(
         width: 80,
         height: 80,
         child: Column(
