@@ -3,18 +3,17 @@ import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class ThemeService {
-  static const String key = "isDark";
+  static const String _key = 'isDark';
+  static final _localStorageService = locator<LocalStorageService>();
 
-  static final localStorage = locator<LocalStorageService>();
-
-  final ValueNotifier<bool> brightnessListner =
-      ValueNotifier(localStorage.read<bool>(key) ?? false);
+  final ValueNotifier<bool> valueListenable =
+      ValueNotifier<bool>(_localStorageService.read<bool>(_key) ?? false);
 
   Brightness get brightness =>
-      brightnessListner.value ? Brightness.dark : Brightness.light;
+      valueListenable.value ? Brightness.dark : Brightness.light;
 
-  void updateTheme(bool isDark) {
-    brightnessListner.value = isDark;
-    localStorage.write(key, brightnessListner.value);
+  void updateTheme() {
+    valueListenable.value = !valueListenable.value;
+    _localStorageService.write(_key, valueListenable.value);
   }
 }
