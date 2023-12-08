@@ -1,6 +1,7 @@
 import 'package:darpan/theme/responsive_utils.dart';
 import 'package:intl/intl.dart';
-import 'package:darpan/file_exporter.dart';
+import '../../../common/cached_network_image.dart';
+import '../../../file_exporter.dart';
 part 'event_view_model.dart';
 part 'event_view_components.dart';
 

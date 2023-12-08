@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:darpan/common/cached_network_image.dart';
 import 'package:darpan/common/shimmer.dart';
+import 'package:darpan/common/update_component.dart';
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/firestore_service.dart';
-import 'package:darpan/theme/responsive_utils.dart';
-import 'package:darpan/ui/views/event/event_view.dart';
 import 'package:intl/intl.dart';
-
-import '../../../common/common_component_model.dart';
+import 'package:darpan/common/common_component_model.dart';
+import 'package:darpan/ui/views/event/event_view.dart';
 part 'home_view_model.dart';
 part 'home_view_component.dart';
 
@@ -39,7 +39,7 @@ class HomeView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Hey ${model.user} 👋',
+                                'Hey ${model.user} 👋', // Update according to loal storage
                                 style: fontTheme.appBarText(context),
                               ),
                               IconButton(
@@ -60,7 +60,6 @@ class HomeView extends StatelessWidget {
 
                         // Carousel
                         const SectionText(title: 'Highlights'),
-
                         SizedBox(
                           width: 460.sp,
                           child: Center(
@@ -70,7 +69,9 @@ class HomeView extends StatelessWidget {
                                 CarouselSlider.builder(
                                   itemCount: model.highlights.length,
                                   itemBuilder: (context, index, realIndex) {
-                                    return CachedNetworkImage(imageUrl: model.highlights[index]['imageUrl']);
+                                    return CachedNetworkImage(
+                                        imageUrl: model._highlights[index]
+                                            ['imageUrl']);
                                   },
                                   options: CarouselOptions(
                                     height: 220.sp,
@@ -110,7 +111,8 @@ class HomeView extends StatelessWidget {
                         const SectionText(
                           title: "Department Updates",
                         ),
-                        for (var i = 0; i < model.departmentUpdates.length; i++) updatesCard(model, i, context),
+                        for (var i = 0; i < model.departmentUpdates.length; i++)
+                          updatesCard(model._departmentUpdates, i, context, model),
                       ],
                     ),
                   ),

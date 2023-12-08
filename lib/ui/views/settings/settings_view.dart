@@ -1,7 +1,6 @@
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/theme_service.dart';
-import 'package:flutter/cupertino.dart';
 part 'settings_view_model.dart';
 part 'settings_view_components.dart';
 
