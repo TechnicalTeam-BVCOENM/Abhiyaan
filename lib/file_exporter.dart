@@ -14,11 +14,10 @@ export 'package:darpan/theme/app_color.dart';
 export 'package:darpan/theme/app_font.dart';
 export 'package:darpan/utils/extension.dart';
 
-
 // Dependencies
 export 'package:stacked/stacked.dart';
 export 'package:stacked_services/stacked_services.dart';
-export 'package:easy_widgets/easy_widget.dart';
+export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 //Components

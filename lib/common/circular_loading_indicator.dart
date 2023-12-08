@@ -10,8 +10,8 @@ class CircularLoadingIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: height.hWise,
-        width: height.wWise,
+        height: height.sp,
+        width: height.sp,
         alignment: Alignment.center,
         child: CircularProgressIndicator(
           valueColor: AlwaysStoppedAnimation<Color>(

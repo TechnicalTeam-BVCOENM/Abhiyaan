@@ -27,7 +27,7 @@ class CachedNetworkImageWidget extends StatelessWidget {
       height: height,
       width: width,
       maxHeightDiskCache: maxHeightDiskCache.toInt(),
-      placeholder: (context, url) => CircularLoadingIndicator(height: 90.hWise),
+      placeholder: (context, url) => CircularLoadingIndicator(height: 90.sp),
       errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }
@@ -39,7 +39,7 @@ Container horizontalStoryRow(
   FontThemeClass fontTheme = FontThemeClass();
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 4),
-    height: 120.hWise,
+    height: 120.sp,
     width: MediaQuery.of(context).size.width,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -58,8 +58,8 @@ Container horizontalStoryRow(
                     },
                     child: Container(
                       margin: const EdgeInsets.fromLTRB(8, 4, 8, 8),
-                      height: 80.hWise,
-                      width: 80.wWise,
+                      height: 80.sp,
+                      width: 80.sp,
                       decoration: BoxDecoration(
                         color: context.colorScheme.secondarySectionColor,
                         borderRadius: BorderRadius.circular(borderRadius),

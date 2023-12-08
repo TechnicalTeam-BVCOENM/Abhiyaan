@@ -27,8 +27,7 @@ class EventView extends StatelessWidget {
                   const SectionText(title: "Ongoing Events"),
                   Card(
                     clipBehavior: Clip.hardEdge,
-                    shadowColor: context.colorScheme.secondaryLPurpleColor
-                        .withOpacity(0.8),
+                    shadowColor: context.colorScheme.secondaryLPurpleColor.withOpacity(0.8),
                     elevation: 4,
                     shape: ShapeBorder.lerp(
                         RoundedRectangleBorder(
@@ -45,32 +44,27 @@ class EventView extends StatelessWidget {
                                 event: todaysEvent,
                               ),
                               EventDateContainer(
-                                top: 120.wWise,
-                                left: 20.wWise,
+                                top: 120.sp,
+                                left: 20.sp,
                                 event: todaysEvent,
                               ),
                             ],
                           )
                         : SizedBox(
-                            height: 200.hWise,
+                            height: 200.sp,
                             width: ResponsiveUtils.screenWidth(context),
                             child: Center(
                               child: Column(
                                 children: [
                                   CachedNetworkImageWidget(
-                                    imageUrl:
-                                        "https://imgs.search.brave.com/DGoVUPXpo3OwVAbBbgF3oGz3MUcz_cPZrzmfvO7iRrc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG5p/Lmljb25zY291dC5j/b20vaWxsdXN0cmF0/aW9uL3ByZW1pdW0v/dGh1bWIvc2VhcmNo/LXJlc3VsdC1ub3Qt/Zm91bmQtMjEzMDM1/NS0xODAwOTIwLnBu/Zz9mPXdlYnA",
-                                    height: 150.hWise,
-                                    width: 150.wWise,
-                                    maxHeightDiskCache:
-                                        ResponsiveUtils.screenWidth(context),
+                                    imageUrl: "https://imgs.search.brave.com/DGoVUPXpo3OwVAbBbgF3oGz3MUcz_cPZrzmfvO7iRrc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG5p/Lmljb25zY291dC5j/b20vaWxsdXN0cmF0/aW9uL3ByZW1pdW0v/dGh1bWIvc2VhcmNo/LXJlc3VsdC1ub3Qt/Zm91bmQtMjEzMDM1/NS0xODAwOTIwLnBu/Zz9mPXdlYnA",
+                                    height: 150.sp,
+                                    width: 150.sp,
+                                    maxHeightDiskCache: ResponsiveUtils.screenWidth(context),
                                   ),
                                   Text(
                                     "No Ongoing Events",
-                                    style: fontTheme.heading(context,
-                                        size: 20,
-                                        color: context
-                                            .colorScheme.secondarySectionColor),
+                                    style: fontTheme.heading(context, size: 20, color: context.colorScheme.secondarySectionColor),
                                   ),
                                 ],
                               ),
@@ -79,7 +73,7 @@ class EventView extends StatelessWidget {
                   ),
                   const SectionText(title: "Sponsors"),
                   SizedBox(
-                    height: 100.hWise,
+                    height: 100.sp,
                     child: ListView.builder(
                       shrinkWrap: true,
                       physics: const BouncingScrollPhysics(),
@@ -107,7 +101,7 @@ class EventView extends StatelessWidget {
                   ),
                   const SectionText(title: "Upcoming Events"),
                   SizedBox(
-                    height: 200.hWise,
+                    height: 200.sp,
                     child: ListView.builder(
                       shrinkWrap: true,
                       physics: const BouncingScrollPhysics(),
@@ -116,8 +110,7 @@ class EventView extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return Card(
                           clipBehavior: Clip.hardEdge,
-                          shadowColor: context.colorScheme.secondaryLPurpleColor
-                              .withOpacity(0.8),
+                          shadowColor: context.colorScheme.secondaryLPurpleColor.withOpacity(0.8),
                           elevation: 4,
                           shape: ShapeBorder.lerp(
                               RoundedRectangleBorder(
@@ -135,8 +128,8 @@ class EventView extends StatelessWidget {
                               ),
                               // Event Date
                               EventDateContainer(
-                                top: 8.wWise,
-                                left: 8.wWise,
+                                top: 8.sp,
+                                left: 8.sp,
                                 event: model.remainigEvents[index],
                               ),
                             ],

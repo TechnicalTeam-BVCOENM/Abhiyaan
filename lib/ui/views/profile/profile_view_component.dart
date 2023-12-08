@@ -1,3 +1,4 @@
+import 'package:darpan/common/common_component_model.dart';
 import 'package:flutter/services.dart';
 import 'package:darpan/file_exporter.dart';
 import '../../../common/toast_message.dart';
@@ -18,19 +19,21 @@ class ProfileDetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 65.hWise,
-      margin: EdgeInsets.only(bottom: 15.wWise),
-      decoration: BoxDecoration(
-          color: context.colorScheme.secondaryWhiteColor,
-          borderRadius: BorderRadius.circular(20)),
+      height: 65.sp,
+      margin: EdgeInsets.only(bottom: 15.sp),
+      decoration: BoxDecoration(color: context.colorScheme.secondaryWhiteColor, borderRadius: BorderRadius.circular(20)),
       child: Row(
         children: [
           SizedBox(
-            width: 25.wWise,
+            width: 25.sp,
           ),
-          Image.asset(width: 30.wWise, leading),
+
+
+          Image.asset(width: 30.sp, leading),
+
           SizedBox(
-            width: 32.wWise,
+            width: 32.sp,
+
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -45,8 +48,7 @@ class ProfileDetailsCard extends StatelessWidget {
               ),
               Text(
                 value,
-                style: FontThemeClass().smallSubHeading(
-                    context, context.colorScheme.secondarySectionColor),
+                style: FontThemeClass().smallSubHeading(context, context.colorScheme.secondarySectionColor),
               ),
             ],
           ),
@@ -69,22 +71,23 @@ class ProfileDetailsCard extends StatelessWidget {
 
 class SocialLinks extends StatelessWidget {
   final String iconpath;
-  const SocialLinks({
-    Key? key,
-    required this.iconpath,
-  }) : super(key: key);
+  final String url;
+  const SocialLinks({Key? key, required this.iconpath, required this.url})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () {},
+        onPressed: () {
+          UrlLauncher externalUrlHandler = UrlLauncher();
+          externalUrlHandler.launchURL(
+            Uri.parse(url),
+          );
+        },
         child: Container(
-          width: 45.wWise,
-          height: 45.hWise,
-          decoration: BoxDecoration(
-              color: context.colorScheme.secondaryWhiteColor,
-              borderRadius: BorderRadius.circular(100)),
-          child: Padding(
-              padding: const EdgeInsets.all(5), child: Image.asset(iconpath)),
+          width: 45.sp,
+          height: 45.sp,
+          decoration: BoxDecoration(color: context.colorScheme.secondaryWhiteColor, borderRadius: BorderRadius.circular(100)),
+          child: Padding(padding: const EdgeInsets.all(5), child: Image.asset(iconpath)),
         ));
   }
 }

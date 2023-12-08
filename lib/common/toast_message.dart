@@ -10,7 +10,7 @@ void showmessage(context, String message) {
         child: Container(
           padding:
               const EdgeInsets.only(left: 70, right: 70, top: 8, bottom: 8),
-          height: 40.hWise,
+          height: 40.sp,
           decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.secondaryLPurpleColor,
               borderRadius: BorderRadius.circular(10)),
