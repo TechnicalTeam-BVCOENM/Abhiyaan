@@ -1,20 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../file_exporter.dart';
+import 'package:darpan/file_exporter.dart';
 
 //tools
 class CircularLoadingIndicator extends StatelessWidget {
   final double height;
 
-  const CircularLoadingIndicator({Key? key, this.height = 100.0})
-      : super(key: key);
+  const CircularLoadingIndicator({Key? key, this.height = 100.0}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: height.hWise,
-        width: height.wWise,
+        height: height.sp,
+        width: height.sp,
         alignment: Alignment.center,
         child: CircularProgressIndicator(
           valueColor: AlwaysStoppedAnimation<Color>(
@@ -27,14 +26,7 @@ class CircularLoadingIndicator extends StatelessWidget {
 }
 
 void showMessage(String message) {
-  Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.white,
-      textColor: Colors.black,
-      fontSize: 16.0);
+  Fluttertoast.showToast(msg: message, toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.CENTER, timeInSecForIosWeb: 1, backgroundColor: Colors.white, textColor: Colors.black, fontSize: 16.0);
 }
 
 // Section Name Text
@@ -81,19 +73,17 @@ class CachedNetworkImageWidget extends StatelessWidget {
       height: height,
       width: width,
       maxHeightDiskCache: maxHeightDiskCache.toInt(),
-      placeholder: (context, url) => CircularLoadingIndicator(height: 90.hWise),
+      placeholder: (context, url) => CircularLoadingIndicator(height: 90.sp),
       errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }
 }
 
-
-Container horizontalStoryRow(
-    BuildContext context, List model, double borderRadius) {
+Container horizontalStoryRow(BuildContext context, List model, double borderRadius) {
   FontThemeClass fontTheme = FontThemeClass();
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 4),
-    height: 120.hWise,
+    height: 120.sp,
     width: MediaQuery.of(context).size.width,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -112,8 +102,8 @@ Container horizontalStoryRow(
                     },
                     child: Container(
                       margin: const EdgeInsets.fromLTRB(8, 4, 8, 8),
-                      height: 80.hWise,
-                      width: 80.wWise,
+                      height: 80.sp,
+                      width: 80.sp,
                       decoration: BoxDecoration(
                         color: context.colorScheme.secondarySectionColor,
                         borderRadius: BorderRadius.circular(borderRadius),
@@ -151,16 +141,12 @@ void showmessage(context, String message) {
       backgroundColor: Colors.transparent,
       content: Center(
         child: Container(
-          padding:
-              const EdgeInsets.only(left: 70, right: 70, top: 8, bottom: 8),
-          height: 40.hWise,
-          decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondaryLPurpleColor,
-              borderRadius: BorderRadius.circular(10)),
+          padding: const EdgeInsets.only(left: 70, right: 70, top: 8, bottom: 8),
+          height: 40.sp,
+          decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondaryLPurpleColor, borderRadius: BorderRadius.circular(10)),
           child: Text(
             message,
-            style: FontThemeClass().subHeading2(
-                context, Theme.of(context).colorScheme.secondaryBlackColor),
+            style: FontThemeClass().subHeading2(context, Theme.of(context).colorScheme.secondaryBlackColor),
           ),
         ),
       ),
@@ -169,4 +155,3 @@ void showmessage(context, String message) {
     debugPrint("error is $e");
   }
 }
-
