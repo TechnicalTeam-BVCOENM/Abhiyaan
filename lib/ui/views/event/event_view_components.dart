@@ -15,7 +15,7 @@ class EventDetails {
       children: [
         Icon(
           Icons.location_on,
-          size: 18.wWise,
+          size: 18.sp,
           color: context.colorScheme.primaryColor.withOpacity(0.8),
         ),
         const SizedBox(
@@ -39,7 +39,7 @@ class EventDetails {
       children: [
         Icon(
           Icons.timer,
-          size: 18.wWise,
+          size: 18.sp,
           color: context.colorScheme.primaryColor.withOpacity(0.8),
         ),
         const SizedBox(
@@ -56,11 +56,9 @@ class EventDetails {
     );
   }
 
-  CachedNetworkImageWidget _eventImage(
-      BuildContext context, String imageUrl, double height, double width) {
+  CachedNetworkImageWidget _eventImage(BuildContext context, String imageUrl, double height, double width) {
     assert(imageUrl.isNotEmpty, "Time should not be null or empty");
-    assert(height != 0 && width != 0 && height < width,
-        "Height should be greater than 0");
+    assert(height != 0 && width != 0 && height < width, "Height should be greater than 0");
 
     return CachedNetworkImageWidget(
       imageUrl: imageUrl,
@@ -70,8 +68,7 @@ class EventDetails {
     );
   }
 
-  Padding eventTitle(BuildContext context, String title, EdgeInsets padding,
-      {double fontSize = 26}) {
+  Padding eventTitle(BuildContext context, String title, EdgeInsets padding, {double fontSize = 26}) {
     return Padding(
       padding: padding,
       child: Text(
@@ -96,11 +93,11 @@ class EventDetails {
 //       children: [
 //         Icon(
 //           Icons.location_on,
-//           size: 12.wWise,
+//           size: 12.sp,
 //           color: context.colorScheme.primaryColor.withOpacity(0.8),
 //         ),
 //         SizedBox(
-//           width: 4.wWise,
+//           width: 4.sp,
 //         ),
 //         Text(
 //           "Qudrangle",
@@ -118,11 +115,11 @@ class EventDetails {
 //       children: [
 //         Icon(
 //           Icons.timer,
-//           size: 12.wWise,
+//           size: 12.sp,
 //           color: context.colorScheme.primaryColor.withOpacity(0.8),
 //         ),
 //         SizedBox(
-//           width: 4.wWise,
+//           width: 4.sp,
 //         ),
 //         Text(
 //           "11:00 AM",
@@ -197,8 +194,8 @@ class EventDateContainer extends StatelessWidget {
       bottom: bottom,
       right: right,
       child: Container(
-        height: 60.hWise,
-        width: 60.wWise,
+        height: 60.sp,
+        width: 60.sp,
         decoration: BoxDecoration(
           color: context.colorScheme.secondaryWhiteColor,
           boxShadow: [
@@ -223,8 +220,7 @@ class EventDateContainer extends StatelessWidget {
             ),
             Text(
               model.getMonthName(event.month, event.year),
-              style: fontTheme.subHeading2(
-                  context, context.colorScheme.secondaryBlackColor),
+              style: fontTheme.subHeading2(context, context.colorScheme.secondaryBlackColor),
             ),
           ],
         ),
@@ -246,7 +242,7 @@ class EventCardInfo extends StatelessWidget {
     EventDetails eventDetails = EventDetails();
     return Positioned(
       child: SizedBox(
-        height: 250.hWise,
+        height: 250.sp,
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
@@ -254,11 +250,11 @@ class EventCardInfo extends StatelessWidget {
             eventDetails.eventImage(
               context,
               event.imageUrl,
-              160.hWise,
+              160.sp,
               ResponsiveUtils.screenWidth(context),
             ),
             SizedBox(
-              height: 28.hWise,
+              height: 28.sp,
             ),
             // Event Info
             Column(
@@ -271,23 +267,25 @@ class EventCardInfo extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Event Title
-                        eventDetails.eventTitle(context, event.title,
-                            EdgeInsets.only(left: 22.padL.left)),
+                        eventDetails.eventTitle(
+                          context,
+                          event.title,
+                          EdgeInsets.only(left: 22.sp),
+                        ),
                         SizedBox(
-                          height: 4.hWise,
+                          height: 4.sp,
                         ),
                         //  Event Time and Location
                         Padding(
-                          padding: EdgeInsets.only(left: 20.padL.left),
+                          padding: EdgeInsets.only(left: 20.sp),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               eventDetails.eventTime(context, event.time),
                               SizedBox(
-                                width: 18.wWise,
+                                width: 18.sp,
                               ),
-                              eventDetails.eventLocation(
-                                  context, event.location),
+                              eventDetails.eventLocation(context, event.location),
                             ],
                           ),
                         )
@@ -295,16 +293,16 @@ class EventCardInfo extends StatelessWidget {
                     ),
                     // Event Button
                     Padding(
-                      padding: EdgeInsets.only(right: 8.padR.right),
+                      padding: EdgeInsets.only(right: 8.sp),
                       child: Transform.rotate(
                         angle: 180 * 314 / 22,
                         child: IconButton(
                           onPressed: () {},
-                          splashRadius: 20.wWise,
+                          splashRadius: 20.sp,
                           tooltip: "Details",
                           icon: Icon(
                             Icons.send_rounded,
-                            size: 36.wWise,
+                            size: 36.sp,
                             color: context.colorScheme.primaryColor,
                           ),
                         ),
@@ -334,19 +332,19 @@ class EventCardUpcoming extends StatelessWidget {
     EventDetails eventDetails = EventDetails();
     return Positioned(
       child: SizedBox(
-        height: 200.hWise,
-        width: 200.wWise,
+        height: 200.sp,
+        width: 200.sp,
         child: Column(
           children: [
             // Event Image
             eventDetails.eventImage(
               context,
               model.imageUrl,
-              130.hWise,
+              130.sp,
               ResponsiveUtils.screenWidth(context),
             ),
             SizedBox(
-              height: 8.hWise,
+              height: 8.sp,
             ),
             // Event Info
             Row(
@@ -357,14 +355,13 @@ class EventCardUpcoming extends StatelessWidget {
                 eventDetails.eventTitle(
                   context,
                   model.title,
-                  EdgeInsets.only(left: 15.padL.left),
+                  EdgeInsets.only(left: 15.sp),
                   fontSize: 18.0,
                 ),
 
                 //  Event Time and Location
                 Padding(
-                  padding:
-                      EdgeInsets.only(left: 12.padL.left, right: 16.padR.right),
+                  padding: EdgeInsets.only(left: 12.sp, right: 16.sp),
                   child: Column(
                     children: [
                       // Time
@@ -373,7 +370,7 @@ class EventCardUpcoming extends StatelessWidget {
                         model.time,
                       ),
                       SizedBox(
-                        height: 6.wWise,
+                        height: 6.sp,
                       ),
                       // Location
                       eventDetails.eventLocation(

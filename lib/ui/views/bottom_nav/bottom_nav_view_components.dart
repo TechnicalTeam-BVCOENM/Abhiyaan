@@ -6,14 +6,14 @@ class BottomNavActiveIcon extends ViewModelWidget<BottomNavViewModel> {
   const BottomNavActiveIcon({
     required this.text,
     required this.icon,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, BottomNavViewModel viewModel) {
     return Container(
       height: kBottomNavigationBarHeight,
-      margin: EdgeInsets.symmetric(horizontal: 0.wWise),
+      margin: EdgeInsets.symmetric(horizontal: 0.sp),
       decoration: BoxDecoration(
         color: context.colorScheme.selectedBottomNavIconbg,
       ),
@@ -21,7 +21,7 @@ class BottomNavActiveIcon extends ViewModelWidget<BottomNavViewModel> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            height: 3.hWise,
+            height: 3.sp,
             decoration: BoxDecoration(
               color: context.colorScheme.primaryColor,
             ),
@@ -31,16 +31,16 @@ class BottomNavActiveIcon extends ViewModelWidget<BottomNavViewModel> {
             icon,
             color: context.colorScheme.selectedBottomNavIcon,
           ),
-          2.hGap,
+          SizedBox(height: 2.sp),
           Text(
             text,
             style: TextStyle(
-              fontSize: 12.wWise,
+              fontSize: 12.sp,
               color: context.colorScheme.selectedBottomNavIcon,
               fontWeight: FontWeight.w700,
             ),
           ),
-          4.hGap,
+          SizedBox(height: 4.sp),
         ],
       ),
     );
