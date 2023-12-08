@@ -8,6 +8,13 @@ class BrandModel {
 class EventViewModel extends BaseViewModel {
   // Variables
   final log = getLogger('EventViewModel');
+
+  final _navigationService = locator<NavigationService>();
+
+  navigateToDetailedEventView() {
+    _navigationService.navigateTo(Routes.detailedEventView);
+  }
+
   EventModel? todayEvent;
   List<EventModel> remainigEvents = [];
   // Init Method
