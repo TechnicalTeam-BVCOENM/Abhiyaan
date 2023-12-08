@@ -28,7 +28,7 @@ class SettingsViewModel extends BaseViewModel {
   navigateToPrivacyPolicy() {
     // Navigation
   }
-   Future<void> logout() async {
+  Future<void> logout() async {
     setBusy(true);
     final success = await _authenticationService.signOut();
     if (success) {
@@ -38,7 +38,6 @@ class SettingsViewModel extends BaseViewModel {
       log.i('sign out failed');
     }
     setBusy(false);
-
   }
 
   List<SettingsModel> settings = [

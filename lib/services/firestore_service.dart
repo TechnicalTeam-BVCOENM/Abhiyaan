@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darpan/ui/views/home/home_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class FirestoreService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -32,5 +33,19 @@ class FirestoreService {
 
   Future<void> addData(Map<String, dynamic> data) async {
     await _firestore.collection('your_collection').add(data);
+  }
+
+  Future<Map<String, dynamic>?> getUserData() async {
+    final DocumentSnapshot snapshot = await _firestore
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    if (snapshot.exists) {
+      // print(snapshot.data() as Map<String, dynamic>);
+      return snapshot.data() as Map<String, dynamic>;
+    } else {
+      return null; // Document with the specified ID does not exist
+    }
   }
 }

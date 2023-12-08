@@ -25,4 +25,8 @@ class AuthViewModel extends BaseViewModel {
     }
     setBusy(false);
   }
+
+  void passwordResetMail() {
+    FirebaseAuth.instance.sendPasswordResetEmail(email: "");
+  }
 }

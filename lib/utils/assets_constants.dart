@@ -19,6 +19,8 @@ class AssetImagePath {
   static const String xImg = 'assets/images/profile/x.png';
   static const String linkedinImg = 'assets/images/profile/linkedin.png';
   static const String logoImg = 'assets/images/logo.png';
+
+  static var iconImages;
 }
 
 class AssetUrls {
