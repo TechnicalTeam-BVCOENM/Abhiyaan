@@ -3,7 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darpan/common/shimmer.dart';
 import 'package:darpan/file_exporter.dart';
-import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/services/firestore_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
 import 'package:darpan/ui/views/event/event_view.dart';
@@ -53,7 +52,6 @@ class HomeView extends StatelessWidget {
                                   size: 24.sp,
                                 ),
                                 onPressed: () {
-                                  model.signOut();
                                 },
                               )
                             ],

@@ -75,7 +75,9 @@ class AuthView extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
+
                       padding: const EdgeInsetsDirectional.symmetric(vertical: 10),
+
                       child: Text(
                         'Forgot password?',
                         style: model.fontTheme.subHeading2(context, context.colorScheme.primaryColor),
@@ -99,6 +101,7 @@ class AuthView extends StatelessWidget {
                       ),
                       child: Text(
                         'Sign In',
+
                         style: FontThemeClass().heading(context, color: context.colorScheme.secondaryWhiteColor),
                       ),
                     ),
@@ -117,7 +120,8 @@ class AuthView extends StatelessWidget {
                         ],
                       ),
                     ),
-                  )
+                  ),
+                  const Expanded(child: Text(""))
                 ],
               ),
             ),

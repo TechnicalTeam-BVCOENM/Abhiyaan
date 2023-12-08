@@ -3,7 +3,8 @@ part of '../settings/settings_view.dart';
 class SettingsViewModel extends BaseViewModel {
   final log = getLogger('SettingsView');
   final _navigationService = locator<NavigationService>();
-  final _localStorageService = locator<LocalStorageService>();
+  final _authenticationService = locator<AuthenticationService>();
+
   final _themeService = locator<ThemeService>();
 
   navigateToProfile() {
@@ -27,8 +28,17 @@ class SettingsViewModel extends BaseViewModel {
   navigateToPrivacyPolicy() {
     // Navigation
   }
-  logout() {
-    // Logout Logic
+   Future<void> logout() async {
+    setBusy(true);
+    final success = await _authenticationService.signOut();
+    if (success) {
+      log.i('sign out success');
+      _navigationService.clearStackAndShow(Routes.authView);
+    } else {
+      log.i('sign out failed');
+    }
+    setBusy(false);
+
   }
 
   List<SettingsModel> settings = [

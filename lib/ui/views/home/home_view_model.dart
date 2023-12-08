@@ -2,8 +2,6 @@ part of 'home_view.dart';
 
 class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
-  final _authenticationService = locator<AuthenticationService>();
-  final _navigationService = locator<NavigationService>();
   final FirestoreService _firestoreService = FirestoreService();
 
   // Variables / constants
@@ -110,17 +108,7 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> signOut() async {
-    setBusy(true);
-    final success = await _authenticationService.signOut();
-    if (success) {
-      log.i('sign out success');
-      _navigationService.clearStackAndShow(Routes.authView);
-    } else {
-      log.i('sign out failed');
-    }
-    setBusy(false);
-  }
+
 }
 
 void handleQuickLinksNavigation(List model, int i) {
