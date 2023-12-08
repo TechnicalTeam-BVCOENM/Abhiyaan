@@ -1,61 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 import '../file_exporter.dart';
-
-//tools
-class CircularLoadingIndicator extends StatelessWidget {
-  final double height;
-
-  const CircularLoadingIndicator({Key? key, this.height = 100.0})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        height: height.hWise,
-        width: height.wWise,
-        alignment: Alignment.center,
-        child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(
-            context.colorScheme.secondarySectionColor,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-void showMessage(String message) {
-  Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.white,
-      textColor: Colors.black,
-      fontSize: 16.0);
-}
-
-// Section Name Text
-class SectionText extends StatelessWidget {
-  const SectionText({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 18, bottom: 8),
-      child: Text(
-        title,
-        style: FontThemeClass().subHeading2(
-          context,
-          context.colorScheme.secondarySectionColor,
-        ),
-      ),
-    );
-  }
-}
+import 'circular_loading_indicator.dart';
 
 class CachedNetworkImageWidget extends StatelessWidget {
   final String imageUrl;
@@ -142,31 +88,3 @@ Container horizontalStoryRow(
     ),
   );
 }
-
-void showmessage(context, String message) {
-  try {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      elevation: 0,
-      duration: const Duration(milliseconds: 500),
-      backgroundColor: Colors.transparent,
-      content: Center(
-        child: Container(
-          padding:
-              const EdgeInsets.only(left: 70, right: 70, top: 8, bottom: 8),
-          height: 40.hWise,
-          decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondaryLPurpleColor,
-              borderRadius: BorderRadius.circular(10)),
-          child: Text(
-            message,
-            style: FontThemeClass().subHeading2(
-                context, Theme.of(context).colorScheme.secondaryBlackColor),
-          ),
-        ),
-      ),
-    ));
-  } catch (e) {
-    debugPrint("error is $e");
-  }
-}
-
