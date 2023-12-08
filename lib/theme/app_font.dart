@@ -3,7 +3,7 @@ import 'package:darpan/file_exporter.dart';
 class FontThemeClass {
   TextStyle appBarText(BuildContext context) {
     return TextStyle(
-      fontSize: 26,
+      fontSize: 24,
       fontFamily: 'Outfit',
       fontWeight: FontWeight.w500,
       color: context.colorScheme.primaryDarkColor,
@@ -14,12 +14,12 @@ class FontThemeClass {
     return TextStyle(
       fontSize: 32,
       fontFamily: 'Outfit',
-      fontWeight: fontWeight ?? FontWeight.w800,
+      fontWeight: fontWeight ?? FontWeight.w700,
       color: context.colorScheme.primaryColor,
     );
   }
 
-  TextStyle heading(BuildContext context, {Color? color, double size = 26}) {
+  TextStyle heading(BuildContext context, {Color? color, double size = 24}) {
     return TextStyle(
       fontSize: size,
       fontFamily: 'Outfit',

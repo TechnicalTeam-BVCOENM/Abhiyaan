@@ -5,10 +5,10 @@ class HomeViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
 
   // Variables / constants
-  String user = "Kiran"; // use local storage for this
+  String user = LocalStorageService().read('userName');
+  // use local storage for this
   final fontTheme = FontThemeClass();
   bool isExpanded = false;
-
 
   List<QuickLinksModel> quickLinksList = [
     QuickLinksModel(
@@ -44,11 +44,13 @@ class HomeViewModel extends BaseViewModel {
     setBusy(true);
     try {
       _highlights = await _firestoreService.getAllData('Highlights');
-      _departmentUpdates = await _firestoreService.getAllDepartmentData('DepartmentUpdate');
+      _departmentUpdates =
+          await _firestoreService.getAllDepartmentData('DepartmentUpdate');
       notifyListeners();
       log.i(highlights);
       log.i(highlights.length);
-      debugPrint(DateFormat("MMMM d").format((departmentUpdates[0].date).toDate()));
+      debugPrint(
+          DateFormat("MMMM d").format((departmentUpdates[0].date).toDate()));
     } catch (e) {
       log.e(e);
     }
@@ -81,8 +83,6 @@ class HomeViewModel extends BaseViewModel {
     _activeIndex = newIndex;
     notifyListeners();
   }
-
-
 }
 
 void handleQuickLinksNavigation(List model, int i) {

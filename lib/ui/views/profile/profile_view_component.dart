@@ -9,31 +9,29 @@ class ProfileDetailsCard extends StatelessWidget {
   final String value;
 
   const ProfileDetailsCard({
-    Key? key,
+    super.key,
     required this.leading,
     required this.title,
     required this.value,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 65.sp,
+      height: 62.sp,
       margin: EdgeInsets.only(bottom: 15.sp),
-      decoration: BoxDecoration(color: context.colorScheme.secondaryWhiteColor, borderRadius: BorderRadius.circular(20)),
+      decoration: BoxDecoration(
+          color: context.colorScheme.secondaryWhiteColor,
+          borderRadius: BorderRadius.circular(20)),
       child: Row(
         children: [
           SizedBox(
             width: 25.sp,
           ),
-
-
           Image.asset(width: 30.sp, leading),
-
           SizedBox(
             width: 32.sp,
-
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -46,9 +44,14 @@ class ProfileDetailsCard extends StatelessWidget {
               const SizedBox(
                 height: 4,
               ),
-              Text(
-                value,
-                style: FontThemeClass().smallSubHeading(context, context.colorScheme.secondarySectionColor),
+              SizedBox(
+                width: 160,
+                child: Text(
+                  value,
+                  overflow: TextOverflow.ellipsis,
+                  style: FontThemeClass().smallSubHeading(
+                      context, context.colorScheme.secondarySectionColor),
+                ),
               ),
             ],
           ),
@@ -72,8 +75,7 @@ class ProfileDetailsCard extends StatelessWidget {
 class SocialLinks extends StatelessWidget {
   final String iconpath;
   final String url;
-  const SocialLinks({Key? key, required this.iconpath, required this.url})
-      : super(key: key);
+  const SocialLinks({super.key, required this.iconpath, required this.url});
   @override
   Widget build(BuildContext context) {
     return TextButton(
@@ -84,10 +86,13 @@ class SocialLinks extends StatelessWidget {
           );
         },
         child: Container(
-          width: 45.sp,
-          height: 45.sp,
-          decoration: BoxDecoration(color: context.colorScheme.secondaryWhiteColor, borderRadius: BorderRadius.circular(100)),
-          child: Padding(padding: const EdgeInsets.all(5), child: Image.asset(iconpath)),
+          width: 40.sp,
+          height: 40.sp,
+          decoration: BoxDecoration(
+              color: context.colorScheme.secondaryWhiteColor,
+              borderRadius: BorderRadius.circular(100)),
+          child: Padding(
+              padding: const EdgeInsets.all(5), child: Image.asset(iconpath)),
         ));
   }
 }

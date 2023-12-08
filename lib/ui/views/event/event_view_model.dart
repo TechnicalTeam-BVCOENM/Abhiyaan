@@ -1,16 +1,16 @@
 part of 'event_view.dart';
 
-class BrandModel {
-  final String imageUrl;
-  BrandModel({required this.imageUrl});
-}
-
 class EventViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
   final log = getLogger('EventViewModel');
+  final _navigationService = locator<NavigationService>();
+  
+  navigateToDetailedEventView() {
+    _navigationService.navigateTo(Routes.detailedEventView);
+  }
 
-
-  // Init Method
+  EventModel? todayEvent;
+  List<EventModel> remainigEvents = [];
   void init() async {
     await loadData();
   }
@@ -19,6 +19,13 @@ class EventViewModel extends BaseViewModel {
   List<SponsorsModel> get sponsors => _sponsors;
   List<EventModel> _events = [];
   List<EventModel> get events => _events;
+  EventModel? _todayEvent = null;
+  EventModel? get todayEvent => _todayEvent;
+  EventModel? setTodayEvent(EventModel? event) {
+    _todayEvent = event;
+    notifyListeners();
+    return null;
+  }
 
   Future<void> loadData() async {
     setBusy(true);
@@ -36,7 +43,7 @@ class EventViewModel extends BaseViewModel {
     log.i("Sponsors Loaded");
   }
 
-  // Methods
+
   String getCurrentMonth() {
     int currentMonthNumber = DateTime.now().month;
     int currentYear = DateTime.now().year;
@@ -53,13 +60,7 @@ class EventViewModel extends BaseViewModel {
     return currentMonth;
   }
 
-  EventModel? _todayEvent = null;
-  EventModel? get todayEvent => _todayEvent;
-  EventModel? setTodayEvent(EventModel? event) {
-    _todayEvent = event;
-    notifyListeners();
-    return null;
-  }
+
   void getTodaysEvent() {
     setTodayEvent(null);
     for (EventModel event in events) {

@@ -11,7 +11,6 @@ part 'event_view_components.dart';
 
 class EventView extends StatelessWidget {
   const EventView({super.key});
-
   @override
   Widget build(BuildContext context) {
     FontThemeClass fontTheme = FontThemeClass();
@@ -121,11 +120,9 @@ class EventView extends StatelessWidget {
                                     1),
                                 child: Stack(
                                   children: [
-                                    // Event Image and Info
                                     EventCardUpcoming(
                                       model: model.remainigEvents[index],
                                     ),
-                                    // Event Date
                                     EventDateContainer(
                                       top: 8.sp,
                                       left: 8.sp,
