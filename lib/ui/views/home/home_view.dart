@@ -51,8 +51,7 @@ class HomeView extends StatelessWidget {
                                   ),
                                   size: 24.sp,
                                 ),
-                                onPressed: () {
-                                },
+                                onPressed: () {},
                               )
                             ],
                           ),
@@ -69,9 +68,7 @@ class HomeView extends StatelessWidget {
                                 CarouselSlider.builder(
                                   itemCount: model.highlights.length,
                                   itemBuilder: (context, index, realIndex) {
-                                    return CachedNetworkImage(
-                                        imageUrl: model._highlights[index]
-                                            ['imageUrl']);
+                                    return CachedNetworkImage(imageUrl: model._highlights[index]['imageUrl']);
                                   },
                                   options: CarouselOptions(
                                     height: 220.sp,
@@ -111,8 +108,9 @@ class HomeView extends StatelessWidget {
                         const SectionText(
                           title: "Department Updates",
                         ),
-                        for (var i = 0; i < model.departmentUpdates.length; i++)
+                        for (var i = 0; i < model.departmentUpdates.length; i++) ...[
                           updatesCard(model._departmentUpdates, i, context, model),
+                        ],
                       ],
                     ),
                   ),
