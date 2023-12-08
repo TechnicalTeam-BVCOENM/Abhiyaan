@@ -16,7 +16,7 @@ class AuthView extends StatelessWidget {
           child: Scaffold(
             backgroundColor: context.colorScheme.backgroundColor,
             body: Container(
-              height: 610.hWise,
+              height: 610.sp,
               padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -39,8 +39,7 @@ class AuthView extends StatelessWidget {
                     cursorColor: context.colorScheme.primaryColor,
                     controller: model.emailIdTextController,
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 15),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                       border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(15),
@@ -50,8 +49,7 @@ class AuthView extends StatelessWidget {
                       filled: true,
                       focusColor: context.colorScheme.secondaryWhiteColor,
                       hintText: 'Student Email ID',
-                      hintStyle: model.fontTheme.subHeading2(
-                          context, context.colorScheme.secondarySectionColor),
+                      hintStyle: model.fontTheme.subHeading2(context, context.colorScheme.secondarySectionColor),
                     ),
                   ),
                   const SizedBox(
@@ -61,8 +59,7 @@ class AuthView extends StatelessWidget {
                     cursorColor: context.colorScheme.primaryColor,
                     controller: model.passwordTextController,
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 15),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                       border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(15),
@@ -72,35 +69,28 @@ class AuthView extends StatelessWidget {
                       filled: true,
                       focusColor: Colors.white,
                       hintText: 'Password',
-                      hintStyle: model.fontTheme.subHeading2(
-                          context, context.colorScheme.secondarySectionColor),
+                      hintStyle: model.fontTheme.subHeading2(context, context.colorScheme.secondarySectionColor),
                     ),
                   ),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.symmetric(vertical: 10),
+                      padding: const EdgeInsetsDirectional.symmetric(vertical: 10),
                       child: Text(
                         'Forgot password?',
-                        style: model.fontTheme.subHeading2(
-                            context, context.colorScheme.primaryColor),
+                        style: model.fontTheme.subHeading2(context, context.colorScheme.primaryColor),
                       ),
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.symmetric(vertical: 10),
+                    padding: const EdgeInsetsDirectional.symmetric(vertical: 10),
                     child: TextButton(
                       onPressed: () async {
-                        await model.login(model.emailIdTextController.text,
-                            model.passwordTextController.text);
+                        await model.login(model.emailIdTextController.text, model.passwordTextController.text);
                       },
                       style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(
-                            const Size(double.infinity, 50)),
-                        backgroundColor: MaterialStateProperty.all(
-                            context.colorScheme.primaryColor),
+                        minimumSize: MaterialStateProperty.all(const Size(double.infinity, 50)),
+                        backgroundColor: MaterialStateProperty.all(context.colorScheme.primaryColor),
                         shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40.0),
@@ -109,24 +99,20 @@ class AuthView extends StatelessWidget {
                       ),
                       child: Text(
                         'Sign In',
-                        style: FontThemeClass().heading(
-                            context, color: context.colorScheme.secondaryWhiteColor),
+                        style: FontThemeClass().heading(context, color: context.colorScheme.secondaryWhiteColor),
                       ),
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.symmetric(vertical: 10),
+                    padding: const EdgeInsetsDirectional.symmetric(vertical: 10),
                     child: RichText(
                       text: TextSpan(
                         text: 'Problem with sign in? ',
-                        style: FontThemeClass().subHeading2(
-                            context, context.colorScheme.secondaryBlackColor),
+                        style: FontThemeClass().subHeading2(context, context.colorScheme.secondaryBlackColor),
                         children: <TextSpan>[
                           TextSpan(
                             text: 'Report issue',
-                            style: FontThemeClass().subHeading2(
-                                context, context.colorScheme.primaryColor),
+                            style: FontThemeClass().subHeading2(context, context.colorScheme.primaryColor),
                           ),
                         ],
                       ),

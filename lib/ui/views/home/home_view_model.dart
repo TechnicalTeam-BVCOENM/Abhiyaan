@@ -43,7 +43,7 @@ class HomeViewModel extends BaseViewModel {
     ),
     QuickLinksModel(
       imageUrl: "assets/images/Rectangle 90.png",
-      title: "Event",
+      title: "Society",
       view: const EventView(),
     ),
     QuickLinksModel(
@@ -65,8 +65,7 @@ class HomeViewModel extends BaseViewModel {
 
     try {
       highlights = await _firestoreService.getAllData('Highlights');
-      departmentUpdates =
-          await _firestoreService.getAllDepartmentData('DepartmentUpdate');
+      departmentUpdates = await _firestoreService.getAllDepartmentData('DepartmentUpdate');
       notifyListeners();
       log.i(highlights);
       log.i(highlights.length);
@@ -81,11 +80,11 @@ class HomeViewModel extends BaseViewModel {
     try {
       departmentUpdates[i].isExpanded = !departmentUpdates[i].isExpanded;
       if (departmentUpdates[i].isExpanded) {
-        departmentUpdates[i].expandedHeight = 125.hWise;
+        departmentUpdates[i].expandedHeight = 125.sp;
         departmentUpdates[i].maxLines = 4;
         departmentUpdates[i].overflow = false;
       } else {
-        departmentUpdates[i].expandedHeight = 100.hWise;
+        departmentUpdates[i].expandedHeight = 100.sp;
         departmentUpdates[i].maxLines = 2;
         departmentUpdates[i].overflow = true;
       }
