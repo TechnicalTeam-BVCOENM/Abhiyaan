@@ -18,21 +18,19 @@ class ProfileDetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 65.sp,
+      height: 62.sp,
       margin: EdgeInsets.only(bottom: 15.sp),
-      decoration: BoxDecoration(color: context.colorScheme.secondaryWhiteColor, borderRadius: BorderRadius.circular(20)),
+      decoration: BoxDecoration(
+          color: context.colorScheme.secondaryWhiteColor,
+          borderRadius: BorderRadius.circular(20)),
       child: Row(
         children: [
           SizedBox(
             width: 25.sp,
           ),
-
-
           Image.asset(width: 30.sp, leading),
-
           SizedBox(
             width: 32.sp,
-
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -89,8 +87,11 @@ class SocialLinks extends StatelessWidget {
         child: Container(
           width: 45.sp,
           height: 45.sp,
-          decoration: BoxDecoration(color: context.colorScheme.secondaryWhiteColor, borderRadius: BorderRadius.circular(100)),
-          child: Padding(padding: const EdgeInsets.all(5), child: Image.asset(iconpath)),
+          decoration: BoxDecoration(
+              color: context.colorScheme.secondaryWhiteColor,
+              borderRadius: BorderRadius.circular(100)),
+          child: Padding(
+              padding: const EdgeInsets.all(5), child: Image.asset(iconpath)),
         ));
   }
 }

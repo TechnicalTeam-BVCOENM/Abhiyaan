@@ -43,7 +43,7 @@ class ProfileView extends StatelessWidget {
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 40.sp),
+                      padding: EdgeInsets.symmetric(vertical: 25.sp),
                       child: Row(
                         children: [
                           ClipOval(
@@ -51,13 +51,16 @@ class ProfileView extends StatelessWidget {
                             child: CachedNetworkImage(
                               width: 85.sp,
                               fit: BoxFit.cover,
-                              imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1K8v6grZ-ZUVMNO5SLPpv1757dIoupO612SvpYZfpzndi3Vg6QnqrxRQal1PHqZtdhBE&usqp=CAU",
-                              placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
-                              errorWidget: (context, url, error) => const Icon(Icons.error),
+                              imageUrl:
+                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1K8v6grZ-ZUVMNO5SLPpv1757dIoupO612SvpYZfpzndi3Vg6QnqrxRQal1PHqZtdhBE&usqp=CAU",
+                              placeholder: (context, url) => const Center(
+                                  child: CircularProgressIndicator.adaptive()),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
                             ),
                           ),
                           SizedBox(
-                            width: 24.sp,
+                            width: 20.sp,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +70,7 @@ class ProfileView extends StatelessWidget {
                                 style: FontThemeClass().profileheading(context),
                               ),
                               SizedBox(
-                                height: 8.sp,
+                                height: 7.sp,
                               ),
                               Text(LocalStorageService().read('userYear'),
                                   style: FontThemeClass().subHeading2(
