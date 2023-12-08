@@ -74,8 +74,7 @@ class HomeView extends StatelessWidget {
                                     return CarouselUtils.buildImage(
                                         context,
                                         model.highlights[index]['imageUrl'],
-                                        model._activeIndex)
-                                        ;
+                                        model._activeIndex);
                                   },
                                   options: CarouselOptions(
                                     height: 220.sp,
