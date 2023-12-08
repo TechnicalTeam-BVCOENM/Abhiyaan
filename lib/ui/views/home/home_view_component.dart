@@ -24,7 +24,8 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
             children: [
               Text(
                 model.departmentUpdates[i].title,
-                style: model.fontTheme.subHeading(context, context.colorScheme.primaryColor),
+                style: model.fontTheme
+                    .subHeading(context, context.colorScheme.primaryColor),
               ),
               Text(
                 "Posted ${DateFormat("MMM d").format((model.departmentUpdates[i].date).toDate())}",
@@ -43,8 +44,12 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
               Text(
                 model.departmentUpdates[i].description,
                 style: model.fontTheme.smallSubHeading(context),
-                maxLines: model.departmentUpdates[i].isExpanded ? model.departmentUpdates[i].maxLines : 2,
-                overflow: model.departmentUpdates[i].overflow ? TextOverflow.ellipsis : null,
+                maxLines: model.departmentUpdates[i].isExpanded
+                    ? model.departmentUpdates[i].maxLines
+                    : 2,
+                overflow: model.departmentUpdates[i].overflow
+                    ? TextOverflow.ellipsis
+                    : null,
               ),
               // Show more/less button
               InkWell(
@@ -55,9 +60,12 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      model.departmentUpdates[i].isExpanded ? 'Read less' : 'Read more',
+                      model.departmentUpdates[i].isExpanded
+                          ? 'Read less'
+                          : 'Read more',
                       style: TextStyle(
-                        color: context.colorScheme.primaryColor, // You can customize the color
+                        color: context.colorScheme
+                            .primaryColor, // You can customize the color
                       ),
                     ),
                   ],
@@ -73,7 +81,9 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
 
 // Carousel
 class CarouselUtils {
-  static Widget buildIndicator(BuildContext context, int activeIndex, int length) => AnimatedSmoothIndicator(
+  static Widget buildIndicator(
+          BuildContext context, int activeIndex, int length) =>
+      AnimatedSmoothIndicator(
         effect: JumpingDotEffect(
           dotHeight: 8.sp,
           dotWidth: 8.sp,
@@ -84,7 +94,8 @@ class CarouselUtils {
         count: length,
       );
 
-  static Widget buildImage(BuildContext context, String urlImage, int index) => Container(
+  static Widget buildImage(BuildContext context, String urlImage, int index) =>
+      Container(
         width: MediaQuery.of(context).size.width * 1,
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: ClipRRect(
@@ -95,7 +106,7 @@ class CarouselUtils {
                 imageUrl: urlImage,
                 height: 1500,
                 width: 350,
-                maxHeightDiskCache: 1500,
+                maxHeightDiskCache: 1000,
                 fit: BoxFit.cover,
               ),
               Container(
