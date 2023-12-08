@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darpan/common/cached_network_image.dart';
@@ -44,15 +43,15 @@ class HomeView extends StatelessWidget {
                               ),
                               IconButton(
                                 splashRadius: 30.sp,
-                                splashColor: context.colorScheme.backgroundColor,
+                                splashColor:
+                                    context.colorScheme.backgroundColor,
                                 icon: ImageIcon(
                                   const AssetImage(
                                     "assets/images/Notification Bell.png",
                                   ),
                                   size: 24.sp,
                                 ),
-                                onPressed: () {
-                                },
+                                onPressed: () {},
                               )
                             ],
                           ),
@@ -69,15 +68,19 @@ class HomeView extends StatelessWidget {
                                 CarouselSlider.builder(
                                   itemCount: model.highlights.length,
                                   itemBuilder: (context, index, realIndex) {
-                                    return CachedNetworkImage(
-                                        imageUrl: model._highlights[index]
-                                            ['imageUrl']);
+                                    // return CachedNetworkImage(imageUrl: model.highlights[index]['imageUrl']);
+                                    return CarouselUtils.buildImage(
+                                        context,
+                                        model.highlights[index]['imageUrl'],
+                                        model._activeIndex);
                                   },
                                   options: CarouselOptions(
-                                    height: 220.sp,
-                                    onPageChanged: (index, reason) => model.updateActiveIndex(index),
+                                    height: 180.sp,
+                                    onPageChanged: (index, reason) =>
+                                        model.updateActiveIndex(index),
                                     autoPlay: true,
-                                    autoPlayInterval: const Duration(seconds: 3),
+                                    autoPlayInterval:
+                                        const Duration(seconds: 3),
                                     viewportFraction: 1,
                                   ),
                                 ),
@@ -112,7 +115,8 @@ class HomeView extends StatelessWidget {
                           title: "Department Updates",
                         ),
                         for (var i = 0; i < model.departmentUpdates.length; i++)
-                          updatesCard(model._departmentUpdates, i, context, model),
+                          updatesCard(
+                              model._departmentUpdates, i, context, model),
                       ],
                     ),
                   ),

@@ -27,7 +27,8 @@ class EventView extends StatelessWidget {
                   const SectionText(title: "Ongoing Events"),
                   Card(
                     clipBehavior: Clip.hardEdge,
-                    shadowColor: context.colorScheme.secondaryLPurpleColor.withOpacity(0.8),
+                    shadowColor: context.colorScheme.secondaryLPurpleColor
+                        .withOpacity(0.8),
                     elevation: 4,
                     shape: ShapeBorder.lerp(
                         RoundedRectangleBorder(
@@ -57,14 +58,19 @@ class EventView extends StatelessWidget {
                               child: Column(
                                 children: [
                                   CachedNetworkImageWidget(
-                                    imageUrl: "https://imgs.search.brave.com/DGoVUPXpo3OwVAbBbgF3oGz3MUcz_cPZrzmfvO7iRrc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG5p/Lmljb25zY291dC5j/b20vaWxsdXN0cmF0/aW9uL3ByZW1pdW0v/dGh1bWIvc2VhcmNo/LXJlc3VsdC1ub3Qt/Zm91bmQtMjEzMDM1/NS0xODAwOTIwLnBu/Zz9mPXdlYnA",
+                                    imageUrl:
+                                        "https://imgs.search.brave.com/DGoVUPXpo3OwVAbBbgF3oGz3MUcz_cPZrzmfvO7iRrc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG5p/Lmljb25zY291dC5j/b20vaWxsdXN0cmF0/aW9uL3ByZW1pdW0v/dGh1bWIvc2VhcmNo/LXJlc3VsdC1ub3Qt/Zm91bmQtMjEzMDM1/NS0xODAwOTIwLnBu/Zz9mPXdlYnA",
                                     height: 150.sp,
                                     width: 150.sp,
-                                    maxHeightDiskCache: ResponsiveUtils.screenWidth(context),
+                                    maxHeightDiskCache:
+                                        ResponsiveUtils.screenWidth(context),
                                   ),
                                   Text(
                                     "No Ongoing Events",
-                                    style: fontTheme.heading(context, size: 20, color: context.colorScheme.secondarySectionColor),
+                                    style: fontTheme.heading(context,
+                                        size: 20,
+                                        color: context
+                                            .colorScheme.secondarySectionColor),
                                   ),
                                 ],
                               ),
@@ -108,31 +114,38 @@ class EventView extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: model.remainigEvents.length,
                       itemBuilder: (context, index) {
-                        return Card(
-                          clipBehavior: Clip.hardEdge,
-                          shadowColor: context.colorScheme.secondaryLPurpleColor.withOpacity(0.8),
-                          elevation: 4,
-                          shape: ShapeBorder.lerp(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18),
-                              ),
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18),
-                              ),
-                              1),
-                          child: Stack(
-                            children: [
-                              // Event Image and Info
-                              EventCardUpcoming(
-                                model: model.remainigEvents[index],
-                              ),
-                              // Event Date
-                              EventDateContainer(
-                                top: 8.sp,
-                                left: 8.sp,
-                                event: model.remainigEvents[index],
-                              ),
-                            ],
+                        return InkWell(
+                          onTap: () {
+                            model.navigateToDetailedEventView();
+                          },
+                          child: Card(
+                            clipBehavior: Clip.hardEdge,
+                            shadowColor: context
+                                .colorScheme.secondaryLPurpleColor
+                                .withOpacity(0.8),
+                            elevation: 4,
+                            shape: ShapeBorder.lerp(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                                1),
+                            child: Stack(
+                              children: [
+                                // Event Image and Info
+                                EventCardUpcoming(
+                                  model: model.remainigEvents[index],
+                                ),
+                                // Event Date
+                                EventDateContainer(
+                                  top: 8.sp,
+                                  left: 8.sp,
+                                  event: model.remainigEvents[index],
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },
