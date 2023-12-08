@@ -11,82 +11,28 @@ class EventViewModel extends BaseViewModel {
   EventModel? todayEvent;
   List<EventModel> remainigEvents = [];
   // Init Method
-  void init() {
-    getTodaysEvent();
-    loadData();
-    getRemainingEvents();
+  void init() async {
+    await loadData();
   }
 
-  List<SponsorsModel> _sponsors= [];
+  List<SponsorsModel> _sponsors = [];
   List<SponsorsModel> get sponsors => _sponsors;
- bool isLoaded = false;
+  List<EventModel> _events = [];
+  List<EventModel> get events => _events;
 
-Future<void> loadData() async {
-    setBusy(true);
+  Future<void> loadData() async {
     try {
       _sponsors = await _firestoreService.getAllSponsors();
+      _events = await _firestoreService.getAllEvents();
+      getRemainingEvents();
+      getTodaysEvent();
+      log.i(_events[0].title);
       notifyListeners();
-      debugPrint(sponsors[0].title.toString());
     } catch (e) {
       log.e(e);
     }
     log.i("Sponsors Loaded");
-    setBusy(false);
   }
-  // List
-  final List<EventModel> eventsList = [
-    EventModel(
-      title: 'Abhiyaan',
-      time: '10:00 AM',
-      year: 2024,
-      day: 17,
-      month: 11,
-      imageUrl:
-          'https://imgs.search.brave.com/y2ve9MehABcSRTFjQYPcwpiFeueug4jPMSBV80j3lew/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXRteXVuaS5j/b20vYXp1cmUvY29s/bGVnZS1pbWFnZS9i/aWcvYmhhcmF0aS12/aWR5YXBlZXRocy1p/bnN0aXR1dGUtb2Yt/bWFuYWdlbWVudC1z/dHVkaWVzLXJlc2Vh/cmNoLWJ2aW1zci1t/dW1iYWkuanBn',
-      location: 'Quadrangle',
-    ),
-    EventModel(
-      title: 'CESA',
-      time: '2:30 PM',
-      year: 2023,
-      day: 18,
-      month: 11,
-      imageUrl:
-          'https://imgs.search.brave.com/naQcU43e9tgthZ_RRInjFZjKgnNxm8W09L3uTjUs44Q/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/YnZ1bml2ZXJzaXR5/LmVkdS5pbi9kb21t/dW1iYWkvaW1hZ2Vz/L2Fib3V0LWhvbWUu/anBn',
-      location: 'Qudrangle',
-    ),
-    EventModel(
-      title: 'CESA',
-      time: '2:30 PM',
-      year: 2023,
-      day: 14,
-      month: 11,
-      imageUrl:
-          'https://imgs.search.brave.com/naQcU43e9tgthZ_RRInjFZjKgnNxm8W09L3uTjUs44Q/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/YnZ1bml2ZXJzaXR5/LmVkdS5pbi9kb21t/dW1iYWkvaW1hZ2Vz/L2Fib3V0LWhvbWUu/anBn',
-      location: 'Qudrangle',
-    ),
-    EventModel(
-      title: 'CESA',
-      time: '2:30 PM',
-      year: 2023,
-      day: 12,
-      month: 12,
-      imageUrl:
-          'https://imgs.search.brave.com/naQcU43e9tgthZ_RRInjFZjKgnNxm8W09L3uTjUs44Q/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/YnZ1bml2ZXJzaXR5/LmVkdS5pbi9kb21t/dW1iYWkvaW1hZ2Vz/L2Fib3V0LWhvbWUu/anBn',
-      location: 'Qudrangle',
-    ),
-    EventModel(
-      title: 'CESA',
-      time: '2:30 PM',
-      year: 2024,
-      day: 18,
-      month: 1,
-      imageUrl:
-          'https://imgs.search.brave.com/naQcU43e9tgthZ_RRInjFZjKgnNxm8W09L3uTjUs44Q/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/YnZ1bml2ZXJzaXR5/LmVkdS5pbi9kb21t/dW1iYWkvaW1hZ2Vz/L2Fib3V0LWhvbWUu/anBn',
-      location: 'Qudrangle',
-    ),
-  ];
-
 
   // Methods
   String getCurrentMonth() {
@@ -107,12 +53,14 @@ Future<void> loadData() async {
 
   void getTodaysEvent() {
     todayEvent = null; // Initialize todayEvent to null or a default value.
-
-    for (EventModel event in eventsList) {
+    for (EventModel event in events) {
       DateTime now = DateTime.now();
-      if (getMonthName(event.month, event.year) == getCurrentMonth() &&
-          event.day == now.day &&
-          event.year == now.year) {
+      int month = event.startDate.toDate().month;
+      int year = event.startDate.toDate().year;
+      int day = event.startDate.toDate().day;
+      if (getMonthName(month, year) == getCurrentMonth() &&
+          day == now.day &&
+          year == now.year) {
         todayEvent = event;
         break;
       }
@@ -120,23 +68,31 @@ Future<void> loadData() async {
   }
 
   void getRemainingEvents() {
-    for (EventModel event in eventsList) {
-      if (event.year > DateTime.now().year ||
-          (event.year == DateTime.now().year &&
-              (event.month > DateTime.now().month ||
-                  (event.month == DateTime.now().month &&
-                      event.day > DateTime.now().day)))) {
+    for (EventModel event in events) {
+      DateTime now = DateTime.now();
+      int month = event.startDate.toDate().month;
+      int year = event.startDate.toDate().year;
+      int day = event.startDate.toDate().day;
+      if (year > now.year ||
+          (year == now.year &&
+              (month > now.month || (month == now.month && day > now.day)))) {
         remainigEvents.add(event);
+        for (EventModel event in remainigEvents) {
+          log.i(event.title);
+        }
+        notifyListeners();
       }
     }
 
     //Doc:  This is sorting according to year, month and date
     remainigEvents.sort((a, b) {
-      int yearComparison = a.year.compareTo(b.year);
+      int yearComparison =
+          a.startDate.toDate().year.compareTo(b.startDate.toDate().year);
       if (yearComparison == 0) {
-        int monthComparison = a.month.compareTo(b.month);
+        int monthComparison =
+            a.startDate.toDate().month.compareTo(b.startDate.toDate().month);
         if (monthComparison == 0) {
-          return a.day.compareTo(b.day);
+          return a.startDate.toDate().day.compareTo(b.startDate.toDate().day);
         }
         return monthComparison;
       }
@@ -148,25 +104,27 @@ Future<void> loadData() async {
 // Models
 class EventModel {
   String title;
-  String time;
-  int day;
-  int year;
-  int month;
+  Timestamp startDate;
+  Timestamp endDate;
   String imageUrl;
-
   String location;
+  String cName;
+  String cEmail;
+  int cPhone;
+  String about;
 
   EventModel({
     required this.title,
-    required this.time,
-    required this.day,
-    required this.month,
-    required this.year,
+    required this.startDate,
+    required this.endDate,
     required this.location,
     required this.imageUrl,
+    required this.cName,
+    required this.cEmail,
+    required this.cPhone,
+    required this.about,
   });
 }
-
 
 class SponsorsModel {
   String title;

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darpan/common/common_component_model.dart';
 import 'package:darpan/common/shimmer.dart';
 import 'package:darpan/services/firestore_service.dart';
@@ -19,9 +20,7 @@ class EventView extends StatelessWidget {
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
         var todaysEvent = model.todayEvent;
-        return model.isBusy
-            ? const ShimmerLoadingWidget()
-            : Scaffold(
+        return  Scaffold(
                 body: SafeArea(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -86,7 +85,7 @@ class EventView extends StatelessWidget {
                         const SectionText(title: "Sponsors"),
                         SizedBox(
                           height: 80.sp,
-                          child: ListView.builder(
+                          child:ListView.builder(
                             shrinkWrap: true,
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
@@ -105,7 +104,7 @@ class EventView extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemCount: model.remainigEvents.length,
                             itemBuilder: (context, index) {
-                              return Card(
+                              return model.isBusy ? const ShimmerLoadingWidget() : Card(
                                 clipBehavior: Clip.hardEdge,
                                 shadowColor: context
                                     .colorScheme.secondaryLPurpleColor

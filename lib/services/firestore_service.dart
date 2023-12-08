@@ -41,6 +41,25 @@ class FirestoreService {
     }).toList();
   }
 
+  Future<List<EventModel>> getAllEvents() async {
+    final QuerySnapshot snapshot =
+        await _firestore.collection("events").get();
+    return snapshot.docs.map((doc) {
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      return EventModel(
+        title: data['title'],
+        startDate: data['startDate'],
+        endDate: data['endDate'],
+        location: data['location'],
+        imageUrl: data['imageUrl'],
+        cName: data['coordinatorName'],
+        cEmail: data['coordinatorEmail'],
+        cPhone: data['coordinatorPhone'],
+        about: data['about'],
+      );
+    }).toList();
+  }
+
   Future<void> addData(Map<String, dynamic> data) async {
     await _firestore.collection('your_collection').add(data);
   }

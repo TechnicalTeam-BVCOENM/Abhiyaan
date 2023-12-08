@@ -134,12 +134,12 @@ class EventDateContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              event.day.toString(),
+              event.startDate.toDate().day.toString(),
               textAlign: TextAlign.center,
               style: fontTheme.large(context, FontWeight.w800),
             ),
             Text(
-              model.getMonthName(event.month, event.year),
+              model.getMonthName(event.startDate.toDate().month, event.startDate.toDate().year),
               style: fontTheme.subHeading2(
                   context, context.colorScheme.secondaryBlackColor),
             ),
@@ -202,7 +202,7 @@ class EventCardInfo extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              eventDetails.eventTime(context, event.time),
+                              eventDetails.eventTime(context, event),
                               SizedBox(
                                 width: 18.sp,
                               ),
@@ -289,7 +289,7 @@ class EventCardUpcoming extends StatelessWidget {
                       // Time
                       eventDetails.eventTime(
                         context,
-                        model.time,
+                        "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}",
                       ),
                       SizedBox(
                         height: 6.sp,
@@ -311,14 +311,14 @@ class EventCardUpcoming extends StatelessWidget {
   }
 }
 
-class Sponsors extends StatelessWidget {
+class Sponsors extends ViewModelWidget<EventViewModel> {
   final SponsorsModel model;
 
-  const Sponsors({super.key, required this.model});
+   const Sponsors({super.key, required this.model});
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
+  Widget build(BuildContext context , EventViewModel viewModel) {
+    return  viewModel.isBusy ? const ShimmerLoadingWidget() :    Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(18),
@@ -331,12 +331,12 @@ class Sponsors extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () => UrlLauncher().launchURL(model.url),
-                child: CachedNetworkImageWidget(
-                  imageUrl: model.imageUrl,
+                child: Image.network(
+                  model.imageUrl,
                   height: 80.sp,
                   width: 80.sp,
-                  maxHeightDiskCache: ResponsiveUtils.screenWidth(context),
-                ),
+                  fit: BoxFit.cover,
+                )
               ),
             ],
           ),
