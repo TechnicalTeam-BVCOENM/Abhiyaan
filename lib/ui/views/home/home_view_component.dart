@@ -24,8 +24,7 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
             children: [
               Text(
                 model.departmentUpdates[i].title,
-                style: model.fontTheme
-                    .subHeading(context, context.colorScheme.primaryColor),
+                style: model.fontTheme.subHeading(context, context.colorScheme.primaryColor),
               ),
               Text(
                 "Posted ${DateFormat("MMM d").format((model.departmentUpdates[i].date).toDate())}",
@@ -44,12 +43,8 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
               Text(
                 model.departmentUpdates[i].description,
                 style: model.fontTheme.smallSubHeading(context),
-                maxLines: model.departmentUpdates[i].isExpanded
-                    ? model.departmentUpdates[i].maxLines
-                    : 2,
-                overflow: model.departmentUpdates[i].overflow
-                    ? TextOverflow.ellipsis
-                    : null,
+                maxLines: model.departmentUpdates[i].isExpanded ? model.departmentUpdates[i].maxLines : 2,
+                overflow: model.departmentUpdates[i].overflow ? TextOverflow.ellipsis : null,
               ),
               // Show more/less button
               InkWell(
@@ -60,12 +55,9 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      model.departmentUpdates[i].isExpanded
-                          ? 'Read less'
-                          : 'Read more',
+                      model.departmentUpdates[i].isExpanded ? 'Read less' : 'Read more',
                       style: TextStyle(
-                        color: context.colorScheme
-                            .primaryColor, // You can customize the color
+                        color: context.colorScheme.primaryColor, // You can customize the color
                       ),
                     ),
                   ],
@@ -81,12 +73,10 @@ Container updatesCard(HomeViewModel model, int i, BuildContext context) {
 
 // Carousel
 class CarouselUtils {
-  static Widget buildIndicator(
-          BuildContext context, int activeIndex, int length) =>
-      AnimatedSmoothIndicator(
+  static Widget buildIndicator(BuildContext context, int activeIndex, int length) => AnimatedSmoothIndicator(
         effect: JumpingDotEffect(
-          dotHeight: 8.hWise,
-          dotWidth: 8.wWise,
+          dotHeight: 8.sp,
+          dotWidth: 8.sp,
           dotColor: context.colorScheme.secondarySectionColor,
           activeDotColor: context.colorScheme.primaryColor,
         ),
@@ -94,8 +84,7 @@ class CarouselUtils {
         count: length,
       );
 
-  static Widget buildImage(BuildContext context, String urlImage, int index) =>
-      Container(
+  static Widget buildImage(BuildContext context, String urlImage, int index) => Container(
         width: MediaQuery.of(context).size.width * 1,
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: ClipRRect(
@@ -145,6 +134,7 @@ Row quickLinksList(BuildContext context, List model, [double? borderRadius]) {
           itemCount: model.length,
           itemBuilder: (context, idx) {
             return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
                   onTap: () {
@@ -152,31 +142,29 @@ Row quickLinksList(BuildContext context, List model, [double? borderRadius]) {
                     handleQuickLinksNavigation(model, idx);
                   },
                   child: Container(
-                    margin: const EdgeInsets.only(bottom: 8),
-                    height: 60.hWise,
-                    width: 60.wWise,
+                    height: 60.sp,
+                    width: 60.sp,
                     decoration: BoxDecoration(
                       color: context.colorScheme.secondaryLPurpleColor,
                       borderRadius: BorderRadius.circular(borderRadius ?? 18),
                     ),
                     child: Image.asset(
                       model[idx].imageUrl,
-                      width: 36.wWise,
-                      height: 36.wWise,
+                      width: 36.sp,
+                      height: 36.sp,
                     ),
-                    // Icon(
-                    //   model[idx].icon,
-                    //   size: 36.wWise,
-                    //   color: context.colorScheme.primaryColor,
-                    // ),
                   ),
                 ),
                 Text(
                   model[idx].title,
-                  style: fontTheme.smallSubHeading(
-                    context,
-                    context.colorScheme.primaryDarkColor,
-                  ),
+                  style: fontTheme
+                      .subHeading2(
+                        context,
+                        context.colorScheme.secondarySectionColor,
+                      )
+                      .copyWith(fontWeight: FontWeight.w600),
+                  textAlign: TextAlign.center,
+                  softWrap: false,
                 ),
               ],
             );

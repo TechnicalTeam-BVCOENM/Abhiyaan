@@ -17,7 +17,7 @@ class ProfileView extends StatelessWidget {
                 TextButton(
                   onPressed: () => model.navigateToSettingsView(),
                   child: SizedBox(
-                    width: 28.wWise,
+                    width: 28.sp,
                     child: Image.asset(AssetImagePath.settingImg),
                   ),
                 ),
@@ -28,7 +28,7 @@ class ProfileView extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8, left: 18),
                 child: Center(
                   child: Container(
-                    margin: EdgeInsets.only(left: 30.wWise),
+                    margin: EdgeInsets.only(left: 30.sp),
                     child: Text(
                       "Profile",
                       style: FontThemeClass().appBarText(context),
@@ -39,28 +39,25 @@ class ProfileView extends StatelessWidget {
             ),
             body: SafeArea(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.wWise),
+                padding: EdgeInsets.symmetric(horizontal: 20.sp),
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 40.hWise),
+                      padding: EdgeInsets.symmetric(vertical: 40.sp),
                       child: Row(
                         children: [
                           ClipOval(
                             clipper: MyClip(),
                             child: CachedNetworkImage(
-                              width: 85.wWise,
+                              width: 85.sp,
                               fit: BoxFit.cover,
-                              imageUrl:
-                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1K8v6grZ-ZUVMNO5SLPpv1757dIoupO612SvpYZfpzndi3Vg6QnqrxRQal1PHqZtdhBE&usqp=CAU",
-                              placeholder: (context, url) => const Center(
-                                  child: CircularProgressIndicator.adaptive()),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
+                              imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1K8v6grZ-ZUVMNO5SLPpv1757dIoupO612SvpYZfpzndi3Vg6QnqrxRQal1PHqZtdhBE&usqp=CAU",
+                              placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
+                              errorWidget: (context, url, error) => const Icon(Icons.error),
                             ),
                           ),
                           SizedBox(
-                            width: 24.wWise,
+                            width: 24.sp,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,13 +67,9 @@ class ProfileView extends StatelessWidget {
                                 style: FontThemeClass().profileheading(context),
                               ),
                               SizedBox(
-                                height: 8.hWise,
+                                height: 8.sp,
                               ),
-                              Text("BE COMPS",
-                                  style: FontThemeClass().subHeading2(
-                                      context,
-                                      context
-                                          .colorScheme.secondarySectionColor))
+                              Text("BE COMPS", style: FontThemeClass().subHeading2(context, context.colorScheme.secondarySectionColor))
                             ],
                           )
                         ],

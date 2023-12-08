@@ -2,7 +2,7 @@ import 'package:darpan/firebase_options.dart';
 import 'package:darpan/theme/theme_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import 'file_exporter.dart';
+import 'package:darpan/file_exporter.dart';
 
 Future<void> servicesToInitializeBeforeAppStart() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,19 +30,27 @@ class MyApp extends StatelessWidget {
     return ValueListenableBuilder(
         valueListenable: themeService.valueListenable,
         builder: ((context, value, child) {
-          return MaterialApp(
-            title: 'Darpan',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-                brightness: themeService.brightness,
-                scaffoldBackgroundColor: context.colorScheme.backgroundColor,
-                appBarTheme: AppBarTheme(
-                  backgroundColor: context.colorScheme.backgroundColor,
-                  foregroundColor: context.colorScheme.secondaryBlackColor,
-                )),
-            onGenerateRoute: StackedRouter().onGenerateRoute,
-            navigatorKey: StackedService.navigatorKey,
-            initialRoute: Routes.splashView,
+          return ScreenUtilInit(
+            designSize: const Size(360, 640),
+            minTextAdapt: true,
+            splitScreenMode: true,
+            builder: (_, child) {
+              return MaterialApp(
+                title: 'Darpan',
+                debugShowCheckedModeBanner: false,
+                theme: ThemeData(
+                  brightness: themeService.brightness,
+                  scaffoldBackgroundColor: context.colorScheme.backgroundColor,
+                  appBarTheme: AppBarTheme(
+                    backgroundColor: context.colorScheme.backgroundColor,
+                    foregroundColor: context.colorScheme.secondaryBlackColor,
+                  ),
+                ),
+                onGenerateRoute: StackedRouter().onGenerateRoute,
+                navigatorKey: StackedService.navigatorKey,
+                initialRoute: Routes.splashView,
+              );
+            },
           );
         }));
   }
