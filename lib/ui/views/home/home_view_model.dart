@@ -69,7 +69,7 @@ class HomeViewModel extends BaseViewModel {
       notifyListeners();
       log.i(highlights);
       log.i(highlights.length);
-      print(DateFormat("MMMM d").format((departmentUpdates[0].date).toDate()));
+      debugPrint(DateFormat("MMMM d").format((departmentUpdates[0].date).toDate()));
     } catch (e) {
       log.e(e);
     }

@@ -1,3 +1,4 @@
+import 'package:darpan/common/common_component_model.dart';
 import 'package:flutter/services.dart';
 import 'package:darpan/file_exporter.dart';
 
@@ -25,9 +26,11 @@ class ProfileDetailsCard extends StatelessWidget {
           SizedBox(
             width: 25.sp,
           ),
+
           Image.asset(width: 30.sp, leading),
           SizedBox(
             width: 32.sp,
+
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -53,7 +56,7 @@ class ProfileDetailsCard extends StatelessWidget {
                 // ignore: use_build_context_synchronously
                 showmessage(context, "Copied");
               },
-              child: Image.asset(width: 18, AssetImagePath.copyImg)),
+              child: Image.asset(width: 17, AssetImagePath.copyImg)),
           const SizedBox(
             width: 10,
           )
@@ -65,14 +68,18 @@ class ProfileDetailsCard extends StatelessWidget {
 
 class SocialLinks extends StatelessWidget {
   final String iconpath;
-  const SocialLinks({
-    Key? key,
-    required this.iconpath,
-  }) : super(key: key);
+  final String url;
+  const SocialLinks({Key? key, required this.iconpath, required this.url})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () {},
+        onPressed: () {
+          UrlLauncher externalUrlHandler = UrlLauncher();
+          externalUrlHandler.launchURL(
+            Uri.parse(url),
+          );
+        },
         child: Container(
           width: 45.sp,
           height: 45.sp,
