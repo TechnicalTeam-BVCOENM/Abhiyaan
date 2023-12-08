@@ -35,7 +35,7 @@ class AuthView extends StatelessWidget {
                         ),
                         const Expanded(child: Text("")),
                         Text(
-                          'Sign In',
+                          'Darpan',
                           style: model.fontTheme.large(context),
                         ),
                         const Expanded(child: Text("")),
@@ -152,13 +152,6 @@ class AuthView extends StatelessWidget {
                       Text(
                         'Darpan v.1.0.0',
                         style: model.fontTheme.subHeading(
-                          context,
-                          context.colorScheme.secondarySectionColor,
-                        ),
-                      ),
-                      Text(
-                        'Made with ❤️ by Technical Team ',
-                        style: model.fontTheme.smallSubHeading(
                           context,
                           context.colorScheme.secondarySectionColor,
                         ),
