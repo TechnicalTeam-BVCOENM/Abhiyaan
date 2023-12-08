@@ -5,7 +5,7 @@ class HomeViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
 
   // Variables / constants
-  String user = LocalStorageService().read('userName');
+  String user = LocalStorageService().read('userName') ?? 'Error';
   // use local storage for this
   final fontTheme = FontThemeClass();
   bool isExpanded = false;
