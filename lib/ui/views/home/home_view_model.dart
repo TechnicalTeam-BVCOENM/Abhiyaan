@@ -43,7 +43,7 @@ class HomeViewModel extends BaseViewModel {
     ),
     QuickLinksModel(
       imageUrl: "assets/images/Rectangle 90.png",
-      title: "Event",
+      title: "Society",
       view: const EventView(),
     ),
     QuickLinksModel(

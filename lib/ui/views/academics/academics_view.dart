@@ -34,19 +34,22 @@ class AcademicsView extends StatelessWidget {
                 slivers: [
                   // ** 2 ** //
 
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 18.0),
-                      child: Text(
-                        "Academics",
-                        textAlign: TextAlign.center,
-                        style: model.fontTheme.appBarText(context).copyWith(
-                              color: context.colorScheme.primaryColor,
-                            ),
-                      ),
-                    ),
+                  // SliverToBoxAdapter(
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.symmetric(vertical: 18.0),
+                  //     child: Text(
+                  //       "Academics",
+                  //       textAlign: TextAlign.center,
+                  //       style: model.fontTheme.appBarText(context).copyWith(
+                  //             color: context.colorScheme.primaryColor,
+                  //           ),
+                  //     ),
+                  //   ),
+                  // ),
+                  const SliverToBoxAdapter(
+                    child: SectionText(title: "Academics"),
                   ),
-                  SliverToBoxAdapter(child: SizedBox(height: 8.sp)),
+                  SliverToBoxAdapter(child: SizedBox(height: 2.sp)),
                   SliverGrid(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
@@ -62,11 +65,11 @@ class AcademicsView extends StatelessWidget {
                             debugPrint("Tapped $index");
                           },
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                height: 90.sp,
-                                width: 94.sp,
+                                height: 86.sp,
+                                width: 86.sp,
                                 decoration: BoxDecoration(
                                   color: context.colorScheme.secondaryLPurpleColor,
                                   borderRadius: BorderRadius.circular(25),
@@ -82,12 +85,11 @@ class AcademicsView extends StatelessWidget {
                                   child: Image(
                                     image: AssetImage(model.gridListImages[index]),
                                     fit: BoxFit.contain,
-                                    height: 72.sp,
-                                    width: 72.sp,
+                                    height: 70.sp,
+                                    width: 70.sp,
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 8.sp),
                               Text(
                                 model.gridListTitle[index],
                                 style: model.fontTheme
@@ -114,6 +116,7 @@ class AcademicsView extends StatelessWidget {
                       childCount: model.academicsUpdatesList.length,
                       (BuildContext context, int index) {
                         return Card(
+                          clipBehavior: Clip.hardEdge,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),

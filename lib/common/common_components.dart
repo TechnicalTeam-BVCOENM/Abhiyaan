@@ -6,7 +6,7 @@ import 'package:darpan/file_exporter.dart';
 class CircularLoadingIndicator extends StatelessWidget {
   final double height;
 
-  const CircularLoadingIndicator({Key? key, this.height = 100.0}) : super(key: key);
+  const CircularLoadingIndicator({super.key, this.height = 100.0});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ void showMessage(String message) {
 
 // Section Name Text
 class SectionText extends StatelessWidget {
-  const SectionText({Key? key, required this.title}) : super(key: key);
+  const SectionText({super.key, required this.title});
   final String title;
 
   @override

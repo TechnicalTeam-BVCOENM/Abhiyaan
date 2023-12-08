@@ -134,6 +134,7 @@ Row quickLinksList(BuildContext context, List model, [double? borderRadius]) {
           itemCount: model.length,
           itemBuilder: (context, idx) {
             return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
                   onTap: () {
@@ -141,7 +142,6 @@ Row quickLinksList(BuildContext context, List model, [double? borderRadius]) {
                     handleQuickLinksNavigation(model, idx);
                   },
                   child: Container(
-                    margin: const EdgeInsets.only(bottom: 8),
                     height: 60.sp,
                     width: 60.sp,
                     decoration: BoxDecoration(
@@ -153,19 +153,18 @@ Row quickLinksList(BuildContext context, List model, [double? borderRadius]) {
                       width: 36.sp,
                       height: 36.sp,
                     ),
-                    // Icon(
-                    //   model[idx].icon,
-                    //   size: 36.sp,
-                    //   color: context.colorScheme.primaryColor,
-                    // ),
                   ),
                 ),
                 Text(
                   model[idx].title,
-                  style: fontTheme.smallSubHeading(
-                    context,
-                    context.colorScheme.primaryDarkColor,
-                  ),
+                  style: fontTheme
+                      .subHeading2(
+                        context,
+                        context.colorScheme.secondarySectionColor,
+                      )
+                      .copyWith(fontWeight: FontWeight.w600),
+                  textAlign: TextAlign.center,
+                  softWrap: false,
                 ),
               ],
             );
