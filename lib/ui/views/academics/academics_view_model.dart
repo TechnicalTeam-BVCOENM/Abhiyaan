@@ -15,7 +15,9 @@ class AcademicsViewModel extends BaseViewModel {
     } catch (e) {
       debugPrint(e.toString());
     }
-    setBusy(false);
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      setBusy(false);
+    });
   }
 
   final gridListTitle = [

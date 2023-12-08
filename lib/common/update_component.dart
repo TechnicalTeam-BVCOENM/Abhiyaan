@@ -34,7 +34,7 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                   ),
                 ],
               ),
-              SizedBox(height: 2.sp),
+              SizedBox(height: 2.h),
               Text(
                 updateList[i].description,
                 maxLines: 2,
@@ -65,7 +65,7 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
           borderRadius: BorderRadius.circular(16),
           side: BorderSide(
             color: context.colorScheme.secondaryLPurpleColor,
-            width: 1.0,
+            width: 1.w,
           ),
         ),
         child: Padding(
@@ -85,7 +85,7 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                   ),
                 ],
               ),
-              SizedBox(height: 2.sp),
+              SizedBox(height: 2.h),
               Text(
                 updateList[i].description,
                 maxLines: 100,

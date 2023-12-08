@@ -43,15 +43,14 @@ class HomeView extends StatelessWidget {
                               ),
                               IconButton(
                                 splashRadius: 30.sp,
-                                splashColor:
-                                    context.colorScheme.backgroundColor,
+                                splashColor: 
+                                context.colorScheme.backgroundColor,
                                 icon: ImageIcon(
                                   const AssetImage(
                                     "assets/images/Notification Bell.png",
                                   ),
                                   size: 24.sp,
                                 ),
-                                onPressed: () {},
                                 onPressed: () {},
                               )
                             ],
@@ -69,15 +68,16 @@ class HomeView extends StatelessWidget {
                                 CarouselSlider.builder(
                                   itemCount: model.highlights.length,
                                   itemBuilder: (context, index, realIndex) {
-                                    return CachedNetworkImage(imageUrl: model._highlights[index]['imageUrl']);
+                                    // return CachedNetworkImage(imageUrl: model.highlights[index]['imageUrl']);
+                                    return CarouselUtils.buildImage(context, model.highlights[index]['imageUrl'], model._activeIndex);
                                   },
                                   options: CarouselOptions(
                                     height: 180.sp,
-                                    onPageChanged: (index, reason) =>
-                                        model.updateActiveIndex(index),
+                                    onPageChanged: (index, reason) => 
+                                    model.updateActiveIndex(index),
                                     autoPlay: true,
-                                    autoPlayInterval:
-                                        const Duration(seconds: 3),
+                                    autoPlayInterval: 
+                                    const Duration(seconds: 3),
                                     viewportFraction: 1,
                                   ),
                                 ),
