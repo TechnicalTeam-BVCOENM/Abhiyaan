@@ -19,8 +19,7 @@ class EventView extends StatelessWidget {
       viewModelBuilder: () => EventViewModel(),
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
-        var todaysEvent = model.todayEvent;
-        return  Scaffold(
+        return model.isBusy ? const ShimmerLoadingWidget() :  Scaffold(
                 body: SafeArea(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -42,16 +41,16 @@ class EventView extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(18.sp),
                               ),
                               1),
-                          child: todaysEvent != null
+                          child: model.todayEvent != null
                               ? Stack(
                                   children: [
                                     EventCardInfo(
-                                      event: todaysEvent,
+                                      model: model.todayEvent!,
                                     ),
                                     EventDateContainer(
                                       top: 120.sp,
                                       left: 20.sp,
-                                      event: todaysEvent,
+                                      event: model.todayEvent!,
                                     ),
                                   ],
                                 )

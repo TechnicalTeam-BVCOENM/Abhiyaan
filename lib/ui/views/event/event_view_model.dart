@@ -8,8 +8,8 @@ class BrandModel {
 class EventViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
   final log = getLogger('EventViewModel');
-  EventModel? todayEvent;
-  List<EventModel> remainigEvents = [];
+
+
   // Init Method
   void init() async {
     await loadData();
@@ -21,16 +21,18 @@ class EventViewModel extends BaseViewModel {
   List<EventModel> get events => _events;
 
   Future<void> loadData() async {
+    setBusy(true);
     try {
       _sponsors = await _firestoreService.getAllSponsors();
       _events = await _firestoreService.getAllEvents();
-      getRemainingEvents();
       getTodaysEvent();
+      getRemainingEvents();
       log.i(_events[0].title);
       notifyListeners();
     } catch (e) {
       log.e(e);
     }
+    setBusy(false);
     log.i("Sponsors Loaded");
   }
 
@@ -51,8 +53,15 @@ class EventViewModel extends BaseViewModel {
     return currentMonth;
   }
 
+  EventModel? _todayEvent = null;
+  EventModel? get todayEvent => _todayEvent;
+  EventModel? setTodayEvent(EventModel? event) {
+    _todayEvent = event;
+    notifyListeners();
+    return null;
+  }
   void getTodaysEvent() {
-    todayEvent = null; // Initialize todayEvent to null or a default value.
+    setTodayEvent(null);
     for (EventModel event in events) {
       DateTime now = DateTime.now();
       int month = event.startDate.toDate().month;
@@ -61,12 +70,14 @@ class EventViewModel extends BaseViewModel {
       if (getMonthName(month, year) == getCurrentMonth() &&
           day == now.day &&
           year == now.year) {
-        todayEvent = event;
+        setTodayEvent(event);
         break;
       }
     }
   }
 
+  List<EventModel> _remainigEvents = [];
+  List<EventModel> get remainigEvents => _remainigEvents;
   void getRemainingEvents() {
     for (EventModel event in events) {
       DateTime now = DateTime.now();

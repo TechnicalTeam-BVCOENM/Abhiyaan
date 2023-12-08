@@ -151,11 +151,11 @@ class EventDateContainer extends StatelessWidget {
 }
 
 class EventCardInfo extends StatelessWidget {
-  final EventModel event;
+  final EventModel model;
 
   const EventCardInfo({
     super.key,
-    required this.event,
+    required this.model,
   });
 
   @override
@@ -170,7 +170,7 @@ class EventCardInfo extends StatelessWidget {
             // Event Image
             eventDetails.eventImage(
               context,
-              event.imageUrl,
+              model.imageUrl,
               160.sp,
               ResponsiveUtils.screenWidth(context),
             ),
@@ -190,7 +190,7 @@ class EventCardInfo extends StatelessWidget {
                         // Event Title
                         eventDetails.eventTitle(
                           context,
-                          event.title,
+                          model.title,
                           EdgeInsets.only(left: 22.sp),
                         ),
                         SizedBox(
@@ -202,12 +202,12 @@ class EventCardInfo extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              eventDetails.eventTime(context, event),
+                              eventDetails.eventTime(context, "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}"),
                               SizedBox(
                                 width: 18.sp,
                               ),
                               eventDetails.eventLocation(
-                                  context, event.location),
+                                  context, model.location),
                             ],
                           ),
                         )
@@ -318,7 +318,7 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
 
   @override
   Widget build(BuildContext context , EventViewModel viewModel) {
-    return  viewModel.isBusy ? const ShimmerLoadingWidget() :    Padding(
+    return  Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(18),
@@ -336,6 +336,12 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
                   height: 80.sp,
                   width: 80.sp,
                   fit: BoxFit.cover,
+                  frameBuilder: (context, child, frame, wasSynchronouslyLoaded) => wasSynchronouslyLoaded ? child : AnimatedOpacity(
+                    opacity: frame == null ? 0 : 1,
+                    duration: const Duration(seconds: 1),
+                    curve: Curves.easeOut,
+                    child: child,
+                  ),
                 )
               ),
             ],
