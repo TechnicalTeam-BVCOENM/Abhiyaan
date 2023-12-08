@@ -75,7 +75,7 @@ class HomeView extends StatelessWidget {
                                         model._activeIndex);
                                   },
                                   options: CarouselOptions(
-                                    height: 220.sp,
+                                    height: 180.sp,
                                     onPageChanged: (index, reason) =>
                                         model.updateActiveIndex(index),
                                     autoPlay: true,
@@ -115,7 +115,8 @@ class HomeView extends StatelessWidget {
                           title: "Department Updates",
                         ),
                         for (var i = 0; i < model.departmentUpdates.length; i++)
-                          updatesCard(model._departmentUpdates, i, context, model),
+                          updatesCard(
+                              model._departmentUpdates, i, context, model),
                       ],
                     ),
                   ),
