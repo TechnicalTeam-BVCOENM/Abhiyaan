@@ -86,8 +86,8 @@ class SocialLinks extends StatelessWidget {
           );
         },
         child: Container(
-          width: 45.sp,
-          height: 45.sp,
+          width: 40.sp,
+          height: 40.sp,
           decoration: BoxDecoration(
               color: context.colorScheme.secondaryWhiteColor,
               borderRadius: BorderRadius.circular(100)),
