@@ -66,13 +66,13 @@ class ProfileView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Sachin Rathod",
+                                LocalStorageService().read('userName'),
                                 style: FontThemeClass().profileheading(context),
                               ),
                               SizedBox(
                                 height: 8.hWise,
                               ),
-                              Text("BE COMPS",
+                              Text(LocalStorageService().read('userYear'),
                                   style: FontThemeClass().subHeading2(
                                       context,
                                       context
@@ -82,25 +82,25 @@ class ProfileView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const ProfileDetailsCard(
+                    ProfileDetailsCard(
                       leading: AssetImagePath.misImg,
                       title: "MIS Number",
-                      value: "21121017",
+                      value: LocalStorageService().read('userMisNo'),
                     ),
-                    const ProfileDetailsCard(
+                    ProfileDetailsCard(
                       leading: AssetImagePath.libraryImg,
                       title: "Library Card Number",
-                      value: "98761112",
+                      value: LocalStorageService().read('userLibNo'),
                     ),
-                    const ProfileDetailsCard(
+                    ProfileDetailsCard(
                       leading: AssetImagePath.idImg,
                       title: "College ID",
-                      value: "125rathodsachin@gmail.com",
+                      value: LocalStorageService().read('userCollegeId'),
                     ),
-                    const ProfileDetailsCard(
+                    ProfileDetailsCard(
                       leading: AssetImagePath.prnImg,
                       title: "PRN Number",
-                      value: "123456781234",
+                      value: LocalStorageService().read('userPrnNo'),
                     ),
                     const Expanded(child: Text("")),
                     const Row(

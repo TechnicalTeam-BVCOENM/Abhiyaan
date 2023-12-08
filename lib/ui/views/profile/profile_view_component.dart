@@ -43,10 +43,14 @@ class ProfileDetailsCard extends StatelessWidget {
               const SizedBox(
                 height: 4,
               ),
-              Text(
-                value,
-                style: FontThemeClass().smallSubHeading(
-                    context, context.colorScheme.secondarySectionColor),
+              SizedBox(
+                width: 160,
+                child: Text(
+                  value,
+                  overflow: TextOverflow.ellipsis,
+                  style: FontThemeClass().smallSubHeading(
+                      context, context.colorScheme.secondarySectionColor),
+                ),
               ),
             ],
           ),

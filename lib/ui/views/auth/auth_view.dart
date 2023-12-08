@@ -1,6 +1,7 @@
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 part 'auth_view_model.dart';
 
 class AuthView extends StatelessWidget {
@@ -76,14 +77,19 @@ class AuthView extends StatelessWidget {
                           context, context.colorScheme.secondarySectionColor),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: const EdgeInsetsDirectional.only(top: 10),
-                      child: Text(
-                        'Forgot password?',
-                        style: model.fontTheme.subHeading2(
-                            context, context.colorScheme.primaryColor),
+                  InkWell(
+                    onTap: () {
+                      model.passwordResetMail();
+                    },
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsetsDirectional.only(top: 10),
+                        child: Text(
+                          'Forgot password?',
+                          style: model.fontTheme.subHeading2(
+                              context, context.colorScheme.primaryColor),
+                        ),
                       ),
                     ),
                   ),
