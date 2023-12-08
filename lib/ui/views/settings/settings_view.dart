@@ -92,7 +92,7 @@ class SettingsView extends StatelessWidget {
                     child: Text(''),
                   ),
                   Text(
-                    'bvcoenm',
+                    'Made',
                     style: model.fontTheme.subHeading2(
                         context, context.colorScheme.secondarySectionColor),
                   )
