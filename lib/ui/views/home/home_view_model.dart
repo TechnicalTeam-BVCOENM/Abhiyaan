@@ -5,28 +5,10 @@ class HomeViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
 
   // Variables / constants
-  String user = "Sachin";
+  String user = "Kiran"; // use local storage for this
   final fontTheme = FontThemeClass();
-  final currentIndex = 3;
+  bool isExpanded = false;
 
-  // List<DepartmentUpdates> departmentUpdates = [
-  //   DepartmentUpdates(
-  //       name: "Placement",
-  //       description:
-  //           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  //       date: "Today"),
-  //   DepartmentUpdates(
-  //       name: "Placement",
-  //       description:
-  //           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  //       date: "20-08-23"),
-  //   DepartmentUpdates(
-  //       name: "Placement",
-  //       description:
-  //           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  //       date: "18-09-23"),
-  // ];
-  // final PageController pageController = PageController();
 
   List<QuickLinksModel> quickLinksList = [
     QuickLinksModel(
@@ -53,17 +35,16 @@ class HomeViewModel extends BaseViewModel {
 
   // Methods
 
-  List<Map<String, dynamic>> highlights = [];
-  List<Map<String, dynamic>> get _highlights => highlights;
-  List<DepartmentUpdates> departmentUpdates = [];
-  List<DepartmentUpdates> get _departmentUpdates => departmentUpdates;
+  List<Map<String, dynamic>> _highlights = [];
+  List<Map<String, dynamic>> get highlights => _highlights;
+  List<DepartmentUpdates> _departmentUpdates = [];
+  List<DepartmentUpdates> get departmentUpdates => _departmentUpdates;
 
   Future<void> loadData() async {
     setBusy(true);
-
     try {
-      highlights = await _firestoreService.getAllData('Highlights');
-      departmentUpdates = await _firestoreService.getAllDepartmentData('DepartmentUpdate');
+      _highlights = await _firestoreService.getAllData('Highlights');
+      _departmentUpdates = await _firestoreService.getAllDepartmentData('DepartmentUpdate');
       notifyListeners();
       log.i(highlights);
       log.i(highlights.length);
@@ -91,13 +72,6 @@ class HomeViewModel extends BaseViewModel {
       debugPrint(e.toString());
     }
   }
-
-  final List<String> urlImages = [
-    'https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg',
-    'https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg',
-    'https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg',
-    'https://bvcoenm.edu.in/wp-content/uploads/2022/08/sih2.jpg',
-  ];
 
   int _activeIndex = 0;
 
