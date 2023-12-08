@@ -35,16 +35,16 @@ class HomeViewModel extends BaseViewModel {
 
   // Methods
 
-  List<Map<String, dynamic>> highlights = [];
-  List<Map<String, dynamic>> get _highlights => highlights;
-  List<DepartmentUpdates> departmentUpdates = [];
-  List<DepartmentUpdates> get _departmentUpdates => departmentUpdates;
+  List<Map<String, dynamic>> _highlights = [];
+  List<Map<String, dynamic>> get highlights => _highlights;
+  List<DepartmentUpdates> _departmentUpdates = [];
+  List<DepartmentUpdates> get departmentUpdates => _departmentUpdates;
 
   Future<void> loadData() async {
     setBusy(true);
     try {
-      highlights = await _firestoreService.getAllData('Highlights');
-      departmentUpdates = await _firestoreService.getAllDepartmentData('DepartmentUpdate');
+      _highlights = await _firestoreService.getAllData('Highlights');
+      _departmentUpdates = await _firestoreService.getAllDepartmentData('DepartmentUpdate');
       notifyListeners();
       log.i(highlights);
       log.i(highlights.length);
