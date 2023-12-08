@@ -112,7 +112,7 @@ class HomeView extends StatelessWidget {
                           title: "Department Updates",
                         ),
                         for (var i = 0; i < model.departmentUpdates.length; i++)
-                          updatesCard(model._departmentUpdates, i, context, model),
+                          updatesCard(model.departmentUpdates, i, context, model),
                       ],
                     ),
                   ),

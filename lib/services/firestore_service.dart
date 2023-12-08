@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:darpan/ui/views/event/event_view.dart';
 import 'package:darpan/ui/views/home/home_view.dart';
 
 class FirestoreService {
@@ -27,6 +28,16 @@ class FirestoreService {
         maxLines: data['maxLines'] ?? 2,
         overflow: data['overflow'] ?? true,
       );
+    }).toList();
+  }
+
+  Future<List<SponsorsModel>> getAllSponsors() async {
+    final QuerySnapshot snapshot =
+        await _firestore.collection("sponsors").get();
+    return snapshot.docs.map((doc) {
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      return SponsorsModel(
+          title: data["title"], url: data["url"], imageUrl: data["imageUrl"]);
     }).toList();
   }
 

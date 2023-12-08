@@ -6,16 +6,33 @@ class BrandModel {
 }
 
 class EventViewModel extends BaseViewModel {
-  // Variables
+  final FirestoreService _firestoreService = FirestoreService();
   final log = getLogger('EventViewModel');
   EventModel? todayEvent;
   List<EventModel> remainigEvents = [];
   // Init Method
   void init() {
     getTodaysEvent();
+    loadData();
     getRemainingEvents();
   }
 
+  List<SponsorsModel> _sponsors= [];
+  List<SponsorsModel> get sponsors => _sponsors;
+ bool isLoaded = false;
+
+Future<void> loadData() async {
+    setBusy(true);
+    try {
+      _sponsors = await _firestoreService.getAllSponsors();
+      notifyListeners();
+      debugPrint(sponsors[0].title.toString());
+    } catch (e) {
+      log.e(e);
+    }
+    log.i("Sponsors Loaded");
+    setBusy(false);
+  }
   // List
   final List<EventModel> eventsList = [
     EventModel(
@@ -70,26 +87,6 @@ class EventViewModel extends BaseViewModel {
     ),
   ];
 
-  final List<BrandModel> brands = [
-    BrandModel(
-      imageUrl:
-          'https://imgs.search.brave.com/PH2aMidbf55D3f5OjcucErBN-WaxA5R73Y87-bEZfns/rs:fit:860:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy84/Lzg5L0xvZ28tQmVS/ZWFsLnBuZw',
-    ),
-    BrandModel(
-      imageUrl:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png',
-    ),
-    BrandModel(
-      imageUrl:
-          'https://e7.pngegg.com/pngimages/384/715/png-clipart-lokmat-pune-nashik-newspaper-lokmat-pune-thumbnail.png',
-    ),
-    BrandModel(
-      imageUrl:
-          'https://brandlogos.net/wp-content/uploads/2013/03/monster-energy-eps-vector-logo.png',
-    ),
-
-    // Add more BrandModel instances as needed
-  ];
 
   // Methods
   String getCurrentMonth() {
@@ -166,6 +163,19 @@ class EventModel {
     required this.month,
     required this.year,
     required this.location,
+    required this.imageUrl,
+  });
+}
+
+
+class SponsorsModel {
+  String title;
+  String imageUrl;
+  String url;
+
+  SponsorsModel({
+    required this.title,
+    required this.url,
     required this.imageUrl,
   });
 }

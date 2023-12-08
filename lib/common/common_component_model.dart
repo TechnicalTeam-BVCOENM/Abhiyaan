@@ -3,9 +3,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class UrlLauncher {
 
-   launchURL(Uri url) async {
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url,
+   launchURL(String url) async {
+   final uri = Uri.parse(url);
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri,
     mode: LaunchMode.externalApplication);
   } else {
     throw 'Could not launch $url';

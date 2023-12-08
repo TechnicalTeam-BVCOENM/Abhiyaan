@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-
 import '../file_exporter.dart';
-import 'circular_loading_indicator.dart';
 
 class CachedNetworkImageWidget extends StatelessWidget {
   final String imageUrl;
@@ -27,7 +25,11 @@ class CachedNetworkImageWidget extends StatelessWidget {
       height: height,
       width: width,
       maxHeightDiskCache: maxHeightDiskCache.toInt(),
-      placeholder: (context, url) => CircularLoadingIndicator(height: 90.sp),
+      // placeholder: (context, url) => CircularLoadingIndicator(height: 90.sp),
+      progressIndicatorBuilder: (context, url, downloadProgress) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(child: CircularProgressIndicator.adaptive(value: downloadProgress.progress,)),
+      ),
       errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }
