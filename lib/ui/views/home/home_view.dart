@@ -43,14 +43,13 @@ class HomeView extends StatelessWidget {
                                 style: fontTheme.appBarText(context),
                               ),
                               IconButton(
-                                splashRadius: 30.wWise,
-                                splashColor:
-                                    context.colorScheme.backgroundColor,
+                                splashRadius: 30.sp,
+                                splashColor: context.colorScheme.backgroundColor,
                                 icon: ImageIcon(
                                   const AssetImage(
                                     "assets/images/Notification Bell.png",
                                   ),
-                                  size: 24.hWise,
+                                  size: 24.sp,
                                 ),
                                 onPressed: () {
                                 },
@@ -63,7 +62,7 @@ class HomeView extends StatelessWidget {
                         const SectionText(title: 'Highlights'),
 
                         SizedBox(
-                          width: 460.wWise,
+                          width: 460.sp,
                           child: Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -71,23 +70,17 @@ class HomeView extends StatelessWidget {
                                 CarouselSlider.builder(
                                   itemCount: model.highlights.length,
                                   itemBuilder: (context, index, realIndex) {
-                                    return CachedNetworkImage(
-                                        imageUrl: model.highlights[index]
-                                            ['imageUrl']);
+                                    return CachedNetworkImage(imageUrl: model.highlights[index]['imageUrl']);
                                   },
                                   options: CarouselOptions(
-                                    height: 220.hWise,
-                                    onPageChanged: (index, reason) =>
-                                        model.updateActiveIndex(index),
+                                    height: 220.sp,
+                                    onPageChanged: (index, reason) => model.updateActiveIndex(index),
                                     autoPlay: true,
-                                    autoPlayInterval:
-                                        const Duration(seconds: 3),
+                                    autoPlayInterval: const Duration(seconds: 3),
                                     viewportFraction: 1,
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 20.hWise,
-                                ),
+                                SizedBox(height: 20.sp),
                                 CarouselUtils.buildIndicator(
                                   context,
                                   model.activeIndex,
@@ -106,7 +99,7 @@ class HomeView extends StatelessWidget {
                           title: "Activity",
                         ),
                         Container(
-                          height: 135.hWise,
+                          height: 135.sp,
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                             color: context.colorScheme.secondaryWhiteColor,
@@ -117,8 +110,7 @@ class HomeView extends StatelessWidget {
                         const SectionText(
                           title: "Department Updates",
                         ),
-                        for (var i = 0; i < model.departmentUpdates.length; i++)
-                          updatesCard(model, i, context),
+                        for (var i = 0; i < model.departmentUpdates.length; i++) updatesCard(model, i, context),
                       ],
                     ),
                   ),

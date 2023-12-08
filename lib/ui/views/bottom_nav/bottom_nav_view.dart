@@ -33,16 +33,14 @@ class BottomNavView extends StatelessWidget {
                 elevation: 0,
                 landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
                 selectedItemColor: context.colorScheme.selectedBottomNavIcon,
-                unselectedItemColor:
-                    context.colorScheme.unSelectedBottomNavIcon,
+                unselectedItemColor: context.colorScheme.unSelectedBottomNavIcon,
                 type: BottomNavigationBarType.fixed,
                 selectedLabelStyle: const TextStyle(fontSize: 0),
                 currentIndex: model.currentIndex,
                 onTap: model.setIndex,
                 items: [
                   BottomNavigationBarItem(
-                    backgroundColor:
-                        context.colorScheme.selectedBottomNavIconbg,
+                    backgroundColor: context.colorScheme.selectedBottomNavIconbg,
                     label: '',
                     icon: const Icon(Icons.home_filled),
                     activeIcon: const BottomNavActiveIcon(
@@ -51,8 +49,7 @@ class BottomNavView extends StatelessWidget {
                     ),
                   ),
                   BottomNavigationBarItem(
-                    backgroundColor:
-                        context.colorScheme.selectedBottomNavIconbg,
+                    backgroundColor: context.colorScheme.selectedBottomNavIconbg,
                     label: '',
                     icon: const Icon(Icons.book),
                     activeIcon: const BottomNavActiveIcon(
@@ -65,7 +62,7 @@ class BottomNavView extends StatelessWidget {
                     icon: Icon(Icons.calendar_month_outlined),
                     activeIcon: BottomNavActiveIcon(
                       icon: Icons.calendar_month_outlined,
-                      text: "Event",
+                      text: "Events",
                     ),
                   ),
                   const BottomNavigationBarItem(

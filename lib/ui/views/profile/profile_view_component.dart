@@ -8,29 +8,31 @@ class ProfileDetailsCard extends StatelessWidget {
   final String value;
 
   const ProfileDetailsCard({
-    Key? key,
+    super.key,
     required this.leading,
     required this.title,
     required this.value,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 65.hWise,
-      margin: EdgeInsets.only(bottom: 15.wWise),
-      decoration: BoxDecoration(
-          color: context.colorScheme.secondaryWhiteColor,
-          borderRadius: BorderRadius.circular(20)),
+      height: 65.sp,
+      margin: EdgeInsets.only(bottom: 15.sp),
+      decoration: BoxDecoration(color: context.colorScheme.secondaryWhiteColor, borderRadius: BorderRadius.circular(20)),
       child: Row(
         children: [
           SizedBox(
-            width: 25.wWise,
+            width: 25.sp,
           ),
-          Image.asset(width: 34.wWise, leading),
+
+
+          Image.asset(width: 30.sp, leading),
+
           SizedBox(
-            width: 28.wWise,
+            width: 32.sp,
+
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -74,8 +76,7 @@ class ProfileDetailsCard extends StatelessWidget {
 class SocialLinks extends StatelessWidget {
   final String iconpath;
   final String url;
-  const SocialLinks({Key? key, required this.iconpath, required this.url})
-      : super(key: key);
+  const SocialLinks({super.key, required this.iconpath, required this.url});
   @override
   Widget build(BuildContext context) {
     return TextButton(
@@ -86,13 +87,10 @@ class SocialLinks extends StatelessWidget {
           );
         },
         child: Container(
-          width: 45.wWise,
-          height: 45.hWise,
-          decoration: BoxDecoration(
-              color: context.colorScheme.secondaryWhiteColor,
-              borderRadius: BorderRadius.circular(100)),
-          child: Padding(
-              padding: const EdgeInsets.all(5), child: Image.asset(iconpath)),
+          width: 45.sp,
+          height: 45.sp,
+          decoration: BoxDecoration(color: context.colorScheme.secondaryWhiteColor, borderRadius: BorderRadius.circular(100)),
+          child: Padding(padding: const EdgeInsets.all(5), child: Image.asset(iconpath)),
         ));
   }
 }

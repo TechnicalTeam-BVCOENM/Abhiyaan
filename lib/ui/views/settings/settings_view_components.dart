@@ -18,7 +18,7 @@ Padding settingsListTile(
       titleAlignment: ListTileTitleAlignment.center,
       leading: Icon(
         leadingIcon!,
-        size: 35.wWise,
+        size: 35.sp,
         color: context.colorScheme.secondaryBlackColor,
       ),
       trailing: trailingIcon,
@@ -26,7 +26,7 @@ Padding settingsListTile(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18),
       ),
-      visualDensity: VisualDensity(vertical: 4.hWise),
+      visualDensity: VisualDensity(vertical: 4.sp),
     ),
   );
 }
