@@ -42,6 +42,7 @@ flutter:
     - assets/images/
     - assets/images/profile/
     - assets/images/academics/
+    - assets/images/academics/class_notes/
 
   uses-material-design: true
   # fonts:
