@@ -11,6 +11,7 @@ Padding settingsListTile(
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 10),
     child: ListTile(
+      contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
       title: Text(
         title!,
         style: model.fontTheme.heading4(context),

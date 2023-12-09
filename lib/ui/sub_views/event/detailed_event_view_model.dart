@@ -1,4 +1,4 @@
-part of '../detailed_event/detailed_event_view.dart';
+part of '../event/detailed_event_view.dart';
 
 class DetailedEventViewModel extends BaseViewModel {
   final log = getLogger('DetailedEventView');
@@ -9,3 +9,4 @@ class DetailedEventViewModel extends BaseViewModel {
     _navigationService.replaceWith(Routes.profileView);
   }
 }
+

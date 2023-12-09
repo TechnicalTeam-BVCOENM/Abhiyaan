@@ -1,7 +1,7 @@
-import 'package:darpan/common/common_component_model.dart';
+import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:flutter/services.dart';
 import 'package:darpan/file_exporter.dart';
-import '../../../common/toast_message.dart';
+import '../../common/toast_message.dart';
 
 class ProfileDetailsCard extends StatelessWidget {
   final String leading;
@@ -62,7 +62,10 @@ class ProfileDetailsCard extends StatelessWidget {
                 // ignore: use_build_context_synchronously
                 showmessage(context, "Copied");
               },
-              child: Image.asset(width: 18, AssetImagePath.copyImg)),
+              child: const Icon(
+                Icons.content_copy,
+                size: 22,
+              )),
           const SizedBox(
             width: 10,
           )
@@ -82,7 +85,7 @@ class SocialLinks extends StatelessWidget {
         onPressed: () {
           UrlLauncher externalUrlHandler = UrlLauncher();
           externalUrlHandler.launchURL(
-            Uri.parse(url),
+            url,
           );
         },
         child: Container(
@@ -92,7 +95,7 @@ class SocialLinks extends StatelessWidget {
               color: context.colorScheme.secondaryWhiteColor,
               borderRadius: BorderRadius.circular(100)),
           child: Padding(
-              padding: const EdgeInsets.all(5), child: Image.asset(iconpath)),
+              padding: const EdgeInsets.all(8), child: Image.asset(iconpath)),
         ));
   }
 }

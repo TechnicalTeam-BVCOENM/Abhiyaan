@@ -1,7 +1,9 @@
 import 'package:darpan/file_exporter.dart';
-import 'package:darpan/ui/views/detailed_event/detailed_event_view_components.dart';
+import 'package:darpan/ui/sub_views/event/detailed_event_view_components.dart';
+// import 'package:darpan/theme/theme_service.dart';
 
 part 'detailed_event_view_model.dart';
+// part 'detailed_event_view_components.dart';
 
 class DetailedEventView extends StatelessWidget {
   const DetailedEventView({super.key});
@@ -14,47 +16,7 @@ class DetailedEventView extends StatelessWidget {
         return Scaffold(
           body: CustomScrollView(
             slivers: <Widget>[
-              SliverAppBar(
-                backgroundColor: Colors.white,
-                elevation: 0.0,
-                pinned: true,
-                stretch: true,
-                expandedHeight: 220.h,
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Image.network(
-                    'https://thumbs.dreamstime.com/b/modern-business-buildings-11681736.jpg',
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: 220.h,
-                  ),
-                  stretchModes: [
-                    StretchMode.blurBackground,
-                    StretchMode.zoomBackground
-                  ],
-                ),
-                bottom: PreferredSize(
-                  preferredSize: Size.fromHeight(0.0),
-                  child: Container(
-                    height: 32.h,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.backgroundColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15.h),
-                        topRight: Radius.circular(15.h),
-                      ),
-                    ),
-                    child: Container(
-                      width: 40.w,
-                      height: 5.h,
-                      decoration: BoxDecoration(
-                        color: Colors.black12,
-                        borderRadius: BorderRadius.circular(100.h),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              DetailedEventAppBar(),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.h),

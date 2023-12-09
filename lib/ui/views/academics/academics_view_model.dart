@@ -1,7 +1,25 @@
 part of 'academics_view.dart';
 
 class AcademicsViewModel extends BaseViewModel {
+  final FirestoreService _firestoreService = FirestoreService();
   final fontTheme = FontThemeClass();
+
+  List<AcademicsUpdates> _academicsUpdates = [];
+  List<AcademicsUpdates> get academicsUpdates => _academicsUpdates;
+
+  Future<void> loadData() async {
+    setBusy(true);
+    try {
+      _academicsUpdates =
+          await _firestoreService.getAllAcademicData('academicUpdates');
+      notifyListeners();
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      setBusy(false);
+    });
+  }
 
   final gridListTitle = [
     "Timetable",
@@ -26,40 +44,25 @@ class AcademicsViewModel extends BaseViewModel {
     AssetImagePath.resultsImg,
     AssetImagePath.attendanceImg,
   ];
-
-  final List<AcademicsUpdates> academicsUpdatesList = [
-    AcademicsUpdates(
-      title: "Term Test 1",
-      postedOn: "29-7-2023",
-      description: "Practical exam is hold from 8th of August to 10th of August.",
-    ),
-    AcademicsUpdates(
-      title: "Term Test 2",
-      postedOn: "10-10-2023",
-      description: "Practical exam is hold from 19th of October to 22nd of October.",
-    ),
-    AcademicsUpdates(
-      title: "Practical Timetable",
-      postedOn: "Today",
-      description: "Practical exam is hold from 31st of October to 5th of November.",
-    ),
-    AcademicsUpdates(
-      title: "Semester Timetable",
-      postedOn: "Today",
-      description: "Semester exam is hold from 5th of November to 18th of November.",
-    ),
-  ];
 }
 
 // Academics Updates Model
 class AcademicsUpdates {
   late String title;
-  late String postedOn;
   late String description;
+  late Timestamp date;
+  bool isExpanded;
+  double expandedHeight;
+  int maxLines;
+  bool overflow;
 
   AcademicsUpdates({
     required this.title,
-    required this.postedOn,
     required this.description,
+    required this.date,
+    this.isExpanded = false,
+    this.expandedHeight = 100.0,
+    this.maxLines = 2,
+    this.overflow = true,
   });
 }

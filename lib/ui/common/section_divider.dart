@@ -1,4 +1,4 @@
-import '../file_exporter.dart';
+import '../../file_exporter.dart';
 
 // Section Name Text
 class SectionText extends StatelessWidget {
