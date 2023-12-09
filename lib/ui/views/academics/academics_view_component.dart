@@ -10,7 +10,8 @@ class AcademicsShimmerLoadingWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: CustomScrollView(
         physics: const BouncingScrollPhysics(),
-        scrollBehavior: const MaterialScrollBehavior().copyWith(overscroll: false),
+        scrollBehavior:
+            const MaterialScrollBehavior().copyWith(overscroll: false),
         slivers: [
           SliverToBoxAdapter(child: SizedBox(height: 62.h)),
           SliverGrid(

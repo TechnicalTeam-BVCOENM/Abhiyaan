@@ -10,7 +10,8 @@ class AcademicsViewModel extends BaseViewModel {
   Future<void> loadData() async {
     setBusy(true);
     try {
-      _academicsUpdates = await _firestoreService.getAllAcademicData('academicUpdates');
+      _academicsUpdates =
+          await _firestoreService.getAllAcademicData('academicUpdates');
       notifyListeners();
     } catch (e) {
       debugPrint(e.toString());

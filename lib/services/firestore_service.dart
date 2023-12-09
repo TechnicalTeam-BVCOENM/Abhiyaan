@@ -8,12 +8,17 @@ class FirestoreService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<List<Map<String, dynamic>>> getAllData(String collection) async {
-    final QuerySnapshot snapshot = await _firestore.collection(collection).get();
-    return snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+    final QuerySnapshot snapshot =
+        await _firestore.collection(collection).get();
+    return snapshot.docs
+        .map((doc) => doc.data() as Map<String, dynamic>)
+        .toList();
   }
 
-  Future<List<DepartmentUpdates>> getAllDepartmentData(String collection) async {
-    final QuerySnapshot snapshot = await _firestore.collection(collection).get();
+  Future<List<DepartmentUpdates>> getAllDepartmentData(
+      String collection) async {
+    final QuerySnapshot snapshot =
+        await _firestore.collection(collection).get();
     return snapshot.docs.map((doc) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       return DepartmentUpdates(
@@ -29,7 +34,8 @@ class FirestoreService {
   }
 
   Future<List<AcademicsUpdates>> getAllAcademicData(String collection) async {
-    final QuerySnapshot snapshot = await _firestore.collection(collection).get();
+    final QuerySnapshot snapshot =
+        await _firestore.collection(collection).get();
     return snapshot.docs.map((doc) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       return AcademicsUpdates(
@@ -40,6 +46,9 @@ class FirestoreService {
         expandedHeight: (data['expandedHeight'] ?? 100.0).toDouble(),
         maxLines: data['maxLines'] ?? 2,
         overflow: data['overflow'] ?? true,
+      );
+    }).toList();
+  }
 
   Future<List<SponsorsModel>> getAllSponsors() async {
     final QuerySnapshot snapshot =
@@ -52,8 +61,7 @@ class FirestoreService {
   }
 
   Future<List<EventModel>> getAllEvents() async {
-    final QuerySnapshot snapshot =
-        await _firestore.collection("events").get();
+    final QuerySnapshot snapshot = await _firestore.collection("events").get();
     return snapshot.docs.map((doc) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       return EventModel(
@@ -75,7 +83,10 @@ class FirestoreService {
   }
 
   Future<Map<String, dynamic>?> getUserData() async {
-    final DocumentSnapshot snapshot = await _firestore.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid).get();
+    final DocumentSnapshot snapshot = await _firestore
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
 
     if (snapshot.exists) {
       // print(snapshot.data() as Map<String, dynamic>);

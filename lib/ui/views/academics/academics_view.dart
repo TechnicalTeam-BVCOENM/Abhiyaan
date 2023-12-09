@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:darpan/common/update_component.dart';
+import 'package:darpan/ui/common/update_component.dart';
 import 'package:darpan/services/firestore_service.dart';
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/ui/views/academics/academics_view_component.dart';
@@ -22,23 +22,27 @@ class AcademicsView extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 18.0),
                     child: CustomScrollView(
                       physics: const BouncingScrollPhysics(),
-                      scrollBehavior: const MaterialScrollBehavior().copyWith(overscroll: false),
+                      scrollBehavior: const MaterialScrollBehavior()
+                          .copyWith(overscroll: false),
                       slivers: [
                         SliverToBoxAdapter(
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 18.0, bottom: 12.0),
+                            padding:
+                                const EdgeInsets.only(top: 18.0, bottom: 12.0),
                             child: Text(
                               "Academics",
                               textAlign: TextAlign.center,
-                              style: model.fontTheme.appBarText(context).copyWith(
-                                    color: context.colorScheme.primaryColor,
-                                  ),
+                              style:
+                                  model.fontTheme.appBarText(context).copyWith(
+                                        color: context.colorScheme.primaryColor,
+                                      ),
                             ),
                           ),
                         ),
                         SliverToBoxAdapter(child: SizedBox(height: 2.h)),
                         SliverGrid(
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
                             mainAxisSpacing: 16.0,
                             // crossAxisSpacing: 16.0,
@@ -52,25 +56,29 @@ class AcademicsView extends StatelessWidget {
                                   debugPrint("Tapped $index");
                                 },
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
                                       width: 90.r,
                                       height: 90.r,
                                       decoration: BoxDecoration(
-                                        color: context.colorScheme.secondaryLPurpleColor,
+                                        color: context
+                                            .colorScheme.secondaryLPurpleColor,
                                         borderRadius: BorderRadius.circular(25),
                                         boxShadow: [
                                           BoxShadow(
                                             blurRadius: 5,
-                                            color: context.colorScheme.secondaryLPurpleColor,
+                                            color: context.colorScheme
+                                                .secondaryLPurpleColor,
                                             offset: const Offset(0, 3),
                                           ),
                                         ],
                                       ),
                                       child: Center(
                                         child: Image(
-                                          image: AssetImage(model.gridListImages[index]),
+                                          image: AssetImage(
+                                              model.gridListImages[index]),
                                           fit: BoxFit.contain,
                                           height: 72.r,
                                           width: 72.r,
@@ -81,7 +89,8 @@ class AcademicsView extends StatelessWidget {
                                       model.gridListTitle[index],
                                       style: model.fontTheme.subHeading2(
                                         context,
-                                        context.colorScheme.secondarySectionColor,
+                                        context
+                                            .colorScheme.secondarySectionColor,
                                       ),
                                       textAlign: TextAlign.center,
                                       softWrap: false,
@@ -100,7 +109,8 @@ class AcademicsView extends StatelessWidget {
                           delegate: SliverChildBuilderDelegate(
                             childCount: model._academicsUpdates.length,
                             (BuildContext context, int index) {
-                              return updatesCard(model._academicsUpdates, index, context, model);
+                              return updatesCard(model._academicsUpdates, index,
+                                  context, model);
                             },
                           ),
                         ),

@@ -26,7 +26,8 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                 children: [
                   Text(
                     updateList[i].title,
-                    style: FontThemeClass().subHeading(context, context.colorScheme.primaryColor),
+                    style: FontThemeClass()
+                        .subHeading(context, context.colorScheme.primaryColor),
                   ),
                   Text(
                     "Posted ${DateFormat("MMM d").format((updateList[i].date).toDate())}",
@@ -77,7 +78,8 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                 children: [
                   Text(
                     updateList[i].title,
-                    style: FontThemeClass().subHeading(context, context.colorScheme.primaryColor),
+                    style: FontThemeClass()
+                        .subHeading(context, context.colorScheme.primaryColor),
                   ),
                   Text(
                     "Posted ${DateFormat("MMM d").format((updateList[i].date).toDate())}",
