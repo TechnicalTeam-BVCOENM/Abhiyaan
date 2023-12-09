@@ -21,6 +21,7 @@ class EventView extends StatelessWidget {
         return model.isBusy
             ? const ShimmerLoadingWidget()
             : Scaffold(
+                backgroundColor: context.colorScheme.backgroundColor,
                 body: SafeArea(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),

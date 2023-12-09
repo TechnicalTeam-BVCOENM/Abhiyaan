@@ -15,6 +15,7 @@ class AcademicsView extends StatelessWidget {
       onViewModelReady: (viewModel) => viewModel.loadData(),
       builder: (context, model, child) {
         return Scaffold(
+          backgroundColor: context.colorScheme.backgroundColor,
           body: model.isBusy
               ? const AcademicsShimmerLoadingWidget()
               : SafeArea(

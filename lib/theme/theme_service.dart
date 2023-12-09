@@ -11,6 +11,7 @@ class ThemeService {
 
   Brightness get brightness =>
       valueListenable.value ? Brightness.dark : Brightness.light;
+    
 
   void updateTheme() {
     valueListenable.value = !valueListenable.value;
