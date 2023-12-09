@@ -115,32 +115,38 @@ class EventView extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: model.remainigEvents.length,
                       itemBuilder: (context, index) {
-                        return Card(
-                          clipBehavior: Clip.hardEdge,
-                          shadowColor: context.colorScheme.secondaryLPurpleColor
-                              .withOpacity(0.8),
-                          elevation: 4,
-                          shape: ShapeBorder.lerp(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18),
-                              ),
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18),
-                              ),
-                              1),
-                          child: Stack(
-                            children: [
-                              // Event Image and Info
-                              EventCardUpcoming(
-                                model: model.remainigEvents[index],
-                              ),
-                              // Event Date
-                              EventDateContainer(
-                                top: 8.sp,
-                                left: 8.sp,
-                                event: model.remainigEvents[index],
-                              ),
-                            ],
+                        return InkWell(
+                          onTap: () {
+                            model.navigateToDetailedEventView();
+                          },
+                          child: Card(
+                            clipBehavior: Clip.hardEdge,
+                            shadowColor: context
+                                .colorScheme.secondaryLPurpleColor
+                                .withOpacity(0.8),
+                            elevation: 4,
+                            shape: ShapeBorder.lerp(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                                1),
+                            child: Stack(
+                              children: [
+                                // Event Image and Info
+                                EventCardUpcoming(
+                                  model: model.remainigEvents[index],
+                                ),
+                                // Event Date
+                                EventDateContainer(
+                                  top: 8.sp,
+                                  left: 8.sp,
+                                  event: model.remainigEvents[index],
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },

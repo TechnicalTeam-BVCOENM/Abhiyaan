@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darpan/common/cached_network_image.dart';
@@ -70,12 +69,14 @@ class HomeView extends StatelessWidget {
                                 CarouselSlider.builder(
                                   itemCount: model.highlights.length,
                                   itemBuilder: (context, index, realIndex) {
-                                    return CachedNetworkImage(
-                                        imageUrl: model._highlights[index]
-                                            ['imageUrl']);
+                                    // return CachedNetworkImage(imageUrl: model.highlights[index]['imageUrl']);
+                                    return CarouselUtils.buildImage(
+                                        context,
+                                        model.highlights[index]['imageUrl'],
+                                        model._activeIndex);
                                   },
                                   options: CarouselOptions(
-                                    height: 220.sp,
+                                    height: 180.sp,
                                     onPageChanged: (index, reason) =>
                                         model.updateActiveIndex(index),
                                     autoPlay: true,

@@ -27,7 +27,7 @@ class CarouselUtils {
                 imageUrl: urlImage,
                 height: 1500,
                 width: 350,
-                maxHeightDiskCache: 1500,
+                maxHeightDiskCache: 1000,
                 fit: BoxFit.cover,
               ),
               Container(
