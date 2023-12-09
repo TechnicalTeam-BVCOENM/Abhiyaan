@@ -92,6 +92,15 @@ class FontThemeClass {
     );
   }
 
+  TextStyle smallestSubHeading(BuildContext context, [Color? color]) {
+    return TextStyle(
+      fontSize: 10,
+      fontFamily: 'Outfit',
+      fontWeight: FontWeight.w500,
+      color: color ?? context.colorScheme.secondarySectionColor,
+    );
+  }
+
   TextStyle paragraph(
     BuildContext context,
   ) {
