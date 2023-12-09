@@ -18,11 +18,11 @@ class EventView extends StatelessWidget {
       viewModelBuilder: () => EventViewModel(),
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
-        return model.isBusy
-            ? const ShimmerLoadingWidget()
-            : Scaffold(
-                backgroundColor: context.colorScheme.backgroundColor,
-                body: SafeArea(
+        return Scaffold(
+          backgroundColor: context.colorScheme.backgroundColor,
+          body: model.isBusy
+              ? const ShimmerLoadingWidget()
+              : SafeArea(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.symmetric(horizontal: 18.0),
@@ -143,7 +143,7 @@ class EventView extends StatelessWidget {
                     ),
                   ),
                 ),
-              );
+        );
       },
     );
   }
