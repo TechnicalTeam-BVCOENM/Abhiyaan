@@ -82,7 +82,7 @@ class SocialLinks extends StatelessWidget {
         onPressed: () {
           UrlLauncher externalUrlHandler = UrlLauncher();
           externalUrlHandler.launchURL(
-            Uri.parse(url),
+           url,
           );
         },
         child: Container(
