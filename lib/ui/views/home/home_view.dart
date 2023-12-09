@@ -66,7 +66,6 @@ class HomeView extends StatelessWidget {
                                 CarouselSlider.builder(
                                   itemCount: model.highlights.length,
                                   itemBuilder: (context, index, realIndex) {
-                                    // return CachedNetworkImage(imageUrl: model.highlights[index]['imageUrl']);
                                     return CarouselUtils.buildImage(
                                         context,
                                         model.highlights[index]['imageUrl'],
