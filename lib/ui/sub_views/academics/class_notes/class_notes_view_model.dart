@@ -3,29 +3,12 @@ part of 'class_notes_view.dart';
 class ClassNotesViewModel extends BaseViewModel {
   // final FirestoreService _firestoreService = FirestoreService();
   final log = getLogger('ClassNotesViewModel');
-
-  // List<String> subName = [
-  //   "Theoretical Computer Science",
-  //   "Software Engineering",
-  //   "Computer Network",
-  //   "Data Warehousing & Mining",
-  //   "Advance Datamanagement System",
-  //   "Professional Communication & Ethics II",
-  // ];
-  // List<String> iconImages = [
-  //   "tcsIMG",
-  //   "seImg",
-  //   "cnImg",
-  //   "dwmImg",
-  //   "adbmsImg",
-  //   "pceImg",
-  // ];
-
+  
 void init() async {
     await loadData();
   }
 
-  List<SubjectCard> _subCard = [];
+  final List<SubjectCard> _subCard = [];
   List<SubjectCard> get subCard => _subCard;
 
 
@@ -47,26 +30,26 @@ void init() async {
 
 
   List<SubjectCard> allSubCards = [
-                      SubjectCard(
+                      const SubjectCard(
                        leading: AssetImagePath.tcsImg,
                       title: "Theoretical Comp. Science",
                     ),
-                    SubjectCard(
+                    const SubjectCard(
                       leading: AssetImagePath.seImg,
                       title: "Software Engineering",
                     ),
-                    SubjectCard(
+                    const SubjectCard(
                       leading: AssetImagePath.cnImg,
                       title: "Computer Network", 
                     ),
-                    SubjectCard(
+                    const SubjectCard(
                       leading: AssetImagePath.dwmImg,
                       title: "Data Warehousing & Mining",
                     ),
-                    SubjectCard(
+                    const SubjectCard(
                       leading: AssetImagePath.adbmsImg,
                       title: "Advance DBMS",
-                    ),SubjectCard(
+                    ),const SubjectCard(
                       leading: AssetImagePath.pceImg,
                       title: "PCE II", 
                     ),
