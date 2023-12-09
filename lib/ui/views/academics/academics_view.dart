@@ -53,6 +53,7 @@ class AcademicsView extends StatelessWidget {
                             (BuildContext context, int index) {
                               return GestureDetector(
                                 onTap: () {
+                                  model.navigateToSyllabusView();
                                   // Functionality remaining
                                   debugPrint("Tapped $index");
                                 },

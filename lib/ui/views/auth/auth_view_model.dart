@@ -14,14 +14,16 @@ class AuthViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.bottomNavView);
   }
 
-  Future<void> login(String email, String password) async {
+  Future<void> login(String email, String password, context) async {
     setBusy(true);
     try {
       await _authenticationService.signInWithEmailAndPassword(email, password);
-
+      showmessage(context, "Login successful");
       _navigationService.navigateTo(Routes.bottomNavView);
-    } catch (e) {
-      // Handle error
+    } on FirebaseException catch (e) {
+      showmessage(context, "Invalid email or password");
+      debugPrint("$e");
+      // You can log or handle other Firebase exceptions here
     }
     setBusy(false);
   }
