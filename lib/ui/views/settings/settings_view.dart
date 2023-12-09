@@ -45,7 +45,7 @@ class SettingsView extends StatelessWidget {
                           value: model._themeService.valueListenable.value,
                           // trackColor: context.colorScheme.secondarySectionColor,
                           onChanged: (val) => model.changeTheme(),
-                          activeColor: context.colorScheme.primary,
+                          activeColor: context.colorScheme.primaryColor,
                         ),
                         leadingIcon: model.settings[0].leading,
                       ),
