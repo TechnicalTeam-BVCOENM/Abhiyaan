@@ -33,4 +33,6 @@ check_flutter_project
 
 # If everything is fine, allow the commit
 echo -e "${GREEN}Formatting and Flutter checks passed.${NC}"
+echo -e "${YELLOW}Proceeding with the commit...${NC}"
+echo -e ""
 exit 0

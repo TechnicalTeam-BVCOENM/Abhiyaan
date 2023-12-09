@@ -1,6 +1,5 @@
 import 'package:darpan/file_exporter.dart';
 import 'package:table_calendar/table_calendar.dart';
-import './utils.dart';
 part 'timetable_view_model.dart';
 
 class TimeTableView extends StatelessWidget {
@@ -12,30 +11,30 @@ class TimeTableView extends StatelessWidget {
       viewModelBuilder: () => TimeTableViewModel(),
       builder: (context, model, child) {
         return Scaffold(
+          backgroundColor: context.colorScheme.backgroundColor,
           appBar: AppBar(
             title: Text(
               'Timetable',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: context.colorScheme.primaryColor,
+                color: context.colorScheme.headingColor,
               ),
             ),
             centerTitle: true,
-            elevation: 1,
-            // leading: const Icon(
-            //   Icons.chevron_left_rounded,
-            //   size: 56,
-            // ),
+            iconTheme: IconThemeData(
+              color: context.colorScheme.iconColor,
+            ),
+            backgroundColor: context.colorScheme.backgroundColor,
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18.0),
             child: TableCalendar(
               locale: 'en_US',
-              firstDay: kFirstDay,
-              lastDay: kLastDay,
+              firstDay: model.getOneYearBack(),
+              lastDay: model.getOneYearForward(),
               focusedDay: model.focusedDay,
-              rowHeight: 40,
-              daysOfWeekHeight: 24,
+              rowHeight: 25.h,
+              daysOfWeekHeight: 20.h,
               availableGestures: AvailableGestures.all,
               daysOfWeekStyle: const DaysOfWeekStyle(
                 weekdayStyle: TextStyle(
@@ -54,12 +53,12 @@ class TimeTableView extends StatelessWidget {
                 leftChevronVisible: false,
                 rightChevronVisible: false,
                 formatButtonShowsNext: false,
-                titleTextStyle: const TextStyle(
-                  fontSize: 18,
+                titleTextStyle: TextStyle(
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
                 ),
-                formatButtonTextStyle: const TextStyle(
-                  fontSize: 15,
+                formatButtonTextStyle: TextStyle(
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -103,6 +102,9 @@ class TimeTableView extends StatelessWidget {
               },
               onFormatChanged: (format) {
                 model.onFormatChanged(format);
+              },
+              onPageChanged: (focusedDay) {
+                model.focusedDay = focusedDay;
               },
             ),
           ),

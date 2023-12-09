@@ -29,11 +29,12 @@ class AcademicsView extends StatelessWidget {
               'Academics',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: context.colorScheme.primaryColor,
+                color: context.colorScheme.headingColor,
               ),
             ),
             centerTitle: true,
-            elevation: 1,
+            automaticallyImplyLeading: false,
+            backgroundColor: context.colorScheme.backgroundColor,
           ),
           backgroundColor: context.colorScheme.backgroundColor,
           body: model.isBusy

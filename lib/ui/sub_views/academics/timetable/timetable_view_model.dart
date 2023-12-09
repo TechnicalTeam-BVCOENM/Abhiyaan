@@ -6,8 +6,17 @@ class TimeTableViewModel extends BaseViewModel {
   DateTime focusedDay = DateTime.now();
   DateTime? selectedDay;
 
+  DateTime getOneYearBack() {
+    return DateTime.now().subtract(const Duration(days: 365));
+  }
+
+  DateTime getOneYearForward() {
+    return DateTime.now().add(const Duration(days: 365));
+  }
+
   void onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     if (!isSameDay(this.selectedDay, selectedDay)) {
+      debugPrint("Selected Day: $selectedDay");
       this.selectedDay = selectedDay;
       this.focusedDay = focusedDay;
     }
