@@ -17,9 +17,9 @@ class AuthenticationService {
       // Handle successful login
       await storeUserData();
       log.i('Auth success');
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       // Handle error
-      throw e;
+      rethrow;
     }
   }
 
@@ -28,9 +28,9 @@ class AuthenticationService {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       // Handle successful sign up
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       // Handle error
-      throw e;
+      rethrow;
     }
   }
 
@@ -63,7 +63,7 @@ class AuthenticationService {
         await localStorageService.write(userTag[i], userData?[userTag[i]]);
       }
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 }
