@@ -1,13 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:darpan/common/cached_network_image.dart';
-import 'package:darpan/common/shimmer.dart';
-import 'package:darpan/common/update_component.dart';
+import 'package:darpan/ui/common/cached_network_image.dart';
+import 'package:darpan/ui/common/shimmer.dart';
+import 'package:darpan/ui/common/update_component.dart';
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/firestore_service.dart';
 import 'package:intl/intl.dart';
-import 'package:darpan/common/common_component_model.dart';
+import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:darpan/ui/views/event/event_view.dart';
 part 'home_view_model.dart';
 part 'home_view_component.dart';
@@ -44,21 +43,19 @@ class HomeView extends StatelessWidget {
                               ),
                               IconButton(
                                 splashRadius: 30.sp,
-                                splashColor: context.colorScheme.backgroundColor,
+                                splashColor:
+                                    context.colorScheme.backgroundColor,
                                 icon: ImageIcon(
                                   const AssetImage(
                                     "assets/images/Notification Bell.png",
                                   ),
                                   size: 24.sp,
                                 ),
-                                onPressed: () {
-                                },
+                                onPressed: () {},
                               )
                             ],
                           ),
                         ),
-
-                        // Carousel
                         const SectionText(title: 'Highlights'),
                         SizedBox(
                           width: 460.sp,
@@ -69,15 +66,19 @@ class HomeView extends StatelessWidget {
                                 CarouselSlider.builder(
                                   itemCount: model.highlights.length,
                                   itemBuilder: (context, index, realIndex) {
-                                    return CachedNetworkImage(
-                                        imageUrl: model._highlights[index]
-                                            ['imageUrl']);
+                                    // return CachedNetworkImage(imageUrl: model.highlights[index]['imageUrl']);
+                                    return CarouselUtils.buildImage(
+                                        context,
+                                        model.highlights[index]['imageUrl'],
+                                        model._activeIndex);
                                   },
                                   options: CarouselOptions(
-                                    height: 220.sp,
-                                    onPageChanged: (index, reason) => model.updateActiveIndex(index),
+                                    height: 180.sp,
+                                    onPageChanged: (index, reason) =>
+                                        model.updateActiveIndex(index),
                                     autoPlay: true,
-                                    autoPlayInterval: const Duration(seconds: 3),
+                                    autoPlayInterval:
+                                        const Duration(seconds: 3),
                                     viewportFraction: 1,
                                   ),
                                 ),
@@ -91,8 +92,6 @@ class HomeView extends StatelessWidget {
                             ),
                           ),
                         ),
-
-                        // Quick Links
                         const SectionText(title: "Quick Links"),
                         quickLinksList(context, model.quickLinksList),
                         // Activity
@@ -107,12 +106,15 @@ class HomeView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
-                        // Department Updates
                         const SectionText(
                           title: "Department Updates",
                         ),
-                        for (var i = 0; i < model.departmentUpdates.length; i++)
-                          updatesCard(model.departmentUpdates, i, context, model),
+                        for (var i = 0;
+                            i < model.departmentUpdates.length;
+                            i++) ...[
+                          updatesCard(
+                              model._departmentUpdates, i, context, model),
+                        ],
                       ],
                     ),
                   ),

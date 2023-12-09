@@ -43,7 +43,7 @@ class ProfileView extends StatelessWidget {
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 40.sp),
+                      padding: EdgeInsets.symmetric(vertical: 25.sp),
                       child: Row(
                         children: [
                           ClipOval(
@@ -51,49 +51,56 @@ class ProfileView extends StatelessWidget {
                             child: CachedNetworkImage(
                               width: 85.sp,
                               fit: BoxFit.cover,
-                              imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1K8v6grZ-ZUVMNO5SLPpv1757dIoupO612SvpYZfpzndi3Vg6QnqrxRQal1PHqZtdhBE&usqp=CAU",
-                              placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
-                              errorWidget: (context, url, error) => const Icon(Icons.error),
+                              imageUrl:
+                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1K8v6grZ-ZUVMNO5SLPpv1757dIoupO612SvpYZfpzndi3Vg6QnqrxRQal1PHqZtdhBE&usqp=CAU",
+                              placeholder: (context, url) => const Center(
+                                  child: CircularProgressIndicator.adaptive()),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
                             ),
                           ),
                           SizedBox(
-                            width: 24.sp,
+                            width: 20.sp,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Sachin Rathod",
+                                LocalStorageService().read('userName'),
                                 style: FontThemeClass().profileheading(context),
                               ),
                               SizedBox(
-                                height: 8.sp,
+                                height: 7.sp,
                               ),
-                              Text("BE COMPS", style: FontThemeClass().subHeading2(context, context.colorScheme.secondarySectionColor))
+                              Text(LocalStorageService().read('userYear'),
+                                  style: FontThemeClass().subHeading2(
+                                      context,
+                                      context
+                                          .colorScheme.secondarySectionColor))
                             ],
                           )
                         ],
                       ),
                     ),
-                    const ProfileDetailsCard(
+                    ProfileDetailsCard(
                       leading: AssetImagePath.misImg,
                       title: "MIS Number",
-                      value: "21121017",
+                      value: LocalStorageService().read('userMisNo'),
                     ),
-                    const ProfileDetailsCard(
+                    ProfileDetailsCard(
                       leading: AssetImagePath.libraryImg,
                       title: "Library Card Number",
-                      value: "98761112",
+                      value: LocalStorageService().read('userLibNo'),
                     ),
-                    const ProfileDetailsCard(
+                    ProfileDetailsCard(
                       leading: AssetImagePath.idImg,
                       title: "College ID",
-                      value: "125rathodsachin@gmail.com",
+                      value: LocalStorageService().read('userCollegeId'),
                     ),
-                    const ProfileDetailsCard(
+                    ProfileDetailsCard(
                       leading: AssetImagePath.prnImg,
                       title: "PRN Number",
-                      value: "123456781234",
+                      value: LocalStorageService().read('userPrnNo'),
                     ),
                     const Expanded(child: Text("")),
                     const Row(

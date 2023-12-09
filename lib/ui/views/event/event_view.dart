@@ -1,17 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:darpan/common/common_component_model.dart';
-import 'package:darpan/common/shimmer.dart';
+import 'package:darpan/ui/common/common_component_model.dart';
+import 'package:darpan/ui/common/shimmer.dart';
 import 'package:darpan/services/firestore_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
 import 'package:intl/intl.dart';
-import 'package:darpan/common/cached_network_image.dart';
+import 'package:darpan/ui/common/cached_network_image.dart';
 import 'package:darpan/file_exporter.dart';
 part 'event_view_model.dart';
 part 'event_view_components.dart';
 
 class EventView extends StatelessWidget {
   const EventView({super.key});
-
   @override
   Widget build(BuildContext context) {
     FontThemeClass fontTheme = FontThemeClass();
@@ -19,7 +18,9 @@ class EventView extends StatelessWidget {
       viewModelBuilder: () => EventViewModel(),
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
-        return model.isBusy ? const ShimmerLoadingWidget() :  Scaffold(
+        return model.isBusy
+            ? const ShimmerLoadingWidget()
+            : Scaffold(
                 body: SafeArea(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -84,7 +85,7 @@ class EventView extends StatelessWidget {
                         const SectionText(title: "Sponsors"),
                         SizedBox(
                           height: 80.sp,
-                          child:ListView.builder(
+                          child: ListView.builder(
                             shrinkWrap: true,
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
@@ -103,37 +104,37 @@ class EventView extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemCount: model.remainigEvents.length,
                             itemBuilder: (context, index) {
-                              return model.isBusy ? const ShimmerLoadingWidget() : Card(
-                                clipBehavior: Clip.hardEdge,
-                                shadowColor: context
-                                    .colorScheme.secondaryLPurpleColor
-                                    .withOpacity(0.8),
-                                elevation: 4,
-                                shape: ShapeBorder.lerp(
-                                    RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(18.sp),
-                                    ),
-                                    RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(18.sp),
-                                    ),
-                                    1),
-                                child: Stack(
-                                  children: [
-                                    // Event Image and Info
-                                    EventCardUpcoming(
-                                      model: model.remainigEvents[index],
-                                    ),
-                                    // Event Date
-                                    EventDateContainer(
-                                      top: 8.sp,
-                                      left: 8.sp,
-                                      event: model.remainigEvents[index],
-                                    ),
-                                  ],
-                                ),
-                              );
+                              return model.isBusy
+                                  ? const ShimmerLoadingWidget()
+                                  : Card(
+                                      clipBehavior: Clip.hardEdge,
+                                      shadowColor: context
+                                          .colorScheme.secondaryLPurpleColor
+                                          .withOpacity(0.8),
+                                      elevation: 4,
+                                      shape: ShapeBorder.lerp(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(18.sp),
+                                          ),
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(18.sp),
+                                          ),
+                                          1),
+                                      child: Stack(
+                                        children: [
+                                          EventCardUpcoming(
+                                            model: model.remainigEvents[index],
+                                          ),
+                                          EventDateContainer(
+                                            top: 8.sp,
+                                            left: 8.sp,
+                                            event: model.remainigEvents[index],
+                                          ),
+                                        ],
+                                      ),
+                                    );
                             },
                           ),
                         ),

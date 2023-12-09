@@ -1,10 +1,8 @@
 part of 'event_view.dart';
 
-
 class EventViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
   final log = getLogger('EventViewModel');
-
 
   // Init Method
   void init() async {
@@ -49,13 +47,14 @@ class EventViewModel extends BaseViewModel {
     return currentMonth;
   }
 
-  EventModel? _todayEvent = null;
+  late EventModel? _todayEvent;
   EventModel? get todayEvent => _todayEvent;
   EventModel? setTodayEvent(EventModel? event) {
     _todayEvent = event;
     notifyListeners();
     return null;
   }
+
   void getTodaysEvent() {
     setTodayEvent(null);
     for (EventModel event in events) {

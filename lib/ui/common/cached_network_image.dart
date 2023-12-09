@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import '../file_exporter.dart';
+import '../../file_exporter.dart';
 
 class CachedNetworkImageWidget extends StatelessWidget {
   final String imageUrl;
@@ -28,13 +28,15 @@ class CachedNetworkImageWidget extends StatelessWidget {
       // placeholder: (context, url) => CircularLoadingIndicator(height: 90.sp),
       progressIndicatorBuilder: (context, url, downloadProgress) => Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Center(child: CircularProgressIndicator.adaptive(value: downloadProgress.progress,)),
+        child: Center(
+            child: CircularProgressIndicator.adaptive(
+          value: downloadProgress.progress,
+        )),
       ),
       errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }
 }
-
 
 Container horizontalStoryRow(
     BuildContext context, List model, double borderRadius) {

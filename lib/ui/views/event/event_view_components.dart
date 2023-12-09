@@ -139,7 +139,8 @@ class EventDateContainer extends StatelessWidget {
               style: fontTheme.large(context, FontWeight.w800),
             ),
             Text(
-              model.getMonthName(event.startDate.toDate().month, event.startDate.toDate().year),
+              model.getMonthName(event.startDate.toDate().month,
+                  event.startDate.toDate().year),
               style: fontTheme.subHeading2(
                   context, context.colorScheme.secondaryBlackColor),
             ),
@@ -202,7 +203,8 @@ class EventCardInfo extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              eventDetails.eventTime(context, "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}"),
+                              eventDetails.eventTime(context,
+                                  "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}"),
                               SizedBox(
                                 width: 18.sp,
                               ),
@@ -314,11 +316,11 @@ class EventCardUpcoming extends StatelessWidget {
 class Sponsors extends ViewModelWidget<EventViewModel> {
   final SponsorsModel model;
 
-   const Sponsors({super.key, required this.model});
+  const Sponsors({super.key, required this.model});
 
   @override
-  Widget build(BuildContext context , EventViewModel viewModel) {
-    return  Padding(
+  Widget build(BuildContext context, EventViewModel viewModel) {
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(18),
@@ -330,20 +332,23 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
           child: Column(
             children: [
               InkWell(
-                onTap: () => UrlLauncher().launchURL(model.url),
-                child: Image.network(
-                  model.imageUrl,
-                  height: 80.sp,
-                  width: 80.sp,
-                  fit: BoxFit.cover,
-                  frameBuilder: (context, child, frame, wasSynchronouslyLoaded) => wasSynchronouslyLoaded ? child : AnimatedOpacity(
-                    opacity: frame == null ? 0 : 1,
-                    duration: const Duration(seconds: 1),
-                    curve: Curves.easeOut,
-                    child: child,
-                  ),
-                )
-              ),
+                  onTap: () => UrlLauncher().launchURL(model.url),
+                  child: Image.network(
+                    model.imageUrl,
+                    height: 80.sp,
+                    width: 80.sp,
+                    fit: BoxFit.cover,
+                    frameBuilder:
+                        (context, child, frame, wasSynchronouslyLoaded) =>
+                            wasSynchronouslyLoaded
+                                ? child
+                                : AnimatedOpacity(
+                                    opacity: frame == null ? 0 : 1,
+                                    duration: const Duration(seconds: 1),
+                                    curve: Curves.easeOut,
+                                    child: child,
+                                  ),
+                  )),
             ],
           ),
         ),

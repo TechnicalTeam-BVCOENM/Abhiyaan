@@ -1,9 +1,10 @@
 part of 'home_view.dart';
 
-
 // Carousel
 class CarouselUtils {
-  static Widget buildIndicator(BuildContext context, int activeIndex, int length) => AnimatedSmoothIndicator(
+  static Widget buildIndicator(
+          BuildContext context, int activeIndex, int length) =>
+      AnimatedSmoothIndicator(
         effect: JumpingDotEffect(
           dotHeight: 8.sp,
           dotWidth: 8.sp,
@@ -14,7 +15,8 @@ class CarouselUtils {
         count: length,
       );
 
-  static Widget buildImage(BuildContext context, String urlImage, int index) => Container(
+  static Widget buildImage(BuildContext context, String urlImage, int index) =>
+      Container(
         width: MediaQuery.of(context).size.width * 1,
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: ClipRRect(
@@ -25,7 +27,7 @@ class CarouselUtils {
                 imageUrl: urlImage,
                 height: 1500,
                 width: 350,
-                maxHeightDiskCache: 1500,
+                maxHeightDiskCache: 1000,
                 fit: BoxFit.cover,
               ),
               Container(
@@ -88,11 +90,11 @@ Row quickLinksList(BuildContext context, List model, [double? borderRadius]) {
                 Text(
                   model[idx].title,
                   style: fontTheme
-                      .subHeading2(
+                      .smallSubHeading(
                         context,
                         context.colorScheme.secondarySectionColor,
                       )
-                      .copyWith(fontWeight: FontWeight.w600),
+                      .copyWith(fontWeight: FontWeight.w500),
                   textAlign: TextAlign.center,
                   softWrap: false,
                 ),
