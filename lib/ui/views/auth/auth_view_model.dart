@@ -32,3 +32,19 @@ class AuthViewModel extends BaseViewModel {
     FirebaseAuth.instance.sendPasswordResetEmail(email: "");
   }
 }
+
+class AppInfoSection extends StatelessWidget {
+  const AppInfoSection({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child :Text(
+          'Darpan v.1.0.0',
+          style: FontThemeClass().subHeading2(
+                                context, context.colorScheme.secondarySectionColor),
+        ),
+      
+    );
+  }
+}

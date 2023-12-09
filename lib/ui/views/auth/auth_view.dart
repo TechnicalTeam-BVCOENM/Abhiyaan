@@ -18,9 +18,11 @@ class AuthView extends StatelessWidget {
           onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
           child: Scaffold(
             backgroundColor: context.colorScheme.backgroundColor,
-            body: Container(
+            body: Stack(
+              children:[
+            Container(
               height: 610.sp,
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 40,bottom:10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -136,13 +138,14 @@ class AuthView extends StatelessWidget {
                     ),
                   ),
                   const Expanded(child: Text("")),
-                  // Text(
-                  //   'Darpan v.1.0.0',
-                  //   style: model.fontTheme.smallSubHeading(
-                  //       context, context.colorScheme.secondarySectionColor),
-                  // ),
                 ],
               ),
+            ),
+           const Align(
+          alignment: Alignment.bottomCenter,
+          child: AppInfoSection(),
+        ),
+              ],
             ),
           ),
         );
