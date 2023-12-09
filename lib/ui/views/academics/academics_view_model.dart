@@ -3,6 +3,7 @@ part of 'academics_view.dart';
 class AcademicsViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
   final fontTheme = FontThemeClass();
+  final _navigationService = locator<NavigationService>();
 
   List<AcademicsUpdates> _academicsUpdates = [];
   List<AcademicsUpdates> get academicsUpdates => _academicsUpdates;
@@ -21,29 +22,55 @@ class AcademicsViewModel extends BaseViewModel {
     });
   }
 
-  final gridListTitle = [
-    "Timetable",
-    "Syllabus",
-    "Student Section",
-    "Class Notes",
-    "Practicals",
-    "PYQ's",
-    "Courses",
-    "Results",
-    "Attendance",
+  final List<GridListModel> _gridListModel = [
+    GridListModel(
+        title: "Timetable",
+        image: AssetImagePath.timetableImg,
+        route: const TimeTableView()),
+    GridListModel(
+        title: "Syllabus",
+        image: AssetImagePath.syllabusImg,
+        route: const SyllabusView()),
+    GridListModel(
+        title: "Student Section",
+        image: AssetImagePath.studentSectionImg,
+        route: const StudentSectionView()),
+    GridListModel(
+        title: "Class Notes",
+        image: AssetImagePath.classNotesImg,
+        route: const ClassNotesView()),
+    GridListModel(
+        title: "Practicals",
+        image: AssetImagePath.practicalsImg,
+        route: const PracticalsView()),
+    GridListModel(
+        title: "PYQ's", image: AssetImagePath.pyqsImg, route: const PyqsView()),
+    GridListModel(
+        title: "Courses",
+        image: AssetImagePath.coursesImg,
+        route: const CoursesView()),
+    GridListModel(
+        title: "Results",
+        image: AssetImagePath.resultsImg,
+        route: const ResultsView()),
+    GridListModel(
+        title: "Attendance",
+        image: AssetImagePath.attendanceImg,
+        route: const AttendanceView()),
   ];
 
-  final gridListImages = [
-    AssetImagePath.timetableImg,
-    AssetImagePath.syllabusImg,
-    AssetImagePath.studentSectionImg,
-    AssetImagePath.classNotesImg,
-    AssetImagePath.practicalsImg,
-    AssetImagePath.pyqsImg,
-    AssetImagePath.coursesImg,
-    AssetImagePath.resultsImg,
-    AssetImagePath.attendanceImg,
-  ];
+  List<GridListModel> get getGridListModel => _gridListModel;
+}
+
+class GridListModel {
+  late String title;
+  late String image;
+  late Widget route;
+  GridListModel({
+    required this.title,
+    required this.image,
+    required this.route,
+  });
 }
 
 // Academics Updates Model
