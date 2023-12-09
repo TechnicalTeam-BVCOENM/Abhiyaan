@@ -116,6 +116,14 @@ class HomeView extends StatelessWidget {
                           updatesCard(
                               model._departmentUpdates, i, context, model),
                         ],
+                        const SizedBox(height: 20),
+                        Center(
+                          child: Text(
+                            'Made with ❤️ by Technical Team',
+                            style: fontTheme.smallSubHeading(context),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
                       ],
                     ),
                   ),
