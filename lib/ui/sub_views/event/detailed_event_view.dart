@@ -10,7 +10,7 @@ class DetailedEventView extends StatelessWidget {
     return ViewModelBuilder<DetailedEventViewModel>.nonReactive(
       viewModelBuilder: () => DetailedEventViewModel(),
       builder: (context, model, child) {
-        return Scaffold(
+        return const Scaffold(
           backgroundColor: Colors.amber,
           body: Text("Hello world"),
         );

@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
                 title: 'Darpan',
                 debugShowCheckedModeBanner: false,
                 theme: ThemeData(
-                  textTheme: TextTheme(),
+                  textTheme: const TextTheme(),
                   brightness: themeService.brightness,
                   scaffoldBackgroundColor: context.colorScheme.backgroundColor,
                   appBarTheme: AppBarTheme(

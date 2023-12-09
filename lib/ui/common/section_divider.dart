@@ -2,7 +2,7 @@ import '../../file_exporter.dart';
 
 // Section Name Text
 class SectionText extends StatelessWidget {
-  const SectionText({Key? key, required this.title}) : super(key: key);
+  const SectionText({super.key, required this.title});
   final String title;
 
   @override

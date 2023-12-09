@@ -21,8 +21,6 @@ class AssetImagePath {
       'assets/images/profile/twitter_square-modified.png';
   static const String linkedinImg = 'assets/images/profile/linkedin_square.png';
   static const String logoImg = 'assets/images/logo.png';
-
-  static var iconImages;
 }
 
 class AssetUrls {
