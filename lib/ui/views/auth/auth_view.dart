@@ -138,9 +138,11 @@ class AuthView extends StatelessWidget {
                     ),
                   ),
                   const Expanded(child: Text("")),
+                  
                 ],
               ),
             ),
+            
            const Align(
           alignment: Alignment.bottomCenter,
           child: AppInfoSection(),

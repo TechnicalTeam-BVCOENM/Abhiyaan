@@ -9,6 +9,19 @@ class StudentSectionView extends StatelessWidget {
         viewModelBuilder: () => StudentSectionViewModel(),
         builder: (context, model, child) {
           return Scaffold(
+            appBar: AppBar(
+              iconTheme: IconThemeData(
+              color: context
+                  .colorScheme.secondaryBlackColor, //change your color here
+            ),
+            backgroundColor: context.colorScheme.backgroundColor,
+            elevation: 0,
+            title: Text(
+              'Student Section',
+              style: FontThemeClass().heading2(context),
+            ),
+            centerTitle: true,
+          ),
             backgroundColor:
                 context.colorScheme.backgroundColor, // Background color
             body: Center(
@@ -35,7 +48,7 @@ class StudentSectionView extends StatelessWidget {
 
                   // Back Button
                   IconButton(
-                    icon: const Icon(Icons.arrow_back),
+                    icon: const Icon(Icons.arrow_circle_left_outlined),
                     iconSize: 50,
                     color: context.colorScheme.primaryColor,
                     onPressed: () {
