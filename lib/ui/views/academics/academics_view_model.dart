@@ -51,18 +51,9 @@ class AcademicsUpdates {
   late String title;
   late String description;
   late Timestamp date;
-  bool isExpanded;
-  double expandedHeight;
-  int maxLines;
-  bool overflow;
-
   AcademicsUpdates({
     required this.title,
     required this.description,
     required this.date,
-    this.isExpanded = false,
-    this.expandedHeight = 100.0,
-    this.maxLines = 2,
-    this.overflow = true,
   });
 }
