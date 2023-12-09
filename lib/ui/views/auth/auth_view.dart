@@ -69,7 +69,7 @@ class AuthView extends StatelessWidget {
                             Radius.circular(15),
                           ),
                           borderSide: BorderSide.none),
-                      fillColor: Colors.white,
+                      fillColor: context.colorScheme.secondaryWhiteColor,
                       filled: true,
                       focusColor: Colors.white,
                       hintText: 'Password',
@@ -109,7 +109,7 @@ class AuthView extends StatelessWidget {
                       child: Text(
                         'Sign In',
                         style: FontThemeClass().heading(context,
-                            color: context.colorScheme.secondaryWhiteColor),
+                            color: context.colorScheme.signInTextColor),
                       ),
                     ),
                   ),

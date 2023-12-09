@@ -95,7 +95,7 @@ class SocialLinks extends StatelessWidget {
               color: context.colorScheme.secondaryWhiteColor,
               borderRadius: BorderRadius.circular(100)),
           child: Padding(
-              padding: const EdgeInsets.all(5), child: Image.asset(iconpath)),
+              padding: const EdgeInsets.all(8), child: Image.asset(iconpath)),
         ));
   }
 }

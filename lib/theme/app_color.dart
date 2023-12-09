@@ -15,8 +15,9 @@ extension ColorSchemeExtension on ColorScheme {
       brightness == Brightness.dark ? Colors.white : const Color(0xFF252525);
   Color get secondarySectionColor => const Color(0xFF8F8FB0);
 
-  Color get bottomNavBarBg =>
-      brightness == Brightness.dark ? Colors.black : const Color(0xFFFFFFFF);
+  Color get bottomNavBarBg => brightness == Brightness.dark
+      ? const Color.fromARGB(255, 25, 25, 25)
+      : const Color(0xFFFFFFFF);
 
   Color get selectedBottomNavIcon => const Color(0xFF4E4BD7);
 
@@ -26,4 +27,7 @@ extension ColorSchemeExtension on ColorScheme {
 
   Color get primaryDarkColor =>
       brightness == Brightness.dark ? Colors.white : const Color(0xFF1C1A63);
+  Color get signInTextColor => brightness == Brightness.dark
+      ? const Color(0xFFF9F9F9)
+      : const Color(0xFF252525);
 }
