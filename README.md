@@ -26,6 +26,10 @@ Welcome to Darpan, the official app for BVCOENM (Bharati Vidyapeeth College of E
   ```bash
   flutter pub get
   ```
+5. Once project is ready run following script in terminal
+  ```bash
+  ./git_script/command.sh
+  ```
 4. Run project
   ```bash
   flutter run

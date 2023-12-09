@@ -1,10 +1,10 @@
 name: darpan
 description: A new Flutter project.
-publish_to: "none"
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.1.1 <4.0.0"
+  sdk: '>=3.1.1 <4.0.0'
 
 dependencies:
   flutter:
@@ -25,11 +25,12 @@ dependencies:
   firebase_auth: ^4.13.0
   cached_network_image: ^3.3.0
   url_launcher: ^6.2.1
-  intl: ^0.19.0
+  intl: 0.18.1
   flutter_native_splash: ^2.3.5
   shimmer: ^3.0.0
   expandable: ^5.0.1
   flutter_screenutil: ^5.9.0
+  table_calendar: ^3.0.9
   timeline_tile: ^2.0.0
 
 dev_dependencies:
@@ -43,6 +44,7 @@ flutter:
     - assets/images/
     - assets/images/profile/
     - assets/images/academics/
+    - assets/images/academics/class_notes/
 
   uses-material-design: true
   # fonts:

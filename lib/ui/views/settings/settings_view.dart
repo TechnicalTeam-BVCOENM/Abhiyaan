@@ -1,6 +1,8 @@
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/theme_service.dart';
+import 'package:darpan/ui/common/toast_message.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 part 'settings_view_model.dart';
 part 'settings_view_components.dart';
 
@@ -50,7 +52,7 @@ class SettingsView extends StatelessWidget {
                         leadingIcon: model.settings[0].leading,
                       ),
                       GestureDetector(
-                        onTap: () => model.changePassword(),
+                        onTap: () => model.changePassword(context),
                         child: settingsListTile(model, context,
                             title: model.settings[1].title,
                             trailingIcon: Icon(
@@ -80,7 +82,8 @@ class SettingsView extends StatelessWidget {
                             leadingIcon: model.settings[3].leading),
                       ),
                       GestureDetector(
-                        onTap: () => model.logout(),
+                        onTap: () => model.logout().then((value) =>
+                            showmessage(context, "Logout successful")),
                         child: settingsListTile(model, context,
                             title: model.settings[4].title,
                             trailingIcon: Icon(

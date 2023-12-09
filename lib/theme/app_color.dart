@@ -27,7 +27,15 @@ extension ColorSchemeExtension on ColorScheme {
 
   Color get primaryDarkColor =>
       brightness == Brightness.dark ? Colors.white : const Color(0xFF1C1A63);
+
   Color get signInTextColor => brightness == Brightness.dark
       ? const Color(0xFFF9F9F9)
       : const Color(0xFF252525);
+
+  Color get headingColor =>
+      brightness == Brightness.dark ? Colors.white : const Color(0xFF252525);
+  Color get iconColor =>
+      brightness == Brightness.dark ? Colors.white : const Color(0xFF252525);
+  Color get signInTextColor => const Color(0xFFF9F9F9);
+
 }
