@@ -28,12 +28,12 @@ class FontThemeClass {
     );
   }
 
-  TextStyle heading2(BuildContext context) {
+  TextStyle heading2(BuildContext context, [Color? primaryColor]) {
     return TextStyle(
       fontSize: 24,
       fontFamily: 'Outfit',
       fontWeight: FontWeight.w500,
-      color: context.colorScheme.secondaryBlackColor,
+      color: primaryColor ?? context.colorScheme.secondaryBlackColor,
     );
   }
 
@@ -64,7 +64,7 @@ class FontThemeClass {
     );
   }
 
-  TextStyle subHeading(BuildContext context, Color? color) {
+  TextStyle subHeading(BuildContext context, [Color? color]) {
     return TextStyle(
       fontSize: 16,
       fontFamily: 'Outfit',
@@ -86,6 +86,15 @@ class FontThemeClass {
   TextStyle smallSubHeading(BuildContext context, [Color? color]) {
     return TextStyle(
       fontSize: 12,
+      fontFamily: 'Outfit',
+      fontWeight: FontWeight.w500,
+      color: color ?? context.colorScheme.secondarySectionColor,
+    );
+  }
+
+  TextStyle smallestSubHeading(BuildContext context, [Color? color]) {
+    return TextStyle(
+      fontSize: 10,
       fontFamily: 'Outfit',
       fontWeight: FontWeight.w500,
       color: color ?? context.colorScheme.secondarySectionColor,

@@ -20,9 +20,10 @@ class ProfileView extends StatelessWidget {
                   onPressed: () => model.navigateToSettingsView(),
                   child: SizedBox(
                     width: 28.sp,
-                    child: const Icon(
+                    child: Icon(
                       Icons.settings,
                       size: 30,
+                      color: context.colorScheme.primaryColor,
                     ),
                   ),
                 ),

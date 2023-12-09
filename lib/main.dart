@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme: ThemeData(
                   textTheme: const TextTheme(),
+                  primaryColor: context.colorScheme.primaryColor,
                   brightness: themeService.brightness,
                   scaffoldBackgroundColor: context.colorScheme.backgroundColor,
                   appBarTheme: AppBarTheme(

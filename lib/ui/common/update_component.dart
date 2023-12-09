@@ -49,7 +49,8 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                   ExpandableButton(
                     child: Text(
                       "Read More",
-                      style: FontThemeClass().smallSubHeading(context),
+                      style: FontThemeClass().smallSubHeading(context,
+                          context.colorScheme.primaryColor.withOpacity(0.9)),
                     ),
                   ),
                 ],
@@ -101,7 +102,8 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                   ExpandableButton(
                     child: Text(
                       "Read Less",
-                      style: FontThemeClass().smallSubHeading(context),
+                      style: FontThemeClass().smallSubHeading(context,
+                          context.colorScheme.primaryColor.withOpacity(0.9)),
                     ),
                   ),
                 ],
