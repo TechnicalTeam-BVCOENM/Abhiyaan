@@ -135,7 +135,12 @@ class AuthView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Expanded(child: Text(""))
+                  const Expanded(child: Text("")),
+                  // Text(
+                  //   'Darpan v.1.0.0',
+                  //   style: model.fontTheme.smallSubHeading(
+                  //       context, context.colorScheme.secondarySectionColor),
+                  // ),
                 ],
               ),
             ),

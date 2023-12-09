@@ -32,7 +32,6 @@ class HomeView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Title Bar
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Row(
@@ -116,6 +115,14 @@ class HomeView extends StatelessWidget {
                           updatesCard(
                               model._departmentUpdates, i, context, model),
                         ],
+                        const SizedBox(height: 20),
+                        Center(
+                          child: Text(
+                            'Made with ❤️ by Technical Team',
+                            style: fontTheme.smallSubHeading(context),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
                       ],
                     ),
                   ),
