@@ -21,7 +21,7 @@ export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 //Components
-export 'package:darpan/common/section_divider.dart';
+export 'package:darpan/ui/common/section_divider.dart';
 
 // assets path
 export 'package:darpan/utils/assets_constants.dart';

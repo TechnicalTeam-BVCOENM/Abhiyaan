@@ -1,12 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:darpan/common/cached_network_image.dart';
-import 'package:darpan/common/shimmer.dart';
-import 'package:darpan/common/update_component.dart';
+import 'package:darpan/ui/common/cached_network_image.dart';
+import 'package:darpan/ui/common/shimmer.dart';
+import 'package:darpan/ui/common/update_component.dart';
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/firestore_service.dart';
 import 'package:intl/intl.dart';
-import 'package:darpan/common/common_component_model.dart';
+import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:darpan/ui/views/event/event_view.dart';
 part 'home_view_model.dart';
 part 'home_view_component.dart';
@@ -57,8 +57,6 @@ class HomeView extends StatelessWidget {
                             ],
                           ),
                         ),
-
-                        // Carousel
                         const SectionText(title: 'Highlights'),
                         SizedBox(
                           width: 460.sp,
@@ -95,8 +93,6 @@ class HomeView extends StatelessWidget {
                             ),
                           ),
                         ),
-
-                        // Quick Links
                         const SectionText(title: "Quick Links"),
                         quickLinksList(context, model.quickLinksList),
                         // Activity
@@ -111,13 +107,15 @@ class HomeView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
-                        // Department Updates
                         const SectionText(
                           title: "Department Updates",
                         ),
-                        for (var i = 0; i < model.departmentUpdates.length; i++)
+                        for (var i = 0;
+                            i < model.departmentUpdates.length;
+                            i++) ...[
                           updatesCard(
                               model._departmentUpdates, i, context, model),
+                        ],
                       ],
                     ),
                   ),

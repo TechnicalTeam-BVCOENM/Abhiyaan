@@ -91,7 +91,7 @@ void handleQuickLinksNavigation(List model, int i) {
       debugPrint("Route Url");
       UrlLauncher externalUrlHandler = UrlLauncher();
       externalUrlHandler.launchURL(
-        Uri.parse(model[i].url),
+        model[i].url,
       );
     } else if (model[i].view != '' && model[i].view != null) {
       final navigationService = locator<NavigationService>();

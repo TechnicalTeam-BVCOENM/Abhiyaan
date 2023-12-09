@@ -1,7 +1,7 @@
-import 'package:darpan/common/common_component_model.dart';
+import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:flutter/services.dart';
 import 'package:darpan/file_exporter.dart';
-import '../../../common/toast_message.dart';
+import '../../common/toast_message.dart';
 
 class ProfileDetailsCard extends StatelessWidget {
   final String leading;
@@ -85,7 +85,7 @@ class SocialLinks extends StatelessWidget {
         onPressed: () {
           UrlLauncher externalUrlHandler = UrlLauncher();
           externalUrlHandler.launchURL(
-            Uri.parse(url),
+            url,
           );
         },
         child: Container(

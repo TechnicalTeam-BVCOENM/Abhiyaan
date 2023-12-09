@@ -1,10 +1,9 @@
-import '../file_exporter.dart';
+import '../../file_exporter.dart';
 
 class CircularLoadingIndicator extends StatelessWidget {
   final double height;
 
-  const CircularLoadingIndicator({Key? key, this.height = 100.0})
-      : super(key: key);
+  const CircularLoadingIndicator({super.key, this.height = 100.0});
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +13,7 @@ class CircularLoadingIndicator extends StatelessWidget {
         width: height.sp,
         alignment: Alignment.center,
         child: CircularProgressIndicator(
+          backgroundColor: context.colorScheme.secondaryWhiteColor,
           valueColor: AlwaysStoppedAnimation<Color>(
             context.colorScheme.secondarySectionColor,
           ),
