@@ -8,7 +8,7 @@ class SubjectCard extends StatelessWidget {
   final String leading;
   final String title;
 
-  const SubjectCard({
+  const SubjectCard({super.key, 
     required this.leading,
     required this.title,
   });
