@@ -85,7 +85,7 @@ class EventView extends StatelessWidget {
                         ),
                         const SectionText(title: "Sponsors"),
                         SizedBox(
-                          height: 80.sp,
+                          height: 60.sp,
                           child: ListView.builder(
                             shrinkWrap: true,
                             physics: const BouncingScrollPhysics(),

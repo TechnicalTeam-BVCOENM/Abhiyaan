@@ -1,14 +1,11 @@
 import 'package:darpan/file_exporter.dart';
 
-
-
-
-
 class SubjectCard extends StatelessWidget {
   final String leading;
   final String title;
 
   const SubjectCard({
+    super.key,
     required this.leading,
     required this.title,
   });
@@ -37,7 +34,8 @@ class SubjectCard extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: FontThemeClass().subHeading(context,context.colorScheme.secondaryBlackColor),
+                style: FontThemeClass().subHeading(
+                    context, context.colorScheme.secondaryBlackColor),
               ),
             ],
           ),
@@ -46,7 +44,7 @@ class SubjectCard extends StatelessWidget {
               onPressed: () {
                 //navigate
                 // navigateToSettingsView
-             },
+              },
               child: const Icon(
                 Icons.navigate_next,
                 size: 22,

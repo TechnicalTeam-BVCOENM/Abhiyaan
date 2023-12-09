@@ -33,11 +33,11 @@ class TimeTableViewModel extends BaseViewModel {
   List<LectureDataModel> get lectureDataList => _lectureDataList;
   final List<LectureDataModel> _lectureDataList = [
     LectureDataModel(
-        startTime: Timestamp.fromDate(DateTime.parse("2021-09-01 09:00:00")),
+        startTime: Timestamp.fromDate(DateTime.parse("2023-09-01 02:00:00")),
         subjectName: "Maths",
         subjectTeacherName: "Mr. Sharma"),
     LectureDataModel(
-        startTime: Timestamp.fromDate(DateTime.parse("2021-09-01 10:00:00")),
+        startTime: Timestamp.fromDate(DateTime.parse("2021-09-01 02:00:00")),
         subjectName: "Science",
         subjectTeacherName: "Mr. Sharma"),
     LectureDataModel(

@@ -1,7 +1,6 @@
 import 'package:darpan/firebase_options.dart';
 import 'package:darpan/theme/theme_service.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 import 'package:darpan/file_exporter.dart';
 
 Future<void> servicesToInitializeBeforeAppStart() async {
@@ -10,7 +9,6 @@ Future<void> servicesToInitializeBeforeAppStart() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   setupLocator();
-
   await Future.wait([
     locator<LocalStorageService>().initStorage(),
   ]);
@@ -44,6 +42,7 @@ class MyApp extends StatelessWidget {
                   brightness: themeService.brightness,
                   scaffoldBackgroundColor: context.colorScheme.backgroundColor,
                   appBarTheme: AppBarTheme(
+                    elevation: 0,
                     backgroundColor: context.colorScheme.backgroundColor,
                     foregroundColor: context.colorScheme.secondaryBlackColor,
                   ),
