@@ -43,8 +43,8 @@ class HomeView extends StatelessWidget {
                               ),
                               IconButton(
                                 splashRadius: 30.sp,
-                                splashColor:
-                                    context.colorScheme.backgroundColor,
+                                splashColor: 
+                                context.colorScheme.backgroundColor,
                                 icon: ImageIcon(
                                   const AssetImage(
                                     "assets/images/Notification Bell.png",
@@ -67,18 +67,15 @@ class HomeView extends StatelessWidget {
                                   itemCount: model.highlights.length,
                                   itemBuilder: (context, index, realIndex) {
                                     // return CachedNetworkImage(imageUrl: model.highlights[index]['imageUrl']);
-                                    return CarouselUtils.buildImage(
-                                        context,
-                                        model.highlights[index]['imageUrl'],
-                                        model._activeIndex);
+                                    return CarouselUtils.buildImage(context, model.highlights[index]['imageUrl'], model._activeIndex);
                                   },
                                   options: CarouselOptions(
                                     height: 180.sp,
-                                    onPageChanged: (index, reason) =>
-                                        model.updateActiveIndex(index),
+                                    onPageChanged: (index, reason) => 
+                                    model.updateActiveIndex(index),
                                     autoPlay: true,
-                                    autoPlayInterval:
-                                        const Duration(seconds: 3),
+                                    autoPlayInterval: 
+                                    const Duration(seconds: 3),
                                     viewportFraction: 1,
                                   ),
                                 ),
@@ -109,9 +106,9 @@ class HomeView extends StatelessWidget {
                         const SectionText(
                           title: "Department Updates",
                         ),
-                        for (var i = 0; i < model.departmentUpdates.length; i++)
-                          updatesCard(model.departmentUpdates, i, context, model),
-
+                        for (var i = 0; i < model.departmentUpdates.length; i++) ...[
+                          updatesCard(model._departmentUpdates, i, context, model),
+                        ],
                       ],
                     ),
                   ),
