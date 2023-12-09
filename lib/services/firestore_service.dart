@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:darpan/ui/views/event/event_view.dart';
 import 'package:darpan/ui/views/home/home_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -27,6 +28,35 @@ class FirestoreService {
         expandedHeight: (data['expandedHeight'] ?? 100.0).toDouble(),
         maxLines: data['maxLines'] ?? 2,
         overflow: data['overflow'] ?? true,
+      );
+    }).toList();
+  }
+
+  Future<List<SponsorsModel>> getAllSponsors() async {
+    final QuerySnapshot snapshot =
+        await _firestore.collection("sponsors").get();
+    return snapshot.docs.map((doc) {
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      return SponsorsModel(
+          title: data["title"], url: data["url"], imageUrl: data["imageUrl"]);
+    }).toList();
+  }
+
+  Future<List<EventModel>> getAllEvents() async {
+    final QuerySnapshot snapshot =
+        await _firestore.collection("events").get();
+    return snapshot.docs.map((doc) {
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      return EventModel(
+        title: data['title'],
+        startDate: data['startDate'],
+        endDate: data['endDate'],
+        location: data['location'],
+        imageUrl: data['imageUrl'],
+        cName: data['coordinatorName'],
+        cEmail: data['coordinatorEmail'],
+        cPhone: data['coordinatorPhone'],
+        about: data['about'],
       );
     }).toList();
   }

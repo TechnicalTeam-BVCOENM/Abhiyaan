@@ -56,9 +56,11 @@ class EventDetails {
     );
   }
 
-  CachedNetworkImageWidget _eventImage(BuildContext context, String imageUrl, double height, double width) {
+  CachedNetworkImageWidget _eventImage(
+      BuildContext context, String imageUrl, double height, double width) {
     assert(imageUrl.isNotEmpty, "Time should not be null or empty");
-    assert(height != 0 && width != 0 && height < width, "Height should be greater than 0");
+    assert(height != 0 && width != 0 && height < width,
+        "Height should be greater than 0");
 
     return CachedNetworkImageWidget(
       imageUrl: imageUrl,
@@ -68,7 +70,8 @@ class EventDetails {
     );
   }
 
-  Padding eventTitle(BuildContext context, String title, EdgeInsets padding, {double fontSize = 26}) {
+  Padding eventTitle(BuildContext context, String title, EdgeInsets padding,
+      {double fontSize = 26}) {
     return Padding(
       padding: padding,
       child: Text(
@@ -84,89 +87,6 @@ class EventDetails {
   get eventImage => _eventImage;
 }
 
-//UC
-// class UCEventDetails {
-//   FontThemeClass fontTheme = FontThemeClass();
-
-//   Row _eventLocation(BuildContext context) {
-//     return Row(
-//       children: [
-//         Icon(
-//           Icons.location_on,
-//           size: 12.sp,
-//           color: context.colorScheme.primaryColor.withOpacity(0.8),
-//         ),
-//         SizedBox(
-//           width: 4.sp,
-//         ),
-//         Text(
-//           "Qudrangle",
-//           style: fontTheme.smallSubHeading(
-//             context,
-//             context.colorScheme.primaryColor.withOpacity(0.8),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-
-//   Row _eventTime(BuildContext context) {
-//     return Row(
-//       children: [
-//         Icon(
-//           Icons.timer,
-//           size: 12.sp,
-//           color: context.colorScheme.primaryColor.withOpacity(0.8),
-//         ),
-//         SizedBox(
-//           width: 4.sp,
-//         ),
-//         Text(
-//           "11:00 AM",
-//           style: fontTheme.smallSubHeading(
-//             context,
-//             context.colorScheme.primaryColor.withOpacity(0.8),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-
-//   CachedNetworkImageWidget _eventImage(
-//       BuildContext context, String imageUrl, double height, double width) {
-//     return CachedNetworkImageWidget(
-//       imageUrl: imageUrl,
-//       height: height,
-//       width: width,
-//       maxHeightDiskCache: ResponsiveUtils.screenWidth(context),
-//     );
-//   }
-
-//   Padding eventTitle(BuildContext context, String title, EdgeInsets padding) {
-//     return Padding(
-//       padding: padding,
-//       child: Text(
-//         title,
-//         style: fontTheme.heading(context),
-//       ),
-//     );
-//   }
-
-//   Padding eventUTitle(BuildContext context, String title, EdgeInsets padding) {
-//     return Padding(
-//       padding: padding,
-//       child: Text(
-//         title,
-//         style: fontTheme.profileheading(context),
-//       ),
-//     );
-//   }
-
-//   get eventLocation => _eventLocation;
-//   get eventTime => _eventTime;
-//   get eventImage => _eventImage;
-// }
-
 class EventDateContainer extends StatelessWidget {
   final double? top;
 
@@ -176,13 +96,13 @@ class EventDateContainer extends StatelessWidget {
   final EventModel event;
 
   const EventDateContainer({
-    Key? key,
+    super.key,
     this.top,
     this.right,
     this.bottom,
     this.left,
     required this.event,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -214,13 +134,14 @@ class EventDateContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              event.day.toString(),
+              event.startDate.toDate().day.toString(),
               textAlign: TextAlign.center,
               style: fontTheme.large(context, FontWeight.w800),
             ),
             Text(
-              model.getMonthName(event.month, event.year),
-              style: fontTheme.subHeading2(context, context.colorScheme.secondaryBlackColor),
+              model.getMonthName(event.startDate.toDate().month, event.startDate.toDate().year),
+              style: fontTheme.subHeading2(
+                  context, context.colorScheme.secondaryBlackColor),
             ),
           ],
         ),
@@ -230,11 +151,11 @@ class EventDateContainer extends StatelessWidget {
 }
 
 class EventCardInfo extends StatelessWidget {
-  final EventModel event;
+  final EventModel model;
 
   const EventCardInfo({
     super.key,
-    required this.event,
+    required this.model,
   });
 
   @override
@@ -249,7 +170,7 @@ class EventCardInfo extends StatelessWidget {
             // Event Image
             eventDetails.eventImage(
               context,
-              event.imageUrl,
+              model.imageUrl,
               160.sp,
               ResponsiveUtils.screenWidth(context),
             ),
@@ -269,7 +190,7 @@ class EventCardInfo extends StatelessWidget {
                         // Event Title
                         eventDetails.eventTitle(
                           context,
-                          event.title,
+                          model.title,
                           EdgeInsets.only(left: 22.sp),
                         ),
                         SizedBox(
@@ -281,11 +202,12 @@ class EventCardInfo extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              eventDetails.eventTime(context, event.time),
+                              eventDetails.eventTime(context, "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}"),
                               SizedBox(
                                 width: 18.sp,
                               ),
-                              eventDetails.eventLocation(context, event.location),
+                              eventDetails.eventLocation(
+                                  context, model.location),
                             ],
                           ),
                         )
@@ -367,7 +289,7 @@ class EventCardUpcoming extends StatelessWidget {
                       // Time
                       eventDetails.eventTime(
                         context,
-                        model.time,
+                        "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}",
                       ),
                       SizedBox(
                         height: 6.sp,
@@ -389,28 +311,41 @@ class EventCardUpcoming extends StatelessWidget {
   }
 }
 
-class BrandCard extends StatelessWidget {
-  final BrandModel brand;
+class Sponsors extends ViewModelWidget<EventViewModel> {
+  final SponsorsModel model;
 
-  const BrandCard({super.key, required this.brand});
+   const Sponsors({super.key, required this.model});
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
+  Widget build(BuildContext context , EventViewModel viewModel) {
+    return  Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: SizedBox(
-        width: 80,
-        height: 80,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 80.0, // Adjust the height as needed
-              child: Image.network(
-                brand.imageUrl,
-                fit: BoxFit.cover,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(18),
+        child: Container(
+          decoration:
+              BoxDecoration(color: context.colorScheme.secondaryWhiteColor),
+          width: 80.sp,
+          height: 80.sp,
+          child: Column(
+            children: [
+              InkWell(
+                onTap: () => UrlLauncher().launchURL(model.url),
+                child: Image.network(
+                  model.imageUrl,
+                  height: 80.sp,
+                  width: 80.sp,
+                  fit: BoxFit.cover,
+                  frameBuilder: (context, child, frame, wasSynchronouslyLoaded) => wasSynchronouslyLoaded ? child : AnimatedOpacity(
+                    opacity: frame == null ? 0 : 1,
+                    duration: const Duration(seconds: 1),
+                    curve: Curves.easeOut,
+                    child: child,
+                  ),
+                )
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

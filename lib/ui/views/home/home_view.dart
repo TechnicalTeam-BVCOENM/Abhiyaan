@@ -56,8 +56,6 @@ class HomeView extends StatelessWidget {
                             ],
                           ),
                         ),
-
-                        // Carousel
                         const SectionText(title: 'Highlights'),
                         SizedBox(
                           width: 460.sp,
@@ -94,8 +92,6 @@ class HomeView extends StatelessWidget {
                             ),
                           ),
                         ),
-
-                        // Quick Links
                         const SectionText(title: "Quick Links"),
                         quickLinksList(context, model.quickLinksList),
                         // Activity
@@ -110,13 +106,12 @@ class HomeView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
-                        // Department Updates
                         const SectionText(
                           title: "Department Updates",
                         ),
                         for (var i = 0; i < model.departmentUpdates.length; i++)
-                          updatesCard(
-                              model._departmentUpdates, i, context, model),
+                          updatesCard(model.departmentUpdates, i, context, model),
+
                       ],
                     ),
                   ),
