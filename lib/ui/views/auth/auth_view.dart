@@ -1,6 +1,8 @@
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
+import 'package:darpan/ui/common/toast_message.dart';
+import 'package:darpan/ui/views/settings/settings_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 part 'auth_view_model.dart';
 
@@ -77,14 +79,17 @@ class AuthView extends StatelessWidget {
                           context, context.colorScheme.secondarySectionColor),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: const EdgeInsetsDirectional.only(top: 10),
-                      child: Text(
-                        'Forgot password?',
-                        style: model.fontTheme.subHeading2(
-                            context, context.colorScheme.primaryColor),
+                  GestureDetector(
+                    onTap: () => SettingsViewModel().changePassword(context),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsetsDirectional.only(top: 10),
+                        child: Text(
+                          'Forgot password?',
+                          style: model.fontTheme.subHeading2(
+                              context, context.colorScheme.primaryColor),
+                        ),
                       ),
                     ),
                   ),
@@ -93,7 +98,7 @@ class AuthView extends StatelessWidget {
                     child: TextButton(
                       onPressed: () async {
                         await model.login(model.emailIdTextController.text,
-                            model.passwordTextController.text);
+                            model.passwordTextController.text, context);
                       },
                       style: ButtonStyle(
                         minimumSize: MaterialStateProperty.all(
@@ -130,7 +135,12 @@ class AuthView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Expanded(child: Text(""))
+                  const Expanded(child: Text("")),
+                  // Text(
+                  //   'Darpan v.1.0.0',
+                  //   style: model.fontTheme.smallSubHeading(
+                  //       context, context.colorScheme.secondarySectionColor),
+                  // ),
                 ],
               ),
             ),

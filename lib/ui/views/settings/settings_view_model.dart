@@ -19,9 +19,16 @@ class SettingsViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  changePassword() {
+  changePassword(context) {
+    final localStorageService = locator<LocalStorageService>();
+    FirebaseAuth.instance
+        .sendPasswordResetEmail(email: localStorageService.read('userEmail'))
+        .then((value) => showmessage(context, "reset password email sent !"))
+        .onError((error, stackTrace) =>
+            showmessage(context, "something went wrong !"));
     // Change password logic
   }
+
   navigateToHelpSupport() {
     // Navigation
   }
