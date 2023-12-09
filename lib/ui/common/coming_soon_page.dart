@@ -1,5 +1,5 @@
 import 'package:darpan/file_exporter.dart';
-part 'student_section_view_model.dart';
+import 'package:darpan/ui/sub_views/academics/student_section/student_section_view.dart';
 
 class StudentSectionView extends StatelessWidget {
   const StudentSectionView({super.key});

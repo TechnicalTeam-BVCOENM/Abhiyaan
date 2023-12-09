@@ -98,8 +98,13 @@ class SettingsView extends StatelessWidget {
                     child: Text(''),
                   ),
                   Text(
-                    'bvcoenm',
-                    style: model.fontTheme.subHeading2(
+                    'Darpan v.1.0.0',
+                    style: model.fontTheme.subHeading(
+                        context, context.colorScheme.secondarySectionColor),
+                  ),
+                  Text(
+                    'Made with ❤️ by Technical Team ',
+                    style: model.fontTheme.smallestSubHeading(
                         context, context.colorScheme.secondarySectionColor),
                   )
                 ],
