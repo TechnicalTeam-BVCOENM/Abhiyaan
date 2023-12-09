@@ -114,7 +114,8 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ExpandableButton(
-                    child: Text("Read Less",
+                    child: Text(
+                      "Read Less",
                       style: FontThemeClass().smallSubHeading(
                         context,
                         context.colorScheme.primaryContainer,

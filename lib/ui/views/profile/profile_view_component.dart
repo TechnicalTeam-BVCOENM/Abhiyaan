@@ -62,7 +62,10 @@ class ProfileDetailsCard extends StatelessWidget {
                 // ignore: use_build_context_synchronously
                 showmessage(context, "Copied");
               },
-              child: Image.asset(width: 18, AssetImagePath.copyImg)),
+              child: const Icon(
+                Icons.content_copy,
+                size: 22,
+              )),
           const SizedBox(
             width: 10,
           )

@@ -15,6 +15,10 @@ class SettingsView extends StatelessWidget {
         return Scaffold(
           backgroundColor: context.colorScheme.backgroundColor,
           appBar: AppBar(
+            iconTheme: IconThemeData(
+              color: context
+                  .colorScheme.secondaryBlackColor, //change your color here
+            ),
             backgroundColor: context.colorScheme.backgroundColor,
             elevation: 0,
             title: Text(
@@ -41,7 +45,7 @@ class SettingsView extends StatelessWidget {
                           value: model._themeService.valueListenable.value,
                           // trackColor: context.colorScheme.secondarySectionColor,
                           onChanged: (val) => model.changeTheme(),
-                          activeColor: context.colorScheme.primaryColor,
+                          activeColor: context.colorScheme.primary,
                         ),
                         leadingIcon: model.settings[0].leading,
                       ),

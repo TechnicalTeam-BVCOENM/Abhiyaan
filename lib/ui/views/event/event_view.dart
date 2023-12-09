@@ -17,6 +17,7 @@ class EventView extends StatelessWidget {
       builder: (context, model, child) {
         var todaysEvent = model.todayEvent;
         return Scaffold(
+          backgroundColor: context.colorScheme.backgroundColor,
           body: SafeArea(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
@@ -27,7 +28,8 @@ class EventView extends StatelessWidget {
                   const SectionText(title: "Ongoing Events"),
                   Card(
                     clipBehavior: Clip.hardEdge,
-                    shadowColor: context.colorScheme.secondaryLPurpleColor.withOpacity(0.8),
+                    shadowColor: context.colorScheme.secondaryLPurpleColor
+                        .withOpacity(0.8),
                     elevation: 4,
                     shape: ShapeBorder.lerp(
                         RoundedRectangleBorder(
@@ -57,14 +59,19 @@ class EventView extends StatelessWidget {
                               child: Column(
                                 children: [
                                   CachedNetworkImageWidget(
-                                    imageUrl: "https://imgs.search.brave.com/DGoVUPXpo3OwVAbBbgF3oGz3MUcz_cPZrzmfvO7iRrc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG5p/Lmljb25zY291dC5j/b20vaWxsdXN0cmF0/aW9uL3ByZW1pdW0v/dGh1bWIvc2VhcmNo/LXJlc3VsdC1ub3Qt/Zm91bmQtMjEzMDM1/NS0xODAwOTIwLnBu/Zz9mPXdlYnA",
+                                    imageUrl:
+                                        "https://imgs.search.brave.com/DGoVUPXpo3OwVAbBbgF3oGz3MUcz_cPZrzmfvO7iRrc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG5p/Lmljb25zY291dC5j/b20vaWxsdXN0cmF0/aW9uL3ByZW1pdW0v/dGh1bWIvc2VhcmNo/LXJlc3VsdC1ub3Qt/Zm91bmQtMjEzMDM1/NS0xODAwOTIwLnBu/Zz9mPXdlYnA",
                                     height: 150.sp,
                                     width: 150.sp,
-                                    maxHeightDiskCache: ResponsiveUtils.screenWidth(context),
+                                    maxHeightDiskCache:
+                                        ResponsiveUtils.screenWidth(context),
                                   ),
                                   Text(
                                     "No Ongoing Events",
-                                    style: fontTheme.heading(context, size: 20, color: context.colorScheme.secondarySectionColor),
+                                    style: fontTheme.heading(context,
+                                        size: 20,
+                                        color: context
+                                            .colorScheme.secondarySectionColor),
                                   ),
                                 ],
                               ),
@@ -110,7 +117,8 @@ class EventView extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return Card(
                           clipBehavior: Clip.hardEdge,
-                          shadowColor: context.colorScheme.secondaryLPurpleColor.withOpacity(0.8),
+                          shadowColor: context.colorScheme.secondaryLPurpleColor
+                              .withOpacity(0.8),
                           elevation: 4,
                           shape: ShapeBorder.lerp(
                               RoundedRectangleBorder(
