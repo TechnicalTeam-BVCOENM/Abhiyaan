@@ -1,9 +1,5 @@
 part of 'event_view.dart';
 
-class BrandModel {
-  final String imageUrl;
-  BrandModel({required this.imageUrl});
-}
 
 class EventViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
