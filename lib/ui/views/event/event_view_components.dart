@@ -327,16 +327,16 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
         child: Container(
           decoration:
               BoxDecoration(color: context.colorScheme.secondaryWhiteColor),
-          width: 80.sp,
-          height: 80.sp,
+          width: 60.sp,
+          height: 60.sp,
           child: Column(
             children: [
               InkWell(
                   onTap: () => UrlLauncher().launchURL(model.url),
                   child: Image.network(
                     model.imageUrl,
-                    height: 80.sp,
-                    width: 80.sp,
+                    height: 60.sp,
+                    width: 60.sp,
                     fit: BoxFit.cover,
                     frameBuilder:
                         (context, child, frame, wasSynchronouslyLoaded) =>
