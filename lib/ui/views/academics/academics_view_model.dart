@@ -4,6 +4,9 @@ class AcademicsViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
   final fontTheme = FontThemeClass();
   final _navigationService = locator<NavigationService>();
+  navigateToSyllabusView() {
+    _navigationService.navigateTo(Routes.syllabusView);
+  }
 
   List<AcademicsUpdates> _academicsUpdates = [];
   List<AcademicsUpdates> get academicsUpdates => _academicsUpdates;

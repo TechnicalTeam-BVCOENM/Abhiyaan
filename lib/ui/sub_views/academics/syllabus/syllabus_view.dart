@@ -8,7 +8,9 @@ class SyllabusView extends StatelessWidget {
     return ViewModelBuilder<SyllabusViewModel>.reactive(
         viewModelBuilder: () => SyllabusViewModel(),
         builder: (context, model, child) {
-          return const Scaffold();
+          return const Scaffold(
+            body: Text("jai ho"),
+          );
         });
   }
 }

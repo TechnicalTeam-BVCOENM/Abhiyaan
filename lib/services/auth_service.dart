@@ -1,7 +1,5 @@
-import 'package:darpan/app/app.locator.dart';
-import 'package:darpan/app/app.logger.dart';
+import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/firestore_service.dart';
-import 'package:darpan/services/local_storage_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthenticationService {
@@ -55,8 +53,19 @@ class AuthenticationService {
       "userName",
       "userYear",
       "userPrnNo",
+      "userEmail"
     ];
     final localStorageService = locator<LocalStorageService>();
+    int misNo = int.parse(localStorageService.read('userMisNo'));
+    int admissionYear = (misNo ~/ 1000000); // 21
+    int departmentCode = ((misNo % 1000000) ~/ 10000); // 12
+    int division = ((misNo % 10000) ~/ 1000); // 1
+    int rollNo = (misNo % 1000); // 17
+    localStorageService.write('addmissionYear', admissionYear);
+    localStorageService.write('departmentCode', departmentCode);
+    localStorageService.write('division', division);
+    localStorageService.write('rollNo', rollNo);
+
     try {
       Map<String, dynamic>? userData = await FirestoreService().getUserData();
       for (var i = 0; i < userTag.length; i++) {
