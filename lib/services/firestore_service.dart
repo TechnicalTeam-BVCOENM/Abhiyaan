@@ -17,35 +17,30 @@ class FirestoreService {
 
   Future<List<DepartmentUpdates>> getAllDepartmentData(
       String collection) async {
-    final QuerySnapshot snapshot =
-        await _firestore.collection(collection).get();
+    final QuerySnapshot snapshot = await _firestore
+        .collection(collection)
+        .doc('12')
+        .collection('updates')
+        .get();
     return snapshot.docs.map((doc) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       return DepartmentUpdates(
         title: data['title'] ?? '',
         description: data['description'] ?? '',
         date: data['date'] ?? '',
-        isExpanded: data['isExpanded'] ?? false,
-        expandedHeight: (data['expandedHeight'] ?? 100.0).toDouble(),
-        maxLines: data['maxLines'] ?? 2,
-        overflow: data['overflow'] ?? true,
       );
     }).toList();
   }
 
   Future<List<AcademicsUpdates>> getAllAcademicData(String collection) async {
     final QuerySnapshot snapshot =
-        await _firestore.collection(collection).get();
+        await _firestore.collection(collection).doc('12').collection('1').get();
     return snapshot.docs.map((doc) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       return AcademicsUpdates(
         title: data['title'] ?? '',
         description: data['description'] ?? '',
         date: data['date'] ?? '',
-        isExpanded: data['isExpanded'] ?? false,
-        expandedHeight: (data['expandedHeight'] ?? 100.0).toDouble(),
-        maxLines: data['maxLines'] ?? 2,
-        overflow: data['overflow'] ?? true,
       );
     }).toList();
   }

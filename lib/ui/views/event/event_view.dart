@@ -18,11 +18,11 @@ class EventView extends StatelessWidget {
       viewModelBuilder: () => EventViewModel(),
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
-        return model.isBusy
-            ? const ShimmerLoadingWidget()
-            : Scaffold(
-                backgroundColor: context.colorScheme.backgroundColor,
-                body: SafeArea(
+        return Scaffold(
+          backgroundColor: context.colorScheme.backgroundColor,
+          body: model.isBusy
+              ? const ShimmerLoadingWidget()
+              : SafeArea(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.symmetric(horizontal: 18.0),
@@ -107,33 +107,40 @@ class EventView extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return model.isBusy
                                   ? const ShimmerLoadingWidget()
-                                  : Card(
-                                      clipBehavior: Clip.hardEdge,
-                                      shadowColor: context
-                                          .colorScheme.secondaryLPurpleColor
-                                          .withOpacity(0.8),
-                                      elevation: 4,
-                                      shape: ShapeBorder.lerp(
-                                          RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18.sp),
-                                          ),
-                                          RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18.sp),
-                                          ),
-                                          1),
-                                      child: Stack(
-                                        children: [
-                                          EventCardUpcoming(
-                                            model: model.remainigEvents[index],
-                                          ),
-                                          EventDateContainer(
-                                            top: 8.sp,
-                                            left: 8.sp,
-                                            event: model.remainigEvents[index],
-                                          ),
-                                        ],
+                                  : InkWell(
+                                      onTap: () {
+                                        model.navigateToDetailedEventView();
+                                      },
+                                      child: Card(
+                                        clipBehavior: Clip.hardEdge,
+                                        shadowColor: context
+                                            .colorScheme.secondaryLPurpleColor
+                                            .withOpacity(0.8),
+                                        elevation: 4,
+                                        shape: ShapeBorder.lerp(
+                                            RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(18.sp),
+                                            ),
+                                            RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(18.sp),
+                                            ),
+                                            1),
+                                        child: Stack(
+                                          children: [
+                                            EventCardUpcoming(
+                                              model:
+                                                  model.remainigEvents[index],
+                                            ),
+                                            EventDateContainer(
+                                              top: 8.sp,
+                                              left: 8.sp,
+                                              event:
+                                                  model.remainigEvents[index],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     );
                             },
@@ -143,7 +150,7 @@ class EventView extends StatelessWidget {
                     ),
                   ),
                 ),
-              );
+        );
       },
     );
   }

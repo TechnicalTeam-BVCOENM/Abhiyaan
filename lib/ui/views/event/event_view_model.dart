@@ -4,6 +4,12 @@ class EventViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
   final log = getLogger('EventViewModel');
 
+  final _navigationService = locator<NavigationService>();
+
+  navigateToDetailedEventView() {
+    _navigationService.navigateTo(Routes.detailedEventView);
+  }
+
   // Init Method
   void init() async {
     await loadData();
@@ -71,7 +77,7 @@ class EventViewModel extends BaseViewModel {
     }
   }
 
-  List<EventModel> _remainigEvents = [];
+  late final List<EventModel> _remainigEvents = [];
   List<EventModel> get remainigEvents => _remainigEvents;
   void getRemainingEvents() {
     for (EventModel event in events) {

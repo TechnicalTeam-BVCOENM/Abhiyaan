@@ -3,12 +3,7 @@ part of 'home_view.dart';
 class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
   final FirestoreService _firestoreService = FirestoreService();
-
-  // Variables / constants
-  String user = LocalStorageService().read('userName') ?? 'Error';
-  // use local storage for this
-  final fontTheme = FontThemeClass();
-  bool isExpanded = false;
+  String user = LocalStorageService().read('userName');
 
   List<QuickLinksModel> quickLinksList = [
     QuickLinksModel(
@@ -33,8 +28,6 @@ class HomeViewModel extends BaseViewModel {
     ),
   ];
 
-  // Methods
-
   List<Map<String, dynamic>> _highlights = [];
   List<Map<String, dynamic>> get highlights => _highlights;
   List<DepartmentUpdates> _departmentUpdates = [];
@@ -57,28 +50,8 @@ class HomeViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  void toggleExpand(i) {
-    try {
-      departmentUpdates[i].isExpanded = !departmentUpdates[i].isExpanded;
-      if (departmentUpdates[i].isExpanded) {
-        departmentUpdates[i].expandedHeight = 125.sp;
-        departmentUpdates[i].maxLines = 4;
-        departmentUpdates[i].overflow = false;
-      } else {
-        departmentUpdates[i].expandedHeight = 100.sp;
-        departmentUpdates[i].maxLines = 2;
-        departmentUpdates[i].overflow = true;
-      }
-      notifyListeners();
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-  }
-
   int _activeIndex = 0;
-
   int get activeIndex => _activeIndex;
-
   void updateActiveIndex(int newIndex) {
     _activeIndex = newIndex;
     notifyListeners();
@@ -111,19 +84,10 @@ class DepartmentUpdates {
   late String title;
   late String description;
   late Timestamp date;
-  bool isExpanded;
-  double expandedHeight;
-  int maxLines;
-  bool overflow;
-
   DepartmentUpdates({
     required this.title,
     required this.description,
     required this.date,
-    this.isExpanded = false,
-    this.expandedHeight = 100.0,
-    this.maxLines = 2,
-    this.overflow = true,
   });
 }
 
@@ -132,7 +96,6 @@ class QuickLinksModel {
   late String title;
   late String url;
   late Widget view;
-
   QuickLinksModel({
     required this.imageUrl,
     required this.title,

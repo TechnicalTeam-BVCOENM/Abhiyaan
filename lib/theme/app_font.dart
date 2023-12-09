@@ -93,10 +93,10 @@ class FontThemeClass {
   }
 
   TextStyle paragraph(
-    BuildContext context,
+    BuildContext context,{double size = 14}
   ) {
     return TextStyle(
-      fontSize: 14,
+      fontSize: size,
       letterSpacing: 0.5,
       fontFamily: 'Outfit',
       color: context.colorScheme.secondaryBlackColor,
