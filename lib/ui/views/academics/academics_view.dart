@@ -24,6 +24,18 @@ class AcademicsView extends StatelessWidget {
       onViewModelReady: (viewModel) => viewModel.loadData(),
       builder: (context, model, child) {
         return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              'Academics',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: context.colorScheme.headingColor,
+              ),
+            ),
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            backgroundColor: context.colorScheme.backgroundColor,
+          ),
           backgroundColor: context.colorScheme.backgroundColor,
           body: model.isBusy
               ? const AcademicsShimmerLoadingWidget()
@@ -35,21 +47,21 @@ class AcademicsView extends StatelessWidget {
                       scrollBehavior: const MaterialScrollBehavior()
                           .copyWith(overscroll: false),
                       slivers: [
-                        SliverToBoxAdapter(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(top: 18.0, bottom: 12.0),
-                            child: Text(
-                              "Academics",
-                              textAlign: TextAlign.center,
-                              style:
-                                  model.fontTheme.appBarText(context).copyWith(
-                                        color: context.colorScheme.primaryColor,
-                                      ),
-                            ),
-                          ),
-                        ),
-                        SliverToBoxAdapter(child: SizedBox(height: 2.h)),
+                        // SliverToBoxAdapter(
+                        //   child: Padding(
+                        //     padding:
+                        //         const EdgeInsets.only(top: 18.0, bottom: 12.0),
+                        //     child: Text(
+                        //       "Academics",
+                        //       textAlign: TextAlign.center,
+                        //       style:
+                        //           model.fontTheme.appBarText(context).copyWith(
+                        //                 color: context.colorScheme.primaryColor,
+                        //               ),
+                        //     ),
+                        //   ),
+                        // ),
+                        SliverToBoxAdapter(child: SizedBox(height: 16.h)),
                         SliverGrid(
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(

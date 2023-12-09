@@ -13,7 +13,7 @@ class AcademicsShimmerLoadingWidget extends StatelessWidget {
         scrollBehavior:
             const MaterialScrollBehavior().copyWith(overscroll: false),
         slivers: [
-          SliverToBoxAdapter(child: SizedBox(height: 62.h)),
+          SliverToBoxAdapter(child: SizedBox(height: 16.h)),
           SliverGrid(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
