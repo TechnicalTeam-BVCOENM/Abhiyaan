@@ -32,7 +32,6 @@ class HomeView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Title Bar
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Row(
