@@ -23,7 +23,7 @@ class StudentSectionView extends StatelessWidget {
                       color: context.colorScheme.primaryColor, // Text color
                     ),
                   ),
-                  SizedBox(height: 20), // Spacer
+                  const SizedBox(height: 20), // Spacer
                   Text(
                     'Stay tuned for Version 2.0.0.',
                     style: TextStyle(
@@ -31,11 +31,11 @@ class StudentSectionView extends StatelessWidget {
                       color: context.colorScheme.onBackground, // Subtitle color
                     ),
                   ),
-                  SizedBox(height: 30), // Spacer
+                  const SizedBox(height: 30), // Spacer
 
                   // Back Button
                   IconButton(
-                    icon: Icon(Icons.arrow_back),
+                    icon: const Icon(Icons.arrow_back),
                     iconSize: 50,
                     color: context.colorScheme.primaryColor,
                     onPressed: () {

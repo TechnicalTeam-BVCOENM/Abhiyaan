@@ -1,7 +1,7 @@
 import 'package:darpan/file_exporter.dart';
 
 extension ColorSchemeExtension on ColorScheme {
-  Color get primaryColor => Color.fromARGB(255, 78, 75, 215);
+  Color get primaryColor => const Color.fromARGB(255, 78, 75, 215);
   Color get backgroundColor => brightness == Brightness.dark
       ? const Color(0xFF252525)
       : const Color(0xFFECECFF);
