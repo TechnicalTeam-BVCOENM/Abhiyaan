@@ -23,8 +23,8 @@ class AuthView extends StatelessWidget {
               children: [
                 Container(
                   height: 870.h,
-                  padding: const EdgeInsets.only(
-                      left: 20, right: 20, top: 40, bottom: 160),
+                  padding: EdgeInsets.only(
+                      left: 20.r, right: 20.r, top: 40.r, bottom: 175.r),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,11 +46,11 @@ class AuthView extends StatelessWidget {
                         cursorColor: context.colorScheme.primaryColor,
                         controller: model.emailIdTextController,
                         decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 15),
-                          border: const OutlineInputBorder(
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 15.r, vertical: 15.r),
+                          border:  OutlineInputBorder(
                               borderRadius: BorderRadius.all(
-                                Radius.circular(15),
+                                Radius.circular(15.r),
                               ),
                               borderSide: BorderSide.none),
                           fillColor: context.colorScheme.secondaryWhiteColor,
@@ -61,18 +61,18 @@ class AuthView extends StatelessWidget {
                               context.colorScheme.secondarySectionColor),
                         ),
                       ),
-                      const SizedBox(
-                        height: 15,
+                       SizedBox(
+                        height: 15.h,
                       ),
                       TextFormField(
                         cursorColor: context.colorScheme.primaryColor,
                         controller: model.passwordTextController,
                         decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 15),
-                          border: const OutlineInputBorder(
+                          contentPadding:  EdgeInsets.symmetric(
+                              horizontal: 15.r, vertical: 15.r),
+                          border:  OutlineInputBorder(
                               borderRadius: BorderRadius.all(
-                                Radius.circular(15),
+                                Radius.circular(15.r),
                               ),
                               borderSide: BorderSide.none),
                           fillColor: context.colorScheme.secondaryWhiteColor,
@@ -89,7 +89,7 @@ class AuthView extends StatelessWidget {
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.only(top: 10),
+                            padding: EdgeInsetsDirectional.only(top: 10.r),
                             child: Text(
                               'Forgot password?',
                               style: model.fontTheme.subHeading2(
@@ -99,7 +99,7 @@ class AuthView extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.only(top: 10),
+                        padding:  EdgeInsetsDirectional.only(top: 10.r),
                         child: TextButton(
                           onPressed: () async {
                             await model.login(model.emailIdTextController.text,
@@ -124,7 +124,7 @@ class AuthView extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.only(top: 10),
+                        padding:  EdgeInsetsDirectional.only(top: 10.r),
                         child: RichText(
                           text: TextSpan(
                             text: 'Problem with Sign in? ',
