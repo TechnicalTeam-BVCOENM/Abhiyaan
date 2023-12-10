@@ -65,38 +65,41 @@ class SemesterResult extends ViewModelWidget<ResultsViewModel> {
                     .heading(context, color: context.colorScheme.primaryColor),
               ),
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    buildElevatedButton(
-                      model: viewModel,
-                      title: 'UT1',
-                      link: ut1_link,
-                      index: 0,
-                      sem_index: index,
-                    ),
-                    buildElevatedButton(
-                      model: viewModel,
-                      title: 'UT2',
-                      link: ut2_link,
-                      index: 1,
-                      sem_index: index,
-                    ),
-                    buildElevatedButton(
-                      model: viewModel,
-                      title: 'Gazette',
-                      link: gazette_link,
-                      index: 2,
-                      sem_index: index,
-                    ),
-                    buildElevatedButton(
-                      model: viewModel,
-                      title: 'Marksheet',
-                      link: marksheet_link,
-                      index: 3,
-                      sem_index: index,
-                    ),
-                  ],
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Wrap(
+                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      buildElevatedButton(
+                        model: viewModel,
+                        title: 'UT1',
+                        link: ut1_link,
+                        index: 0,
+                        sem_index: index,
+                      ),
+                      buildElevatedButton(
+                        model: viewModel,
+                        title: 'UT2',
+                        link: ut2_link,
+                        index: 1,
+                        sem_index: index,
+                      ),
+                      buildElevatedButton(
+                        model: viewModel,
+                        title: 'Gazette',
+                        link: gazette_link,
+                        index: 2,
+                        sem_index: index,
+                      ),
+                      buildElevatedButton(
+                        model: viewModel,
+                        title: 'Marksheet',
+                        link: marksheet_link,
+                        index: 3,
+                        sem_index: index,
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),
@@ -127,7 +130,7 @@ class buildElevatedButton extends ViewModelWidget<ResultsViewModel> {
   @override
   Widget build(BuildContext context, ResultsViewModel viewModel) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(2, 8, 2, 8),
+      padding: const EdgeInsets.fromLTRB(2, 8, 2, 8).r,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           minimumSize: Size(80.w, 40.h),
