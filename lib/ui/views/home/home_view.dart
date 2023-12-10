@@ -95,17 +95,90 @@ class HomeView extends StatelessWidget {
                         const SectionText(title: "Quick Links"),
                         quickLinksList(context, model.quickLinksList),
                         // Activity
-                        // const SectionText(
-                        //   title: "Activity",
-                        // ),
-                        // Container(
-                        //   height: 135.sp,
-                        //   width: MediaQuery.of(context).size.width,
-                        //   decoration: BoxDecoration(
-                        //     color: context.colorScheme.secondaryWhiteColor,
-                        //     borderRadius: BorderRadius.circular(12),
-                        //   ),
-                        // ),
+                        const SectionText(
+                          title: "Activity",
+                        ),
+                        Container(
+                          height: 135.h,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            color: context.colorScheme.secondaryWhiteColor,
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Row( 
+                            children: [ 
+                              Expanded( 
+                                flex: 4, 
+                                child: Container( 
+                                decoration: BoxDecoration( 
+                                color: context.colorScheme.secondaryLPurpleColor, 
+                                borderRadius: BorderRadius.only( 
+                                topLeft: Radius.circular(12.r), 
+                                bottomLeft: Radius.circular(12.r), 
+                                  ), 
+                                 ), 
+                                  child: Padding( 
+                                    padding: EdgeInsets.symmetric(horizontal: 12.r, vertical: 8.r), 
+                                    child: Column( 
+                                      mainAxisAlignment: MainAxisAlignment.center, 
+                                      children: [ 
+                                        Text("${model.activityList[0].startTime.format(context)}", 
+                                          style: fontTheme.subHeading(context, context.colorScheme.primaryDarkColor), 
+                                        ), 
+                                        Container ( 
+                                         width: 10.r, 
+                                         child:  Divider( 
+                                         color: context.colorScheme.primaryDarkColor, 
+                                         thickness: 2.r, 
+                                         height: 10.r, 
+                                         ), 
+                                        ), 
+                                        Text("${model.activityList[0].endTime.format(context)}", 
+                                          style: fontTheme.subHeading(context, context.colorScheme.primaryDarkColor), 
+                                        ), 
+                                      ], 
+                                     
+                                    ), 
+                                  ), 
+                                ), 
+                              ), 
+                              Expanded( 
+                                flex: 6, 
+                                child: Container( 
+                                decoration: BoxDecoration( 
+                                  color: context.colorScheme.secondaryWhiteColor, 
+                                  borderRadius: BorderRadius.only( 
+                                  topRight: Radius.circular(12.r), 
+                                  bottomRight: Radius.circular(12.r), 
+                                  ), 
+                                ), 
+                                   
+                                  child: Padding( 
+                                    padding: EdgeInsets.symmetric(horizontal: 16.r, vertical: 8.r), 
+                                    child: Column( 
+                                      mainAxisAlignment: MainAxisAlignment.center, 
+                                      crossAxisAlignment: CrossAxisAlignment.start, 
+                                      children: [ 
+                                        Text(model.activityList[0].subName, 
+                                            style: fontTheme.subHeading(context, context.colorScheme.primaryDarkColor), 
+                                          ), 
+                                        SizedBox(height: 10.h), 
+                                        Text(model.activityList[0].profName, 
+                                            style: fontTheme.smallSubHeading(context, context.colorScheme.primaryDarkColor), 
+                                          ), 
+                                        SizedBox(height: 5.h), 
+                                        Text(model.activityList[0].location, 
+                                            style: fontTheme.smallSubHeading(context, context.colorScheme.primaryDarkColor), 
+                                          ), 
+                                     
+                                      ], 
+                                    ), 
+                                  ), 
+                                ),
+                              ),
+                              ],
+                              ),  
+                        ),
                         const SectionText(
                           title: "Department Updates",
                         ),
@@ -115,14 +188,59 @@ class HomeView extends StatelessWidget {
                           updatesCard(
                               model._departmentUpdates, i, context, model),
                         ],
-                        SizedBox(height: 20.h),
-                        Center(
-                          child: Text(
-                            'Made with ❤️ by Technical Team',
-                            style: fontTheme.smallSubHeading(context),
+                        40.verticalSpace,
+                        Text(
+                          "Innovate.",
+                          maxLines: 2,
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            shadows: [
+                              Shadow(
+                                blurRadius: 8,
+                                color: context.colorScheme.primaryColor
+                                    .withOpacity(0.2),
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                            letterSpacing: 0.01,
+                            fontSize: 40.sp,
+                            wordSpacing: 0.2,
+                            textBaseline: TextBaseline.alphabetic,
+                            fontWeight: FontWeight.bold,
+                            color: context.colorScheme.primaryDarkColor
+                                .withOpacity(0.5),
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        Text(
+                          "Inspire. Achieve.",
+                          maxLines: 2,
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            shadows: [
+                              Shadow(
+                                blurRadius: 8,
+                                color: context.colorScheme.primaryColor
+                                    .withOpacity(0.2),
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                            letterSpacing: 0.01,
+                            fontSize: 40.sp,
+                            wordSpacing: 0.2,
+                            textBaseline: TextBaseline.alphabetic,
+                            fontWeight: FontWeight.bold,
+                            color: context.colorScheme.primaryDarkColor
+                                .withOpacity(0.5),
+                          ),
+                        ),
+                        12.verticalSpace,
+                        Text(
+                          'Made with ❤️ by Technical Team',
+                          style: fontTheme.smallSubHeading(context),
+                        ),
+                        12.verticalSpace,
                       ],
                     ),
                   ),

@@ -27,10 +27,7 @@ class AcademicsView extends StatelessWidget {
           appBar: AppBar(
             title: Text(
               'Academics',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: context.colorScheme.headingColor,
-              ),
+              style: FontThemeClass().heading(context),
             ),
             centerTitle: true,
             automaticallyImplyLeading: false,
@@ -41,33 +38,20 @@ class AcademicsView extends StatelessWidget {
               ? const AcademicsShimmerLoadingWidget()
               : SafeArea(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    padding: EdgeInsets.symmetric(horizontal: 18.r),
                     child: CustomScrollView(
                       physics: const BouncingScrollPhysics(),
                       scrollBehavior: const MaterialScrollBehavior()
                           .copyWith(overscroll: false),
                       slivers: [
-                        // SliverToBoxAdapter(
-                        //   child: Padding(
-                        //     padding:
-                        //         const EdgeInsets.only(top: 18.0, bottom: 12.0),
-                        //     child: Text(
-                        //       "Academics",
-                        //       textAlign: TextAlign.center,
-                        //       style:
-                        //           model.fontTheme.appBarText(context).copyWith(
-                        //                 color: context.colorScheme.primaryColor,
-                        //               ),
-                        //     ),
-                        //   ),
-                        // ),
-                        SliverToBoxAdapter(child: SizedBox(height: 16.h)),
+                        SliverToBoxAdapter(
+                          child: 16.verticalSpace,
+                        ),
                         SliverGrid(
                           gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
+                              SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
-                            mainAxisSpacing: 16.0,
-                            // crossAxisSpacing: 16.0,
+                            mainAxisSpacing: 16.r,
                           ),
                           delegate: SliverChildBuilderDelegate(
                             childCount: 9,
@@ -82,15 +66,16 @@ class AcademicsView extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
-                                      width: 90.r,
-                                      height: 90.r,
+                                      width: 98.r,
+                                      height: 98.r,
                                       decoration: BoxDecoration(
                                         color: context
                                             .colorScheme.secondaryLPurpleColor,
-                                        borderRadius: BorderRadius.circular(25),
+                                        borderRadius:
+                                            BorderRadius.circular(25.r),
                                         boxShadow: [
                                           BoxShadow(
-                                            blurRadius: 5,
+                                            blurRadius: 5.r,
                                             color: context.colorScheme
                                                 .secondaryLPurpleColor,
                                             offset: const Offset(0, 3),
@@ -102,8 +87,8 @@ class AcademicsView extends StatelessWidget {
                                           image: AssetImage(model
                                               .getGridListModel[index].image),
                                           fit: BoxFit.contain,
-                                          height: 72.r,
-                                          width: 72.r,
+                                          height: 86.r,
+                                          width: 86.r,
                                         ),
                                       ),
                                     ),
@@ -123,7 +108,9 @@ class AcademicsView extends StatelessWidget {
                             },
                           ),
                         ),
-                        SliverToBoxAdapter(child: SizedBox(height: 12.h)),
+                        SliverToBoxAdapter(
+                          child: 12.verticalSpace,
+                        ),
                         const SliverToBoxAdapter(
                           child: SectionText(title: "Academics Updates"),
                         ),
@@ -136,7 +123,9 @@ class AcademicsView extends StatelessWidget {
                             },
                           ),
                         ),
-                        SliverToBoxAdapter(child: SizedBox(height: 8.h)),
+                        SliverToBoxAdapter(
+                          child: 8.verticalSpace,
+                        ),
                       ],
                     ),
                   ),
