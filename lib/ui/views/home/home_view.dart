@@ -38,7 +38,7 @@ class HomeView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Hey ${model.user} 👋', // Update according to loal storage
+                                'Hey ${model.firstname[0]} 👋', // Update according to loal storage
                                 style: fontTheme.appBarText(
                                     context, context.colorScheme.headingColor),
                               ),
@@ -105,79 +105,106 @@ class HomeView extends StatelessWidget {
                             color: context.colorScheme.secondaryWhiteColor,
                             borderRadius: BorderRadius.circular(12.r),
                           ),
-                          child: Row( 
-                            children: [ 
-                              Expanded( 
-                                flex: 4, 
-                                child: Container( 
-                                decoration: BoxDecoration( 
-                                color: context.colorScheme.secondaryLPurpleColor, 
-                                borderRadius: BorderRadius.only( 
-                                topLeft: Radius.circular(12.r), 
-                                bottomLeft: Radius.circular(12.r), 
-                                  ), 
-                                 ), 
-                                  child: Padding( 
-                                    padding: EdgeInsets.symmetric(horizontal: 12.r, vertical: 8.r), 
-                                    child: Column( 
-                                      mainAxisAlignment: MainAxisAlignment.center, 
-                                      children: [ 
-                                        Text("${model.activityList[0].startTime.format(context)}", 
-                                          style: fontTheme.subHeading(context, context.colorScheme.primaryDarkColor), 
-                                        ), 
-                                        Container ( 
-                                         width: 10.r, 
-                                         child:  Divider( 
-                                         color: context.colorScheme.primaryDarkColor, 
-                                         thickness: 2.r, 
-                                         height: 10.r, 
-                                         ), 
-                                        ), 
-                                        Text("${model.activityList[0].endTime.format(context)}", 
-                                          style: fontTheme.subHeading(context, context.colorScheme.primaryDarkColor), 
-                                        ), 
-                                      ], 
-                                     
-                                    ), 
-                                  ), 
-                                ), 
-                              ), 
-                              Expanded( 
-                                flex: 6, 
-                                child: Container( 
-                                decoration: BoxDecoration( 
-                                  color: context.colorScheme.secondaryWhiteColor, 
-                                  borderRadius: BorderRadius.only( 
-                                  topRight: Radius.circular(12.r), 
-                                  bottomRight: Radius.circular(12.r), 
-                                  ), 
-                                ), 
-                                   
-                                  child: Padding( 
-                                    padding: EdgeInsets.symmetric(horizontal: 16.r, vertical: 8.r), 
-                                    child: Column( 
-                                      mainAxisAlignment: MainAxisAlignment.center, 
-                                      crossAxisAlignment: CrossAxisAlignment.start, 
-                                      children: [ 
-                                        Text(model.activityList[0].subName, 
-                                            style: fontTheme.subHeading(context, context.colorScheme.primaryDarkColor), 
-                                          ), 
-                                        SizedBox(height: 10.h), 
-                                        Text(model.activityList[0].profName, 
-                                            style: fontTheme.smallSubHeading(context, context.colorScheme.primaryDarkColor), 
-                                          ), 
-                                        SizedBox(height: 5.h), 
-                                        Text(model.activityList[0].location, 
-                                            style: fontTheme.smallSubHeading(context, context.colorScheme.primaryDarkColor), 
-                                          ), 
-                                     
-                                      ], 
-                                    ), 
-                                  ), 
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 4,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: context
+                                        .colorScheme.secondaryLPurpleColor,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(12.r),
+                                      bottomLeft: Radius.circular(12.r),
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 12.r, vertical: 8.r),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          model.activityList[0].startTime
+                                              .format(context),
+                                          style: fontTheme.subHeading(
+                                              context,
+                                              context.colorScheme
+                                                  .primaryDarkColor),
+                                        ),
+                                        SizedBox(
+                                          width: 10.r,
+                                          child: Divider(
+                                            color: context
+                                                .colorScheme.primaryDarkColor,
+                                            thickness: 2.r,
+                                            height: 10.r,
+                                          ),
+                                        ),
+                                        Text(
+                                          model.activityList[0].endTime
+                                              .format(context),
+                                          style: fontTheme.subHeading(
+                                              context,
+                                              context.colorScheme
+                                                  .primaryDarkColor),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
-                              ],
-                              ),  
+                              Expanded(
+                                flex: 6,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color:
+                                        context.colorScheme.secondaryWhiteColor,
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(12.r),
+                                      bottomRight: Radius.circular(12.r),
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 16.r, vertical: 8.r),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          model.activityList[0].subName,
+                                          style: fontTheme.subHeading(
+                                              context,
+                                              context.colorScheme
+                                                  .primaryDarkColor),
+                                        ),
+                                        SizedBox(height: 10.h),
+                                        Text(
+                                          model.activityList[0].profName,
+                                          style: fontTheme.smallSubHeading(
+                                              context,
+                                              context.colorScheme
+                                                  .primaryDarkColor),
+                                        ),
+                                        SizedBox(height: 5.h),
+                                        Text(
+                                          model.activityList[0].location,
+                                          style: fontTheme.smallSubHeading(
+                                              context,
+                                              context.colorScheme
+                                                  .primaryDarkColor),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         const SectionText(
                           title: "Department Updates",

@@ -3,7 +3,8 @@ part of 'home_view.dart';
 class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
   final FirestoreService _firestoreService = FirestoreService();
-  String user = LocalStorageService().read('userName');
+static String user = LocalStorageService().read('userName');
+final firstname = user.split(' ');
 
   List<QuickLinksModel> quickLinksList = [
     QuickLinksModel(
@@ -28,10 +29,10 @@ class HomeViewModel extends BaseViewModel {
     ),
   ];
 
-  List<Activity> _activityList = [
+  final List<Activity> _activityList = [
     Activity(
-      startTime: TimeOfDay(hour: 11, minute: 15),
-      endTime: TimeOfDay(hour: 12, minute: 15),
+      startTime: const TimeOfDay(hour: 11, minute: 15),
+      endTime: const TimeOfDay(hour: 12, minute: 15),
       subName: "Computer Network",
       profName: "Prof. Aruna Kamble",
       location: "Floor 1, Class Room 137",
