@@ -10,7 +10,10 @@ class PyqsView extends StatelessWidget {
         viewModelBuilder: () => PyqsViewModel(),
         builder: (context, model, child) {
           return Scaffold(
+            backgroundColor: context.colorScheme.backgroundColor,
             appBar: AppBar(
+              backgroundColor: context.colorScheme.backgroundColor,
+              foregroundColor: context.colorScheme.secondaryBlackColor,
               iconTheme: IconThemeData(
                 color: context
                     .colorScheme.secondaryBlackColor, //change your color here
