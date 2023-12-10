@@ -127,8 +127,8 @@ class HomeView extends StatelessWidget {
                                         ), 
                                         Container ( 
                                          width: 10, 
-                                         child: const Divider( 
-                                         color: Colors.black, 
+                                         child:  Divider( 
+                                         color: context.colorScheme.primaryDarkColor, 
                                          thickness: 2.0, 
                                          height: 10.0, 
                                          ), 
