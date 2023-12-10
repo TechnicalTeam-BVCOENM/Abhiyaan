@@ -37,7 +37,8 @@ class SettingsViewModel extends BaseViewModel {
 
   navigateToPrivacyPolicy() {
     UrlLauncher externalUrlHandler = UrlLauncher();
-    externalUrlHandler.launchURL("");
+    externalUrlHandler.launchURL(
+        "https://docs.google.com/document/d/1WzwkIXbSMIBa-M2_ADZfPJmGa9CkvBjA2j847oVn6C8/edit?usp=sharing");
     // Navigation
   }
 

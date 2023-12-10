@@ -23,7 +23,7 @@ class ProfileDetailsCard extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 20.sp),
       decoration: BoxDecoration(
           color: context.colorScheme.secondaryWhiteColor,
-          borderRadius: BorderRadius.circular(20)),
+          borderRadius: BorderRadius.circular(20.sp)),
       child: Row(
         children: [
           SizedBox(
@@ -65,7 +65,7 @@ class ProfileDetailsCard extends StatelessWidget {
               child: Icon(
                 Icons.content_copy,
                 size: 22,
-                color: context.colorScheme.primaryColor,
+                color: context.colorScheme.switchColor,
               )),
           const SizedBox(
             width: 10,

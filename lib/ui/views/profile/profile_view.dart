@@ -23,7 +23,7 @@ class ProfileView extends StatelessWidget {
                     child: Icon(
                       Icons.settings,
                       size: 30.sp,
-                      color: context.colorScheme.primaryColor,
+                      color: context.colorScheme.switchColor,
                     ),
                   ),
                 ),
