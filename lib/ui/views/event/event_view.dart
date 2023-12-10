@@ -58,17 +58,17 @@ class EventView extends StatelessWidget {
                                     ),
                                   ],
                                 )
-                              : SizedBox(
-                                  height: 261.h,
-                                  width: ResponsiveUtils.screenWidth(context),
-                                  child: Center(
+                              : Center(
+                                  child: SizedBox(
+                                    height: 261.h,
+                                    width: ResponsiveUtils.screenWidth(context),
                                     child: Column(
                                       children: [
                                         CachedNetworkImageWidget(
                                           imageUrl:
                                               "https://imgs.search.brave.com/DGoVUPXpo3OwVAbBbgF3oGz3MUcz_cPZrzmfvO7iRrc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG5p/Lmljb25zY291dC5j/b20vaWxsdXN0cmF0/aW9uL3ByZW1pdW0v/dGh1bWIvc2VhcmNo/LXJlc3VsdC1ub3Qt/Zm91bmQtMjEzMDM1/NS0xODAwOTIwLnBu/Zz9mPXdlYnA",
-                                          height: 100.h,
-                                          width: 100.w,
+                                          height: 200.h,
+                                          width: 200.w,
                                           fit: BoxFit.cover,
                                           maxHeightDiskCache:
                                               ResponsiveUtils.screenWidth(
@@ -134,11 +134,12 @@ class EventView extends StatelessWidget {
                                         model: model.remainigEvents[index],
                                       ),
                                       EventDateContainer(
-                                        top: 8,
-                                        left: 8,
-                                        height: 52,
-                                        width: 62,
-                                        fontSize: 28,
+                                        top: 8.h,
+                                        left: 8.w,
+                                        height: 60,
+                                        width: 60,
+                                        timeFontSize: 30,
+                                        textFontSize: 20,
                                         event: model.remainigEvents[index],
                                       ),
                                     ],

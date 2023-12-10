@@ -215,27 +215,17 @@ class HomeView extends StatelessWidget {
                           updatesCard(
                               model._departmentUpdates, i, context, model),
                         ],
-                        40.verticalSpace,
+                        60.verticalSpace,
                         Text(
                           "Innovate.",
                           maxLines: 2,
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            shadows: [
-                              Shadow(
-                                blurRadius: 8,
-                                color: context.colorScheme.primaryColor
-                                    .withOpacity(0.2),
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                            letterSpacing: 0.01,
                             fontSize: 40.sp,
-                            wordSpacing: 0.2,
                             textBaseline: TextBaseline.alphabetic,
                             fontWeight: FontWeight.bold,
-                            color: context.colorScheme.primaryDarkColor
+                            color: context.colorScheme.secondarySectionColor
                                 .withOpacity(0.5),
                           ),
                         ),
@@ -245,27 +235,19 @@ class HomeView extends StatelessWidget {
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            shadows: [
-                              Shadow(
-                                blurRadius: 8,
-                                color: context.colorScheme.primaryColor
-                                    .withOpacity(0.2),
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                            letterSpacing: 0.01,
                             fontSize: 40.sp,
-                            wordSpacing: 0.2,
                             textBaseline: TextBaseline.alphabetic,
                             fontWeight: FontWeight.bold,
-                            color: context.colorScheme.primaryDarkColor
+                            color: context.colorScheme.secondarySectionColor
                                 .withOpacity(0.5),
                           ),
                         ),
-                        12.verticalSpace,
                         Text(
                           'Made with ❤️ by Technical Team',
-                          style: fontTheme.smallSubHeading(context),
+                          style: fontTheme.smallSubHeading(context).copyWith(
+                                color: context.colorScheme.secondaryBlackColor
+                                    .withOpacity(0.8),
+                              ),
                         ),
                         12.verticalSpace,
                       ],
