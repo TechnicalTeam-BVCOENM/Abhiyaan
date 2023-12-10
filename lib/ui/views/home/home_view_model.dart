@@ -28,6 +28,18 @@ class HomeViewModel extends BaseViewModel {
     ),
   ];
 
+  List<Activity> _activityList = [
+    Activity(
+      startTime: TimeOfDay(hour: 11, minute: 15),
+      endTime: TimeOfDay(hour: 12, minute: 15),
+      subName: "Computer Network",
+      profName: "Prof. Aruna Kamble",
+      location: "Floor 1, Class Room 137",
+    ),
+  ];
+
+  List<Activity> get activityList => _activityList;
+
   List<Map<String, dynamic>> _highlights = [];
   List<Map<String, dynamic>> get highlights => _highlights;
   List<DepartmentUpdates> _departmentUpdates = [];
@@ -103,3 +115,20 @@ class QuickLinksModel {
     this.view = const HomeView(),
   });
 }
+
+class Activity {
+  final TimeOfDay startTime;
+  final TimeOfDay endTime;
+  final String subName;
+  final String profName;
+  final String location;
+
+  Activity({
+    required this.startTime,
+    required this.endTime,
+    required this.subName,
+    required this.profName,
+    required this.location,
+  });
+}
+
