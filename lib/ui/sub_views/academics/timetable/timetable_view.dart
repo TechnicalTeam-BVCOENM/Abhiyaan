@@ -91,7 +91,8 @@ class TimeTableView extends StatelessWidget {
                         shape: BoxShape.circle,
                       ),
                       todayDecoration: BoxDecoration(
-                        color: context.colorScheme.secondarySectionColor,
+                        color:
+                            context.colorScheme.primaryColor.withOpacity(0.5),
                         shape: BoxShape.circle,
                       ),
                       selectedTextStyle: const TextStyle(
@@ -118,7 +119,7 @@ class TimeTableView extends StatelessWidget {
                   ),
                   SizedBox(height: 20.h),
                   Text(
-                    "Daily Tasks",
+                    model.todaysDay == 'holiday' ? "Holiday" : "Lectures",
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       fontSize: fontThemeClass.heading(context).fontSize,
@@ -126,15 +127,50 @@ class TimeTableView extends StatelessWidget {
                       color: context.colorScheme.primaryColor,
                     ),
                   ),
+                  SizedBox(height: 8.h),
                   model.todaysDay == 'holiday'
                       ? Card(
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            side: BorderSide(
+                              color: context.colorScheme.primaryColor
+                                  .withOpacity(0.3),
+                              width: 1.0,
+                            ),
+                          ),
+                          color: context.colorScheme.secondaryLPurpleColor,
                           child: SizedBox(
-                            height: 48.h,
-                            child: Center(
-                                child: Text(
-                              "Today is hoilday",
-                              style: fontThemeClass.heading3(context),
-                            )),
+                            width: double.infinity,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12.0, horizontal: 16.0),
+                              child: Center(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "It's weekend o'clock!",
+                                      style: TextStyle(
+                                        fontSize: FontThemeClass()
+                                            .heading3(context)
+                                            .fontSize,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Sip, savor, and soak in the sunshine.',
+                                      textAlign: TextAlign.center,
+                                      style: FontThemeClass().subHeading(
+                                          context,
+                                          context.colorScheme.primaryColor
+                                              .withOpacity(0.6)),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         )
                       : Column(

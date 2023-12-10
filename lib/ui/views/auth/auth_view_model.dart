@@ -39,12 +39,11 @@ class AppInfoSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
-      child :Text(
-          'Darpan v.1.0.0',
-          style: FontThemeClass().subHeading2(
-                                context, context.colorScheme.secondarySectionColor),
-        ),
-      
+      child: Text(
+        'Darpan v.1.0.0',
+        style: FontThemeClass()
+            .subHeading2(context, context.colorScheme.secondarySectionColor),
+      ),
     );
   }
 }
