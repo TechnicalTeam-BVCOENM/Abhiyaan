@@ -19,6 +19,7 @@ class AuthView extends StatelessWidget {
           child: Scaffold(
             backgroundColor: context.colorScheme.backgroundColor,
             body: ListView(
+              physics: const NeverScrollableScrollPhysics(),
               children: [
                 Container(
                   height: 870.h,
