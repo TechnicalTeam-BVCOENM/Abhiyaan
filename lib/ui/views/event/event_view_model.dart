@@ -97,19 +97,21 @@ class EventViewModel extends BaseViewModel {
     }
 
     //Doc:  This is sorting according to year, month and date
-    remainigEvents.sort((a, b) {
-      int yearComparison =
-          a.startDate.toDate().year.compareTo(b.startDate.toDate().year);
-      if (yearComparison == 0) {
-        int monthComparison =
-            a.startDate.toDate().month.compareTo(b.startDate.toDate().month);
-        if (monthComparison == 0) {
-          return a.startDate.toDate().day.compareTo(b.startDate.toDate().day);
+    remainigEvents.sort(
+      (a, b) {
+        int yearComparison =
+            a.startDate.toDate().year.compareTo(b.startDate.toDate().year);
+        if (yearComparison == 0) {
+          int monthComparison =
+              a.startDate.toDate().month.compareTo(b.startDate.toDate().month);
+          if (monthComparison == 0) {
+            return a.startDate.toDate().day.compareTo(b.startDate.toDate().day);
+          }
+          return monthComparison;
         }
-        return monthComparison;
-      }
-      return yearComparison;
-    });
+        return yearComparison;
+      },
+    );
   }
 }
 
