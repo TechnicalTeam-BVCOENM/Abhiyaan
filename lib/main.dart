@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         valueListenable: themeService.valueListenable,
         builder: ((context, value, child) {
           return ScreenUtilInit(
-            designSize: const Size(360, 640),
+            designSize: const Size(430, 932),
             minTextAdapt: true,
             splitScreenMode: true,
             builder: (_, child) {

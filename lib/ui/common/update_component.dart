@@ -18,7 +18,7 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(12.0).r,
           child: Column(
             children: [
               Row(
@@ -60,11 +60,11 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
         ),
       ),
       expanded: Card(
-        margin: const EdgeInsets.only(bottom: 8),
+        margin: const EdgeInsets.only(bottom: 8).r,
         elevation: 0,
         clipBehavior: Clip.hardEdge,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16).r,
           side: BorderSide(
             color: context.colorScheme.secondaryLPurpleColor,
             width: 1.w,
