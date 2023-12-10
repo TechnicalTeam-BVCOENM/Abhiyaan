@@ -18,12 +18,14 @@ class AuthView extends StatelessWidget {
           onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
           child: Scaffold(
             backgroundColor: context.colorScheme.backgroundColor,
-            body: ListView(
+
+            body: Stack(
               children: [
                 Container(
-                  height: 595.h,
+                  height: 610.sp,
                   padding: const EdgeInsets.only(
-                      left: 20, right: 20, top: 40, bottom: 160),
+                      left: 20, right: 20, top: 40, bottom: 10),
+
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -143,6 +145,7 @@ class AuthView extends StatelessWidget {
                     ],
                   ),
                 ),
+<<<<<<< srana-coming-soon
                 Container(
                   alignment: Alignment.bottomCenter,
                   child:Text(
@@ -151,6 +154,7 @@ class AuthView extends StatelessWidget {
                       context, context.colorScheme.secondarySectionColor),
                 ),
              ) ],
+
             ),
           ),
         );

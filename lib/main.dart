@@ -2,6 +2,7 @@ import 'package:darpan/firebase_options.dart';
 import 'package:darpan/theme/theme_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:darpan/file_exporter.dart';
+import 'package:flutter/services.dart';
 
 Future<void> servicesToInitializeBeforeAppStart() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +26,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeService = locator<ThemeService>();
+
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: themeService.brightness == Brightness.light
+            ? context.colorScheme.backgroundColor
+            : context.colorScheme.secondaryBlackColor,
+        statusBarIconBrightness: themeService.brightness == Brightness.light
+            ? Brightness.dark
+            : Brightness.light,
+        statusBarBrightness: themeService.brightness == Brightness.light
+            ? Brightness.dark
+            : Brightness.light,
+      ),
+    );
     return ValueListenableBuilder(
         valueListenable: themeService.valueListenable,
         builder: ((context, value, child) {

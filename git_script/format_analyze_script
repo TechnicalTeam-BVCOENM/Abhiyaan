@@ -23,7 +23,10 @@ check_flutter_project() {
 }
 
 # Run dart format on the 'lib' directory for the staged files
-git diff --cached --name-only --diff-filter=ACM | grep '\.dart$' | xargs dart format
+# git diff --cached --name-only --diff-filter=ACM | grep '\.dart$' | xargs dart format
+
+# Run dart format on the 'lib' directory for all files
+dart format ./lib
 
 # Add the formatted files to the staging area
 git add .

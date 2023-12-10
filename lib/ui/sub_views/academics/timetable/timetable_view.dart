@@ -1,16 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/services/firestore_service.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:darpan/ui/sub_views/academics/timetable/timetable_view_component.dart';
 part 'timetable_view_model.dart';
 
 class TimeTableView extends StatelessWidget {
   const TimeTableView({super.key});
-
   @override
   Widget build(BuildContext context) {
+    FontThemeClass fontThemeClass = FontThemeClass();
     return ViewModelBuilder<TimeTableViewModel>.reactive(
       viewModelBuilder: () => TimeTableViewModel(),
+      onViewModelReady: (model) => model.init(),
       builder: (context, model, child) {
         return Scaffold(
           backgroundColor: context.colorScheme.backgroundColor,
@@ -89,7 +91,8 @@ class TimeTableView extends StatelessWidget {
                         shape: BoxShape.circle,
                       ),
                       todayDecoration: BoxDecoration(
-                        color: context.colorScheme.secondarySectionColor,
+                        color:
+                            context.colorScheme.primaryColor.withOpacity(0.5),
                         shape: BoxShape.circle,
                       ),
                       selectedTextStyle: const TextStyle(
@@ -116,23 +119,77 @@ class TimeTableView extends StatelessWidget {
                   ),
                   SizedBox(height: 20.h),
                   Text(
-                    "Daily Tasks",
+                    model.todaysDay == 'holiday' ? "Holiday" : "Lectures",
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      fontSize: FontThemeClass().heading(context).fontSize,
+                      fontSize: fontThemeClass.heading(context).fontSize,
                       fontWeight: FontWeight.w700,
                       color: context.colorScheme.primaryColor,
                     ),
                   ),
-                  for (int i = 0; i < model.lectureDataList.length; i++) ...[
-                    TimeLineWidget(
-                      isFirst: i == 0,
-                      isLast: i == model.lectureDataList.length - 1,
-                      isPast: model.lectureDataList[i].startTime.toDate().hour <
-                          DateTime.now().hour,
-                      index: i,
-                    ),
-                  ],
+                  SizedBox(height: 8.h),
+                  model.todaysDay == 'holiday'
+                      ? Card(
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            side: BorderSide(
+                              color: context.colorScheme.primaryColor
+                                  .withOpacity(0.3),
+                              width: 1.0,
+                            ),
+                          ),
+                          color: context.colorScheme.secondaryLPurpleColor,
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12.0, horizontal: 16.0),
+                              child: Center(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "It's weekend o'clock!",
+                                      style: TextStyle(
+                                        fontSize: FontThemeClass()
+                                            .heading3(context)
+                                            .fontSize,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Sip, savor, and soak in the sunshine.',
+                                      textAlign: TextAlign.center,
+                                      style: FontThemeClass().subHeading(
+                                          context,
+                                          context.colorScheme.primaryColor
+                                              .withOpacity(0.6)),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      : Column(
+                          children: [
+                            for (int i = 0;
+                                i < model.lectureDataList.length;
+                                i++) ...[
+                              TimeLineWidget(
+                                isFirst: i == 0,
+                                isLast: i == model.lectureDataList.length - 1,
+                                isPast: model.lectureDataList[i].startTime
+                                        .toDate()
+                                        .hour <
+                                    DateTime.now().hour,
+                                index: i,
+                              ),
+                            ],
+                          ],
+                        )
                 ],
               ),
             ),
