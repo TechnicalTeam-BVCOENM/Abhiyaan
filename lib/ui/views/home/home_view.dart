@@ -38,7 +38,7 @@ class HomeView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Hey ${model.user} 👋', // Update according to loal storage
+                                'Hey ${model.user} 👋',
                                 style: fontTheme.appBarText(
                                     context, context.colorScheme.headingColor),
                               ),
@@ -115,14 +115,41 @@ class HomeView extends StatelessWidget {
                           updatesCard(
                               model._departmentUpdates, i, context, model),
                         ],
-                        SizedBox(height: 20.h),
-                        Center(
-                          child: Text(
-                            'Made with ❤️ by Technical Team',
-                            style: fontTheme.smallSubHeading(context),
+                        60.verticalSpace,
+                        Text(
+                          "Innovate.",
+                          maxLines: 2,
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 40.sp,
+                            textBaseline: TextBaseline.alphabetic,
+                            fontWeight: FontWeight.bold,
+                            color: context.colorScheme.secondarySectionColor
+                                .withOpacity(0.5),
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        Text(
+                          "Inspire. Achieve.",
+                          maxLines: 2,
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 40.sp,
+                            textBaseline: TextBaseline.alphabetic,
+                            fontWeight: FontWeight.bold,
+                            color: context.colorScheme.secondarySectionColor
+                                .withOpacity(0.5),
+                          ),
+                        ),
+                        Text(
+                          'Made with ❤️ by Technical Team',
+                          style: fontTheme.smallSubHeading(context).copyWith(
+                                color: context.colorScheme.secondaryBlackColor
+                                    .withOpacity(0.8),
+                              ),
+                        ),
+                        12.verticalSpace,
                       ],
                     ),
                   ),

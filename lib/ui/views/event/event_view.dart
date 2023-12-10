@@ -25,7 +25,7 @@ class EventView extends StatelessWidget {
               : SafeArea(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0).r,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -37,10 +37,10 @@ class EventView extends StatelessWidget {
                           elevation: 4,
                           shape: ShapeBorder.lerp(
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.sp),
+                                borderRadius: BorderRadius.circular(18.sp).r,
                               ),
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.sp),
+                                borderRadius: BorderRadius.circular(18.sp).r,
                               ),
                               1),
                           child: model.todayEvent != null
@@ -50,16 +50,16 @@ class EventView extends StatelessWidget {
                                       model: model.todayEvent!,
                                     ),
                                     EventDateContainer(
-                                      top: 100.sp,
-                                      left: 20.sp,
-                                      height: 55,
-                                      width: 70,
+                                      top: 125.h,
+                                      left: 10.w,
+                                      height: 60.h,
+                                      width: 60.w,
                                       event: model.todayEvent!,
                                     ),
                                   ],
                                 )
                               : SizedBox(
-                                  height: 150.h,
+                                  height: 261.h,
                                   width: ResponsiveUtils.screenWidth(context),
                                   child: Center(
                                     child: Column(
@@ -88,7 +88,7 @@ class EventView extends StatelessWidget {
                         ),
                         const SectionText(title: "Sponsors"),
                         SizedBox(
-                          height: 60.sp,
+                          height: 80.h,
                           child: ListView.builder(
                             shrinkWrap: true,
                             physics: const BouncingScrollPhysics(),
@@ -101,7 +101,7 @@ class EventView extends StatelessWidget {
                         ),
                         const SectionText(title: "Upcoming Events"),
                         SizedBox(
-                          height: 200.sp,
+                          height: 200.h,
                           child: ListView.builder(
                             shrinkWrap: true,
                             physics: const BouncingScrollPhysics(),
@@ -110,8 +110,8 @@ class EventView extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: index == 0
-                                    ? const EdgeInsets.only(left: 0)
-                                    : EdgeInsets.only(left: 10.sp),
+                                    ? const EdgeInsets.only(left: 0).r
+                                    : const EdgeInsets.only(left: 10).r,
                                 child: Card(
                                   clipBehavior: Clip.hardEdge,
                                   shadowColor: context
@@ -121,11 +121,11 @@ class EventView extends StatelessWidget {
                                   shape: ShapeBorder.lerp(
                                       RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(18.sp),
+                                            BorderRadius.circular(18).r,
                                       ),
                                       RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(18.sp),
+                                            BorderRadius.circular(18).r,
                                       ),
                                       1),
                                   child: Stack(
