@@ -7,7 +7,7 @@ import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/firestore_service.dart';
 import 'package:intl/intl.dart';
 import 'package:darpan/ui/common/common_component_model.dart';
-import 'package:darpan/ui/views/event/event_view.dart';
+import 'package:darpan/ui/sub_views/home/Societies/societies_view.dart';
 part 'home_view_model.dart';
 part 'home_view_component.dart';
 
@@ -48,7 +48,7 @@ class HomeView extends StatelessWidget {
                                     context.colorScheme.secondaryBlackColor,
                                 icon: ImageIcon(
                                   const AssetImage(
-                                    "assets/images/Notification Bell.png",
+                                    "assets/images/home/Notification Bell.png",
                                   ),
                                   size: 24.sp,
                                 ),
@@ -93,7 +93,11 @@ class HomeView extends StatelessWidget {
                           ),
                         ),
                         const SectionText(title: "Quick Links"),
-                        quickLinksList(context, model.quickLinksList),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Center(
+                                child: quickLinksList(
+                                    context, model.quickLinksList))),
                         // Activity
                         const SectionText(
                           title: "Activity",
@@ -242,11 +246,12 @@ class HomeView extends StatelessWidget {
                                 .withOpacity(0.5),
                           ),
                         ),
+                        3.verticalSpace,
                         Text(
                           'Made with ❤️ by Technical Team',
                           style: fontTheme.smallSubHeading(context).copyWith(
                                 color: context.colorScheme.secondaryBlackColor
-                                    .withOpacity(0.8),
+                                    .withOpacity(0.6),
                               ),
                         ),
                         12.verticalSpace,

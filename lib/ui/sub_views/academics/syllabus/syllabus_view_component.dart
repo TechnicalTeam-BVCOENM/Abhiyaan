@@ -15,8 +15,8 @@ Widget subjectCard(List syllabusList, int i, BuildContext context, viewModel) {
                 borderRadius: BorderRadius.circular(120.0),
                 child: Image.network(
                   syllabusList[index].imageUrl,
-                  width: 54.sp,
-                  height: 60.sp,
+                  width: 60.r,
+                  height: 60.r,
                   fit: BoxFit.cover,
                 ),
               ),

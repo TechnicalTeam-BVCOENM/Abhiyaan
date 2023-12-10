@@ -20,16 +20,16 @@ class ProfileDetailsCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 75.h,
-      margin: EdgeInsets.only(bottom: 20.sp),
+      margin: EdgeInsets.only(bottom: 20.r),
       decoration: BoxDecoration(
           color: context.colorScheme.secondaryWhiteColor,
-          borderRadius: BorderRadius.circular(20.sp)),
+          borderRadius: BorderRadius.circular(20.r)),
       child: Row(
         children: [
           SizedBox(
-            width: 25.sp,
+            width: 25.w,
           ),
-          Image.asset(width: 35.sp, leading),
+          Image.asset(width: 36.w, leading),
           SizedBox(
             width: 32.w,
           ),
@@ -41,11 +41,11 @@ class ProfileDetailsCard extends StatelessWidget {
                 title,
                 style: FontThemeClass().heading4(context),
               ),
-              const SizedBox(
-                height: 4,
+              SizedBox(
+                height: 4.h,
               ),
               SizedBox(
-                width: 160,
+                width: 160.w,
                 child: Text(
                   value,
                   overflow: TextOverflow.ellipsis,
@@ -64,11 +64,11 @@ class ProfileDetailsCard extends StatelessWidget {
               },
               child: Icon(
                 Icons.content_copy,
-                size: 22,
+                size: 26.r,
                 color: context.colorScheme.switchColor,
               )),
-          const SizedBox(
-            width: 10,
+          SizedBox(
+            width: 10.w,
           )
         ],
       ),
@@ -90,13 +90,13 @@ class SocialLinks extends StatelessWidget {
           );
         },
         child: Container(
-          width: 45.sp,
-          height: 45.sp,
+          width: 47.r,
+          height: 47.r,
           decoration: BoxDecoration(
               color: context.colorScheme.secondaryWhiteColor,
               borderRadius: BorderRadius.circular(100)),
           child: Padding(
-              padding: const EdgeInsets.all(9), child: Image.asset(iconpath)),
+              padding: const EdgeInsets.all(9).r, child: Image.asset(iconpath)),
         ));
   }
 }
