@@ -99,26 +99,26 @@ class HomeView extends StatelessWidget {
                           title: "Activity",
                         ),
                         Container(
-                          height: 135.sp,
+                          height: 135.h,
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                             color: context.colorScheme.secondaryWhiteColor,
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(12.r),
                           ),
                           child: Row( 
                             children: [ 
                               Expanded( 
-                                flex: 3, 
+                                flex: 4, 
                                 child: Container( 
                                 decoration: BoxDecoration( 
                                 color: context.colorScheme.secondaryLPurpleColor, 
                                 borderRadius: BorderRadius.only( 
-                                topLeft: Radius.circular(12), 
-                                bottomLeft: Radius.circular(12), 
+                                topLeft: Radius.circular(12.r), 
+                                bottomLeft: Radius.circular(12.r), 
                                   ), 
                                  ), 
                                   child: Padding( 
-                                    padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8), 
+                                    padding: EdgeInsets.symmetric(horizontal: 12.r, vertical: 8.r), 
                                     child: Column( 
                                       mainAxisAlignment: MainAxisAlignment.center, 
                                       children: [ 
@@ -126,11 +126,11 @@ class HomeView extends StatelessWidget {
                                           style: fontTheme.subHeading(context, context.colorScheme.primaryDarkColor), 
                                         ), 
                                         Container ( 
-                                         width: 10, 
+                                         width: 10.r, 
                                          child:  Divider( 
                                          color: context.colorScheme.primaryDarkColor, 
-                                         thickness: 2.0, 
-                                         height: 10.0, 
+                                         thickness: 2.r, 
+                                         height: 10.r, 
                                          ), 
                                         ), 
                                         Text("${model.activityList[0].endTime.format(context)}", 
@@ -143,18 +143,18 @@ class HomeView extends StatelessWidget {
                                 ), 
                               ), 
                               Expanded( 
-                                flex: 7, 
+                                flex: 6, 
                                 child: Container( 
                                 decoration: BoxDecoration( 
                                   color: context.colorScheme.secondaryWhiteColor, 
                                   borderRadius: BorderRadius.only( 
-                                  topRight: Radius.circular(12), 
-                                  bottomRight: Radius.circular(12), 
+                                  topRight: Radius.circular(12.r), 
+                                  bottomRight: Radius.circular(12.r), 
                                   ), 
                                 ), 
                                    
                                   child: Padding( 
-                                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8), 
+                                    padding: EdgeInsets.symmetric(horizontal: 16.r, vertical: 8.r), 
                                     child: Column( 
                                       mainAxisAlignment: MainAxisAlignment.center, 
                                       crossAxisAlignment: CrossAxisAlignment.start, 
@@ -162,11 +162,11 @@ class HomeView extends StatelessWidget {
                                         Text(model.activityList[0].subName, 
                                             style: fontTheme.subHeading(context, context.colorScheme.primaryDarkColor), 
                                           ), 
-                                        SizedBox(height: 10), 
+                                        SizedBox(height: 10.h), 
                                         Text(model.activityList[0].profName, 
                                             style: fontTheme.smallSubHeading(context, context.colorScheme.primaryDarkColor), 
                                           ), 
-                                        SizedBox(height: 5), 
+                                        SizedBox(height: 5.h), 
                                         Text(model.activityList[0].location, 
                                             style: fontTheme.smallSubHeading(context, context.colorScheme.primaryDarkColor), 
                                           ), 
