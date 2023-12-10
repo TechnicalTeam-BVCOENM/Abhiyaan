@@ -25,7 +25,7 @@ class PyqsView extends StatelessWidget {
             body: SafeArea(
               child: Padding(
                 padding:
-                    EdgeInsets.symmetric(vertical: 30.sp, horizontal: 20.sp),
+                    const EdgeInsets.symmetric(vertical: 30, horizontal: 20).r,
                 child: ListView.builder(
                     itemCount: 5,
                     itemBuilder: (context, index) {

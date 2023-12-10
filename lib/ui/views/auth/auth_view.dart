@@ -14,6 +14,7 @@ class AuthView extends StatelessWidget {
     return ViewModelBuilder<AuthViewModel>.reactive(
       viewModelBuilder: () => AuthViewModel(),
       builder: (context, model, child) {
+        
         return GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
           child: Scaffold(
@@ -23,8 +24,8 @@ class AuthView extends StatelessWidget {
               children: [
                 Container(
                   height: 870.h,
-                  padding: EdgeInsets.only(
-                      left: 20.r, right: 20.r, top: 40.r, bottom: 175.r),
+                  padding: const EdgeInsets.only(
+                      left: 20, right: 20, top: 40, bottom: 175).r,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,11 +47,11 @@ class AuthView extends StatelessWidget {
                         cursorColor: context.colorScheme.primaryColor,
                         controller: model.emailIdTextController,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 15.r, vertical: 15.r),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 15).r,
                           border:  OutlineInputBorder(
                               borderRadius: BorderRadius.all(
-                                Radius.circular(15.r),
+                                const Radius.circular(15).r,
                               ),
                               borderSide: BorderSide.none),
                           fillColor: context.colorScheme.secondaryWhiteColor,
@@ -68,11 +69,11 @@ class AuthView extends StatelessWidget {
                         cursorColor: context.colorScheme.primaryColor,
                         controller: model.passwordTextController,
                         decoration: InputDecoration(
-                          contentPadding:  EdgeInsets.symmetric(
-                              horizontal: 15.r, vertical: 15.r),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 15).r,
                           border:  OutlineInputBorder(
                               borderRadius: BorderRadius.all(
-                                Radius.circular(15.r),
+                                const Radius.circular(15).r,
                               ),
                               borderSide: BorderSide.none),
                           fillColor: context.colorScheme.secondaryWhiteColor,
@@ -89,7 +90,7 @@ class AuthView extends StatelessWidget {
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Padding(
-                            padding: EdgeInsetsDirectional.only(top: 10.r),
+                            padding: EdgeInsetsDirectional.only(top: 10.r) ,
                             child: Text(
                               'Forgot password?',
                               style: model.fontTheme.subHeading2(
@@ -112,7 +113,7 @@ class AuthView extends StatelessWidget {
                                 context.colorScheme.primaryColor),
                             shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(40.0).r,
                               ),
                             ),
                           ),

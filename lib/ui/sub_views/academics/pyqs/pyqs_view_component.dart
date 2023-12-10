@@ -13,10 +13,10 @@ class SubjectCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 70.h,
-      margin: EdgeInsets.only(bottom: 25.w),
+      margin: const EdgeInsets.only(bottom: 25).w,
       decoration: BoxDecoration(
           color: context.colorScheme.secondaryLPurpleColor,
-          borderRadius: BorderRadius.circular(20)),
+          borderRadius: BorderRadius.circular(20).r),
       child: Row(
         children: [
           SizedBox(
@@ -41,7 +41,7 @@ class SubjectCard extends StatelessWidget {
               },
               child:Icon(
                 Icons.navigate_next_rounded,
-                size: 22.r,
+                size: 22.sp,
               )),
         ],
       ),

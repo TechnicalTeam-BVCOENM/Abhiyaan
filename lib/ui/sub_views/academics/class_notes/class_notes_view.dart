@@ -26,7 +26,7 @@ class ClassNotesView extends StatelessWidget {
             body: SafeArea(
               child: Padding(
                 padding:
-                    EdgeInsets.symmetric(vertical: 20.sp, horizontal: 20.sp),
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20).r,
                child: ListView.builder(
                       itemCount: 6,
                       itemBuilder: (context, index) {

@@ -17,10 +17,10 @@ class SocietyCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 100.h,
-      margin: EdgeInsets.only(bottom: 20.w),
+      margin: const EdgeInsets.only(bottom: 20).r,
       decoration: BoxDecoration(
           color: context.colorScheme.secondaryWhiteColor,
-          borderRadius: BorderRadius.circular(20)),
+          borderRadius: BorderRadius.circular(20).r),
       child: Row(
         children: [
           SizedBox(
