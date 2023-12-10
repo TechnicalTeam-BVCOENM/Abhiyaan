@@ -48,7 +48,7 @@ class HomeView extends StatelessWidget {
                                     context.colorScheme.secondaryBlackColor,
                                 icon: ImageIcon(
                                   const AssetImage(
-                                    "assets/images/Notification Bell.png",
+                                    "assets/images/home/Notification Bell.png",
                                   ),
                                   size: 24.sp,
                                 ),

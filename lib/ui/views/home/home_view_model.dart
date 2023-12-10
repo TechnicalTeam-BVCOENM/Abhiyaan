@@ -7,22 +7,22 @@ class HomeViewModel extends BaseViewModel {
 
   List<QuickLinksModel> quickLinksList = [
     QuickLinksModel(
-      imageUrl: "assets/images/Rectangle 88.png",
+      imageUrl: "assets/images/home/Rectangle 88.png",
       title: "BCOENM",
       url: 'https://www.bvcoenm.edu.in/',
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/Rectangle 89.png",
+      imageUrl: "assets/images/home/Rectangle_89.png",
       title: "Abhiyaan",
       url: 'https://abhiyaan-2023.netlify.app/',
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/Rectangle 90.png",
+      imageUrl: "assets/images/home/Rectangle 90.png",
       title: "Society",
       view: const SocietiesView(),
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/Rectangle 91.png",
+      imageUrl: "assets/images/home/Rectangle_91.png",
       title: "Blogs",
       url: 'https://www.dev.com/',
     ),
