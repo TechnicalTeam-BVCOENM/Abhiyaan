@@ -18,7 +18,7 @@ class TimeLineWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: isFirst ? 90.h : 100.h,
+      height: 70.h,
       child: TimelineTile(
         isFirst: isFirst,
         isLast: isLast,
@@ -47,15 +47,6 @@ class TimeLineWidget extends StatelessWidget {
   }
 }
 
-//  margin: const EdgeInsets.all(10),
-//       padding: const EdgeInsets.all(10),
-//       height: 60.h,
-//       width: MediaQuery.of(context).size.width,
-//       decoration: BoxDecoration(
-//         color: context.colorScheme.primaryColor.withOpacity(0.1),
-//         borderRadius: BorderRadius.circular(10),
-//       ),
-
 class LectureCard extends ViewModelWidget<TimeTableViewModel> {
   final int index;
   const LectureCard({super.key, required this.index});
@@ -63,29 +54,49 @@ class LectureCard extends ViewModelWidget<TimeTableViewModel> {
   @override
   Widget build(BuildContext context, TimeTableViewModel viewModel) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 12.0),
       child: SizedBox(
         height: 64.h,
         child: Card(
+          elevation: 0,
+          clipBehavior: Clip.hardEdge,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: BorderSide(
+              color: context.colorScheme.primaryColor.withOpacity(0.3),
+              width: 1.0,
+            ),
+          ),
           color: context.colorScheme.secondaryLPurpleColor,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   viewModel.lectureDataList[index].subjectName,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: FontThemeClass().heading3(context).fontSize,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
                 SizedBox(height: 2.h),
-                Text(
-                  viewModel.lectureDataList[index].subjectTeacherName,
-                  style: FontThemeClass().subHeading(context,
-                      context.colorScheme.secondaryBlackColor.withOpacity(0.5)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      viewModel.lectureDataList[index].subjectTeacherName,
+                      style: FontThemeClass().subHeading(context,
+                          context.colorScheme.primaryColor.withOpacity(0.6)),
+                    ),
+                    Text(
+                      'From ${viewModel.lectureDataList[index].startTime.toDate().toString().substring(10, 16)}',
+                      style: FontThemeClass().subHeading(context,
+                          context.colorScheme.primaryColor.withOpacity(0.6)),
+                    ),
+                  ],
                 ),
               ],
             ),
