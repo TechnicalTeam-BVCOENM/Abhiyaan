@@ -25,7 +25,8 @@ class AssetImagePath {
   static const String seImg = 'assets/images/academics/class_notes/se.png';
   static const String cnImg = 'assets/images/academics/class_notes/cn.png';
   static const String dwmImg = 'assets/images/academics/class_notes/dwm.png';
-  static const String adbmsImg = 'assets/images/academics/class_notes/adbms.png';
+  static const String adbmsImg =
+      'assets/images/academics/class_notes/adbms.png';
   static const String pceImg = 'assets/images/academics/class_notes/pce.png';
   static const String nautankiImg = 'assets/images/home/societies/Nautanki.png';
   static const String crew_5678Img = 'assets/images/home/societies/Crew_5678.png';

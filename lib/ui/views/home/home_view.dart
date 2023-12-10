@@ -28,7 +28,7 @@ class HomeView extends StatelessWidget {
               : SafeArea(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0).r,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -59,7 +59,7 @@ class HomeView extends StatelessWidget {
                         ),
                         const SectionText(title: 'Highlights'),
                         SizedBox(
-                          width: 460.sp,
+                          width: 386.w,
                           child: Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +73,7 @@ class HomeView extends StatelessWidget {
                                         model._activeIndex);
                                   },
                                   options: CarouselOptions(
-                                    height: 180.sp,
+                                    height: 230.h,
                                     onPageChanged: (index, reason) =>
                                         model.updateActiveIndex(index),
                                     autoPlay: true,
@@ -82,7 +82,7 @@ class HomeView extends StatelessWidget {
                                     viewportFraction: 1,
                                   ),
                                 ),
-                                SizedBox(height: 20.sp),
+                                SizedBox(height: 20.h),
                                 CarouselUtils.buildIndicator(
                                   context,
                                   model.activeIndex,
@@ -95,17 +95,17 @@ class HomeView extends StatelessWidget {
                         const SectionText(title: "Quick Links"),
                         quickLinksList(context, model.quickLinksList),
                         // Activity
-                        const SectionText(
-                          title: "Activity",
-                        ),
-                        Container(
-                          height: 135.sp,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: context.colorScheme.secondaryWhiteColor,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
+                        // const SectionText(
+                        //   title: "Activity",
+                        // ),
+                        // Container(
+                        //   height: 135.sp,
+                        //   width: MediaQuery.of(context).size.width,
+                        //   decoration: BoxDecoration(
+                        //     color: context.colorScheme.secondaryWhiteColor,
+                        //     borderRadius: BorderRadius.circular(12),
+                        //   ),
+                        // ),
                         const SectionText(
                           title: "Department Updates",
                         ),
@@ -115,7 +115,7 @@ class HomeView extends StatelessWidget {
                           updatesCard(
                               model._departmentUpdates, i, context, model),
                         ],
-                        const SizedBox(height: 20),
+                        SizedBox(height: 20.h),
                         Center(
                           child: Text(
                             'Made with ❤️ by Technical Team',

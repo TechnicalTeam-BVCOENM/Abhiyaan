@@ -5,6 +5,8 @@ class TimeTableViewModel extends BaseViewModel {
   CalendarFormat calendarFormat = CalendarFormat.month;
   DateTime focusedDay = DateTime.now();
   DateTime? selectedDay;
+  DateTime now = DateTime.now();
+  late String todaysDay;
 
   DateTime getOneYearBack() {
     return DateTime.now().subtract(const Duration(days: 365));
@@ -16,7 +18,7 @@ class TimeTableViewModel extends BaseViewModel {
 
   void onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     if (!isSameDay(this.selectedDay, selectedDay)) {
-      debugPrint("Selected Day: $selectedDay");
+      loadData(selectedDay.weekday);
       this.selectedDay = selectedDay;
       this.focusedDay = focusedDay;
     }
@@ -30,29 +32,53 @@ class TimeTableViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  List<LectureDataModel> _lectureDataList = [];
   List<LectureDataModel> get lectureDataList => _lectureDataList;
-  final List<LectureDataModel> _lectureDataList = [
-    LectureDataModel(
-        startTime: Timestamp.fromDate(DateTime.parse("2023-09-01 02:00:00")),
-        subjectName: "Maths",
-        subjectTeacherName: "Mr. Sharma"),
-    LectureDataModel(
-        startTime: Timestamp.fromDate(DateTime.parse("2021-09-01 02:00:00")),
-        subjectName: "Science",
-        subjectTeacherName: "Mr. Sharma"),
-    LectureDataModel(
-        startTime: Timestamp.fromDate(DateTime.parse("2021-09-01 11:00:00")),
-        subjectName: "English",
-        subjectTeacherName: "Mr. Sharma"),
-    LectureDataModel(
-        startTime: Timestamp.fromDate(DateTime.parse("2021-09-01 22:00:00")),
-        subjectName: "Hindi",
-        subjectTeacherName: "Mr. Sharma"),
-    LectureDataModel(
-        startTime: Timestamp.fromDate(DateTime.parse("2021-09-01 23:00:00")),
-        subjectName: "Social Science",
-        subjectTeacherName: "Mr. Sharma"),
-  ];
+
+  String getDayName(int index) {
+    switch (index) {
+      case 1:
+        return "mon";
+      case 2:
+        return "tue";
+      case 3:
+        return "wed";
+      case 4:
+        return "thu";
+      case 5:
+        return "fri";
+      default:
+        return "holiday";
+    }
+  }
+
+  Future<void> loadData(int day) async {
+    setBusy(true);
+    try {
+      final FirestoreService firestoreService = FirestoreService();
+      todaysDay = getDayName(day);
+      List<LectureDataModel> lectureData =
+          await firestoreService.getTimeTableData(todaysDay);
+      lectureData.sort((a, b) => a.startTime.compareTo(b.startTime));
+      _lectureDataList = lectureData;
+      debugPrint(_lectureDataList.toString());
+      notifyListeners();
+    } catch (e) {
+      log.e(e);
+    }
+    setBusy(false);
+  }
+
+  void init() {
+    loadData(now.weekday);
+  }
+
+  int _activeIndex = 0;
+  int get activeIndex => _activeIndex;
+  void updateActiveIndex(int newIndex) {
+    _activeIndex = newIndex;
+    notifyListeners();
+  }
 }
 
 class LectureDataModel {
