@@ -167,8 +167,8 @@ class EventCardInfo extends StatelessWidget {
     EventDetails eventDetails = EventDetails();
     return Positioned(
       child: SizedBox(
-        height: 262.h,
-        width: 386.w,
+        height: 265.h,
+        width: double.infinity,
         child: Column(
           children: [
             eventDetails.eventImage(
@@ -187,26 +187,21 @@ class EventCardInfo extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Event Title
+                        4.verticalSpace,
                         eventDetails.eventTitle(
                           context,
                           model.title,
-                          EdgeInsets.only(left: 18.sp),
+                          const EdgeInsets.only(left: 18).r,
                         ),
-                        SizedBox(
-                          height: 2.h,
-                        ),
-                        //  Event Time and Location
+                        2.verticalSpace,
                         Padding(
-                          padding: EdgeInsets.only(left: 18.sp),
+                          padding: const EdgeInsets.only(left: 18).r,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               eventDetails.eventTime(context,
                                   "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}"),
-                              SizedBox(
-                                width: 18.w,
-                              ),
+                              18.horizontalSpace,
                               eventDetails.eventLocation(
                                   context, model.location),
                             ],
@@ -216,10 +211,10 @@ class EventCardInfo extends StatelessWidget {
                     ),
                     // Event Button
                     Padding(
-                      padding: EdgeInsets.only(right: 18.sp),
+                      padding: const EdgeInsets.only(right: 18).r,
                       child: Container(
-                        height: 35.h,
-                        width: 90.w,
+                        height: 40.h,
+                        width: 95.w,
                         decoration: BoxDecoration(
                           color:
                               context.colorScheme.primaryColor.withOpacity(0.8),
@@ -239,7 +234,7 @@ class EventCardInfo extends StatelessWidget {
                             "Open".toUpperCase(),
                             style: FontThemeClass().subHeading2(context,
                                 context.colorScheme.secondaryWhiteColor,
-                                fontSize: 16.sp, fontWeight: FontWeight.w900),
+                                fontSize: 18.sp, fontWeight: FontWeight.w900),
                           ),
                         ),
                       ),
@@ -268,38 +263,30 @@ class EventCardUpcoming extends StatelessWidget {
     return Positioned(
       child: SizedBox(
         height: 200.h,
-        width: 200.w,
+        width: 202.w,
         child: Column(
           children: [
-            // Event Image
             eventDetails.eventImage(
               context,
               model.imageUrl,
-              110.h,
+              135.h,
               ResponsiveUtils.screenWidth(context),
             ),
-            SizedBox(
-              height: 8.h,
-            ),
-            // Event Info
+            2.verticalSpace,
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 12.sp, right: 16.sp),
+                  padding: const EdgeInsets.only(left: 12, right: 16).r,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Time
                       eventDetails.eventTime(
                         context,
                         "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}",
                       ),
-                      SizedBox(
-                        height: 6.h,
-                      ),
-                      // Location
+                      2.verticalSpace,
                       eventDetails.eventLocation(
                         context,
                         model.location,
@@ -363,23 +350,24 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
           child: Column(
             children: [
               InkWell(
-                  onTap: () => UrlLauncher().launchURL(model.url),
-                  child: Image.network(
-                    model.imageUrl,
-                    height: 80.h,
-                    width: 80.w,
-                    fit: BoxFit.cover,
-                    frameBuilder:
-                        (context, child, frame, wasSynchronouslyLoaded) =>
-                            wasSynchronouslyLoaded
-                                ? child
-                                : AnimatedOpacity(
-                                    opacity: frame == null ? 0 : 1,
-                                    duration: const Duration(seconds: 1),
-                                    curve: Curves.easeOut,
-                                    child: child,
-                                  ),
-                  )),
+                onTap: () => UrlLauncher().launchURL(model.url),
+                child: Image.network(
+                  model.imageUrl,
+                  height: 80.h,
+                  width: 80.w,
+                  fit: BoxFit.cover,
+                  frameBuilder:
+                      (context, child, frame, wasSynchronouslyLoaded) =>
+                          wasSynchronouslyLoaded
+                              ? child
+                              : AnimatedOpacity(
+                                  opacity: frame == null ? 0 : 1,
+                                  duration: const Duration(seconds: 1),
+                                  curve: Curves.easeOut,
+                                  child: child,
+                                ),
+                ),
+              ),
             ],
           ),
         ),
