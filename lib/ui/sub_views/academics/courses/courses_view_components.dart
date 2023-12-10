@@ -12,73 +12,82 @@ class CourseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Container(
-        decoration: BoxDecoration(
-          color: context.colorScheme.primaryColor.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(10),
+      padding: EdgeInsets.symmetric(vertical: 8.r),
+      child: Card(
+        margin: const EdgeInsets.only(bottom: 8),
+        elevation: 0,
+        clipBehavior: Clip.hardEdge,
+        color: context.colorScheme.secondaryLPurpleColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.r),
         ),
-        width: ResponsiveUtils.screenWidth(context),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: 250.w,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      course.courseName,
-                      style: FontThemeClass().heading4(context),
-                    ),
-                    10.verticalSpace,
-                    Text(
-                      course.courseDesc,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      softWrap: true,
-                      style: FontThemeClass()
-                          .subHeading2(context, context.colorScheme.secondary),
-                    ),
-                    20.verticalSpace,
-                    ElevatedButton(
-                      onPressed: () {
-                        UrlLauncher().launchURL(course.url);
-                      },
-                      style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(
-                          const Size(130, 40),
+              Text(
+                course.courseName,
+                style: FontThemeClass().heading2(context),
+                textAlign: TextAlign.left,
+                overflow: TextOverflow.ellipsis,
+              ),
+              4.verticalSpace,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          course.courseDesc,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                          style: FontThemeClass().subHeading2(context,
+                              context.colorScheme.secondarySectionColor),
                         ),
-                        backgroundColor: MaterialStateProperty.all(
-                            context.colorScheme.primaryColor),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
+                        6.verticalSpace,
+                        ElevatedButton(
+                          onPressed: () {
+                            UrlLauncher().launchURL(course.url);
+                          },
+                          style: ButtonStyle(
+                            minimumSize: MaterialStateProperty.all(
+                              Size(130.w, 40.h),
+                            ),
+                            backgroundColor: MaterialStateProperty.all(
+                                context.colorScheme.primaryColor),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.r),
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            'Check Out',
+                            style: FontThemeClass().subHeading(context,
+                                context.colorScheme.secondaryWhiteColor),
                           ),
                         ),
-                      ),
-                      child: Text(
-                        'Check out',
-                        style: FontThemeClass().subHeading(
-                            context, context.colorScheme.secondaryWhiteColor),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  10.horizontalSpace,
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(18),
+                    child: CachedNetworkImageWidget(
+                      fit: BoxFit.cover,
+                      imageUrl: course.image,
+                      height: 100.h,
+                      width: 95.w,
+                      maxHeightDiskCache: ResponsiveUtils.screenWidth(context),
+                    ),
+                  )
+                ],
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(18),
-                child: CachedNetworkImageWidget(
-                  fit: BoxFit.fill,
-                  imageUrl: course.image,
-                  height: 100.h,
-                  width: 95.w,
-                  maxHeightDiskCache: ResponsiveUtils.screenWidth(context),
-                ),
-              )
             ],
           ),
         ),

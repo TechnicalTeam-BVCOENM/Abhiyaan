@@ -3,7 +3,6 @@ part of 'courses_view.dart';
 class CoursesViewModel extends BaseViewModel {
   final log = getLogger('CoursesViewModel');
   final FirestoreService _firestoreService = FirestoreService();
-  final fontTheme = FontThemeClass();
   List<CourseModel> courses = [];
 
 // Get all courses
