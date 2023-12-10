@@ -93,7 +93,11 @@ class HomeView extends StatelessWidget {
                           ),
                         ),
                         const SectionText(title: "Quick Links"),
-                        quickLinksList(context, model.quickLinksList),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Center(
+                                child: quickLinksList(
+                                    context, model.quickLinksList))),
                         // Activity
                         const SectionText(
                           title: "Activity",
