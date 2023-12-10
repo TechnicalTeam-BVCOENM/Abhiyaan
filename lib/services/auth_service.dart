@@ -52,6 +52,7 @@ class AuthenticationService {
       "userMisNo",
       "userEmail",
       "userName",
+      "userYear",
       "userPrnNo",
       "userLibNo",
     ];
