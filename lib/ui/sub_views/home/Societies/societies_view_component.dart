@@ -16,8 +16,8 @@ class SocietyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 70.h,
-      margin: EdgeInsets.only(bottom: 15.w),
+      height: 100.h,
+      margin: EdgeInsets.only(bottom: 20.w),
       decoration: BoxDecoration(
           color: context.colorScheme.secondaryWhiteColor,
           borderRadius: BorderRadius.circular(20)),
@@ -30,6 +30,9 @@ class SocietyCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(
+                height: 4,
+              ),
               Text(
                 title,
                 style: FontThemeClass()
@@ -39,7 +42,7 @@ class SocietyCard extends StatelessWidget {
                 height: 4,
               ),
               SizedBox(
-                width: 200.w,
+                width: 270.w,
                 child: Text(
                   value,
                   maxLines: 3,
@@ -51,12 +54,12 @@ class SocietyCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 4,
+                height: 8,
               ),
             ],
           ),
           const Expanded(child: Text("")),
-          Image.asset(width: 50.w, leading),
+          Image.asset(width: 80.w, leading),
           SizedBox(
             width: 15.w,
           ),

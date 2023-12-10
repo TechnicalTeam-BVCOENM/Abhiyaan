@@ -26,7 +26,7 @@ class SocietiesView extends StatelessWidget {
             body: SafeArea(
               child: Padding(
                 padding:
-                    EdgeInsets.symmetric(vertical: 20.sp, horizontal: 20.sp),
+                    EdgeInsets.symmetric(vertical: 30.r, horizontal: 20.r),
                 child: const Column(children: [
                   SocietyCard(
                     title: "Nautanki",
@@ -35,7 +35,7 @@ class SocietiesView extends StatelessWidget {
                   ),
                   SocietyCard(
                     title: "Crew 5678",
-                    value: "Dance is the hidden language of the soul, and in our crew, we speak it fluently.",
+                    value: "Dance is the hidden language of the soul. It enables students to display an understanding of expressions and rhythm.",
                     leading: AssetImagePath.crew_5678Img,
                   ),
                   SocietyCard(
