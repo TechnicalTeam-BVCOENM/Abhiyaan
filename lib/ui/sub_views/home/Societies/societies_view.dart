@@ -10,60 +10,30 @@ class SocietiesView extends StatelessWidget {
         viewModelBuilder: () => SocietiesViewModel(),
         builder: (context, model, child) {
           return Scaffold(
-            appBar: AppBar(
-              iconTheme: IconThemeData(
-                color: context
-                    .colorScheme.secondaryBlackColor, //change your color here
-              ),
               backgroundColor: context.colorScheme.backgroundColor,
-              elevation: 0,
-              title: Text(
-                'Societies',
-                style: FontThemeClass().heading2(context),
+              appBar: AppBar(
+                iconTheme: IconThemeData(
+                  color: context
+                      .colorScheme.secondaryBlackColor, //change your color here
+                ),
+                elevation: 0,
+                title: Text(
+                  'Societies',
+                  style: FontThemeClass().heading2(context),
+                ),
+                centerTitle: true,
               ),
-              centerTitle: true,
-            ),
-            body: SafeArea(
-              child: Padding(
-                padding:
-                    EdgeInsets.symmetric(vertical: 30.r, horizontal: 20.r),
-                child: const Column(children: [
-                  SocietyCard(
-                    title: "Nautanki",
-                    value: "The Nautanki Club is where dreams take center stage, and reality plays a supporting role.",
-                    leading: AssetImagePath.nautankiImg,
-                  ),
-                  SocietyCard(
-                    title: "Crew 5678",
-                    value: "Dance is the hidden language of the soul. It enables students to display an understanding of expressions and rhythm.",
-                    leading: AssetImagePath.crew_5678Img,
-                  ),
-                  SocietyCard(
-                    title: "CamEra",
-                    value: "Photography is the art of frozen time. Our club, the artists of the shutter, freeze memories to last a lifetime.",
-                    leading: AssetImagePath.camEraImg,
-                  ),
-                  SocietyCard(
-                    title: "Literature",
-                    value: "Literature is art of crafting world with words, & our club is a canvas where literary masterpieces come to life.",
-                    leading: AssetImagePath.literatureImg,
-                  ),
-                  SocietyCard(
-                    title: "Mudrakala",
-                    value: "Within the strokes of our imagination, the Mudrakala Club unveils a gallery of creativity.",
-                    leading: AssetImagePath.mudrakalaImg,
-                  ),
-                  SocietyCard(
-                    title: "Crescendo",
-                    value: "Club where individual notes unite in a symphony of diversity, composing the vibrant melody of our shared passion.",
-                    leading: AssetImagePath.crescendoImg,
-                  ),
-                  Expanded(child: Text("")),
-                ]),
-              ),
-            ),
-            backgroundColor: context.colorScheme.backgroundColor,
-          );
+              body: SafeArea(
+                child: Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 30.r, horizontal: 20.r),
+                  child: ListView.builder(
+                      itemCount: 6,
+                      itemBuilder: (context, index) {
+                        return SocietiesViewModel().allsocietyCards[index];
+                      }),
+                ),
+              ));
         });
   }
 }

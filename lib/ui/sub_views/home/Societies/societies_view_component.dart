@@ -30,16 +30,16 @@ class SocietyCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 4,
+               SizedBox(
+                height: 4.h,
               ),
               Text(
                 title,
                 style: FontThemeClass()
                     .subHeading(context, context.colorScheme.primaryColor),
               ),
-              const SizedBox(
-                height: 4,
+               SizedBox(
+                height: 4.h,
               ),
               SizedBox(
                 width: 270.w,
@@ -53,8 +53,8 @@ class SocietyCard extends StatelessWidget {
                       context, context.colorScheme.secondarySectionColor),
                 ),
               ),
-              const SizedBox(
-                height: 8,
+               SizedBox(
+                height: 8.h,
               ),
             ],
           ),

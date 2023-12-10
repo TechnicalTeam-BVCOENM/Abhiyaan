@@ -8,15 +8,15 @@ class SocietiesViewModel extends BaseViewModel {
     await loadData();
   }
 
-  final List<SocietyCard> _socCard = [];
-  List<SocietyCard> get socCard => _socCard;
+  final List<SocietyCard> _societyCard = [];
+  List<SocietyCard> get societyCard => _societyCard;
 
   Future<void> loadData() async {
     setBusy(true);
     try {
       // _subCard = await _firestoreService.getallSubCards();
 
-      log.i(_socCard[0].title);
+      log.i(_societyCard[0].title);
       notifyListeners();
     } catch (e) {
       log.e(e);
@@ -25,7 +25,7 @@ class SocietiesViewModel extends BaseViewModel {
     log.i("Subject Loaded");
   }
 
-  List<SocietyCard> allSocCards = [
+  List<SocietyCard> allsocietyCards = [
     const SocietyCard(
                     title: "Nautanki",
                     value: "The Nautanki Club is where dreams take center stage, and reality plays a supporting role.",
