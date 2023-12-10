@@ -1,10 +1,12 @@
-import 'package:darpan/theme/app_color.dart';
-import 'package:darpan/utils/extension.dart';
-import 'package:flutter/material.dart';
+import 'package:darpan/file_exporter.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerLoadingWidget extends StatelessWidget {
-  const ShimmerLoadingWidget({super.key});
+  final double? height;
+  final double? width;
+  final double? radius;
+
+  const ShimmerLoadingWidget({super.key, this.height, this.width, this.radius});
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +14,12 @@ class ShimmerLoadingWidget extends StatelessWidget {
       baseColor: context.colorScheme.backgroundColor,
       highlightColor: context.colorScheme.secondaryLPurpleColor,
       child: Container(
-        color: Colors.white,
-        width: double.infinity,
-        height: double.infinity, // Adjust the height as needed
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(radius ?? 18.sp),
+          color: Colors.white,
+        ),
+        width: width ?? double.infinity,
+        height: height ?? double.infinity, // Adjust the height as needed
       ),
     );
   }

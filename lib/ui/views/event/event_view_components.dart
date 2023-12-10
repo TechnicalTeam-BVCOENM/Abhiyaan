@@ -77,7 +77,8 @@ class EventDetails {
       child: Text(
         title,
         textAlign: TextAlign.center,
-        style: fontTheme.heading(context, size: fontSize),
+        style: fontTheme.heading(context,
+            size: fontSize.sp, color: context.colorScheme.secondaryBlackColor),
       ),
     );
   }
@@ -89,10 +90,12 @@ class EventDetails {
 
 class EventDateContainer extends StatelessWidget {
   final double? top;
-
   final double? bottom;
   final double? right;
   final double? left;
+  final double height;
+  final double width;
+  final double fontSize;
   final EventModel event;
 
   const EventDateContainer({
@@ -101,6 +104,9 @@ class EventDateContainer extends StatelessWidget {
     this.right,
     this.bottom,
     this.left,
+    this.fontSize = 30,
+    required this.height,
+    required this.width,
     required this.event,
   });
 
@@ -109,13 +115,13 @@ class EventDateContainer extends StatelessWidget {
     FontThemeClass fontTheme = FontThemeClass();
     EventViewModel model = EventViewModel();
     return Positioned(
-      top: top,
-      left: left,
-      bottom: bottom,
-      right: right,
+      top: top?.sp,
+      left: left?.sp,
+      bottom: bottom?.sp,
+      right: right?.sp,
       child: Container(
-        height: 60.sp,
-        width: 60.sp,
+        height: height.h,
+        width: width.w,
         decoration: BoxDecoration(
           color: context.colorScheme.secondaryWhiteColor,
           boxShadow: [
@@ -130,13 +136,14 @@ class EventDateContainer extends StatelessWidget {
         ),
         // Event Date
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               event.startDate.toDate().day.toString(),
               textAlign: TextAlign.center,
-              style: fontTheme.large(context, FontWeight.w800),
+              style: fontTheme.heading(context,
+                  size: fontSize.sp, color: context.colorScheme.primaryColor),
             ),
             Text(
               model.getMonthName(event.startDate.toDate().month,
@@ -164,7 +171,7 @@ class EventCardInfo extends StatelessWidget {
     EventDetails eventDetails = EventDetails();
     return Positioned(
       child: SizedBox(
-        height: 250.sp,
+        height: 205.h,
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
@@ -172,11 +179,11 @@ class EventCardInfo extends StatelessWidget {
             eventDetails.eventImage(
               context,
               model.imageUrl,
-              160.sp,
+              128.h,
               ResponsiveUtils.screenWidth(context),
             ),
             SizedBox(
-              height: 28.sp,
+              height: 18.h,
             ),
             // Event Info
             Column(
@@ -192,21 +199,21 @@ class EventCardInfo extends StatelessWidget {
                         eventDetails.eventTitle(
                           context,
                           model.title,
-                          EdgeInsets.only(left: 22.sp),
+                          EdgeInsets.only(left: 18.sp),
                         ),
                         SizedBox(
-                          height: 4.sp,
+                          height: 2.h,
                         ),
                         //  Event Time and Location
                         Padding(
-                          padding: EdgeInsets.only(left: 20.sp),
+                          padding: EdgeInsets.only(left: 18.sp),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               eventDetails.eventTime(context,
                                   "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}"),
                               SizedBox(
-                                width: 18.sp,
+                                width: 18.w,
                               ),
                               eventDetails.eventLocation(
                                   context, model.location),
@@ -217,17 +224,30 @@ class EventCardInfo extends StatelessWidget {
                     ),
                     // Event Button
                     Padding(
-                      padding: EdgeInsets.only(right: 8.sp),
-                      child: Transform.rotate(
-                        angle: 180 * 314 / 22,
-                        child: IconButton(
-                          onPressed: () {},
-                          splashRadius: 20.sp,
-                          tooltip: "Details",
-                          icon: Icon(
-                            Icons.send_rounded,
-                            size: 36.sp,
-                            color: context.colorScheme.primaryColor,
+                      padding: EdgeInsets.only(right: 18.sp),
+                      child: Container(
+                        height: 35.h,
+                        width: 90.w,
+                        decoration: BoxDecoration(
+                          color:
+                              context.colorScheme.primaryColor.withOpacity(0.8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: context.colorScheme.secondarySectionColor
+                                  .withOpacity(0.4),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset: const Offset(0, 1),
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Open".toUpperCase(),
+                            style: FontThemeClass().subHeading2(context,
+                                context.colorScheme.secondaryWhiteColor,
+                                fontSize: 16.sp, fontWeight: FontWeight.w900),
                           ),
                         ),
                       ),
@@ -245,7 +265,6 @@ class EventCardInfo extends StatelessWidget {
 
 class EventCardUpcoming extends StatelessWidget {
   final EventModel model;
-
   const EventCardUpcoming({
     super.key,
     required this.model,
@@ -256,37 +275,29 @@ class EventCardUpcoming extends StatelessWidget {
     EventDetails eventDetails = EventDetails();
     return Positioned(
       child: SizedBox(
-        height: 200.sp,
-        width: 200.sp,
+        height: 200.h,
+        width: 200.w,
         child: Column(
           children: [
             // Event Image
             eventDetails.eventImage(
               context,
               model.imageUrl,
-              130.sp,
+              110.h,
               ResponsiveUtils.screenWidth(context),
             ),
             SizedBox(
-              height: 8.sp,
+              height: 8.h,
             ),
             // Event Info
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Event Title
-                eventDetails.eventTitle(
-                  context,
-                  model.title,
-                  EdgeInsets.only(left: 15.sp),
-                  fontSize: 18.0,
-                ),
-
-                //  Event Time and Location
                 Padding(
                   padding: EdgeInsets.only(left: 12.sp, right: 16.sp),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Time
                       eventDetails.eventTime(
@@ -294,7 +305,7 @@ class EventCardUpcoming extends StatelessWidget {
                         "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}",
                       ),
                       SizedBox(
-                        height: 6.sp,
+                        height: 6.h,
                       ),
                       // Location
                       eventDetails.eventLocation(
@@ -303,7 +314,35 @@ class EventCardUpcoming extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
+                ),
+                Padding(
+                    padding: EdgeInsets.only(right: 10.sp),
+                    child: Container(
+                      height: 30.h,
+                      width: 62.w,
+                      decoration: BoxDecoration(
+                        color:
+                            context.colorScheme.primaryColor.withOpacity(0.8),
+                        boxShadow: [
+                          BoxShadow(
+                            color: context.colorScheme.secondarySectionColor
+                                .withOpacity(0.4),
+                            spreadRadius: 1,
+                            blurRadius: 2,
+                            offset: const Offset(0, 1),
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Open".toUpperCase(),
+                          style: FontThemeClass().subHeading2(
+                              context, context.colorScheme.secondaryWhiteColor,
+                              fontWeight: FontWeight.w900, fontSize: 16.sp),
+                        ),
+                      ),
+                    ))
               ],
             ),
           ],
@@ -354,5 +393,81 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
         ),
       ),
     );
+  }
+}
+
+class EventShimmerEffect extends StatelessWidget {
+  const EventShimmerEffect({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 44,
+          ),
+          Card(
+              clipBehavior: Clip.hardEdge,
+              shadowColor:
+                  context.colorScheme.secondaryLPurpleColor.withOpacity(0.8),
+              elevation: 4,
+              shape: ShapeBorder.lerp(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.sp),
+                  ),
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.sp),
+                  ),
+                  1),
+              child: ShimmerLoadingWidget(
+                height: 200.h,
+              )),
+          // const SectionText(title: "Sponsors"),
+          const SizedBox(
+            height: 44,
+          ),
+          SizedBox(
+            height: 60.sp,
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: 4,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(left: 14.0),
+                  child: ShimmerLoadingWidget(
+                    height: 70.sp,
+                    width: 70.sp,
+                  ),
+                );
+              },
+            ),
+          ),
+          const SizedBox(
+            height: 44,
+          ),
+          SizedBox(
+            height: 200.sp,
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: 2,
+              itemBuilder: (context, index) {
+                return ShimmerLoadingWidget(
+                  height: 200.sp,
+                  width: 200.sp,
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    ));
   }
 }

@@ -21,7 +21,7 @@ class EventView extends StatelessWidget {
         return Scaffold(
           backgroundColor: context.colorScheme.backgroundColor,
           body: model.isBusy
-              ? const ShimmerLoadingWidget()
+              ? const EventShimmerEffect()
               : SafeArea(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -50,14 +50,16 @@ class EventView extends StatelessWidget {
                                       model: model.todayEvent!,
                                     ),
                                     EventDateContainer(
-                                      top: 120.sp,
+                                      top: 100.sp,
                                       left: 20.sp,
+                                      height: 55,
+                                      width: 70,
                                       event: model.todayEvent!,
                                     ),
                                   ],
                                 )
                               : SizedBox(
-                                  height: 200.sp,
+                                  height: 150.h,
                                   width: ResponsiveUtils.screenWidth(context),
                                   child: Center(
                                     child: Column(
@@ -65,8 +67,9 @@ class EventView extends StatelessWidget {
                                         CachedNetworkImageWidget(
                                           imageUrl:
                                               "https://imgs.search.brave.com/DGoVUPXpo3OwVAbBbgF3oGz3MUcz_cPZrzmfvO7iRrc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG5p/Lmljb25zY291dC5j/b20vaWxsdXN0cmF0/aW9uL3ByZW1pdW0v/dGh1bWIvc2VhcmNo/LXJlc3VsdC1ub3Qt/Zm91bmQtMjEzMDM1/NS0xODAwOTIwLnBu/Zz9mPXdlYnA",
-                                          height: 150.sp,
-                                          width: 150.sp,
+                                          height: 100.h,
+                                          width: 100.w,
+                                          fit: BoxFit.cover,
                                           maxHeightDiskCache:
                                               ResponsiveUtils.screenWidth(
                                                   context),
@@ -105,37 +108,43 @@ class EventView extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemCount: model.remainigEvents.length,
                             itemBuilder: (context, index) {
-                              return model.isBusy
-                                  ? const ShimmerLoadingWidget()
-                                  : Card(
-                                      clipBehavior: Clip.hardEdge,
-                                      shadowColor: context
-                                          .colorScheme.secondaryLPurpleColor
-                                          .withOpacity(0.8),
-                                      elevation: 4,
-                                      shape: ShapeBorder.lerp(
-                                          RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18.sp),
-                                          ),
-                                          RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18.sp),
-                                          ),
-                                          1),
-                                      child: Stack(
-                                        children: [
-                                          EventCardUpcoming(
-                                            model: model.remainigEvents[index],
-                                          ),
-                                          EventDateContainer(
-                                            top: 8.sp,
-                                            left: 8.sp,
-                                            event: model.remainigEvents[index],
-                                          ),
-                                        ],
+                              return Padding(
+                                padding: index == 0
+                                    ? const EdgeInsets.only(left: 0)
+                                    : EdgeInsets.only(left: 10.sp),
+                                child: Card(
+                                  clipBehavior: Clip.hardEdge,
+                                  shadowColor: context
+                                      .colorScheme.secondaryLPurpleColor
+                                      .withOpacity(0.8),
+                                  elevation: 4,
+                                  shape: ShapeBorder.lerp(
+                                      RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18.sp),
                                       ),
-                                    );
+                                      RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18.sp),
+                                      ),
+                                      1),
+                                  child: Stack(
+                                    children: [
+                                      EventCardUpcoming(
+                                        model: model.remainigEvents[index],
+                                      ),
+                                      EventDateContainer(
+                                        top: 8,
+                                        left: 8,
+                                        height: 52,
+                                        width: 62,
+                                        fontSize: 28,
+                                        event: model.remainigEvents[index],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
                             },
                           ),
                         ),

@@ -74,11 +74,12 @@ class FontThemeClass {
     );
   }
 
-  TextStyle subHeading2(BuildContext context, Color color) {
+  TextStyle subHeading2(BuildContext context, Color color,
+      {FontWeight? fontWeight, double? fontSize}) {
     return TextStyle(
-      fontSize: 14,
+      fontSize: fontSize ?? 14,
       fontFamily: 'Outfit',
-      fontWeight: FontWeight.w500,
+      fontWeight: fontWeight ?? FontWeight.w500,
       color: color,
     );
   }
