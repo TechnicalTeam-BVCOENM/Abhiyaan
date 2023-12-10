@@ -1,9 +1,13 @@
+// ignore_for_file: avoid_print
+
 part of 'results_view.dart';
 
 class ResultsViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
   final log = getLogger('ResultsViewModel');
+
   // bool _isExpanded = false;
+
 
   final List<List<bool>> _semesterButtonStates =
       List.generate(8, (_) => List.filled(4, false));
@@ -18,6 +22,7 @@ class ResultsViewModel extends BaseViewModel {
   //   _isExpanded = isExpanded;
   //   notifyListeners();
   // }
+
 
   void updateButtonPressedState(int semesterIndex, int index, bool isPressed) {
     if (_selectedSemesterIndex != -1) {
