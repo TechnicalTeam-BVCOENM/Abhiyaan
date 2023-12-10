@@ -63,7 +63,7 @@ Widget quickLinksList(BuildContext context, List model,
       // itemExtent: 98.w,
       itemBuilder: (context, idx) {
         return Padding(
-          padding: const EdgeInsets.only(right: 22.0, left: 0).r,
+          padding: EdgeInsets.only(right: 22.w, left: 0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
