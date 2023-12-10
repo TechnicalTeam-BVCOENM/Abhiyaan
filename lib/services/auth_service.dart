@@ -10,10 +10,10 @@ class AuthenticationService {
 
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
+      await _firebaseAuth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) => storeUserData());
       // Handle successful login
-      await storeUserData();
       log.i('Auth success');
     } on FirebaseAuthException {
       // Handle error
@@ -47,17 +47,17 @@ class AuthenticationService {
 
   Future storeUserData() async {
     List userTag = [
+      "userSem",
       "userCollegeId",
-      "userLibNo",
       "userMisNo",
+      "userEmail",
       "userName",
-      "userYear",
       "userPrnNo",
-      "userEmail"
+      "userLibNo",
     ];
-    final localStorageService = locator<LocalStorageService>();
 
     try {
+      final localStorageService = locator<LocalStorageService>();
       Map<String, dynamic>? userData = await FirestoreService().getUserData();
       for (var i = 0; i < userTag.length; i++) {
         await localStorageService.write(userTag[i], userData?[userTag[i]]);
