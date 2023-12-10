@@ -53,7 +53,7 @@ class CarouselUtils {
 Widget quickLinksList(BuildContext context, List model,
     [double? borderRadius]) {
   return SizedBox(
-    height: 100.h,
+    height: 110.h,
     width: 386.w,
     child: ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
