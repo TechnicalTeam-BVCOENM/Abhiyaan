@@ -28,11 +28,10 @@ class HomeView extends StatelessWidget {
               : SafeArea(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0).r,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Title Bar
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Row(
@@ -40,12 +39,13 @@ class HomeView extends StatelessWidget {
                             children: [
                               Text(
                                 'Hey ${model.user} 👋', // Update according to loal storage
-                                style: fontTheme.appBarText(context),
+                                style: fontTheme.appBarText(
+                                    context, context.colorScheme.headingColor),
                               ),
                               IconButton(
                                 splashRadius: 30.sp,
                                 splashColor:
-                                    context.colorScheme.backgroundColor,
+                                    context.colorScheme.secondaryBlackColor,
                                 icon: ImageIcon(
                                   const AssetImage(
                                     "assets/images/Notification Bell.png",
@@ -59,7 +59,7 @@ class HomeView extends StatelessWidget {
                         ),
                         const SectionText(title: 'Highlights'),
                         SizedBox(
-                          width: 460.sp,
+                          width: 386.w,
                           child: Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -67,14 +67,13 @@ class HomeView extends StatelessWidget {
                                 CarouselSlider.builder(
                                   itemCount: model.highlights.length,
                                   itemBuilder: (context, index, realIndex) {
-                                    // return CachedNetworkImage(imageUrl: model.highlights[index]['imageUrl']);
                                     return CarouselUtils.buildImage(
                                         context,
                                         model.highlights[index]['imageUrl'],
                                         model._activeIndex);
                                   },
                                   options: CarouselOptions(
-                                    height: 180.sp,
+                                    height: 230.h,
                                     onPageChanged: (index, reason) =>
                                         model.updateActiveIndex(index),
                                     autoPlay: true,
@@ -83,7 +82,7 @@ class HomeView extends StatelessWidget {
                                     viewportFraction: 1,
                                   ),
                                 ),
-                                SizedBox(height: 18.h),
+                                SizedBox(height: 20.h),
                                 CarouselUtils.buildIndicator(
                                   context,
                                   model.activeIndex,
@@ -96,17 +95,17 @@ class HomeView extends StatelessWidget {
                         const SectionText(title: "Quick Links"),
                         quickLinksList(context, model.quickLinksList),
                         // Activity
-                        const SectionText(
-                          title: "Activity",
-                        ),
-                        Container(
-                          height: 135.sp,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: context.colorScheme.secondaryWhiteColor,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
+                        // const SectionText(
+                        //   title: "Activity",
+                        // ),
+                        // Container(
+                        //   height: 135.sp,
+                        //   width: MediaQuery.of(context).size.width,
+                        //   decoration: BoxDecoration(
+                        //     color: context.colorScheme.secondaryWhiteColor,
+                        //     borderRadius: BorderRadius.circular(12),
+                        //   ),
+                        // ),
                         const SectionText(
                           title: "Department Updates",
                         ),
@@ -116,6 +115,14 @@ class HomeView extends StatelessWidget {
                           updatesCard(
                               model._departmentUpdates, i, context, model),
                         ],
+                        SizedBox(height: 20.h),
+                        Center(
+                          child: Text(
+                            'Made with ❤️ by Technical Team',
+                            style: fontTheme.smallSubHeading(context),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
                       ],
                     ),
                   ),

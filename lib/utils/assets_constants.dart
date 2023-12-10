@@ -21,6 +21,13 @@ class AssetImagePath {
       'assets/images/profile/twitter_square-modified.png';
   static const String linkedinImg = 'assets/images/profile/linkedin_square.png';
   static const String logoImg = 'assets/images/logo.png';
+  static const String tcsImg = 'assets/images/academics/class_notes/tcs.png';
+  static const String seImg = 'assets/images/academics/class_notes/se.png';
+  static const String cnImg = 'assets/images/academics/class_notes/cn.png';
+  static const String dwmImg = 'assets/images/academics/class_notes/dwm.png';
+  static const String adbmsImg =
+      'assets/images/academics/class_notes/adbms.png';
+  static const String pceImg = 'assets/images/academics/class_notes/pce.png';
 }
 
 class AssetUrls {

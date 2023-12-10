@@ -1,10 +1,14 @@
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:darpan/ui/sub_views/event/detailed_event_view.dart';
+import 'package:intl/intl.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
   final String imageLink;
-  const DetailedEventAppBar({super.key, required this.imageLink});
+  final String eventLocation;
+  const DetailedEventAppBar(
+      {super.key, required this.imageLink, required this.eventLocation});
 
   @override
   Widget build(BuildContext context, DetailedEventViewModel viewModel) {
@@ -65,7 +69,7 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
                     ),
                     SizedBox(width: 8.w),
                     Text(
-                      'Quadrangle',
+                      eventLocation,
                       style: FontThemeClass().heading3(
                           context,
                           context.colorScheme.primaryDarkColor,
@@ -83,7 +87,23 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
 }
 
 class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
-  const DetailedEventData({super.key});
+  final String eventName;
+  final DateTime eventStartDate;
+  final DateTime eventEndDate;
+  final String eventInfo;
+  final String eventContactName;
+  final String eventContactEmail;
+  final int eventContactNumber;
+  const DetailedEventData({
+    super.key,
+    required this.eventName,
+    required this.eventStartDate,
+    required this.eventInfo,
+    required this.eventEndDate,
+    required this.eventContactName,
+    required this.eventContactEmail,
+    required this.eventContactNumber,
+  });
 
   @override
   Widget build(BuildContext context, DetailedEventViewModel viewModel) {
@@ -95,7 +115,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
             height: 10.h,
           ),
           Text(
-            'Abhiyaan',
+            eventName,
             style: FontThemeClass().heading(context,
                 size: 32.sp, color: context.colorScheme.primaryDarkColor),
           ),
@@ -108,14 +128,15 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                 height: 24.h,
                 width: 24.h,
                 alignment: Alignment.center,
-                margin: EdgeInsets.only(right: 8.0),
+                margin: const EdgeInsets.only(right: 8.0),
                 child: Icon(
                   Icons.calendar_month,
                   color: context.colorScheme.primaryColor,
                 ),
               ),
               Text(
-                '14-18 Jan 2024',
+                // '14-18 Jan 2024',
+                "${eventStartDate.day}-${eventEndDate.day} ${DateFormat('MMMM yyyy').format(eventEndDate)}",
                 style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
@@ -132,14 +153,14 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                 height: 24.h,
                 width: 24.h,
                 alignment: Alignment.center,
-                margin: EdgeInsets.only(right: 8.0),
+                margin: const EdgeInsets.only(right: 8.0),
                 child: Icon(
                   Icons.timer,
                   color: context.colorScheme.primaryColor,
                 ),
               ),
               Text(
-                '15:00 pm',
+                "${eventStartDate.hour}:${eventStartDate.minute}",
                 style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
@@ -159,7 +180,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
             height: 10.h,
           ),
           Text(
-            'Join us for a spectacular celebration of cultural diversity at the Abhiyaan Carnival, where students from all walks of life come together to showcase the rich tapestry of talents that make our college community vibrant and unique. The rich tapestry of talents that make our college community vibrant and unique.',
+            eventInfo,
             style: FontThemeClass().paragraph(
               context,
               size: 16.sp,
@@ -189,11 +210,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                 height: 28.h,
                 width: 28.h,
                 alignment: Alignment.center,
-                margin: EdgeInsets.only(right: 8.0),
-                // decoration: BoxDecoration(
-                //   shape: BoxShape.circle,
-                //   color: Colors.white,
-                // ),
+                margin: const EdgeInsets.only(right: 8.0),
                 child: Icon(
                   Icons.account_circle,
                   size: 23.h,
@@ -201,7 +218,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                 ),
               ),
               Text(
-                'Mr. Sachin Rathod',
+                eventContactName,
                 style: TextStyle(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w500,
@@ -218,11 +235,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                 height: 28.h,
                 width: 28.h,
                 alignment: Alignment.center,
-                margin: EdgeInsets.only(right: 8.0),
-                // decoration: BoxDecoration(
-                //   shape: BoxShape.circle,
-                //   color: Colors.white,
-                // ),
+                margin: const EdgeInsets.only(right: 8.0),
                 child: Icon(
                   Icons.email,
                   size: 23.h,
@@ -230,7 +243,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                 ),
               ),
               Text(
-                '125rathodsachin@gmail.com',
+                eventContactEmail,
                 style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
@@ -247,7 +260,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                 height: 28.h,
                 width: 28.h,
                 alignment: Alignment.center,
-                margin: EdgeInsets.only(right: 8.0),
+                margin: const EdgeInsets.only(right: 8.0),
                 // decoration: BoxDecoration(
                 //   shape: BoxShape.circle,
                 //   color: Colors.white,
@@ -259,7 +272,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                 ),
               ),
               Text(
-                '9838070708',
+                eventContactNumber.toString(),
                 style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
@@ -277,11 +290,27 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
 }
 
 class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
-  const BottomNavBarDetailedPage({super.key});
+  final String eventName;
+  final DateTime eventStartDate;
+  final DateTime eventEndDate;
+  final String eventInfo;
+  final String eventContactName;
+  final String eventContactEmail;
+  final int eventContactNumber;
+  const BottomNavBarDetailedPage({
+    super.key,
+    required this.eventName,
+    required this.eventStartDate,
+    required this.eventInfo,
+    required this.eventEndDate,
+    required this.eventContactName,
+    required this.eventContactEmail,
+    required this.eventContactNumber,
+  });
 
   @override
   Widget build(BuildContext context, DetailedEventViewModel viewModel) {
-    return Container(
+    return SizedBox(
       height: 50.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -300,7 +329,10 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
               ),
               side: BorderSide(color: context.colorScheme.primaryColor),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Share.share(
+                  "$eventName\n$eventInfo\nEvent Date: ${eventStartDate.day}${DateFormat('MMMM yyyy').format(eventEndDate)}\nTiming: ${eventStartDate.hour}:${eventStartDate.minute}\nContact $eventContactName for more details\nContact Number: $eventContactNumber");
+            },
             child: Text(
               'Share',
               style: FontThemeClass().subHeading(
@@ -315,7 +347,7 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
               backgroundColor: context.colorScheme.primaryColor,
               elevation: 0,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(50),
                 ),
                 side: BorderSide(color: context.colorScheme.primaryColor),

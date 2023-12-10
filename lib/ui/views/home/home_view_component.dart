@@ -74,27 +74,27 @@ Row quickLinksList(BuildContext context, List model, [double? borderRadius]) {
                     handleQuickLinksNavigation(model, idx);
                   },
                   child: Container(
-                    height: 60.sp,
-                    width: 60.sp,
+                    height: 80.h,
+                    width: 80.w,
                     decoration: BoxDecoration(
                       color: context.colorScheme.secondaryLPurpleColor,
-                      borderRadius: BorderRadius.circular(borderRadius ?? 18),
+                      borderRadius: BorderRadius.circular(borderRadius ?? 18).r,
                     ),
                     child: Image.asset(
                       model[idx].imageUrl,
-                      width: 36.sp,
-                      height: 36.sp,
+                      width: 40.w,
+                      height: 40.h,
                     ),
                   ),
                 ),
                 Text(
-                  model[idx].title,
+                  model[idx].title.toString().toUpperCase(),
                   style: fontTheme
                       .smallSubHeading(
                         context,
-                        context.colorScheme.secondarySectionColor,
+                        context.colorScheme.primaryDarkColor,
                       )
-                      .copyWith(fontWeight: FontWeight.w500),
+                      .copyWith(fontWeight: FontWeight.w600),
                   textAlign: TextAlign.center,
                   softWrap: false,
                 ),

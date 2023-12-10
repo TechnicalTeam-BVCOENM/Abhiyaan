@@ -1,15 +1,12 @@
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/ui/sub_views/event/detailed_event_view_components.dart';
 import 'package:darpan/ui/views/event/event_view.dart';
-// import 'package:darpan/theme/theme_service.dart';
 
 part 'detailed_event_view_model.dart';
-// part 'detailed_event_view_components.dart';
 
 class DetailedEventView extends StatelessWidget {
-
   final EventModel eventData;
-  const DetailedEventView({super.key,required this.eventData});
+  const DetailedEventView({super.key, required this.eventData});
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +16,32 @@ class DetailedEventView extends StatelessWidget {
         return Scaffold(
           backgroundColor: context.colorScheme.backgroundColor,
           body: CustomScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             slivers: <Widget>[
-              DetailedEventAppBar(imageLink: eventData.imageUrl,),
-              DetailedEventData(),
+              DetailedEventAppBar(
+                imageLink: eventData.imageUrl,
+                eventLocation: eventData.location,
+              ),
+              DetailedEventData(
+                eventName: eventData.title,
+                eventInfo: eventData.about,
+                eventStartDate: eventData.startDate.toDate(),
+                eventEndDate: eventData.endDate.toDate(),
+                eventContactName: eventData.cName,
+                eventContactEmail: eventData.cEmail,
+                eventContactNumber: eventData.cPhone,
+              ),
             ],
           ),
-          bottomNavigationBar: BottomNavBarDetailedPage(),
+          bottomNavigationBar: BottomNavBarDetailedPage(
+            eventName: eventData.title,
+            eventInfo: eventData.about,
+            eventStartDate: eventData.startDate.toDate(),
+            eventEndDate: eventData.endDate.toDate(),
+            eventContactName: eventData.cName,
+            eventContactEmail: eventData.cEmail,
+            eventContactNumber: eventData.cPhone,
+          ),
         );
       },
     );
