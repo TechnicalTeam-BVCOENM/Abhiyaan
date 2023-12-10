@@ -32,8 +32,8 @@ class SubjectCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 4,
+               SizedBox(
+                height: 4.h,
               ),
               SizedBox(
                 width: 200.w,
@@ -47,8 +47,8 @@ class SubjectCard extends StatelessWidget {
                       context, context.colorScheme.secondaryBlackColor),
                 ),
               ),
-              const SizedBox(
-                height: 4,
+               SizedBox(
+                height: 4.h,
               ),
             ],
           ),
@@ -58,9 +58,9 @@ class SubjectCard extends StatelessWidget {
                 //navigate
                 // navigateToSettingsView
               },
-              child: const Icon(
+              child:  Icon(
                 Icons.navigate_next,
-                size: 22,
+                size: 22.r,
               )),
         ],
       ),
