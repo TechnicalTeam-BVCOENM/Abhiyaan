@@ -158,7 +158,7 @@ class EventDateContainer extends ViewModelWidget<EventViewModel> {
   }
 }
 
-class EventCardInfo extends StatelessWidget {
+class EventCardInfo extends ViewModelWidget<EventViewModel> {
   final EventModel model;
 
   const EventCardInfo({
@@ -167,7 +167,7 @@ class EventCardInfo extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, EventViewModel viewModel) {
     EventDetails eventDetails = EventDetails();
     return Positioned(
       child: SizedBox(
@@ -216,29 +216,35 @@ class EventCardInfo extends StatelessWidget {
                     // Event Button
                     Padding(
                       padding: const EdgeInsets.only(right: 18).r,
-                      child: Container(
-                        height: 40.h,
-                        width: 95.w,
-                        decoration: BoxDecoration(
-                          color:
-                              context.colorScheme.primaryColor.withOpacity(0.8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: context.colorScheme.secondarySectionColor
-                                  .withOpacity(0.4),
-                              spreadRadius: 1,
-                              blurRadius: 2,
-                              offset: const Offset(0, 1),
+                      child: InkWell(
+                        onTap: () {
+                          viewModel._navigationService
+                              .navigateToDetailedEventView(eventData: model);
+                        },
+                        child: Container(
+                          height: 40.h,
+                          width: 95.w,
+                          decoration: BoxDecoration(
+                            color: context.colorScheme.primaryColor
+                                .withOpacity(0.8),
+                            boxShadow: [
+                              BoxShadow(
+                                color: context.colorScheme.secondarySectionColor
+                                    .withOpacity(0.4),
+                                spreadRadius: 1,
+                                blurRadius: 2,
+                                offset: const Offset(0, 1),
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Open".toUpperCase(),
+                              style: FontThemeClass().subHeading2(
+                                  context, context.colorScheme.signInTextColor,
+                                  fontSize: 18.sp, fontWeight: FontWeight.w900),
                             ),
-                          ],
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Open".toUpperCase(),
-                            style: FontThemeClass().subHeading2(
-                                context, context.colorScheme.signInTextColor,
-                                fontSize: 18.sp, fontWeight: FontWeight.w900),
                           ),
                         ),
                       ),
@@ -254,7 +260,7 @@ class EventCardInfo extends StatelessWidget {
   }
 }
 
-class EventCardUpcoming extends StatelessWidget {
+class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
   final EventModel model;
   const EventCardUpcoming({
     super.key,
@@ -262,7 +268,7 @@ class EventCardUpcoming extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, EventViewModel viewModel) {
     EventDetails eventDetails = EventDetails();
     return Positioned(
       child: SizedBox(
@@ -300,29 +306,35 @@ class EventCardUpcoming extends StatelessWidget {
                 ),
                 Padding(
                     padding: EdgeInsets.only(right: 10.sp),
-                    child: Container(
-                      height: 30.h,
-                      width: 62.w,
-                      decoration: BoxDecoration(
-                        color:
-                            context.colorScheme.primaryColor.withOpacity(0.8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: context.colorScheme.secondarySectionColor
-                                .withOpacity(0.4),
-                            spreadRadius: 1,
-                            blurRadius: 2,
-                            offset: const Offset(0, 1),
+                    child: InkWell(
+                      onTap: () {
+                        viewModel._navigationService
+                            .navigateToDetailedEventView(eventData: model);
+                      },
+                      child: Container(
+                        height: 30.h,
+                        width: 62.w,
+                        decoration: BoxDecoration(
+                          color:
+                              context.colorScheme.primaryColor.withOpacity(0.8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: context.colorScheme.secondarySectionColor
+                                  .withOpacity(0.4),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset: const Offset(0, 1),
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Open".toUpperCase(),
+                            style: FontThemeClass().subHeading2(
+                                context, context.colorScheme.signInTextColor,
+                                fontWeight: FontWeight.w900, fontSize: 16.sp),
                           ),
-                        ],
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Open".toUpperCase(),
-                          style: FontThemeClass().subHeading2(
-                              context, context.colorScheme.signInTextColor,
-                              fontWeight: FontWeight.w900, fontSize: 16.sp),
                         ),
                       ),
                     ))

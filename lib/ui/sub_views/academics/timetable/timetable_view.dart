@@ -59,8 +59,7 @@ class TimeTableView extends StatelessWidget {
                       leftChevronVisible: false,
                       rightChevronVisible: false,
                       formatButtonShowsNext: false,
-                      titleTextStyle:
-                          fontThemeClass.heading3(context, FontWeight.bold),
+                      titleTextStyle: fontThemeClass.heading3(context),
                       formatButtonTextStyle:
                           fontThemeClass.subHeading(context, Colors.white),
                       formatButtonDecoration: BoxDecoration(
@@ -113,7 +112,7 @@ class TimeTableView extends StatelessWidget {
                   Text(
                     model.todaysDay == 'holiday' ? "Holiday" : "Lectures",
                     textAlign: TextAlign.start,
-                    style: fontThemeClass.heading3(context, FontWeight.bold),
+                    style: fontThemeClass.heading3(context),
                   ),
                   8.verticalSpace,
                   model.todaysDay == 'holiday'

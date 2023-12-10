@@ -105,7 +105,7 @@ class SettingsView extends StatelessWidget {
                   ),
                   Text(
                     'Made with ❤️ by Technical Team ',
-                    style: model.fontTheme.smallestSubHeading(
+                    style: model.fontTheme.smallSubHeading(
                         context, context.colorScheme.secondarySectionColor),
                   )
                 ],

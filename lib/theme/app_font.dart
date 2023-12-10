@@ -46,12 +46,12 @@ class FontThemeClass {
     );
   }
 
-  TextStyle heading3(BuildContext context, [FontWeight? weight]) {
+  TextStyle heading3(BuildContext context, [Color? color, FontWeight? weight]) {
     return TextStyle(
       fontSize: 20,
       fontFamily: 'Outfit',
-      fontWeight: weight ?? FontWeight.w400,
-      color: context.colorScheme.headingColor,
+      fontWeight: weight ?? FontWeight.bold,
+      color: color ?? context.colorScheme.secondaryBlackColor,
     );
   }
 
@@ -102,11 +102,9 @@ class FontThemeClass {
     );
   }
 
-  TextStyle paragraph(
-    BuildContext context,
-  ) {
+  TextStyle paragraph(BuildContext context, {double size = 14}) {
     return TextStyle(
-      fontSize: 14,
+      fontSize: size,
       letterSpacing: 0.5,
       fontFamily: 'Outfit',
       color: context.colorScheme.secondaryBlackColor,
