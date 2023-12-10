@@ -24,7 +24,7 @@ class FontThemeClass {
       fontSize: size,
       fontFamily: 'Outfit',
       fontWeight: FontWeight.bold,
-      color: color ?? context.colorScheme.secondaryBlackColor,
+      color: color ?? context.colorScheme.headingColor,
     );
   }
 
@@ -33,7 +33,7 @@ class FontThemeClass {
       fontSize: 24,
       fontFamily: 'Outfit',
       fontWeight: FontWeight.w500,
-      color: primaryColor ?? context.colorScheme.secondaryBlackColor,
+      color: primaryColor ?? context.colorScheme.headingColor,
     );
   }
 
@@ -42,16 +42,16 @@ class FontThemeClass {
       fontSize: 22,
       fontFamily: 'Outfit',
       fontWeight: FontWeight.w500,
-      color: context.colorScheme.secondaryBlackColor,
+      color: context.colorScheme.headingColor,
     );
   }
 
-  TextStyle heading3(BuildContext context) {
+  TextStyle heading3(BuildContext context, [FontWeight? weight]) {
     return TextStyle(
       fontSize: 20,
       fontFamily: 'Outfit',
-      fontWeight: FontWeight.w400,
-      color: context.colorScheme.secondaryBlackColor,
+      fontWeight: weight ?? FontWeight.w400,
+      color: context.colorScheme.headingColor,
     );
   }
 
@@ -60,7 +60,7 @@ class FontThemeClass {
       fontSize: 16,
       fontFamily: 'Outfit',
       fontWeight: FontWeight.w500,
-      color: context.colorScheme.secondaryBlackColor,
+      color: context.colorScheme.headingColor,
     );
   }
 
@@ -70,7 +70,7 @@ class FontThemeClass {
       fontFamily: 'Outfit',
       fontWeight: FontWeight.w700,
       letterSpacing: 0.1,
-      color: color ?? context.colorScheme.secondarySectionColor,
+      color: color ?? context.colorScheme.headingColor,
     );
   }
 
@@ -89,7 +89,7 @@ class FontThemeClass {
       fontSize: 12,
       fontFamily: 'Outfit',
       fontWeight: FontWeight.w500,
-      color: color ?? context.colorScheme.secondarySectionColor,
+      color: color ?? context.colorScheme.headingColor,
     );
   }
 
@@ -98,7 +98,7 @@ class FontThemeClass {
       fontSize: 10,
       fontFamily: 'Outfit',
       fontWeight: FontWeight.w500,
-      color: color ?? context.colorScheme.secondarySectionColor,
+      color: color ?? context.colorScheme.headingColor,
     );
   }
 
