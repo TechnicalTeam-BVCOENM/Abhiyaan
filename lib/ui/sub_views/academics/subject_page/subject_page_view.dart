@@ -37,7 +37,7 @@ class SubjectView extends StatelessWidget {
                     child: const SizedBox(
                         width: double.infinity - 100,
                         height: 40,
-                        child: Center(child: Text("hello world")))),
+                        child: Center(child: Text("click here for Syllabus")))),
               ));
         });
   }
