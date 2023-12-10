@@ -98,14 +98,22 @@ class FirestoreService {
   }
 
   Future<List<CourseModel>> getAllCourses() async {
-    final QuerySnapshot response = await _firestore.collection("courses").get();
+    final QuerySnapshot response = await _firestore
+        .collection("Department")
+        .doc('12_computer')
+        .collection('academics')
+        .doc('semester')
+        .collection('1_sem')
+        .doc('1_sem')
+        .collection('courses')
+        .get();
     return response.docs.map((ele) {
       Map<String, dynamic> data = ele.data() as Map<String, dynamic>;
       return CourseModel(
-          courseName: data['courseName'],
-          courseDesc: data['courseDesc'],
+          courseName: data['title'],
+          courseDesc: data['description'],
           image: data['image'],
-          url: data['courseUrl']);
+          url: data['url']);
     }).toList();
   }
 }
