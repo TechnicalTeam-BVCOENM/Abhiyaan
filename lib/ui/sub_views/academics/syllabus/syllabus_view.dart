@@ -27,8 +27,12 @@ class SyllabusView extends StatelessWidget {
                 ),
                 backgroundColor: context.colorScheme.backgroundColor,
               ),
-              body: subjectCard(
-                  model.syllabus, model.syllabus.length, context, model));
+              body: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: subjectCard(
+                    model.syllabus, model.syllabus.length, context, model),
+              ));
         });
   }
 }

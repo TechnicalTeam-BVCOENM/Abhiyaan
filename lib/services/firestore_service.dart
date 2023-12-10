@@ -78,13 +78,14 @@ class FirestoreService {
 
   Future<List<Syllabus>> getAllSyllabus(String collection) async {
     final localStorageService = locator<LocalStorageService>();
+    String semester = "${localStorageService.read('userSem')}_sem";
     final QuerySnapshot snapshot = await _firestore
         .collection(collection)
         .doc(localStorageService.read('departmentCodeDatabase'))
         .collection('academics')
         .doc('semester')
-        .collection('1_sem')
-        .doc('1_sem')
+        .collection(semester)
+        .doc(semester)
         .collection('syllabus')
         .get();
     return snapshot.docs.map((doc) {
