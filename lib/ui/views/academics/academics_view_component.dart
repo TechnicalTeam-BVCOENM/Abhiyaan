@@ -7,7 +7,7 @@ class AcademicsShimmerLoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 18.r),
+      padding: const EdgeInsets.symmetric(horizontal: 18).r,
       child: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         scrollBehavior:
@@ -33,7 +33,7 @@ class AcademicsShimmerLoadingWidget extends StatelessWidget {
                     height: 98.r,
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(25.r),
+                      borderRadius: BorderRadius.circular(25).r,
                     ),
                   ),
                 );
@@ -51,12 +51,12 @@ class AcademicsShimmerLoadingWidget extends StatelessWidget {
                   baseColor: context.colorScheme.backgroundColor,
                   highlightColor: context.colorScheme.secondaryLPurpleColor,
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 12.r),
+                    margin: const EdgeInsets.only(bottom: 12).r,
                     width: double.infinity,
                     height: 120.h,
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(16.r),
+                      borderRadius: BorderRadius.circular(16).r,
                     ),
                   ),
                 );
