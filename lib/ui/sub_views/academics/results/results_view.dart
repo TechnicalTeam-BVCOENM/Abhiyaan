@@ -26,7 +26,7 @@ class ResultsView extends StatelessWidget {
               centerTitle: true,
             ),
             body: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18.0),

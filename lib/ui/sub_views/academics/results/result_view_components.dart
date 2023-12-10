@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, avoid_print
+
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:darpan/ui/sub_views/academics/results/results_view.dart';
@@ -50,7 +52,6 @@ class SemesterResult extends ViewModelWidget<ResultsViewModel> {
               onExpansionChanged: (bool expanded) {
                 viewModel.updateExpansionState(expanded);
                 viewModel.updateExpandedSemesterIndices(index, expanded);
-                ;
               },
               title: Text(
                 semester,
@@ -100,13 +101,12 @@ class SemesterResult extends ViewModelWidget<ResultsViewModel> {
   }
 }
 
-// ignore: camel_case_types
+// ignore: camel_case_types, duplicate_ignore
 class buildElevatedButton extends ViewModelWidget<ResultsViewModel> {
   final ResultsViewModel model;
   final String title;
   final String link;
   final int index;
-  // ignore: non_constant_identifier_names
   final int sem_index;
   const buildElevatedButton(
       {super.key,
