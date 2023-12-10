@@ -50,23 +50,23 @@ class SettingsViewModel extends BaseViewModel {
   List<SettingsModel> settings = [
     SettingsModel(
       title: 'Dark mode',
-      leading: Icons.brightness_2_outlined,
+      leading: AssetImagePath.darkMode,
     ),
     SettingsModel(
       title: 'Change Password',
-      leading: Icons.lock_outline_rounded,
+      leading: AssetImagePath.pass,
     ),
     SettingsModel(
       title: 'Help & Support',
-      leading: Icons.support_agent_rounded,
+      leading: AssetImagePath.help,
     ),
     SettingsModel(
       title: 'Privacy Policy',
-      leading: Icons.security_rounded,
+      leading: AssetImagePath.privacy,
     ),
     SettingsModel(
       title: 'Logout',
-      leading: Icons.logout,
+      leading: AssetImagePath.logout,
     )
   ];
 }
@@ -74,6 +74,6 @@ class SettingsViewModel extends BaseViewModel {
 class SettingsModel {
   late String title;
   IconData trailing = Icons.arrow_forward_ios;
-  late IconData leading;
+  late String leading;
   SettingsModel({required this.title, required this.leading});
 }
