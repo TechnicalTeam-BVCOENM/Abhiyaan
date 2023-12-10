@@ -1,6 +1,14 @@
 part of 'profile_view.dart';
 
 class ProfileViewModel extends BaseViewModel {
+  final log = getLogger('ProfileView');
+  final _navigationService = locator<NavigationService>();
+  final localStorageService = locator<LocalStorageService>();
+
+  navigateToSettingsView() {
+    _navigationService.navigateTo(Routes.settingsView);
+  }
+
   List<String> userStorageTag = [
     "userCollegeId",
     "userLibNo",
@@ -44,12 +52,4 @@ class ProfileViewModel extends BaseViewModel {
       value: LocalStorageService().read('userPrnNo'),
     ),
   ];
-
-  final log = getLogger('ProfileView');
-  final _navigationService = locator<NavigationService>();
-  final localStorageService = locator<LocalStorageService>();
-
-  navigateToSettingsView() {
-    _navigationService.navigateTo(Routes.settingsView);
-  }
 }
