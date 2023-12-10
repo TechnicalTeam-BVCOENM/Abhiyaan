@@ -1,6 +1,5 @@
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/ui/sub_views/event/detailed_event_view.dart';
-// part of '../event/detailed_event_view.dart';
 
 class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
   const DetailedEventAppBar({super.key});
@@ -8,45 +7,83 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
   @override
   Widget build(BuildContext context, DetailedEventViewModel viewModel) {
     return SliverAppBar(
-      // backgroundColor: Colors.white,
+      backgroundColor: context.colorScheme.backgroundColor,
       elevation: 0.0,
-      pinned: true,
+      pinned: false,
       stretch: true,
       expandedHeight: 220.h,
-      flexibleSpace: FlexibleSpaceBar(
-        background: Image.network(
-          'https://thumbs.dreamstime.com/b/modern-business-buildings-11681736.jpg',
-          fit: BoxFit.cover,
-          width: double.infinity,
-          height: 220.h,
-        ),
-        stretchModes: const [
-          StretchMode.blurBackground,
-          StretchMode.zoomBackground
-        ],
-      ),
-      bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(0),
-        child: Container(
-          height: 30.h,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: context.colorScheme.backgroundColor,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15.h),
-              topRight: Radius.circular(15.h),
+      flexibleSpace: Stack(
+        children: [
+          FlexibleSpaceBar(
+            background: Image.network(
+              'https://thumbs.dreamstime.com/b/modern-business-buildings-11681736.jpg',
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: 220.h,
+            ),
+            stretchModes: const [
+              StretchMode.blurBackground,
+              StretchMode.zoomBackground
+            ],
+          ),
+          Positioned(
+            bottom: -1,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 30.h,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: context.colorScheme.backgroundColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15.h),
+                  topRight: Radius.circular(15.h),
+                ),
+              ),
+              child: Container(
+                width: 40.w,
+                height: 5.h,
+                // color: Colors.black12,
+                decoration: BoxDecoration(
+                  color: context.colorScheme.primaryDarkColor,
+                  borderRadius: BorderRadius.circular(100.h),
+                ),
+              ),
             ),
           ),
-          child: Container(
-            width: 40.w,
-            height: 5.h,
-            color: Colors.black12,
-            // decoration: BoxDecoration(
-            //   color: Colors.black12,
-            //   borderRadius: BorderRadius.circular(100.h),
-            // ),
+          Positioned(
+            bottom: 30,
+            right: 20.w,
+            child: Material(
+              elevation: 2.h,
+              borderRadius: BorderRadius.circular(10.h),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 8.h),
+                decoration: BoxDecoration(
+                  color: context.colorScheme.secondaryWhiteColor,
+                  borderRadius: BorderRadius.circular(10.h),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.pin_drop,
+                      color: context.colorScheme.primaryColor,
+                    ),
+                    SizedBox(width: 8.w),
+                    Text(
+                      'Quadrangle',
+                      style: FontThemeClass().heading3(
+                          context,
+                          context.colorScheme.primaryDarkColor,
+                          FontWeight.w700),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -294,10 +331,7 @@ class BottomNavBarDetailedPage extends StatelessWidget {
             onPressed: () {},
             child: Text(
               'Register',
-              style: FontThemeClass().subHeading(
-                context,
-                context.colorScheme.secondaryWhiteColor,
-              ),
+              style: FontThemeClass().subHeading(context, Colors.white),
             ),
           ),
         ],

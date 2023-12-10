@@ -14,35 +14,14 @@ class DetailedEventView extends StatelessWidget {
       viewModelBuilder: () => DetailedEventViewModel(),
       builder: (context, model, child) {
         return Scaffold(
+          backgroundColor: context.colorScheme.backgroundColor,
           body: CustomScrollView(
             physics: BouncingScrollPhysics(),
-            // scrollBehavior:
-            //     MaterialScrollBehavior().copyWith(overscroll: false),
             slivers: <Widget>[
               DetailedEventAppBar(),
               DetailedEventData(),
             ],
           ),
-          // body: SafeArea(
-          //   child: Stack(
-          //     children: [
-          //       Padding(
-          //         padding: const EdgeInsets.only(top: 40.0),
-          //         child: Column(
-          //           children: [
-          //             Image.network(
-          //                 'https://thumbs.dreamstime.com/b/modern-business-buildings-11681736.jpg'),
-          //           ],
-          //         ),
-          //       ),
-          //       DraggableScrollableSheet(
-          //         builder: (context, scrollController) {
-          //           return DetailedEventData();
-          //         },
-          //       ),
-          //     ],
-          //   ),
-          // ),
           bottomNavigationBar: BottomNavBarDetailedPage(),
         );
       },

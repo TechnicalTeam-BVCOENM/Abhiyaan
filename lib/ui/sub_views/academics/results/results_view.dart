@@ -1,4 +1,5 @@
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/ui/sub_views/academics/results/result_view_components.dart';
 part 'results_view_model.dart';
 
 class ResultsView extends StatelessWidget {
@@ -8,12 +9,101 @@ class ResultsView extends StatelessWidget {
     return ViewModelBuilder<ResultsViewModel>.reactive(
         viewModelBuilder: () => ResultsViewModel(),
         builder: (context, model, child) {
-          return const Scaffold(
-            body: SafeArea(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18.0),
-                child: Column(
-                  children: [Center(child: Text("Results"))],
+          return Scaffold(
+            backgroundColor: context.colorScheme.backgroundColor,
+            appBar: AppBar(
+              iconTheme: IconThemeData(
+                color: context
+                    .colorScheme.secondaryBlackColor, //change your color here
+              ),
+              backgroundColor: context.colorScheme.backgroundColor,
+              elevation: 0,
+              title: Text(
+                'Results',
+                style: FontThemeClass().heading(context),
+              ),
+              centerTitle: true,
+            ),
+            body: SingleChildScrollView(
+              child: SafeArea(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 18.0),
+                  child: Column(
+                    children: [
+                      SemesterResult(
+                        model: model,
+                        semester: 'Semester 1',
+                        ut1_link: 'udgsdcj',
+                        ut2_link: 'udg',
+                        gazette_link: 'uwf',
+                        marksheet_link: 'hgd',
+                        index: 0,
+                      ),
+                      SemesterResult(
+                        model: model,
+                        semester: 'Semester 2',
+                        ut1_link: 'udgsdcj',
+                        ut2_link: 'udg',
+                        gazette_link: 'uwf',
+                        marksheet_link: 'hgd',
+                        index: 1,
+                      ),
+                      SemesterResult(
+                        model: model,
+                        semester: 'Semester 3',
+                        ut1_link: 'udgsdcj',
+                        ut2_link: 'udg',
+                        gazette_link: 'uwf',
+                        marksheet_link: 'hgd',
+                        index: 2,
+                      ),
+                      SemesterResult(
+                        model: model,
+                        semester: 'Semester 4',
+                        ut1_link: 'udgsdcj',
+                        ut2_link: 'udg',
+                        gazette_link: 'uwf',
+                        marksheet_link: 'hgd',
+                        index: 3,
+                      ),
+                      SemesterResult(
+                        model: model,
+                        semester: 'Semester 5',
+                        ut1_link: 'udgsdcj',
+                        ut2_link: 'udg',
+                        gazette_link: 'uwf',
+                        marksheet_link: 'hgd',
+                        index: 4,
+                      ),
+                      SemesterResult(
+                        model: model,
+                        semester: 'Semester 6',
+                        ut1_link: 'udgsdcj',
+                        ut2_link: 'udg',
+                        gazette_link: 'uwf',
+                        marksheet_link: 'hgd',
+                        index: 5,
+                      ),
+                      SemesterResult(
+                        model: model,
+                        semester: 'Semester 7',
+                        ut1_link: 'udgsdcj',
+                        ut2_link: 'udg',
+                        gazette_link: 'uwf',
+                        marksheet_link: 'hgd',
+                        index: 6,
+                      ),
+                      SemesterResult(
+                        model: model,
+                        semester: 'Semester 8',
+                        ut1_link: 'udgsdcj',
+                        ut2_link: 'udg',
+                        gazette_link: 'uwf',
+                        marksheet_link: 'hgd',
+                        index: 7,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

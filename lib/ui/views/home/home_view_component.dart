@@ -18,15 +18,15 @@ class CarouselUtils {
   static Widget buildImage(BuildContext context, String urlImage, int index) =>
       Container(
         width: MediaQuery.of(context).size.width * 1,
-        margin: const EdgeInsets.symmetric(horizontal: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 7),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(13),
           child: Stack(
             children: [
               CachedNetworkImageWidget(
                 imageUrl: urlImage,
-                height: 1500,
-                width: 350,
+                height: 1500.h,
+                width: 350.w,
                 maxHeightDiskCache: 1000,
                 fit: BoxFit.cover,
               ),

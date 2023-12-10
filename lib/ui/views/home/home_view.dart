@@ -83,7 +83,7 @@ class HomeView extends StatelessWidget {
                                     viewportFraction: 1,
                                   ),
                                 ),
-                                SizedBox(height: 20.sp),
+                                SizedBox(height: 18.h),
                                 CarouselUtils.buildIndicator(
                                   context,
                                   model.activeIndex,
