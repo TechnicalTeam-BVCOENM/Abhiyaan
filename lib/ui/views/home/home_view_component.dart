@@ -106,3 +106,4 @@ Row quickLinksList(BuildContext context, List model, [double? borderRadius]) {
     ],
   );
 }
+
