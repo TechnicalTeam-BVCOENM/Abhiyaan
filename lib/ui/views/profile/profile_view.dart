@@ -55,10 +55,11 @@ class ProfileView extends StatelessWidget {
                           ClipOval(
                             clipper: MyClip(),
                             child: CachedNetworkImage(
-                              width: 80.r,
-                              height: 80.r,
+                              width: 90.r,
+                              height: 90.r,
                               fit: BoxFit.cover,
-                              imageUrl: LocalStorageService().read('userImg'),
+                              imageUrl:
+                                  "https://firebasestorage.googleapis.com/v0/b/darpan-b94d6.appspot.com/o/user%2Fimages.jpeg?alt=media&token=a9889ba7-3958-4784-9708-e43ade1016d4",
                               placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator.adaptive()),
                               errorWidget: (context, url, error) =>
@@ -66,7 +67,7 @@ class ProfileView extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: 30.w,
+                            width: 25.w,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
