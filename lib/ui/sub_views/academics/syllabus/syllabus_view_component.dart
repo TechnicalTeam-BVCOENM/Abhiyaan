@@ -1,6 +1,5 @@
 import 'package:darpan/file_exporter.dart';
 
-
 Widget subjectCard(List syllabusList, int i, BuildContext context, viewModel) {
   return ListView.builder(
       itemCount: i,

@@ -104,4 +104,3 @@ Widget quickLinksList(BuildContext context, List model,
     ),
   );
 }
-
