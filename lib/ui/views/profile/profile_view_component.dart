@@ -19,19 +19,19 @@ class ProfileDetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 62.sp,
-      margin: EdgeInsets.only(bottom: 15.sp),
+      height: 75.h,
+      margin: EdgeInsets.only(bottom: 20.sp),
       decoration: BoxDecoration(
           color: context.colorScheme.secondaryWhiteColor,
-          borderRadius: BorderRadius.circular(20)),
+          borderRadius: BorderRadius.circular(20.sp)),
       child: Row(
         children: [
           SizedBox(
             width: 25.sp,
           ),
-          Image.asset(width: 30.sp, leading),
+          Image.asset(width: 35.sp, leading),
           SizedBox(
-            width: 32.sp,
+            width: 32.w,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -65,7 +65,7 @@ class ProfileDetailsCard extends StatelessWidget {
               child: Icon(
                 Icons.content_copy,
                 size: 22,
-                color: context.colorScheme.primaryColor,
+                color: context.colorScheme.switchColor,
               )),
           const SizedBox(
             width: 10,
@@ -90,13 +90,13 @@ class SocialLinks extends StatelessWidget {
           );
         },
         child: Container(
-          width: 40.sp,
-          height: 40.sp,
+          width: 45.sp,
+          height: 45.sp,
           decoration: BoxDecoration(
               color: context.colorScheme.secondaryWhiteColor,
               borderRadius: BorderRadius.circular(100)),
           child: Padding(
-              padding: const EdgeInsets.all(8), child: Image.asset(iconpath)),
+              padding: const EdgeInsets.all(9), child: Image.asset(iconpath)),
         ));
   }
 }
