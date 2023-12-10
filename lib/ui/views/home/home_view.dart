@@ -39,12 +39,13 @@ class HomeView extends StatelessWidget {
                             children: [
                               Text(
                                 'Hey ${model.user} 👋', // Update according to loal storage
-                                style: fontTheme.appBarText(context),
+                                style: fontTheme.appBarText(
+                                    context, context.colorScheme.headingColor),
                               ),
                               IconButton(
                                 splashRadius: 30.sp,
                                 splashColor:
-                                    context.colorScheme.backgroundColor,
+                                    context.colorScheme.secondaryBlackColor,
                                 icon: ImageIcon(
                                   const AssetImage(
                                     "assets/images/Notification Bell.png",
@@ -66,7 +67,6 @@ class HomeView extends StatelessWidget {
                                 CarouselSlider.builder(
                                   itemCount: model.highlights.length,
                                   itemBuilder: (context, index, realIndex) {
-                                    // return CachedNetworkImage(imageUrl: model.highlights[index]['imageUrl']);
                                     return CarouselUtils.buildImage(
                                         context,
                                         model.highlights[index]['imageUrl'],

@@ -88,13 +88,13 @@ Row quickLinksList(BuildContext context, List model, [double? borderRadius]) {
                   ),
                 ),
                 Text(
-                  model[idx].title,
+                  model[idx].title.toString().toUpperCase(),
                   style: fontTheme
                       .smallSubHeading(
                         context,
-                        context.colorScheme.secondarySectionColor,
+                        context.colorScheme.primaryDarkColor,
                       )
-                      .copyWith(fontWeight: FontWeight.w500),
+                      .copyWith(fontWeight: FontWeight.w600),
                   textAlign: TextAlign.center,
                   softWrap: false,
                 ),

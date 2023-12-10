@@ -12,7 +12,7 @@ class SplashView extends StatelessWidget {
       onViewModelReady: (model) => model.init(),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: context.colorScheme.background,
+          backgroundColor: context.colorScheme.backgroundColor,
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
