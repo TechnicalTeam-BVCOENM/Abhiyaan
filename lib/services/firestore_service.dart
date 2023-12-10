@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:darpan/ui/sub_views/academics/courses/courses_view.dart';
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/ui/sub_views/academics/syllabus/syllabus_view.dart';
 import 'package:darpan/ui/sub_views/academics/timetable/timetable_view.dart';
@@ -157,5 +158,25 @@ class FirestoreService {
     } else {
       return null; // Document with the specified ID does not exist
     }
+  }
+
+  Future<List<CourseModel>> getAllCourses() async {
+    final QuerySnapshot response = await _firestore
+        .collection("Department")
+        .doc('12_computer')
+        .collection('academics')
+        .doc('semester')
+        .collection('1_sem')
+        .doc('1_sem')
+        .collection('courses')
+        .get();
+    return response.docs.map((ele) {
+      Map<String, dynamic> data = ele.data() as Map<String, dynamic>;
+      return CourseModel(
+          courseName: data['title'],
+          courseDesc: data['description'],
+          image: data['image'],
+          url: data['url']);
+    }).toList();
   }
 }
