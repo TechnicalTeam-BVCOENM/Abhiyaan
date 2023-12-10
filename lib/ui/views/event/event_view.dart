@@ -109,7 +109,11 @@ class EventView extends StatelessWidget {
                                   ? const ShimmerLoadingWidget()
                                   : InkWell(
                                       onTap: () {
-                                        model.navigateToDetailedEventView();
+                                        // model.navigateToDetailedEventView();
+                                        model._navigationService
+                                            .navigateToDetailedEventView(
+                                                eventData:
+                                                    model.remainigEvents[index]);
                                       },
                                       child: Card(
                                         clipBehavior: Clip.hardEdge,

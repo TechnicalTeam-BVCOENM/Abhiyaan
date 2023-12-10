@@ -3,7 +3,8 @@ import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:darpan/ui/sub_views/event/detailed_event_view.dart';
 
 class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
-  const DetailedEventAppBar({super.key});
+  final String imageLink;
+  const DetailedEventAppBar({super.key, required this.imageLink});
 
   @override
   Widget build(BuildContext context, DetailedEventViewModel viewModel) {
@@ -17,7 +18,7 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
         children: [
           FlexibleSpaceBar(
             background: Image.network(
-              'https://thumbs.dreamstime.com/b/modern-business-buildings-11681736.jpg',
+              imageLink,
               fit: BoxFit.cover,
               width: double.infinity,
               height: 220.h,
