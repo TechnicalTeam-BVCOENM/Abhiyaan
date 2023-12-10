@@ -27,7 +27,7 @@ class PyqsViewModel extends BaseViewModel {
 
   List<SubjectCard> allSubCards = [
     const SubjectCard(
-      title: "Theoretical Comp. Science",
+      title: "Theoretical Computer Science",
     ),
     const SubjectCard(
       title: "Software Engineering",
@@ -39,7 +39,7 @@ class PyqsViewModel extends BaseViewModel {
       title: "Data Warehousing & Mining",
     ),
     const SubjectCard(
-      title: "Advance DBMS",
+      title: "Advance Database Management",
     ),
   ];
 

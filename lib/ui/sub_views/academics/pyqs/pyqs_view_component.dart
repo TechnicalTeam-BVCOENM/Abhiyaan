@@ -12,8 +12,8 @@ class SubjectCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 62.h,
-      margin: EdgeInsets.only(bottom: 15.w),
+      height: 70.h,
+      margin: EdgeInsets.only(bottom: 25.w),
       decoration: BoxDecoration(
           color: context.colorScheme.secondaryLPurpleColor,
           borderRadius: BorderRadius.circular(20)),

@@ -26,10 +26,10 @@ class PyqsView extends StatelessWidget {
             body: SafeArea(
               child: Padding(
                 padding:
-                    EdgeInsets.symmetric(vertical: 20.sp, horizontal: 20.sp),
+                    EdgeInsets.symmetric(vertical: 30.sp, horizontal: 20.sp),
                 child: const Column(children: [
                    SubjectCard(
-                    title: "Theoretical Comp. Science",
+                    title: "Theoretical Computer Science",
                   ),
                    SubjectCard(
                     title: "Software Engineering",
@@ -41,7 +41,7 @@ class PyqsView extends StatelessWidget {
                     title: "Data Warehousing & Mining",
                   ),
                    SubjectCard(
-                    title: "Advance DBMS",
+                    title: "Advance Database Management",
                   ),
                   Expanded(child: Text("")),
                 ]),
