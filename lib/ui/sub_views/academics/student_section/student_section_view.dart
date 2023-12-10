@@ -11,17 +11,17 @@ class StudentSectionView extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               iconTheme: IconThemeData(
-              color: context
-                  .colorScheme.secondaryBlackColor, //change your color here
+                color: context
+                    .colorScheme.secondaryBlackColor, //change your color here
+              ),
+              backgroundColor: context.colorScheme.backgroundColor,
+              elevation: 0,
+              title: Text(
+                'Student Section',
+                style: FontThemeClass().heading2(context),
+              ),
+              centerTitle: true,
             ),
-            backgroundColor: context.colorScheme.backgroundColor,
-            elevation: 0,
-            title: Text(
-              'Student Section',
-              style: FontThemeClass().heading2(context),
-            ),
-            centerTitle: true,
-          ),
             backgroundColor:
                 context.colorScheme.backgroundColor, // Background color
             body: Center(

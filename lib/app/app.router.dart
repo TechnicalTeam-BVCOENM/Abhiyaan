@@ -34,7 +34,6 @@ import 'package:darpan/ui/views/home/home_view.dart' as _i3;
 import 'package:darpan/ui/views/profile/profile_view.dart' as _i6;
 import 'package:darpan/ui/views/settings/settings_view.dart' as _i7;
 import 'package:darpan/ui/views/splash/splash_view.dart' as _i2;
-import 'package:flutter/material.dart' as _i21;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i22;
