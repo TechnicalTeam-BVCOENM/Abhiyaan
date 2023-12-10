@@ -17,7 +17,7 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
       elevation: 0.0,
       pinned: false,
       stretch: true,
-      expandedHeight: 220.h,
+      expandedHeight: 276.h,
       flexibleSpace: Stack(
         children: [
           FlexibleSpaceBar(
@@ -25,7 +25,7 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
               imageLink,
               fit: BoxFit.cover,
               width: double.infinity,
-              height: 220.h,
+              height: 276.h,
             ),
             stretchModes: const [
               StretchMode.blurBackground,
@@ -49,13 +49,13 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
             ),
           ),
           Positioned(
-            bottom: 15.w,
-            right: 20.w,
+            bottom: 2.r,
+            right: 20.r,
             child: Material(
               elevation: 2.h,
-              borderRadius: BorderRadius.circular(10.h),
+              borderRadius: BorderRadius.circular(10.r),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 8.h),
+                padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 15.h),
                 decoration: BoxDecoration(
                   color: context.colorScheme.secondaryWhiteColor,
                   borderRadius: BorderRadius.circular(10.h),
@@ -111,36 +111,31 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.h),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(
-            height: 10.h,
-          ),
+          10.h.verticalSpace,
           Text(
             eventName,
             style: FontThemeClass().heading(context,
-                size: 32.sp, color: context.colorScheme.primaryDarkColor),
+                size: 35.sp, color: context.colorScheme.primaryDarkColor),
           ),
-          SizedBox(
-            height: 10.h,
-          ),
+          10.h.verticalSpace,
           Row(
             children: [
               Container(
-                height: 24.h,
-                width: 24.h,
+                height: 24.r,
+                width: 24.r,
                 alignment: Alignment.center,
-                margin: const EdgeInsets.only(right: 8.0),
+                margin: const EdgeInsets.only(right: 8.0).r,
                 child: Icon(
                   Icons.calendar_month,
                   color: context.colorScheme.primaryColor,
                 ),
               ),
               Text(
-                // '14-18 Jan 2024',
                 "${eventStartDate.day}-${eventEndDate.day} ${DateFormat('MMMM yyyy').format(eventEndDate)}",
                 style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
-                    color: context.colorScheme.primaryDarkColor),
+                    color: context.colorScheme.secondarySectionColor),
               ),
             ],
           ),
@@ -164,7 +159,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                 style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
-                    color: context.colorScheme.primaryDarkColor),
+                    color: context.colorScheme.secondarySectionColor),
               ),
             ],
           ),
@@ -174,7 +169,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
           Text(
             "About Event",
             style: FontThemeClass().heading(context,
-                size: 22.sp, color: context.colorScheme.primaryDarkColor),
+                size: 25.sp, color: context.colorScheme.primaryDarkColor),
           ),
           SizedBox(
             height: 10.h,
@@ -199,7 +194,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
           Text(
             "Contact Section",
             style: FontThemeClass().heading(context,
-                size: 22.sp, color: context.colorScheme.primaryDarkColor),
+                size: 25.sp, color: context.colorScheme.primaryDarkColor),
           ),
           SizedBox(
             height: 20.h,
@@ -208,12 +203,12 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
             children: [
               Container(
                 height: 28.h,
-                width: 28.h,
+                width: 28.w,
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(right: 8.0),
                 child: Icon(
                   Icons.account_circle,
-                  size: 23.h,
+                  size: 28.h,
                   color: context.colorScheme.primaryColor,
                 ),
               ),
@@ -233,19 +228,19 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
             children: [
               Container(
                 height: 28.h,
-                width: 28.h,
+                width: 28.w,
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(right: 8.0),
                 child: Icon(
                   Icons.email,
-                  size: 23.h,
+                  size: 28.h,
                   color: context.colorScheme.primaryColor,
                 ),
               ),
               Text(
                 eventContactEmail,
                 style: TextStyle(
-                    fontSize: 18.sp,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.w500,
                     color: context.colorScheme.primaryDarkColor),
               ),
@@ -258,7 +253,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
             children: [
               Container(
                 height: 28.h,
-                width: 28.h,
+                width: 28.w,
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(right: 8.0),
                 // decoration: BoxDecoration(
@@ -267,14 +262,14 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                 // ),
                 child: Icon(
                   Icons.phone_in_talk_rounded,
-                  size: 23.h,
+                  size: 28.h,
                   color: context.colorScheme.primaryColor,
                 ),
               ),
               Text(
                 eventContactNumber.toString(),
                 style: TextStyle(
-                    fontSize: 18.sp,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.w500,
                     color: context.colorScheme.primaryDarkColor),
               ),
@@ -311,13 +306,13 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
   @override
   Widget build(BuildContext context, DetailedEventViewModel viewModel) {
     return SizedBox(
-      height: 50.h,
+      height: 80.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              minimumSize: Size(140.w, 40.h),
+              minimumSize: Size(160.w, 55.h),
               backgroundColor: Colors.white,
               elevation: 0,
               shape: const RoundedRectangleBorder(
@@ -335,7 +330,7 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
             },
             child: Text(
               'Share',
-              style: FontThemeClass().subHeading(
+              style: FontThemeClass().heading2(
                 context,
                 context.colorScheme.primaryColor,
               ),
@@ -343,7 +338,7 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              minimumSize: Size(140.w, 40.h),
+              minimumSize: Size(160.w, 55.h),
               backgroundColor: context.colorScheme.primaryColor,
               elevation: 0,
               shape: RoundedRectangleBorder(
@@ -358,7 +353,7 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
             },
             child: Text(
               'Register',
-              style: FontThemeClass().subHeading(context, Colors.white),
+              style: FontThemeClass().heading2(context, Colors.white),
             ),
           ),
         ],

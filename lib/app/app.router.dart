@@ -19,6 +19,8 @@ import 'package:darpan/ui/sub_views/academics/results/results_view.dart'
     as _i14;
 import 'package:darpan/ui/sub_views/academics/student_section/student_section_view.dart'
     as _i13;
+import 'package:darpan/ui/sub_views/academics/subject_page/subject_page_view.dart'
+    as _i20;
 import 'package:darpan/ui/sub_views/academics/syllabus/syllabus_view.dart'
     as _i12;
 import 'package:darpan/ui/sub_views/academics/timetable/timetable_view.dart'
@@ -32,7 +34,7 @@ import 'package:darpan/ui/views/home/home_view.dart' as _i3;
 import 'package:darpan/ui/views/profile/profile_view.dart' as _i6;
 import 'package:darpan/ui/views/settings/settings_view.dart' as _i7;
 import 'package:darpan/ui/views/splash/splash_view.dart' as _i2;
-import 'package:flutter/material.dart' as _i20;
+import 'package:flutter/material.dart' as _i21;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i22;
@@ -74,6 +76,8 @@ class Routes {
 
   static const coursesView = '/courses-view';
 
+  static const subjectView = '/subject-view';
+
   static const all = <String>{
     splashView,
     homeView,
@@ -93,6 +97,7 @@ class Routes {
     classNotesView,
     attendanceView,
     coursesView,
+    subjectView,
   };
 }
 
@@ -170,116 +175,126 @@ class StackedRouter extends _i1.RouterBase {
       Routes.coursesView,
       page: _i19.CoursesView,
     ),
+    _i1.RouteDef(
+      Routes.subjectView,
+      page: _i20.SubjectView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.SplashView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.SplashView(),
         settings: data,
       );
     },
     _i3.HomeView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.HomeView(),
         settings: data,
       );
     },
     _i4.AcademicsView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.AcademicsView(),
         settings: data,
       );
     },
     _i5.AuthView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.AuthView(),
         settings: data,
       );
     },
     _i6.ProfileView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.ProfileView(),
         settings: data,
       );
     },
     _i7.SettingsView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.SettingsView(),
         settings: data,
       );
     },
     _i8.BottomNavView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.BottomNavView(),
         settings: data,
       );
     },
     _i9.EventView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i9.EventView(),
         settings: data,
       );
     },
     _i10.DetailedEventView: (data) {
       final args = data.getArgs<DetailedEventViewArguments>(nullOk: false);
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i10.DetailedEventView(key: args.key, eventData: args.eventData),
         settings: data,
       );
     },
     _i11.TimeTableView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.TimeTableView(),
         settings: data,
       );
     },
     _i12.SyllabusView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i12.SyllabusView(),
         settings: data,
       );
     },
     _i13.StudentSectionView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i13.StudentSectionView(),
         settings: data,
       );
     },
     _i14.ResultsView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i14.ResultsView(),
         settings: data,
       );
     },
     _i15.PyqsView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i15.PyqsView(),
         settings: data,
       );
     },
     _i16.PracticalsView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i16.PracticalsView(),
         settings: data,
       );
     },
     _i17.ClassNotesView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i17.ClassNotesView(),
         settings: data,
       );
     },
     _i18.AttendanceView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i18.AttendanceView(),
         settings: data,
       );
     },
     _i19.CoursesView: (data) {
-      return _i20.MaterialPageRoute<dynamic>(
+      return _i21.MaterialPageRoute<dynamic>(
         builder: (context) => const _i19.CoursesView(),
+        settings: data,
+      );
+    },
+    _i20.SubjectView: (data) {
+      return _i21.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i20.SubjectView(),
         settings: data,
       );
     },
@@ -575,6 +590,20 @@ extension NavigatorStateExtension on _i22.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToSubjectView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.subjectView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithSplashView([
     int? routerId,
     bool preventDuplicates = true,
@@ -824,6 +853,20 @@ extension NavigatorStateExtension on _i22.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.coursesView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithSubjectView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.subjectView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

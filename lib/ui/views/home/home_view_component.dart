@@ -50,59 +50,60 @@ class CarouselUtils {
 }
 
 // Quick Links
-Row quickLinksList(BuildContext context, List model, [double? borderRadius]) {
-  FontThemeClass fontTheme = FontThemeClass();
-  return Row(
-    children: [
-      Expanded(
-        child: GridView.builder(
-          physics: const ClampingScrollPhysics(),
-          shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
-            crossAxisSpacing: 4.0,
-            mainAxisSpacing: 4.0,
-          ),
-          itemCount: model.length,
-          itemBuilder: (context, idx) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    debugPrint("Tapped$idx");
-                    handleQuickLinksNavigation(model, idx);
-                  },
-                  child: Container(
-                    height: 80.h,
-                    width: 80.w,
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.secondaryLPurpleColor,
-                      borderRadius: BorderRadius.circular(borderRadius ?? 18).r,
-                    ),
-                    child: Image.asset(
-                      model[idx].imageUrl,
-                      width: 40.w,
-                      height: 40.h,
-                    ),
+Widget quickLinksList(BuildContext context, List model,
+    [double? borderRadius]) {
+  return SizedBox(
+    height: 110.h,
+    width: 386.w,
+    child: ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      scrollDirection: Axis.horizontal,
+      itemCount: model.length,
+      // itemExtent: 98.w,
+      itemBuilder: (context, idx) {
+        return Padding(
+          padding: const EdgeInsets.only(right: 22.0, left: 0).r,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  debugPrint("Tapped $idx");
+                  handleQuickLinksNavigation(model, idx);
+                },
+                child: Container(
+                  height: 80.h,
+                  width: 80.w,
+                  decoration: BoxDecoration(
+                    color: context.colorScheme.secondaryLPurpleColor,
+                    borderRadius: BorderRadius.circular(borderRadius ?? 18).r,
+                  ),
+                  child: Image.asset(
+                    model[idx].imageUrl,
+                    width: 40.w,
+                    height: 40.h,
                   ),
                 ),
-                Text(
-                  model[idx].title.toString().toUpperCase(),
-                  style: fontTheme
-                      .smallSubHeading(
-                        context,
-                        context.colorScheme.primaryDarkColor,
-                      )
-                      .copyWith(fontWeight: FontWeight.w600),
-                  textAlign: TextAlign.center,
-                  softWrap: false,
-                ),
-              ],
-            );
-          },
-        ),
-      ),
-    ],
+              ),
+              // const SizedBox(height: 18),
+              Text(
+                model[idx].title.toString().toUpperCase(),
+                style: FontThemeClass()
+                    .smallSubHeading(
+                      context,
+                      context.colorScheme.primaryDarkColor,
+                    )
+                    .copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                textAlign: TextAlign.center,
+                softWrap: false,
+              ),
+            ],
+          ),
+        );
+      },
+    ),
   );
 }

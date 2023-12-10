@@ -30,7 +30,7 @@ class TimeTableView extends StatelessWidget {
           body: SafeArea(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 18.r),
+              padding: const EdgeInsets.symmetric(horizontal: 18).r,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

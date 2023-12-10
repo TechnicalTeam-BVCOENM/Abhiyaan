@@ -4,23 +4,6 @@ class ClassNotesViewModel extends BaseViewModel {
   // final FirestoreService _firestoreService = FirestoreService();
   final log = getLogger('ClassNotesViewModel');
 
-  // List<String> subName = [
-  //   "Theoretical Computer Science",
-  //   "Software Engineering",
-  //   "Computer Network",
-  //   "Data Warehousing & Mining",
-  //   "Advance Datamanagement System",
-  //   "Professional Communication & Ethics II",
-  // ];
-  // List<String> iconImages = [
-  //   "tcsIMG",
-  //   "seImg",
-  //   "cnImg",
-  //   "dwmImg",
-  //   "adbmsImg",
-  //   "pceImg",
-  // ];
-
   void init() async {
     await loadData();
   }
@@ -45,7 +28,7 @@ class ClassNotesViewModel extends BaseViewModel {
   List<SubjectCard> allSubCards = [
     const SubjectCard(
       leading: AssetImagePath.tcsImg,
-      title: "Theoretical Comp. Science",
+      title: "Theoretical Computer Science",
     ),
     const SubjectCard(
       leading: AssetImagePath.seImg,
@@ -61,11 +44,11 @@ class ClassNotesViewModel extends BaseViewModel {
     ),
     const SubjectCard(
       leading: AssetImagePath.adbmsImg,
-      title: "Advance DBMS",
+      title: "Advance Database Management",
     ),
     const SubjectCard(
       leading: AssetImagePath.pceImg,
-      title: "PCE II",
+      title: "Professional Comm. & Ethics II",
     ),
   ];
 

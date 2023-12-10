@@ -38,7 +38,7 @@ class AcademicsView extends StatelessWidget {
               ? const AcademicsShimmerLoadingWidget()
               : SafeArea(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 18.r),
+                    padding: const EdgeInsets.symmetric(horizontal: 18).r,
                     child: CustomScrollView(
                       physics: const BouncingScrollPhysics(),
                       scrollBehavior: const MaterialScrollBehavior()
@@ -72,7 +72,7 @@ class AcademicsView extends StatelessWidget {
                                         color: context
                                             .colorScheme.secondaryLPurpleColor,
                                         borderRadius:
-                                            BorderRadius.circular(25.r),
+                                            BorderRadius.circular(25).r,
                                         boxShadow: [
                                           BoxShadow(
                                             blurRadius: 5.r,

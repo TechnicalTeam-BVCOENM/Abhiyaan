@@ -1,6 +1,7 @@
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/theme_service.dart';
+import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:darpan/ui/common/toast_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 part 'settings_view_model.dart';
@@ -44,10 +45,10 @@ class SettingsView extends StatelessWidget {
                         context,
                         title: model.settings[0].title,
                         trailingIcon: Switch.adaptive(
+                          activeColor: context.colorScheme.switchColor,
                           value: model._themeService.valueListenable.value,
                           // trackColor: context.colorScheme.secondarySectionColor,
                           onChanged: (val) => model.changeTheme(),
-                          activeColor: context.colorScheme.primaryColor,
                         ),
                         leadingIcon: model.settings[0].leading,
                       ),

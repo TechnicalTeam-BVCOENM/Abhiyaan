@@ -54,21 +54,21 @@ class LectureCard extends ViewModelWidget<TimeTableViewModel> {
   @override
   Widget build(BuildContext context, TimeTableViewModel viewModel) {
     return Padding(
-      padding: EdgeInsets.only(left: 12.r),
+      padding: const EdgeInsets.only(left: 12).r,
       child: SizedBox(
         height: 80.h,
         child: Card(
           elevation: 0,
           clipBehavior: Clip.hardEdge,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.r),
+            borderRadius: BorderRadius.circular(16).r,
             side: BorderSide(
               color: context.colorScheme.primaryColor.withOpacity(0.3),
               width: 1.w,
             ),
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.r),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,

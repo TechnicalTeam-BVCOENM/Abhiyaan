@@ -30,7 +30,7 @@ class SemesterResult extends ViewModelWidget<ResultsViewModel> {
         margin: const EdgeInsets.only(bottom: 8),
         elevation: 0,
         clipBehavior: Clip.hardEdge,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(15),
           ),
@@ -100,11 +100,13 @@ class SemesterResult extends ViewModelWidget<ResultsViewModel> {
   }
 }
 
+// ignore: camel_case_types
 class buildElevatedButton extends ViewModelWidget<ResultsViewModel> {
   final ResultsViewModel model;
   final String title;
   final String link;
   final int index;
+  // ignore: non_constant_identifier_names
   final int sem_index;
   const buildElevatedButton(
       {super.key,
@@ -120,7 +122,7 @@ class buildElevatedButton extends ViewModelWidget<ResultsViewModel> {
       padding: const EdgeInsets.fromLTRB(2, 8, 2, 8),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          minimumSize: Size(65.w, 25.h),
+          minimumSize: Size(80.w, 40.h),
           backgroundColor: model.buttonPressedStates(sem_index)[index]
               ? context.colorScheme.primaryColor
               : context.colorScheme.secondaryWhiteColor,
