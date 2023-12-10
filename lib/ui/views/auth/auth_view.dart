@@ -21,7 +21,7 @@ class AuthView extends StatelessWidget {
             body: ListView(
               children: [
                 Container(
-                  height: 595.h,
+                  height: 870.h,
                   padding: const EdgeInsets.only(
                       left: 20, right: 20, top: 40, bottom: 160),
                   child: Column(
@@ -126,7 +126,7 @@ class AuthView extends StatelessWidget {
                         padding: const EdgeInsetsDirectional.only(top: 10),
                         child: RichText(
                           text: TextSpan(
-                            text: 'Problem with sign in? ',
+                            text: 'Problem with Sign in? ',
                             style: FontThemeClass().subHeading2(context,
                                 context.colorScheme.secondaryBlackColor),
                             children: <TextSpan>[
