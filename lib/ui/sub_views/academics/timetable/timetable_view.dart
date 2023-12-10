@@ -65,6 +65,7 @@ class TimeTableView extends StatelessWidget {
                       titleTextStyle: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
+                        color: context.colorScheme.headingColor,
                       ),
                       formatButtonTextStyle: TextStyle(
                         fontSize: 14.sp,
@@ -117,17 +118,17 @@ class TimeTableView extends StatelessWidget {
                       model.focusedDay = focusedDay;
                     },
                   ),
-                  SizedBox(height: 20.h),
+                  20.verticalSpace,
                   Text(
                     model.todaysDay == 'holiday' ? "Holiday" : "Lectures",
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       fontSize: fontThemeClass.heading(context).fontSize,
                       fontWeight: FontWeight.w700,
-                      color: context.colorScheme.primaryColor,
+                      color: context.colorScheme.headingColor,
                     ),
                   ),
-                  SizedBox(height: 8.h),
+                  8.verticalSpace,
                   model.todaysDay == 'holiday'
                       ? Card(
                           elevation: 0,
@@ -139,7 +140,6 @@ class TimeTableView extends StatelessWidget {
                               width: 1.0,
                             ),
                           ),
-                          color: context.colorScheme.secondaryLPurpleColor,
                           child: SizedBox(
                             width: double.infinity,
                             child: Padding(
@@ -152,20 +152,17 @@ class TimeTableView extends StatelessWidget {
                                   children: [
                                     Text(
                                       "It's weekend o'clock!",
-                                      style: TextStyle(
-                                        fontSize: FontThemeClass()
-                                            .heading3(context)
-                                            .fontSize,
-                                        fontWeight: FontWeight.w800,
-                                      ),
-                                    ),
-                                    Text(
-                                      'Sip, savor, and soak in the sunshine.',
-                                      textAlign: TextAlign.center,
                                       style: FontThemeClass().subHeading(
                                           context,
-                                          context.colorScheme.primaryColor
-                                              .withOpacity(0.6)),
+                                          context.colorScheme.primaryColor),
+                                    ),
+                                    Text(
+                                      'Sip, savor and soak in the sunshine.',
+                                      textAlign: TextAlign.center,
+                                      style: FontThemeClass().subHeading2(
+                                          context,
+                                          context.colorScheme
+                                              .secondarySectionColor),
                                     ),
                                   ],
                                 ),

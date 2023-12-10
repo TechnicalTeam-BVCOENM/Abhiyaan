@@ -47,21 +47,9 @@ class AcademicsView extends StatelessWidget {
                       scrollBehavior: const MaterialScrollBehavior()
                           .copyWith(overscroll: false),
                       slivers: [
-                        // SliverToBoxAdapter(
-                        //   child: Padding(
-                        //     padding:
-                        //         const EdgeInsets.only(top: 18.0, bottom: 12.0),
-                        //     child: Text(
-                        //       "Academics",
-                        //       textAlign: TextAlign.center,
-                        //       style:
-                        //           model.fontTheme.appBarText(context).copyWith(
-                        //                 color: context.colorScheme.primaryColor,
-                        //               ),
-                        //     ),
-                        //   ),
-                        // ),
-                        SliverToBoxAdapter(child: SizedBox(height: 16.h)),
+                        SliverToBoxAdapter(
+                          child: 16.verticalSpace,
+                        ),
                         SliverGrid(
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
@@ -123,7 +111,9 @@ class AcademicsView extends StatelessWidget {
                             },
                           ),
                         ),
-                        SliverToBoxAdapter(child: SizedBox(height: 12.h)),
+                        SliverToBoxAdapter(
+                          child: 12.verticalSpace,
+                        ),
                         const SliverToBoxAdapter(
                           child: SectionText(title: "Academics Updates"),
                         ),
@@ -136,7 +126,9 @@ class AcademicsView extends StatelessWidget {
                             },
                           ),
                         ),
-                        SliverToBoxAdapter(child: SizedBox(height: 8.h)),
+                        SliverToBoxAdapter(
+                          child: 8.verticalSpace,
+                        ),
                       ],
                     ),
                   ),

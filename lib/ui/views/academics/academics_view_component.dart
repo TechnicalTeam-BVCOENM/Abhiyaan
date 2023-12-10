@@ -13,7 +13,9 @@ class AcademicsShimmerLoadingWidget extends StatelessWidget {
         scrollBehavior:
             const MaterialScrollBehavior().copyWith(overscroll: false),
         slivers: [
-          SliverToBoxAdapter(child: SizedBox(height: 16.h)),
+          SliverToBoxAdapter(
+            child: 16.verticalSpace,
+          ),
           SliverGrid(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
@@ -38,7 +40,9 @@ class AcademicsShimmerLoadingWidget extends StatelessWidget {
               },
             ),
           ),
-          SliverToBoxAdapter(child: SizedBox(height: 60.h)),
+          SliverToBoxAdapter(
+            child: 60.verticalSpace,
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               childCount: 3,
@@ -59,7 +63,9 @@ class AcademicsShimmerLoadingWidget extends StatelessWidget {
               },
             ),
           ),
-          SliverToBoxAdapter(child: SizedBox(height: 8.h)),
+          SliverToBoxAdapter(
+            child: 8.verticalSpace,
+          ),
         ],
       ),
     );
