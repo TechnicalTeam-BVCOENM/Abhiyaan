@@ -32,22 +32,22 @@ class SubjectCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               SizedBox(
+              SizedBox(
                 height: 4.h,
               ),
               SizedBox(
                 width: 200.w,
                 child: Text(
                   title,
-                    maxLines: 2,
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.left,
-                    style: FontThemeClass().subHeading(
+                  maxLines: 2,
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.left,
+                  style: FontThemeClass().subHeading(
                       context, context.colorScheme.secondaryBlackColor),
                 ),
               ),
-               SizedBox(
+              SizedBox(
                 height: 4.h,
               ),
             ],
@@ -58,7 +58,7 @@ class SubjectCard extends StatelessWidget {
                 //navigate
                 // navigateToSettingsView
               },
-              child:  Icon(
+              child: Icon(
                 Icons.navigate_next,
                 size: 22.sp,
               )),

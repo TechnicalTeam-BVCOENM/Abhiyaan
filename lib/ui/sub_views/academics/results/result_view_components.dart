@@ -5,20 +5,28 @@ import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:darpan/ui/sub_views/academics/results/results_view.dart';
 
 class SemesterResult extends ViewModelWidget<ResultsViewModel> {
-  final ResultsViewModel model;
+  // final ResultsViewModel model;
   final String semester;
+  // ignore: non_constant_identifier_names
   final String ut1_link;
+  // ignore: non_constant_identifier_names
   final String ut2_link;
+  // ignore: non_constant_identifier_names
   final String gazette_link;
+  // ignore: non_constant_identifier_names
   final String marksheet_link;
   final int index;
   const SemesterResult({
     super.key,
-    required this.model,
+    // required this.model,
     required this.semester,
+    // ignore: non_constant_identifier_names
     required this.ut1_link,
+    // ignore: non_constant_identifier_names
     required this.ut2_link,
+    // ignore: non_constant_identifier_names
     required this.gazette_link,
+    // ignore: non_constant_identifier_names
     required this.marksheet_link,
     required this.index,
   });
@@ -50,7 +58,7 @@ class SemesterResult extends ViewModelWidget<ResultsViewModel> {
                     : context.colorScheme.primaryDarkColor,
               ),
               onExpansionChanged: (bool expanded) {
-                viewModel.updateExpansionState(expanded);
+                // viewModel.updateExpansionState(expanded);
                 viewModel.updateExpandedSemesterIndices(index, expanded);
               },
               title: Text(
@@ -59,38 +67,41 @@ class SemesterResult extends ViewModelWidget<ResultsViewModel> {
                     .heading(context, color: context.colorScheme.primaryColor),
               ),
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    buildElevatedButton(
-                      model: model,
-                      title: 'UT1',
-                      link: ut1_link,
-                      index: 0,
-                      sem_index: index,
-                    ),
-                    buildElevatedButton(
-                      model: model,
-                      title: 'UT2',
-                      link: ut2_link,
-                      index: 1,
-                      sem_index: index,
-                    ),
-                    buildElevatedButton(
-                      model: model,
-                      title: 'Gazette',
-                      link: gazette_link,
-                      index: 2,
-                      sem_index: index,
-                    ),
-                    buildElevatedButton(
-                      model: model,
-                      title: 'Marksheet',
-                      link: marksheet_link,
-                      index: 3,
-                      sem_index: index,
-                    ),
-                  ],
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Wrap(
+                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      buildElevatedButton(
+                        model: viewModel,
+                        title: 'UT1',
+                        link: ut1_link,
+                        index: 0,
+                        sem_index: index,
+                      ),
+                      buildElevatedButton(
+                        model: viewModel,
+                        title: 'UT2',
+                        link: ut2_link,
+                        index: 1,
+                        sem_index: index,
+                      ),
+                      buildElevatedButton(
+                        model: viewModel,
+                        title: 'Gazette',
+                        link: gazette_link,
+                        index: 2,
+                        sem_index: index,
+                      ),
+                      buildElevatedButton(
+                        model: viewModel,
+                        title: 'Marksheet',
+                        link: marksheet_link,
+                        index: 3,
+                        sem_index: index,
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),
@@ -114,12 +125,13 @@ class buildElevatedButton extends ViewModelWidget<ResultsViewModel> {
       required this.title,
       required this.link,
       required this.index,
+      // ignore: non_constant_identifier_names
       required this.sem_index});
 
   @override
   Widget build(BuildContext context, ResultsViewModel viewModel) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(2, 8, 2, 8),
+      padding: const EdgeInsets.fromLTRB(2, 8, 2, 8).r,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           minimumSize: Size(80.w, 40.h),
@@ -139,7 +151,7 @@ class buildElevatedButton extends ViewModelWidget<ResultsViewModel> {
         onPressed: () {
           model.updateButtonPressedState(sem_index, index, true);
           UrlLauncher().launchURL(link);
-          print(link);
+          // print(link);
         },
         child: Text(
           title,
