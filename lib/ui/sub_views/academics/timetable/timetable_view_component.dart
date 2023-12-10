@@ -18,7 +18,7 @@ class TimeLineWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 70.h,
+      height: 90.h,
       child: TimelineTile(
         isFirst: isFirst,
         isLast: isLast,
@@ -54,22 +54,21 @@ class LectureCard extends ViewModelWidget<TimeTableViewModel> {
   @override
   Widget build(BuildContext context, TimeTableViewModel viewModel) {
     return Padding(
-      padding: const EdgeInsets.only(left: 12.0),
+      padding: const EdgeInsets.only(left: 12).r,
       child: SizedBox(
-        height: 64.h,
+        height: 80.h,
         child: Card(
           elevation: 0,
           clipBehavior: Clip.hardEdge,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(16).r,
             side: BorderSide(
               color: context.colorScheme.primaryColor.withOpacity(0.3),
-              width: 1.0,
+              width: 1.w,
             ),
           ),
-          color: context.colorScheme.secondaryLPurpleColor,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -77,24 +76,22 @@ class LectureCard extends ViewModelWidget<TimeTableViewModel> {
                 Text(
                   viewModel.lectureDataList[index].subjectName,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: FontThemeClass().heading3(context).fontSize,
-                    fontWeight: FontWeight.w800,
-                  ),
+                  style: FontThemeClass()
+                      .subHeading(context, context.colorScheme.primaryColor),
                 ),
-                SizedBox(height: 2.h),
+                2.verticalSpace,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       viewModel.lectureDataList[index].subjectTeacherName,
-                      style: FontThemeClass().subHeading(context,
-                          context.colorScheme.primaryColor.withOpacity(0.6)),
+                      style: FontThemeClass().subHeading2(
+                          context, context.colorScheme.secondarySectionColor),
                     ),
                     Text(
                       'From ${viewModel.lectureDataList[index].startTime.toDate().toString().substring(10, 16)}',
-                      style: FontThemeClass().subHeading(context,
-                          context.colorScheme.primaryColor.withOpacity(0.6)),
+                      style: FontThemeClass().subHeading2(
+                          context, context.colorScheme.secondarySectionColor),
                     ),
                   ],
                 ),

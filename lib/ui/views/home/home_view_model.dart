@@ -3,30 +3,43 @@ part of 'home_view.dart';
 class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
   final FirestoreService _firestoreService = FirestoreService();
-  String user = LocalStorageService().read('userName');
+static String user = LocalStorageService().read('userName');
+final firstname = user.split(' ');
 
   List<QuickLinksModel> quickLinksList = [
     QuickLinksModel(
-      imageUrl: "assets/images/Rectangle 88.png",
+      imageUrl: "assets/images/home/Rectangle 88.png",
       title: "BCOENM",
       url: 'https://www.bvcoenm.edu.in/',
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/Rectangle 89.png",
+      imageUrl: "assets/images/home/Rectangle_89.png",
       title: "Abhiyaan",
       url: 'https://abhiyaan-2023.netlify.app/',
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/Rectangle 90.png",
+      imageUrl: "assets/images/home/Rectangle 90.png",
       title: "Society",
-      view: const EventView(),
+      view: const SocietiesView(),
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/Rectangle 91.png",
+      imageUrl: "assets/images/home/Rectangle_91.png",
       title: "Blogs",
       url: 'https://www.dev.com/',
     ),
   ];
+
+  final List<Activity> _activityList = [
+    Activity(
+      startTime: const TimeOfDay(hour: 11, minute: 15),
+      endTime: const TimeOfDay(hour: 12, minute: 15),
+      subName: "Computer Network",
+      profName: "Prof. Aruna Kamble",
+      location: "Floor 1, Class Room 137",
+    ),
+  ];
+
+  List<Activity> get activityList => _activityList;
 
   List<Map<String, dynamic>> _highlights = [];
   List<Map<String, dynamic>> get highlights => _highlights;
@@ -103,3 +116,20 @@ class QuickLinksModel {
     this.view = const HomeView(),
   });
 }
+
+class Activity {
+  final TimeOfDay startTime;
+  final TimeOfDay endTime;
+  final String subName;
+  final String profName;
+  final String location;
+
+  Activity({
+    required this.startTime,
+    required this.endTime,
+    required this.subName,
+    required this.profName,
+    required this.location,
+  });
+}
+

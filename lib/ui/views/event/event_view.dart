@@ -25,7 +25,7 @@ class EventView extends StatelessWidget {
               : SafeArea(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0).r,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -37,10 +37,10 @@ class EventView extends StatelessWidget {
                           elevation: 4,
                           shape: ShapeBorder.lerp(
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.sp),
+                                borderRadius: BorderRadius.circular(18.sp).r,
                               ),
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.sp),
+                                borderRadius: BorderRadius.circular(18.sp).r,
                               ),
                               1),
                           child: model.todayEvent != null
@@ -50,25 +50,25 @@ class EventView extends StatelessWidget {
                                       model: model.todayEvent!,
                                     ),
                                     EventDateContainer(
-                                      top: 100.sp,
-                                      left: 20.sp,
-                                      height: 55,
-                                      width: 70,
+                                      top: 125.h,
+                                      left: 10.w,
+                                      height: 60.h,
+                                      width: 60.w,
                                       event: model.todayEvent!,
                                     ),
                                   ],
                                 )
-                              : SizedBox(
-                                  height: 150.h,
-                                  width: ResponsiveUtils.screenWidth(context),
-                                  child: Center(
+                              : Center(
+                                  child: SizedBox(
+                                    height: 261.h,
+                                    width: ResponsiveUtils.screenWidth(context),
                                     child: Column(
                                       children: [
                                         CachedNetworkImageWidget(
                                           imageUrl:
                                               "https://imgs.search.brave.com/DGoVUPXpo3OwVAbBbgF3oGz3MUcz_cPZrzmfvO7iRrc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG5p/Lmljb25zY291dC5j/b20vaWxsdXN0cmF0/aW9uL3ByZW1pdW0v/dGh1bWIvc2VhcmNo/LXJlc3VsdC1ub3Qt/Zm91bmQtMjEzMDM1/NS0xODAwOTIwLnBu/Zz9mPXdlYnA",
-                                          height: 100.h,
-                                          width: 100.w,
+                                          height: 200.h,
+                                          width: 200.w,
                                           fit: BoxFit.cover,
                                           maxHeightDiskCache:
                                               ResponsiveUtils.screenWidth(
@@ -88,7 +88,7 @@ class EventView extends StatelessWidget {
                         ),
                         const SectionText(title: "Sponsors"),
                         SizedBox(
-                          height: 60.sp,
+                          height: 80.h,
                           child: ListView.builder(
                             shrinkWrap: true,
                             physics: const BouncingScrollPhysics(),
@@ -101,7 +101,7 @@ class EventView extends StatelessWidget {
                         ),
                         const SectionText(title: "Upcoming Events"),
                         SizedBox(
-                          height: 200.sp,
+                          height: 200.h,
                           child: ListView.builder(
                             shrinkWrap: true,
                             physics: const BouncingScrollPhysics(),
@@ -110,8 +110,8 @@ class EventView extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: index == 0
-                                    ? const EdgeInsets.only(left: 0)
-                                    : EdgeInsets.only(left: 10.sp),
+                                    ? const EdgeInsets.only(left: 0).r
+                                    : const EdgeInsets.only(left: 10).r,
                                 child: Card(
                                   clipBehavior: Clip.hardEdge,
                                   shadowColor: context
@@ -121,11 +121,11 @@ class EventView extends StatelessWidget {
                                   shape: ShapeBorder.lerp(
                                       RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(18.sp),
+                                            BorderRadius.circular(18).r,
                                       ),
                                       RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(18.sp),
+                                            BorderRadius.circular(18).r,
                                       ),
                                       1),
                                   child: Stack(
@@ -134,11 +134,12 @@ class EventView extends StatelessWidget {
                                         model: model.remainigEvents[index],
                                       ),
                                       EventDateContainer(
-                                        top: 8,
-                                        left: 8,
-                                        height: 52,
-                                        width: 62,
-                                        fontSize: 28,
+                                        top: 8.h,
+                                        left: 8.w,
+                                        height: 60,
+                                        width: 60,
+                                        timeFontSize: 30,
+                                        textFontSize: 20,
                                         event: model.remainigEvents[index],
                                       ),
                                     ],

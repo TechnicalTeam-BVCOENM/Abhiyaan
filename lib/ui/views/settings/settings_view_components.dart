@@ -5,27 +5,23 @@ Padding settingsListTile(
   BuildContext context, {
   String? title,
   Widget? trailingIcon,
-  IconData? leadingIcon,
+  String? leadingIcon,
   Function? onTap,
 }) {
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 10),
+    padding: EdgeInsets.symmetric(vertical: 10.sp),
     child: ListTile(
-      contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+      contentPadding: EdgeInsets.symmetric(vertical: 7.sp, horizontal: 20.sp),
       title: Text(
         title!,
         style: model.fontTheme.heading4(context),
       ),
       titleAlignment: ListTileTitleAlignment.center,
-      leading: Icon(
-        leadingIcon!,
-        size: 35.sp,
-        color: context.colorScheme.secondaryBlackColor,
-      ),
+      leading: SizedBox(width: 40.w, child: Image.asset(leadingIcon!)),
       trailing: trailingIcon,
       tileColor: context.colorScheme.secondaryWhiteColor,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(18.sp),
       ),
     ),
   );
