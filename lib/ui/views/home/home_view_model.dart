@@ -29,10 +29,10 @@ final firstname = user.split(' ');
     ),
   ];
 
-  List<Activity> _activityList = [
+  final List<Activity> _activityList = [
     Activity(
-      startTime: TimeOfDay(hour: 11, minute: 15),
-      endTime: TimeOfDay(hour: 12, minute: 15),
+      startTime: const TimeOfDay(hour: 11, minute: 15),
+      endTime: const TimeOfDay(hour: 12, minute: 15),
       subName: "Computer Network",
       profName: "Prof. Aruna Kamble",
       location: "Floor 1, Class Room 137",
