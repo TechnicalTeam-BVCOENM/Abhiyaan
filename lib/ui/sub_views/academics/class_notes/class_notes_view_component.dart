@@ -14,28 +14,41 @@ class SubjectCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 62.sp,
-      margin: EdgeInsets.only(bottom: 15.sp),
+      height: 80.h,
+      margin: const EdgeInsets.only(bottom: 25).r,
       decoration: BoxDecoration(
           color: context.colorScheme.secondaryWhiteColor,
-          borderRadius: BorderRadius.circular(20)),
+          borderRadius: BorderRadius.circular(20).r),
       child: Row(
         children: [
           SizedBox(
-            width: 15.sp,
+            width: 15.w,
           ),
-          Image.asset(width: 32.sp, leading),
+          Image.asset(width: 70.w, leading),
           SizedBox(
-            width: 15.sp,
+            width: 15.w,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: FontThemeClass().subHeading(
-                    context, context.colorScheme.secondaryBlackColor),
+               SizedBox(
+                height: 4.h,
+              ),
+              SizedBox(
+                width: 200.w,
+                child: Text(
+                  title,
+                    maxLines: 2,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
+                    style: FontThemeClass().subHeading(
+                      context, context.colorScheme.secondaryBlackColor),
+                ),
+              ),
+               SizedBox(
+                height: 4.h,
               ),
             ],
           ),
@@ -45,9 +58,9 @@ class SubjectCard extends StatelessWidget {
                 //navigate
                 // navigateToSettingsView
               },
-              child: const Icon(
+              child:  Icon(
                 Icons.navigate_next,
-                size: 22,
+                size: 22.sp,
               )),
         ],
       ),
