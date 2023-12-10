@@ -242,11 +242,12 @@ class HomeView extends StatelessWidget {
                                 .withOpacity(0.5),
                           ),
                         ),
+                        3.verticalSpace,
                         Text(
                           'Made with ❤️ by Technical Team',
                           style: fontTheme.smallSubHeading(context).copyWith(
                                 color: context.colorScheme.secondaryBlackColor
-                                    .withOpacity(0.8),
+                                    .withOpacity(0.6),
                               ),
                         ),
                         12.verticalSpace,
