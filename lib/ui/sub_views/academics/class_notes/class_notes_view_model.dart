@@ -3,8 +3,8 @@ part of 'class_notes_view.dart';
 class ClassNotesViewModel extends BaseViewModel {
   // final FirestoreService _firestoreService = FirestoreService();
   final log = getLogger('ClassNotesViewModel');
-  
-void init() async {
+
+  void init() async {
     await loadData();
   }
 
@@ -28,7 +28,7 @@ void init() async {
   List<SubjectCard> allSubCards = [
     const SubjectCard(
       leading: AssetImagePath.tcsImg,
-      title: "Theoretical Comp. Science",
+      title: "Theoretical Computer Science",
     ),
     const SubjectCard(
       leading: AssetImagePath.seImg,
@@ -44,11 +44,11 @@ void init() async {
     ),
     const SubjectCard(
       leading: AssetImagePath.adbmsImg,
-      title: "Advance DBMS",
+      title: "Advance Database Management",
     ),
     const SubjectCard(
       leading: AssetImagePath.pceImg,
-      title: "PCE II",
+      title: "Professional Comm. & Ethics II",
     ),
   ];
 

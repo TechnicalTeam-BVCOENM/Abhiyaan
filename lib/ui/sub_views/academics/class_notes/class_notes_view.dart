@@ -30,7 +30,7 @@ class ClassNotesView extends StatelessWidget {
                 child: const Column(children: [
                   SubjectCard(
                     leading: AssetImagePath.tcsImg,
-                    title: "Theoretical Comp. Science",
+                    title: "Theoretical Computer Science",
                   ),
                   SubjectCard(
                     leading: AssetImagePath.seImg,
@@ -46,11 +46,11 @@ class ClassNotesView extends StatelessWidget {
                   ),
                   SubjectCard(
                     leading: AssetImagePath.adbmsImg,
-                    title: "Advance DBMS",
+                    title: "Advance Database Management",
                   ),
                   SubjectCard(
                     leading: AssetImagePath.pceImg,
-                    title: "PCE II",
+                    title: "Professional Comm. & Ethics II",
                   ),
                   Expanded(child: Text("")),
                 ]),
