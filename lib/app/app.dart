@@ -10,6 +10,7 @@ import 'package:darpan/ui/sub_views/academics/results/results_view.dart';
 import 'package:darpan/ui/sub_views/academics/student_section/student_section_view.dart';
 import 'package:darpan/ui/sub_views/academics/syllabus/syllabus_view.dart';
 import 'package:darpan/ui/sub_views/academics/timetable/timetable_view.dart';
+import 'package:darpan/ui/sub_views/academics/subject_page/subject_page_view.dart';
 import 'package:darpan/ui/views/academics/academics_view.dart';
 import 'package:darpan/ui/views/auth/auth_view.dart';
 import 'package:darpan/ui/views/bottom_nav/bottom_nav_view.dart';
@@ -41,7 +42,8 @@ import 'package:darpan/ui/views/splash/splash_view.dart';
     MaterialRoute(page: PracticalsView),
     MaterialRoute(page: ClassNotesView),
     MaterialRoute(page: AttendanceView),
-    MaterialRoute(page: CoursesView)
+    MaterialRoute(page: CoursesView),
+    MaterialRoute(page: SubjectView)
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

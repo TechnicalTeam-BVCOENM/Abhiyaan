@@ -28,6 +28,11 @@ class AssetImagePath {
   static const String adbmsImg =
       'assets/images/academics/class_notes/adbms.png';
   static const String pceImg = 'assets/images/academics/class_notes/pce.png';
+  static const String darkMode = 'assets/images/profile/dark_mode.png';
+  static const String help = 'assets/images/profile/help.png';
+  static const String logout = 'assets/images/profile/logout.png';
+  static const String pass = 'assets/images/profile/pass.png';
+  static const String privacy = 'assets/images/profile/privacy.png';
 }
 
 class AssetUrls {

@@ -18,6 +18,12 @@ class SyllabusViewModel extends BaseViewModel {
       setBusy(false);
     });
   }
+  final _navigationService = locator<NavigationService>();
+  navigateToSubject() {
+    _navigationService.navigateTo(Routes.subjectView);
+  }
+
+
 }
 
 class Syllabus {

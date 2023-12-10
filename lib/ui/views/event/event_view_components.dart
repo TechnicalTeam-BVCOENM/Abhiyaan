@@ -232,8 +232,8 @@ class EventCardInfo extends StatelessWidget {
                         child: Center(
                           child: Text(
                             "Open".toUpperCase(),
-                            style: FontThemeClass().subHeading2(context,
-                                context.colorScheme.secondaryWhiteColor,
+                            style: FontThemeClass().subHeading2(
+                                context, context.colorScheme.signInTextColor,
                                 fontSize: 18.sp, fontWeight: FontWeight.w900),
                           ),
                         ),
@@ -317,7 +317,7 @@ class EventCardUpcoming extends StatelessWidget {
                         child: Text(
                           "Open".toUpperCase(),
                           style: FontThemeClass().subHeading2(
-                              context, context.colorScheme.secondaryWhiteColor,
+                              context, context.colorScheme.signInTextColor,
                               fontWeight: FontWeight.w900, fontSize: 16.sp),
                         ),
                       ),

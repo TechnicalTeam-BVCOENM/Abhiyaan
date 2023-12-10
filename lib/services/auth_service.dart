@@ -53,6 +53,7 @@ class AuthenticationService {
       "userEmail",
       "userName",
       "userYear",
+      "userImg",
       "userPrnNo",
       "userLibNo",
     ];
