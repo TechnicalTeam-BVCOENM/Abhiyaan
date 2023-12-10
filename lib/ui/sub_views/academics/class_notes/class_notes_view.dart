@@ -10,8 +10,10 @@ class ClassNotesView extends StatelessWidget {
         viewModelBuilder: () => ClassNotesViewModel(),
         builder: (context, model, child) {
           return Scaffold(
-              backgroundColor: context.colorScheme.backgroundColor,
+            backgroundColor: context.colorScheme.backgroundColor,
             appBar: AppBar(
+              backgroundColor: context.colorScheme.backgroundColor,
+              foregroundColor: context.colorScheme.secondaryBlackColor,
               iconTheme: IconThemeData(
                 color: context
                     .colorScheme.secondaryBlackColor, //change your color here
@@ -27,11 +29,11 @@ class ClassNotesView extends StatelessWidget {
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 20).r,
-               child: ListView.builder(
-                      itemCount: 6,
-                      itemBuilder: (context, index) {
-                        return ClassNotesViewModel().allSubCards[index];
-                      }),
+                child: ListView.builder(
+                    itemCount: 6,
+                    itemBuilder: (context, index) {
+                      return ClassNotesViewModel().allSubCards[index];
+                    }),
               ),
             ),
           );

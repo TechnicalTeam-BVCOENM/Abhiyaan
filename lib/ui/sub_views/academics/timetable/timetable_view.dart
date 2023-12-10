@@ -164,10 +164,7 @@ class TimeTableView extends StatelessWidget {
                               TimeLineWidget(
                                 isFirst: i == 0,
                                 isLast: i == model.lectureDataList.length - 1,
-                                isPast: model.lectureDataList[i].startTime
-                                        .toDate()
-                                        .hour <
-                                    DateTime.now().hour,
+                                isPast: model.isLecturePassed(i),
                                 index: i,
                               ),
                             ],

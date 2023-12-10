@@ -4,7 +4,7 @@ class TimeTableViewModel extends BaseViewModel {
   final log = getLogger('TimeTableViewModel');
   CalendarFormat calendarFormat = CalendarFormat.month;
   DateTime focusedDay = DateTime.now();
-  DateTime? selectedDay;
+  DateTime selectedDay = DateTime.now();
   DateTime now = DateTime.now();
   late String todaysDay;
 
@@ -78,6 +78,15 @@ class TimeTableViewModel extends BaseViewModel {
   void updateActiveIndex(int newIndex) {
     _activeIndex = newIndex;
     notifyListeners();
+  }
+
+  bool isLecturePassed(int index) {
+    if (selectedDay.day == DateTime.now().day) {
+      return _lectureDataList[index].startTime.toDate().hour <
+          DateTime.now().hour;
+    } else {
+      return selectedDay.day < DateTime.now().day;
+    }
   }
 }
 
