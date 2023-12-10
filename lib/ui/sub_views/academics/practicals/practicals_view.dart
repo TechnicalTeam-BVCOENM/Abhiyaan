@@ -11,20 +11,20 @@ class PracticalsView extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               iconTheme: IconThemeData(
-              color: context
-                  .colorScheme.secondaryBlackColor, //change your color here
+                color: context
+                    .colorScheme.secondaryBlackColor, //change your color here
+              ),
+              backgroundColor: context.colorScheme.backgroundColor,
+              elevation: 0,
+              title: Text(
+                'Practicals',
+                style: FontThemeClass().heading2(context),
+              ),
+              centerTitle: true,
             ),
-            backgroundColor: context.colorScheme.backgroundColor,
-            elevation: 0,
-            title: Text(
-              'Practicals',
-              style: FontThemeClass().heading2(context),
-            ),
-            centerTitle: true,
-          ),
             backgroundColor:
                 context.colorScheme.backgroundColor, // Background color
-            body:  Center(
+            body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

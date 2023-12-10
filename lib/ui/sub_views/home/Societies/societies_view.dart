@@ -26,7 +26,8 @@ class SocietiesView extends StatelessWidget {
               body: SafeArea(
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 30, horizontal: 20).r,
+                      const EdgeInsets.symmetric(vertical: 30, horizontal: 20)
+                          .r,
                   child: ListView.builder(
                       itemCount: 6,
                       itemBuilder: (context, index) {
