@@ -71,7 +71,7 @@ class EventViewModel extends BaseViewModel {
     }
   }
 
-  List<EventModel> _remainigEvents = [];
+  late final List<EventModel> _remainigEvents = [];
   List<EventModel> get remainigEvents => _remainigEvents;
   void getRemainingEvents() {
     for (EventModel event in events) {

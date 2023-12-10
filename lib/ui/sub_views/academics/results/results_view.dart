@@ -8,7 +8,16 @@ class ResultsView extends StatelessWidget {
     return ViewModelBuilder<ResultsViewModel>.reactive(
         viewModelBuilder: () => ResultsViewModel(),
         builder: (context, model, child) {
-          return const Scaffold();
+          return const Scaffold(
+            body: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 18.0),
+                child: Column(
+                  children: [Center(child: Text("Results"))],
+                ),
+              ),
+            ),
+          );
         });
   }
 }

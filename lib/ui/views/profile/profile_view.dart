@@ -12,13 +12,19 @@ class ProfileView extends StatelessWidget {
         viewModelBuilder: () => ProfileViewModel(),
         builder: (context, model, child) {
           return Scaffold(
+            backgroundColor: context.colorScheme.backgroundColor,
             appBar: AppBar(
+              backgroundColor: context.colorScheme.backgroundColor,
               actions: [
                 TextButton(
                   onPressed: () => model.navigateToSettingsView(),
                   child: SizedBox(
                     width: 28.sp,
-                    child: Image.asset(AssetImagePath.settingImg),
+                    child: Icon(
+                      Icons.settings,
+                      size: 30,
+                      color: context.colorScheme.primaryColor,
+                    ),
                   ),
                 ),
               ],

@@ -19,6 +19,7 @@ class BottomNavView extends StatelessWidget {
         builder: (context, model, child) {
           return Scaffold(
             extendBody: true,
+            // ignore: deprecated_member_use
             body: WillPopScope(
               onWillPop: model.onPop,
               child: model.getViewForCurrentIndex(model.currentIndex),

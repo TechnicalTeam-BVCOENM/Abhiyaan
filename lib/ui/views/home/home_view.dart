@@ -22,6 +22,7 @@ class HomeView extends StatelessWidget {
       onViewModelReady: (viewModel) => viewModel.loadData(),
       builder: (context, model, child) {
         return Scaffold(
+          backgroundColor: context.colorScheme.backgroundColor,
           body: model.isBusy
               ? const ShimmerLoadingWidget()
               : SafeArea(
@@ -31,7 +32,6 @@ class HomeView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Title Bar
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Row(
@@ -39,12 +39,13 @@ class HomeView extends StatelessWidget {
                             children: [
                               Text(
                                 'Hey ${model.user} 👋', // Update according to loal storage
-                                style: fontTheme.appBarText(context),
+                                style: fontTheme.appBarText(
+                                    context, context.colorScheme.headingColor),
                               ),
                               IconButton(
                                 splashRadius: 30.sp,
                                 splashColor:
-                                    context.colorScheme.backgroundColor,
+                                    context.colorScheme.secondaryBlackColor,
                                 icon: ImageIcon(
                                   const AssetImage(
                                     "assets/images/Notification Bell.png",
@@ -66,7 +67,6 @@ class HomeView extends StatelessWidget {
                                 CarouselSlider.builder(
                                   itemCount: model.highlights.length,
                                   itemBuilder: (context, index, realIndex) {
-                                    // return CachedNetworkImage(imageUrl: model.highlights[index]['imageUrl']);
                                     return CarouselUtils.buildImage(
                                         context,
                                         model.highlights[index]['imageUrl'],
@@ -115,6 +115,14 @@ class HomeView extends StatelessWidget {
                           updatesCard(
                               model._departmentUpdates, i, context, model),
                         ],
+                        const SizedBox(height: 20),
+                        Center(
+                          child: Text(
+                            'Made with ❤️ by Technical Team',
+                            style: fontTheme.smallSubHeading(context),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
                       ],
                     ),
                   ),
