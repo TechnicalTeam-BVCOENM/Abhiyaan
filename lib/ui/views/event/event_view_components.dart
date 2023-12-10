@@ -95,8 +95,9 @@ class EventDateContainer extends ViewModelWidget<EventViewModel> {
   final double? left;
   final double height;
   final double width;
-  final double fontSize;
   final EventModel event;
+  final double timeFontSize;
+  final double textFontSize;
 
   const EventDateContainer({
     super.key,
@@ -104,7 +105,8 @@ class EventDateContainer extends ViewModelWidget<EventViewModel> {
     this.right,
     this.bottom,
     this.left,
-    this.fontSize = 28,
+    this.timeFontSize = 28,
+    this.textFontSize = 14,
     required this.height,
     required this.width,
     required this.event,
@@ -124,19 +126,20 @@ class EventDateContainer extends ViewModelWidget<EventViewModel> {
           children: [
             SizedBox(
               width: width,
-              height: 30.h,
+              height: (height / 2).h,
               child: Text(
                 event.startDate.toDate().day.toString().trim(),
                 textAlign: TextAlign.center,
                 style: fontTheme.heading(
                   context,
+                  size: timeFontSize.toDouble().sp,
                   color: context.colorScheme.primaryColor,
                 ),
               ),
             ),
             SizedBox(
               width: width,
-              height: 30.h,
+              height: (height / 2).h,
               child: Text(
                 viewModel
                     .getMonthName(event.startDate.toDate().month,
@@ -144,7 +147,8 @@ class EventDateContainer extends ViewModelWidget<EventViewModel> {
                     .trim(),
                 textAlign: TextAlign.center,
                 style: fontTheme.subHeading2(
-                    context, context.colorScheme.secondaryBlackColor),
+                    context, context.colorScheme.secondaryBlackColor,
+                    fontSize: textFontSize.toDouble().sp),
               ),
             ),
           ],
