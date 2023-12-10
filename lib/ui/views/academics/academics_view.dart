@@ -27,10 +27,7 @@ class AcademicsView extends StatelessWidget {
           appBar: AppBar(
             title: Text(
               'Academics',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: context.colorScheme.headingColor,
-              ),
+              style: FontThemeClass().heading(context),
             ),
             centerTitle: true,
             automaticallyImplyLeading: false,
@@ -41,7 +38,7 @@ class AcademicsView extends StatelessWidget {
               ? const AcademicsShimmerLoadingWidget()
               : SafeArea(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    padding: EdgeInsets.symmetric(horizontal: 18.r),
                     child: CustomScrollView(
                       physics: const BouncingScrollPhysics(),
                       scrollBehavior: const MaterialScrollBehavior()
@@ -52,10 +49,9 @@ class AcademicsView extends StatelessWidget {
                         ),
                         SliverGrid(
                           gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
+                              SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
-                            mainAxisSpacing: 16.0,
-                            // crossAxisSpacing: 16.0,
+                            mainAxisSpacing: 16.r,
                           ),
                           delegate: SliverChildBuilderDelegate(
                             childCount: 9,
@@ -70,15 +66,16 @@ class AcademicsView extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
-                                      width: 90.r,
-                                      height: 90.r,
+                                      width: 98.r,
+                                      height: 98.r,
                                       decoration: BoxDecoration(
                                         color: context
                                             .colorScheme.secondaryLPurpleColor,
-                                        borderRadius: BorderRadius.circular(25),
+                                        borderRadius:
+                                            BorderRadius.circular(25.r),
                                         boxShadow: [
                                           BoxShadow(
-                                            blurRadius: 5,
+                                            blurRadius: 5.r,
                                             color: context.colorScheme
                                                 .secondaryLPurpleColor,
                                             offset: const Offset(0, 3),
@@ -90,8 +87,8 @@ class AcademicsView extends StatelessWidget {
                                           image: AssetImage(model
                                               .getGridListModel[index].image),
                                           fit: BoxFit.contain,
-                                          height: 72.r,
-                                          width: 72.r,
+                                          height: 86.r,
+                                          width: 86.r,
                                         ),
                                       ),
                                     ),

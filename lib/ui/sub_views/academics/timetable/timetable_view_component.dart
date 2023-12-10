@@ -18,7 +18,7 @@ class TimeLineWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60.h,
+      height: 90.h,
       child: TimelineTile(
         isFirst: isFirst,
         isLast: isLast,
@@ -54,21 +54,21 @@ class LectureCard extends ViewModelWidget<TimeTableViewModel> {
   @override
   Widget build(BuildContext context, TimeTableViewModel viewModel) {
     return Padding(
-      padding: const EdgeInsets.only(left: 12.0),
+      padding: EdgeInsets.only(left: 12.r),
       child: SizedBox(
-        height: 56.h,
+        height: 80.h,
         child: Card(
           elevation: 0,
           clipBehavior: Clip.hardEdge,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(16.r),
             side: BorderSide(
               color: context.colorScheme.primaryColor.withOpacity(0.3),
-              width: 1.0,
+              width: 1.w,
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: EdgeInsets.symmetric(horizontal: 16.r),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,

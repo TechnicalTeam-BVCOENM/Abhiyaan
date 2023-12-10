@@ -19,10 +19,7 @@ class TimeTableView extends StatelessWidget {
           appBar: AppBar(
             title: Text(
               'Timetable',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: context.colorScheme.headingColor,
-              ),
+              style: FontThemeClass().heading(context),
             ),
             centerTitle: true,
             iconTheme: IconThemeData(
@@ -33,7 +30,7 @@ class TimeTableView extends StatelessWidget {
           body: SafeArea(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
-              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              padding: EdgeInsets.symmetric(horizontal: 18.r),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -42,8 +39,8 @@ class TimeTableView extends StatelessWidget {
                     firstDay: model.getOneYearBack(),
                     lastDay: model.getOneYearForward(),
                     focusedDay: model.focusedDay,
-                    rowHeight: 25.h,
-                    daysOfWeekHeight: 20.h,
+                    rowHeight: 34.h,
+                    daysOfWeekHeight: 24.h,
                     availableGestures: AvailableGestures.all,
                     daysOfWeekStyle: const DaysOfWeekStyle(
                       weekdayStyle: TextStyle(
@@ -62,16 +59,10 @@ class TimeTableView extends StatelessWidget {
                       leftChevronVisible: false,
                       rightChevronVisible: false,
                       formatButtonShowsNext: false,
-                      titleTextStyle: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
-                        color: context.colorScheme.headingColor,
-                      ),
-                      formatButtonTextStyle: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                      titleTextStyle:
+                          fontThemeClass.heading3(context, FontWeight.bold),
+                      formatButtonTextStyle:
+                          fontThemeClass.subHeading(context, Colors.white),
                       formatButtonDecoration: BoxDecoration(
                         color: context.colorScheme.primaryColor,
                         borderRadius: BorderRadius.circular(12),
@@ -122,11 +113,7 @@ class TimeTableView extends StatelessWidget {
                   Text(
                     model.todaysDay == 'holiday' ? "Holiday" : "Lectures",
                     textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontSize: fontThemeClass.heading(context).fontSize,
-                      fontWeight: FontWeight.w700,
-                      color: context.colorScheme.headingColor,
-                    ),
+                    style: fontThemeClass.heading3(context, FontWeight.bold),
                   ),
                   8.verticalSpace,
                   model.todaysDay == 'holiday'
