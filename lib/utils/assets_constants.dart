@@ -27,6 +27,12 @@ class AssetImagePath {
   static const String dwmImg = 'assets/images/academics/class_notes/dwm.png';
   static const String adbmsImg = 'assets/images/academics/class_notes/adbms.png';
   static const String pceImg = 'assets/images/academics/class_notes/pce.png';
+  static const String nautankiImg = 'assets/images/home/societies/Nautanki.png';
+  static const String crew_5678Img = 'assets/images/home/societies/Crew_5678.png';
+  static const String camEraImg = 'assets/images/home/societies/CamEra.png';
+  static const String literatureImg = 'assets/images/home/societies/Literature.png';
+  static const String mudrakalaImg = 'assets/images/home/societies/Mudrakala.png';
+  static const String crescendoImg = 'assets/images/home/societies/Crescendo.png';
 
 }
 

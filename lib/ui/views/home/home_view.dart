@@ -7,7 +7,7 @@ import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/firestore_service.dart';
 import 'package:intl/intl.dart';
 import 'package:darpan/ui/common/common_component_model.dart';
-import 'package:darpan/ui/views/event/event_view.dart';
+import 'package:darpan/ui/sub_views/home/Societies/societies_view.dart';
 part 'home_view_model.dart';
 part 'home_view_component.dart';
 

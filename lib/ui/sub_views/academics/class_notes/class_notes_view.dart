@@ -1,5 +1,5 @@
 import 'package:darpan/file_exporter.dart';
-import 'package:darpan/ui/sub_views/academics/class_notes/class_notes_components.dart';
+import 'package:darpan/ui/sub_views/academics/class_notes/class_notes_view_component.dart';
 part 'class_notes_view_model.dart';
 
 
