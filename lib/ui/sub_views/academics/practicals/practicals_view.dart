@@ -8,7 +8,50 @@ class PracticalsView extends StatelessWidget {
     return ViewModelBuilder<PracticalsViewModel>.reactive(
         viewModelBuilder: () => PracticalsViewModel(),
         builder: (context, model, child) {
-          return const Scaffold();
+          return Scaffold(
+            backgroundColor:
+                context.colorScheme.backgroundColor, // Background color
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 100,
+                        ),
+                        Text(
+                          'Amazingness in Progress, Stay Tuned!',
+                          style: TextStyle(
+                            fontSize: 22,
+
+                            color:
+                                context.colorScheme.primaryColor, // Text color
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 40), // Spacer
+
+                  // Back Button
+                  IconButton(
+                    icon: const Icon(Icons.arrow_circle_left_outlined),
+                    iconSize: 90,
+                    color: context.colorScheme.primaryColor,
+                    onPressed: () {
+                      // Implement your back button logic here
+                      Navigator.of(context)
+                          .pop(); // For example, pops the current screen
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
         });
   }
 }
