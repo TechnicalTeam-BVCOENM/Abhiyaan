@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:darpan/file_exporter.dart';
+import 'package:darpan/ui/sub_views/academics/timetable/timetable_view.dart';
 import 'package:darpan/ui/views/academics/academics_view.dart';
 import 'package:darpan/ui/views/event/event_view.dart';
 import 'package:darpan/ui/views/home/home_view.dart';
@@ -71,6 +73,50 @@ class FirestoreService {
         about: data['about'],
       );
     }).toList();
+  }
+
+  Future<List<LectureDataModel>> getTimeTableData(String day) async {
+    try {
+      final DocumentSnapshot<Map<String, dynamic>> snapshot = await _firestore
+          .collection("Department")
+          .doc('12_computer')
+          .collection('academics')
+          .doc('semester')
+          .collection('1_sem')
+          .doc('1_sem')
+          .collection('timeTable')
+          .doc(day)
+          .get();
+
+      if (snapshot.exists) {
+        final Map<String, dynamic> data = snapshot.data()!;
+
+        debugPrint("statement");
+        debugPrint(data.toString());
+
+        // Assuming 'lectures' is the field containing the array of maps
+        final List<dynamic>? lectures = data['lectures'];
+
+        if (lectures != null) {
+          return lectures.map((dynamic lecture) {
+            Map<String, dynamic> lectureData = lecture as Map<String, dynamic>;
+            return LectureDataModel(
+              subjectName: lectureData['subjectName'] ?? '',
+              startTime: lectureData['startTime'] ?? '',
+              subjectTeacherName: lectureData['subjectTeacher'] ?? '',
+            );
+          }).toList();
+        }
+      }
+
+      // Handle the case when the document doesn't exist or the array is null
+      debugPrint("Document does not exist or the array is null");
+      return [];
+    } catch (e) {
+      // Handle any other exceptions that might occur during the process
+      debugPrint("Error fetching data: $e");
+      return [];
+    }
   }
 
   Future<void> addData(Map<String, dynamic> data) async {

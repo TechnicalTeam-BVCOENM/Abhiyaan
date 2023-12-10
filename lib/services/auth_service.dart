@@ -10,10 +10,10 @@ class AuthenticationService {
 
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
+      await _firebaseAuth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) => storeUserData());
       // Handle successful login
-      await storeUserData();
       log.i('Auth success');
     } on FirebaseAuthException {
       // Handle error
@@ -47,30 +47,29 @@ class AuthenticationService {
 
   Future storeUserData() async {
     List userTag = [
+      "userSem",
       "userCollegeId",
-      "userLibNo",
       "userMisNo",
+      "userEmail",
       "userName",
-      "userYear",
       "userPrnNo",
-      "userEmail"
+      "userLibNo",
     ];
-    final localStorageService = locator<LocalStorageService>();
-    int misNo = int.parse(localStorageService.read('userMisNo'));
-    int admissionYear = (misNo ~/ 1000000); // 21
-    int departmentCode = ((misNo % 1000000) ~/ 10000); // 12
-    int division = ((misNo % 10000) ~/ 1000); // 1
-    int rollNo = (misNo % 1000); // 17
-    localStorageService.write('addmissionYear', admissionYear);
-    localStorageService.write('departmentCode', departmentCode);
-    localStorageService.write('division', division);
-    localStorageService.write('rollNo', rollNo);
-
     try {
+      final localStorageService = locator<LocalStorageService>();
       Map<String, dynamic>? userData = await FirestoreService().getUserData();
       for (var i = 0; i < userTag.length; i++) {
         await localStorageService.write(userTag[i], userData?[userTag[i]]);
       }
+      int misNo = int.parse(localStorageService.read('userMisNo'));
+      int admissionYear = (misNo ~/ 1000000); // 21
+      int departmentCode = ((misNo % 1000000) ~/ 10000); // 12
+      int division = ((misNo % 10000) ~/ 1000); // 1
+      int rollNo = (misNo % 1000); // 17
+      localStorageService.write('addmissionYear', admissionYear);
+      localStorageService.write('departmentCode', departmentCode);
+      localStorageService.write('division', division);
+      localStorageService.write('rollNo', rollNo);
     } catch (e) {
       rethrow;
     }
