@@ -4,15 +4,10 @@ class ResultsViewModel extends BaseViewModel {
   final log = getLogger('ResultsViewModel');
   bool _isExpanded = false;
 
-  // List to store button pressed states for each semester
   final List<List<bool>> _semesterButtonStates =
       List.generate(8, (_) => List.filled(4, false));
 
-  // Variable to track the currently selected semester
   int _selectedSemesterIndex = -1;
-
-  bool get isExpanded => _isExpanded;
-  int get selectedSemesterIndex => _selectedSemesterIndex;
 
   List<bool> buttonPressedStates(int semesterIndex) {
     return _semesterButtonStates[semesterIndex] ?? List.filled(4, false);
@@ -24,7 +19,6 @@ class ResultsViewModel extends BaseViewModel {
   }
 
   void updateButtonPressedState(int semesterIndex, int index, bool isPressed) {
-    // Reset the pressed state for the previous semester buttons
     if (_selectedSemesterIndex != -1) {
       _semesterButtonStates[_selectedSemesterIndex] = List.filled(4, false);
     }
@@ -33,6 +27,19 @@ class ResultsViewModel extends BaseViewModel {
 
     _selectedSemesterIndex = semesterIndex;
 
+    notifyListeners();
+  }
+
+  Set<int> _expandedSemesterIndices = {};
+
+  Set<int> get expandedSemesterIndices => _expandedSemesterIndices;
+
+  void updateExpandedSemesterIndices(int semesterIndex, bool expanded) {
+    if (expanded) {
+      _expandedSemesterIndices.add(semesterIndex);
+    } else {
+      _expandedSemesterIndices.remove(semesterIndex);
+    }
     notifyListeners();
   }
 }

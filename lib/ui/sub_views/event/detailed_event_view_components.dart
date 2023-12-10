@@ -1,4 +1,5 @@
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:darpan/ui/sub_views/event/detailed_event_view.dart';
 
 class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
@@ -40,19 +41,10 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
                   topRight: Radius.circular(15.h),
                 ),
               ),
-              child: Container(
-                width: 40.w,
-                height: 5.h,
-                // color: Colors.black12,
-                decoration: BoxDecoration(
-                  color: context.colorScheme.primaryDarkColor,
-                  borderRadius: BorderRadius.circular(100.h),
-                ),
-              ),
             ),
           ),
           Positioned(
-            bottom: 30,
+            bottom: 15.w,
             right: 20.w,
             child: Material(
               elevation: 2.h,
@@ -283,11 +275,11 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
   }
 }
 
-class BottomNavBarDetailedPage extends StatelessWidget {
+class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
   const BottomNavBarDetailedPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, DetailedEventViewModel viewModel) {
     return Container(
       height: 50.h,
       child: Row(
@@ -328,7 +320,9 @@ class BottomNavBarDetailedPage extends StatelessWidget {
                 side: BorderSide(color: context.colorScheme.primaryColor),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              UrlLauncher().launchURL('https://www.google.com/forms/about/');
+            },
             child: Text(
               'Register',
               style: FontThemeClass().subHeading(context, Colors.white),

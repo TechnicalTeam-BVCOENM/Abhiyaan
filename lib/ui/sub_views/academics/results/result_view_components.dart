@@ -39,13 +39,17 @@ class SemesterResult extends ViewModelWidget<ResultsViewModel> {
             ExpansionTile(
               clipBehavior: Clip.hardEdge,
               trailing: Icon(
-                model.isExpanded ? Icons.expand_less : Icons.expand_more,
-                color: model.isExpanded
+                viewModel.expandedSemesterIndices.contains(index)
+                    ? Icons.expand_less
+                    : Icons.expand_more,
+                color: viewModel.expandedSemesterIndices.contains(index)
                     ? context.colorScheme.primaryColor
                     : context.colorScheme.primaryDarkColor,
               ),
               onExpansionChanged: (bool expanded) {
-                model.updateExpansionState(expanded);
+                viewModel.updateExpansionState(expanded);
+                viewModel.updateExpandedSemesterIndices(index, expanded);
+                ;
               },
               title: Text(
                 semester,
