@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darpan/ui/sub_views/academics/courses/courses_view.dart';
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/ui/sub_views/academics/results/results_view.dart';
 import 'package:darpan/ui/sub_views/academics/syllabus/syllabus_view.dart';
 import 'package:darpan/ui/sub_views/academics/timetable/timetable_view.dart';
 import 'package:darpan/ui/views/academics/academics_view.dart';
@@ -179,4 +180,39 @@ class FirestoreService {
           url: data['url']);
     }).toList();
   }
+
+// /Department/12_computer/academics/semester/1_sem/1_sem/results
+
+  Future<List<ResultModel>> getSemesterResults() async {
+    try {
+      final localStorageService = locator<LocalStorageService>();
+      String semester = await "${localStorageService.read('userSem')}_sem";
+
+      final QuerySnapshot snapshot = await _firestore
+          .collection('Department')
+          .doc('12_computer')
+          .collection('academics')
+          .doc('semester')
+          .collection('1_sem')
+          .doc('1_sem')
+          .collection('results')
+          .get();
+
+      return snapshot.docs.map((doc) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        return ResultModel(
+          ut1Link: data['ut1'] ?? '',
+          ut2Link: data['ut2'] ?? '',
+          gazetteLink: data['gazette'] ?? '',
+          marksheetLink: data['sem'] ?? '',
+        );
+      }).toList();
+    } catch (e) {
+      // Handle any exceptions that might occur during the process
+      debugPrint("Error fetching results: $e");
+      return [];
+    }
+  }
+  
 }
+

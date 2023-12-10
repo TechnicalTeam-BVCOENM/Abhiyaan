@@ -1,6 +1,7 @@
 part of 'results_view.dart';
 
 class ResultsViewModel extends BaseViewModel {
+  final FirestoreService _firestoreService = FirestoreService();
   final log = getLogger('ResultsViewModel');
   bool _isExpanded = false;
 
@@ -42,4 +43,33 @@ class ResultsViewModel extends BaseViewModel {
     }
     notifyListeners();
   }
+
+  List<ResultModel> results = [];
+
+  Future<void> fetchResults() async {
+    setBusy(true);
+    try {
+      results = await _firestoreService.getSemesterResults();
+      print(results[0].gazetteLink.toString());
+      notifyListeners();
+      // Notify listeners or update your view model state as needed
+    } catch (e) {
+      // Handle errors
+    }
+    setBusy(false);
+  }
+}
+
+class ResultModel {
+  String ut1Link;
+  String ut2Link;
+  String gazetteLink;
+  String marksheetLink;
+
+  ResultModel({
+    required this.ut1Link,
+    required this.ut2Link,
+    required this.gazetteLink,
+    required this.marksheetLink,
+  });
 }

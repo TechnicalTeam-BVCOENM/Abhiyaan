@@ -1,4 +1,5 @@
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:darpan/ui/sub_views/academics/results/results_view.dart';
 
 class SemesterResult extends ViewModelWidget<ResultsViewModel> {
@@ -135,6 +136,8 @@ class buildElevatedButton extends ViewModelWidget<ResultsViewModel> {
         ),
         onPressed: () {
           model.updateButtonPressedState(sem_index, index, true);
+          UrlLauncher().launchURL(link);
+          print(link);
         },
         child: Text(
           title,

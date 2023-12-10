@@ -88,7 +88,7 @@ class EventDetails {
   get eventImage => _eventImage;
 }
 
-class EventDateContainer extends StatelessWidget {
+class EventDateContainer extends ViewModelWidget<EventViewModel> {
   final double? top;
   final double? bottom;
   final double? right;
@@ -104,52 +104,48 @@ class EventDateContainer extends StatelessWidget {
     this.right,
     this.bottom,
     this.left,
-    this.fontSize = 30,
+    this.fontSize = 28,
     required this.height,
     required this.width,
     required this.event,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, EventViewModel viewModel) {
     FontThemeClass fontTheme = FontThemeClass();
-    EventViewModel model = EventViewModel();
     return Positioned(
-      top: top?.sp,
-      left: left?.sp,
-      bottom: bottom?.sp,
-      right: right?.sp,
-      child: Container(
-        height: height.h,
-        width: width.w,
-        decoration: BoxDecoration(
-          color: context.colorScheme.secondaryWhiteColor,
-          boxShadow: [
-            BoxShadow(
-              color: context.colorScheme.secondarySectionColor.withOpacity(0.4),
-              spreadRadius: 1,
-              blurRadius: 2,
-              offset: const Offset(0, 1), // changes position of shadow
-            ),
-          ],
-          borderRadius: BorderRadius.circular(12),
-        ),
-        // Event Date
+      top: top,
+      left: left,
+      bottom: bottom,
+      right: right,
+      child: Card(
+        shadowColor: context.colorScheme.secondarySectionColor,
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              event.startDate.toDate().day.toString(),
-              textAlign: TextAlign.center,
-              style: fontTheme.heading(context,
-                  size: fontSize.sp, color: context.colorScheme.primaryColor),
+            SizedBox(
+              width: width,
+              height: 30.h,
+              child: Text(
+                event.startDate.toDate().day.toString().trim(),
+                textAlign: TextAlign.center,
+                style: fontTheme.heading(
+                  context,
+                  color: context.colorScheme.primaryColor,
+                ),
+              ),
             ),
-            Text(
-              model.getMonthName(event.startDate.toDate().month,
-                  event.startDate.toDate().year),
-              style: fontTheme.subHeading2(
-                  context, context.colorScheme.secondaryBlackColor),
+            SizedBox(
+              width: width,
+              height: 30.h,
+              child: Text(
+                viewModel
+                    .getMonthName(event.startDate.toDate().month,
+                        event.startDate.toDate().year)
+                    .trim(),
+                textAlign: TextAlign.center,
+                style: fontTheme.subHeading2(
+                    context, context.colorScheme.secondaryBlackColor),
+              ),
             ),
           ],
         ),
@@ -171,21 +167,17 @@ class EventCardInfo extends StatelessWidget {
     EventDetails eventDetails = EventDetails();
     return Positioned(
       child: SizedBox(
-        height: 205.h,
-        width: MediaQuery.of(context).size.width,
+        height: 265.h,
+        width: double.infinity,
         child: Column(
           children: [
-            // Event Image
             eventDetails.eventImage(
               context,
               model.imageUrl,
-              128.h,
+              179.h,
               ResponsiveUtils.screenWidth(context),
             ),
-            SizedBox(
-              height: 18.h,
-            ),
-            // Event Info
+            8.verticalSpace,
             Column(
               children: [
                 Row(
@@ -195,26 +187,21 @@ class EventCardInfo extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Event Title
+                        4.verticalSpace,
                         eventDetails.eventTitle(
                           context,
                           model.title,
-                          EdgeInsets.only(left: 18.sp),
+                          const EdgeInsets.only(left: 18).r,
                         ),
-                        SizedBox(
-                          height: 2.h,
-                        ),
-                        //  Event Time and Location
+                        2.verticalSpace,
                         Padding(
-                          padding: EdgeInsets.only(left: 18.sp),
+                          padding: const EdgeInsets.only(left: 18).r,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               eventDetails.eventTime(context,
                                   "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}"),
-                              SizedBox(
-                                width: 18.w,
-                              ),
+                              18.horizontalSpace,
                               eventDetails.eventLocation(
                                   context, model.location),
                             ],
@@ -224,10 +211,10 @@ class EventCardInfo extends StatelessWidget {
                     ),
                     // Event Button
                     Padding(
-                      padding: EdgeInsets.only(right: 18.sp),
+                      padding: const EdgeInsets.only(right: 18).r,
                       child: Container(
-                        height: 35.h,
-                        width: 90.w,
+                        height: 40.h,
+                        width: 95.w,
                         decoration: BoxDecoration(
                           color:
                               context.colorScheme.primaryColor.withOpacity(0.8),
@@ -247,7 +234,7 @@ class EventCardInfo extends StatelessWidget {
                             "Open".toUpperCase(),
                             style: FontThemeClass().subHeading2(context,
                                 context.colorScheme.secondaryWhiteColor,
-                                fontSize: 16.sp, fontWeight: FontWeight.w900),
+                                fontSize: 18.sp, fontWeight: FontWeight.w900),
                           ),
                         ),
                       ),
@@ -276,38 +263,30 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
     return Positioned(
       child: SizedBox(
         height: 200.h,
-        width: 200.w,
+        width: 202.w,
         child: Column(
           children: [
-            // Event Image
             eventDetails.eventImage(
               context,
               model.imageUrl,
-              110.h,
+              135.h,
               ResponsiveUtils.screenWidth(context),
             ),
-            SizedBox(
-              height: 8.h,
-            ),
-            // Event Info
+            2.verticalSpace,
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 12.sp, right: 16.sp),
+                  padding: const EdgeInsets.only(left: 12, right: 16).r,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Time
                       eventDetails.eventTime(
                         context,
                         "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}",
                       ),
-                      SizedBox(
-                        height: 6.h,
-                      ),
-                      // Location
+                      2.verticalSpace,
                       eventDetails.eventLocation(
                         context,
                         model.location,
@@ -366,34 +345,35 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
   @override
   Widget build(BuildContext context, EventViewModel viewModel) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0).r,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(18.0).r,
         child: Container(
           decoration:
               BoxDecoration(color: context.colorScheme.secondaryWhiteColor),
-          width: 60.sp,
-          height: 60.sp,
+          width: 80.w,
+          height: 80.h,
           child: Column(
             children: [
               InkWell(
-                  onTap: () => UrlLauncher().launchURL(model.url),
-                  child: Image.network(
-                    model.imageUrl,
-                    height: 60.sp,
-                    width: 60.sp,
-                    fit: BoxFit.cover,
-                    frameBuilder:
-                        (context, child, frame, wasSynchronouslyLoaded) =>
-                            wasSynchronouslyLoaded
-                                ? child
-                                : AnimatedOpacity(
-                                    opacity: frame == null ? 0 : 1,
-                                    duration: const Duration(seconds: 1),
-                                    curve: Curves.easeOut,
-                                    child: child,
-                                  ),
-                  )),
+                onTap: () => UrlLauncher().launchURL(model.url),
+                child: Image.network(
+                  model.imageUrl,
+                  height: 80.h,
+                  width: 80.w,
+                  fit: BoxFit.cover,
+                  frameBuilder:
+                      (context, child, frame, wasSynchronouslyLoaded) =>
+                          wasSynchronouslyLoaded
+                              ? child
+                              : AnimatedOpacity(
+                                  opacity: frame == null ? 0 : 1,
+                                  duration: const Duration(seconds: 1),
+                                  curve: Curves.easeOut,
+                                  child: child,
+                                ),
+                ),
+              ),
             ],
           ),
         ),

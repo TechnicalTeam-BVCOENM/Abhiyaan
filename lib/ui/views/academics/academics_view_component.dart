@@ -7,18 +7,20 @@ class AcademicsShimmerLoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+      padding: EdgeInsets.symmetric(horizontal: 18.r),
       child: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         scrollBehavior:
             const MaterialScrollBehavior().copyWith(overscroll: false),
         slivers: [
-          SliverToBoxAdapter(child: SizedBox(height: 16.h)),
+          SliverToBoxAdapter(
+            child: 16.verticalSpace,
+          ),
           SliverGrid(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              mainAxisSpacing: 16.0,
-              crossAxisSpacing: 16.0,
+              mainAxisSpacing: 16.r,
+              crossAxisSpacing: 16.r,
             ),
             delegate: SliverChildBuilderDelegate(
               childCount: 9,
@@ -27,18 +29,20 @@ class AcademicsShimmerLoadingWidget extends StatelessWidget {
                   baseColor: context.colorScheme.backgroundColor,
                   highlightColor: context.colorScheme.secondaryLPurpleColor,
                   child: Container(
-                    width: 90.r,
-                    height: 90.r,
+                    width: 98.r,
+                    height: 98.r,
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(25.r),
                     ),
                   ),
                 );
               },
             ),
           ),
-          SliverToBoxAdapter(child: SizedBox(height: 60.h)),
+          SliverToBoxAdapter(
+            child: 62.verticalSpace,
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               childCount: 3,
@@ -47,19 +51,21 @@ class AcademicsShimmerLoadingWidget extends StatelessWidget {
                   baseColor: context.colorScheme.backgroundColor,
                   highlightColor: context.colorScheme.secondaryLPurpleColor,
                   child: Container(
-                    margin: const EdgeInsets.only(bottom: 12.0),
+                    margin: EdgeInsets.only(bottom: 12.r),
                     width: double.infinity,
-                    height: 80.h,
+                    height: 120.h,
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(16.r),
                     ),
                   ),
                 );
               },
             ),
           ),
-          SliverToBoxAdapter(child: SizedBox(height: 8.h)),
+          SliverToBoxAdapter(
+            child: 8.verticalSpace,
+          ),
         ],
       ),
     );
