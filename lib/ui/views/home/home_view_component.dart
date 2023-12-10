@@ -60,48 +60,50 @@ Widget quickLinksList(BuildContext context, List model,
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
       itemCount: model.length,
-      itemExtent: 100.w,
+      // itemExtent: 98.w,
       itemBuilder: (context, idx) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            GestureDetector(
-              onTap: () {
-                debugPrint("Tapped $idx");
-                handleQuickLinksNavigation(model, idx);
-              },
-              child: Container(
-                height: 80.h,
-                width: 80.w,
-                decoration: BoxDecoration(
-                  color: context.colorScheme.secondaryLPurpleColor,
-                  borderRadius: BorderRadius.circular(borderRadius ?? 18).r,
-                ),
-                child: Image.asset(
-                  model[idx].imageUrl,
-                  width: 40.w,
-                  height: 40.h,
+        return Padding(
+          padding: const EdgeInsets.only(right: 22.0, left: 0).r,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  debugPrint("Tapped $idx");
+                  handleQuickLinksNavigation(model, idx);
+                },
+                child: Container(
+                  height: 80.h,
+                  width: 80.w,
+                  decoration: BoxDecoration(
+                    color: context.colorScheme.secondaryLPurpleColor,
+                    borderRadius: BorderRadius.circular(borderRadius ?? 18).r,
+                  ),
+                  child: Image.asset(
+                    model[idx].imageUrl,
+                    width: 40.w,
+                    height: 40.h,
+                  ),
                 ),
               ),
-            ),
-            // const SizedBox(height: 18),
-            Text(
-              model[idx].title.toString().toUpperCase(),
-              style: FontThemeClass()
-                  .smallSubHeading(
-                    context,
-                    context.colorScheme.primaryDarkColor,
-                  )
-                  .copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-              textAlign: TextAlign.center,
-              softWrap: false,
-            ),
-          ],
+              // const SizedBox(height: 18),
+              Text(
+                model[idx].title.toString().toUpperCase(),
+                style: FontThemeClass()
+                    .smallSubHeading(
+                      context,
+                      context.colorScheme.primaryDarkColor,
+                    )
+                    .copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                textAlign: TextAlign.center,
+                softWrap: false,
+              ),
+            ],
+          ),
         );
       },
     ),
   );
 }
-
