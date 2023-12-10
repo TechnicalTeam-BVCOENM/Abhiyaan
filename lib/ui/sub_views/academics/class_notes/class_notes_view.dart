@@ -2,9 +2,6 @@ import 'package:darpan/file_exporter.dart';
 import 'package:darpan/ui/sub_views/academics/class_notes/class_notes_components.dart';
 part 'class_notes_view_model.dart';
 
-
-
-
 class ClassNotesView extends StatelessWidget {
   const ClassNotesView({super.key});
   @override

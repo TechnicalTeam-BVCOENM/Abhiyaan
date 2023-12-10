@@ -1,4 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:darpan/app/app.locator.dart';
+import 'package:darpan/services/local_storage_service.dart';
+import 'package:darpan/ui/sub_views/academics/syllabus/syllabus_view.dart';
 import 'package:darpan/ui/views/academics/academics_view.dart';
 import 'package:darpan/ui/views/event/event_view.dart';
 import 'package:darpan/ui/views/home/home_view.dart';
@@ -69,6 +72,26 @@ class FirestoreService {
         cEmail: data['coordinatorEmail'],
         cPhone: data['coordinatorPhone'],
         about: data['about'],
+      );
+    }).toList();
+  }
+
+  Future<List<Syllabus>> getAllSyllabus(String collection) async {
+    final localStorageService = locator<LocalStorageService>();
+    final QuerySnapshot snapshot = await _firestore
+        .collection(collection)
+        .doc(localStorageService.read('departmentCodeDatabase'))
+        .collection('academics')
+        .doc('semester')
+        .collection('1_sem')
+        .doc('1_sem')
+        .collection('syllabus')
+        .get();
+    return snapshot.docs.map((doc) {
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      return Syllabus(
+        subjectName: data['subjectName'] ?? '',
+        imageUrl: data['imageUrl'] ?? '',
       );
     }).toList();
   }
