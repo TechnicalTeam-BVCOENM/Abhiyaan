@@ -1,16 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/services/firestore_service.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:darpan/ui/sub_views/academics/timetable/timetable_view_component.dart';
 part 'timetable_view_model.dart';
 
 class TimeTableView extends StatelessWidget {
   const TimeTableView({super.key});
-
   @override
   Widget build(BuildContext context) {
+    FontThemeClass fontThemeClass = FontThemeClass();
     return ViewModelBuilder<TimeTableViewModel>.reactive(
       viewModelBuilder: () => TimeTableViewModel(),
+      onViewModelReady: (model) => model.init(),
       builder: (context, model, child) {
         return Scaffold(
           backgroundColor: context.colorScheme.backgroundColor,
@@ -119,20 +121,39 @@ class TimeTableView extends StatelessWidget {
                     "Daily Tasks",
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      fontSize: FontThemeClass().heading(context).fontSize,
+                      fontSize: fontThemeClass.heading(context).fontSize,
                       fontWeight: FontWeight.w700,
                       color: context.colorScheme.primaryColor,
                     ),
                   ),
-                  for (int i = 0; i < model.lectureDataList.length; i++) ...[
-                    TimeLineWidget(
-                      isFirst: i == 0,
-                      isLast: i == model.lectureDataList.length - 1,
-                      isPast: model.lectureDataList[i].startTime.toDate().hour <
-                          DateTime.now().hour,
-                      index: i,
-                    ),
-                  ],
+                  model.todaysDay == 'holiday'
+                      ? Card(
+                          child: SizedBox(
+                            height: 48.h,
+                            child: Center(
+                                child: Text(
+                              "Today is hoilday",
+                              style: fontThemeClass.heading3(context),
+                            )),
+                          ),
+                        )
+                      : Column(
+                          children: [
+                            for (int i = 0;
+                                i < model.lectureDataList.length;
+                                i++) ...[
+                              TimeLineWidget(
+                                isFirst: i == 0,
+                                isLast: i == model.lectureDataList.length - 1,
+                                isPast: model.lectureDataList[i].startTime
+                                        .toDate()
+                                        .hour <
+                                    DateTime.now().hour,
+                                index: i,
+                              ),
+                            ],
+                          ],
+                        )
                 ],
               ),
             ),
