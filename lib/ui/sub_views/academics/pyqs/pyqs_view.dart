@@ -15,7 +15,6 @@ class PyqsView extends StatelessWidget {
                 color: context
                     .colorScheme.secondaryBlackColor, //change your color here
               ),
-              backgroundColor: context.colorScheme.backgroundColor,
               elevation: 0,
               title: Text(
                 "PYQ's",
@@ -27,27 +26,13 @@ class PyqsView extends StatelessWidget {
               child: Padding(
                 padding:
                     EdgeInsets.symmetric(vertical: 30.sp, horizontal: 20.sp),
-                child: const Column(children: [
-                   SubjectCard(
-                    title: "Theoretical Computer Science",
-                  ),
-                   SubjectCard(
-                    title: "Software Engineering",
-                  ),
-                   SubjectCard(
-                    title: "Computer Network",
-                  ),
-                   SubjectCard(
-                    title: "Data Warehousing & Mining",
-                  ),
-                   SubjectCard(
-                    title: "Advance Database Management",
-                  ),
-                  Expanded(child: Text("")),
-                ]),
+                child: ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return PyqsViewModel().allSubCards[index];
+                    }),
               ),
             ),
-            backgroundColor: context.colorScheme.backgroundColor,
           );
         });
   }

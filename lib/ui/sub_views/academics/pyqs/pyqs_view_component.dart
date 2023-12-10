@@ -39,9 +39,9 @@ class SubjectCard extends StatelessWidget {
                 //navigate
                 // navigateToSettingsView
               },
-              child: const Icon(
+              child:Icon(
                 Icons.navigate_next_rounded,
-                size: 22,
+                size: 22.r,
               )),
         ],
       ),
