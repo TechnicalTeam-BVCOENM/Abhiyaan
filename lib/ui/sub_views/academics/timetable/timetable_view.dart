@@ -19,10 +19,7 @@ class TimeTableView extends StatelessWidget {
           appBar: AppBar(
             title: Text(
               'Timetable',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: context.colorScheme.headingColor,
-              ),
+              style: FontThemeClass().heading(context),
             ),
             centerTitle: true,
             iconTheme: IconThemeData(
@@ -33,7 +30,7 @@ class TimeTableView extends StatelessWidget {
           body: SafeArea(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
-              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              padding: EdgeInsets.symmetric(horizontal: 18.r),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -42,8 +39,8 @@ class TimeTableView extends StatelessWidget {
                     firstDay: model.getOneYearBack(),
                     lastDay: model.getOneYearForward(),
                     focusedDay: model.focusedDay,
-                    rowHeight: 25.h,
-                    daysOfWeekHeight: 20.h,
+                    rowHeight: 34.h,
+                    daysOfWeekHeight: 24.h,
                     availableGestures: AvailableGestures.all,
                     daysOfWeekStyle: const DaysOfWeekStyle(
                       weekdayStyle: TextStyle(
@@ -62,15 +59,10 @@ class TimeTableView extends StatelessWidget {
                       leftChevronVisible: false,
                       rightChevronVisible: false,
                       formatButtonShowsNext: false,
-                      titleTextStyle: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      formatButtonTextStyle: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                      titleTextStyle:
+                          fontThemeClass.heading3(context, FontWeight.bold),
+                      formatButtonTextStyle:
+                          fontThemeClass.subHeading(context, Colors.white),
                       formatButtonDecoration: BoxDecoration(
                         color: context.colorScheme.primaryColor,
                         borderRadius: BorderRadius.circular(12),
@@ -117,17 +109,13 @@ class TimeTableView extends StatelessWidget {
                       model.focusedDay = focusedDay;
                     },
                   ),
-                  SizedBox(height: 20.h),
+                  20.verticalSpace,
                   Text(
                     model.todaysDay == 'holiday' ? "Holiday" : "Lectures",
                     textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontSize: fontThemeClass.heading(context).fontSize,
-                      fontWeight: FontWeight.w700,
-                      color: context.colorScheme.primaryColor,
-                    ),
+                    style: fontThemeClass.heading3(context, FontWeight.bold),
                   ),
-                  SizedBox(height: 8.h),
+                  8.verticalSpace,
                   model.todaysDay == 'holiday'
                       ? Card(
                           elevation: 0,
@@ -139,7 +127,6 @@ class TimeTableView extends StatelessWidget {
                               width: 1.0,
                             ),
                           ),
-                          color: context.colorScheme.secondaryLPurpleColor,
                           child: SizedBox(
                             width: double.infinity,
                             child: Padding(
@@ -152,20 +139,17 @@ class TimeTableView extends StatelessWidget {
                                   children: [
                                     Text(
                                       "It's weekend o'clock!",
-                                      style: TextStyle(
-                                        fontSize: FontThemeClass()
-                                            .heading3(context)
-                                            .fontSize,
-                                        fontWeight: FontWeight.w800,
-                                      ),
-                                    ),
-                                    Text(
-                                      'Sip, savor, and soak in the sunshine.',
-                                      textAlign: TextAlign.center,
                                       style: FontThemeClass().subHeading(
                                           context,
-                                          context.colorScheme.primaryColor
-                                              .withOpacity(0.6)),
+                                          context.colorScheme.primaryColor),
+                                    ),
+                                    Text(
+                                      'Sip, savor and soak in the sunshine.',
+                                      textAlign: TextAlign.center,
+                                      style: FontThemeClass().subHeading2(
+                                          context,
+                                          context.colorScheme
+                                              .secondarySectionColor),
                                     ),
                                   ],
                                 ),

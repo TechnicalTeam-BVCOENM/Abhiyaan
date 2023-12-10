@@ -35,7 +35,7 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                   ),
                 ],
               ),
-              SizedBox(height: 2.h),
+              2.verticalSpace,
               Text(
                 updateList[i].description,
                 maxLines: 2,
@@ -88,7 +88,7 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                   ),
                 ],
               ),
-              SizedBox(height: 2.h),
+              2.verticalSpace,
               Text(
                 updateList[i].description,
                 maxLines: 100,
