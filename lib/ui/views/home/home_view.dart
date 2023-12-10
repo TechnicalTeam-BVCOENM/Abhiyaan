@@ -38,7 +38,7 @@ class HomeView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Hey ${model.user} 👋', // Update according to loal storage
+                                'Hey ${model.firstname[0]} 👋', // Update according to loal storage
                                 style: fontTheme.appBarText(
                                     context, context.colorScheme.headingColor),
                               ),

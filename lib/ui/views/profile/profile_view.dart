@@ -22,7 +22,7 @@ class ProfileView extends StatelessWidget {
                     width: 28.sp,
                     child: Icon(
                       Icons.settings,
-                      size: 30,
+                      size: 30.sp,
                       color: context.colorScheme.primaryColor,
                     ),
                   ),
@@ -34,7 +34,7 @@ class ProfileView extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8, left: 18),
                 child: Center(
                   child: Container(
-                    margin: EdgeInsets.only(left: 30.sp),
+                    margin: EdgeInsets.only(left: 40.sp),
                     child: Text(
                       "Profile",
                       style: FontThemeClass().appBarText(context),
@@ -49,16 +49,16 @@ class ProfileView extends StatelessWidget {
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 25.sp),
+                      padding: EdgeInsets.symmetric(vertical: 45.sp),
                       child: Row(
                         children: [
                           ClipOval(
                             clipper: MyClip(),
                             child: CachedNetworkImage(
-                              width: 85.sp,
+                              width: 80.sp,
+                              height: 80.sp,
                               fit: BoxFit.cover,
-                              imageUrl:
-                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1K8v6grZ-ZUVMNO5SLPpv1757dIoupO612SvpYZfpzndi3Vg6QnqrxRQal1PHqZtdhBE&usqp=CAU",
+                              imageUrl: LocalStorageService().read('userImg'),
                               placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator.adaptive()),
                               errorWidget: (context, url, error) =>
@@ -66,7 +66,7 @@ class ProfileView extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: 20.sp,
+                            width: 30.sp,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,9 +76,9 @@ class ProfileView extends StatelessWidget {
                                 style: FontThemeClass().profileheading(context),
                               ),
                               SizedBox(
-                                height: 7.sp,
+                                height: 7.h,
                               ),
-                              Text('',
+                              Text(LocalStorageService().read('userYear'),
                                   style: FontThemeClass().subHeading2(
                                       context,
                                       context
@@ -141,7 +141,7 @@ class ProfileView extends StatelessWidget {
 class MyClip extends CustomClipper<Rect> {
   @override
   Rect getClip(Size size) {
-    return const Rect.fromLTWH(0, 0, 85, 85);
+    return const Rect.fromLTWH(0, 0, 70, 70);
   }
 
   @override

@@ -30,8 +30,11 @@ class SettingsViewModel extends BaseViewModel {
   }
 
   navigateToHelpSupport() {
+    UrlLauncher externalUrlHandler = UrlLauncher();
+    externalUrlHandler.launchURL("https://bvcoenm.edu.in/contact-us/");
     // Navigation
   }
+
   navigateToPrivacyPolicy() {
     // Navigation
   }

@@ -9,19 +9,19 @@ Padding settingsListTile(
   Function? onTap,
 }) {
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 10),
+    padding: EdgeInsets.symmetric(vertical: 10.sp),
     child: ListTile(
-      contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+      contentPadding: EdgeInsets.symmetric(vertical: 7.sp, horizontal: 20.sp),
       title: Text(
         title!,
         style: model.fontTheme.heading4(context),
       ),
       titleAlignment: ListTileTitleAlignment.center,
-      leading: SizedBox(width: 35.w, child: Image.asset(leadingIcon!)),
+      leading: SizedBox(width: 40.w, child: Image.asset(leadingIcon!)),
       trailing: trailingIcon,
       tileColor: context.colorScheme.secondaryWhiteColor,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(18.sp),
       ),
     ),
   );

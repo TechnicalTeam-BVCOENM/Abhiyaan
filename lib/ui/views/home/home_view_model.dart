@@ -3,7 +3,8 @@ part of 'home_view.dart';
 class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
   final FirestoreService _firestoreService = FirestoreService();
-  String user = LocalStorageService().read('userName');
+static String user = LocalStorageService().read('userName');
+final firstname = user.split(' ');
 
   List<QuickLinksModel> quickLinksList = [
     QuickLinksModel(
