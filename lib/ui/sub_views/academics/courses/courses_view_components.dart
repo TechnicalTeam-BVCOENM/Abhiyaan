@@ -76,11 +76,15 @@ class CourseCard extends StatelessWidget {
                   ],
                 ),
               ),
-              CachedNetworkImageWidget(
-                imageUrl: course.image,
-                height: 90.h,
-                width: 90.w,
-                maxHeightDiskCache: ResponsiveUtils.screenWidth(context),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(18),
+                child: CachedNetworkImageWidget(
+                  fit: BoxFit.fill,
+                  imageUrl: course.image,
+                  height: 70.h,
+                  width: 80.w,
+                  maxHeightDiskCache: ResponsiveUtils.screenWidth(context),
+                ),
               )
             ],
           ),
