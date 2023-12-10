@@ -36,8 +36,11 @@ class SettingsViewModel extends BaseViewModel {
   }
 
   navigateToPrivacyPolicy() {
+    UrlLauncher externalUrlHandler = UrlLauncher();
+    externalUrlHandler.launchURL("");
     // Navigation
   }
+
   Future<void> logout() async {
     setBusy(true);
     final success = await _authenticationService.signOut();
