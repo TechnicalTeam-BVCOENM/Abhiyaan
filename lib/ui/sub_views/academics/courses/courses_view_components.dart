@@ -12,17 +12,17 @@ class CourseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.r),
+      padding: const EdgeInsets.symmetric(vertical: 8).r,
       child: Card(
         margin: const EdgeInsets.only(bottom: 8),
         elevation: 0,
         clipBehavior: Clip.hardEdge,
         color: context.colorScheme.secondaryLPurpleColor,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(16).r,
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14).r,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -62,7 +62,7 @@ class CourseCard extends StatelessWidget {
                                 context.colorScheme.primaryColor),
                             shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.r),
+                                borderRadius: BorderRadius.circular(15).r,
                               ),
                             ),
                           ),

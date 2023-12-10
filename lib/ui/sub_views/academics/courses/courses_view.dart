@@ -22,7 +22,7 @@ class CoursesView extends StatelessWidget {
           ),
           body: SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18.r),
+              padding: const EdgeInsets.symmetric(horizontal: 18).r,
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 itemCount: model.courses.length,
