@@ -25,7 +25,7 @@ class CourseCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                width: 210.w,
+                width: 250.w,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -34,23 +34,16 @@ class CourseCard extends StatelessWidget {
                       course.courseName,
                       style: FontThemeClass().heading4(context),
                     ),
-                    SizedBox(
-                      height: 5.sp,
+                    10.verticalSpace,
+                    Text(
+                      course.courseDesc,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      softWrap: true,
+                      style: FontThemeClass()
+                          .subHeading2(context, context.colorScheme.secondary),
                     ),
-                    SizedBox(
-                      height: 40.h,
-                      child: Text(
-                        course.courseDesc,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        softWrap: true,
-                        style: FontThemeClass().subHeading2(
-                            context, context.colorScheme.secondary),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5.sp,
-                    ),
+                    20.verticalSpace,
                     ElevatedButton(
                       onPressed: () {
                         UrlLauncher().launchURL(course.url);
@@ -81,8 +74,8 @@ class CourseCard extends StatelessWidget {
                 child: CachedNetworkImageWidget(
                   fit: BoxFit.fill,
                   imageUrl: course.image,
-                  height: 70.h,
-                  width: 80.w,
+                  height: 100.h,
+                  width: 95.w,
                   maxHeightDiskCache: ResponsiveUtils.screenWidth(context),
                 ),
               )

@@ -11,7 +11,6 @@ class CoursesViewModel extends BaseViewModel {
     setBusy(true);
     try {
       courses = await _firestoreService.getAllCourses();
-      debugPrint(courses.toString());
       courses.shuffle(); //to display courses randomly
       notifyListeners();
     } catch (e) {
