@@ -9,9 +9,9 @@ Padding settingsListTile(
   Function? onTap,
 }) {
   return Padding(
-    padding: EdgeInsets.symmetric(vertical: 10.sp),
+    padding: const EdgeInsets.symmetric(vertical: 10).r,
     child: ListTile(
-      contentPadding: EdgeInsets.symmetric(vertical: 7.sp, horizontal: 20.sp),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20).r,
       title: Text(
         title!,
         style: model.fontTheme.heading4(context),

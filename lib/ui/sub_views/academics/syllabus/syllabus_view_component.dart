@@ -1,11 +1,15 @@
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/ui/common/common_component_model.dart';
 
 Widget subjectCard(List syllabusList, int i, BuildContext context, viewModel) {
   return ListView.builder(
       itemCount: i,
       itemBuilder: (ctx, index) {
         return GestureDetector(
-          onTap: () => viewModel.navigateToSubject(),
+          onTap: () {
+            UrlLauncher().launchURL(
+                "https://www.vidyalankar.org/engineering/assets/docs/be/computer-engineering-syllabus-sem-vii-mumbai-university.pdf");
+          },
           child: Container(
             margin: const EdgeInsets.only(top: 20),
             child: ListTile(
