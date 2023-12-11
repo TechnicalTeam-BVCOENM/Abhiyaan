@@ -22,6 +22,7 @@ class SocietiesView extends StatelessWidget {
                   style: FontThemeClass().heading2(context),
                 ),
                 centerTitle: true,
+              backgroundColor: context.colorScheme.backgroundColor,
               ),
               body: SafeArea(
                 child: Padding(
