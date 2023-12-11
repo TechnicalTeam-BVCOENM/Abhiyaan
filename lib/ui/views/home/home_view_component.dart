@@ -26,7 +26,7 @@ class CarouselUtils {
               CachedNetworkImageWidget(
                 imageUrl: urlImage,
                 height: 1500.h,
-                width: 350.w,
+                width: double.infinity,
                 maxHeightDiskCache: 1000,
                 fit: BoxFit.cover,
               ),
