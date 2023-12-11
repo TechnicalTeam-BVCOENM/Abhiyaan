@@ -49,7 +49,7 @@ class SocietyCard extends StatelessWidget {
                   softWrap: true,
                   overflow: TextOverflow.ellipsis,
                   style: FontThemeClass().smallSubHeading(context,
-                      context.colorScheme.signInTextColor.withOpacity(0.8)),
+                      context.colorScheme.secondaryBlackColor.withOpacity(0.8)),
                 ),
               ),
               SizedBox(
