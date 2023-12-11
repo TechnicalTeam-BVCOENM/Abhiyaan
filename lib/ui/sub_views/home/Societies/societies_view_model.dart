@@ -1,7 +1,6 @@
 part of 'societies_view.dart';
 
 class SocietiesViewModel extends BaseViewModel {
-  // final FirestoreService _firestoreService = FirestoreService();
   final log = getLogger('SocietiesViewModel');
 
   void init() async {
@@ -14,8 +13,6 @@ class SocietiesViewModel extends BaseViewModel {
   Future<void> loadData() async {
     setBusy(true);
     try {
-      // _subCard = await _firestoreService.getallSubCards();
-
       log.i(_societyCard[0].title);
       notifyListeners();
     } catch (e) {
@@ -63,10 +60,4 @@ class SocietiesViewModel extends BaseViewModel {
       leading: AssetImagePath.crescendoImg,
     ),
   ];
-
-  // final _navigationService = locator<NavigationService>();
-}
-
-navigateToSettingsView() {
-  // _navigationService.navigateTo(Routes.settingsView);
 }
