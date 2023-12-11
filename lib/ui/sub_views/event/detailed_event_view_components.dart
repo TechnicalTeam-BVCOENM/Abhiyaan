@@ -13,6 +13,7 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
   @override
   Widget build(BuildContext context, DetailedEventViewModel viewModel) {
     return SliverAppBar(
+      foregroundColor: context.colorScheme.signInTextColor,
       backgroundColor: context.colorScheme.backgroundColor,
       elevation: 0.0,
       pinned: false,
@@ -349,7 +350,7 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
               ),
             ),
             onPressed: () {
-              UrlLauncher().launchURL('https://www.google.com/forms/about/');
+              UrlLauncher().launchURL(viewModel.eventData.registerUrl);
             },
             child: Text(
               'Register',

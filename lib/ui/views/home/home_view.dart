@@ -115,8 +115,8 @@ class HomeView extends StatelessWidget {
                                 flex: 4,
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: context
-                                        .colorScheme.secondaryLPurpleColor,
+                                    color: context.colorScheme.primaryColor
+                                        .withOpacity(0.45),
                                     borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(12.r),
                                       bottomLeft: Radius.circular(12.r),
