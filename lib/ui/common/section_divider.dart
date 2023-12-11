@@ -12,9 +12,8 @@ class SectionText extends StatelessWidget {
       child: Text(
         title,
         style: FontThemeClass().subHeading2(
-          context,
-          context.colorScheme.secondarySectionColor,
-        ),
+            context, context.colorScheme.secondarySectionColor,
+            fontSize: 16),
       ),
     );
   }

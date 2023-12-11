@@ -169,7 +169,8 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
   Widget build(BuildContext context, EventViewModel viewModel) {
     EventDetails eventDetails = EventDetails();
     return Positioned(
-      child: SizedBox(
+      child: Container(
+        color: context.colorScheme.secondaryLPurpleColor,
         height: 265.h,
         width: double.infinity,
         child: Column(
@@ -270,9 +271,10 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
   Widget build(BuildContext context, EventViewModel viewModel) {
     EventDetails eventDetails = EventDetails();
     return Positioned(
-      child: SizedBox(
+      child: Container(
+        color: context.colorScheme.secondaryLPurpleColor,
         height: 210.h,
-        width: 202.w,
+        width: 232.w,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

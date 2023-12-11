@@ -126,18 +126,19 @@ class EventModel {
   String cEmail;
   int cPhone;
   String about;
+  String registerUrl;
 
-  EventModel({
-    required this.title,
-    required this.startDate,
-    required this.endDate,
-    required this.location,
-    required this.imageUrl,
-    required this.cName,
-    required this.cEmail,
-    required this.cPhone,
-    required this.about,
-  });
+  EventModel(
+      {required this.title,
+      required this.startDate,
+      required this.endDate,
+      required this.location,
+      required this.imageUrl,
+      required this.cName,
+      required this.cEmail,
+      required this.cPhone,
+      required this.about,
+      required this.registerUrl});
 }
 
 class SponsorsModel {

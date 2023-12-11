@@ -74,6 +74,7 @@ class FirestoreService {
         cEmail: data['coordinatorEmail'],
         cPhone: data['coordinatorPhone'],
         about: data['about'],
+        registerUrl: data['registerUrl'],
       );
     }).toList();
   }
