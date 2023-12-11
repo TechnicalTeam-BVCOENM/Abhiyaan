@@ -125,20 +125,20 @@ class EventDateContainer extends ViewModelWidget<EventViewModel> {
           children: [
             SizedBox(
               width: width,
-              height: (height / 2).h,
+              height: (height / 2),
               child: Text(
                 event.startDate.toDate().day.toString().trim(),
                 textAlign: TextAlign.center,
                 style: fontTheme.heading(
                   context,
-                  size: timeFontSize.toDouble().sp,
+                  size: timeFontSize.toDouble(),
                   color: context.colorScheme.primaryColor,
                 ),
               ),
             ),
             SizedBox(
               width: width,
-              height: (height / 2).h,
+              height: (height / 2),
               child: Text(
                 viewModel
                     .getMonthName(event.startDate.toDate().month,
