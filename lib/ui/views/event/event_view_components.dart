@@ -125,20 +125,20 @@ class EventDateContainer extends ViewModelWidget<EventViewModel> {
           children: [
             SizedBox(
               width: width,
-              height: (height / 2).h,
+              height: (height / 2),
               child: Text(
                 event.startDate.toDate().day.toString().trim(),
                 textAlign: TextAlign.center,
                 style: fontTheme.heading(
                   context,
-                  size: timeFontSize.toDouble().sp,
+                  size: timeFontSize.toDouble(),
                   color: context.colorScheme.primaryColor,
                 ),
               ),
             ),
             SizedBox(
               width: width,
-              height: (height / 2).h,
+              height: (height / 2),
               child: Text(
                 viewModel
                     .getMonthName(event.startDate.toDate().month,
@@ -180,7 +180,7 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
               179.h,
               ResponsiveUtils.screenWidth(context),
             ),
-            8.verticalSpace,
+            10.verticalSpace,
             Column(
               children: [
                 Row(
@@ -271,9 +271,10 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
     EventDetails eventDetails = EventDetails();
     return Positioned(
       child: SizedBox(
-        height: 200.h,
+        height: 210.h,
         width: 202.w,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             eventDetails.eventImage(
               context,
@@ -281,7 +282,6 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
               135.h,
               ResponsiveUtils.screenWidth(context),
             ),
-            2.verticalSpace,
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -339,6 +339,7 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
                     ))
               ],
             ),
+            2.verticalSpace
           ],
         ),
       ),
