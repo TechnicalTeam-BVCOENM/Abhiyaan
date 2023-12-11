@@ -7,26 +7,18 @@ import 'package:darpan/ui/sub_views/academics/results/results_view.dart';
 class SemesterResult extends ViewModelWidget<ResultsViewModel> {
   // final ResultsViewModel model;
   final String semester;
-  // ignore: non_constant_identifier_names
   final String ut1_link;
-  // ignore: non_constant_identifier_names
   final String ut2_link;
-  // ignore: non_constant_identifier_names
   final String gazette_link;
-  // ignore: non_constant_identifier_names
   final String marksheet_link;
   final int index;
   const SemesterResult({
     super.key,
     // required this.model,
     required this.semester,
-    // ignore: non_constant_identifier_names
     required this.ut1_link,
-    // ignore: non_constant_identifier_names
     required this.ut2_link,
-    // ignore: non_constant_identifier_names
     required this.gazette_link,
-    // ignore: non_constant_identifier_names
     required this.marksheet_link,
     required this.index,
   });
@@ -125,7 +117,6 @@ class buildElevatedButton extends ViewModelWidget<ResultsViewModel> {
       required this.title,
       required this.link,
       required this.index,
-      // ignore: non_constant_identifier_names
       required this.sem_index});
 
   @override
