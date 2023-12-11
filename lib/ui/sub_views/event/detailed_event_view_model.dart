@@ -10,5 +10,4 @@ class DetailedEventViewModel extends BaseViewModel {
   navigateToEventView() {
     _navigationService.replaceWith(Routes.profileView);
   }
- 
 }

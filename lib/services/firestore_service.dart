@@ -185,8 +185,8 @@ class FirestoreService {
 
   Future<List<ResultModel>> getSemesterResults() async {
     try {
-      final localStorageService = locator<LocalStorageService>();
-      String semester = await "${localStorageService.read('userSem')}_sem";
+      // final localStorageService = locator<LocalStorageService>();
+      // String semester = "${localStorageService.read('userSem')}_sem";
 
       final QuerySnapshot snapshot = await _firestore
           .collection('Department')
@@ -213,6 +213,4 @@ class FirestoreService {
       return [];
     }
   }
-  
 }
-

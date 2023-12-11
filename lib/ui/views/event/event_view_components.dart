@@ -1,6 +1,5 @@
 part of 'event_view.dart';
 
-// Event Time and location component
 class EventDetails {
   FontThemeClass fontTheme = FontThemeClass();
 
@@ -305,7 +304,7 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
                   ),
                 ),
                 Padding(
-                    padding: EdgeInsets.only(right: 10.sp),
+                    padding: const EdgeInsets.only(right: 10).r,
                     child: InkWell(
                       onTap: () {
                         viewModel._navigationService
@@ -403,9 +402,7 @@ class EventShimmerEffect extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 44,
-          ),
+          44.verticalSpace,
           Card(
               clipBehavior: Clip.hardEdge,
               shadowColor:
@@ -420,14 +417,11 @@ class EventShimmerEffect extends StatelessWidget {
                   ),
                   1),
               child: ShimmerLoadingWidget(
-                height: 200.h,
+                height: 260.h,
               )),
-          // const SectionText(title: "Sponsors"),
-          const SizedBox(
-            height: 44,
-          ),
+          44.verticalSpace,
           SizedBox(
-            height: 60.sp,
+            height: 80.h,
             child: ListView.builder(
               shrinkWrap: true,
               physics: const BouncingScrollPhysics(),
@@ -435,7 +429,7 @@ class EventShimmerEffect extends StatelessWidget {
               itemCount: 4,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.only(left: 14.0),
+                  padding: const EdgeInsets.only(left: 25.0).r,
                   child: ShimmerLoadingWidget(
                     height: 70.sp,
                     width: 70.sp,
@@ -444,11 +438,9 @@ class EventShimmerEffect extends StatelessWidget {
               },
             ),
           ),
-          const SizedBox(
-            height: 44,
-          ),
+          44.verticalSpace,
           SizedBox(
-            height: 200.sp,
+            height: 200.h,
             child: ListView.builder(
               shrinkWrap: true,
               physics: const BouncingScrollPhysics(),
@@ -456,8 +448,8 @@ class EventShimmerEffect extends StatelessWidget {
               itemCount: 2,
               itemBuilder: (context, index) {
                 return ShimmerLoadingWidget(
-                  height: 200.sp,
-                  width: 200.sp,
+                  height: 200.h,
+                  width: 240.h,
                 );
               },
             ),

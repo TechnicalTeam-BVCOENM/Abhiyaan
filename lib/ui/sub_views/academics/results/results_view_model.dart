@@ -1,9 +1,13 @@
+// ignore_for_file: avoid_print
+
 part of 'results_view.dart';
 
 class ResultsViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
   final log = getLogger('ResultsViewModel');
-  bool _isExpanded = false;
+
+  // bool _isExpanded = false;
+
 
   final List<List<bool>> _semesterButtonStates =
       List.generate(8, (_) => List.filled(4, false));
@@ -11,13 +15,14 @@ class ResultsViewModel extends BaseViewModel {
   int _selectedSemesterIndex = -1;
 
   List<bool> buttonPressedStates(int semesterIndex) {
-    return _semesterButtonStates[semesterIndex] ?? List.filled(4, false);
+    return _semesterButtonStates[semesterIndex];
   }
 
-  void updateExpansionState(bool isExpanded) {
-    _isExpanded = isExpanded;
-    notifyListeners();
-  }
+  // void updateExpansionState(bool isExpanded) {
+  //   _isExpanded = isExpanded;
+  //   notifyListeners();
+  // }
+
 
   void updateButtonPressedState(int semesterIndex, int index, bool isPressed) {
     if (_selectedSemesterIndex != -1) {
@@ -31,7 +36,7 @@ class ResultsViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Set<int> _expandedSemesterIndices = {};
+  final Set<int> _expandedSemesterIndices = {};
 
   Set<int> get expandedSemesterIndices => _expandedSemesterIndices;
 
@@ -44,13 +49,19 @@ class ResultsViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  List<ResultModel> results = [];
+  List<ResultModel> results = [
+    ResultModel(
+        ut1Link: 'example.com',
+        ut2Link: 'example.com',
+        gazetteLink: 'example.com',
+        marksheetLink: 'example.com')
+  ];
 
   Future<void> fetchResults() async {
     setBusy(true);
     try {
       results = await _firestoreService.getSemesterResults();
-      print(results[0].gazetteLink.toString());
+      // print(results[0].gazetteLink.toString());
       notifyListeners();
       // Notify listeners or update your view model state as needed
     } catch (e) {
