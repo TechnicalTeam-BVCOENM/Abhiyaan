@@ -12,7 +12,10 @@ class CoursesView extends StatelessWidget {
       onViewModelReady: (viewModel) => viewModel.getCourses(),
       builder: (context, model, child) {
         return Scaffold(
+          backgroundColor: context.colorScheme.backgroundColor,
           appBar: AppBar(
+            backgroundColor: context.colorScheme.backgroundColor,
+            foregroundColor: context.colorScheme.secondaryBlackColor,
             elevation: 0,
             centerTitle: true,
             title: Text(
