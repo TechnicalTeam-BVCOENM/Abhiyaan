@@ -23,6 +23,7 @@ Padding settingsListTile(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18.sp),
       ),
+      visualDensity: const VisualDensity(vertical: 4),
     ),
   );
 }

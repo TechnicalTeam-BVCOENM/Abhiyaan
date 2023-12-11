@@ -5,6 +5,7 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:darpan/file_exporter.dart' as _i21;
 import 'package:darpan/ui/sub_views/academics/attendance/attendance_view.dart'
     as _i18;
 import 'package:darpan/ui/sub_views/academics/class_notes/class_notes_view.dart'
@@ -33,7 +34,6 @@ import 'package:darpan/ui/views/home/home_view.dart' as _i3;
 import 'package:darpan/ui/views/profile/profile_view.dart' as _i6;
 import 'package:darpan/ui/views/settings/settings_view.dart' as _i7;
 import 'package:darpan/ui/views/splash/splash_view.dart' as _i2;
-import 'package:flutter/material.dart' as _i21;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i22;
@@ -230,8 +230,10 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i10.DetailedEventView: (data) {
+      final args = data.getArgs<DetailedEventViewArguments>(nullOk: false);
       return _i21.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i10.DetailedEventView(),
+        builder: (context) =>
+            _i10.DetailedEventView(key: args.key, eventData: args.eventData),
         settings: data,
       );
     },
@@ -302,6 +304,33 @@ class StackedRouter extends _i1.RouterBase {
 
   @override
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
+}
+
+class DetailedEventViewArguments {
+  const DetailedEventViewArguments({
+    this.key,
+    required this.eventData,
+  });
+
+  final _i21.Key? key;
+
+  final _i9.EventModel eventData;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "eventData": "$eventData"}';
+  }
+
+  @override
+  bool operator ==(covariant DetailedEventViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.eventData == eventData;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ eventData.hashCode;
+  }
 }
 
 extension NavigatorStateExtension on _i22.NavigationService {
@@ -417,14 +446,17 @@ extension NavigatorStateExtension on _i22.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToDetailedEventView([
+  Future<dynamic> navigateToDetailedEventView({
+    _i21.Key? key,
+    required _i9.EventModel eventData,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.detailedEventView,
+        arguments: DetailedEventViewArguments(key: key, eventData: eventData),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -683,14 +715,17 @@ extension NavigatorStateExtension on _i22.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithDetailedEventView([
+  Future<dynamic> replaceWithDetailedEventView({
+    _i21.Key? key,
+    required _i9.EventModel eventData,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.detailedEventView,
+        arguments: DetailedEventViewArguments(key: key, eventData: eventData),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

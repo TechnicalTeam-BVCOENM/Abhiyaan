@@ -1,6 +1,5 @@
 part of 'event_view.dart';
 
-// Event Time and location component
 class EventDetails {
   FontThemeClass fontTheme = FontThemeClass();
 
@@ -158,7 +157,7 @@ class EventDateContainer extends ViewModelWidget<EventViewModel> {
   }
 }
 
-class EventCardInfo extends StatelessWidget {
+class EventCardInfo extends ViewModelWidget<EventViewModel> {
   final EventModel model;
 
   const EventCardInfo({
@@ -167,7 +166,7 @@ class EventCardInfo extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, EventViewModel viewModel) {
     EventDetails eventDetails = EventDetails();
     return Positioned(
       child: SizedBox(
@@ -216,29 +215,35 @@ class EventCardInfo extends StatelessWidget {
                     // Event Button
                     Padding(
                       padding: const EdgeInsets.only(right: 18).r,
-                      child: Container(
-                        height: 40.h,
-                        width: 95.w,
-                        decoration: BoxDecoration(
-                          color:
-                              context.colorScheme.primaryColor.withOpacity(0.8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: context.colorScheme.secondarySectionColor
-                                  .withOpacity(0.4),
-                              spreadRadius: 1,
-                              blurRadius: 2,
-                              offset: const Offset(0, 1),
+                      child: InkWell(
+                        onTap: () {
+                          viewModel._navigationService
+                              .navigateToDetailedEventView(eventData: model);
+                        },
+                        child: Container(
+                          height: 40.h,
+                          width: 95.w,
+                          decoration: BoxDecoration(
+                            color: context.colorScheme.primaryColor
+                                .withOpacity(0.8),
+                            boxShadow: [
+                              BoxShadow(
+                                color: context.colorScheme.secondarySectionColor
+                                    .withOpacity(0.4),
+                                spreadRadius: 1,
+                                blurRadius: 2,
+                                offset: const Offset(0, 1),
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Open".toUpperCase(),
+                              style: FontThemeClass().subHeading2(
+                                  context, context.colorScheme.signInTextColor,
+                                  fontSize: 18.sp, fontWeight: FontWeight.w900),
                             ),
-                          ],
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Open".toUpperCase(),
-                            style: FontThemeClass().subHeading2(
-                                context, context.colorScheme.signInTextColor,
-                                fontSize: 18.sp, fontWeight: FontWeight.w900),
                           ),
                         ),
                       ),
@@ -254,7 +259,7 @@ class EventCardInfo extends StatelessWidget {
   }
 }
 
-class EventCardUpcoming extends StatelessWidget {
+class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
   final EventModel model;
   const EventCardUpcoming({
     super.key,
@@ -262,7 +267,7 @@ class EventCardUpcoming extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, EventViewModel viewModel) {
     EventDetails eventDetails = EventDetails();
     return Positioned(
       child: SizedBox(
@@ -299,30 +304,36 @@ class EventCardUpcoming extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                    padding: EdgeInsets.only(right: 10.sp),
-                    child: Container(
-                      height: 30.h,
-                      width: 62.w,
-                      decoration: BoxDecoration(
-                        color:
-                            context.colorScheme.primaryColor.withOpacity(0.8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: context.colorScheme.secondarySectionColor
-                                .withOpacity(0.4),
-                            spreadRadius: 1,
-                            blurRadius: 2,
-                            offset: const Offset(0, 1),
+                    padding: const EdgeInsets.only(right: 10).r,
+                    child: InkWell(
+                      onTap: () {
+                        viewModel._navigationService
+                            .navigateToDetailedEventView(eventData: model);
+                      },
+                      child: Container(
+                        height: 30.h,
+                        width: 62.w,
+                        decoration: BoxDecoration(
+                          color:
+                              context.colorScheme.primaryColor.withOpacity(0.8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: context.colorScheme.secondarySectionColor
+                                  .withOpacity(0.4),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset: const Offset(0, 1),
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Open".toUpperCase(),
+                            style: FontThemeClass().subHeading2(
+                                context, context.colorScheme.signInTextColor,
+                                fontWeight: FontWeight.w900, fontSize: 16.sp),
                           ),
-                        ],
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Open".toUpperCase(),
-                          style: FontThemeClass().subHeading2(
-                              context, context.colorScheme.signInTextColor,
-                              fontWeight: FontWeight.w900, fontSize: 16.sp),
                         ),
                       ),
                     ))
@@ -391,9 +402,7 @@ class EventShimmerEffect extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 44,
-          ),
+          44.verticalSpace,
           Card(
               clipBehavior: Clip.hardEdge,
               shadowColor:
@@ -408,14 +417,11 @@ class EventShimmerEffect extends StatelessWidget {
                   ),
                   1),
               child: ShimmerLoadingWidget(
-                height: 200.h,
+                height: 260.h,
               )),
-          // const SectionText(title: "Sponsors"),
-          const SizedBox(
-            height: 44,
-          ),
+          44.verticalSpace,
           SizedBox(
-            height: 60.sp,
+            height: 80.h,
             child: ListView.builder(
               shrinkWrap: true,
               physics: const BouncingScrollPhysics(),
@@ -423,7 +429,7 @@ class EventShimmerEffect extends StatelessWidget {
               itemCount: 4,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.only(left: 14.0),
+                  padding: const EdgeInsets.only(left: 25.0).r,
                   child: ShimmerLoadingWidget(
                     height: 70.sp,
                     width: 70.sp,
@@ -432,11 +438,9 @@ class EventShimmerEffect extends StatelessWidget {
               },
             ),
           ),
-          const SizedBox(
-            height: 44,
-          ),
+          44.verticalSpace,
           SizedBox(
-            height: 200.sp,
+            height: 200.h,
             child: ListView.builder(
               shrinkWrap: true,
               physics: const BouncingScrollPhysics(),
@@ -444,8 +448,8 @@ class EventShimmerEffect extends StatelessWidget {
               itemCount: 2,
               itemBuilder: (context, index) {
                 return ShimmerLoadingWidget(
-                  height: 200.sp,
-                  width: 200.sp,
+                  height: 200.h,
+                  width: 240.h,
                 );
               },
             ),

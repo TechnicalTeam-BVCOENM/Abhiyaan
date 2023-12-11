@@ -11,17 +11,17 @@ class PracticalsView extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               iconTheme: IconThemeData(
-              color: context
-                  .colorScheme.secondaryBlackColor, //change your color here
+                color: context
+                    .colorScheme.secondaryBlackColor, //change your color here
+              ),
+              backgroundColor: context.colorScheme.backgroundColor,
+              elevation: 0,
+              title: Text(
+                'Practicals',
+                style: FontThemeClass().heading2(context),
+              ),
+              centerTitle: true,
             ),
-            backgroundColor: context.colorScheme.backgroundColor,
-            elevation: 0,
-            title: Text(
-              'Practicals',
-              style: FontThemeClass().heading2(context),
-            ),
-            centerTitle: true,
-          ),
             backgroundColor:
                 context.colorScheme.backgroundColor, // Background color
             body: Center(
@@ -30,32 +30,14 @@ class PracticalsView extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'Coming Soon !',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: context.colorScheme.primaryColor, // Text color
-                    ),
+                    style: FontThemeClass().heading(context,
+                        color: context.colorScheme.primaryColor),
                   ),
-                  const SizedBox(height: 20), // Spacer
+                  4.verticalSpace,
                   Text(
-                    'Stay tuned for Version 2.0.0.',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: context.colorScheme.onBackground, // Subtitle color
-                    ),
-                  ),
-                  const SizedBox(height: 30), // Spacer
-
-                  // Back Button
-                  IconButton(
-                    icon: const Icon(Icons.arrow_circle_left_outlined),
-                    iconSize: 50,
-                    color: context.colorScheme.primaryColor,
-                    onPressed: () {
-                      // Implement your back button logic here
-                      Navigator.of(context)
-                          .pop(); // For example, pops the current screen
-                    },
+                    'Amazingness in progress. Stay tuned !',
+                    style: FontThemeClass().subHeading2(
+                        context, context.colorScheme.secondarySectionColor),
                   ),
                 ],
               ),

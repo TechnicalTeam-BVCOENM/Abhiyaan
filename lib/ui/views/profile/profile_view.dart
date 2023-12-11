@@ -19,10 +19,10 @@ class ProfileView extends StatelessWidget {
                 TextButton(
                   onPressed: () => model.navigateToSettingsView(),
                   child: SizedBox(
-                    width: 28.sp,
+                    width: 28.w,
                     child: Icon(
                       Icons.settings,
-                      size: 30.sp,
+                      size: 32.r,
                       color: context.colorScheme.switchColor,
                     ),
                   ),
@@ -31,10 +31,10 @@ class ProfileView extends StatelessWidget {
               elevation: 0,
               automaticallyImplyLeading: false,
               title: Padding(
-                padding: const EdgeInsets.only(top: 8, left: 18),
+                padding: const EdgeInsets.only(top: 8, left: 18).r,
                 child: Center(
                   child: Container(
-                    margin: EdgeInsets.only(left: 40.sp),
+                    margin: EdgeInsets.only(left: 40.r),
                     child: Text(
                       "Profile",
                       style: FontThemeClass().appBarText(context),
@@ -45,20 +45,21 @@ class ProfileView extends StatelessWidget {
             ),
             body: SafeArea(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.sp),
+                padding: EdgeInsets.symmetric(horizontal: 20.r),
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 45.sp),
+                      padding: EdgeInsets.symmetric(vertical: 45.r),
                       child: Row(
                         children: [
                           ClipOval(
                             clipper: MyClip(),
                             child: CachedNetworkImage(
-                              width: 80.sp,
-                              height: 80.sp,
+                              width: 90.r,
+                              height: 90.r,
                               fit: BoxFit.cover,
-                              imageUrl: LocalStorageService().read('userImg'),
+                              imageUrl:
+                                  "https://firebasestorage.googleapis.com/v0/b/darpan-b94d6.appspot.com/o/user%2Fimages.jpeg?alt=media&token=a9889ba7-3958-4784-9708-e43ade1016d4",
                               placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator.adaptive()),
                               errorWidget: (context, url, error) =>
@@ -66,7 +67,7 @@ class ProfileView extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: 30.sp,
+                            width: 25.w,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,8 +127,8 @@ class ProfileView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 20,
+                    SizedBox(
+                      height: 20.h,
                     )
                   ],
                 ),
@@ -141,7 +142,7 @@ class ProfileView extends StatelessWidget {
 class MyClip extends CustomClipper<Rect> {
   @override
   Rect getClip(Size size) {
-    return const Rect.fromLTWH(0, 0, 70, 70);
+    return const Rect.fromLTWH(0, 0, 68, 68);
   }
 
   @override
