@@ -50,10 +50,10 @@ class EventView extends StatelessWidget {
                                       model: model.todayEvent!,
                                     ),
                                     EventDateContainer(
-                                      top: 125.h,
+                                      top: 118.h,
                                       left: 10.w,
-                                      height: 75.h,
-                                      width: 60.w,
+                                      height: 70.r,
+                                      width: 70.r,
                                       timeFontSize: 30.sp,
                                       textFontSize: 20.sp,
                                       event: model.todayEvent!,
@@ -103,7 +103,7 @@ class EventView extends StatelessWidget {
                         ),
                         const SectionText(title: "Upcoming Events"),
                         SizedBox(
-                          height: 200.h,
+                          height: 210.h,
                           child: ListView.builder(
                             shrinkWrap: true,
                             physics: const BouncingScrollPhysics(),
@@ -138,8 +138,8 @@ class EventView extends StatelessWidget {
                                       EventDateContainer(
                                         top: 8.h,
                                         left: 8.w,
-                                        height: 75.h,
-                                        width: 60.w,
+                                        height: 70.r,
+                                        width: 70.r,
                                         timeFontSize: 30.sp,
                                         textFontSize: 20.sp,
                                         event: model.remainigEvents[index],
@@ -151,6 +151,7 @@ class EventView extends StatelessWidget {
                             },
                           ),
                         ),
+                        4.verticalSpace,
                       ],
                     ),
                   ),
