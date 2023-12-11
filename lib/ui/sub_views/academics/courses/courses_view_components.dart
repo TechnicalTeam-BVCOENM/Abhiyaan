@@ -58,6 +58,8 @@ class CourseCard extends StatelessWidget {
                             minimumSize: MaterialStateProperty.all(
                               Size(130.w, 40.h),
                             ),
+                            foregroundColor: MaterialStateProperty.all(
+                                context.colorScheme.secondaryBlackColor),
                             backgroundColor: MaterialStateProperty.all(
                                 context.colorScheme.primaryColor),
                             shape: MaterialStateProperty.all(
@@ -69,7 +71,7 @@ class CourseCard extends StatelessWidget {
                           child: Text(
                             'Check Out',
                             style: FontThemeClass().subHeading(context,
-                                context.colorScheme.secondaryWhiteColor),
+                                context.colorScheme.secondaryBlackColor),
                           ),
                         ),
                       ],
