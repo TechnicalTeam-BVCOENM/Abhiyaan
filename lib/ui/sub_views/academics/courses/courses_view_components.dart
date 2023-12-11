@@ -70,8 +70,8 @@ class CourseCard extends StatelessWidget {
                           ),
                           child: Text(
                             'Check Out',
-                            style: FontThemeClass().subHeading(context,
-                                context.colorScheme.secondaryBlackColor),
+                            style: FontThemeClass().subHeading(
+                                context, context.colorScheme.signInTextColor),
                           ),
                         ),
                       ],
