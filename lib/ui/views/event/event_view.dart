@@ -103,7 +103,7 @@ class EventView extends StatelessWidget {
                         ),
                         const SectionText(title: "Upcoming Events"),
                         SizedBox(
-                          height: 200.h,
+                          height: 210.h,
                           child: ListView.builder(
                             shrinkWrap: true,
                             physics: const BouncingScrollPhysics(),
@@ -151,6 +151,7 @@ class EventView extends StatelessWidget {
                             },
                           ),
                         ),
+                        4.verticalSpace,
                       ],
                     ),
                   ),
