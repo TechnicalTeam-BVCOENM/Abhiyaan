@@ -16,7 +16,7 @@ class SocietyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 100.h,
+      height: 110.h,
       margin: const EdgeInsets.only(bottom: 20).r,
       decoration: BoxDecoration(
           color: context.colorScheme.secondaryWhiteColor,
@@ -36,7 +36,7 @@ class SocietyCard extends StatelessWidget {
               Text(
                 title,
                 style: FontThemeClass()
-                    .subHeading(context, context.colorScheme.primaryColor),
+                    .subHeading(context, context.colorScheme.switchColor),
               ),
               SizedBox(
                 height: 4.h,
@@ -48,9 +48,8 @@ class SocietyCard extends StatelessWidget {
                   maxLines: 3,
                   softWrap: true,
                   overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.justify,
-                  style: FontThemeClass().smallSubHeading(
-                      context, context.colorScheme.secondarySectionColor),
+                  style: FontThemeClass().smallSubHeading(context,
+                      context.colorScheme.signInTextColor.withOpacity(0.8)),
                 ),
               ),
               SizedBox(
