@@ -53,7 +53,6 @@ class ProfileView extends StatelessWidget {
                       child: Row(
                         children: [
                           ClipOval(
-                            clipper: MyClip(),
                             child: CachedNetworkImage(
                               width: 90.r,
                               height: 90.r,
@@ -89,26 +88,9 @@ class ProfileView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    ProfileDetailsCard(
-                      leading: AssetImagePath.misImg,
-                      title: "MIS Number",
-                      value: LocalStorageService().read('userMisNo'),
-                    ),
-                    ProfileDetailsCard(
-                      leading: AssetImagePath.libraryImg,
-                      title: "Library Card Number",
-                      value: LocalStorageService().read('userLibNo'),
-                    ),
-                    ProfileDetailsCard(
-                      leading: AssetImagePath.idImg,
-                      title: "College ID",
-                      value: LocalStorageService().read('userCollegeId'),
-                    ),
-                    ProfileDetailsCard(
-                      leading: AssetImagePath.prnImg,
-                      title: "PRN Number",
-                      value: LocalStorageService().read('userPrnNo'),
-                    ),
+                    for (var profileCard in model.profileCardList)
+                      profileCard, // Display each profile card widget
+
                     const Expanded(child: Text("")),
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -136,17 +118,5 @@ class ProfileView extends StatelessWidget {
             ),
           );
         });
-  }
-}
-
-class MyClip extends CustomClipper<Rect> {
-  @override
-  Rect getClip(Size size) {
-    return const Rect.fromLTWH(0, 0, 68, 68);
-  }
-
-  @override
-  bool shouldReclip(oldClipper) {
-    return false;
   }
 }
