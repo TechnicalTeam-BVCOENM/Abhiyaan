@@ -33,14 +33,16 @@ class HomeView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          padding: const EdgeInsets.symmetric(vertical: 8.0).r,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 'Hey ${model.firstname[0]} 👋', // Update according to loal storage
-                                style: fontTheme.display(
-                                    context, context.colorScheme.headingColor),
+                                style: fontTheme.header(
+                                    context,
+                                    context.colorScheme.headingColor,
+                                    FontWeight.w700),
                               ),
                               IconButton(
                                 splashRadius: 30.sp,
