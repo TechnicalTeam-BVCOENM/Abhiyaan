@@ -78,7 +78,7 @@ Container horizontalStoryRow(
                   ),
                   Text(
                     model[idx].title,
-                    style: fontTheme.smallSubHeading(
+                    style: fontTheme.title2(
                       context,
                       context.colorScheme.secondaryBlackColor,
                     ),

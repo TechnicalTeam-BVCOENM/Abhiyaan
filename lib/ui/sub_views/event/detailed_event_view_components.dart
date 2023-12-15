@@ -1,8 +1,4 @@
-import 'package:darpan/file_exporter.dart';
-import 'package:darpan/ui/common/common_component_model.dart';
-import 'package:darpan/ui/sub_views/event/detailed_event_view.dart';
-import 'package:intl/intl.dart';
-import 'package:share_plus/share_plus.dart';
+part of '../event/detailed_event_view.dart';
 
 class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
   final String imageLink;
@@ -71,7 +67,7 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
                     SizedBox(width: 8.w),
                     Text(
                       eventLocation,
-                      style: FontThemeClass().heading3(
+                      style: FontThemeClass().header(
                           context,
                           context.colorScheme.primaryDarkColor,
                           FontWeight.w700),
@@ -115,8 +111,9 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
           10.h.verticalSpace,
           Text(
             eventName,
-            style: FontThemeClass().heading(context,
-                size: 35.sp, color: context.colorScheme.primaryDarkColor),
+            style: FontThemeClass().header(
+              context,
+            ),
           ),
           10.h.verticalSpace,
           Row(
@@ -169,8 +166,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
           ),
           Text(
             "About Event",
-            style: FontThemeClass().heading(context,
-                size: 25.sp, color: context.colorScheme.primaryDarkColor),
+            style: FontThemeClass().header(context),
           ),
           SizedBox(
             height: 10.h,
@@ -179,7 +175,6 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
             eventInfo,
             style: FontThemeClass().paragraph(
               context,
-              size: 16.sp,
             ),
           ),
           SizedBox(
@@ -194,8 +189,9 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
           ),
           Text(
             "Contact Section",
-            style: FontThemeClass().heading(context,
-                size: 25.sp, color: context.colorScheme.primaryDarkColor),
+            style: FontThemeClass().header(
+              context,
+            ),
           ),
           SizedBox(
             height: 20.h,
@@ -331,7 +327,7 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
             },
             child: Text(
               'Share',
-              style: FontThemeClass().heading2(
+              style: FontThemeClass().header(
                 context,
                 context.colorScheme.primaryColor,
               ),
@@ -354,7 +350,7 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
             },
             child: Text(
               'Register',
-              style: FontThemeClass().heading2(context, Colors.white),
+              style: FontThemeClass().header(context, Colors.white),
             ),
           ),
         ],

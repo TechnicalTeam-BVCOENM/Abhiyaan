@@ -78,10 +78,7 @@ class EventView extends StatelessWidget {
                                         ),
                                         Text(
                                           "No Ongoing Events",
-                                          style: fontTheme.heading(context,
-                                              size: 20.sp,
-                                              color: context.colorScheme
-                                                  .secondarySectionColor),
+                                          style: fontTheme.header(context),
                                         ),
                                       ],
                                     ),

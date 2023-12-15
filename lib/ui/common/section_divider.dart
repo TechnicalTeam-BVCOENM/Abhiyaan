@@ -11,9 +11,10 @@ class SectionText extends StatelessWidget {
       margin: const EdgeInsets.only(top: 18, bottom: 8),
       child: Text(
         title,
-        style: FontThemeClass().subHeading2(
-            context, context.colorScheme.secondarySectionColor,
-            fontSize: 16),
+        style: FontThemeClass().title2(
+          context,
+          context.colorScheme.secondarySectionColor,
+        ),
       ),
     );
   }

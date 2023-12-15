@@ -90,7 +90,7 @@ Widget quickLinksList(BuildContext context, List model,
               Text(
                 model[idx].title.toString().toUpperCase(),
                 style: FontThemeClass()
-                    .smallSubHeading(
+                    .title2(
                       context,
                       context.colorScheme.primaryDarkColor,
                     )

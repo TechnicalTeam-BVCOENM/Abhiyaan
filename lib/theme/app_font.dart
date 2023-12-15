@@ -1,113 +1,67 @@
 import 'package:darpan/file_exporter.dart';
 
 class FontThemeClass {
-  TextStyle appBarText(BuildContext context, [Color? color]) {
+  TextStyle display(BuildContext ctx, [Color? color, FontWeight? fontWeight]) {
     return TextStyle(
-      fontSize: 30.sp,
+      fontSize: 42.sp,
       fontFamily: 'Outfit',
-      fontWeight: FontWeight.w500,
-      color: color ?? context.colorScheme.primaryDarkColor,
+      fontWeight: fontWeight ?? FontWeight.w300,
+      color: color ?? ctx.colorScheme.primaryDarkColor,
     );
   }
 
-  TextStyle large(BuildContext context, [FontWeight? fontWeight]) {
+  TextStyle header(BuildContext ctx, [Color? color, FontWeight? fontWeight]) {
     return TextStyle(
-      fontSize: 32,
+      fontSize: 34.sp,
       fontFamily: 'Outfit',
       fontWeight: fontWeight ?? FontWeight.w700,
-      color: context.colorScheme.primaryColor,
+      color: color ?? ctx.colorScheme.primaryDarkColor,
     );
   }
 
-  TextStyle heading(BuildContext context, {Color? color, double size = 24}) {
+  TextStyle title(BuildContext ctx, [Color? color, FontWeight? fontWeight]) {
     return TextStyle(
-      fontSize: size,
-      fontFamily: 'Outfit',
-      fontWeight: FontWeight.bold,
-      color: color ?? context.colorScheme.headingColor,
-    );
-  }
-
-  TextStyle heading2(BuildContext context, [Color? primaryColor]) {
-    return TextStyle(
-      fontSize: 24,
-      fontFamily: 'Outfit',
-      fontWeight: FontWeight.w500,
-      color: primaryColor ?? context.colorScheme.headingColor,
-    );
-  }
-
-  TextStyle profileheading(BuildContext context) {
-    return TextStyle(
-      fontSize: 22,
-      fontFamily: 'Outfit',
-      fontWeight: FontWeight.w500,
-      color: context.colorScheme.headingColor,
-    );
-  }
-
-  TextStyle heading3(BuildContext context, [Color? color, FontWeight? weight]) {
-    return TextStyle(
-      fontSize: 20,
-      fontFamily: 'Outfit',
-      fontWeight: weight ?? FontWeight.bold,
-      color: color ?? context.colorScheme.secondaryBlackColor,
-    );
-  }
-
-  TextStyle heading4(BuildContext context) {
-    return TextStyle(
-      fontSize: 16,
-      fontFamily: 'Outfit',
-      fontWeight: FontWeight.w500,
-      color: context.colorScheme.headingColor,
-    );
-  }
-
-  TextStyle subHeading(BuildContext context, [Color? color]) {
-    return TextStyle(
-      fontSize: 16,
-      fontFamily: 'Outfit',
-      fontWeight: FontWeight.w700,
-      letterSpacing: 0.1,
-      color: color ?? context.colorScheme.headingColor,
-    );
-  }
-
-  TextStyle subHeading2(BuildContext context, Color color,
-      {FontWeight? fontWeight, double? fontSize}) {
-    return TextStyle(
-      fontSize: fontSize ?? 14,
+      fontSize: 28.sp,
       fontFamily: 'Outfit',
       fontWeight: fontWeight ?? FontWeight.w500,
-      color: color,
+      color: color ?? ctx.colorScheme.primaryDarkColor,
     );
   }
 
-  TextStyle smallSubHeading(BuildContext context, [Color? color]) {
+  TextStyle title2(BuildContext ctx, [Color? color, FontWeight? fontWeight]) {
     return TextStyle(
-      fontSize: 12,
+      fontSize: 22.sp,
       fontFamily: 'Outfit',
-      fontWeight: FontWeight.w500,
-      color: color ?? context.colorScheme.headingColor,
+      fontWeight: fontWeight ?? FontWeight.w300,
+      color: color ?? ctx.colorScheme.primaryDarkColor,
     );
   }
 
-  TextStyle smallestSubHeading(BuildContext context, [Color? color]) {
+  TextStyle paragraph(BuildContext ctx,
+      [Color? color, FontWeight? fontWeight]) {
     return TextStyle(
-      fontSize: 10,
+      fontSize: 20.sp,
       fontFamily: 'Outfit',
-      fontWeight: FontWeight.w500,
-      color: color ?? context.colorScheme.headingColor,
+      fontWeight: fontWeight ?? FontWeight.w400,
+      color: color ?? ctx.colorScheme.primaryDarkColor,
     );
   }
 
-  TextStyle paragraph(BuildContext context, {double size = 14}) {
+  TextStyle body(BuildContext ctx, [Color? color, FontWeight? fontWeight]) {
     return TextStyle(
-      fontSize: size,
-      letterSpacing: 0.5,
+      fontSize: 16.sp,
       fontFamily: 'Outfit',
-      color: context.colorScheme.secondaryBlackColor,
+      fontWeight: fontWeight ?? FontWeight.w400,
+      color: color ?? ctx.colorScheme.primaryDarkColor,
+    );
+  }
+
+  TextStyle caption(BuildContext ctx, [Color? color, FontWeight? fontWeight]) {
+    return TextStyle(
+      fontSize: 12.sp,
+      fontFamily: 'Outfit',
+      fontWeight: fontWeight ?? FontWeight.w400,
+      color: color ?? ctx.colorScheme.primaryDarkColor,
     );
   }
 }

@@ -22,7 +22,7 @@ class EventDetails {
         ),
         Text(
           location,
-          style: fontTheme.subHeading2(
+          style: fontTheme.title2(
             context,
             context.colorScheme.primaryColor.withOpacity(0.8),
           ),
@@ -46,7 +46,7 @@ class EventDetails {
         ),
         Text(
           time,
-          style: fontTheme.subHeading2(
+          style: fontTheme.title2(
             context,
             context.colorScheme.primaryColor.withOpacity(0.8),
           ),
@@ -76,8 +76,7 @@ class EventDetails {
       child: Text(
         title,
         textAlign: TextAlign.center,
-        style: fontTheme.heading(context,
-            size: fontSize.sp, color: context.colorScheme.secondaryBlackColor),
+        style: fontTheme.header(context),
       ),
     );
   }
@@ -129,11 +128,7 @@ class EventDateContainer extends ViewModelWidget<EventViewModel> {
               child: Text(
                 event.startDate.toDate().day.toString().trim(),
                 textAlign: TextAlign.center,
-                style: fontTheme.heading(
-                  context,
-                  size: timeFontSize.toDouble(),
-                  color: context.colorScheme.primaryColor,
-                ),
+                style: fontTheme.header(context),
               ),
             ),
             SizedBox(
@@ -145,9 +140,8 @@ class EventDateContainer extends ViewModelWidget<EventViewModel> {
                         event.startDate.toDate().year)
                     .trim(),
                 textAlign: TextAlign.center,
-                style: fontTheme.subHeading2(
-                    context, context.colorScheme.secondaryBlackColor,
-                    fontSize: textFontSize.toDouble().sp),
+                style: fontTheme.title2(
+                    context, context.colorScheme.secondaryBlackColor),
               ),
             ),
           ],
@@ -241,9 +235,8 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                           child: Center(
                             child: Text(
                               "Open".toUpperCase(),
-                              style: FontThemeClass().subHeading2(
-                                  context, context.colorScheme.signInTextColor,
-                                  fontSize: 18.sp, fontWeight: FontWeight.w900),
+                              style: FontThemeClass().title2(
+                                  context, context.colorScheme.signInTextColor),
                             ),
                           ),
                         ),
@@ -332,9 +325,8 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
                         child: Center(
                           child: Text(
                             "Open".toUpperCase(),
-                            style: FontThemeClass().subHeading2(
-                                context, context.colorScheme.signInTextColor,
-                                fontWeight: FontWeight.w900, fontSize: 16.sp),
+                            style: FontThemeClass().title2(
+                                context, context.colorScheme.signInTextColor),
                           ),
                         ),
                       ),

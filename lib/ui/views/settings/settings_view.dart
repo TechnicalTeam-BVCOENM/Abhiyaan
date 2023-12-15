@@ -26,7 +26,7 @@ class SettingsView extends StatelessWidget {
             elevation: 0,
             title: Text(
               'Settings',
-              style: model.fontTheme.heading(context),
+              style: model.fontTheme.header(context),
             ),
             centerTitle: true,
           ),
@@ -100,12 +100,12 @@ class SettingsView extends StatelessWidget {
                   ),
                   Text(
                     'Darpan v.1.0.0',
-                    style: model.fontTheme.subHeading(
+                    style: model.fontTheme.title(
                         context, context.colorScheme.secondarySectionColor),
                   ),
                   Text(
                     'Made with ❤️ by Technical Team ',
-                    style: model.fontTheme.smallSubHeading(
+                    style: model.fontTheme.title2(
                         context, context.colorScheme.secondarySectionColor),
                   )
                 ],

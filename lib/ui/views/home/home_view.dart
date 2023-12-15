@@ -5,9 +5,9 @@ import 'package:darpan/ui/common/shimmer.dart';
 import 'package:darpan/ui/common/update_component.dart';
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/firestore_service.dart';
+import 'package:darpan/ui/views/home/Societies/societies_view.dart';
 import 'package:intl/intl.dart';
 import 'package:darpan/ui/common/common_component_model.dart';
-import 'package:darpan/ui/sub_views/home/Societies/societies_view.dart';
 part 'home_view_model.dart';
 part 'home_view_component.dart';
 
@@ -39,7 +39,7 @@ class HomeView extends StatelessWidget {
                             children: [
                               Text(
                                 'Hey ${model.firstname[0]} 👋', // Update according to loal storage
-                                style: fontTheme.appBarText(
+                                style: fontTheme.display(
                                     context, context.colorScheme.headingColor),
                               ),
                               IconButton(
@@ -132,7 +132,7 @@ class HomeView extends StatelessWidget {
                                         Text(
                                           model.activityList[0].startTime
                                               .format(context),
-                                          style: fontTheme.subHeading(
+                                          style: fontTheme.title2(
                                               context,
                                               context.colorScheme
                                                   .primaryDarkColor),
@@ -149,7 +149,7 @@ class HomeView extends StatelessWidget {
                                         Text(
                                           model.activityList[0].endTime
                                               .format(context),
-                                          style: fontTheme.subHeading(
+                                          style: fontTheme.title2(
                                               context,
                                               context.colorScheme
                                                   .primaryDarkColor),
@@ -181,7 +181,7 @@ class HomeView extends StatelessWidget {
                                       children: [
                                         Text(
                                           model.activityList[0].subName,
-                                          style: fontTheme.subHeading(
+                                          style: fontTheme.title2(
                                               context,
                                               context.colorScheme
                                                   .primaryDarkColor),
@@ -189,7 +189,7 @@ class HomeView extends StatelessWidget {
                                         SizedBox(height: 10.h),
                                         Text(
                                           model.activityList[0].profName,
-                                          style: fontTheme.smallSubHeading(
+                                          style: fontTheme.title2(
                                               context,
                                               context.colorScheme
                                                   .primaryDarkColor),
@@ -197,7 +197,7 @@ class HomeView extends StatelessWidget {
                                         SizedBox(height: 5.h),
                                         Text(
                                           model.activityList[0].location,
-                                          style: fontTheme.smallSubHeading(
+                                          style: fontTheme.title2(
                                               context,
                                               context.colorScheme
                                                   .primaryDarkColor),
@@ -249,7 +249,7 @@ class HomeView extends StatelessWidget {
                         3.verticalSpace,
                         Text(
                           'Made with ❤️ by Technical Team',
-                          style: fontTheme.smallSubHeading(context).copyWith(
+                          style: fontTheme.title2(context).copyWith(
                                 color: context.colorScheme.secondaryBlackColor
                                     .withOpacity(0.6),
                               ),

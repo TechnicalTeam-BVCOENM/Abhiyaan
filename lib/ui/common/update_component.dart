@@ -27,11 +27,11 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                   Text(
                     updateList[i].title,
                     style: FontThemeClass()
-                        .subHeading(context, context.colorScheme.primaryColor),
+                        .title2(context, context.colorScheme.primaryColor),
                   ),
                   Text(
                     "Posted ${DateFormat("MMM d").format((updateList[i].date).toDate())}",
-                    style: FontThemeClass().smallSubHeading(context),
+                    style: FontThemeClass().title2(context),
                   ),
                 ],
               ),
@@ -49,7 +49,7 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                   ExpandableButton(
                     child: Text(
                       "Read More",
-                      style: FontThemeClass().smallSubHeading(context,
+                      style: FontThemeClass().title2(context,
                           context.colorScheme.primaryColor.withOpacity(0.9)),
                     ),
                   ),
@@ -80,11 +80,11 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                   Text(
                     updateList[i].title,
                     style: FontThemeClass()
-                        .subHeading(context, context.colorScheme.primaryColor),
+                        .title2(context, context.colorScheme.primaryColor),
                   ),
                   Text(
                     "Posted ${DateFormat("MMM d").format((updateList[i].date).toDate())}",
-                    style: FontThemeClass().smallSubHeading(context),
+                    style: FontThemeClass().title2(context),
                   ),
                 ],
               ),
@@ -102,7 +102,7 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                   ExpandableButton(
                     child: Text(
                       "Read Less",
-                      style: FontThemeClass().smallSubHeading(context,
+                      style: FontThemeClass().title2(context,
                           context.colorScheme.primaryColor.withOpacity(0.9)),
                     ),
                   ),

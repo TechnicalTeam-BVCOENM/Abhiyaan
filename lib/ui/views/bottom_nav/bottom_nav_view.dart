@@ -1,10 +1,7 @@
 import 'package:darpan/file_exporter.dart';
-import 'package:darpan/ui/views/academics/academics_view.dart';
-
 import 'package:darpan/ui/views/event/event_view.dart';
 import 'package:darpan/ui/views/home/home_view.dart';
 import 'package:darpan/ui/views/profile/profile_view.dart';
-
 part 'bottom_nav_view_model.dart';
 part 'bottom_nav_view_components.dart';
 
@@ -58,7 +55,7 @@ class BottomNavView extends StatelessWidget {
                     icon: const Icon(Icons.book),
                     activeIcon: const BottomNavActiveIcon(
                       icon: Icons.menu_book_sharp,
-                      text: "Academics",
+                      text: "Community",
                     ),
                   ),
                   const BottomNavigationBarItem(

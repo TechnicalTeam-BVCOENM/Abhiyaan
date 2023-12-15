@@ -1,8 +1,10 @@
 import 'package:darpan/file_exporter.dart';
-import 'package:darpan/ui/sub_views/event/detailed_event_view_components.dart';
+import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:darpan/ui/views/event/event_view.dart';
-
+import 'package:intl/intl.dart';
+import 'package:share_plus/share_plus.dart';
 part 'detailed_event_view_model.dart';
+part 'detailed_event_view_components.dart';
 
 class DetailedEventView extends StatelessWidget {
   final EventModel eventData;

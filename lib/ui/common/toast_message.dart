@@ -16,7 +16,7 @@ void showmessage(context, String message) {
               borderRadius: BorderRadius.circular(10)),
           child: Text(
             message,
-            style: FontThemeClass().subHeading2(
+            style: FontThemeClass().header(
                 context, Theme.of(context).colorScheme.secondaryBlackColor),
           ),
         ),

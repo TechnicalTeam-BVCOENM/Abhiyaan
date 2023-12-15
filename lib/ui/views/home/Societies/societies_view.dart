@@ -1,5 +1,5 @@
 import 'package:darpan/file_exporter.dart';
-import 'package:darpan/ui/sub_views/home/Societies/societies_view_component.dart';
+import 'package:darpan/ui/views/home/Societies/societies_view_component.dart';
 part 'societies_view_model.dart';
 
 class SocietiesView extends StatelessWidget {
@@ -19,7 +19,7 @@ class SocietiesView extends StatelessWidget {
                 elevation: 0,
                 title: Text(
                   'Societies',
-                  style: FontThemeClass().heading2(context),
+                  style: FontThemeClass().header(context),
                 ),
                 centerTitle: true,
                 backgroundColor: context.colorScheme.backgroundColor,

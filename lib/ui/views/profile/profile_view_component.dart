@@ -39,7 +39,7 @@ class ProfileDetailsCard extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: FontThemeClass().heading4(context),
+                style: FontThemeClass().header(context),
               ),
               SizedBox(
                 height: 4.h,
@@ -49,7 +49,7 @@ class ProfileDetailsCard extends StatelessWidget {
                 child: Text(
                   value,
                   overflow: TextOverflow.ellipsis,
-                  style: FontThemeClass().smallSubHeading(
+                  style: FontThemeClass().title2(
                       context, context.colorScheme.secondarySectionColor),
                 ),
               ),
