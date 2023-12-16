@@ -25,8 +25,8 @@ class SplashView extends StatelessWidget {
                 const SizedBox(
                     height:
                         16.0), // Add some space between the photo and the text
-                Text('Darpan', // Your App name
-                    style: FontThemeClass().header(context)),
+                Text('Abhiyaan', // Your App name
+                    style: FontThemeClass().title(context)),
                 const SizedBox(height: 8.0),
                 Text('BVCOENM',
                     style: FontThemeClass().title(context,

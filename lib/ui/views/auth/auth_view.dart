@@ -39,8 +39,8 @@ class AuthView extends StatelessWidget {
                       ),
                       const Expanded(child: Text("")),
                       Text(
-                        'Darpan',
-                        style: model.fontTheme.display(context),
+                        'Sign Up',
+                        style: model.fontTheme.header(context),
                       ),
                       const Expanded(child: Text("")),
                       TextFormField(
@@ -59,7 +59,7 @@ class AuthView extends StatelessWidget {
                           filled: true,
                           focusColor: context.colorScheme.secondaryWhiteColor,
                           hintText: 'Student Email ID',
-                          hintStyle: model.fontTheme.title2(context,
+                          hintStyle: model.fontTheme.body(context,
                               color: context.colorScheme.secondarySectionColor),
                         ),
                       ),
@@ -82,7 +82,7 @@ class AuthView extends StatelessWidget {
                           filled: true,
                           focusColor: Colors.white,
                           hintText: 'Password',
-                          hintStyle: model.fontTheme.title2(context,
+                          hintStyle: model.fontTheme.body(context,
                               color: context.colorScheme.secondarySectionColor),
                         ),
                       ),
@@ -95,7 +95,7 @@ class AuthView extends StatelessWidget {
                             padding: EdgeInsetsDirectional.only(top: 10.r),
                             child: Text(
                               'Forgot password?',
-                              style: model.fontTheme.title2(context,
+                              style: model.fontTheme.body(context,
                                   color: context.colorScheme.primaryColor),
                             ),
                           ),
@@ -121,7 +121,8 @@ class AuthView extends StatelessWidget {
                           ),
                           child: Text(
                             'Sign In',
-                            style: FontThemeClass().header(context),
+                            style: FontThemeClass().header(context,
+                                color: context.colorScheme.secondaryWhiteColor),
                           ),
                         ),
                       ),
@@ -130,12 +131,12 @@ class AuthView extends StatelessWidget {
                         child: RichText(
                           text: TextSpan(
                             text: 'Problem with Sign in? ',
-                            style: FontThemeClass().title2(context,
+                            style: FontThemeClass().body(context,
                                 color: context.colorScheme.secondaryBlackColor),
                             children: <TextSpan>[
                               TextSpan(
                                 text: 'Report issue',
-                                style: FontThemeClass().title2(context,
+                                style: FontThemeClass().body(context,
                                     color: context.colorScheme.primaryColor),
                               ),
                             ],
@@ -149,8 +150,8 @@ class AuthView extends StatelessWidget {
                 Container(
                   alignment: Alignment.bottomCenter,
                   child: Text(
-                    'Darpan v.1.0.0',
-                    style: model.fontTheme.title2(context,
+                    'Abhiyaan v.1.0.0',
+                    style: model.fontTheme.caption(context,
                         color: context.colorScheme.secondarySectionColor),
                   ),
                 )
