@@ -24,7 +24,7 @@ class EventDetails {
           location,
           style: fontTheme.title2(
             context,
-            context.colorScheme.primaryColor.withOpacity(0.8),
+            color: context.colorScheme.primaryColor.withOpacity(0.8),
           ),
         ),
       ],
@@ -48,7 +48,7 @@ class EventDetails {
           time,
           style: fontTheme.title2(
             context,
-            context.colorScheme.primaryColor.withOpacity(0.8),
+            color: context.colorScheme.primaryColor.withOpacity(0.8),
           ),
         ),
       ],
@@ -140,8 +140,8 @@ class EventDateContainer extends ViewModelWidget<EventViewModel> {
                         event.startDate.toDate().year)
                     .trim(),
                 textAlign: TextAlign.center,
-                style: fontTheme.title2(
-                    context, context.colorScheme.secondaryBlackColor),
+                style: fontTheme.title2(context,
+                    color: context.colorScheme.secondaryBlackColor),
               ),
             ),
           ],
@@ -235,8 +235,8 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                           child: Center(
                             child: Text(
                               "Open".toUpperCase(),
-                              style: FontThemeClass().title2(
-                                  context, context.colorScheme.signInTextColor),
+                              style: FontThemeClass().title2(context,
+                                  color: context.colorScheme.signInTextColor),
                             ),
                           ),
                         ),
@@ -325,8 +325,8 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
                         child: Center(
                           child: Text(
                             "Open".toUpperCase(),
-                            style: FontThemeClass().title2(
-                                context, context.colorScheme.signInTextColor),
+                            style: FontThemeClass().title2(context,
+                                color: context.colorScheme.signInTextColor),
                           ),
                         ),
                       ),

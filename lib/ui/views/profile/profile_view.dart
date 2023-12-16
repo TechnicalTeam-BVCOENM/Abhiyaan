@@ -79,9 +79,8 @@ class ProfileView extends StatelessWidget {
                                 height: 7.h,
                               ),
                               Text(LocalStorageService().read('userYear'),
-                                  style: FontThemeClass().title2(
-                                      context,
-                                      context
+                                  style: FontThemeClass().title2(context,
+                                      color: context
                                           .colorScheme.secondarySectionColor))
                             ],
                           )

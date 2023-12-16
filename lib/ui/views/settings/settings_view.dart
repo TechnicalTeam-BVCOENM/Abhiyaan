@@ -100,13 +100,13 @@ class SettingsView extends StatelessWidget {
                   ),
                   Text(
                     'Darpan v.1.0.0',
-                    style: model.fontTheme.title(
-                        context, context.colorScheme.secondarySectionColor),
+                    style: model.fontTheme.title(context,
+                        color: context.colorScheme.secondarySectionColor),
                   ),
                   Text(
                     'Made with ❤️ by Technical Team ',
-                    style: model.fontTheme.title2(
-                        context, context.colorScheme.secondarySectionColor),
+                    style: model.fontTheme.title2(context,
+                        color: context.colorScheme.secondarySectionColor),
                   )
                 ],
               ),

@@ -60,7 +60,7 @@ class AuthView extends StatelessWidget {
                           focusColor: context.colorScheme.secondaryWhiteColor,
                           hintText: 'Student Email ID',
                           hintStyle: model.fontTheme.title2(context,
-                              context.colorScheme.secondarySectionColor),
+                              color: context.colorScheme.secondarySectionColor),
                         ),
                       ),
                       SizedBox(
@@ -83,7 +83,7 @@ class AuthView extends StatelessWidget {
                           focusColor: Colors.white,
                           hintText: 'Password',
                           hintStyle: model.fontTheme.title2(context,
-                              context.colorScheme.secondarySectionColor),
+                              color: context.colorScheme.secondarySectionColor),
                         ),
                       ),
                       GestureDetector(
@@ -95,8 +95,8 @@ class AuthView extends StatelessWidget {
                             padding: EdgeInsetsDirectional.only(top: 10.r),
                             child: Text(
                               'Forgot password?',
-                              style: model.fontTheme.title2(
-                                  context, context.colorScheme.primaryColor),
+                              style: model.fontTheme.title2(context,
+                                  color: context.colorScheme.primaryColor),
                             ),
                           ),
                         ),
@@ -131,12 +131,12 @@ class AuthView extends StatelessWidget {
                           text: TextSpan(
                             text: 'Problem with Sign in? ',
                             style: FontThemeClass().title2(context,
-                                context.colorScheme.secondaryBlackColor),
+                                color: context.colorScheme.secondaryBlackColor),
                             children: <TextSpan>[
                               TextSpan(
                                 text: 'Report issue',
-                                style: FontThemeClass().title2(
-                                    context, context.colorScheme.primaryColor),
+                                style: FontThemeClass().title2(context,
+                                    color: context.colorScheme.primaryColor),
                               ),
                             ],
                           ),
@@ -150,8 +150,8 @@ class AuthView extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   child: Text(
                     'Darpan v.1.0.0',
-                    style: model.fontTheme.title2(
-                        context, context.colorScheme.secondarySectionColor),
+                    style: model.fontTheme.title2(context,
+                        color: context.colorScheme.secondarySectionColor),
                   ),
                 )
               ],
