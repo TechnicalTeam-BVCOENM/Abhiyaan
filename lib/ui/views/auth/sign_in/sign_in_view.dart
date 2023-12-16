@@ -56,8 +56,10 @@ class SignInView extends StatelessWidget {
                               focusColor:
                                   context.colorScheme.secondaryWhiteColor,
                               hintText: 'Student Email ID',
-                              // hintStyle: model.fontTheme.subHeading2(context,
-                              //     context.colorScheme.secondarySectionColor),
+                              hintStyle: model.fontTheme.caption(context,
+                                  color:
+                                      context.colorScheme.secondarySectionColor,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                           SizedBox(
@@ -80,8 +82,10 @@ class SignInView extends StatelessWidget {
                               filled: true,
                               focusColor: Colors.white,
                               hintText: 'Password',
-                              // hintStyle: model.fontTheme.subHeading2(context,
-                              //     context.colorScheme.secondarySectionColor),
+                              hintStyle: model.fontTheme.caption(context,
+                                  color:
+                                      context.colorScheme.secondarySectionColor,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                           GestureDetector(
