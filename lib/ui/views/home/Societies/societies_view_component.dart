@@ -36,7 +36,7 @@ class SocietyCard extends StatelessWidget {
               Text(
                 title,
                 style: FontThemeClass()
-                    .title2(context, context.colorScheme.switchColor),
+                    .title2(context, color: context.colorScheme.switchColor),
               ),
               SizedBox(
                 height: 4.h,
@@ -49,7 +49,8 @@ class SocietyCard extends StatelessWidget {
                   softWrap: true,
                   overflow: TextOverflow.ellipsis,
                   style: FontThemeClass().title2(context,
-                      context.colorScheme.secondaryBlackColor.withOpacity(0.8)),
+                      color: context.colorScheme.secondaryBlackColor
+                          .withOpacity(0.8)),
                 ),
               ),
               SizedBox(

@@ -49,8 +49,8 @@ class ProfileDetailsCard extends StatelessWidget {
                 child: Text(
                   value,
                   overflow: TextOverflow.ellipsis,
-                  style: FontThemeClass().title2(
-                      context, context.colorScheme.secondarySectionColor),
+                  style: FontThemeClass().title2(context,
+                      color: context.colorScheme.secondarySectionColor),
                 ),
               ),
             ],

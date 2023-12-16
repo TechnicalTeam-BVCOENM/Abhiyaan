@@ -1,4 +1,4 @@
-part of '../event/detailed_event_view.dart';
+part of '../detailed_event/detailed_event_view.dart';
 
 class DetailedEventViewModel extends BaseViewModel {
   final EventModel eventData;

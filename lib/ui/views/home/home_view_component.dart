@@ -69,7 +69,6 @@ Widget quickLinksList(BuildContext context, List model,
             children: [
               GestureDetector(
                 onTap: () {
-                  debugPrint("Tapped $idx");
                   handleQuickLinksNavigation(model, idx);
                 },
                 child: Container(
@@ -89,14 +88,11 @@ Widget quickLinksList(BuildContext context, List model,
               // const SizedBox(height: 18),
               Text(
                 model[idx].title.toString().toUpperCase(),
-                style: FontThemeClass()
-                    .title2(
-                      context,
-                      context.colorScheme.primaryDarkColor,
-                    )
-                    .copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                style: FontThemeClass().body(
+                  context,
+                  color: context.colorScheme.primaryDarkColor,
+                  fontWeight: FontWeight.w600,
+                ),
                 textAlign: TextAlign.center,
                 softWrap: false,
               ),

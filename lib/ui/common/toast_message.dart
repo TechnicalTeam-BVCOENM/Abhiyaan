@@ -1,6 +1,7 @@
 import '../../file_exporter.dart';
 
 void showmessage(context, String message) {
+  FontThemeClass fontTheme = FontThemeClass();
   try {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       elevation: 0,
@@ -16,8 +17,8 @@ void showmessage(context, String message) {
               borderRadius: BorderRadius.circular(10)),
           child: Text(
             message,
-            style: FontThemeClass().header(
-                context, Theme.of(context).colorScheme.secondaryBlackColor),
+            style: fontTheme.header(context,
+                color: context.colorScheme.secondaryBlackColor),
           ),
         ),
       ),

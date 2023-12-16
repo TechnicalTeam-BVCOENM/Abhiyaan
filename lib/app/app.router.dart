@@ -6,9 +6,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:darpan/file_exporter.dart' as _i11;
-import 'package:darpan/ui/sub_views/event/detailed_event_view.dart' as _i9;
 import 'package:darpan/ui/views/auth/auth_view.dart' as _i4;
 import 'package:darpan/ui/views/bottom_nav/bottom_nav_view.dart' as _i7;
+import 'package:darpan/ui/views/event/detailed_event/detailed_event_view.dart'
+    as _i9;
 import 'package:darpan/ui/views/event/event_view.dart' as _i8;
 import 'package:darpan/ui/views/home/home_view.dart' as _i3;
 import 'package:darpan/ui/views/profile/profile_view.dart' as _i5;

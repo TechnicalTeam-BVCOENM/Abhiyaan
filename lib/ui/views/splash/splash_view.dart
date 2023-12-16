@@ -29,8 +29,8 @@ class SplashView extends StatelessWidget {
                     style: FontThemeClass().header(context)),
                 const SizedBox(height: 8.0),
                 Text('BVCOENM',
-                    style: FontThemeClass().title(
-                        context, context.colorScheme.secondaryBlackColor)),
+                    style: FontThemeClass().title(context,
+                        color: context.colorScheme.secondaryBlackColor)),
               ],
             ),
           ),

@@ -1,6 +1,5 @@
-import '../../file_exporter.dart';
+import 'package:darpan/file_exporter.dart';
 
-// Section Name Text
 class SectionText extends StatelessWidget {
   const SectionText({super.key, required this.title});
   final String title;
@@ -11,10 +10,9 @@ class SectionText extends StatelessWidget {
       margin: const EdgeInsets.only(top: 18, bottom: 8),
       child: Text(
         title,
-        style: FontThemeClass().title2(
-          context,
-          context.colorScheme.secondarySectionColor,
-        ),
+        style: FontThemeClass().body(context,
+            color: context.colorScheme.secondarySectionColor,
+            fontWeight: FontWeight.w600),
       ),
     );
   }
