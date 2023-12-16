@@ -1,14 +1,4 @@
 class AssetImagePath {
-  static const String attendanceImg = 'assets/images/academics/attendance.png';
-  static const String classNotesImg = 'assets/images/academics/class_notes.png';
-  static const String coursesImg = 'assets/images/academics/courses.png';
-  static const String practicalsImg = 'assets/images/academics/practicals.png';
-  static const String pyqsImg = 'assets/images/academics/pyqs.png';
-  static const String resultsImg = 'assets/images/academics/results.png';
-  static const String studentSectionImg =
-      'assets/images/academics/student_section.png';
-  static const String syllabusImg = 'assets/images/academics/syllabus.png';
-  static const String timetableImg = 'assets/images/academics/timetable.png';
   static const String copyImg = 'assets/images/profile/copy.png';
   static const String settingImg = 'assets/images/profile/setting.png';
   static const String misImg = 'assets/images/profile/mis.png';
@@ -21,13 +11,7 @@ class AssetImagePath {
       'assets/images/profile/twitter_square-modified.png';
   static const String linkedinImg = 'assets/images/profile/linkedin_square.png';
   static const String logoImg = 'assets/images/logo.png';
-  static const String tcsImg = 'assets/images/academics/class_notes/tcs.png';
-  static const String seImg = 'assets/images/academics/class_notes/se.png';
-  static const String cnImg = 'assets/images/academics/class_notes/cn.png';
-  static const String dwmImg = 'assets/images/academics/class_notes/dwm.png';
-  static const String adbmsImg =
-      'assets/images/academics/class_notes/adbms.png';
-  static const String pceImg = 'assets/images/academics/class_notes/pce.png';
+
   static const String darkMode = 'assets/images/profile/dark_mode.png';
   static const String help = 'assets/images/profile/help.png';
   static const String logout = 'assets/images/profile/logout.png';

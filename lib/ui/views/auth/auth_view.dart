@@ -1,9 +1,4 @@
 import 'package:darpan/file_exporter.dart';
-import 'package:darpan/services/auth_service.dart';
-import 'package:darpan/theme/responsive_utils.dart';
-import 'package:darpan/ui/common/toast_message.dart';
-import 'package:darpan/ui/views/settings/settings_view.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 part 'auth_view_model.dart';
 
 class AuthView extends StatelessWidget {
@@ -14,150 +9,69 @@ class AuthView extends StatelessWidget {
     return ViewModelBuilder<AuthViewModel>.reactive(
       viewModelBuilder: () => AuthViewModel(),
       builder: (context, model, child) {
-        return GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-          child: Scaffold(
+        return Scaffold(
             backgroundColor: context.colorScheme.backgroundColor,
-            body: ListView(
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                Container(
-                  height: 870.h,
-                  padding: const EdgeInsets.only(
-                          left: 20, right: 20, top: 40, bottom: 175)
-                      .r,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Expanded(child: Text("")),
-                      SizedBox(
-                        width: ResponsiveUtils.screenWidth(context) * 0.6,
-                        child: Image.asset(
-                          AssetImagePath.logoImg,
+            body: SafeArea(
+              child: Center(
+                child: Column(
+                  children: [
+                    const Expanded(child: Text('')),
+                    Image(image: Image.asset(AssetImagePath.logoImg).image),
+                    16.verticalSpace,
+                    InkWell(
+                      splashColor: context.colorScheme.secondaryLPurpleColor,
+                      onTap: () {
+                        model.toSignInPage(context);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(10).r,
+                        width: 334.h,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30).r,
+                          color: context.colorScheme.primaryColor,
                         ),
-                      ),
-                      const Expanded(child: Text("")),
-                      Text(
-                        'Darpan',
-                        style: model.fontTheme.display(context),
-                      ),
-                      const Expanded(child: Text("")),
-                      TextFormField(
-                        cursorColor: context.colorScheme.primaryColor,
-                        controller: model.emailIdTextController,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 15)
-                              .r,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                const Radius.circular(15).r,
-                              ),
-                              borderSide: BorderSide.none),
-                          fillColor: context.colorScheme.secondaryWhiteColor,
-                          filled: true,
-                          focusColor: context.colorScheme.secondaryWhiteColor,
-                          hintText: 'Student Email ID',
-                          hintStyle: model.fontTheme.title2(context,
-                              color: context.colorScheme.secondarySectionColor),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      TextFormField(
-                        cursorColor: context.colorScheme.primaryColor,
-                        controller: model.passwordTextController,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 15)
-                              .r,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                const Radius.circular(15).r,
-                              ),
-                              borderSide: BorderSide.none),
-                          fillColor: context.colorScheme.secondaryWhiteColor,
-                          filled: true,
-                          focusColor: Colors.white,
-                          hintText: 'Password',
-                          hintStyle: model.fontTheme.title2(context,
-                              color: context.colorScheme.secondarySectionColor),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () =>
-                            SettingsViewModel().changePassword(context),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.only(top: 10.r),
-                            child: Text(
-                              'Forgot password?',
-                              style: model.fontTheme.title2(context,
-                                  color: context.colorScheme.primaryColor),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.only(top: 10.r),
-                        child: TextButton(
-                          onPressed: () async {
-                            await model.login(model.emailIdTextController.text,
-                                model.passwordTextController.text, context);
-                          },
-                          style: ButtonStyle(
-                            minimumSize: MaterialStateProperty.all(
-                                const Size(double.infinity, 50)),
-                            backgroundColor: MaterialStateProperty.all(
-                                context.colorScheme.primaryColor),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40.0).r,
-                              ),
-                            ),
-                          ),
+                        child: Center(
                           child: Text(
                             'Sign In',
-                            style: FontThemeClass().header(context),
+                            style: FontThemeClass().title(context,
+                                color: context.colorScheme.secondaryWhiteColor),
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.only(top: 10.r),
-                        child: RichText(
-                          text: TextSpan(
-                            text: 'Problem with Sign in? ',
-                            style: FontThemeClass().title2(context,
-                                color: context.colorScheme.secondaryBlackColor),
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: 'Report issue',
-                                style: FontThemeClass().title2(context,
-                                    color: context.colorScheme.primaryColor),
-                              ),
-                            ],
+                    ),
+                    20.verticalSpace,
+                    InkWell(
+                      splashColor: context.colorScheme.secondaryLPurpleColor,
+                      onTap: () {
+                        model.toRegisterPage(context);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(10).r,
+                        width: 334.h,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30).r,
+                          color: context.colorScheme.primaryColor,
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Register',
+                            style: FontThemeClass().title(context,
+                                color: context.colorScheme.secondaryWhiteColor),
                           ),
                         ),
                       ),
-                      const Expanded(child: Text("")),
-                    ],
-                  ),
+                    ),
+                    const Expanded(child: Text('')),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Abhiyaan v1.0.0',
+                          style: FontThemeClass().caption(context,
+                              color: context.colorScheme.secondaryBlackColor)),
+                    ),
+                  ],
                 ),
-                Container(
-                  alignment: Alignment.bottomCenter,
-                  child: Text(
-                    'Darpan v.1.0.0',
-                    style: model.fontTheme.title2(context,
-                        color: context.colorScheme.secondarySectionColor),
-                  ),
-                )
-              ],
-            ),
-          ),
-        );
+              ),
+            ));
       },
     );
   }

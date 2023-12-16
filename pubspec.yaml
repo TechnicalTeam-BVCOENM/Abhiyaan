@@ -44,8 +44,6 @@ flutter:
   assets:
     - assets/images/
     - assets/images/profile/
-    - assets/images/academics/
-    - assets/images/academics/class_notes/
     - assets/images/home/
     - assets/images/home/societies/
 
