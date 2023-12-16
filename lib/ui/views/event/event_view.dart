@@ -37,10 +37,10 @@ class EventView extends StatelessWidget {
                           elevation: 4,
                           shape: ShapeBorder.lerp(
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.sp).r,
+                                borderRadius: BorderRadius.circular(18).r,
                               ),
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.sp).r,
+                                borderRadius: BorderRadius.circular(18).r,
                               ),
                               1),
                           child: model.todayEvent != null
@@ -78,7 +78,8 @@ class EventView extends StatelessWidget {
                                         ),
                                         Text(
                                           "No Ongoing Events",
-                                          style: fontTheme.header(context),
+                                          style: fontTheme.title2(context,
+                                              fontWeight: FontWeight.w600),
                                         ),
                                       ],
                                     ),
@@ -110,7 +111,7 @@ class EventView extends StatelessWidget {
                               return Padding(
                                 padding: index == 0
                                     ? const EdgeInsets.only(left: 0).r
-                                    : const EdgeInsets.only(left: 10).r,
+                                    : const EdgeInsets.only(left: 12).r,
                                 child: Card(
                                   clipBehavior: Clip.hardEdge,
                                   shadowColor: context

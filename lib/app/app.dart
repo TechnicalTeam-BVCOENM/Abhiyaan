@@ -1,9 +1,9 @@
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/services/local_storage_service.dart';
 import 'package:darpan/theme/theme_service.dart';
-import 'package:darpan/ui/sub_views/event/detailed_event_view.dart';
 import 'package:darpan/ui/views/auth/auth_view.dart';
 import 'package:darpan/ui/views/bottom_nav/bottom_nav_view.dart';
+import 'package:darpan/ui/views/event/detailed_event/detailed_event_view.dart';
 import 'package:darpan/ui/views/event/event_view.dart';
 import 'package:darpan/ui/views/profile/profile_view.dart';
 import 'package:darpan/ui/views/settings/settings_view.dart';
