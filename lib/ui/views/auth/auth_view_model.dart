@@ -4,6 +4,10 @@ class AuthViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 
   void toSignInPage(BuildContext context) {
-    _navigationService.navigateTo(Routes.bottomNavView);
+    _navigationService.navigateTo(Routes.signInView);
+  }
+
+  void toRegisterPage(BuildContext context) {
+    _navigationService.navigateTo(Routes.registerView);
   }
 }

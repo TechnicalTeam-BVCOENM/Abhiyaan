@@ -42,7 +42,9 @@ class AuthView extends StatelessWidget {
                     20.verticalSpace,
                     InkWell(
                       splashColor: context.colorScheme.secondaryLPurpleColor,
-                      onTap: () {},
+                      onTap: () {
+                        model.toRegisterPage(context);
+                      },
                       child: Container(
                         padding: const EdgeInsets.all(10).r,
                         width: 334.h,
