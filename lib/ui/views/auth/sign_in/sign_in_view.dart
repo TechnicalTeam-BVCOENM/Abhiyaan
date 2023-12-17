@@ -58,6 +58,9 @@ class SignInView extends StatelessWidget {
                               focusColor:
                                   context.colorScheme.secondaryWhiteColor,
                               hintText: 'Student Email ID',
+                              errorText: model.isEmailIdValid
+                                  ? null
+                                  : model.emailIdErrorText,
                               hintStyle: model.fontTheme.caption(context,
                                   color:
                                       context.colorScheme.secondarySectionColor,
@@ -98,11 +101,15 @@ class SignInView extends StatelessWidget {
                                     : const Icon(Icons.visibility),
                               ),
                               hintText: 'Password',
+
                               hintStyle: model.fontTheme.caption(
                                 context,
                                 color:
                                     context.colorScheme.secondarySectionColor,
                               ),
+                              errorText: model.isPasswordValid
+                                  ? null
+                                  : model.passwordErrorText
                             ),
                           ),
                           InkWell(
