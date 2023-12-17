@@ -58,11 +58,10 @@ class SignInView extends StatelessWidget {
                               focusColor:
                                   context.colorScheme.secondaryWhiteColor,
                               hintText: 'Student Email ID',
-                              hintStyle: model.fontTheme.caption(
-                                context,
-                                color:
-                                    context.colorScheme.secondarySectionColor,
-                              ),
+                              hintStyle: model.fontTheme.caption(context,
+                                  color:
+                                      context.colorScheme.secondarySectionColor,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                           SizedBox(
@@ -86,11 +85,10 @@ class SignInView extends StatelessWidget {
                               filled: true,
                               focusColor: Colors.white,
                               hintText: 'Password',
-                              hintStyle: model.fontTheme.caption(
-                                context,
-                                color:
-                                    context.colorScheme.secondarySectionColor,
-                              ),
+                              hintStyle: model.fontTheme.caption(context,
+                                  color:
+                                      context.colorScheme.secondarySectionColor,
+                                  fontWeight: FontWeight.w500),
                               suffixIcon: GestureDetector(
                                 onTap: () => model.togglePassword(),
                                 child: Icon(
@@ -110,10 +108,9 @@ class SignInView extends StatelessWidget {
                                 padding: EdgeInsetsDirectional.only(top: 10.r),
                                 child: Text(
                                   'Forgot password?',
-                                  style: FontThemeClass().caption(
-                                    context,
-                                    color: context.colorScheme.primaryColor,
-                                  ),
+                                  style: FontThemeClass().caption(context,
+                                      color: context.colorScheme.primaryColor,
+                                      fontWeight: FontWeight.w500),
                                 ),
                               ),
                             ),
@@ -141,8 +138,7 @@ class SignInView extends StatelessWidget {
                               child: Text(
                                 'Sign In',
                                 style: FontThemeClass().title(context,
-                                    color: context
-                                        .colorScheme.secondaryWhiteColor),
+                                    color: context.colorScheme.signInTextColor),
                               ),
                             ),
                           ),
@@ -151,18 +147,16 @@ class SignInView extends StatelessWidget {
                             child: RichText(
                               text: TextSpan(
                                 text: 'Don\'t have an account? ',
-                                style: FontThemeClass().caption(
-                                  context,
-                                  color:
-                                      context.colorScheme.secondaryBlackColor,
-                                ),
+                                style: FontThemeClass().caption(context,
+                                    color:
+                                        context.colorScheme.secondaryBlackColor,
+                                    fontWeight: FontWeight.w500),
                                 children: <TextSpan>[
                                   TextSpan(
                                     text: 'Register Now',
-                                    style: FontThemeClass().caption(
-                                      context,
-                                      color: context.colorScheme.primaryColor,
-                                    ),
+                                    style: FontThemeClass().caption(context,
+                                        color: context.colorScheme.primaryColor,
+                                        fontWeight: FontWeight.w500),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
                                         Navigator.push(
@@ -182,18 +176,16 @@ class SignInView extends StatelessWidget {
                             child: RichText(
                               text: TextSpan(
                                 text: 'Problem with Sign In? ',
-                                style: FontThemeClass().caption(
-                                  context,
-                                  color:
-                                      context.colorScheme.secondaryBlackColor,
-                                ),
+                                style: FontThemeClass().caption(context,
+                                    color:
+                                        context.colorScheme.secondaryBlackColor,
+                                    fontWeight: FontWeight.w500),
                                 children: <TextSpan>[
                                   TextSpan(
                                     text: 'Report Issue',
-                                    style: FontThemeClass().caption(
-                                      context,
-                                      color: context.colorScheme.primaryColor,
-                                    ),
+                                    style: FontThemeClass().caption(context,
+                                        color: context.colorScheme.primaryColor,
+                                        fontWeight: FontWeight.w500),
                                   ),
                                 ],
                               ),
@@ -206,10 +198,9 @@ class SignInView extends StatelessWidget {
                     Container(
                       alignment: Alignment.bottomCenter,
                       child: Text('Abhiyaan v1.0.0',
-                          style: FontThemeClass().caption(
-                            context,
-                            color: context.colorScheme.secondarySectionColor,
-                          )),
+                          style: FontThemeClass().caption(context,
+                              color: context.colorScheme.secondarySectionColor,
+                              fontWeight: FontWeight.w500)),
                     ),
                   ],
                 ),

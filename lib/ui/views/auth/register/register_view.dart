@@ -52,11 +52,10 @@ class RegisterView extends StatelessWidget {
                                     value: value,
                                     child: Text(
                                       value,
-                                      style: model.fontTheme.caption(
-                                        context,
-                                        color: context
-                                            .colorScheme.secondaryBlackColor,
-                                      ),
+                                      style: model.fontTheme.caption(context,
+                                          color: context
+                                              .colorScheme.secondaryBlackColor,
+                                          fontWeight: FontWeight.w500),
                                     ),
                                   );
                                 }).toList();
@@ -113,11 +112,10 @@ class RegisterView extends StatelessWidget {
                               focusColor:
                                   context.colorScheme.secondaryWhiteColor,
                               hintText: 'Student Email ID',
-                              hintStyle: model.fontTheme.caption(
-                                context,
-                                color:
-                                    context.colorScheme.secondarySectionColor,
-                              ),
+                              hintStyle: model.fontTheme.caption(context,
+                                  color:
+                                      context.colorScheme.secondarySectionColor,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                           SizedBox(
@@ -141,11 +139,10 @@ class RegisterView extends StatelessWidget {
                               focusColor:
                                   context.colorScheme.secondaryWhiteColor,
                               hintText: 'Enter MIS Number',
-                              hintStyle: model.fontTheme.caption(
-                                context,
-                                color:
-                                    context.colorScheme.secondarySectionColor,
-                              ),
+                              hintStyle: model.fontTheme.caption(context,
+                                  color:
+                                      context.colorScheme.secondarySectionColor,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                           SizedBox(
@@ -169,11 +166,10 @@ class RegisterView extends StatelessWidget {
                               filled: true,
                               focusColor: Colors.white,
                               hintText: 'Create Password',
-                              hintStyle: model.fontTheme.caption(
-                                context,
-                                color:
-                                    context.colorScheme.secondarySectionColor,
-                              ),
+                              hintStyle: model.fontTheme.caption(context,
+                                  color:
+                                      context.colorScheme.secondarySectionColor,
+                                  fontWeight: FontWeight.w500),
                               suffixIcon: GestureDetector(
                                 onTap: () => model.toggleCreatePassword(),
                                 child: Icon(
@@ -203,11 +199,10 @@ class RegisterView extends StatelessWidget {
                               filled: true,
                               focusColor: Colors.white,
                               hintText: 'Confirm Password',
-                              hintStyle: model.fontTheme.caption(
-                                context,
-                                color:
-                                    context.colorScheme.secondarySectionColor,
-                              ),
+                              hintStyle: model.fontTheme.caption(context,
+                                  color:
+                                      context.colorScheme.secondarySectionColor,
+                                  fontWeight: FontWeight.w500),
                               suffixIcon: GestureDetector(
                                 onTap: () => model.toggleConfirmPassword(),
                                 child: Icon(
@@ -245,8 +240,7 @@ class RegisterView extends StatelessWidget {
                               child: Text(
                                 'Register',
                                 style: FontThemeClass().title(context,
-                                    color: context
-                                        .colorScheme.secondaryWhiteColor),
+                                    color: context.colorScheme.signInTextColor),
                               ),
                             ),
                           ),
@@ -255,18 +249,16 @@ class RegisterView extends StatelessWidget {
                             child: RichText(
                               text: TextSpan(
                                 text: 'Already have an account? ',
-                                style: FontThemeClass().caption(
-                                  context,
-                                  color:
-                                      context.colorScheme.secondaryBlackColor,
-                                ),
+                                style: FontThemeClass().caption(context,
+                                    color:
+                                        context.colorScheme.secondaryBlackColor,
+                                    fontWeight: FontWeight.w500),
                                 children: <TextSpan>[
                                   TextSpan(
                                     text: 'Sign In',
-                                    style: FontThemeClass().caption(
-                                      context,
-                                      color: context.colorScheme.primaryColor,
-                                    ),
+                                    style: FontThemeClass().caption(context,
+                                        color: context.colorScheme.primaryColor,
+                                        fontWeight: FontWeight.w500),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
                                         Navigator.push(
@@ -286,18 +278,16 @@ class RegisterView extends StatelessWidget {
                             child: RichText(
                               text: TextSpan(
                                 text: 'Problem with Registration? ',
-                                style: FontThemeClass().caption(
-                                  context,
-                                  color:
-                                      context.colorScheme.secondaryBlackColor,
-                                ),
+                                style: FontThemeClass().caption(context,
+                                    color:
+                                        context.colorScheme.secondaryBlackColor,
+                                    fontWeight: FontWeight.w500),
                                 children: <TextSpan>[
                                   TextSpan(
                                     text: 'Report Issue',
-                                    style: FontThemeClass().caption(
-                                      context,
-                                      color: context.colorScheme.primaryColor,
-                                    ),
+                                    style: FontThemeClass().caption(context,
+                                        color: context.colorScheme.primaryColor,
+                                        fontWeight: FontWeight.w500),
                                   ),
                                 ],
                               ),
@@ -310,10 +300,9 @@ class RegisterView extends StatelessWidget {
                     Container(
                       alignment: Alignment.bottomCenter,
                       child: Text('Abhiyaan v1.0.0',
-                          style: FontThemeClass().caption(
-                            context,
-                            color: context.colorScheme.secondarySectionColor,
-                          )),
+                          style: FontThemeClass().caption(context,
+                              color: context.colorScheme.secondarySectionColor,
+                              fontWeight: FontWeight.w500)),
                     ),
                   ],
                 ),
@@ -321,5 +310,3 @@ class RegisterView extends StatelessWidget {
         });
   }
 }
-
-// void setState(Null Function() param0) {}

@@ -34,7 +34,7 @@ class AuthView extends StatelessWidget {
                           child: Text(
                             'Sign In',
                             style: FontThemeClass().title(context,
-                                color: context.colorScheme.secondaryWhiteColor),
+                                color: context.colorScheme.signInTextColor),
                           ),
                         ),
                       ),
@@ -56,7 +56,7 @@ class AuthView extends StatelessWidget {
                           child: Text(
                             'Register',
                             style: FontThemeClass().title(context,
-                                color: context.colorScheme.secondaryWhiteColor),
+                                color: context.colorScheme.signInTextColor),
                           ),
                         ),
                       ),
@@ -65,10 +65,9 @@ class AuthView extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text('Abhiyaan v1.0.0',
-                          style: FontThemeClass().caption(
-                            context,
-                            color: context.colorScheme.secondarySectionColor,
-                          )),
+                          style: FontThemeClass().caption(context,
+                              color: context.colorScheme.secondarySectionColor,
+                              fontWeight: FontWeight.w500)),
                     ),
                   ],
                 ),
