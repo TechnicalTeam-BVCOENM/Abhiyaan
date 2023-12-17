@@ -14,7 +14,9 @@ Padding settingsListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 20).r,
       title: Text(
         title!,
-        style: model.fontTheme.title(context),
+        style: model.fontTheme.paragraph(context,
+            color: context.colorScheme.secondaryBlackColor,
+            fontWeight: FontWeight.w500),
       ),
       titleAlignment: ListTileTitleAlignment.center,
       leading: SizedBox(width: 40.w, child: Image.asset(leadingIcon!)),
