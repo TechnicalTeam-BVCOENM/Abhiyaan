@@ -7,12 +7,14 @@ class ProfileDetailsCard extends StatelessWidget {
   final String leading;
   final String title;
   final String value;
+  final IconData icon;
 
   const ProfileDetailsCard({
     super.key,
     required this.leading,
     required this.title,
     required this.value,
+    required this.icon,
   });
 
   @override
@@ -64,12 +66,12 @@ class ProfileDetailsCard extends StatelessWidget {
           const Expanded(child: Text("")),
           TextButton(
               onPressed: () async {
-                await Clipboard.setData(ClipboardData(text: value));
+                await Clipboard.setData(ClipboardData(text: value))
+                    .then((value) => showmessage(context, "Copied"));
                 // ignore: use_build_context_synchronously
-                showmessage(context, "Copied");
               },
               child: Icon(
-                Icons.content_copy,
+                icon,
                 size: 26.r,
                 color: context.colorScheme.switchColor,
               )),

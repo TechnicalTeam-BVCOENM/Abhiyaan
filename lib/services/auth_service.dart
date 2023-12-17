@@ -55,6 +55,8 @@ class AuthenticationService {
       "userYear",
       "userPrnNo",
       "userLibNo",
+      "userPhone",
+      "userCertifications",
     ];
 
     try {
