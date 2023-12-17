@@ -10,6 +10,14 @@ class SignInViewModel extends BaseViewModel {
   final TextEditingController emailIdTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
 
+  bool isPasswordVisible = false;
+
+  bool togglePasswordVisibility() {
+    isPasswordVisible = !isPasswordVisible;
+    notifyListeners();
+    return isPasswordVisible;
+  }
+
   void toHomePage(BuildContext context) {
     _navigationService.navigateTo(Routes.bottomNavView);
   }

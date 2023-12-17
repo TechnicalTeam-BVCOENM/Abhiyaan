@@ -71,7 +71,9 @@ class SignInView extends StatelessWidget {
                           TextFormField(
                             cursorColor: context.colorScheme.primaryColor,
                             controller: model.passwordTextController,
-                            obscureText: obscureText,
+
+                            obscureText: model.isPasswordVisible ? false : true,
+
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 15, vertical: 15)
@@ -85,6 +87,19 @@ class SignInView extends StatelessWidget {
                                   context.colorScheme.secondaryWhiteColor,
                               filled: true,
                               focusColor: Colors.white,
+                              suffixIcon: InkWell(
+                                splashColor:
+                                    context.colorScheme.secondaryLPurpleColor,
+                                onTap: () {
+                                  model.togglePasswordVisibility();
+                                },
+                                child: model.isPasswordVisible
+                                    ? Icon(
+                                        Icons.visibility_off,
+                                        color: context.colorScheme.iconColor,
+                                      )
+                                    : const Icon(Icons.visibility),
+                              ),
                               hintText: 'Password',
                               hintStyle: model.fontTheme.caption(
                                 context,
@@ -101,7 +116,7 @@ class SignInView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          GestureDetector(
+                          InkWell(
                             onTap: () =>
                                 SettingsViewModel().changePassword(context),
                             child: Align(

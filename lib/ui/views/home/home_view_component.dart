@@ -88,9 +88,9 @@ Widget quickLinksList(BuildContext context, List model,
               // const SizedBox(height: 18),
               Text(
                 model[idx].title.toString().toUpperCase(),
-                style: FontThemeClass().body(
+                style: FontThemeClass().caption(
                   context,
-                  color: context.colorScheme.primaryDarkColor,
+                  color: context.colorScheme.primaryDarkColor.withOpacity(0.8),
                   fontWeight: FontWeight.w600,
                 ),
                 textAlign: TextAlign.center,
@@ -102,4 +102,112 @@ Widget quickLinksList(BuildContext context, List model,
       },
     ),
   );
+}
+
+class HomePageShimmerEffect extends StatelessWidget {
+  const HomePageShimmerEffect({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 18).r,
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0).r,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ShimmerLoadingWidget(
+                  height: 45.h,
+                  width: 240.w,
+                ),
+                ShimmerLoadingWidget(
+                  height: 45.h,
+                  width: 45.w,
+                ),
+              ],
+            ),
+          ),
+          16.verticalSpace,
+          const SectionTextShimmerEffect(),
+          4.verticalSpace,
+          Center(
+            child: ShimmerLoadingWidget(
+              width: double.infinity,
+              height: 230.h,
+            ),
+          ),
+          16.verticalSpace,
+          const SectionTextShimmerEffect(),
+          8.verticalSpace,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ShimmerLoadingWidget(
+                height: 80.h,
+                width: 80.w,
+              ),
+              ShimmerLoadingWidget(
+                height: 80.h,
+                width: 80.w,
+              ),
+              ShimmerLoadingWidget(
+                height: 80.h,
+                width: 80.w,
+              ),
+              ShimmerLoadingWidget(
+                height: 80.h,
+                width: 80.w,
+              ),
+            ],
+          ),
+          16.verticalSpace,
+          const SectionTextShimmerEffect(),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ShimmerLoadingWidget(
+                width: double.infinity,
+                height: 110.h,
+              ),
+              12.verticalSpace,
+              ShimmerLoadingWidget(
+                width: double.infinity,
+                height: 110.h,
+              ),
+              12.verticalSpace,
+              ShimmerLoadingWidget(
+                width: double.infinity,
+                height: 110.h,
+              ),
+            ],
+          )
+        ],
+      ),
+    ));
+  }
+}
+
+class SectionTextShimmerEffect extends StatelessWidget {
+  const SectionTextShimmerEffect({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 18, bottom: 8).r,
+      child: Row(
+        children: [
+          ShimmerLoadingWidget(
+            width: 180.w,
+            height: 20.h,
+          ),
+        ],
+      ),
+    );
+  }
 }
