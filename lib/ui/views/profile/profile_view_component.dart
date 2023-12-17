@@ -37,9 +37,15 @@ class ProfileDetailsCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: FontThemeClass().header(context),
+              SizedBox(
+                width: 200.w,
+                child: Text(
+                  overflow: TextOverflow.ellipsis,
+                  title,
+                  style: FontThemeClass().body(context,
+                      fontWeight: FontWeight.w500,
+                      color: context.colorScheme.secondaryBlackColor),
+                ),
               ),
               SizedBox(
                 height: 4.h,
@@ -49,7 +55,7 @@ class ProfileDetailsCard extends StatelessWidget {
                 child: Text(
                   value,
                   overflow: TextOverflow.ellipsis,
-                  style: FontThemeClass().title2(context,
+                  style: FontThemeClass().caption(context,
                       color: context.colorScheme.secondarySectionColor),
                 ),
               ),
