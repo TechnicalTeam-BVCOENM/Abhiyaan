@@ -13,7 +13,17 @@ class RegisterViewModel extends BaseViewModel {
       TextEditingController();
   final TextEditingController confirmpasswordTextController =
       TextEditingController();
+void toHomePage(BuildContext context) {
+    _navigationService.navigateTo(Routes.bottomNavView);
+  }
 
+  bool isPasswordVisible = false;
+
+  bool togglePasswordVisibility() {
+    isPasswordVisible = !isPasswordVisible;
+    notifyListeners();
+    return isPasswordVisible;
+  }
   Future<void> register(
       String email,
       String createpassword,
@@ -21,6 +31,7 @@ class RegisterViewModel extends BaseViewModel {
       String selectedOption,
       String misNo,
       context) async {
+
     setBusy(true);
 
     // Validate that all common fields are non-empty

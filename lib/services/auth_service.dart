@@ -21,6 +21,8 @@ class AuthenticationService {
     }
   }
 
+  registerWithEmailAndPassword(String email, String createpassword) {}
+  
   Future<bool> signOut() async {
     bool firebaseSignOutSuccess = false;
 
@@ -81,6 +83,4 @@ class AuthenticationService {
           'departmentCodeDatabase', departmentCodeDatabase);
     }
   }
-
-  registerWithEmailAndPassword(String email, String createpassword) {}
 }
