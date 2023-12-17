@@ -66,7 +66,8 @@ class AuthView extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text('Abhiyaan v1.0.0',
                           style: FontThemeClass().caption(context,
-                              color: context.colorScheme.headingColor,
+                              color: context.colorScheme.headingColor
+                                  .withOpacity(0.5),
                               fontWeight: FontWeight.w500)),
                     ),
                   ],
