@@ -24,7 +24,7 @@ class HomeView extends StatelessWidget {
         return Scaffold(
           backgroundColor: context.colorScheme.backgroundColor,
           body: model.isBusy
-              ? const ShimmerLoadingWidget()
+              ? const HomePageShimmerEffect()
               : SafeArea(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),

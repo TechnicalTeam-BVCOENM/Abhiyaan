@@ -103,3 +103,111 @@ Widget quickLinksList(BuildContext context, List model,
     ),
   );
 }
+
+class HomePageShimmerEffect extends StatelessWidget {
+  const HomePageShimmerEffect({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 18).r,
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0).r,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ShimmerLoadingWidget(
+                  height: 45.h,
+                  width: 240.w,
+                ),
+                ShimmerLoadingWidget(
+                  height: 45.h,
+                  width: 45.w,
+                ),
+              ],
+            ),
+          ),
+          16.verticalSpace,
+          const SectionTextShimmerEffect(),
+          4.verticalSpace,
+          Center(
+            child: ShimmerLoadingWidget(
+              width: double.infinity,
+              height: 230.h,
+            ),
+          ),
+          8.verticalSpace,
+          const SectionTextShimmerEffect(),
+          4.verticalSpace,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ShimmerLoadingWidget(
+                height: 70.h,
+                width: 70.w,
+              ),
+              ShimmerLoadingWidget(
+                height: 70.h,
+                width: 70.w,
+              ),
+              ShimmerLoadingWidget(
+                height: 70.h,
+                width: 70.w,
+              ),
+              ShimmerLoadingWidget(
+                height: 70.h,
+                width: 70.w,
+              ),
+            ],
+          ),
+          16.verticalSpace,
+          const SectionTextShimmerEffect(),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ShimmerLoadingWidget(
+                width: double.infinity,
+                height: 90.h,
+              ),
+              12.verticalSpace,
+              ShimmerLoadingWidget(
+                width: double.infinity,
+                height: 90.h,
+              ),
+              12.verticalSpace,
+              ShimmerLoadingWidget(
+                width: double.infinity,
+                height: 90.h,
+              ),
+            ],
+          )
+        ],
+      ),
+    ));
+  }
+}
+
+class SectionTextShimmerEffect extends StatelessWidget {
+  const SectionTextShimmerEffect({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 18, bottom: 8).r,
+      child: Row(
+        children: [
+          ShimmerLoadingWidget(
+            width: 180.w,
+            height: 20.h,
+          ),
+        ],
+      ),
+    );
+  }
+}
