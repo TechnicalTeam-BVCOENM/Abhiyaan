@@ -140,27 +140,27 @@ class HomePageShimmerEffect extends StatelessWidget {
               height: 230.h,
             ),
           ),
-          8.verticalSpace,
+          16.verticalSpace,
           const SectionTextShimmerEffect(),
-          4.verticalSpace,
+          8.verticalSpace,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ShimmerLoadingWidget(
-                height: 70.h,
-                width: 70.w,
+                height: 80.h,
+                width: 80.w,
               ),
               ShimmerLoadingWidget(
-                height: 70.h,
-                width: 70.w,
+                height: 80.h,
+                width: 80.w,
               ),
               ShimmerLoadingWidget(
-                height: 70.h,
-                width: 70.w,
+                height: 80.h,
+                width: 80.w,
               ),
               ShimmerLoadingWidget(
-                height: 70.h,
-                width: 70.w,
+                height: 80.h,
+                width: 80.w,
               ),
             ],
           ),
@@ -171,17 +171,17 @@ class HomePageShimmerEffect extends StatelessWidget {
             children: [
               ShimmerLoadingWidget(
                 width: double.infinity,
-                height: 90.h,
+                height: 110.h,
               ),
               12.verticalSpace,
               ShimmerLoadingWidget(
                 width: double.infinity,
-                height: 90.h,
+                height: 110.h,
               ),
               12.verticalSpace,
               ShimmerLoadingWidget(
                 width: double.infinity,
-                height: 90.h,
+                height: 110.h,
               ),
             ],
           )
