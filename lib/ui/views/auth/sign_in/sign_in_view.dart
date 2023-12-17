@@ -70,9 +70,7 @@ class SignInView extends StatelessWidget {
                           TextFormField(
                             cursorColor: context.colorScheme.primaryColor,
                             controller: model.passwordTextController,
-
                             obscureText: model.isPasswordVisible ? false : true,
-
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 15, vertical: 15)
@@ -100,17 +98,10 @@ class SignInView extends StatelessWidget {
                                     : const Icon(Icons.visibility),
                               ),
                               hintText: 'Password',
-                              hintStyle: model.fontTheme.caption(context,
-                                  color:
-                                      context.colorScheme.secondarySectionColor,
-                                  fontWeight: FontWeight.w500),
-                              suffixIcon: GestureDetector(
-                                onTap: () => model.togglePassword(),
-                                child: Icon(
-                                  obscureText
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
+                              hintStyle: model.fontTheme.caption(
+                                context,
+                                color:
+                                    context.colorScheme.secondarySectionColor,
                               ),
                             ),
                           ),
