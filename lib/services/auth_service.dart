@@ -21,18 +21,8 @@ class AuthenticationService {
     }
   }
 
-  Future registerWithEmailAndPassword(
-      String email, String confirmpassword) async {
-    try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: confirmpassword);
-      // Handle successful sign up
-    } on FirebaseAuthException {
-      // Handle error
-      rethrow;
-    }
-  }
-
+  registerWithEmailAndPassword(String email, String createpassword) {}
+  
   Future<bool> signOut() async {
     bool firebaseSignOutSuccess = false;
 
