@@ -46,9 +46,11 @@ class HomeViewModel extends BaseViewModel {
   List<DepartmentUpdates> _departmentUpdates = [];
   List<DepartmentUpdates> get departmentUpdates => _departmentUpdates;
 
-  Future<void> loadData() async {
+  Future<void> init() async {
     setBusy(true);
     try {
+      NotificationService notificationService = NotificationService();
+      notificationService.reqestNotificationPermission();
       _highlights = await _firestoreService.getAllData('Highlights');
       _departmentUpdates =
           await _firestoreService.getAllDepartmentData('DepartmentUpdate');
