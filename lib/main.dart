@@ -1,7 +1,9 @@
 import 'package:darpan/firebase_options.dart';
+import 'package:darpan/services/notification_service.dart';
 import 'package:darpan/theme/theme_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:darpan/file_exporter.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
 
 Future<void> servicesToInitializeBeforeAppStart() async {
@@ -13,10 +15,18 @@ Future<void> servicesToInitializeBeforeAppStart() async {
   await Future.wait([
     locator<LocalStorageService>().initStorage(),
   ]);
+  NotificationService notificationService = NotificationService();
+  notificationService.reqestNotificationPermission();
+}
+
+@pragma('vm:entry-point')
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
 }
 
 void main() async {
   await servicesToInitializeBeforeAppStart();
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
 }
 
