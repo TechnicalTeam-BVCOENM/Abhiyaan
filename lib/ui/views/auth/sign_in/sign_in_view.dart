@@ -2,8 +2,10 @@ import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
 import 'package:darpan/ui/common/toast_message.dart';
+import 'package:darpan/ui/views/auth/register/register_view.dart';
 import 'package:darpan/ui/views/settings/settings_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 part 'sign_in_view_model.dart';
 
 class SignInView extends StatelessWidget {
@@ -56,10 +58,11 @@ class SignInView extends StatelessWidget {
                               focusColor:
                                   context.colorScheme.secondaryWhiteColor,
                               hintText: 'Student Email ID',
-                              hintStyle: model.fontTheme.caption(context,
-                                  color:
-                                      context.colorScheme.secondarySectionColor,
-                                  fontWeight: FontWeight.w500),
+                              hintStyle: model.fontTheme.caption(
+                                context,
+                                color:
+                                    context.colorScheme.secondarySectionColor,
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -68,6 +71,7 @@ class SignInView extends StatelessWidget {
                           TextFormField(
                             cursorColor: context.colorScheme.primaryColor,
                             controller: model.passwordTextController,
+                            obscureText: obscureText,
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 15, vertical: 15)
@@ -82,10 +86,19 @@ class SignInView extends StatelessWidget {
                               filled: true,
                               focusColor: Colors.white,
                               hintText: 'Password',
-                              hintStyle: model.fontTheme.caption(context,
-                                  color:
-                                      context.colorScheme.secondarySectionColor,
-                                  fontWeight: FontWeight.w500),
+                              hintStyle: model.fontTheme.caption(
+                                context,
+                                color:
+                                    context.colorScheme.secondarySectionColor,
+                              ),
+                              suffixIcon: GestureDetector(
+                                onTap: () => model.togglePassword(),
+                                child: Icon(
+                                  obscureText
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                              ),
                             ),
                           ),
                           GestureDetector(
@@ -97,9 +110,10 @@ class SignInView extends StatelessWidget {
                                 padding: EdgeInsetsDirectional.only(top: 10.r),
                                 child: Text(
                                   'Forgot password?',
-                                  style: FontThemeClass().caption(context,
-                                      color: context.colorScheme.primaryColor,
-                                      fontWeight: FontWeight.w500),
+                                  style: FontThemeClass().caption(
+                                    context,
+                                    color: context.colorScheme.primaryColor,
+                                  ),
                                 ),
                               ),
                             ),
@@ -136,17 +150,50 @@ class SignInView extends StatelessWidget {
                             padding: EdgeInsetsDirectional.only(top: 10.r),
                             child: RichText(
                               text: TextSpan(
-                                text: 'Problem with Sign In? ',
-                                style: FontThemeClass().caption(context,
-                                    color:
-                                        context.colorScheme.secondaryBlackColor,
-                                    fontWeight: FontWeight.w500),
+                                text: 'Don\'t have an account? ',
+                                style: FontThemeClass().caption(
+                                  context,
+                                  color:
+                                      context.colorScheme.secondaryBlackColor,
+                                ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text: 'Report issue',
-                                    style: FontThemeClass().caption(context,
-                                        color: context.colorScheme.primaryColor,
-                                        fontWeight: FontWeight.w500),
+                                    text: 'Register Now',
+                                    style: FontThemeClass().caption(
+                                      context,
+                                      color: context.colorScheme.primaryColor,
+                                    ),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const RegisterView()),
+                                        );
+                                      },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.only(top: 10.r),
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'Problem with Sign In? ',
+                                style: FontThemeClass().caption(
+                                  context,
+                                  color:
+                                      context.colorScheme.secondaryBlackColor,
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: 'Report Issue',
+                                    style: FontThemeClass().caption(
+                                      context,
+                                      color: context.colorScheme.primaryColor,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -159,9 +206,10 @@ class SignInView extends StatelessWidget {
                     Container(
                       alignment: Alignment.bottomCenter,
                       child: Text('Abhiyaan v1.0.0',
-                          style: FontThemeClass().caption(context,
-                              color: context.colorScheme.secondaryBlackColor,
-                              fontWeight: FontWeight.w500)),
+                          style: FontThemeClass().caption(
+                            context,
+                            color: context.colorScheme.secondarySectionColor,
+                          )),
                     ),
                   ],
                 ),

@@ -60,7 +60,7 @@ class FontThemeClass {
     return TextStyle(
       fontSize: 14.sp,
       fontFamily: 'Outfit',
-      fontWeight: fontWeight ?? FontWeight.w400,
+      fontWeight: fontWeight ?? FontWeight.w500,
       color: color ?? ctx.colorScheme.primaryDarkColor,
     );
   }

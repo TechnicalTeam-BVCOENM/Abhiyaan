@@ -31,4 +31,8 @@ class SignInViewModel extends BaseViewModel {
   void passwordResetMail() {
     FirebaseAuth.instance.sendPasswordResetEmail(email: "");
   }
+
+  togglePassword() {
+    obscureText = !obscureText;
+  }
 }

@@ -92,4 +92,6 @@ class AuthenticationService {
           'departmentCodeDatabase', departmentCodeDatabase);
     }
   }
+
+  registerWithEmailAndPassword(String email, String createpassword) {}
 }
