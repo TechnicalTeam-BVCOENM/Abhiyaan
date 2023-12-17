@@ -127,8 +127,7 @@ class SignInView extends StatelessWidget {
                               child: Text(
                                 'Sign In',
                                 style: FontThemeClass().title(context,
-                                    color: context
-                                        .colorScheme.secondaryWhiteColor),
+                                    color: context.colorScheme.signInTextColor),
                               ),
                             ),
                           ),
