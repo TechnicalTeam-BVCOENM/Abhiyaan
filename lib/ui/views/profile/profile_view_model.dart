@@ -49,11 +49,5 @@ class ProfileViewModel extends BaseViewModel {
       value: LocalStorageService().read('userPhone'),
       icon: Icons.content_copy,
     ),
-    ProfileDetailsCard(
-      leading: AssetImagePath.certificateImg,
-      title: "Certifications",
-      value: LocalStorageService().read('userCertifications'),
-      icon: Icons.navigate_next,
-    ),
   ];
 }

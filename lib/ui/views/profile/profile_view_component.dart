@@ -108,3 +108,69 @@ class SocialLinks extends StatelessWidget {
         ));
   }
 }
+
+class Cetificatation extends StatelessWidget {
+  const Cetificatation({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 75.h,
+      margin: EdgeInsets.only(bottom: 20.r),
+      decoration: BoxDecoration(
+          color: context.colorScheme.secondaryWhiteColor,
+          borderRadius: BorderRadius.circular(20.r)),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 25.w,
+          ),
+          Image.asset(width: 36.w, AssetImagePath.certificateImg),
+          SizedBox(
+            width: 32.w,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 200.w,
+                child: Text(
+                  overflow: TextOverflow.ellipsis,
+                  "Certifications",
+                  style: FontThemeClass().body(context,
+                      fontWeight: FontWeight.w500,
+                      color: context.colorScheme.secondaryBlackColor),
+                ),
+              ),
+              SizedBox(
+                height: 4.h,
+              ),
+              SizedBox(
+                width: 160.w,
+                child: Text(
+                  LocalStorageService().read('userCertifications'),
+                  overflow: TextOverflow.ellipsis,
+                  style: FontThemeClass().caption(context,
+                      color: context.colorScheme.secondarySectionColor),
+                ),
+              ),
+            ],
+          ),
+          const Expanded(child: Text("")),
+          TextButton(
+              onPressed: () async {},
+              child: Icon(
+                Icons.navigate_next,
+                size: 26.r,
+                color: context.colorScheme.switchColor,
+              )),
+          SizedBox(
+            width: 10.w,
+          )
+        ],
+      ),
+    );
+  }
+}

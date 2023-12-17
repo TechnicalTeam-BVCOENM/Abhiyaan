@@ -49,7 +49,7 @@ class ProfileView extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.r),
                 child: Column(
-                  children: [
+                  children: <Widget>[
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 45.r),
                       child: Row(
@@ -93,9 +93,9 @@ class ProfileView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    for (var profileCard in model.profileCardList)
-                      profileCard, // Display each profile card widget
-
+                    for (var profileCard in model.profileCardList) profileCard,
+                    // Display each profile card widget
+                    const Cetificatation(),
                     const Expanded(child: Text("")),
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
