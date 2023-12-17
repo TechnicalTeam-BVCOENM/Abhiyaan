@@ -10,6 +10,19 @@ class SignInViewModel extends BaseViewModel {
   final TextEditingController emailIdTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
 
+  final String emailIdErrorText = "Please enter a valid email id";
+  final String passwordErrorText = "Please enter a valid password";
+
+  bool isPasswordVisible = false;
+  bool isEmailIdValid = true;
+  bool isPasswordValid = true;
+
+  bool togglePasswordVisibility() {
+    isPasswordVisible = !isPasswordVisible;
+    notifyListeners();
+    return isPasswordVisible;
+  }
+
   void toHomePage(BuildContext context) {
     _navigationService.navigateTo(Routes.bottomNavView);
   }
@@ -22,6 +35,9 @@ class SignInViewModel extends BaseViewModel {
       _navigationService.navigateTo(Routes.bottomNavView);
     } on FirebaseException catch (e) {
       showmessage(context, "Invalid email or password");
+      isPasswordValid = false;
+      isEmailIdValid = false;
+      notifyListeners();
       debugPrint("$e");
       // You can log or handle other Firebase exceptions here
     }
