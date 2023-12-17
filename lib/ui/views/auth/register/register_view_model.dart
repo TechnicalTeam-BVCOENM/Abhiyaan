@@ -56,8 +56,8 @@ class RegisterViewModel extends BaseViewModel {
       // Store the information in Firebase Firestore
       // await FirebaseFirestore.instance.collection('users').add({
       //   'email': email,
-      //   'misNo': misNo,
       //   'password': confirmPassword,
+       //   if (selectedOption == 'BVCOE Student') 'misNo': misNo,
       // });
 
       showmessage(context, "Registration successful");
