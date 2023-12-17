@@ -24,7 +24,7 @@ class HomeView extends StatelessWidget {
         return Scaffold(
           backgroundColor: context.colorScheme.backgroundColor,
           body: model.isBusy
-              ? const ShimmerLoadingWidget()
+              ? const HomePageShimmerEffect()
               : SafeArea(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -39,9 +39,9 @@ class HomeView extends StatelessWidget {
                             children: [
                               Text(
                                 'Hey ${model.firstname[0]} 👋', // Update according to loal storage
-                                style: fontTheme.header(context,
+                                style: fontTheme.title(context,
                                     color: context.colorScheme.headingColor,
-                                    fontWeight: FontWeight.w700),
+                                    fontWeight: FontWeight.w600),
                               ),
                               IconButton(
                                 splashRadius: 30.sp,
@@ -100,7 +100,7 @@ class HomeView extends StatelessWidget {
                                 child: quickLinksList(
                                     context, model.quickLinksList))),
                         const SectionText(
-                          title: "Department Updates",
+                          title: "College Updates",
                         ),
                         for (var i = 0;
                             i < model.departmentUpdates.length;
@@ -114,18 +114,23 @@ class HomeView extends StatelessWidget {
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,
                             style: fontTheme.display(context,
-                                fontWeight: FontWeight.bold)),
+                                fontWeight: FontWeight.bold,
+                                color: context.colorScheme.secondarySectionColor
+                                    .withOpacity(0.8))),
                         Text("Inspire. Achieve.",
                             maxLines: 2,
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,
                             style: fontTheme.display(context,
-                                fontWeight: FontWeight.bold)),
+                                fontWeight: FontWeight.bold,
+                                color: context.colorScheme.secondarySectionColor
+                                    .withOpacity(0.8))),
                         3.verticalSpace,
                         Text('Made with ❤️ by Technical Team of SC',
                             style: fontTheme.caption(context,
                                 color: context.colorScheme.secondaryBlackColor
-                                    .withOpacity(0.8))),
+                                    .withOpacity(0.8),
+                                fontWeight: FontWeight.w500)),
                         12.verticalSpace,
                       ],
                     ),
