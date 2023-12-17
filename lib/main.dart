@@ -22,6 +22,7 @@ Future<void> servicesToInitializeBeforeAppStart() async {
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
+  debugPrint('Handling a background message ${message.messageId}');
 }
 
 void main() async {
