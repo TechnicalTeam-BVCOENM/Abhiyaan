@@ -21,10 +21,11 @@ class AuthenticationService {
     }
   }
 
-  Future signUpWithEmailAndPassword(String email, String password) async {
+  Future registerWithEmailAndPassword(
+      String email, String confirmpassword) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
+          email: email, password: confirmpassword);
       // Handle successful sign up
     } on FirebaseAuthException {
       // Handle error
@@ -92,6 +93,4 @@ class AuthenticationService {
           'departmentCodeDatabase', departmentCodeDatabase);
     }
   }
-
-  registerWithEmailAndPassword(String email, String createpassword) {}
 }
