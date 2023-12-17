@@ -14,6 +14,14 @@ class RegisterViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.bottomNavView);
   }
 
+  bool isPasswordVisible = false;
+
+  bool togglePasswordVisibility() {
+    isPasswordVisible = !isPasswordVisible;
+    notifyListeners();
+    return isPasswordVisible;
+  }
+
   Future<void> login(String email, String password, context) async {
     setBusy(true);
     try {
