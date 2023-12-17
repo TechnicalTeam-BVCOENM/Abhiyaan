@@ -26,7 +26,7 @@ class SettingsView extends StatelessWidget {
             elevation: 0,
             title: Text(
               'Settings',
-              style: model.fontTheme.header(context,
+              style: model.fontTheme.title(context,
                   color: context.colorScheme.secondaryBlackColor,
                   fontWeight: FontWeight.w500),
             ),

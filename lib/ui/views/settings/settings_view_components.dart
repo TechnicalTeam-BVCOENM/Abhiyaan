@@ -14,7 +14,7 @@ Padding settingsListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 20).r,
       title: Text(
         title!,
-        style: model.fontTheme.paragraph(context,
+        style: model.fontTheme.body(context,
             color: context.colorScheme.secondaryBlackColor,
             fontWeight: FontWeight.w500),
       ),

@@ -37,7 +37,7 @@ class ProfileView extends StatelessWidget {
                     margin: EdgeInsets.only(left: 40.r),
                     child: Text(
                       "Profile",
-                      style: FontThemeClass().header(context,
+                      style: FontThemeClass().title(context,
                           fontWeight: FontWeight.w500,
                           color: context.colorScheme.secondaryBlackColor),
                     ),
@@ -75,15 +75,16 @@ class ProfileView extends StatelessWidget {
                             children: [
                               Text(
                                 LocalStorageService().read('userName'),
-                                style: FontThemeClass().title(context,
-                                    color: context
-                                        .colorScheme.secondaryBlackColor),
+                                style: FontThemeClass().title2(context,
+                                    color:
+                                        context.colorScheme.secondaryBlackColor,
+                                    fontWeight: FontWeight.w500),
                               ),
                               SizedBox(
                                 height: 4.h,
                               ),
                               Text(LocalStorageService().read('userYear'),
-                                  style: FontThemeClass().paragraph(context,
+                                  style: FontThemeClass().body(context,
                                       color: context
                                           .colorScheme.secondarySectionColor,
                                       fontWeight: FontWeight.w500))

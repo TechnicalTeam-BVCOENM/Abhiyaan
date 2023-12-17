@@ -42,7 +42,7 @@ class ProfileDetailsCard extends StatelessWidget {
                 child: Text(
                   overflow: TextOverflow.ellipsis,
                   title,
-                  style: FontThemeClass().paragraph(context,
+                  style: FontThemeClass().body(context,
                       fontWeight: FontWeight.w500,
                       color: context.colorScheme.secondaryBlackColor),
                 ),
@@ -55,7 +55,7 @@ class ProfileDetailsCard extends StatelessWidget {
                 child: Text(
                   value,
                   overflow: TextOverflow.ellipsis,
-                  style: FontThemeClass().body(context,
+                  style: FontThemeClass().caption(context,
                       color: context.colorScheme.secondarySectionColor),
                 ),
               ),
