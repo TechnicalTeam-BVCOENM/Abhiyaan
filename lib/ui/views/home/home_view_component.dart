@@ -88,9 +88,9 @@ Widget quickLinksList(BuildContext context, List model,
               // const SizedBox(height: 18),
               Text(
                 model[idx].title.toString().toUpperCase(),
-                style: FontThemeClass().body(
+                style: FontThemeClass().caption(
                   context,
-                  color: context.colorScheme.primaryDarkColor,
+                  color: context.colorScheme.primaryDarkColor.withOpacity(0.8),
                   fontWeight: FontWeight.w600,
                 ),
                 textAlign: TextAlign.center,
