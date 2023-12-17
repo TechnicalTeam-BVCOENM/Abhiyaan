@@ -17,13 +17,14 @@ class SplashView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                // Add your photo here
                 const Image(
                   image: AssetImage(AssetImagePath.logoImg),
                 ),
-                SizedBox(
-                    height:
-                        16.h), // Add some space between the photo and the text
+                Text(
+                  'Version 1.0.0',
+                  style: FontThemeClass().caption(context,
+                      color: context.colorScheme.headingColor),
+                ),
               ],
             ),
           ),
