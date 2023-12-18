@@ -104,6 +104,18 @@ class NotificationService {
     if (message.data['type'] == 'msg') {
       navigationService.navigateToNotificationView(id: message.data['id']);
     }
+    if (message.data['type'] == 'event') {
+      navigationService.navigateToEventView();
+    }
+  }
+
+  Future iosForgroundMessage() async {
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
   }
 
   Future<void> showNotification(RemoteMessage message) async {

@@ -11,6 +11,13 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
 }
 
+void notificationServicesAfterAppStart(BuildContext context) {
+  NotificationService notificationService = NotificationService();
+  notificationService.reqestNotificationPermission();
+  notificationService.initFirebaseNotification(context);
+  notificationService.setupInteractMessage(context);
+}
+
 Future<void> servicesToInitializeBeforeAppStart() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -34,10 +41,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeService = locator<ThemeService>();
-    NotificationService notificationService = NotificationService();
-    notificationService.reqestNotificationPermission();
-    notificationService.initFirebaseNotification(context);
-    notificationService.setupInteractMessage(context);
+    notificationServicesAfterAppStart(context);
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
