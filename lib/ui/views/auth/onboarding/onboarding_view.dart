@@ -86,10 +86,9 @@ class OnboardingView extends StatelessWidget {
                                       color: context
                                           .colorScheme.secondarySectionColor,
                                     )
-                                  : Icon(
+                                  : const Icon(
                                       Icons.done_rounded,
-                                      color: context
-                                          .colorScheme.secondarySectionColor,
+                                      color: Colors.green,
                                     )),
                         )
                       ],
