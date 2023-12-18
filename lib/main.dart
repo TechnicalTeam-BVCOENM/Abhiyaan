@@ -36,8 +36,8 @@ class MyApp extends StatelessWidget {
     final themeService = locator<ThemeService>();
     NotificationService notificationService = NotificationService();
     notificationService.reqestNotificationPermission();
-    // ignore: use_build_context_synchronously
     notificationService.initFirebaseNotification(context);
+    notificationService.setupInteractMessage(context);
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(

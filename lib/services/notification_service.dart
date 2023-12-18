@@ -43,11 +43,12 @@ class NotificationService {
         if (Platform.isAndroid) {
           initLocalNotification(context, message);
           showNotification(message);
+          debugPrint('Initialized Android firebase notification successfully!');
         } else {
           showNotification(message);
+          debugPrint('Initialized Ios firebase notification successfully!');
         }
       });
-      debugPrint('Initialized firebase notification successfully!');
     } catch (e) {
       debugPrint(e.toString());
     }
