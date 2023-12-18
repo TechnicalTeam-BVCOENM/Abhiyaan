@@ -47,6 +47,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/profile/
+    - assets/images/onboarding/
     - assets/images/home/
     - assets/images/home/societies/
 

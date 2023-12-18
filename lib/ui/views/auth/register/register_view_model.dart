@@ -70,7 +70,7 @@ class RegisterViewModel extends BaseViewModel {
 
     // ignore: use_build_context_synchronously
     showmessage(context, "Registration successful");
-    _navigationService.navigateTo(Routes.signInView);
+    _navigationService.navigateTo(Routes.onboardingView);
   }
 }
 
