@@ -9,7 +9,7 @@ class OnboardingViewModel extends BaseViewModel {
     } else if (!increment && index != 0) {
       activeindex = activeindex - 1;
     } else if (increment && index == 2) {
-      _navigationService.navigateTo(Routes.homeView);
+      _navigationService.navigateTo(Routes.bottomNavView);
     } else if (!increment && index == 0) {
       _navigationService.back();
     }
