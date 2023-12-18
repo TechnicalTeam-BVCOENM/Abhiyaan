@@ -5,6 +5,11 @@ class HomeViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
   static String user = LocalStorageService().read('userName');
   final firstname = user.split(' ');
+  final navigationService = locator<NavigationService>();
+
+  void navigateToNotificationView() {
+    navigationService.navigateToNotificationView(id: '');
+  }
 
   List<QuickLinksModel> quickLinksList = [
     QuickLinksModel(

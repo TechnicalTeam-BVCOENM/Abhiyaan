@@ -54,7 +54,9 @@ class HomeView extends StatelessWidget {
                                   ),
                                   size: 24.sp,
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  model.navigateToNotificationView();
+                                },
                               )
                             ],
                           ),

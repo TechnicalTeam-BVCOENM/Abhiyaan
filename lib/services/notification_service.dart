@@ -43,6 +43,8 @@ class NotificationService {
         if (Platform.isAndroid) {
           initLocalNotification(context, message);
           showNotification(message);
+        } else {
+          showNotification(message);
         }
       });
       debugPrint('Initialized firebase notification successfully!');
@@ -81,10 +83,26 @@ class NotificationService {
     }
   }
 
-  void handleMessage(BuildContext context, RemoteMessage message) {
-    // if(message.data.type == 'msg'){
+  Future<void> setupInteractMessage(BuildContext context) async {
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
 
-    // }
+    if (initialMessage != null) {
+      // ignore: use_build_context_synchronously
+      handleMessage(context, initialMessage);
+    }
+
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      handleMessage(context, event);
+    });
+  }
+
+  void handleMessage(BuildContext context, RemoteMessage message) {
+    final navigationService = locator<NavigationService>();
+
+    if (message.data['type'] == 'msg') {
+      navigationService.navigateToNotificationView(id: message.data['id']);
+    }
   }
 
   Future<void> showNotification(RemoteMessage message) async {

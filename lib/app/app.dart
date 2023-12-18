@@ -8,6 +8,7 @@ import 'package:darpan/ui/views/auth/sign_in/sign_in_view.dart';
 import 'package:darpan/ui/views/bottom_nav/bottom_nav_view.dart';
 import 'package:darpan/ui/views/event/detailed_event/detailed_event_view.dart';
 import 'package:darpan/ui/views/event/event_view.dart';
+import 'package:darpan/ui/views/notifications/notification_view.dart';
 import 'package:darpan/ui/views/profile/profile_view.dart';
 import 'package:darpan/ui/views/settings/settings_view.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -28,6 +29,7 @@ import 'package:darpan/ui/views/splash/splash_view.dart';
     MaterialRoute(page: SignInView),
     MaterialRoute(page: RegisterView),
     MaterialRoute(page: OnboardingView),
+    MaterialRoute(page: NotificationView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),
