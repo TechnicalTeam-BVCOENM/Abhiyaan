@@ -85,7 +85,6 @@ Widget quickLinksList(BuildContext context, List model,
                   ),
                 ),
               ),
-              // const SizedBox(height: 18),
               Text(
                 model[idx].title.toString().toUpperCase(),
                 style: FontThemeClass().caption(

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:darpan/ui/common/carousel.dart';
 import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:darpan/ui/common/shimmer.dart';
 import 'package:darpan/services/firestore_service.dart';
@@ -150,6 +151,18 @@ class EventView extends StatelessWidget {
                           ),
                         ),
                         4.verticalSpace,
+                        const SectionText(title: "Best Moments"),
+                        SizedBox(
+                          width: 386.w,
+                          child: const Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Carousel(),
+                              ],
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
