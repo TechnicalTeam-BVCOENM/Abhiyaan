@@ -4,7 +4,6 @@ import 'package:darpan/theme/responsive_utils.dart';
 import 'package:darpan/ui/common/toast_message.dart';
 import 'package:darpan/ui/views/auth/register/register_view_component.dart';
 import 'package:darpan/ui/views/auth/sign_in/sign_in_view.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 part 'register_view_model.dart';
 
@@ -42,8 +41,7 @@ class RegisterView extends StatelessWidget {
                           const Expanded(child: Text("")),
                           Padding(
                             padding: const EdgeInsets.only(top: 5.0).r,
-                            child: 
-                            const DropdownMenuExample(),
+                            child: const DropdownMenuBtn(),
                           ),
                           SizedBox(
                             height: 15.h,
@@ -69,33 +67,6 @@ class RegisterView extends StatelessWidget {
                               errorText: model.isEmailIdValid
                                   ? null
                                   : model.emailIdErrorText,
-                              hintStyle: model.fontTheme.caption(context,
-                                  color:
-                                      context.colorScheme.secondarySectionColor,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 15.h,
-                          ),
-                          TextFormField(
-                            cursorColor: context.colorScheme.primaryColor,
-                            controller: model.misnoTextController,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 15, vertical: 15)
-                                  .r,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                    const Radius.circular(15).r,
-                                  ),
-                                  borderSide: BorderSide.none),
-                              fillColor:
-                                  context.colorScheme.secondaryWhiteColor,
-                              filled: true,
-                              focusColor:
-                                  context.colorScheme.secondaryWhiteColor,
-                              hintText: 'Enter MIS Number',
                               hintStyle: model.fontTheme.caption(context,
                                   color:
                                       context.colorScheme.secondarySectionColor,

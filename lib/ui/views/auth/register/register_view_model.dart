@@ -14,7 +14,8 @@ class RegisterViewModel extends BaseViewModel {
   final TextEditingController confirmpasswordTextController =
       TextEditingController();
 
- final ValueNotifier<String> dropdownValueNotifier = ValueNotifier<String>('Select');
+  final ValueNotifier<String> dropdownValueNotifier =
+      ValueNotifier<String>('Select');
 
   String get dropdownValue => dropdownValueNotifier.value;
 
@@ -34,73 +35,58 @@ class RegisterViewModel extends BaseViewModel {
     notifyListeners();
     return isCreatePasswordVisible;
   }
+
   bool toggleConfirmPasswordVisibility() {
     isConfirmPasswordVisible = !isConfirmPasswordVisible;
     notifyListeners();
     return isConfirmPasswordVisible;
   }
 
-
   Future<void> register(
-      String email,
-      String createpassword,
-      String confirmPassword,
-      String dropdownValue,
-      String misNo,
-      context) async {
-
-    setBusy(true);
-
-    // Validate that all common fields are non-empty
-    if (email.isEmpty ||
-        createpassword.isEmpty ||
-        confirmPassword.isEmpty ||
-        dropdownValue == 'Select') {
-      showmessage(context, "Please fill in all fields");
-      setBusy(false);
+    String email,
+    String createpassword,
+    String confirmPassword,
+    String dropdownValue,
+    String misNo,
+    BuildContext context,
+  ) async {
+    // Validate email format
+    if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+        .hasMatch(email)) {
+      showmessage(context, "Invalid email format");
       return;
     }
 
+    // Validate that create password and confirm password are the same
     if (createpassword != confirmPassword) {
       showmessage(context, "Passwords do not match");
-      setBusy(false);
       return;
     }
+    await _authenticationService.registerWithEmailAndPassword(
+        email, confirmPassword);
 
-    try {
-      // Check the selected option
-      if (dropdownValue == 'BVCOE Student') {
-        if (misNo.isEmpty) {
-          showmessage(context, "MIS No is required for BVCOE Student");
-          setBusy(false);
-          return;
-        }
-      }
+    //  Notify listeners if needed
+    notifyListeners();
 
-      // Continue with registration if passwords match
-      await _authenticationService.registerWithEmailAndPassword(
-          email, confirmPassword);
-
-      // Store the information in Firebase Firestore
-      // await FirebaseFirestore.instance.collection('users').add({
-      //   'email': email,
-      //   'password': confirmPassword,
-      //   if (selectedOption == 'BVCOE Student') 'misNo': misNo,
-      // });
-
-      showmessage(context, "Registration successful");
-      _navigationService.navigateTo(Routes.signInView);
-    } on FirebaseException catch (e) {
-      showmessage(
-          context, "Registration failed. Please try again: ${e.message}");
-      debugPrint("$e");
-      // You can log or handle other Firebase exceptions here
-    } finally {
-      setBusy(false);
-    }
+    showmessage(context, "Registration successful");
+    _navigationService.navigateTo(Routes.signInView);
   }
-
 }
 
-bool obscureText = true;
-const List<String> list = <String>['BVCOE Student', 'Outsider']; 
+class ToggleModel extends ChangeNotifier {
+  bool isBvcoeStudent = true;
+  String misNo = '';
+
+  void toggleSelection() {
+    isBvcoeStudent = !isBvcoeStudent;
+    misNo = '';
+    notifyListeners();
+  }
+
+  void updateMisNo(String newMisNo) {
+    misNo = newMisNo;
+    notifyListeners();
+  }
+}
+
+const List<String> list = <String>['BVCOE Student', 'Explorer'];
