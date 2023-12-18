@@ -33,7 +33,6 @@ dependencies:
   table_calendar: ^3.0.9
   timeline_tile: ^2.0.0
   share_plus: ^7.2.1
-  provider: ^6.1.1
 
 dev_dependencies:
   flutter_test:
