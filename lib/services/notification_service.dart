@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:app_settings/app_settings.dart';
+import 'package:darpan/file_exporter.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService {
@@ -36,12 +36,12 @@ class NotificationService {
     }
   }
 
-  void initFirebaseNotification() async {
+  void initFirebaseNotification(BuildContext context) async {
     try {
       debugPrint('Initializing firebase notification');
       FirebaseMessaging.onMessage.listen((message) {
         if (Platform.isAndroid) {
-          initLocalNotification();
+          initLocalNotification(context, message);
           showNotification(message);
         }
       });
@@ -51,7 +51,8 @@ class NotificationService {
     }
   }
 
-  void initLocalNotification() async {
+  void initLocalNotification(
+      BuildContext context, RemoteMessage message) async {
     try {
       debugPrint('Initializing local notification');
       // For Android
@@ -71,13 +72,19 @@ class NotificationService {
       await flutterLocalNotificationsPlugin.initialize(
         initializationSettings,
         onDidReceiveNotificationResponse: (payload) async {
-          debugPrint('notification payload: $payload');
+          handleMessage(context, message);
         },
       );
       debugPrint('Initialized local notification successfully!');
     } catch (e) {
       debugPrint(e.toString());
     }
+  }
+
+  void handleMessage(BuildContext context, RemoteMessage message) {
+    // if(message.data.type == 'msg'){
+
+    // }
   }
 
   Future<void> showNotification(RemoteMessage message) async {

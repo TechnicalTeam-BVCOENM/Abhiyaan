@@ -2,10 +2,10 @@ import 'package:darpan/file_exporter.dart';
 import 'package:darpan/ui/views/auth/register/register_view.dart';
 
 class DropdownMenuBtn extends StatefulWidget {
-  const DropdownMenuBtn({Key? key}) : super(key: key);
+  const DropdownMenuBtn({super.key});
 
   @override
-  _DropdownMenuBtnState createState() => _DropdownMenuBtnState();
+  State<DropdownMenuBtn> createState() => _DropdownMenuBtnState();
 }
 
 class _DropdownMenuBtnState extends State<DropdownMenuBtn> {

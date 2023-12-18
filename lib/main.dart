@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  debugPrint('Handling a background message ${message.messageId}');
 }
 
 Future<void> servicesToInitializeBeforeAppStart() async {
@@ -21,9 +20,6 @@ Future<void> servicesToInitializeBeforeAppStart() async {
   await Future.wait([
     locator<LocalStorageService>().initStorage(),
   ]);
-  NotificationService notificationService = NotificationService();
-  notificationService.reqestNotificationPermission();
-  notificationService.initFirebaseNotification();
 }
 
 void main() async {
@@ -38,6 +34,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeService = locator<ThemeService>();
+    NotificationService notificationService = NotificationService();
+    notificationService.reqestNotificationPermission();
+    // ignore: use_build_context_synchronously
+    notificationService.initFirebaseNotification(context);
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
