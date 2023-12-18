@@ -13,22 +13,39 @@ class RegisterViewModel extends BaseViewModel {
       TextEditingController();
   final TextEditingController confirmpasswordTextController =
       TextEditingController();
-void toHomePage(BuildContext context) {
-    _navigationService.navigateTo(Routes.bottomNavView);
+
+ final ValueNotifier<String> dropdownValueNotifier = ValueNotifier<String>('Select');
+
+  String get dropdownValue => dropdownValueNotifier.value;
+
+  set dropdownValue(String value) {
+    dropdownValueNotifier.value = value;
+    notifyListeners(); // Notify listeners when the value changes
   }
 
-  bool isPasswordVisible = false;
+  final String emailIdErrorText = "Please enter a valid email id";
 
-  bool togglePasswordVisibility() {
-    isPasswordVisible = !isPasswordVisible;
+  bool isCreatePasswordVisible = false;
+  bool isConfirmPasswordVisible = false;
+  bool isEmailIdValid = true;
+
+  bool toggleCreatePasswordVisibility() {
+    isCreatePasswordVisible = !isCreatePasswordVisible;
     notifyListeners();
-    return isPasswordVisible;
+    return isCreatePasswordVisible;
   }
+  bool toggleConfirmPasswordVisibility() {
+    isConfirmPasswordVisible = !isConfirmPasswordVisible;
+    notifyListeners();
+    return isConfirmPasswordVisible;
+  }
+
+
   Future<void> register(
       String email,
       String createpassword,
       String confirmPassword,
-      String selectedOption,
+      String dropdownValue,
       String misNo,
       context) async {
 
@@ -38,7 +55,7 @@ void toHomePage(BuildContext context) {
     if (email.isEmpty ||
         createpassword.isEmpty ||
         confirmPassword.isEmpty ||
-        selectedOption == 'Select') {
+        dropdownValue == 'Select') {
       showmessage(context, "Please fill in all fields");
       setBusy(false);
       return;
@@ -52,7 +69,7 @@ void toHomePage(BuildContext context) {
 
     try {
       // Check the selected option
-      if (selectedOption == 'BVCOE Student') {
+      if (dropdownValue == 'BVCOE Student') {
         if (misNo.isEmpty) {
           showmessage(context, "MIS No is required for BVCOE Student");
           setBusy(false);
@@ -83,24 +100,7 @@ void toHomePage(BuildContext context) {
     }
   }
 
-  toggleCreatePassword() {
-    obscureText = !obscureText;
-  }
-
-  toggleConfirmPassword() {
-    obscureText = !obscureText;
-  }
-
-  String _selectedValue = 'Select'; // Initialize with your default value
-
-  String get selectedValue => _selectedValue;
-
-  void setSelectedValue(String value) {
-    _selectedValue = value;
-    notifyListeners();
-  }
 }
 
-String selectedValue = 'Select';
 bool obscureText = true;
-List<String> dropdownItems = ['BVCOE Student', 'Outsider'];
+const List<String> list = <String>['BVCOE Student', 'Outsider']; 

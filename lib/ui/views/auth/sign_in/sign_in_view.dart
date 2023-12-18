@@ -106,6 +106,7 @@ class SignInView extends StatelessWidget {
                                 context,
                                 color:
                                     context.colorScheme.secondarySectionColor,
+                                    fontWeight: FontWeight.w500
                               ),
                               errorText: model.isPasswordValid
                                   ? null

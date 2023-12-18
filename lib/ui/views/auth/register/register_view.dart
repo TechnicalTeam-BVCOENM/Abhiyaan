@@ -2,10 +2,10 @@ import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
 import 'package:darpan/ui/common/toast_message.dart';
+import 'package:darpan/ui/views/auth/register/register_view_component.dart';
 import 'package:darpan/ui/views/auth/sign_in/sign_in_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
-import 'package:provider/provider.dart';
 part 'register_view_model.dart';
 
 class RegisterView extends StatelessWidget {
@@ -42,54 +42,8 @@ class RegisterView extends StatelessWidget {
                           const Expanded(child: Text("")),
                           Padding(
                             padding: const EdgeInsets.only(top: 5.0).r,
-                            child: PopupMenuButton<String>(
-                              itemBuilder: (BuildContext context) {
-                                final model = Provider.of<RegisterViewModel>(
-                                    context,
-                                    listen: false);
-                                return dropdownItems.map((String value) {
-                                  return PopupMenuItem<String>(
-                                    value: value,
-                                    child: Text(
-                                      value,
-                                      style: model.fontTheme.caption(context,
-                                          color: context
-                                              .colorScheme.secondaryBlackColor,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  );
-                                }).toList();
-                              },
-                              onSelected: (String value) {
-                                final model = Provider.of<RegisterViewModel>(
-                                    context,
-                                    listen: false);
-                                model.setSelectedValue(value);
-                              },
-                              child: Consumer<RegisterViewModel>(
-                                builder: (context, model, child) =>
-                                    InputDecorator(
-                                  decoration: InputDecoration(
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                                  horizontal: 15, vertical: 15)
-                                              .r,
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            const Radius.circular(15).r),
-                                        borderSide: BorderSide.none,
-                                      ),
-                                      fillColor: context
-                                          .colorScheme.secondaryWhiteColor,
-                                      filled: true,
-                                      suffixIcon: const Icon(
-                                        Icons.keyboard_arrow_down_rounded,
-                                        size: 25,
-                                      )),
-                                  child: Text(model.selectedValue),
-                                ),
-                              ),
-                            ),
+                            child: 
+                            const DropdownMenuExample(),
                           ),
                           SizedBox(
                             height: 15.h,
@@ -112,6 +66,9 @@ class RegisterView extends StatelessWidget {
                               focusColor:
                                   context.colorScheme.secondaryWhiteColor,
                               hintText: 'Student Email ID',
+                              errorText: model.isEmailIdValid
+                                  ? null
+                                  : model.emailIdErrorText,
                               hintStyle: model.fontTheme.caption(context,
                                   color:
                                       context.colorScheme.secondarySectionColor,
@@ -151,7 +108,8 @@ class RegisterView extends StatelessWidget {
                           TextFormField(
                             cursorColor: context.colorScheme.primaryColor,
                             controller: model.createpasswordTextController,
-                            obscureText: obscureText,
+                            obscureText:
+                                model.isCreatePasswordVisible ? false : true,
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 15, vertical: 15)
@@ -165,18 +123,24 @@ class RegisterView extends StatelessWidget {
                                   context.colorScheme.secondaryWhiteColor,
                               filled: true,
                               focusColor: Colors.white,
+                              suffixIcon: InkWell(
+                                splashColor:
+                                    context.colorScheme.secondaryLPurpleColor,
+                                onTap: () {
+                                  model.toggleCreatePasswordVisibility();
+                                },
+                                child: model.isCreatePasswordVisible
+                                    ? Icon(
+                                        Icons.visibility_off,
+                                        color: context.colorScheme.iconColor,
+                                      )
+                                    : const Icon(Icons.visibility),
+                              ),
                               hintText: 'Create Password',
-                              hintStyle: model.fontTheme.caption(context,
-                                  color:
-                                      context.colorScheme.secondarySectionColor,
-                                  fontWeight: FontWeight.w500),
-                              suffixIcon: GestureDetector(
-                                onTap: () => model.toggleCreatePassword(),
-                                child: Icon(
-                                  obscureText
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
+                              hintStyle: model.fontTheme.caption(
+                                context,
+                                color:
+                                    context.colorScheme.secondarySectionColor,
                               ),
                             ),
                           ),
@@ -184,7 +148,8 @@ class RegisterView extends StatelessWidget {
                           TextFormField(
                             cursorColor: context.colorScheme.primaryColor,
                             controller: model.confirmpasswordTextController,
-                            obscureText: obscureText,
+                            obscureText:
+                                model.isConfirmPasswordVisible ? false : true,
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 15, vertical: 15)
@@ -198,18 +163,24 @@ class RegisterView extends StatelessWidget {
                                   context.colorScheme.secondaryWhiteColor,
                               filled: true,
                               focusColor: Colors.white,
+                              suffixIcon: InkWell(
+                                splashColor:
+                                    context.colorScheme.secondaryLPurpleColor,
+                                onTap: () {
+                                  model.toggleConfirmPasswordVisibility();
+                                },
+                                child: model.isConfirmPasswordVisible
+                                    ? Icon(
+                                        Icons.visibility_off,
+                                        color: context.colorScheme.iconColor,
+                                      )
+                                    : const Icon(Icons.visibility),
+                              ),
                               hintText: 'Confirm Password',
-                              hintStyle: model.fontTheme.caption(context,
-                                  color:
-                                      context.colorScheme.secondarySectionColor,
-                                  fontWeight: FontWeight.w500),
-                              suffixIcon: GestureDetector(
-                                onTap: () => model.toggleConfirmPassword(),
-                                child: Icon(
-                                  obscureText
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
+                              hintStyle: model.fontTheme.caption(
+                                context,
+                                color:
+                                    context.colorScheme.secondarySectionColor,
                               ),
                             ),
                           ),
@@ -222,7 +193,7 @@ class RegisterView extends StatelessWidget {
                                     model.emailIdTextController.text,
                                     model.createpasswordTextController.text,
                                     model.confirmpasswordTextController.text,
-                                    model.selectedValue,
+                                    model.dropdownValue,
                                     model.misnoTextController.text,
                                     context);
                               },
