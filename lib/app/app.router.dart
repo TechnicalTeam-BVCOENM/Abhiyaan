@@ -5,7 +5,7 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:darpan/file_exporter.dart' as _i14;
+import 'package:darpan/file_exporter.dart' as _i15;
 import 'package:darpan/ui/views/auth/auth_view.dart' as _i4;
 import 'package:darpan/ui/views/auth/onboarding/onboarding_view.dart' as _i12;
 import 'package:darpan/ui/views/auth/register/register_view.dart' as _i11;
@@ -15,13 +15,14 @@ import 'package:darpan/ui/views/event/detailed_event/detailed_event_view.dart'
     as _i9;
 import 'package:darpan/ui/views/event/event_view.dart' as _i8;
 import 'package:darpan/ui/views/home/home_view.dart' as _i3;
+import 'package:darpan/ui/views/notifications/notification_view.dart' as _i13;
 import 'package:darpan/ui/views/profile/profile_view.dart' as _i5;
 import 'package:darpan/ui/views/settings/settings_view.dart' as _i6;
 import 'package:darpan/ui/views/splash/splash_view.dart' as _i2;
-import 'package:flutter/material.dart' as _i13;
+import 'package:flutter/material.dart' as _i14;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i15;
+import 'package:stacked_services/stacked_services.dart' as _i16;
 
 class Routes {
   static const splashView = '/';
@@ -46,6 +47,8 @@ class Routes {
 
   static const onboardingView = '/onboarding-view';
 
+  static const notificationView = '/notification-view';
+
   static const all = <String>{
     splashView,
     homeView,
@@ -58,6 +61,7 @@ class Routes {
     signInView,
     registerView,
     onboardingView,
+    notificationView,
   };
 }
 
@@ -107,74 +111,85 @@ class StackedRouter extends _i1.RouterBase {
       Routes.onboardingView,
       page: _i12.OnboardingView,
     ),
+    _i1.RouteDef(
+      Routes.notificationView,
+      page: _i13.NotificationView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.SplashView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.SplashView(),
         settings: data,
       );
     },
     _i3.HomeView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.HomeView(),
         settings: data,
       );
     },
     _i4.AuthView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.AuthView(),
         settings: data,
       );
     },
     _i5.ProfileView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.ProfileView(),
         settings: data,
       );
     },
     _i6.SettingsView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.SettingsView(),
         settings: data,
       );
     },
     _i7.BottomNavView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.BottomNavView(),
         settings: data,
       );
     },
     _i8.EventView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.EventView(),
         settings: data,
       );
     },
     _i9.DetailedEventView: (data) {
       final args = data.getArgs<DetailedEventViewArguments>(nullOk: false);
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i9.DetailedEventView(key: args.key, eventData: args.eventData),
         settings: data,
       );
     },
     _i10.SignInView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.SignInView(),
         settings: data,
       );
     },
     _i11.RegisterView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.RegisterView(),
         settings: data,
       );
     },
     _i12.OnboardingView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i12.OnboardingView(),
+        settings: data,
+      );
+    },
+    _i13.NotificationView: (data) {
+      final args = data.getArgs<NotificationViewArguments>(nullOk: false);
+      return _i14.MaterialPageRoute<dynamic>(
+        builder: (context) => _i13.NotificationView(key: args.key, id: args.id),
         settings: data,
       );
     },
@@ -193,7 +208,7 @@ class DetailedEventViewArguments {
     required this.eventData,
   });
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
   final _i8.EventModel eventData;
 
@@ -214,7 +229,34 @@ class DetailedEventViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i15.NavigationService {
+class NotificationViewArguments {
+  const NotificationViewArguments({
+    this.key,
+    required this.id,
+  });
+
+  final _i15.Key? key;
+
+  final String id;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "id": "$id"}';
+  }
+
+  @override
+  bool operator ==(covariant NotificationViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ id.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i16.NavigationService {
   Future<dynamic> navigateToSplashView([
     int? routerId,
     bool preventDuplicates = true,
@@ -314,7 +356,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> navigateToDetailedEventView({
-    _i14.Key? key,
+    _i15.Key? key,
     required _i8.EventModel eventData,
     int? routerId,
     bool preventDuplicates = true,
@@ -366,6 +408,23 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.onboardingView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToNotificationView({
+    _i15.Key? key,
+    required String id,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.notificationView,
+        arguments: NotificationViewArguments(key: key, id: id),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -471,7 +530,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> replaceWithDetailedEventView({
-    _i14.Key? key,
+    _i15.Key? key,
     required _i8.EventModel eventData,
     int? routerId,
     bool preventDuplicates = true,
@@ -523,6 +582,23 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.onboardingView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithNotificationView({
+    _i15.Key? key,
+    required String id,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.notificationView,
+        arguments: NotificationViewArguments(key: key, id: id),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

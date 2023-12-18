@@ -68,6 +68,7 @@ class RegisterViewModel extends BaseViewModel {
     //  Notify listeners if needed
     notifyListeners();
 
+    // ignore: use_build_context_synchronously
     showmessage(context, "Registration successful");
     _navigationService.navigateTo(Routes.onboardingView);
   }

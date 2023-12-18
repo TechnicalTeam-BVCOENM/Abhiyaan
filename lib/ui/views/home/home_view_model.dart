@@ -5,6 +5,11 @@ class HomeViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
   static String user = LocalStorageService().read('userName');
   final firstname = user.split(' ');
+  final navigationService = locator<NavigationService>();
+
+  void navigateToNotificationView() {
+    navigationService.navigateToNotificationView(id: '');
+  }
 
   List<QuickLinksModel> quickLinksList = [
     QuickLinksModel(
@@ -46,9 +51,12 @@ class HomeViewModel extends BaseViewModel {
   List<DepartmentUpdates> _departmentUpdates = [];
   List<DepartmentUpdates> get departmentUpdates => _departmentUpdates;
 
-  Future<void> loadData() async {
+  Future<void> init() async {
     setBusy(true);
     try {
+      NotificationService notificationService = NotificationService();
+      notificationService.refreshedDeviceToken();
+      notificationService.getDeviceToken();
       _highlights = await _firestoreService.getAllData('Highlights');
       _departmentUpdates =
           await _firestoreService.getAllDepartmentData('DepartmentUpdate');

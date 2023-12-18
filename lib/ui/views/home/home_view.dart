@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:darpan/services/notification_service.dart';
 import 'package:darpan/ui/common/cached_network_image.dart';
 import 'package:darpan/ui/common/shimmer.dart';
 import 'package:darpan/ui/common/update_component.dart';
@@ -19,7 +20,7 @@ class HomeView extends StatelessWidget {
     FontThemeClass fontTheme = FontThemeClass();
     return ViewModelBuilder<HomeViewModel>.reactive(
       viewModelBuilder: () => HomeViewModel(),
-      onViewModelReady: (viewModel) => viewModel.loadData(),
+      onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
         return Scaffold(
           backgroundColor: context.colorScheme.backgroundColor,
@@ -53,7 +54,9 @@ class HomeView extends StatelessWidget {
                                   ),
                                   size: 24.sp,
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  model.navigateToNotificationView();
+                                },
                               )
                             ],
                           ),

@@ -1,8 +1,22 @@
 import 'package:darpan/firebase_options.dart';
+import 'package:darpan/services/notification_service.dart';
 import 'package:darpan/theme/theme_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:darpan/file_exporter.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
+
+@pragma('vm:entry-point')
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+}
+
+void notificationServicesAfterAppStart(BuildContext context) {
+  NotificationService notificationService = NotificationService();
+  notificationService.reqestNotificationPermission();
+  notificationService.initFirebaseNotification(context);
+  notificationService.setupInteractMessage(context);
+}
 
 Future<void> servicesToInitializeBeforeAppStart() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +31,7 @@ Future<void> servicesToInitializeBeforeAppStart() async {
 
 void main() async {
   await servicesToInitializeBeforeAppStart();
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
 }
 
@@ -26,6 +41,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeService = locator<ThemeService>();
+    notificationServicesAfterAppStart(context);
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
