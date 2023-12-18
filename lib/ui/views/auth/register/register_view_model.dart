@@ -69,7 +69,7 @@ class RegisterViewModel extends BaseViewModel {
     notifyListeners();
 
     showmessage(context, "Registration successful");
-    _navigationService.navigateTo(Routes.signInView);
+    _navigationService.navigateTo(Routes.onboardingView);
   }
 }
 

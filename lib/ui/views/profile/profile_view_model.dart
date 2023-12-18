@@ -32,20 +32,22 @@ class ProfileViewModel extends BaseViewModel {
 
   List<ProfileDetailsCard> profileCardList = [
     ProfileDetailsCard(
-        leading: AssetImagePath.misImg,
-        title: "MIS Number",
-        value: LocalStorageService().read('userMisNo')),
+      leading: AssetImagePath.misImg,
+      title: "MIS Number",
+      value: LocalStorageService().read('userMisNo'),
+      icon: Icons.content_copy,
+    ),
     ProfileDetailsCard(
-        leading: AssetImagePath.libraryImg,
-        title: "Library Card Number",
-        value: LocalStorageService().read('userLibNo')),
+      leading: AssetImagePath.emailImg,
+      title: "Email ID",
+      value: LocalStorageService().read('userEmail'),
+      icon: Icons.content_copy,
+    ),
     ProfileDetailsCard(
-        leading: AssetImagePath.idImg,
-        title: "College ID",
-        value: LocalStorageService().read('userCollegeId')),
-    ProfileDetailsCard(
-        leading: AssetImagePath.prnImg,
-        title: "PRN Number",
-        value: LocalStorageService().read('userPrnNo')),
+      leading: AssetImagePath.phoneImg,
+      title: "Mobile Number",
+      value: LocalStorageService().read('userPhone'),
+      icon: Icons.content_copy,
+    ),
   ];
 }

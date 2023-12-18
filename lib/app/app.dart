@@ -2,6 +2,7 @@ import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/services/local_storage_service.dart';
 import 'package:darpan/theme/theme_service.dart';
 import 'package:darpan/ui/views/auth/auth_view.dart';
+import 'package:darpan/ui/views/auth/onboarding/onboarding_view.dart';
 import 'package:darpan/ui/views/auth/register/register_view.dart';
 import 'package:darpan/ui/views/auth/sign_in/sign_in_view.dart';
 import 'package:darpan/ui/views/bottom_nav/bottom_nav_view.dart';
@@ -26,6 +27,7 @@ import 'package:darpan/ui/views/splash/splash_view.dart';
     MaterialRoute(page: DetailedEventView),
     MaterialRoute(page: SignInView),
     MaterialRoute(page: RegisterView),
+    MaterialRoute(page: OnboardingView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

@@ -9,8 +9,12 @@ class AssetImagePath {
   static const String libraryImg = 'assets/images/profile/library.png';
   static const String xImg =
       'assets/images/profile/twitter_square-modified.png';
+  static const String emailImg = 'assets/images/profile/gmail.png';
+  static const String phoneImg = 'assets/images/profile/phone.png';
+  static const String certificateImg = 'assets/images/profile/certificate.png';
   static const String linkedinImg = 'assets/images/profile/linkedin_square.png';
   static const String logoImg = 'assets/images/logo.png';
+  static const String boy = 'assets/images/onboarding/boy1.png';
 
   static const String darkMode = 'assets/images/profile/dark_mode.png';
   static const String help = 'assets/images/profile/help.png';
