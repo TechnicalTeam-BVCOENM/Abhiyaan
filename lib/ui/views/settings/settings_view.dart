@@ -55,7 +55,9 @@ class SettingsView extends StatelessWidget {
                         leadingIcon: model.settings[0].leading,
                       ),
                       GestureDetector(
-                        onTap: () => model.changePassword(context),
+                        onTap: () {
+                          model.passwordChangeAlert(context, model);
+                        },
                         child: settingsListTile(model, context,
                             title: model.settings[1].title,
                             trailingIcon: Icon(

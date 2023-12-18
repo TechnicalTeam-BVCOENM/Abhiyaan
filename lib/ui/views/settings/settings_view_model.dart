@@ -19,19 +19,47 @@ class SettingsViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  changePassword(context) {
-    final localStorageService = locator<LocalStorageService>();
-    FirebaseAuth.instance
-        .sendPasswordResetEmail(email: localStorageService.read('userEmail'))
-        .then((value) => showmessage(context, "reset password email sent !"))
-        .onError((error, stackTrace) =>
-            showmessage(context, "something went wrong !"));
+  Future<void> changePassword(context) async {
+    try {
+      final localStorageService = locator<LocalStorageService>();
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: localStorageService.read('userEmail'))
+          .then((value) => showmessage(context, "reset password email sent !"));
+    } catch (e) {
+      showmessage(context, "something went wrong !");
+    }
     // Change password logic
+  }
+
+  void passwordChangeAlert(context, model) {
+    showAdaptiveDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Delete Account"),
+            content:
+                const Text("Are you sure you want to delete your account?"),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Cancel"),
+              ),
+              TextButton(
+                onPressed: () {
+                  model
+                      .changePassword(context)
+                      .then((value) => Navigator.pop(context));
+                },
+                child: const Text("Delete"),
+              ),
+            ],
+          );
+        });
   }
 
   navigateToHelpSupport() {
     UrlLauncher externalUrlHandler = UrlLauncher();
-    externalUrlHandler.launchURL("https://bvcoenm.edu.in/contact-us/");
+    externalUrlHandler.launchEmail("technicalteam.bvcoenm@gmail.com");
     // Navigation
   }
 
