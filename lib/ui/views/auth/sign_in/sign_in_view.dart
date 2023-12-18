@@ -1,7 +1,6 @@
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
-import 'package:darpan/ui/common/show_dialogue.dart';
 import 'package:darpan/ui/common/toast_message.dart';
 import 'package:darpan/ui/views/auth/register/register_view.dart';
 import 'package:darpan/ui/views/settings/settings_view.dart';
@@ -116,7 +115,7 @@ class SignInView extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () =>
-                                  showDialogue(context, "hello", "hello", SettingsViewModel.sendResetMail(context)),
+                                SettingsViewModel().changePassword(context),
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Padding(
