@@ -6,7 +6,6 @@ class OnboardingView extends StatelessWidget {
   const OnboardingView({super.key});
   @override
   Widget build(BuildContext context) {
-    PageController pageController = PageController();
     return ViewModelBuilder<OnboardingViewModel>.reactive(
       viewModelBuilder: () => OnboardingViewModel(),
       builder: (context, model, child) {
@@ -16,7 +15,7 @@ class OnboardingView extends StatelessWidget {
             body: Stack(
               children: [
                 PageView(
-                  controller: pageController,
+                  controller: model.pageController,
                   children: [
                     for (var onboardingPages
                         in OnboardingComponents.getOnboardingPages(context))
@@ -28,9 +27,9 @@ class OnboardingView extends StatelessWidget {
                   child: SmoothPageIndicator(
                       effect: const WormEffect(dotHeight: 5),
                       onDotClicked: (index) {
-                        pageController.jumpToPage(index);
+                        model.pageController.jumpToPage(index);
                       },
-                      controller: pageController,
+                      controller: model.pageController,
                       count: 3),
                 ),
                 Container(
@@ -52,12 +51,20 @@ class OnboardingView extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
-                                model.updateindex(false, model.activeindex);
-                                pageController.previousPage(
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeInOutQuad);
+                                model.updateindex(
+                                    context, false, model.activeindex);
                               },
-                              child: const Icon(Icons.arrow_back)),
+                              child: model.activeindex != 0
+                                  ? Icon(
+                                      Icons.arrow_back,
+                                      color: context
+                                          .colorScheme.secondarySectionColor,
+                                    )
+                                  : Icon(
+                                      Icons.arrow_forward,
+                                      color: context
+                                          .colorScheme.secondarySectionColor,
+                                    )),
                         ),
                         SizedBox(
                           width: 60.r,
@@ -72,12 +79,20 @@ class OnboardingView extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
-                                model.updateindex(true, model.activeindex);
-                                pageController.nextPage(
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeInOutQuad);
+                                model.updateindex(
+                                    context, true, model.activeindex);
                               },
-                              child: const Icon(Icons.arrow_forward)),
+                              child: model.activeindex != 2
+                                  ? Icon(
+                                      Icons.arrow_forward,
+                                      color: context
+                                          .colorScheme.secondarySectionColor,
+                                    )
+                                  : Icon(
+                                      Icons.done_rounded,
+                                      color: context
+                                          .colorScheme.secondarySectionColor,
+                                    )),
                         )
                       ],
                     ))
