@@ -6,6 +6,12 @@ import 'package:darpan/file_exporter.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
 
+@pragma('vm:entry-point')
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  debugPrint('Handling a background message ${message.messageId}');
+}
+
 Future<void> servicesToInitializeBeforeAppStart() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -17,12 +23,7 @@ Future<void> servicesToInitializeBeforeAppStart() async {
   ]);
   NotificationService notificationService = NotificationService();
   notificationService.reqestNotificationPermission();
-}
-
-@pragma('vm:entry-point')
-Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-  debugPrint('Handling a background message ${message.messageId}');
+  notificationService.initFirebaseNotification();
 }
 
 void main() async {

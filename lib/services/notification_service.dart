@@ -1,5 +1,4 @@
-import 'dart:math';
-
+import 'dart:io';
 import 'package:app_settings/app_settings.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -30,6 +29,7 @@ class NotificationService {
         debugPrint('User granted provisional permission');
       } else {
         AppSettings.openAppSettings(type: AppSettingsType.notification);
+        debugPrint('User declined or has not accepted permission');
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -38,13 +38,14 @@ class NotificationService {
 
   void initFirebaseNotification() async {
     try {
+      debugPrint('Initializing firebase notification');
       FirebaseMessaging.onMessage.listen((message) {
-        if (kDebugMode) {
-          debugPrint('onMessage: ${message.notification!.body.toString()}');
+        if (Platform.isAndroid) {
           initLocalNotification();
+          showNotification(message);
         }
-        showNotification(message);
       });
+      debugPrint('Initialized firebase notification successfully!');
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -52,15 +53,16 @@ class NotificationService {
 
   void initLocalNotification() async {
     try {
+      debugPrint('Initializing local notification');
       // For Android
-      const AndroidInitializationSettings androidInitializationSettings =
-          AndroidInitializationSettings('@mipmap/ic_launcher');
+      AndroidInitializationSettings androidInitializationSettings =
+          const AndroidInitializationSettings('@mipmap/ic_launcher');
 
       // For iOS
-      const iosInitializationSettings = DarwinInitializationSettings();
+      var iosInitializationSettings = const DarwinInitializationSettings();
 
       // For both Android & iOS
-      var initializationSettings = const InitializationSettings(
+      var initializationSettings = InitializationSettings(
           android: androidInitializationSettings,
           iOS: iosInitializationSettings);
 
@@ -71,6 +73,7 @@ class NotificationService {
           debugPrint('notification payload: $payload');
         },
       );
+      debugPrint('Initialized local notification successfully!');
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -78,47 +81,53 @@ class NotificationService {
 
   Future<void> showNotification(RemoteMessage message) async {
     try {
-      AndroidNotificationChannel channel = AndroidNotificationChannel(
-        Random.secure().nextInt(100000).toString(),
-        'High Importance Notification',
-        importance: Importance.max,
-      );
+      if (message.notification != null) {
+        AndroidNotificationChannel channel = const AndroidNotificationChannel(
+          '1',
+          'High Importance Channel',
+          importance: Importance.max,
+        );
 
-      //  For Android
-      AndroidNotificationDetails androidPlatformChannelSpecifics =
-          AndroidNotificationDetails(
-        channel.id,
-        channel.name,
-        channelDescription: 'Your channel description',
-        priority: Priority.high,
-        importance: Importance.max,
-        ticker: 'ticker',
-      );
+        //  For Android
+        AndroidNotificationDetails androidPlatformChannelSpecifics =
+            AndroidNotificationDetails(
+          channel.id,
+          channel.name,
+          channelDescription: 'Your channel description',
+          priority: Priority.max,
+          importance: Importance.max,
+          showWhen: false,
+          ticker: 'ticker',
+        );
 
-      //  For iOS
-      DarwinNotificationDetails iOSPlatformChannelSpecifics =
-          const DarwinNotificationDetails(
-        presentAlert: true,
-        presentBadge: true,
-        presentSound: true,
-      );
+        //  For iOS
+        DarwinNotificationDetails iOSPlatformChannelSpecifics =
+            const DarwinNotificationDetails(
+          presentAlert: true,
+          presentBadge: true,
+          presentSound: true,
+        );
 
-      // For both Android & iOS
-      NotificationDetails platformChannelSpecifics = NotificationDetails(
-        android: androidPlatformChannelSpecifics,
-        iOS: iOSPlatformChannelSpecifics,
-      );
-
-      // For both Android & iOS
-      await Future.delayed(
-          Duration.zero,
-          () => flutterLocalNotificationsPlugin.show(
-                0,
-                message.notification!.title.toString(),
-                message.notification!.body.toString(),
-                platformChannelSpecifics,
-                payload: 'Default_Sound',
-              ));
+        // For both Android & iOS
+        NotificationDetails platformChannelSpecifics = NotificationDetails(
+          android: androidPlatformChannelSpecifics,
+          iOS: iOSPlatformChannelSpecifics,
+        );
+        await flutterLocalNotificationsPlugin
+            .resolvePlatformSpecificImplementation<
+                AndroidFlutterLocalNotificationsPlugin>()
+            ?.createNotificationChannel(channel);
+        // For both Android & iOS
+        Future.delayed(
+            Duration.zero,
+            () => flutterLocalNotificationsPlugin.show(
+                  0,
+                  message.notification?.title.toString(),
+                  message.notification?.body.toString(),
+                  platformChannelSpecifics,
+                  payload: 'Default_Sound',
+                ));
+      }
     } catch (e) {
       debugPrint(e.toString());
     }

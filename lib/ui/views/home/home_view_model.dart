@@ -50,7 +50,6 @@ class HomeViewModel extends BaseViewModel {
     setBusy(true);
     try {
       NotificationService notificationService = NotificationService();
-      notificationService.initFirebaseNotification();
       notificationService.refreshedDeviceToken();
       notificationService.getDeviceToken();
       _highlights = await _firestoreService.getAllData('Highlights');
