@@ -2,8 +2,10 @@ import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
 import 'package:darpan/ui/common/toast_message.dart';
+import 'package:darpan/ui/views/auth/register/register_view.dart';
 import 'package:darpan/ui/views/settings/settings_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 part 'sign_in_view_model.dart';
 
 class SignInView extends StatelessWidget {
@@ -99,13 +101,16 @@ class SignInView extends StatelessWidget {
                                     : const Icon(Icons.visibility),
                               ),
                               hintText: 'Password',
+
+                              hintStyle: model.fontTheme.caption(
+                                context,
+                                color:
+                                    context.colorScheme.secondarySectionColor,
+                                    fontWeight: FontWeight.w500
+                              ),
                               errorText: model.isPasswordValid
                                   ? null
-                                  : model.passwordErrorText,
-                              hintStyle: model.fontTheme.caption(context,
-                                  color:
-                                      context.colorScheme.secondarySectionColor,
-                                  fontWeight: FontWeight.w500),
+                                  : model.passwordErrorText
                             ),
                           ),
                           InkWell(
@@ -155,6 +160,35 @@ class SignInView extends StatelessWidget {
                             padding: EdgeInsetsDirectional.only(top: 10.r),
                             child: RichText(
                               text: TextSpan(
+                                text: 'Don\'t have an account? ',
+                                style: FontThemeClass().caption(context,
+                                    color:
+                                        context.colorScheme.secondaryBlackColor,
+                                    fontWeight: FontWeight.w500),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: 'Register Now',
+                                    style: FontThemeClass().caption(context,
+                                        color: context.colorScheme.primaryColor,
+                                        fontWeight: FontWeight.w500),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const RegisterView()),
+                                        );
+                                      },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.only(top: 10.r),
+                            child: RichText(
+                              text: TextSpan(
                                 text: 'Problem with Sign In? ',
                                 style: FontThemeClass().caption(context,
                                     color:
@@ -162,7 +196,7 @@ class SignInView extends StatelessWidget {
                                     fontWeight: FontWeight.w500),
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text: 'Report issue',
+                                    text: 'Report Issue',
                                     style: FontThemeClass().caption(context,
                                         color: context.colorScheme.primaryColor,
                                         fontWeight: FontWeight.w500),
@@ -179,7 +213,7 @@ class SignInView extends StatelessWidget {
                       alignment: Alignment.bottomCenter,
                       child: Text('Abhiyaan v1.0.0',
                           style: FontThemeClass().caption(context,
-                              color: context.colorScheme.secondaryBlackColor,
+                              color: context.colorScheme.secondarySectionColor,
                               fontWeight: FontWeight.w500)),
                     ),
                   ],

@@ -52,6 +52,7 @@ class OnboardingView extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
+                                model.updateindex(false, model.activeindex);
                                 pageController.previousPage(
                                     duration: const Duration(milliseconds: 300),
                                     curve: Curves.easeInOutQuad);
@@ -71,6 +72,7 @@ class OnboardingView extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
+                                model.updateindex(true, model.activeindex);
                                 pageController.nextPage(
                                     duration: const Duration(milliseconds: 300),
                                     curve: Curves.easeInOutQuad);

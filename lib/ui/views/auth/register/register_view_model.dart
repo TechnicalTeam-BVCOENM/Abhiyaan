@@ -8,35 +8,85 @@ class RegisterViewModel extends BaseViewModel {
   final fontTheme = FontThemeClass();
 
   final TextEditingController emailIdTextController = TextEditingController();
-  final TextEditingController passwordTextController = TextEditingController();
+  final TextEditingController misnoTextController = TextEditingController();
+  final TextEditingController createpasswordTextController =
+      TextEditingController();
+  final TextEditingController confirmpasswordTextController =
+      TextEditingController();
 
-  void toHomePage(BuildContext context) {
-    _navigationService.navigateTo(Routes.bottomNavView);
+  final ValueNotifier<String> dropdownValueNotifier =
+      ValueNotifier<String>('Select');
+
+  String get dropdownValue => dropdownValueNotifier.value;
+
+  set dropdownValue(String value) {
+    dropdownValueNotifier.value = value;
+    notifyListeners(); // Notify listeners when the value changes
   }
 
-  bool isPasswordVisible = false;
+  final String emailIdErrorText = "Please enter a valid email id";
 
-  bool togglePasswordVisibility() {
-    isPasswordVisible = !isPasswordVisible;
+  bool isCreatePasswordVisible = false;
+  bool isConfirmPasswordVisible = false;
+  bool isEmailIdValid = true;
+
+  bool toggleCreatePasswordVisibility() {
+    isCreatePasswordVisible = !isCreatePasswordVisible;
     notifyListeners();
-    return isPasswordVisible;
+    return isCreatePasswordVisible;
   }
 
-  Future<void> login(String email, String password, context) async {
-    setBusy(true);
-    try {
-      await _authenticationService.signInWithEmailAndPassword(email, password);
-      showmessage(context, "Login successful");
-      _navigationService.navigateTo(Routes.bottomNavView);
-    } on FirebaseException catch (e) {
-      showmessage(context, "Invalid email or password");
-      debugPrint("$e");
-      // You can log or handle other Firebase exceptions here
+  bool toggleConfirmPasswordVisibility() {
+    isConfirmPasswordVisible = !isConfirmPasswordVisible;
+    notifyListeners();
+    return isConfirmPasswordVisible;
+  }
+
+  Future<void> register(
+    String email,
+    String createpassword,
+    String confirmPassword,
+    String dropdownValue,
+    String misNo,
+    BuildContext context,
+  ) async {
+    // Validate email format
+    if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+        .hasMatch(email)) {
+      showmessage(context, "Invalid email format");
+      return;
     }
-    setBusy(false);
-  }
 
-  void passwordResetMail() {
-    FirebaseAuth.instance.sendPasswordResetEmail(email: "");
+    // Validate that create password and confirm password are the same
+    if (createpassword != confirmPassword) {
+      showmessage(context, "Passwords do not match");
+      return;
+    }
+    await _authenticationService.registerWithEmailAndPassword(
+        email, confirmPassword);
+
+    //  Notify listeners if needed
+    notifyListeners();
+
+    showmessage(context, "Registration successful");
+    _navigationService.navigateTo(Routes.onboardingView);
   }
 }
+
+class ToggleModel extends ChangeNotifier {
+  bool isBvcoeStudent = true;
+  String misNo = '';
+
+  void toggleSelection() {
+    isBvcoeStudent = !isBvcoeStudent;
+    misNo = '';
+    notifyListeners();
+  }
+
+  void updateMisNo(String newMisNo) {
+    misNo = newMisNo;
+    notifyListeners();
+  }
+}
+
+const List<String> list = <String>['BVCOE Student', 'Explorer'];
