@@ -416,7 +416,7 @@ extension NavigatorStateExtension on _i16.NavigationService {
 
   Future<dynamic> navigateToNotificationView({
     _i15.Key? key,
-    String? id,
+    required String id,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -424,7 +424,7 @@ extension NavigatorStateExtension on _i16.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.notificationView,
-        arguments: NotificationViewArguments(key: key, id: id!),
+        arguments: NotificationViewArguments(key: key, id: id),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
