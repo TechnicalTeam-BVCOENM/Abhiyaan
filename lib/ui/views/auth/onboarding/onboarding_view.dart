@@ -15,6 +15,9 @@ class OnboardingView extends StatelessWidget {
             body: Stack(
               children: [
                 PageView(
+                  onPageChanged: (index) {
+                    model.index(index);
+                  },
                   controller: model.pageController,
                   children: [
                     for (var onboardingPages
@@ -39,33 +42,28 @@ class OnboardingView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          width: 60.r,
-                          height: 60.r,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.all(0),
-                                foregroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      300), // Rounded corners
-                                ),
-                              ),
-                              onPressed: () {
-                                model.updateindex(
-                                    context, false, model.activeindex);
-                              },
-                              child: model.activeindex != 0
-                                  ? Icon(
+                            width: 60.r,
+                            height: 60.r,
+                            child: model.activeindex != 0
+                                ? ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      padding: const EdgeInsets.all(0),
+                                      foregroundColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            300), // Rounded corners
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      model.updateindex(
+                                          context, false, model.activeindex);
+                                    },
+                                    child: Icon(
                                       Icons.arrow_back,
                                       color: context
                                           .colorScheme.secondarySectionColor,
-                                    )
-                                  : Icon(
-                                      Icons.arrow_forward,
-                                      color: context
-                                          .colorScheme.secondarySectionColor,
-                                    )),
-                        ),
+                                    ))
+                                : Container()),
                         SizedBox(
                           width: 60.r,
                           height: 60.r,
