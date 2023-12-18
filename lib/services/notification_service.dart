@@ -59,7 +59,8 @@ class NotificationService {
           const AndroidInitializationSettings('@mipmap/ic_launcher');
 
       // For iOS
-      var iosInitializationSettings = const DarwinInitializationSettings();
+      const DarwinInitializationSettings iosInitializationSettings =
+          DarwinInitializationSettings();
 
       // For both Android & iOS
       var initializationSettings = InitializationSettings(
@@ -87,7 +88,10 @@ class NotificationService {
           'High Importance Channel',
           importance: Importance.max,
         );
-
+        await flutterLocalNotificationsPlugin
+            .resolvePlatformSpecificImplementation<
+                AndroidFlutterLocalNotificationsPlugin>()
+            ?.createNotificationChannel(channel);
         //  For Android
         AndroidNotificationDetails androidPlatformChannelSpecifics =
             AndroidNotificationDetails(
@@ -113,10 +117,7 @@ class NotificationService {
           android: androidPlatformChannelSpecifics,
           iOS: iOSPlatformChannelSpecifics,
         );
-        await flutterLocalNotificationsPlugin
-            .resolvePlatformSpecificImplementation<
-                AndroidFlutterLocalNotificationsPlugin>()
-            ?.createNotificationChannel(channel);
+
         // For both Android & iOS
         Future.delayed(
             Duration.zero,

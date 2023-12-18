@@ -28,6 +28,8 @@
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
+		<key>NSLocalNotificationUsageDescription</key>
+        <string>Allow notifications to receive important updates</string>
 		<key>LSApplicationQueriesSchemes</key>
 		<array>
 			<string>sms</string>
