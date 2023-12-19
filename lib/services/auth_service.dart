@@ -8,21 +8,37 @@ class AuthenticationService {
 
   User? get currentUser => _firebaseAuth.currentUser;
 
-  Future signInWithEmailAndPassword(String email, String password) async {
+  Future signInWithEmailAndPassword(
+      context, String email, String password) async {
     try {
       await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) => storeUserData());
       // Handle successful login
       log.i('Auth success');
-    } on FirebaseAuthException {
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-credentials') {
+        if (e.message?.contains('user-not-found') == true) {
+          // Display an error message for user not found
+          print('No user found for that email.');
+        } else if (e.message?.contains('wrong-password') == true) {
+          // Display an error message for wrong password
+          print('Wrong password provided for that user.');
+        } else {
+          // Handle other FirebaseAuthException errors
+          print('FirebaseAuthException: ${e.code}');
+        }
+      }
+
       // Handle error
+
+      log.i(e.code);
       rethrow;
     }
   }
 
   registerWithEmailAndPassword(String email, String createpassword) {}
-  
+
   Future<bool> signOut() async {
     bool firebaseSignOutSuccess = false;
 

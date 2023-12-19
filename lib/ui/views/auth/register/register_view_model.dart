@@ -72,6 +72,12 @@ class RegisterViewModel extends BaseViewModel {
     showmessage(context, "Registration successful");
     _navigationService.navigateTo(Routes.onboardingView);
   }
+
+  navigateToHelpSupport() {
+    UrlLauncher externalUrlHandler = UrlLauncher();
+    externalUrlHandler.launchEmail("technicalteam.bvcoenm@gmail.com");
+    // Navigation
+  }
 }
 
 class ToggleModel extends ChangeNotifier {

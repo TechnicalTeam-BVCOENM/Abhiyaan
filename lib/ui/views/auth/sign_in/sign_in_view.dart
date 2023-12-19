@@ -1,6 +1,7 @@
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
+import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:darpan/ui/common/toast_message.dart';
 import 'package:darpan/ui/views/auth/register/register_view.dart';
 import 'package:darpan/ui/views/settings/settings_view.dart';
@@ -58,9 +59,9 @@ class SignInView extends StatelessWidget {
                               focusColor:
                                   context.colorScheme.secondaryWhiteColor,
                               hintText: 'Student Email ID',
-                              errorText: model.isEmailIdValid
-                                  ? null
-                                  : model.emailIdErrorText,
+                              // errorText: model.isEmailIdValid
+                              //     ? null
+                              //     : model.emailIdErrorText,
                               hintStyle: model.fontTheme.caption(context,
                                   color:
                                       context.colorScheme.secondarySectionColor,
@@ -75,47 +76,43 @@ class SignInView extends StatelessWidget {
                             controller: model.passwordTextController,
                             obscureText: model.isPasswordVisible ? false : true,
                             decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 15, vertical: 15)
-                                  .r,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                    const Radius.circular(15).r,
-                                  ),
-                                  borderSide: BorderSide.none),
-                              fillColor:
-                                  context.colorScheme.secondaryWhiteColor,
-                              filled: true,
-                              focusColor: Colors.white,
-                              suffixIcon: InkWell(
-                                splashColor:
-                                    context.colorScheme.secondaryLPurpleColor,
-                                onTap: () {
-                                  model.togglePasswordVisibility();
-                                },
-                                child: model.isPasswordVisible
-                                    ? Icon(
-                                        Icons.visibility_off,
-                                        color: context.colorScheme.iconColor,
-                                      )
-                                    : const Icon(Icons.visibility),
-                              ),
-                              hintText: 'Password',
-
-                              hintStyle: model.fontTheme.caption(
-                                context,
-                                color:
-                                    context.colorScheme.secondarySectionColor,
-                                    fontWeight: FontWeight.w500
-                              ),
-                              errorText: model.isPasswordValid
-                                  ? null
-                                  : model.passwordErrorText
-                            ),
+                                contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 15, vertical: 15)
+                                    .r,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                      const Radius.circular(15).r,
+                                    ),
+                                    borderSide: BorderSide.none),
+                                fillColor:
+                                    context.colorScheme.secondaryWhiteColor,
+                                filled: true,
+                                focusColor: Colors.white,
+                                suffixIcon: InkWell(
+                                  splashColor:
+                                      context.colorScheme.secondaryLPurpleColor,
+                                  onTap: () {
+                                    model.togglePasswordVisibility();
+                                  },
+                                  child: model.isPasswordVisible
+                                      ? Icon(
+                                          Icons.visibility_off,
+                                          color: context.colorScheme.iconColor,
+                                        )
+                                      : const Icon(Icons.visibility),
+                                ),
+                                hintText: 'Password',
+                                hintStyle: model.fontTheme.caption(context,
+                                    color: context
+                                        .colorScheme.secondarySectionColor,
+                                    fontWeight: FontWeight.w500),
+                                errorText: model.isPasswordValid
+                                    ? null
+                                    : model.passwordErrorText),
                           ),
                           InkWell(
-                            onTap: () =>
-                                SettingsViewModel().changePassword(context),
+                            onTap: () => SettingsViewModel()
+                                .passwordChangeAlert(context, model),
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Padding(
@@ -157,7 +154,7 @@ class SignInView extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.only(top: 10.r),
+                            padding: EdgeInsetsDirectional.only(top: 15.r),
                             child: RichText(
                               text: TextSpan(
                                 text: 'Don\'t have an account? ',
@@ -187,21 +184,25 @@ class SignInView extends StatelessWidget {
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.only(top: 10.r),
-                            child: RichText(
-                              text: TextSpan(
-                                text: 'Problem with Sign In? ',
-                                style: FontThemeClass().caption(context,
-                                    color:
-                                        context.colorScheme.secondaryBlackColor,
-                                    fontWeight: FontWeight.w500),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: 'Report Issue',
-                                    style: FontThemeClass().caption(context,
-                                        color: context.colorScheme.primaryColor,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ],
+                            child: InkWell(
+                              onTap: () => model.navigateToHelpSupport(),
+                              child: RichText(
+                                text: TextSpan(
+                                  text: 'Problem with Sign In? ',
+                                  style: FontThemeClass().caption(context,
+                                      color: context
+                                          .colorScheme.secondaryBlackColor,
+                                      fontWeight: FontWeight.w500),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: 'Report Issue',
+                                      style: FontThemeClass().caption(context,
+                                          color:
+                                              context.colorScheme.primaryColor,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
