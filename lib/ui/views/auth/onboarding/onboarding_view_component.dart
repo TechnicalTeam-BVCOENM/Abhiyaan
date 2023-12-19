@@ -4,17 +4,17 @@ class OnboardingComponents {
   static List<Widget> getOnboardingPages(BuildContext context) {
     return [
       onboardingPage(context, const Color.fromARGB(255, 193, 192, 238),
-          "Lets Explore Diversity", AssetImagePath.boy),
+          ["Lets", "Explore", "Diversity"], AssetImagePath.boy),
       onboardingPage(context, const Color.fromARGB(255, 149, 219, 219),
-          "Meet Amazing People", AssetImagePath.boy),
+          ["Meet", "Amazing", "People"], AssetImagePath.boy),
       onboardingPage(context, const Color.fromARGB(255, 192, 230, 149),
-          "Stay Updated", AssetImagePath.boy),
+          ["Stay", "Updated"], AssetImagePath.boy),
       // Add more onboarding pages here as needed
     ];
   }
 
   static Widget onboardingPage(BuildContext context, Color backgroundColor,
-      String quote, String imagePath) {
+      List<String> quote, String imagePath) {
     return Container(
       color: backgroundColor,
       child: Column(
@@ -32,11 +32,17 @@ class OnboardingComponents {
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(72, 249, 233, 232),
                     borderRadius: BorderRadius.circular(20)),
-                child: Text(
-                  quote,
-                  style: FontThemeClass().display(context,
-                      color: const Color.fromARGB(255, 69, 69, 69),
-                      fontWeight: FontWeight.w700),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    for (var quote in quote)
+                      Text(
+                        quote,
+                        style: FontThemeClass().display(context,
+                            color: const Color.fromARGB(255, 69, 69, 69),
+                            fontWeight: FontWeight.w700),
+                      ),
+                  ],
                 ),
               ),
               Positioned(

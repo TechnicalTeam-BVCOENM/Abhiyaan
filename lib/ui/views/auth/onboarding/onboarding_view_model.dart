@@ -18,12 +18,12 @@ class OnboardingViewModel extends BaseViewModel {
           curve: Curves.easeInOutQuad);
     } else if (increment && index == 2) {
       _navigationService.replaceWith(Routes.authView);
-    } else if (!increment && index == 0) {
-      activeindex = activeindex + 1;
-      pageController.nextPage(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOutQuad);
     }
+    notifyListeners();
+  }
+
+  void index(int index) {
+    activeindex = index;
     notifyListeners();
   }
 }
