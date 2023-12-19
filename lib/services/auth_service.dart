@@ -1,9 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/firestore_service.dart';
+import 'package:darpan/ui/common/toast_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthenticationService {
+  List userTag = [
+    "userSem",
+    "userCollegeId",
+    "userMisNo",
+    "userEmail",
+    "userName",
+    "userYear",
+    "userPrnNo",
+    "userLibNo",
+    "userPhone",
+    "userCertifications",
+  ];
+  final localStorageService = locator<LocalStorageService>();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final log = getLogger('AuthService');
 
@@ -16,28 +30,28 @@ class AuthenticationService {
           .then((value) => storeUserDataLocally());
       // Handle successful login
       log.i('Auth success');
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'invalid-credentials') {
-        if (e.message?.contains('user-not-found') == true) {
-          // Display an error message for user not found
-          print('No user found for that email.');
-        } else if (e.message?.contains('wrong-password') == true) {
-          // Display an error message for wrong password
-          print('Wrong password provided for that user.');
-        } else {
-          // Handle other FirebaseAuthException errors
-          print('FirebaseAuthException: ${e.code}');
-        }
-      }
-
-      // Handle error
-
-      log.i(e.code);
+    } on FirebaseAuthException {
       rethrow;
     }
   }
 
-  registerWithEmailAndPassword(String email, String createpassword) {}
+  Future<void> signUpWithEmailAndPassword(
+      context, String email, String password) async {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        showmessage(context, "weak-password");
+      } else if (e.code == 'email-already-in-use') {
+        showmessage(context, "email-already-in-use");
+      }
+    }
+  }
+
+  registerWithEmailAndPassword(String email, String password) {}
 
   Future<bool> signOut() async {
     bool firebaseSignOutSuccess = false;
@@ -53,30 +67,29 @@ class AuthenticationService {
   }
 
   Future<void> storeUserDataLocally() async {
-    List userTag = [
-      "userSem",
-      "userCollegeId",
-      "userMisNo",
-      "userEmail",
-      "userName",
-      "userYear",
-      "userPrnNo",
-      "userLibNo",
-      "userPhone",
-      "userCertifications",
-    ];
-
     try {
-      final localStorageService = locator<LocalStorageService>();
       Map<String, dynamic>? userData = await FirestoreService().getUserData();
       for (var i = 0; i < userTag.length; i++) {
-        await localStorageService.write(userTag[i], userData?[userTag[i]]);
-        log.i(localStorageService..read('${userTag[i]}'));
+        if (userData?[userTag[i]] == null) {
+          await localStorageService.write(userTag[i], "feed me data");
+        } else {
+          await localStorageService.write(userTag[i], userData?[userTag[i]]);
+          log.i(localStorageService..read('${userTag[i]}'));
+        }
       }
+
       await misBreakdown();
     } catch (e) {
+      log.i(e);
       rethrow;
     }
+  }
+
+  void setStorageToNull() async {
+    for (var i = 0; i < userTag.length; i++) {
+      await localStorageService.write(userTag[i], "feed me data");
+    }
+    log.i("done");
   }
 
   Future<void> misBreakdown() async {

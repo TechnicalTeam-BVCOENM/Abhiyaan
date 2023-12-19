@@ -1,10 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
 import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:darpan/ui/common/toast_message.dart';
 import 'package:darpan/ui/views/auth/register/register_view_component.dart';
-import 'package:darpan/ui/views/auth/sign_in/sign_in_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 part 'register_view_model.dart';
 
@@ -205,12 +206,7 @@ class RegisterView extends StatelessWidget {
                                           fontWeight: FontWeight.w500),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const SignInView()),
-                                          );
+                                          model.navigateToSignIn();
                                         },
                                     ),
                                   ],

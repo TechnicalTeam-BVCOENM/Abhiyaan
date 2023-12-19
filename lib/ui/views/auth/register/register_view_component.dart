@@ -25,7 +25,7 @@ class _DropdownMenuBtnState extends State<DropdownMenuBtn> {
             margin: const EdgeInsets.symmetric(horizontal: 10),
             child: DropdownButton<String>(
               elevation: 0,
-              dropdownColor: const Color.fromARGB(255, 90, 90, 90),
+              dropdownColor: context.colorScheme.secondaryLPurpleColor,
               borderRadius: BorderRadius.circular(20),
               value: dropdownValue,
               items: list.map<DropdownMenuItem<String>>((String value) {

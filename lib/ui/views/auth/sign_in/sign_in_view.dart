@@ -3,8 +3,7 @@ import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
 import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:darpan/ui/common/toast_message.dart';
-import 'package:darpan/ui/views/auth/register/register_view.dart';
-import 'package:darpan/ui/views/settings/settings_view.dart';
+import 'package:darpan/ui/views/profile/settings/settings_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 part 'sign_in_view_model.dart';
@@ -112,7 +111,7 @@ class SignInView extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () => SettingsViewModel()
-                                .passwordChangeAlert(context, model),
+                                .passwordChangeAlert(context),
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Padding(
@@ -170,12 +169,7 @@ class SignInView extends StatelessWidget {
                                         fontWeight: FontWeight.w500),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const RegisterView()),
-                                        );
+                                        model.toRegisterPage(context);
                                       },
                                   ),
                                 ],

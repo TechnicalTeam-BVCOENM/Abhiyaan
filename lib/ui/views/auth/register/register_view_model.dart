@@ -62,21 +62,30 @@ class RegisterViewModel extends BaseViewModel {
       showmessage(context, "Passwords do not match");
       return;
     }
-    await _authenticationService.registerWithEmailAndPassword(
-        email, confirmPassword);
+    await _authenticationService.signUpWithEmailAndPassword(
+        context, email, confirmPassword);
+
+    await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .set({ "userMisNo": misNo});
 
     //  Notify listeners if needed
     notifyListeners();
-
     // ignore: use_build_context_synchronously
     showmessage(context, "Registration successful");
-    _navigationService.navigateTo(Routes.onboardingView);
+    await AuthenticationService().storeUserDataLocally();
+    await _navigationService.replaceWith(Routes.onboardingView);
   }
 
-  navigateToHelpSupport() {
+  navigateToHelpSupport() async {
     UrlLauncher externalUrlHandler = UrlLauncher();
-    externalUrlHandler.launchEmail("technicalteam.bvcoenm@gmail.com");
+    await externalUrlHandler.launchEmail("technicalteam.bvcoenm@gmail.com");
     // Navigation
+  }
+
+  navigateToSignIn() async {
+    _navigationService.replaceWith(Routes.signInView);
   }
 }
 

@@ -17,7 +17,7 @@ import 'package:darpan/ui/views/event/event_view.dart' as _i8;
 import 'package:darpan/ui/views/home/home_view.dart' as _i3;
 import 'package:darpan/ui/views/notifications/notification_view.dart' as _i13;
 import 'package:darpan/ui/views/profile/profile_view.dart' as _i5;
-import 'package:darpan/ui/views/settings/settings_view.dart' as _i6;
+import 'package:darpan/ui/views/profile/settings/settings_view.dart' as _i6;
 import 'package:darpan/ui/views/splash/splash_view.dart' as _i2;
 import 'package:flutter/material.dart' as _i14;
 import 'package:flutter/material.dart';

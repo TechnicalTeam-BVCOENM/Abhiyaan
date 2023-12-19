@@ -27,6 +27,10 @@ class SignInViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.bottomNavView);
   }
 
+  void toRegisterPage(BuildContext context) {
+    _navigationService.replaceWith(Routes.registerView);
+  }
+
   Future<void> login(String email, String password, context) async {
     setBusy(true);
     try {
@@ -34,7 +38,6 @@ class SignInViewModel extends BaseViewModel {
       showmessage(context, "Login successful");
       _navigationService.navigateTo(Routes.bottomNavView);
     } on FirebaseException {
-      showmessage(context, "Invalid email or password");
       isPasswordValid = false;
       isEmailIdValid = false;
       notifyListeners();

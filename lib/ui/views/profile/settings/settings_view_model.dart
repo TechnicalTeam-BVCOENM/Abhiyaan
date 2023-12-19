@@ -31,14 +31,16 @@ class SettingsViewModel extends BaseViewModel {
     // Change password logic
   }
 
-  void passwordChangeAlert(context, model) {
+  void passwordChangeAlert(
+    context,
+  ) {
     showAdaptiveDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text("Delete Account"),
+            title: const Text("Alert"),
             content:
-                const Text("Are you sure you want to delete your account?"),
+                const Text("Are you sure you want to change your password ?"),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
@@ -46,11 +48,10 @@ class SettingsViewModel extends BaseViewModel {
               ),
               TextButton(
                 onPressed: () {
-                  model
-                      .changePassword(context)
+                  changePassword(context)
                       .then((value) => Navigator.pop(context));
                 },
-                child: const Text("Delete"),
+                child: const Text("Yes"),
               ),
             ],
           );
@@ -72,10 +73,11 @@ class SettingsViewModel extends BaseViewModel {
 
   Future<void> logout() async {
     setBusy(true);
+    _authenticationService.setStorageToNull();
     final success = await _authenticationService.signOut();
     if (success) {
       log.i('sign out success');
-      _navigationService.clearStackAndShow(Routes.authView);
+      _navigationService.replaceWith(Routes.authView);
     } else {
       log.i('sign out failed');
     }

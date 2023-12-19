@@ -1,3 +1,4 @@
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darpan/services/notification_service.dart';
@@ -39,7 +40,7 @@ class HomeView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Hey ${model.firstname[0]} 👋', // Update according to loal storage
+                                'Hey ${model.splitusername()} 👋', // Update according to loal storage
                                 style: fontTheme.title(context,
                                     color: context.colorScheme.headingColor,
                                     fontWeight: FontWeight.w600),
