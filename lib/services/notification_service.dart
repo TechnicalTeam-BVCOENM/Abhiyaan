@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:app_settings/app_settings.dart';
 import 'package:darpan/file_exporter.dart';
+import 'package:darpan/services/auth_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -49,6 +50,10 @@ class NotificationService {
           debugPrint('Initialized Ios firebase notification successfully!');
         }
       });
+
+      await messaging
+          .subscribeToTopic('all')
+          .whenComplete(() => debugPrint('Subscribed to topic "all"'));
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -123,7 +128,7 @@ class NotificationService {
       if (message.notification != null) {
         AndroidNotificationChannel channel = const AndroidNotificationChannel(
           '1',
-          'High Importance Channel',
+          'high_importance_channel',
           importance: Importance.max,
         );
         await flutterLocalNotificationsPlugin
@@ -172,20 +177,17 @@ class NotificationService {
     }
   }
 
-  Future<String> getDeviceToken() async {
+  Future getDeviceToken() async {
+    AuthenticationService authenticationService =
+        locator<AuthenticationService>();
     try {
       String? token = await messaging.getToken();
-      debugPrint('Device Token: $token');
-      return token!;
+      if (token != null) {
+        debugPrint('📍 Device Token: $token');
+        authenticationService.saveDeviceToken(token);
+      }
     } catch (e) {
-      debugPrint(e.toString());
-      return '';
+      debugPrint('Device Token Error: ${e.toString()}');
     }
-  }
-
-  void refreshedDeviceToken() {
-    messaging.onTokenRefresh.listen((event) {
-      debugPrint('Device Token: $event');
-    });
   }
 }

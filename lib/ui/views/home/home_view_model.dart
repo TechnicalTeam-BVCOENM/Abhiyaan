@@ -45,7 +45,6 @@ class HomeViewModel extends BaseViewModel {
   ];
 
   List<Activity> get activityList => _activityList;
-
   List<Map<String, dynamic>> _highlights = [];
   List<Map<String, dynamic>> get highlights => _highlights;
   List<DepartmentUpdates> _departmentUpdates = [];
@@ -55,7 +54,9 @@ class HomeViewModel extends BaseViewModel {
     setBusy(true);
     try {
       NotificationService notificationService = NotificationService();
-      notificationService.refreshedDeviceToken();
+      notificationService.messaging.onTokenRefresh.listen((event) {
+        notificationService.getDeviceToken();
+      });
       notificationService.getDeviceToken();
       _highlights = await _firestoreService.getAllData('Highlights');
       _departmentUpdates =
