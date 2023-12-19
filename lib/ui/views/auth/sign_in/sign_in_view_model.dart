@@ -30,8 +30,7 @@ class SignInViewModel extends BaseViewModel {
   Future<void> login(String email, String password, context) async {
     setBusy(true);
     try {
-      await _authenticationService.signInWithEmailAndPassword(
-          context, email, password);
+      await _authenticationService.signInWithEmailAndPassword(email, password);
       showmessage(context, "Login successful");
       _navigationService.navigateTo(Routes.bottomNavView);
     } on FirebaseException {
