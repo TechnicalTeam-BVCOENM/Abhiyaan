@@ -21,29 +21,34 @@ class _DropdownMenuBtnState extends State<DropdownMenuBtn> {
             borderRadius: BorderRadius.circular(16.0).r,
             color: context.colorScheme.secondaryWhiteColor,
           ),
-          child: DropdownButton<String>(
-            value: dropdownValue,
-            items: list.map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            onChanged: (String? value) {
-              setState(() {
-                dropdownValue = value!;
-              });
-            },
-            padding: const EdgeInsets.symmetric(horizontal: 15).r,
-            underline: const SizedBox(), // Remove the default underline
-            isExpanded: true,
-            icon: Icon(
-              Icons.arrow_drop_down,
-              size: 40.sp,
-            ),
-            style: FontThemeClass().caption(
-              context,
-              color: context.colorScheme.secondaryBlackColor,
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            child: DropdownButton<String>(
+              elevation: 0,
+              dropdownColor: context.colorScheme.secondaryLPurpleColor,
+              borderRadius: BorderRadius.circular(20),
+              value: dropdownValue,
+              items: list.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (String? value) {
+                setState(() {
+                  dropdownValue = value!;
+                });
+              },
+              underline: const SizedBox(), // Remove the default underline
+              isExpanded: true,
+              icon: Icon(
+                Icons.arrow_drop_down,
+                size: 40.sp,
+              ),
+              style: FontThemeClass().caption(
+                context,
+                color: context.colorScheme.secondaryBlackColor,
+              ),
             ),
           ),
         ),

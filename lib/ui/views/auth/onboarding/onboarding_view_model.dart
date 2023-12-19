@@ -17,7 +17,7 @@ class OnboardingViewModel extends BaseViewModel {
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOutQuad);
     } else if (increment && index == 2) {
-      _navigationService.replaceWith(Routes.authView);
+      _navigationService.replaceWith(Routes.bottomNavView);
     }
     notifyListeners();
   }

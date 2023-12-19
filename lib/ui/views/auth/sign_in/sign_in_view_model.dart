@@ -11,7 +11,7 @@ class SignInViewModel extends BaseViewModel {
   final TextEditingController passwordTextController = TextEditingController();
 
   final String emailIdErrorText = "Please enter a valid email id";
-  final String passwordErrorText = "Please enter a valid password";
+  final String passwordErrorText = "Please enter a valid email and password";
 
   bool isPasswordVisible = false;
   bool isEmailIdValid = true;
@@ -27,18 +27,20 @@ class SignInViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.bottomNavView);
   }
 
+  void toRegisterPage(BuildContext context) {
+    _navigationService.replaceWith(Routes.registerView);
+  }
+
   Future<void> login(String email, String password, context) async {
     setBusy(true);
     try {
       await _authenticationService.signInWithEmailAndPassword(email, password);
       showmessage(context, "Login successful");
       _navigationService.navigateTo(Routes.bottomNavView);
-    } on FirebaseException catch (e) {
-      showmessage(context, "Invalid email or password");
+    } on FirebaseException {
       isPasswordValid = false;
       isEmailIdValid = false;
       notifyListeners();
-      debugPrint("$e");
       // You can log or handle other Firebase exceptions here
     }
     setBusy(false);
@@ -48,4 +50,9 @@ class SignInViewModel extends BaseViewModel {
     FirebaseAuth.instance.sendPasswordResetEmail(email: "");
   }
 
+  void navigateToHelpSupport() {
+    UrlLauncher externalUrlHandler = UrlLauncher();
+    externalUrlHandler.launchEmail("technicalteam.bvcoenm@gmail.com");
+    // Navigation
+  }
 }

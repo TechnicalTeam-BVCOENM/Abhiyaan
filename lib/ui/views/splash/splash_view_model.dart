@@ -11,7 +11,7 @@ class SplashViewModel extends BaseViewModel {
       // signed in
       _navigationService.replaceWith(Routes.bottomNavView);
     } else {
-      _navigationService.navigateTo(Routes.authView);
+      _navigationService.replaceWith(Routes.authView);
 
       // signed out
     }

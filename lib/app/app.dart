@@ -10,7 +10,7 @@ import 'package:darpan/ui/views/event/detailed_event/detailed_event_view.dart';
 import 'package:darpan/ui/views/event/event_view.dart';
 import 'package:darpan/ui/views/notifications/notification_view.dart';
 import 'package:darpan/ui/views/profile/profile_view.dart';
-import 'package:darpan/ui/views/settings/settings_view.dart';
+import 'package:darpan/ui/views/profile/settings/settings_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:darpan/ui/views/home/home_view.dart';

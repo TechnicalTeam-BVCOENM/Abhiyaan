@@ -3,8 +3,13 @@ part of 'home_view.dart';
 class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
   final FirestoreService _firestoreService = FirestoreService();
-  static String user = LocalStorageService().read('userName');
-  final firstname = user.split(' ');
+  List<String> firstname = [];
+  String splitusername() {
+    final user = LocalStorageService().read('userName');
+    firstname = user.split(' ');
+    return firstname[0];
+  }
+
   final navigationService = locator<NavigationService>();
 
   void navigateToNotificationView() {
