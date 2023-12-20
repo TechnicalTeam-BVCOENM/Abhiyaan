@@ -134,7 +134,11 @@ class HomeViewModel extends BaseViewModel {
                         AssetImagePath.community,
                         width: 40.w,
                         height: 40.h,
-                      ),
+                      ).animate(delay: 300.ms).fadeIn().shake(
+                            delay: 500.ms,
+                            curve: Curves.easeInOut,
+                            duration: 1000.ms,
+                          ),
                       16.horizontalSpace,
                       Expanded(
                         child: Text(
@@ -151,7 +155,11 @@ class HomeViewModel extends BaseViewModel {
                         AssetImagePath.poper,
                         width: 40.w,
                         height: 40.h,
-                      ),
+                      ).animate(delay: 300.ms).fadeIn().shake(
+                            delay: 500.ms,
+                            curve: Curves.easeInOut,
+                            duration: 1000.ms,
+                          ),
                       16.horizontalSpace,
                       Expanded(
                         child: Text(
@@ -168,7 +176,7 @@ class HomeViewModel extends BaseViewModel {
             actions: <Widget>[
               Container(
                 decoration: BoxDecoration(
-                  color: context.colorScheme.primaryColor,
+                  color: context.colorScheme.primaryColor.withOpacity(0.8),
                   borderRadius: BorderRadius.circular(12).r,
                 ),
                 width: double.infinity,
@@ -179,7 +187,7 @@ class HomeViewModel extends BaseViewModel {
                     debugPrint("✅✅ Upgrade Popup Shown $isUpgradePopupShown");
                   },
                   child: Text(
-                    'OK',
+                    "Let's Go!",
                     style: fontThemeClass.body(
                       context,
                       color: context.colorScheme.secondaryWhiteColor,
