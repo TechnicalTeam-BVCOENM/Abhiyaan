@@ -1,10 +1,10 @@
+import 'package:abhiyaan/ui/views/auth/onboarding/onboarding_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:darpan/file_exporter.dart';
-import 'package:darpan/services/auth_service.dart';
-import 'package:darpan/theme/responsive_utils.dart';
-import 'package:darpan/ui/common/common_component_model.dart';
-import 'package:darpan/ui/common/toast_message.dart';
-import 'package:darpan/ui/views/auth/onboarding/onboarding_view.dart';
+import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/services/auth_service.dart';
+import 'package:abhiyaan/theme/responsive_utils.dart';
+import 'package:abhiyaan/ui/common/common_component_model.dart';
+import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 part 'register_view_model.dart';

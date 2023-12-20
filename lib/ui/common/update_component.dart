@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expandable/expandable.dart';
 import 'package:intl/intl.dart';
-import 'package:darpan/file_exporter.dart';
+import 'package:abhiyaan/file_exporter.dart';
 
 Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
   FontThemeClass fontTheme = FontThemeClass();

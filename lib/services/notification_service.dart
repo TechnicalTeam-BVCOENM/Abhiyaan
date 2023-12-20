@@ -1,14 +1,15 @@
 import 'dart:io';
 import 'package:app_settings/app_settings.dart';
-import 'package:darpan/file_exporter.dart';
-import 'package:darpan/services/auth_service.dart';
+import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/services/auth_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService {
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  final FirebaseMessaging messaging = FirebaseMessaging.instance;
+  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+  bool isLocalNotificationInitialized = false;
 
   void reqestNotificationPermission() async {
     try {
@@ -37,13 +38,12 @@ class NotificationService {
     }
   }
 
-  void initFirebaseNotification(BuildContext context) async {
+  Future initFirebaseNotification(BuildContext context) async {
     try {
       debugPrint('Initializing firebase notification');
       FirebaseMessaging.onMessage.listen((message) {
         if (Platform.isAndroid) {
           initLocalNotification(context, message);
-          showNotification(message);
           debugPrint('Initialized Android firebase notification successfully!');
         } else {
           showNotification(message);
@@ -77,21 +77,26 @@ class NotificationService {
           iOS: iosInitializationSettings);
 
       // For both Android & iOS Plugin Activation
-      await flutterLocalNotificationsPlugin.initialize(
-        initializationSettings,
-        onDidReceiveNotificationResponse: (payload) async {
-          handleMessage(context, message);
-        },
-      );
+      if (!isLocalNotificationInitialized) {
+        debugPrint('Checking local notification initialization');
+        await flutterLocalNotificationsPlugin.initialize(
+          initializationSettings,
+          onDidReceiveNotificationResponse: (payload) async {
+            handleMessage(context, message);
+          },
+        );
+      }
       debugPrint('Initialized local notification successfully!');
     } catch (e) {
+      debugPrint('Initialized local notification failed!');
+
       debugPrint(e.toString());
     }
+    debugPrint('📍📍📍📍Initialized local notification exited!');
   }
 
   Future<void> setupInteractMessage(BuildContext context) async {
-    RemoteMessage? initialMessage =
-        await FirebaseMessaging.instance.getInitialMessage();
+    RemoteMessage? initialMessage = await messaging.getInitialMessage();
 
     if (initialMessage != null) {
       // ignore: use_build_context_synchronously
@@ -114,64 +119,66 @@ class NotificationService {
     }
   }
 
-  Future iosForgroundMessage() async {
-    await FirebaseMessaging.instance
-        .setForegroundNotificationPresentationOptions(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
-  }
-
   Future<void> showNotification(RemoteMessage message) async {
     try {
-      if (message.notification != null) {
-        AndroidNotificationChannel channel = const AndroidNotificationChannel(
-          '1',
-          'high_importance_channel',
-          importance: Importance.max,
-        );
-        await flutterLocalNotificationsPlugin
-            .resolvePlatformSpecificImplementation<
-                AndroidFlutterLocalNotificationsPlugin>()
-            ?.createNotificationChannel(channel);
-        //  For Android
-        AndroidNotificationDetails androidPlatformChannelSpecifics =
-            AndroidNotificationDetails(
-          channel.id,
-          channel.name,
-          channelDescription: 'Your channel description',
-          priority: Priority.max,
-          importance: Importance.max,
-          showWhen: false,
-          ticker: 'ticker',
-        );
-
-        //  For iOS
-        DarwinNotificationDetails iOSPlatformChannelSpecifics =
-            const DarwinNotificationDetails(
-          presentAlert: true,
-          presentBadge: true,
-          presentSound: true,
-        );
-
-        // For both Android & iOS
-        NotificationDetails platformChannelSpecifics = NotificationDetails(
-          android: androidPlatformChannelSpecifics,
-          iOS: iOSPlatformChannelSpecifics,
-        );
-
-        // For both Android & iOS
-        Future.delayed(
-            Duration.zero,
-            () => flutterLocalNotificationsPlugin.show(
-                  0,
-                  message.notification?.title.toString(),
-                  message.notification?.body.toString(),
-                  platformChannelSpecifics,
-                  payload: 'Default_Sound',
-                ));
+      if (isLocalNotificationInitialized) {
+        return;
       }
+
+      AndroidNotificationChannel channel = const AndroidNotificationChannel(
+        'high_importance_channel',
+        'High Importance Notifications',
+        description: 'This channel is used for important notifications.',
+        importance: Importance.max,
+      );
+
+      await flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>()
+          ?.createNotificationChannel(channel);
+      //  For Android
+      AndroidNotificationDetails androidPlatformChannelSpecifics =
+          AndroidNotificationDetails(
+        channel.id,
+        channel.name,
+        channelDescription: channel.description,
+        priority: Priority.high,
+        importance: Importance.max,
+        showWhen: false,
+        ticker: 'ticker',
+      );
+
+      //  For iOS
+      DarwinNotificationDetails iOSPlatformChannelSpecifics =
+          const DarwinNotificationDetails(
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true,
+      );
+
+      // For both Android & iOS
+      NotificationDetails platformChannelSpecifics = NotificationDetails(
+        android: androidPlatformChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics,
+      );
+      await messaging
+          .setForegroundNotificationPresentationOptions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+      isLocalNotificationInitialized = true;
+
+      // For both Android & iOS
+      Future.delayed(
+          Duration.zero,
+          () => flutterLocalNotificationsPlugin.show(
+                0,
+                message.notification?.title.toString(),
+                message.notification?.body.toString(),
+                platformChannelSpecifics,
+                payload: 'Default_Sound',
+              ));
     } catch (e) {
       debugPrint(e.toString());
     }

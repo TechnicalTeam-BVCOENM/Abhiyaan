@@ -33,7 +33,7 @@
     </queries>
 
     <application
-        android:label="darpan"
+        android:label="Abhiyaan"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 

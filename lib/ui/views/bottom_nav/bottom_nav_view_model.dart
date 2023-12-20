@@ -14,8 +14,6 @@ class BottomNavViewModel extends IndexTrackingViewModel {
       case 1:
         return const EventView();
       case 2:
-        return const EventView();
-      case 3:
         return const ProfileView();
       default:
         return const HomeView();

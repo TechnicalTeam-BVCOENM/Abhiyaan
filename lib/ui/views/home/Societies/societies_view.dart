@@ -1,5 +1,5 @@
-import 'package:darpan/file_exporter.dart';
-import 'package:darpan/ui/views/home/Societies/societies_view_component.dart';
+import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/ui/views/home/Societies/societies_view_component.dart';
 part 'societies_view_model.dart';
 
 class SocietiesView extends StatelessWidget {
@@ -9,6 +9,7 @@ class SocietiesView extends StatelessWidget {
     return ViewModelBuilder<SocietiesViewModel>.reactive(
         viewModelBuilder: () => SocietiesViewModel(),
         builder: (context, model, child) {
+          FontThemeClass fontThemeClass = FontThemeClass();
           return Scaffold(
               backgroundColor: context.colorScheme.backgroundColor,
               appBar: AppBar(
@@ -18,24 +19,26 @@ class SocietiesView extends StatelessWidget {
                 ),
                 elevation: 0,
                 title: Text(
-                  'Societies',
-                  style: FontThemeClass().header(context),
+                  "Sigma's",
+                  style: fontThemeClass.header(context,
+                      color: context.colorScheme.secondaryBlackColor),
                 ),
                 centerTitle: true,
                 backgroundColor: context.colorScheme.backgroundColor,
               ),
               body: SafeArea(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 30, horizontal: 20)
-                          .r
-                          .r,
-                  child: ListView.builder(
-                      itemCount: 6,
-                      itemBuilder: (context, index) {
-                        return model.allsocietyCards[index];
-                      }),
-                ),
+                minimum: const EdgeInsets.symmetric(horizontal: 18).r,
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: model.allsocietyCards.length,
+                    itemBuilder: (context, index) {
+                      return SocietyCard(
+                        title: model.allsocietyCards[index].title,
+                        value: model.allsocietyCards[index].value,
+                        leading: model.allsocietyCards[index].leading,
+                      );
+                    }),
               ));
         });
   }

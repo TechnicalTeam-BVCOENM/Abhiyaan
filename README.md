@@ -1,10 +1,10 @@
-# Darpan
+# abhiyaan
 
 Bharati Vidyapeeth College of Engineering, Navi Mumbai.
 
 
 ## Introduction
-Welcome to Darpan, the official app for BVCOENM (Bharati Vidyapeeth College of Engineering, Navi Mumbai) created by the Student Council Technical Team. This app is designed to enhance the overall experience for students and faculty by providing a centralized platform for college-related information and activities.
+Welcome to abhiyaan, the official app for BVCOENM (Bharati Vidyapeeth College of Engineering, Navi Mumbai) created by the Student Council Technical Team. This app is designed to enhance the overall experience for students and faculty by providing a centralized platform for college-related information and activities.
 
 ## Features
 - **Academic Tools:** Stay updated with the latest announcements, and events happening in the college.
@@ -16,11 +16,11 @@ Welcome to Darpan, the official app for BVCOENM (Bharati Vidyapeeth College of E
 
 1. Clone the repository:
   ```bash
-  git clone https://github.com/TechnicalTeam-BVCOENM/Darpan.git
+  git clone https://github.com/TechnicalTeam-BVCOENM/abhiyaan.git
   ```
 2. Go to project folder
   ```bash
-  cd Darpan
+  cd abhiyaan
   ```
 3. Install libraries
   ```bash
@@ -36,7 +36,7 @@ Welcome to Darpan, the official app for BVCOENM (Bharati Vidyapeeth College of E
   ```
 
 ## Contributing
-<!--[![GitHub contributors](https://img.shields.io/github/contributors/your-username/your-repository.svg)](https://github.com/TechnicalTeam-BVCOENM/Darpan/graphs/contributors)-->
+<!--[![GitHub contributors](https://img.shields.io/github/contributors/your-username/your-repository.svg)](https://github.com/TechnicalTeam-BVCOENM/abhiyaan/graphs/contributors)-->
 
 [<img src="https://avatars.githubusercontent.com/125sachin?v=4" width="40px;"/>](https://github.com/125sachin) 
 [<img src="https://avatars.githubusercontent.com/psantosh16?v=4" width="40px;"/>](https://github.com/psantosh16)

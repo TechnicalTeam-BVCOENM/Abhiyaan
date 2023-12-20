@@ -1,4 +1,4 @@
-package com.bvcoenm.darpan
+package com.bvcoenm.abhiyaan
 
 import io.flutter.embedding.android.FlutterActivity
 
