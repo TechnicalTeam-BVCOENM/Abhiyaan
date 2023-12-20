@@ -10,15 +10,21 @@ class RegisterViewModel extends BaseViewModel {
 
   final TextEditingController emailIdTextController = TextEditingController();
   final TextEditingController misnoTextController = TextEditingController();
+  final TextEditingController phoneTextController = TextEditingController();
   final TextEditingController createpasswordTextController =
       TextEditingController();
   final TextEditingController confirmpasswordTextController =
       TextEditingController();
+  final TextEditingController userNameController = TextEditingController();
 
   final ValueNotifier<String> dropdownValueNotifier =
       ValueNotifier<String>('Select');
 
   String get dropdownValue => dropdownValueNotifier.value;
+  changeDropDown(String? value) {
+    dropDownValue = value!;
+    notifyListeners();
+  }
 
   set dropdownValue(String value) {
     dropdownValueNotifier.value = value;
@@ -49,6 +55,8 @@ class RegisterViewModel extends BaseViewModel {
     String confirmPassword,
     String dropdownValue,
     String misNo,
+    String phoneNo,
+    String userName,
     BuildContext context,
   ) async {
     // Validate email format
@@ -57,12 +65,12 @@ class RegisterViewModel extends BaseViewModel {
       showmessage(context, "Invalid email format");
       return;
     }
-    if (misNo == "") {
-      showmessage(context, "misNo field empty");
-      return;
-    }
-    if (createpassword == "" || confirmPassword == "") {
-      showmessage(context, "password field empty");
+    if (misNo == "" ||
+        createpassword == "" ||
+        confirmPassword == "" ||
+        phoneNo == "" ||
+        userName == "") {
+      showmessage(context, "some fields are empty!");
       return;
     }
 
@@ -78,7 +86,12 @@ class RegisterViewModel extends BaseViewModel {
     await FirebaseFirestore.instance
         .collection("Users")
         .doc(FirebaseAuth.instance.currentUser?.uid)
-        .set({"userMisNo": misNo});
+        .set({
+      "userMisNo": misNo,
+      "userEmail": email,
+      "userPhone": phoneNo,
+      "userName": userName
+    });
 
     await AuthenticationService().storeUserDataLocally();
     //  Notify listeners if needed

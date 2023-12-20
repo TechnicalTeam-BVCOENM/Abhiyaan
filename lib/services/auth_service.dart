@@ -31,7 +31,8 @@ class AuthenticationService {
       );
 
       log.i('Auth success');
-    } on FirebaseAuthException {
+    } on FirebaseAuthException catch (e) {
+      log.i(e);
       rethrow;
     }
   }

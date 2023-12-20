@@ -1,4 +1,3 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/services/notification_service.dart';
@@ -39,11 +38,15 @@ class HomeView extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Hey ${model.splitusername()} 👋', // Update according to loal storage
-                                style: fontTheme.title(context,
-                                    color: context.colorScheme.headingColor,
-                                    fontWeight: FontWeight.w600),
+                              SizedBox(
+                                width: 280.w,
+                                child: Text(
+                                  overflow: TextOverflow.ellipsis,
+                                  'Hey ${model.splitusername()} 👋', // Update according to loal storage
+                                  style: fontTheme.title(context,
+                                      color: context.colorScheme.headingColor,
+                                      fontWeight: FontWeight.w600),
+                                ),
                               ),
                               IconButton(
                                 splashRadius: 30.sp,
