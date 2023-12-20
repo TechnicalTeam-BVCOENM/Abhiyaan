@@ -1,25 +1,28 @@
 part of 'home_view.dart';
 
-bool isUpgradePopupShown = false;
-
 class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
   final FirestoreService _firestoreService = FirestoreService();
+  final navigationService = locator<NavigationService>();
+  late bool isUserNew = LocalStorageService().read('isUserNew');
+
   List<String> firstname = [];
   String splitusername() {
     final user = LocalStorageService().read('userName');
     firstname = user.split(' ');
+    log.i(isUserNew);
     return firstname[0];
   }
 
   bool toggleUpgradePopup() {
-    isUpgradePopupShown = true;
-    debugPrint("✅ Upgrade Popup Shown $isUpgradePopupShown");
+    isUserNew = false;
+    debugPrint("✅ Upgrade Popup Shown $isUserNew");
+    _firestoreService
+        .updateUserStatus()
+        .then((value) => LocalStorageService().write('isUserNew', isUserNew));
     notifyListeners();
-    return isUpgradePopupShown;
+    return isUserNew;
   }
-
-  final navigationService = locator<NavigationService>();
 
   void navigateToNotificationView() {
     navigationService.navigateToNotificationView(id: '');
@@ -71,15 +74,17 @@ class HomeViewModel extends BaseViewModel {
       notificationService.messaging.onTokenRefresh.listen((event) {
         notificationService.getDeviceToken();
       });
-      debugPrint("✅✅ Upgrade Popup Shown $isUpgradePopupShown");
+      debugPrint("✅✅ Upgrade Popup Shown $isUserNew");
 
       notificationService.getDeviceToken();
+      // _firestoreService.getUserStatus();
+
       _highlights = await _firestoreService.getHighlights();
       _departmentUpdates = await _firestoreService.getCollegeUpdates();
       notifyListeners();
       log.i(highlights);
       log.i(highlights.length);
-      if (isUpgradePopupShown == false) {
+      if (isUserNew == true) {
         showWelcomPopUp(context);
       }
       debugPrint(
@@ -184,7 +189,7 @@ class HomeViewModel extends BaseViewModel {
                   onPressed: () {
                     toggleUpgradePopup();
                     Navigator.of(context).pop();
-                    debugPrint("✅✅ Upgrade Popup Shown $isUpgradePopupShown");
+                    debugPrint("✅✅ Upgrade Popup Shown $isUserNew");
                   },
                   child: Text(
                     "Let's Go!",

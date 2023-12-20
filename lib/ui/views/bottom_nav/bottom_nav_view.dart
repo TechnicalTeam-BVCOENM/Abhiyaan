@@ -48,7 +48,6 @@ class BottomNavView extends StatelessWidget {
                       text: "Home",
                     ),
                   ),
-                  
                   const BottomNavigationBarItem(
                     label: '',
                     icon: Icon(Icons.calendar_month_outlined),

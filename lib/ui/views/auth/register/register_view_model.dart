@@ -68,7 +68,7 @@ class RegisterViewModel extends BaseViewModel {
     await FirebaseFirestore.instance
         .collection("Users")
         .doc(FirebaseAuth.instance.currentUser?.uid)
-        .set({ "userMisNo": misNo});
+        .set({"userMisNo": misNo});
 
     //  Notify listeners if needed
     notifyListeners();
