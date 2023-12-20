@@ -8,7 +8,11 @@ import 'package:flutter/services.dart';
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
+  if (Firebase.apps.isEmpty) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
 }
 
 void notificationServicesAfterAppStart(BuildContext context) {
@@ -20,9 +24,11 @@ void notificationServicesAfterAppStart(BuildContext context) {
 
 Future<void> servicesToInitializeBeforeAppStart() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  if (Firebase.apps.isEmpty) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
   setupLocator();
   await Future.wait([
     locator<LocalStorageService>().initStorage(),
