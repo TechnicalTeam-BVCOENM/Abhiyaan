@@ -1,8 +1,8 @@
-import 'package:darpan/firebase_options.dart';
-import 'package:darpan/services/notification_service.dart';
-import 'package:darpan/theme/theme_service.dart';
+import 'package:abhiyaan/firebase_options.dart';
+import 'package:abhiyaan/services/notification_service.dart';
+import 'package:abhiyaan/theme/theme_service.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:darpan/file_exporter.dart';
+import 'package:abhiyaan/file_exporter.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
 
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
             splitScreenMode: true,
             builder: (_, child) {
               return MaterialApp(
-                title: 'Darpan',
+                title: 'abhiyaan',
                 debugShowCheckedModeBanner: false,
                 theme: ThemeData(
                   textTheme: const TextTheme(),

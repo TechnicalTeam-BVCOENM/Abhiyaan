@@ -51,19 +51,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBH-E6avJchvbbI0pZlEtPMuArCqcrav0k',
-    appId: '1:601824246739:android:d48a1e766d36a5bb0b4d26',
-    messagingSenderId: '601824246739',
-    projectId: 'darpan-b94d6',
-    storageBucket: 'darpan-b94d6.appspot.com',
+    apiKey: 'AIzaSyDAoK2-eDzShHx0WcvUVyDFwJWNHkrDUm0',
+    appId: '1:28627991579:android:71efbadea26c899f0e0cbe',
+    messagingSenderId: '28627991579',
+    projectId: 'abhiyaan-9f241',
+    storageBucket: 'abhiyaan-9f241.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCqCa76freIR8U4h3QI31OacAhQ1qeWVcY',
-    appId: '1:601824246739:ios:e31faf3faef792c80b4d26',
-    messagingSenderId: '601824246739',
-    projectId: 'darpan-b94d6',
-    storageBucket: 'darpan-b94d6.appspot.com',
-    iosBundleId: 'com.bvcoenm.darpan',
+    apiKey: 'AIzaSyDAoK2-eDzShHx0WcvUVyDFwJWNHkrDUm0',
+    appId: '1:28627991579:android:71efbadea26c899f0e0cbe',
+    messagingSenderId: '28627991579',
+    projectId: 'abhiyaan-9f241',
+    storageBucket: 'abhiyaan-9f241.appspot.com',
+    iosBundleId: 'com.bvcoenm.abhiyaan',
   );
 }

@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:darpan/file_exporter.dart';
-import 'package:darpan/ui/views/profile/profile_view_component.dart';
+import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/ui/views/profile/profile_view_component.dart';
 part 'profile_view_model.dart';
 
 class ProfileView extends StatelessWidget {
@@ -60,7 +60,7 @@ class ProfileView extends StatelessWidget {
                               height: 90.r,
                               fit: BoxFit.cover,
                               imageUrl:
-                                  "https://firebasestorage.googleapis.com/v0/b/darpan-b94d6.appspot.com/o/user%2Fimages.jpeg?alt=media&token=a9889ba7-3958-4784-9708-e43ade1016d4",
+                                  "https://firebasestorage.googleapis.com/v0/b/abhiyaan-b94d6.appspot.com/o/user%2Fimages.jpeg?alt=media&token=a9889ba7-3958-4784-9708-e43ade1016d4",
                               placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator.adaptive()),
                               errorWidget: (context, url, error) =>

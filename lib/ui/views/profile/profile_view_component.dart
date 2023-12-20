@@ -1,6 +1,6 @@
-import 'package:darpan/ui/common/common_component_model.dart';
+import 'package:abhiyaan/ui/common/common_component_model.dart';
 import 'package:flutter/services.dart';
-import 'package:darpan/file_exporter.dart';
+import 'package:abhiyaan/file_exporter.dart';
 import '../../common/toast_message.dart';
 
 class ProfileDetailsCard extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:app_settings/app_settings.dart';
-import 'package:darpan/file_exporter.dart';
-import 'package:darpan/services/auth_service.dart';
+import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/services/auth_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -37,7 +37,7 @@ class NotificationService {
     }
   }
 
-  void initFirebaseNotification(BuildContext context) async {
+  Future initFirebaseNotification(BuildContext context) async {
     try {
       debugPrint('Initializing firebase notification');
       FirebaseMessaging.onMessage.listen((message) {
@@ -85,8 +85,12 @@ class NotificationService {
       );
       debugPrint('Initialized local notification successfully!');
     } catch (e) {
+      debugPrint('Initialized local notification failed!');
+
       debugPrint(e.toString());
     }
+      debugPrint('📍📍📍📍Initialized local notification exited!');
+
   }
 
   Future<void> setupInteractMessage(BuildContext context) async {
@@ -114,18 +118,9 @@ class NotificationService {
     }
   }
 
-  Future iosForgroundMessage() async {
-    await FirebaseMessaging.instance
-        .setForegroundNotificationPresentationOptions(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
-  }
-
   Future<void> showNotification(RemoteMessage message) async {
     try {
-      if (message.notification != null) {
+      
         AndroidNotificationChannel channel = const AndroidNotificationChannel(
           '1',
           'high_importance_channel',
@@ -171,7 +166,6 @@ class NotificationService {
                   platformChannelSpecifics,
                   payload: 'Default_Sound',
                 ));
-      }
     } catch (e) {
       debugPrint(e.toString());
     }

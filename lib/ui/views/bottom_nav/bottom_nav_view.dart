@@ -1,7 +1,7 @@
-import 'package:darpan/file_exporter.dart';
-import 'package:darpan/ui/views/event/event_view.dart';
-import 'package:darpan/ui/views/home/home_view.dart';
-import 'package:darpan/ui/views/profile/profile_view.dart';
+import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/ui/views/event/event_view.dart';
+import 'package:abhiyaan/ui/views/home/home_view.dart';
+import 'package:abhiyaan/ui/views/profile/profile_view.dart';
 part 'bottom_nav_view_model.dart';
 part 'bottom_nav_view_components.dart';
 
@@ -48,16 +48,7 @@ class BottomNavView extends StatelessWidget {
                       text: "Home",
                     ),
                   ),
-                  BottomNavigationBarItem(
-                    backgroundColor:
-                        context.colorScheme.selectedBottomNavIconbg,
-                    label: '',
-                    icon: const Icon(Icons.book),
-                    activeIcon: const BottomNavActiveIcon(
-                      icon: Icons.menu_book_sharp,
-                      text: "Community",
-                    ),
-                  ),
+                  
                   const BottomNavigationBarItem(
                     label: '',
                     icon: Icon(Icons.calendar_month_outlined),

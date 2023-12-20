@@ -1,20 +1,20 @@
-import 'package:darpan/services/auth_service.dart';
-import 'package:darpan/services/local_storage_service.dart';
-import 'package:darpan/theme/theme_service.dart';
-import 'package:darpan/ui/views/auth/auth_view.dart';
-import 'package:darpan/ui/views/auth/onboarding/onboarding_view.dart';
-import 'package:darpan/ui/views/auth/register/register_view.dart';
-import 'package:darpan/ui/views/auth/sign_in/sign_in_view.dart';
-import 'package:darpan/ui/views/bottom_nav/bottom_nav_view.dart';
-import 'package:darpan/ui/views/event/detailed_event/detailed_event_view.dart';
-import 'package:darpan/ui/views/event/event_view.dart';
-import 'package:darpan/ui/views/notifications/notification_view.dart';
-import 'package:darpan/ui/views/profile/profile_view.dart';
-import 'package:darpan/ui/views/profile/settings/settings_view.dart';
+import 'package:abhiyaan/services/auth_service.dart';
+import 'package:abhiyaan/services/local_storage_service.dart';
+import 'package:abhiyaan/theme/theme_service.dart';
+import 'package:abhiyaan/ui/views/auth/auth_view.dart';
+import 'package:abhiyaan/ui/views/auth/onboarding/onboarding_view.dart';
+import 'package:abhiyaan/ui/views/auth/register/register_view.dart';
+import 'package:abhiyaan/ui/views/auth/sign_in/sign_in_view.dart';
+import 'package:abhiyaan/ui/views/bottom_nav/bottom_nav_view.dart';
+import 'package:abhiyaan/ui/views/event/detailed_event/detailed_event_view.dart';
+import 'package:abhiyaan/ui/views/event/event_view.dart';
+import 'package:abhiyaan/ui/views/notifications/notification_view.dart';
+import 'package:abhiyaan/ui/views/profile/profile_view.dart';
+import 'package:abhiyaan/ui/views/profile/settings/settings_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:darpan/ui/views/home/home_view.dart';
-import 'package:darpan/ui/views/splash/splash_view.dart';
+import 'package:abhiyaan/ui/views/home/home_view.dart';
+import 'package:abhiyaan/ui/views/splash/splash_view.dart';
 
 @StackedApp(
   routes: [

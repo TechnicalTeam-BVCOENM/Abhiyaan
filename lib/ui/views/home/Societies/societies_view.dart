@@ -1,5 +1,5 @@
-import 'package:darpan/file_exporter.dart';
-import 'package:darpan/ui/views/home/Societies/societies_view_component.dart';
+import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/ui/views/home/Societies/societies_view_component.dart';
 part 'societies_view_model.dart';
 
 class SocietiesView extends StatelessWidget {

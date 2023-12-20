@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:darpan/file_exporter.dart';
-import 'package:darpan/services/firestore_service.dart';
-import 'package:darpan/ui/common/toast_message.dart';
+import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/services/firestore_service.dart';
+import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthenticationService {

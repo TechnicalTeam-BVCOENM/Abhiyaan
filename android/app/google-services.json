@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "601824246739",
-    "project_id": "darpan-b94d6",
-    "storage_bucket": "darpan-b94d6.appspot.com"
+    "project_number": "28627991579",
+    "project_id": "abhiyaan-9f241",
+    "storage_bucket": "abhiyaan-9f241.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:601824246739:android:d48a1e766d36a5bb0b4d26",
+        "mobilesdk_app_id": "1:28627991579:android:71efbadea26c899f0e0cbe",
         "android_client_info": {
-          "package_name": "com.bvcoenm.darpan"
+          "package_name": "com.bvcoenm.abhiyaan"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBH-E6avJchvbbI0pZlEtPMuArCqcrav0k"
+          "current_key": "AIzaSyDAoK2-eDzShHx0WcvUVyDFwJWNHkrDUm0"
         }
       ],
       "services": {

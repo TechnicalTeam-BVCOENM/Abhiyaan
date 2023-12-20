@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:darpan/ui/views/event/event_view.dart';
-import 'package:darpan/ui/views/home/home_view.dart';
+import 'package:abhiyaan/ui/views/event/event_view.dart';
+import 'package:abhiyaan/ui/views/home/home_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirestoreService {

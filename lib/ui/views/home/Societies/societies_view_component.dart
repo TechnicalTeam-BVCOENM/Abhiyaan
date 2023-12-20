@@ -1,4 +1,4 @@
-import 'package:darpan/file_exporter.dart';
+import 'package:abhiyaan/file_exporter.dart';
 
 class SocietyCard extends StatelessWidget {
   final String title;

@@ -2,17 +2,17 @@
 export 'package:flutter/material.dart';
 
 // App
-export 'package:darpan/app/app.router.dart';
-export 'package:darpan/app/app.locator.dart';
-export 'package:darpan/app/app.logger.dart';
+export 'package:abhiyaan/app/app.router.dart';
+export 'package:abhiyaan/app/app.locator.dart';
+export 'package:abhiyaan/app/app.logger.dart';
 
 //Services
-export 'package:darpan/services/local_storage_service.dart';
+export 'package:abhiyaan/services/local_storage_service.dart';
 
 // Theme
-export 'package:darpan/theme/app_color.dart';
-export 'package:darpan/theme/app_font.dart';
-export 'package:darpan/utils/extension.dart';
+export 'package:abhiyaan/theme/app_color.dart';
+export 'package:abhiyaan/theme/app_font.dart';
+export 'package:abhiyaan/utils/extension.dart';
 
 // Dependencies
 export 'package:stacked/stacked.dart';
@@ -21,7 +21,7 @@ export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 //Components
-export 'package:darpan/ui/common/section_divider.dart';
+export 'package:abhiyaan/ui/common/section_divider.dart';
 
 // assets path
-export 'package:darpan/utils/assets_constants.dart';
+export 'package:abhiyaan/utils/assets_constants.dart';
