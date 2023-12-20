@@ -68,7 +68,10 @@ class ProfileDetailsCard extends StatelessWidget {
                 TextButton(
                     onPressed: () async {
                       await Clipboard.setData(ClipboardData(text: value))
-                          .then((value) => showmessage(context, "Copied"));
+                          .then((value) => showmessage(
+                                context,
+                                "Copied",
+                              ));
                       // ignore: use_build_context_synchronously
                     },
                     child: Icon(

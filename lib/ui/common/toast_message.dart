@@ -1,24 +1,29 @@
+import 'package:flutter_animate/flutter_animate.dart';
+
 import '../../file_exporter.dart';
 
 void showmessage(BuildContext context, String message) {
   FontThemeClass fontTheme = FontThemeClass();
   try {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      elevation: 0,
-      duration: const Duration(milliseconds: 500),
+      padding: const EdgeInsets.all(10),
+      elevation: 30,
+      duration: const Duration(milliseconds: 1500),
       backgroundColor: Colors.transparent,
       content: Center(
         child: Container(
-          padding:
-              const EdgeInsets.only(left: 70, right: 70, top: 8, bottom: 8),
-          height: 40.sp,
+          padding: const EdgeInsets.only(top: 8, bottom: 8),
+          height: 50.sp,
+          width: double.infinity,
           decoration: BoxDecoration(
-              color: context.colorScheme.secondaryLPurpleColor,
+              color: context.colorScheme.secondaryWhiteColor,
               borderRadius: BorderRadius.circular(10)),
-          child: Text(
-            message,
-            style: fontTheme.body(context,
-                color: context.colorScheme.secondaryBlackColor),
+          child: Center(
+            child: Text(
+              message,
+              style: fontTheme.body(context,
+                  color: context.colorScheme.secondaryBlackColor),
+            ),
           ),
         ),
       ),

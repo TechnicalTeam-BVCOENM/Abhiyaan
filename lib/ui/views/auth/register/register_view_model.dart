@@ -62,7 +62,7 @@ class RegisterViewModel extends BaseViewModel {
     // Validate email format
     if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
         .hasMatch(email)) {
-      showmessage(context, "Invalid email format");
+      showmessage(context, "Invalid email format",);
       return;
     }
     if (misNo == "" ||

@@ -24,7 +24,7 @@ class SettingsViewModel extends BaseViewModel {
       final localStorageService = locator<LocalStorageService>();
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: localStorageService.read('userEmail'))
-          .then((value) => showmessage(context, "reset password email sent !"));
+          .then((value) => showmessage(context, "reset password email sent !",));
     } catch (e) {
       showmessage(context, "something went wrong !");
     }
