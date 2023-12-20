@@ -48,7 +48,7 @@ class HomeView extends StatelessWidget {
                                 style: fontTheme.title(context,
                                     color: context.colorScheme.headingColor,
                                     fontWeight: FontWeight.w600),
-                              ),
+                              ).animate().fadeIn(),
                               IconButton(
                                 splashRadius: 30.sp,
                                 splashColor:
