@@ -3,7 +3,7 @@ part of 'sign_in_view.dart';
 class SignInViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
-
+  bool isloading = false;
   final log = getLogger('AuthViewModel');
   final fontTheme = FontThemeClass();
 
@@ -33,16 +33,23 @@ class SignInViewModel extends BaseViewModel {
 
   Future<void> login(String email, String password, context) async {
     setBusy(true);
+
     try {
+      // Show a loading indicator over your UI
+      AuthenticationService().showLoadingOverlay(context);
       await _authenticationService.signInWithEmailAndPassword(email, password);
+      await AuthenticationService().storeUserDataLocally();
+      NavigationService().back();
       showmessage(context, "Login successful");
       _navigationService.navigateTo(Routes.bottomNavView);
     } on FirebaseException {
       isPasswordValid = false;
       isEmailIdValid = false;
+      NavigationService().back();
       notifyListeners();
-      // You can log or handle other Firebase exceptions here
+      // Handle Firebase exceptions here
     }
+
     setBusy(false);
   }
 

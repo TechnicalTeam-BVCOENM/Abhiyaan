@@ -4,7 +4,6 @@ import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
 import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:darpan/ui/common/toast_message.dart';
-import 'package:darpan/ui/views/auth/register/register_view_component.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 part 'register_view_model.dart';
@@ -40,9 +39,97 @@ class RegisterView extends StatelessWidget {
                             ),
                             const Expanded(child: Text("")),
                             Padding(
-                              padding: const EdgeInsets.only(top: 5.0).r,
-                              child: const DropdownMenuBtn(),
-                            ),
+                                padding: const EdgeInsets.only(top: 5.0).r,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: context.colorScheme
+                                                .secondaryWhiteColor),
+                                        borderRadius:
+                                            BorderRadius.circular(16.0).r,
+                                        color: context
+                                            .colorScheme.secondaryWhiteColor,
+                                      ),
+                                      child: Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          child: DropdownButton<String>(
+                                            elevation: 0,
+                                            dropdownColor: context.colorScheme
+                                                .secondaryLPurpleColor,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            value: model.dropDownValue,
+                                            items: list
+                                                .map<DropdownMenuItem<String>>(
+                                                  (e) => DropdownMenuItem(
+                                                    value: e,
+                                                    child: Text(e),
+                                                  ),
+                                                )
+                                                .toList(),
+
+                                            onChanged: (String? value) {
+                                              if (value != null) {}
+                                              model.dropDownValue = value!;
+                                            },
+                                            underline:
+                                                const SizedBox(), // Remove the default underline
+                                            isExpanded: true,
+                                            icon: Icon(
+                                              Icons.arrow_drop_down,
+                                              size: 40.sp,
+                                            ),
+                                            style: FontThemeClass().caption(
+                                              context,
+                                              color: context.colorScheme
+                                                  .secondaryBlackColor,
+                                            ),
+                                          )),
+                                    ),
+                                    if (model.dropDownValue == 'BVCOE Student')
+                                      Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 15.h,
+                                          ),
+                                          TextFormField(
+                                            cursorColor: context
+                                                .colorScheme.primaryColor,
+                                            controller:
+                                                model.misnoTextController,
+                                            decoration: InputDecoration(
+                                              contentPadding:
+                                                  const EdgeInsets.symmetric(
+                                                          horizontal: 15,
+                                                          vertical: 15)
+                                                      .r,
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                    const Radius.circular(15).r,
+                                                  ),
+                                                  borderSide: BorderSide.none),
+                                              fillColor: context.colorScheme
+                                                  .secondaryWhiteColor,
+                                              filled: true,
+                                              focusColor: context.colorScheme
+                                                  .secondaryWhiteColor,
+                                              hintText: 'Enter MIS Number',
+                                              hintStyle: FontThemeClass()
+                                                  .caption(context,
+                                                      color: context.colorScheme
+                                                          .secondarySectionColor,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                  ],
+                                )),
                             SizedBox(
                               height: 15.h,
                             ),

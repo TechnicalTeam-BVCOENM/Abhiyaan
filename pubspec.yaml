@@ -36,6 +36,7 @@ dependencies:
   share_plus: ^7.2.1
   flutter_local_notifications: ^16.2.0
   app_settings: ^5.1.1
+  lottie: ^2.7.0
 
 dev_dependencies:
   flutter_test:
@@ -46,6 +47,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/
+    - assets/images/animations/
     - assets/images/profile/
     - assets/images/onboarding/
     - assets/images/home/

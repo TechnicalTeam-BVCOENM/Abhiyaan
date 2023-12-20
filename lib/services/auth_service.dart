@@ -3,6 +3,7 @@ import 'package:darpan/file_exporter.dart';
 import 'package:darpan/services/firestore_service.dart';
 import 'package:darpan/ui/common/toast_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:lottie/lottie.dart';
 
 class AuthenticationService {
   List userTag = [
@@ -20,15 +21,15 @@ class AuthenticationService {
   final localStorageService = locator<LocalStorageService>();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final log = getLogger('AuthService');
-
   User? get currentUser => _firebaseAuth.currentUser;
 
   Future<void> signInWithEmailAndPassword(String email, String password) async {
     try {
-      await _firebaseAuth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) => storeUserDataLocally());
-      // Handle successful login
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
       log.i('Auth success');
     } on FirebaseAuthException {
       rethrow;
@@ -43,11 +44,12 @@ class AuthenticationService {
         password: password,
       );
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        showmessage(context, "weak-password");
-      } else if (e.code == 'email-already-in-use') {
+      if (e.code == 'email-already-in-use') {
         showmessage(context, "email-already-in-use");
+      } else if (e.code == 'weak-password') {
+        showmessage(context, "weak-password");
       }
+      NavigationService().back();
     }
   }
 
@@ -160,5 +162,19 @@ class AuthenticationService {
     } catch (e) {
       debugPrint('Error saving  token to database: ${e.toString()}');
     }
+  }
+
+  void showLoadingOverlay(BuildContext context) async {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return Center(
+              child: SizedBox(
+                  width: 250,
+                  child: LottieBuilder.asset(
+                      repeat: true,
+                      "assets/images/animations/hand_loading.json")));
+        });
   }
 }
