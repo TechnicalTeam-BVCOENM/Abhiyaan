@@ -16,6 +16,7 @@ class AuthenticationService {
     "userLibNo",
     "userPhone",
     "userCertifications",
+    "isUserNew",
   ];
   final localStorageService = locator<LocalStorageService>();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;

@@ -53,7 +53,7 @@ class EventViewModel extends BaseViewModel {
     return currentMonth;
   }
 
-   EventModel? _todayEvent;
+  EventModel? _todayEvent;
   EventModel? get todayEvent => _todayEvent;
   EventModel? setTodayEvent(EventModel? event) {
     _todayEvent = event;
