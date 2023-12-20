@@ -85,7 +85,10 @@ class RegisterViewModel extends BaseViewModel {
     // ignore: use_build_context_synchronously
     NavigationService().back();
     await _navigationService
-        .replaceWith(Routes.onboardingView)
+        .navigateWithTransition(const OnboardingView(),
+            transitionStyle: Transition.rightToLeftWithFade,
+            curve: Curves.easeInOutQuad,
+            duration: const Duration(milliseconds: 400))
         ?.then((value) => showmessage(context, "Registration successful"));
     notifyListeners();
   }

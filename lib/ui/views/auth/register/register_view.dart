@@ -4,6 +4,7 @@ import 'package:darpan/services/auth_service.dart';
 import 'package:darpan/theme/responsive_utils.dart';
 import 'package:darpan/ui/common/common_component_model.dart';
 import 'package:darpan/ui/common/toast_message.dart';
+import 'package:darpan/ui/views/auth/onboarding/onboarding_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 part 'register_view_model.dart';
