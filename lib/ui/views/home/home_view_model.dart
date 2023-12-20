@@ -63,9 +63,9 @@ class HomeViewModel extends BaseViewModel {
         notificationService.getDeviceToken();
       });
       notificationService.getDeviceToken();
-      _highlights = await _firestoreService.getAllData('Highlights');
+      _highlights = await _firestoreService.getHighlights();
       _departmentUpdates =
-          await _firestoreService.getAllDepartmentData('DepartmentUpdate');
+          await _firestoreService.getCollegeUpdates();
       notifyListeners();
       log.i(highlights);
       log.i(highlights.length);

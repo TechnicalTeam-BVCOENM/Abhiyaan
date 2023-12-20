@@ -1,5 +1,5 @@
-import 'package:darpan/file_exporter.dart';
-import 'package:darpan/ui/views/auth/onboarding/onboarding_view_component.dart';
+import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/ui/views/auth/onboarding/onboarding_view_component.dart';
 part 'onboarding_view_model.dart';
 
 class OnboardingView extends StatelessWidget {

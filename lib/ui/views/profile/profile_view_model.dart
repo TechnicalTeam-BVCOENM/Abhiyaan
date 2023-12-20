@@ -34,7 +34,7 @@ class ProfileViewModel extends BaseViewModel {
     ProfileDetailsCard(
       leading: AssetImagePath.misImg,
       title: "MIS Number",
-      value: LocalStorageService().read('userMisNo'),
+      value: LocalStorageService().read('userMisNo').toString(),
       icon: Icons.content_copy,
     ),
     ProfileDetailsCard(
@@ -46,7 +46,7 @@ class ProfileViewModel extends BaseViewModel {
     ProfileDetailsCard(
       leading: AssetImagePath.phoneImg,
       title: "Mobile Number",
-      value: LocalStorageService().read('userPhone'),
+      value: LocalStorageService().read('userPhone').toString(),
       icon: Icons.content_copy,
     ),
   ];

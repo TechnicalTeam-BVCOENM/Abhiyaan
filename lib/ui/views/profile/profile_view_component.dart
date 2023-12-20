@@ -1,6 +1,6 @@
-import 'package:darpan/ui/common/common_component_model.dart';
+import 'package:abhiyaan/ui/common/common_component_model.dart';
 import 'package:flutter/services.dart';
-import 'package:darpan/file_exporter.dart';
+import 'package:abhiyaan/file_exporter.dart';
 import '../../common/toast_message.dart';
 
 class ProfileDetailsCard extends StatelessWidget {
@@ -101,10 +101,13 @@ class SocialLinks extends StatelessWidget {
           width: 47.r,
           height: 47.r,
           decoration: BoxDecoration(
-              color: context.colorScheme.secondaryWhiteColor,
-              borderRadius: BorderRadius.circular(100)),
+            color: context.colorScheme.secondaryWhiteColor,
+            borderRadius: BorderRadius.circular(100),
+          ),
           child: Padding(
-              padding: const EdgeInsets.all(9).r, child: Image.asset(iconpath)),
+            padding: const EdgeInsets.all(9).r,
+            child: Image.asset(iconpath),
+          ),
         ));
   }
 }
@@ -150,7 +153,7 @@ class Cetificatation extends StatelessWidget {
               SizedBox(
                 width: 160.w,
                 child: Text(
-                  LocalStorageService().read('userCertifications'),
+                  LocalStorageService().read('userCertifications').toString(),
                   overflow: TextOverflow.ellipsis,
                   style: FontThemeClass().caption(context,
                       color: context.colorScheme.secondarySectionColor),

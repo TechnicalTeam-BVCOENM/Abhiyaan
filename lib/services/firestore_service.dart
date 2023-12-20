@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:darpan/ui/views/event/event_view.dart';
-import 'package:darpan/ui/views/home/home_view.dart';
+import 'package:abhiyaan/ui/views/event/event_view.dart';
+import 'package:abhiyaan/ui/views/home/home_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirestoreService {
@@ -13,14 +13,17 @@ class FirestoreService {
         .map((doc) => doc.data() as Map<String, dynamic>)
         .toList();
   }
+  Future<List<Map<String, dynamic>>> getHighlights() async {
+    final QuerySnapshot snapshot =
+        await _firestore.collection('CollegeUpdates').doc("data").collection("highlights").get();
+    return snapshot.docs
+        .map((doc) => doc.data() as Map<String, dynamic>)
+        .toList();
+  }
 
-  Future<List<DepartmentUpdates>> getAllDepartmentData(
-      String collection) async {
+  Future<List<DepartmentUpdates>> getCollegeUpdates() async {
     final QuerySnapshot snapshot = await _firestore
-        .collection(collection)
-        .doc('12')
-        .collection('updates')
-        .get();
+        .collection('CollegeUpdates').doc("data").collection("updates").get();
     return snapshot.docs.map((doc) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       return DepartmentUpdates(
@@ -33,7 +36,7 @@ class FirestoreService {
 
   Future<List<SponsorsModel>> getAllSponsors() async {
     final QuerySnapshot snapshot =
-        await _firestore.collection("sponsors").get();
+        await _firestore.collection("Sponsors").get();
     return snapshot.docs.map((doc) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       return SponsorsModel(
@@ -42,7 +45,7 @@ class FirestoreService {
   }
 
   Future<List<EventModel>> getAllEvents() async {
-    final QuerySnapshot snapshot = await _firestore.collection("events").get();
+    final QuerySnapshot snapshot = await _firestore.collection("Events").get();
     return snapshot.docs.map((doc) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       return EventModel(

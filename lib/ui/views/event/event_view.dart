@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:darpan/ui/common/common_component_model.dart';
-import 'package:darpan/ui/common/shimmer.dart';
-import 'package:darpan/services/firestore_service.dart';
-import 'package:darpan/theme/responsive_utils.dart';
+import 'package:abhiyaan/ui/common/common_component_model.dart';
+import 'package:abhiyaan/ui/common/shimmer.dart';
+import 'package:abhiyaan/services/firestore_service.dart';
+import 'package:abhiyaan/theme/responsive_utils.dart';
 import 'package:intl/intl.dart';
-import 'package:darpan/ui/common/cached_network_image.dart';
-import 'package:darpan/file_exporter.dart';
+import 'package:abhiyaan/ui/common/cached_network_image.dart';
+import 'package:abhiyaan/file_exporter.dart';
 part 'event_view_model.dart';
 part 'event_view_components.dart';
 
