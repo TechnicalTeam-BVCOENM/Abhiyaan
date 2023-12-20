@@ -1,5 +1,7 @@
 part of 'home_view.dart';
 
+bool isUpgradePopupShown = false;
+
 class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
   final FirestoreService _firestoreService = FirestoreService();
@@ -8,6 +10,13 @@ class HomeViewModel extends BaseViewModel {
     final user = LocalStorageService().read('userName');
     firstname = user.split(' ');
     return firstname[0];
+  }
+
+  bool toggleUpgradePopup() {
+    isUpgradePopupShown = true;
+    debugPrint("✅ Upgrade Popup Shown $isUpgradePopupShown");
+    notifyListeners();
+    return isUpgradePopupShown;
   }
 
   final navigationService = locator<NavigationService>();
@@ -55,25 +64,30 @@ class HomeViewModel extends BaseViewModel {
   List<DepartmentUpdates> _departmentUpdates = [];
   List<DepartmentUpdates> get departmentUpdates => _departmentUpdates;
 
-  Future<void> init() async {
+  Future<void> init(context) async {
     setBusy(true);
     try {
       NotificationService notificationService = NotificationService();
       notificationService.messaging.onTokenRefresh.listen((event) {
         notificationService.getDeviceToken();
       });
+      debugPrint("✅✅ Upgrade Popup Shown $isUpgradePopupShown");
+
       notificationService.getDeviceToken();
       _highlights = await _firestoreService.getHighlights();
-      _departmentUpdates =
-          await _firestoreService.getCollegeUpdates();
+      _departmentUpdates = await _firestoreService.getCollegeUpdates();
       notifyListeners();
       log.i(highlights);
       log.i(highlights.length);
+      if (isUpgradePopupShown == false) {
+        showWelcomPopUp(context);
+      }
       debugPrint(
           DateFormat("MMMM d").format((departmentUpdates[0].date).toDate()));
     } catch (e) {
       log.e(e);
     }
+
     setBusy(false);
   }
 
@@ -82,6 +96,101 @@ class HomeViewModel extends BaseViewModel {
   void updateActiveIndex(int newIndex) {
     _activeIndex = newIndex;
     notifyListeners();
+  }
+
+  void showWelcomPopUp(BuildContext context) {
+    FontThemeClass fontThemeClass = FontThemeClass();
+    showAdaptiveDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: context.colorScheme.secondaryWhiteColor,
+            title: SizedBox(
+              height: 100.h,
+              width: 100.w,
+              child: Lottie.asset(
+                AnimationAssets.welcome,
+                repeat: true,
+                reverse: false,
+                frameRate: FrameRate(60),
+                fit: BoxFit.contain,
+              ),
+            ),
+            content: IntrinsicHeight(
+              child: Column(
+                children: [
+                  Text(
+                    splitusername(),
+                    style: fontThemeClass.title(
+                      context,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  10.verticalSpace,
+                  Row(
+                    children: [
+                      Image.asset(
+                        AssetImagePath.community,
+                        width: 40.w,
+                        height: 40.h,
+                      ),
+                      16.horizontalSpace,
+                      Expanded(
+                        child: Text(
+                          "We are thrilled to have you join our digital community!",
+                          style: fontThemeClass.body(context),
+                        ),
+                      ),
+                    ],
+                  ),
+                  10.verticalSpace,
+                  Row(
+                    children: [
+                      Image.asset(
+                        AssetImagePath.poper,
+                        width: 40.w,
+                        height: 40.h,
+                      ),
+                      16.horizontalSpace,
+                      Expanded(
+                        child: Text(
+                          "Explore events, from cultural festivals to academic seminars.",
+                          style: fontThemeClass.body(context),
+                        ),
+                      ),
+                    ],
+                  ),
+                  10.verticalSpace,
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  color: context.colorScheme.primaryColor,
+                  borderRadius: BorderRadius.circular(12).r,
+                ),
+                width: double.infinity,
+                child: TextButton(
+                  onPressed: () {
+                    toggleUpgradePopup();
+                    Navigator.of(context).pop();
+                    debugPrint("✅✅ Upgrade Popup Shown $isUpgradePopupShown");
+                  },
+                  child: Text(
+                    'OK',
+                    style: fontThemeClass.body(
+                      context,
+                      color: context.colorScheme.secondaryWhiteColor,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
   }
 }
 

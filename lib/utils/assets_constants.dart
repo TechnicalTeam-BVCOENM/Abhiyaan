@@ -31,6 +31,10 @@ class AssetImagePath {
       'assets/images/home/societies/Mudrakala.png';
   static const String crescendoImg =
       'assets/images/home/societies/Crescendo.png';
+    static const String poper =
+      'assets/images/home/poper.png';  
+    static const String community =
+      'assets/images/home/community.webp';  
 }
 
 class AssetUrls {
@@ -39,4 +43,9 @@ class AssetUrls {
   static const linkedinUrl =
       "https://www.linkedin.com/school/bharati-vidyapeeth-college-of-engineering-navi-mumbai/";
   static const twitterUrl = "https://x.com/bvcoenm?s=20";
+}
+
+
+class AnimationAssets {
+  static const String welcome = 'assets/animations/welcome.json';
 }
