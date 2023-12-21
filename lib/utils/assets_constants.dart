@@ -45,4 +45,5 @@ class AssetUrls {
 
 class AnimationAssets {
   static const String welcome = 'assets/animations/welcome.json';
+  static const String handLoading = 'assets/animations/hand_loading.json';
 }
