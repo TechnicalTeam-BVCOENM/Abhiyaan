@@ -47,9 +47,9 @@ class AuthenticationService {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
-        showmessage(context, "email-already-in-use");
+        showErrorMessage(context, "email-already-in-use");
       } else if (e.code == 'weak-password') {
-        showmessage(context, "weak-password");
+        showErrorMessage(context, "weak-password");
       }
       NavigationService().back();
     }
