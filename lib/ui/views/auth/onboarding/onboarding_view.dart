@@ -9,10 +9,10 @@ class OnboardingView extends StatelessWidget {
     return ViewModelBuilder<OnboardingViewModel>.reactive(
       viewModelBuilder: () => OnboardingViewModel(),
       builder: (context, model, child) {
-        return SafeArea(
-          child: Scaffold(
-            backgroundColor: context.colorScheme.backgroundColor,
-            body: Stack(
+        return Scaffold(
+          backgroundColor: context.colorScheme.backgroundColor,
+          body: SafeArea(
+            child: Stack(
               children: [
                 PageView(
                   onPageChanged: (index) {
