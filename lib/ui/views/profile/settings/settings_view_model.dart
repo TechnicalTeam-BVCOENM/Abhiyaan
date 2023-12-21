@@ -73,8 +73,12 @@ class SettingsViewModel extends BaseViewModel {
 
   Future<void> logout() async {
     setBusy(true);
-    _authenticationService.setStorageToNull();
-    final success = await _authenticationService.signOut();
+    LocalStorageService localStorageService = locator<LocalStorageService>();
+
+    final bool success = await _authenticationService.signOut().then((value) {
+      localStorageService.clear();
+      return value;
+    });
     if (success) {
       log.i('sign out success');
       _navigationService.replaceWith(Routes.authView);
