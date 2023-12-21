@@ -89,8 +89,6 @@ class AuthenticationService {
     }
   }
 
-
-
   Future<void> misBreakdown() async {
     try {
       final localStorageService = locator<LocalStorageService>();
@@ -170,8 +168,9 @@ class AuthenticationService {
               child: SizedBox(
                   width: 250,
                   child: LottieBuilder.asset(
-                      repeat: true,
-                      "assets/images/animations/hand_loading.json")));
+                    repeat: true,
+                    AnimationAssets.handLoading,
+                  )));
         });
   }
 }
