@@ -299,7 +299,7 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
               'Share',
               style: fontTheme.title(
                 context,
-                color: context.colorScheme.primaryColor,
+                color: context.colorScheme.secondaryBlackColor,
               ),
             ),
           ),
@@ -321,7 +321,7 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
             child: Text(
               'Register',
               style: fontTheme.title(context,
-                  color: context.colorScheme.secondaryWhiteColor),
+                  color: context.colorScheme.signInTextColor),
             ),
           ),
         ],
