@@ -117,12 +117,47 @@ class HomeView extends StatelessWidget {
                         const SectionText(
                           title: "College Updates",
                         ),
-                        for (var i = 0;
-                            i < model.departmentUpdates.length;
-                            i++) ...[
-                          updatesCard(
-                              model._departmentUpdates, i, context, model),
-                        ],
+                        model.departmentUpdates.isEmpty
+                            ? SizedBox(
+                                height: 120.h,
+                                child: Card(
+                                    margin: const EdgeInsets.only(bottom: 8).r,
+                                    elevation: 0,
+                                    clipBehavior: Clip.hardEdge,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16).r,
+                                      side: BorderSide(
+                                        color: context
+                                            .colorScheme.secondaryLPurpleColor,
+                                        width: 1.0,
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.info_rounded,
+                                          color: context
+                                              .colorScheme.secondaryBlackColor,
+                                        ),
+                                        10.horizontalSpace,
+                                        Text(
+                                          "No updates yet, Stay Tuned",
+                                          style: fontTheme.body(context),
+                                        ),
+                                      ],
+                                    )).animate().fadeIn(),
+                              )
+                            : ListView.builder(
+                                itemBuilder: (context, index) {
+                                  return updatesCard(model.departmentUpdates,
+                                      index, context, model);
+                                },
+                                itemCount: model.departmentUpdates.length,
+                                shrinkWrap: true,
+                                physics: const BouncingScrollPhysics(),
+                              ).animate().fadeIn(),
                         60.verticalSpace,
                         Text("Innovate.",
                             maxLines: 2,
