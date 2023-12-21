@@ -1,6 +1,7 @@
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/ui/common/common_component_model.dart';
 import 'package:abhiyaan/ui/views/event/event_view.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 part 'detailed_event_view_model.dart';

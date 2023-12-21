@@ -1,4 +1,5 @@
 import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/ui/views/home/celebration/celebration_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/ui/views/event/event_view.dart';
 import 'package:abhiyaan/ui/views/home/home_view.dart';
@@ -17,6 +18,35 @@ class FirestoreService {
       return;
     } catch (e) {
       debugPrint("User status failed to update with : ${e.toString()}");
+    }
+  }
+
+  Future<List<CelebrationData>> getCelebrationData() async {
+    try {
+      final QuerySnapshot snapshot = await _firestore
+          .collection('Events')
+          .doc("data")
+          .collection("celebration")
+          .get();
+
+      if (snapshot.docs.isEmpty) {
+        return [];
+      } else {
+        debugPrint("Celebration data : ${snapshot.docs.length}");
+        return snapshot.docs.map((doc) {
+          Map<dynamic, dynamic> data = doc.data() as Map<dynamic, dynamic>;
+          return CelebrationData(
+            title: data['title'] ?? '',
+            description: data['description'] ?? '',
+            image: data['imageUrl'] ?? '',
+            startdate: data['startDate'],
+          );
+        }).toList();
+      }
+    } catch (e) {
+      debugPrint(
+          "Error in getting celebration data from firebase : ${e.toString()}");
+      return [];
     }
   }
 
@@ -40,24 +70,37 @@ class FirestoreService {
   }
 
   Future<List<DepartmentUpdates>> getCollegeUpdates() async {
-    final QuerySnapshot snapshot = await _firestore
-        .collection('CollegeUpdates')
-        .doc("data")
-        .collection("updates")
-        .get();
-    return snapshot.docs.map((doc) {
-      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-      return DepartmentUpdates(
-        title: data['title'] ?? '',
-        description: data['description'] ?? '',
-        date: data['date'] ?? '',
-      );
-    }).toList();
+    try {
+      final QuerySnapshot snapshot = await _firestore
+          .collection('CollegeUpdates')
+          .doc("data")
+          .collection("updates")
+          .get();
+
+      if (snapshot.docs.isEmpty) {
+        return [];
+      } else {
+        return snapshot.docs.map((doc) {
+          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+          return DepartmentUpdates(
+            title: data['title'] ?? '',
+            description: data['description'] ?? '',
+            date: data['date'] ?? '',
+          );
+        }).toList();
+      }
+    } catch (e) {
+      debugPrint("Error in getting college updates : ${e.toString()}");
+      return [];
+    }
   }
 
   Future<List<SponsorsModel>> getAllSponsors() async {
-    final QuerySnapshot snapshot =
-        await _firestore.collection("Sponsors").get();
+    final QuerySnapshot snapshot = await _firestore
+        .collection("Events")
+        .doc("data")
+        .collection('sponsors')
+        .get();
     return snapshot.docs.map((doc) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       return SponsorsModel(
@@ -66,7 +109,11 @@ class FirestoreService {
   }
 
   Future<List<EventModel>> getAllEvents() async {
-    final QuerySnapshot snapshot = await _firestore.collection("Events").get();
+    final QuerySnapshot snapshot = await _firestore
+        .collection("Events")
+        .doc('data')
+        .collection('events')
+        .get();
     return snapshot.docs.map((doc) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       return EventModel(

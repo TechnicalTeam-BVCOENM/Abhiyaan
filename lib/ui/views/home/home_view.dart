@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:abhiyaan/ui/views/home/celebration/celebration_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/services/notification_service.dart';
@@ -79,18 +80,22 @@ class HomeView extends StatelessWidget {
                                   itemCount: model.highlights.length,
                                   itemBuilder: (context, index, realIndex) {
                                     return CarouselUtils.buildImage(
-                                        context,
-                                        model.highlights[index]['imageUrl'],
-                                        model._activeIndex);
+                                      context,
+                                      model.highlights[index]['imageUrl'],
+                                      model._activeIndex,
+                                    );
                                   },
                                   options: CarouselOptions(
                                     height: 230.h,
                                     onPageChanged: (index, reason) =>
                                         model.updateActiveIndex(index),
                                     autoPlay: true,
-                                    autoPlayInterval:
-                                        const Duration(seconds: 3),
+                                    autoPlayInterval: 4.seconds,
                                     viewportFraction: 1,
+                                    enableInfiniteScroll: true,
+                                    autoPlayAnimationDuration: 1.seconds,
+                                    autoPlayCurve: Curves.easeInOut,
+                                    enlargeCenterPage: true,
                                   ),
                                 ),
                                 SizedBox(height: 20.h),
@@ -109,15 +114,51 @@ class HomeView extends StatelessWidget {
                             child: Center(
                                 child: quickLinksList(
                                     context, model.quickLinksList))),
+                        10.verticalSpace,
                         const SectionText(
                           title: "College Updates",
                         ),
-                        for (var i = 0;
-                            i < model.departmentUpdates.length;
-                            i++) ...[
-                          updatesCard(
-                              model._departmentUpdates, i, context, model),
-                        ],
+                        model.departmentUpdates.isEmpty
+                            ? SizedBox(
+                                height: 120.h,
+                                child: Card(
+                                    margin: const EdgeInsets.only(bottom: 8).r,
+                                    elevation: 0,
+                                    clipBehavior: Clip.hardEdge,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16).r,
+                                      side: BorderSide(
+                                        color: context
+                                            .colorScheme.secondaryLPurpleColor,
+                                        width: 1.0,
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.info_rounded,
+                                          color: context
+                                              .colorScheme.secondaryBlackColor,
+                                        ),
+                                        10.horizontalSpace,
+                                        Text(
+                                          "No updates yet, Stay Tuned",
+                                          style: fontTheme.body(context),
+                                        ),
+                                      ],
+                                    )).animate().fadeIn(),
+                              )
+                            : ListView.builder(
+                                itemBuilder: (context, index) {
+                                  return updatesCard(model.departmentUpdates,
+                                      index, context, model);
+                                },
+                                itemCount: model.departmentUpdates.length,
+                                shrinkWrap: true,
+                                physics: const BouncingScrollPhysics(),
+                              ).animate().fadeIn(),
                         60.verticalSpace,
                         Text("Innovate.",
                             maxLines: 2,
