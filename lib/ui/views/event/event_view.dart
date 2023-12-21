@@ -36,7 +36,7 @@ class EventView extends StatelessWidget {
                           clipBehavior: Clip.hardEdge,
                           shadowColor: context.colorScheme.secondaryLPurpleColor
                               .withOpacity(0.8),
-                          elevation: 4,
+                          elevation: 2,
                           shape: ShapeBorder.lerp(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18).r,
@@ -118,11 +118,22 @@ class EventView extends StatelessWidget {
                               pauseAutoPlayOnTouch: true,
                               enableInfiniteScroll: true,
                               viewportFraction: 0.72,
-                              
                             ),
                             itemBuilder: (context, index, realIndex) {
-                              return ClipRRect(
-                                borderRadius: BorderRadius.circular(18).r,
+                              return Card(
+                                clipBehavior: Clip.hardEdge,
+                                shadowColor: context
+                                    .colorScheme.secondaryLPurpleColor
+                                    .withOpacity(0.8),
+                                elevation: 2,
+                                shape: ShapeBorder.lerp(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18).r,
+                                    ),
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18).r,
+                                    ),
+                                    1),
                                 child: Stack(
                                   children: [
                                     EventCardUpcoming(
@@ -138,7 +149,12 @@ class EventView extends StatelessWidget {
                                       event: model.remainigEvents[index],
                                     ),
                                   ],
-                                ),
+                                ).animate(delay: 400.ms).shimmer(
+                                    duration: 1000.ms,
+                                    delay: 1100.ms,
+                                    color: context
+                                        .colorScheme.secondaryLPurpleColor
+                                        .withOpacity(0.2)),
                               );
                             },
                           ),
