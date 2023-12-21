@@ -1,5 +1,5 @@
 import 'package:abhiyaan/file_exporter.dart';
-import 'package:abhiyaan/ui/views/auth/register/register_view.dart';
+import 'package:abhiyaan/ui/views/auth/onboarding/onboarding_view.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 part 'auth_view_model.dart';
 

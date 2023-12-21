@@ -9,7 +9,7 @@ class AuthViewModel extends BaseViewModel {
   }
 
   void toRegisterPage(BuildContext context) {
-    _navigationService.navigateWithTransition(const RegisterView(),
+    _navigationService.navigateWithTransition(const OnboardingView(),
         transitionStyle: Transition.rightToLeftWithFade,
         curve: Curves.fastEaseInToSlowEaseOut,
         duration: const Duration(milliseconds: 1500));
