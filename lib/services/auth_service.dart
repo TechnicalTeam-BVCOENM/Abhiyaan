@@ -7,17 +7,13 @@ import 'package:lottie/lottie.dart';
 
 class AuthenticationService {
   List userTag = [
-    "userSem",
-    "userCollegeId",
     "userMisNo",
     "userEmail",
     "userName",
-    "userYear",
-    "userPrnNo",
-    "userLibNo",
     "userPhone",
     "userCertifications",
     "isUserNew",
+    "userProfile",
   ];
   final localStorageService = locator<LocalStorageService>();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;

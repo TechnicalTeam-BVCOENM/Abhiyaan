@@ -1,5 +1,4 @@
 import 'package:abhiyaan/file_exporter.dart';
-import 'package:abhiyaan/ui/views/auth/onboarding/onboarding_view.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 part 'auth_view_model.dart';
 
@@ -12,7 +11,9 @@ class AuthView extends StatelessWidget {
       viewModelBuilder: () => AuthViewModel(),
       builder: (context, model, child) {
         return Scaffold(
+          
             appBar: AppBar(
+                 backgroundColor: context.colorScheme.backgroundColor,
               toolbarHeight: 100,
               title: SizedBox(
                   width: 180.w,

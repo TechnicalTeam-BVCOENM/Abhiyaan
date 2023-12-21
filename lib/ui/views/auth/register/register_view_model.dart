@@ -59,11 +59,8 @@ class RegisterViewModel extends BaseViewModel {
     String userName,
     BuildContext context,
   ) async {
-    // Validate email format
-    if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
-        .hasMatch(email)) {
-      showmessage(context, "Invalid email format",);
-      return;
+    if (dropDownValue == "Explorer") {
+      misNo = "null";
     }
     if (misNo == "" ||
         createpassword == "" ||
@@ -73,12 +70,38 @@ class RegisterViewModel extends BaseViewModel {
       showmessage(context, "some fields are empty!");
       return;
     }
-
-    // Validate that create password and confirm password are the same
-    if (createpassword != confirmPassword) {
-      showmessage(context, "Passwords do not match");
+    // Check MIS number only if the dropdown is not "explorer"
+    if (dropDownValue != "Explorer" && !RegExp(r'^[0-9]{8}$').hasMatch(misNo)) {
+      showmessage(context, "MIS number should be an 8-digit number");
       return;
     }
+    // Validate email format
+    if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+        .hasMatch(email)) {
+      showmessage(
+        context,
+        "Invalid email format",
+      );
+      return;
+    } // Check if phone number contains only numbers and has a length of 10
+    if (!RegExp(r'^[0-9]{10}$').hasMatch(phoneNo)) {
+      showmessage(context, "Phone number should be a 10-digit number");
+      return;
+    }
+
+    if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(userName)) {
+      showmessage(context, "Username should contain only alphabets");
+      return;
+    }
+
+// Check if the first letter of the username is capitalized
+    if (userName[0] != userName[0].toUpperCase()) {
+      showmessage(context, "Username should start with a capital letter");
+      return;
+    }
+
+    // Check if MIS number contains only numbers and has a length of 8
+
     AuthenticationService().showLoadingOverlay(context);
     await _authenticationService.signUpWithEmailAndPassword(
         context, email, confirmPassword);
@@ -91,18 +114,18 @@ class RegisterViewModel extends BaseViewModel {
       "userEmail": email,
       "userPhone": phoneNo,
       "userName": userName,
-          "isUserNew": true,
+      "isUserNew": true,
+      "userProfile": dropDownValue,
     });
-
 
     await AuthenticationService().storeUserDataLocally();
     // ignore: use_build_context_synchronously
     NavigationService().back();
-    await _navigationService
-        .navigateWithTransition(const OnboardingView(),
+    _navigationService
+        .replaceWithTransition(const OnboardingView(),
             transitionStyle: Transition.rightToLeftWithFade,
-            curve: Curves.easeInOutQuad,
-            duration: const Duration(milliseconds: 400))
+            curve: Curves.fastEaseInToSlowEaseOut,
+            duration: const Duration(milliseconds: 1500))
         ?.then((value) => showmessage(context, "Registration successful"));
     notifyListeners();
   }

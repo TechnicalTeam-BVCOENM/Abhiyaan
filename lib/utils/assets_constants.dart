@@ -15,6 +15,9 @@ class AssetImagePath {
   static const String linkedinImg = 'assets/images/profile/linkedin_square.png';
   static const String logoImg = 'assets/images/logo.png';
   static const String boy = 'assets/images/onboarding/boy1.png';
+  static const String heart = 'assets/images/onboarding/heart.png';
+  static const String connect = 'assets/images/onboarding/connect.png';
+  static const String events = 'assets/images/onboarding/events.png';
 
   static const String darkMode = 'assets/images/profile/dark_mode.png';
   static const String help = 'assets/images/profile/help.png';

@@ -24,7 +24,10 @@ class SettingsViewModel extends BaseViewModel {
       final localStorageService = locator<LocalStorageService>();
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: localStorageService.read('userEmail'))
-          .then((value) => showmessage(context, "reset password email sent !",));
+          .then((value) => showmessage(
+                context,
+                "reset password email sent !",
+              ));
     } catch (e) {
       showmessage(context, "something went wrong !");
     }
@@ -105,7 +108,8 @@ class SettingsViewModel extends BaseViewModel {
     });
     if (success) {
       // ignore: use_build_context_synchronously
-      Navigator.pop(context);
+      NavigationService().back();
+      NavigationService().back();
       log.i('sign out success');
       _navigationService.replaceWith(Routes.authView);
     } else {
