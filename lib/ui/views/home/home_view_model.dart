@@ -1,9 +1,12 @@
 part of 'home_view.dart';
 
+bool isCelebrationShown = false;
+
 class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
   final FirestoreService _firestoreService = FirestoreService();
   final navigationService = locator<NavigationService>();
+  FontThemeClass fontThemeClass = FontThemeClass();
   List<String> firstname = [];
   List<Activity> get activityList => _activityList;
   List<Map<String, dynamic>> _highlights = [];
@@ -11,7 +14,128 @@ class HomeViewModel extends BaseViewModel {
   List<DepartmentUpdates> _departmentUpdates = [];
   List<DepartmentUpdates> get departmentUpdates => _departmentUpdates;
   late bool isUserNew = LocalStorageService().read('isUserNew');
+  final List<CelebrationData> _celebrationData = [];
+  List<CelebrationData> get celebrationData => _celebrationData;
 
+  bool toggleCelebrationShown() {
+    isCelebrationShown = true;
+    notifyListeners();
+    return isCelebrationShown;
+  }
+
+  Future showCelebrationModal(BuildContext context, CelebrationData data) async{
+    await showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog.adaptive(
+          clipBehavior: Clip.hardEdge,
+          insetPadding: EdgeInsets.zero,
+          contentPadding: EdgeInsets.zero,
+          content: IntrinsicHeight(
+            child: Column(
+              children: [
+                Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    Container(
+                      height: 220.h,
+                      width: 340.w,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: Image.network(data.image,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: context.colorScheme.primaryColor,
+                                value: loadingProgress.expectedTotalBytes != null
+                                    ? loadingProgress.cumulativeBytesLoaded /
+                                        loadingProgress.expectedTotalBytes!
+                                    : null,
+                              ),
+                            );
+                          },
+                          ).image,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0).r,
+                      child: GestureDetector(
+                        onTap: () {
+                          toggleCelebrationShown();
+                          Navigator.pop(context);
+                        },
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12).r,
+                          ),
+                          color: context.colorScheme.secondaryWhiteColor
+                              .withOpacity(0.6),
+                          child: Icon(
+                            Icons.close,
+                            color: context.colorScheme.secondaryWhiteColor,
+                            size: 30.0.sp,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                10.verticalSpace,
+                Container(
+                  padding: const EdgeInsets.all(20).r,
+                  width: 340.w,
+                  child: Column(
+                    children: [
+                      Text(
+                        data.title,
+                        style: fontThemeClass.header(
+                          context,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      10.verticalSpace,
+                      Text(
+                        data.description,
+                        maxLines: 5,
+                        overflow: TextOverflow.ellipsis,
+                        style: fontThemeClass.body(
+                          context,
+                          color: context.colorScheme.secondarySectionColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                10.verticalSpace,
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future getCelebrationData() async {
+    try {
+      List<CelebrationData> unsortedList = [];
+      unsortedList = await _firestoreService.getCelebrationData();
+
+      if (unsortedList.isEmpty) {
+        debugPrint("Celebration data is empty");
+        return;
+      } else {
+        unsortedList.sort((a, b) => a.startdate.compareTo(b.startdate));
+        _celebrationData.add(unsortedList.first);
+        notifyListeners();
+      }
+    } catch (e) {
+      debugPrint("Error in getting celebration data : ${e.toString()}");
+    }
+  }
 
   String splitusername() {
     final user = LocalStorageService().read('userName');
@@ -20,13 +144,32 @@ class HomeViewModel extends BaseViewModel {
     return firstname[0];
   }
 
-  bool toggleUpgradePopup() {
+  bool toggleisNewUser() {
     isUserNew = false;
     _firestoreService
         .updateUserStatus()
         .then((value) => LocalStorageService().write('isUserNew', isUserNew));
     notifyListeners();
     return isUserNew;
+  }
+
+  void showWelcomeAndCelebration(BuildContext context) async {
+    if (isUserNew) {
+      debugPrint("User is new");
+      await showWelcomPopUp(context).then((value) async {
+        debugPrint("Showed welcome pop up");
+        if (isCelebrationShown == false && celebrationData.isNotEmpty) {
+          await showCelebrationModal(context, celebrationData[0]);
+          debugPrint("Showed Celebration pop up");
+        }
+      });
+    } else {
+      if (celebrationData.isNotEmpty && isCelebrationShown == false) {
+        await showCelebrationModal(context, celebrationData[0]);
+      }else{
+        debugPrint("Celebration data is empty");
+      }
+    }
   }
 
   void navigateToNotificationView() {
@@ -66,8 +209,6 @@ class HomeViewModel extends BaseViewModel {
     ),
   ];
 
-  
-
   Future<void> init(context) async {
     setBusy(true);
     try {
@@ -76,14 +217,13 @@ class HomeViewModel extends BaseViewModel {
         notificationService.getDeviceToken();
       });
       notificationService.getDeviceToken();
+      await getCelebrationData();
       _highlights = await _firestoreService.getHighlights();
       _departmentUpdates = await _firestoreService.getCollegeUpdates();
       notifyListeners();
       log.i(highlights);
       log.i(highlights.length);
-      if (isUserNew == true) {
-        showWelcomPopUp(context);
-      }
+      showWelcomeAndCelebration(context);
       debugPrint(
           DateFormat("MMMM d").format((departmentUpdates[0].date).toDate()));
     } catch (e) {
@@ -100,9 +240,9 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void showWelcomPopUp(BuildContext context) {
+  Future showWelcomPopUp(BuildContext context) async {
     FontThemeClass fontThemeClass = FontThemeClass();
-    showAdaptiveDialog(
+    await showAdaptiveDialog(
         barrierDismissible: false,
         context: context,
         builder: (context) {
@@ -184,9 +324,8 @@ class HomeViewModel extends BaseViewModel {
                 width: double.infinity,
                 child: TextButton(
                   onPressed: () {
-                    toggleUpgradePopup();
+                    toggleisNewUser();
                     Navigator.of(context).pop();
-                    debugPrint("✅✅ Upgrade Popup Shown $isUserNew");
                   },
                   child: Text(
                     "Let's Go!",
@@ -199,8 +338,8 @@ class HomeViewModel extends BaseViewModel {
                 ),
               ),
             ],
-          );
-        });
+          ).animate().fadeIn();
+        }) ;
   }
 }
 
