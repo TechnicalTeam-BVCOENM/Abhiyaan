@@ -17,6 +17,7 @@ class AuthenticationService {
     "userLibNo",
     "userPhone",
     "userCertifications",
+    "isUserNew",
   ];
   final localStorageService = locator<LocalStorageService>();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -62,11 +63,11 @@ class AuthenticationService {
     try {
       await _firebaseAuth.signOut();
       firebaseSignOutSuccess = true;
+      return firebaseSignOutSuccess;
     } catch (error) {
       log.i("Firebase Sign Out Error: $error");
+      return firebaseSignOutSuccess;
     }
-    return firebaseSignOutSuccess;
-    // Handle sign out
   }
 
   Future<void> storeUserDataLocally() async {
@@ -88,12 +89,7 @@ class AuthenticationService {
     }
   }
 
-  void setStorageToNull() async {
-    for (var i = 0; i < userTag.length; i++) {
-      await localStorageService.write(userTag[i], "feed me data");
-    }
-    log.i("done");
-  }
+
 
   Future<void> misBreakdown() async {
     try {

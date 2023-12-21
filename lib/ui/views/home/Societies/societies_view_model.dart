@@ -7,7 +7,7 @@ class SocietiesViewModel extends BaseViewModel {
     await loadData();
   }
 
-  final List<SocietyData>  _societyDataList = [];
+  final List<SocietyData> _societyDataList = [];
   List<SocietyData> get societyDataList => _societyDataList;
 
   Future<void> loadData() async {
@@ -53,7 +53,7 @@ class SocietiesViewModel extends BaseViewModel {
           "Within the strokes of our imagination, the Mudrakala Club unveils a gallery of creativity.",
       leading: AssetImagePath.mudrakalaImg,
     ),
-     const SocietyData(
+    const SocietyData(
       title: "Crescendo",
       value:
           "Club where individual notes unite in a symphony of diversity, composing the vibrant melody of our shared passion.",
@@ -61,7 +61,6 @@ class SocietiesViewModel extends BaseViewModel {
     ),
   ];
 }
-
 
 class SocietyData {
   final String title;

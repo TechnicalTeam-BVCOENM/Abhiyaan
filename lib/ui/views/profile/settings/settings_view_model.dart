@@ -97,8 +97,12 @@ class SettingsViewModel extends BaseViewModel {
 
   Future<void> logout(BuildContext context) async {
     setBusy(true);
-    _authenticationService.setStorageToNull();
-    final success = await _authenticationService.signOut();
+    LocalStorageService localStorageService = locator<LocalStorageService>();
+
+    final bool success = await _authenticationService.signOut().then((value) {
+      localStorageService.clear();
+      return value;
+    });
     if (success) {
       // ignore: use_build_context_synchronously
       Navigator.pop(context);

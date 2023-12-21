@@ -90,11 +90,12 @@ class RegisterViewModel extends BaseViewModel {
       "userMisNo": misNo,
       "userEmail": email,
       "userPhone": phoneNo,
-      "userName": userName
+      "userName": userName,
+          "isUserNew": true,
     });
 
+
     await AuthenticationService().storeUserDataLocally();
-    //  Notify listeners if needed
     // ignore: use_build_context_synchronously
     NavigationService().back();
     await _navigationService
@@ -109,7 +110,6 @@ class RegisterViewModel extends BaseViewModel {
   navigateToHelpSupport() async {
     UrlLauncher externalUrlHandler = UrlLauncher();
     await externalUrlHandler.launchEmail("technicalteam.bvcoenm@gmail.com");
-    // Navigation
   }
 
   navigateToSignIn() async {
