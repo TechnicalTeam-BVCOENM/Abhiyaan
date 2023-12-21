@@ -111,13 +111,16 @@ class EventView extends StatelessWidget {
                           child: CarouselSlider.builder(
                             itemCount: model.remainigEvents.length,
                             options: CarouselOptions(
+                              enlargeCenterPage: true,
                               autoPlay: true,
                               autoPlayInterval: 2.seconds,
                               autoPlayAnimationDuration: 1.seconds,
                               autoPlayCurve: Curves.easeInOut,
                               pauseAutoPlayOnTouch: true,
+                              enlargeStrategy: CenterPageEnlargeStrategy.zoom,
                               enableInfiniteScroll: true,
-                              viewportFraction: 0.72,
+                              pauseAutoPlayInFiniteScroll: true,
+                              viewportFraction: 0.70,
                             ),
                             itemBuilder: (context, index, realIndex) {
                               return Card(
