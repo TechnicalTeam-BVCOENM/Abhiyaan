@@ -24,9 +24,9 @@ class SettingsViewModel extends BaseViewModel {
       final localStorageService = locator<LocalStorageService>();
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: localStorageService.read('userEmail'))
-          .then((value) => showmessage(context, "reset password email sent !",));
+          .then((value) => showNormalMessage(context, "reset password email sent !",));
     } catch (e) {
-      showmessage(context, "something went wrong !");
+      showErrorMessage(context, "something went wrong !");
     }
     // Change password logic
   }
@@ -73,7 +73,7 @@ class SettingsViewModel extends BaseViewModel {
               TextButton(
                 onPressed: () async {
                   await logout(context).then(
-                      (value) => showmessage(context, "Logout successful"));
+                      (value) => showSuccessMessage(context, "Logout successful"));
                 },
                 child: const Text("Yes"),
               ),

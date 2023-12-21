@@ -62,7 +62,7 @@ class RegisterViewModel extends BaseViewModel {
     // Validate email format
     if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
         .hasMatch(email)) {
-      showmessage(context, "Invalid email format",);
+      showErrorMessage(context, "Invalid email format");
       return;
     }
     if (misNo == "" ||
@@ -70,13 +70,13 @@ class RegisterViewModel extends BaseViewModel {
         confirmPassword == "" ||
         phoneNo == "" ||
         userName == "") {
-      showmessage(context, "some fields are empty!");
+      showErrorMessage(context, "some fields are empty!");
       return;
     }
 
     // Validate that create password and confirm password are the same
     if (createpassword != confirmPassword) {
-      showmessage(context, "Passwords do not match");
+      showErrorMessage(context, "Passwords do not match");
       return;
     }
     AuthenticationService().showLoadingOverlay(context);
@@ -103,7 +103,7 @@ class RegisterViewModel extends BaseViewModel {
             transitionStyle: Transition.rightToLeftWithFade,
             curve: Curves.easeInOutQuad,
             duration: const Duration(milliseconds: 400))
-        ?.then((value) => showmessage(context, "Registration successful"));
+        ?.then((value) => showSuccessMessage(context, "Registration successful"));
     notifyListeners();
   }
 

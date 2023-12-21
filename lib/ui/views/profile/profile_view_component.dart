@@ -68,7 +68,7 @@ class ProfileDetailsCard extends StatelessWidget {
                 TextButton(
                     onPressed: () async {
                       await Clipboard.setData(ClipboardData(text: value))
-                          .then((value) => showmessage(
+                          .then((value) => showNormalMessage(
                                 context,
                                 "Copied",
                               ));

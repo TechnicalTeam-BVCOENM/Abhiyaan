@@ -40,7 +40,7 @@ class SignInViewModel extends BaseViewModel {
       await _authenticationService.signInWithEmailAndPassword(email, password);
       await AuthenticationService().storeUserDataLocally();
       NavigationService().back();
-      showmessage(context, "Login successful",);
+      showSuccessMessage(context, "Login successful",);
       _navigationService.navigateTo(Routes.bottomNavView);
     } on FirebaseException {
       isPasswordValid = false;
