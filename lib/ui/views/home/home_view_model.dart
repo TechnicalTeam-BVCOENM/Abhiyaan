@@ -4,9 +4,15 @@ class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
   final FirestoreService _firestoreService = FirestoreService();
   final navigationService = locator<NavigationService>();
+  List<String> firstname = [];
+  List<Activity> get activityList => _activityList;
+  List<Map<String, dynamic>> _highlights = [];
+  List<Map<String, dynamic>> get highlights => _highlights;
+  List<DepartmentUpdates> _departmentUpdates = [];
+  List<DepartmentUpdates> get departmentUpdates => _departmentUpdates;
   late bool isUserNew = LocalStorageService().read('isUserNew');
 
-  List<String> firstname = [];
+
   String splitusername() {
     final user = LocalStorageService().read('userName');
     firstname = user.split(' ');
@@ -16,7 +22,6 @@ class HomeViewModel extends BaseViewModel {
 
   bool toggleUpgradePopup() {
     isUserNew = false;
-    debugPrint("✅ Upgrade Popup Shown $isUserNew");
     _firestoreService
         .updateUserStatus()
         .then((value) => LocalStorageService().write('isUserNew', isUserNew));
@@ -61,11 +66,7 @@ class HomeViewModel extends BaseViewModel {
     ),
   ];
 
-  List<Activity> get activityList => _activityList;
-  List<Map<String, dynamic>> _highlights = [];
-  List<Map<String, dynamic>> get highlights => _highlights;
-  List<DepartmentUpdates> _departmentUpdates = [];
-  List<DepartmentUpdates> get departmentUpdates => _departmentUpdates;
+  
 
   Future<void> init(context) async {
     setBusy(true);
@@ -74,11 +75,7 @@ class HomeViewModel extends BaseViewModel {
       notificationService.messaging.onTokenRefresh.listen((event) {
         notificationService.getDeviceToken();
       });
-      debugPrint("✅✅ Upgrade Popup Shown $isUserNew");
-
       notificationService.getDeviceToken();
-      // _firestoreService.getUserStatus();
-
       _highlights = await _firestoreService.getHighlights();
       _departmentUpdates = await _firestoreService.getCollegeUpdates();
       notifyListeners();

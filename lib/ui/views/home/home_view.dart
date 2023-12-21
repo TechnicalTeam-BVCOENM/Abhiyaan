@@ -79,18 +79,22 @@ class HomeView extends StatelessWidget {
                                   itemCount: model.highlights.length,
                                   itemBuilder: (context, index, realIndex) {
                                     return CarouselUtils.buildImage(
-                                        context,
-                                        model.highlights[index]['imageUrl'],
-                                        model._activeIndex);
+                                      context,
+                                      model.highlights[index]['imageUrl'],
+                                      model._activeIndex,
+                                    );
                                   },
                                   options: CarouselOptions(
                                     height: 230.h,
                                     onPageChanged: (index, reason) =>
                                         model.updateActiveIndex(index),
                                     autoPlay: true,
-                                    autoPlayInterval:
-                                        const Duration(seconds: 3),
+                                    autoPlayInterval: 4.seconds,
                                     viewportFraction: 1,
+                                    enableInfiniteScroll: true,
+                                    autoPlayAnimationDuration: 1.seconds,
+                                    autoPlayCurve: Curves.easeInOut,
+                                    enlargeCenterPage: true,
                                   ),
                                 ),
                                 SizedBox(height: 20.h),
@@ -109,6 +113,7 @@ class HomeView extends StatelessWidget {
                             child: Center(
                                 child: quickLinksList(
                                     context, model.quickLinksList))),
+                        10.verticalSpace,
                         const SectionText(
                           title: "College Updates",
                         ),

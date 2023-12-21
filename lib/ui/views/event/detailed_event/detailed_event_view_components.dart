@@ -19,11 +19,15 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
       flexibleSpace: Stack(
         children: [
           FlexibleSpaceBar(
-            background: Image.network(
-              imageLink,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: 276.h,
+            background: Hero(
+              transitionOnUserGestures: true,
+              tag: "eventImage",
+              child: Image.network(
+                imageLink,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 276.h,
+              ).animate().shimmer(duration: 1000.ms, padding: 0),
             ),
             stretchModes: const [
               StretchMode.blurBackground,
@@ -76,7 +80,7 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
                     ),
                   ],
                 ),
-              ),
+              ).animate().shimmer(duration: 1000.ms, padding: 0),
             ),
           ),
         ],
@@ -111,139 +115,147 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18).r,
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          10.verticalSpace,
-          Text(
-            eventName,
-            style: fontTheme.header(context),
-          ),
-          10.verticalSpace,
-          Row(
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 24.h,
-                width: 24.w,
-                alignment: Alignment.center,
-                margin: const EdgeInsets.only(right: 8.0).r,
-                child: Icon(
-                  Icons.calendar_month,
-                  color: context.colorScheme.primaryColor,
-                ),
-              ),
+              10.verticalSpace,
               Text(
-                "${eventStartDate.day}-${eventEndDate.day} ${DateFormat('MMMM yyyy').format(eventEndDate)}",
-                style: fontTheme.body(context,
-                    color: context.colorScheme.secondarySectionColor,
-                    fontWeight: FontWeight.w500),
+                eventName,
+                style: fontTheme.header(context),
               ),
-            ],
-          ),
-          6.verticalSpace,
-          Row(
-            children: [
-              Container(
-                height: 24.h,
-                width: 24.w,
-                alignment: Alignment.center,
-                margin: const EdgeInsets.only(right: 8.0).r,
-                child: Icon(
-                  Icons.timer,
-                  color: context.colorScheme.primaryColor,
-                ),
+              10.verticalSpace,
+              Row(
+                children: [
+                  Container(
+                    height: 24.h,
+                    width: 24.w,
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(right: 8.0).r,
+                    child: Icon(
+                      Icons.calendar_month,
+                      color: context.colorScheme.primaryColor,
+                    ),
+                  ),
+                  Text(
+                    "${eventStartDate.day}-${eventEndDate.day} ${DateFormat('MMMM yyyy').format(eventEndDate)}",
+                    style: fontTheme.body(context,
+                        color: context.colorScheme.secondarySectionColor,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
               ),
+              6.verticalSpace,
+              Row(
+                children: [
+                  Container(
+                    height: 24.h,
+                    width: 24.w,
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(right: 8.0).r,
+                    child: Icon(
+                      Icons.timer,
+                      color: context.colorScheme.primaryColor,
+                    ),
+                  ),
+                  Text(
+                    "${eventStartDate.hour}:${eventStartDate.minute} AM",
+                    style: fontTheme.body(context,
+                        color: context.colorScheme.secondarySectionColor,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              28.verticalSpace,
               Text(
-                "${eventStartDate.hour}:${eventStartDate.minute} AM",
-                style: fontTheme.body(context,
-                    color: context.colorScheme.secondarySectionColor,
-                    fontWeight: FontWeight.w500),
+                "About Event",
+                style: fontTheme.title(context),
               ),
-            ],
-          ),
-          28.verticalSpace,
-          Text(
-            "About Event",
-            style: fontTheme.header(context),
-          ),
-          8.verticalSpace,
-          Text(
-            eventInfo,
-            style: fontTheme.body(
-              context,
-              color: context.colorScheme.secondaryBlackColor.withOpacity(0.8),
-            ),
-          ),
-          20.verticalSpace,
-          Divider(
-            color: context.colorScheme.secondaryBlackColor.withOpacity(0.2),
-            height: 1.h,
-          ),
-          20.verticalSpace,
-          Text(
-            "Contact Section",
-            style: fontTheme.header(
-              context,
-            ),
-          ),
-          20.verticalSpace,
-          Row(
-            children: [
-              Container(
-                height: 28.h,
-                width: 28.w,
-                alignment: Alignment.center,
-                margin: const EdgeInsets.only(right: 8.0).r,
-                child: Icon(
-                  Icons.account_circle,
-                  size: 28.sp,
-                  color: context.colorScheme.primaryColor,
+              8.verticalSpace,
+              Text(
+                eventInfo,
+                style: fontTheme.body(
+                  context,
+                  color:
+                      context.colorScheme.secondaryBlackColor.withOpacity(0.8),
                 ),
               ),
-              Text(eventContactName,
-                  style: fontTheme.body(context, fontWeight: FontWeight.w500)),
-            ],
-          ),
-          8.verticalSpace,
-          Row(
-            children: [
-              Container(
-                height: 28.h,
-                width: 28.w,
-                alignment: Alignment.center,
-                margin: const EdgeInsets.only(right: 8.0),
-                child: Icon(
-                  Icons.email,
-                  size: 28.h,
-                  color: context.colorScheme.primaryColor,
+              20.verticalSpace,
+              Divider(
+                color: context.colorScheme.secondaryBlackColor.withOpacity(0.2),
+                height: 1.h,
+              ),
+              20.verticalSpace,
+              Text(
+                "Contact Section",
+                style: fontTheme.title(
+                  context,
                 ),
               ),
-              Text(eventContactEmail,
-                  style: fontTheme.body(context, fontWeight: FontWeight.w500)),
-            ],
-          ),
-          8.verticalSpace,
-          Row(
-            children: [
-              Container(
-                height: 28.h,
-                width: 28.w,
-                alignment: Alignment.center,
-                margin: const EdgeInsets.only(right: 8.0),
-                // decoration: BoxDecoration(
-                //   shape: BoxShape.circle,
-                //   color: Colors.white,
-                // ),
-                child: Icon(
-                  Icons.phone_in_talk_rounded,
-                  size: 28.h,
-                  color: context.colorScheme.primaryColor,
-                ),
+              20.verticalSpace,
+              Row(
+                children: [
+                  Container(
+                    height: 28.h,
+                    width: 28.w,
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(right: 8.0).r,
+                    child: Icon(
+                      Icons.account_circle,
+                      size: 28.sp,
+                      color: context.colorScheme.primaryColor,
+                    ),
+                  ),
+                  Text(eventContactName,
+                      style:
+                          fontTheme.body(context, fontWeight: FontWeight.w500)),
+                ],
               ),
-              Text(eventContactNumber.toString(),
-                  style: fontTheme.body(context, fontWeight: FontWeight.w500)),
-            ],
-          ),
-          28.verticalSpace,
-        ]),
+              8.verticalSpace,
+              Row(
+                children: [
+                  Container(
+                    height: 28.h,
+                    width: 28.w,
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(right: 8.0),
+                    child: Icon(
+                      Icons.email,
+                      size: 28.h,
+                      color: context.colorScheme.primaryColor,
+                    ),
+                  ),
+                  Text(eventContactEmail,
+                      style:
+                          fontTheme.body(context, fontWeight: FontWeight.w500)),
+                ],
+              ),
+              8.verticalSpace,
+              Row(
+                children: [
+                  Container(
+                    height: 28.h,
+                    width: 28.w,
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(right: 8.0),
+                    // decoration: BoxDecoration(
+                    //   shape: BoxShape.circle,
+                    //   color: Colors.white,
+                    // ),
+                    child: Icon(
+                      Icons.phone_in_talk_rounded,
+                      size: 28.h,
+                      color: context.colorScheme.primaryColor,
+                    ),
+                  ),
+                  Text(eventContactNumber.toString(),
+                      style:
+                          fontTheme.body(context, fontWeight: FontWeight.w500)),
+                ],
+              ),
+              28.verticalSpace,
+            ]
+                .animate(delay: 0.ms, interval: 100.ms)
+                .fadeIn(curve: Curves.easeIn)),
       ),
     );
   }
@@ -299,7 +311,7 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
               'Share',
               style: fontTheme.title(
                 context,
-                color: context.colorScheme.primaryColor,
+                color: context.colorScheme.secondaryBlackColor,
               ),
             ),
           ),
@@ -321,7 +333,7 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
             child: Text(
               'Register',
               style: fontTheme.title(context,
-                  color: context.colorScheme.secondaryWhiteColor),
+                  color: context.colorScheme.signInTextColor),
             ),
           ),
         ],
