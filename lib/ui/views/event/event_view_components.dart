@@ -369,6 +369,7 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
 
   @override
   Widget build(BuildContext context, EventViewModel viewModel) {
+    UrlLauncher urlLauncher = UrlLauncher();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0).r,
       child: ClipRRect(
@@ -381,7 +382,7 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
           child: Column(
             children: [
               InkWell(
-                onTap: () => UrlLauncher().launchURL(model.url),
+                onTap: () => urlLauncher.launchURL(model.url),
                 child: Image.network(
                   model.imageUrl,
                   height: 80.h,
@@ -403,7 +404,15 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
           ),
         ),
       ),
-    );
+    )
+        .animate(
+          delay: 300.ms,
+        )
+        .shimmer(
+            padding: 0,
+            delay: 200.ms,
+            duration: 1000.ms,
+            color: context.colorScheme.secondaryLPurpleColor.withOpacity(0.3));
   }
 }
 
