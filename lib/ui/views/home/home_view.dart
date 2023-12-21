@@ -113,6 +113,7 @@ class HomeView extends StatelessWidget {
                             child: Center(
                                 child: quickLinksList(
                                     context, model.quickLinksList))),
+                        10.verticalSpace,
                         const SectionText(
                           title: "College Updates",
                         ),
