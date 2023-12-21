@@ -48,6 +48,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/
+    - assets/images/animations/
     - assets/images/profile/
     - assets/images/onboarding/
     - assets/images/home/

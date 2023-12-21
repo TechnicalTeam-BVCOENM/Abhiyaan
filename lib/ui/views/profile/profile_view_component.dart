@@ -19,68 +19,73 @@ class ProfileDetailsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 75.h,
-      margin: EdgeInsets.only(bottom: 20.r),
-      decoration: BoxDecoration(
-          color: context.colorScheme.secondaryWhiteColor,
-          borderRadius: BorderRadius.circular(20.r)),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 25.w,
-          ),
-          Image.asset(width: 36.w, leading),
-          SizedBox(
-            width: 32.w,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 200.w,
-                child: Text(
-                  overflow: TextOverflow.ellipsis,
-                  title,
-                  style: FontThemeClass().body(context,
-                      fontWeight: FontWeight.w500,
-                      color: context.colorScheme.secondaryBlackColor),
+    return value != "feed me data"
+        ? Container(
+            width: double.infinity,
+            height: 75.h,
+            margin: EdgeInsets.only(bottom: 20.r),
+            decoration: BoxDecoration(
+                color: context.colorScheme.secondaryWhiteColor,
+                borderRadius: BorderRadius.circular(20.r)),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 25.w,
                 ),
-              ),
-              SizedBox(
-                height: 4.h,
-              ),
-              SizedBox(
-                width: 160.w,
-                child: Text(
-                  value,
-                  overflow: TextOverflow.ellipsis,
-                  style: FontThemeClass().caption(context,
-                      color: context.colorScheme.secondarySectionColor),
+                Image.asset(width: 36.w, leading),
+                SizedBox(
+                  width: 32.w,
                 ),
-              ),
-            ],
-          ),
-          const Expanded(child: Text("")),
-          TextButton(
-              onPressed: () async {
-                await Clipboard.setData(ClipboardData(text: value))
-                    .then((value) => showmessage(context, "Copied"));
-                // ignore: use_build_context_synchronously
-              },
-              child: Icon(
-                icon,
-                size: 26.r,
-                color: context.colorScheme.switchColor,
-              )),
-          SizedBox(
-            width: 10.w,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 200.w,
+                      child: Text(
+                        overflow: TextOverflow.ellipsis,
+                        title,
+                        style: FontThemeClass().body(context,
+                            fontWeight: FontWeight.w500,
+                            color: context.colorScheme.secondaryBlackColor),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    SizedBox(
+                      width: 160.w,
+                      child: Text(
+                        value,
+                        overflow: TextOverflow.ellipsis,
+                        style: FontThemeClass().caption(context,
+                            color: context.colorScheme.secondarySectionColor),
+                      ),
+                    ),
+                  ],
+                ),
+                const Expanded(child: Text("")),
+                TextButton(
+                    onPressed: () async {
+                      await Clipboard.setData(ClipboardData(text: value))
+                          .then((value) => showmessage(
+                                context,
+                                "Copied",
+                              ));
+                      // ignore: use_build_context_synchronously
+                    },
+                    child: Icon(
+                      icon,
+                      size: 26.r,
+                      color: context.colorScheme.switchColor,
+                    )),
+                SizedBox(
+                  width: 10.w,
+                )
+              ],
+            ),
           )
-        ],
-      ),
-    );
+        : const SizedBox();
   }
 }
 
@@ -112,8 +117,8 @@ class SocialLinks extends StatelessWidget {
   }
 }
 
-class Cetificatation extends StatelessWidget {
-  const Cetificatation({super.key});
+class Cerificatation extends StatelessWidget {
+  const Cerificatation({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +158,7 @@ class Cetificatation extends StatelessWidget {
               SizedBox(
                 width: 160.w,
                 child: Text(
-                  LocalStorageService().read('userCertifications').toString(),
+                  "0",
                   overflow: TextOverflow.ellipsis,
                   style: FontThemeClass().caption(context,
                       color: context.colorScheme.secondarySectionColor),

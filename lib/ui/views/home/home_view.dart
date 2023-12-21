@@ -41,12 +41,16 @@ class HomeView extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Hey ${model.splitusername()} 👋', // Update according to loal storage
-                                style: fontTheme.title(context,
-                                    color: context.colorScheme.headingColor,
-                                    fontWeight: FontWeight.w600),
-                              ).animate().fadeIn(),
+                              SizedBox(
+                                width: 280.w,
+                                child: Text(
+                                  overflow: TextOverflow.ellipsis,
+                                  'Hey ${model.splitusername()} 👋', // Update according to loal storage
+                                  style: fontTheme.title(context,
+                                      color: context.colorScheme.headingColor,
+                                      fontWeight: FontWeight.w600),
+                                ).animate().fadeIn(),
+                              ),
                               IconButton(
                                 splashRadius: 30.sp,
                                 splashColor:

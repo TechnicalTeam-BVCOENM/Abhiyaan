@@ -32,5 +32,7 @@ extension ColorSchemeExtension on ColorScheme {
   Color get iconColor =>
       brightness == Brightness.dark ? Colors.white : const Color(0xFF252525);
   Color get signInTextColor => const Color(0xFFF9F9F9);
-  Color get switchColor => const Color.fromARGB(255, 122, 115, 255);
+  Color get switchColor => brightness == Brightness.dark
+      ? const Color.fromARGB(255, 141, 135, 253)
+      : const Color.fromARGB(255, 78, 75, 215);
 }

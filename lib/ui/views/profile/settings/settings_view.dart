@@ -87,8 +87,7 @@ class SettingsView extends StatelessWidget {
                             leadingIcon: model.settings[3].leading),
                       ),
                       GestureDetector(
-                        onTap: () => model.logout().then((value) =>
-                            showmessage(context, "Logout successful")),
+                        onTap: () => model.logoutAlert(context),
                         child: settingsListTile(model, context,
                             title: model.settings[4].title,
                             trailingIcon: Icon(

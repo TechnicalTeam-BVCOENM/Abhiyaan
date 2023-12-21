@@ -60,7 +60,7 @@ class ProfileView extends StatelessWidget {
                               height: 90.r,
                               fit: BoxFit.cover,
                               imageUrl:
-                                  "https://firebasestorage.googleapis.com/v0/b/abhiyaan-b94d6.appspot.com/o/user%2Fimages.jpeg?alt=media&token=a9889ba7-3958-4784-9708-e43ade1016d4",
+                                  "https://firebasestorage.googleapis.com/v0/b/darpan-b94d6.appspot.com/o/user%2Fimages.jpeg?alt=media&token=a9889ba7-3958-4784-9708-e43ade1016d4",
                               placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator.adaptive()),
                               errorWidget: (context, url, error) =>
@@ -83,14 +83,18 @@ class ProfileView extends StatelessWidget {
                               SizedBox(
                                 height: 4.h,
                               ),
-                              Text(
-                                  LocalStorageService()
-                                      .read('userYear')
-                                      .toString(),
-                                  style: FontThemeClass().body(context,
-                                      color: context
-                                          .colorScheme.secondarySectionColor,
-                                      fontWeight: FontWeight.w500))
+                              LocalStorageService().read('userMisNo') ==
+                                      "feed me data"
+                                  ? Text("Explorer",
+                                      style: FontThemeClass().body(context,
+                                          color: context.colorScheme
+                                              .secondarySectionColor,
+                                          fontWeight: FontWeight.w500))
+                                  : Text("BVP Student",
+                                      style: FontThemeClass().body(context,
+                                          color: context.colorScheme
+                                              .secondarySectionColor,
+                                          fontWeight: FontWeight.w500))
                             ],
                           )
                         ],
@@ -98,7 +102,7 @@ class ProfileView extends StatelessWidget {
                     ),
                     for (var profileCard in model.profileCardList) profileCard,
                     // Display each profile card widget
-                    const Cetificatation(),
+                    const Cerificatation(),
                     const Expanded(child: Text("")),
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.center,

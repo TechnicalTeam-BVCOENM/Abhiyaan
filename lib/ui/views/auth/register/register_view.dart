@@ -1,10 +1,10 @@
+import 'package:abhiyaan/ui/views/auth/onboarding/onboarding_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/auth_service.dart';
 import 'package:abhiyaan/theme/responsive_utils.dart';
 import 'package:abhiyaan/ui/common/common_component_model.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
-import 'package:abhiyaan/ui/views/auth/register/register_view_component.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 part 'register_view_model.dart';
@@ -24,25 +24,97 @@ class RegisterView extends StatelessWidget {
                 body: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Container(
-                        height: 873.h,
+                      Padding(
                         padding: const EdgeInsets.only(
-                                left: 30, right: 30, top: 40, bottom: 105)
+                                left: 30, right: 30, top: 40, bottom: 50)
                             .r,
                         child: Column(
                           children: [
-                            const Expanded(child: Text("")),
                             SizedBox(
                               width: ResponsiveUtils.screenWidth(context) * 0.6,
                               child: Image.asset(
                                 AssetImagePath.logoImg,
                               ),
                             ),
-                            const Expanded(child: Text("")),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5.0).r,
-                              child: const DropdownMenuBtn(),
+                            Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: context
+                                        .colorScheme.secondaryWhiteColor),
+                                borderRadius: BorderRadius.circular(16.0).r,
+                                color: context.colorScheme.secondaryWhiteColor,
+                              ),
+                              child: DropdownButton<String>(
+                                elevation: 0,
+                                dropdownColor:
+                                    context.colorScheme.secondaryLPurpleColor,
+                                borderRadius: BorderRadius.circular(20),
+                                value: model.dropDownValue,
+                                items: list
+                                    .map<DropdownMenuItem<String>>(
+                                      (e) => DropdownMenuItem(
+                                        value: e,
+                                        child: Text(e),
+                                      ),
+                                    )
+                                    .toList(),
+
+                                onChanged: (String? value) {
+                                  model.changeDropDown(value);
+                                },
+                                underline:
+                                    const SizedBox(), // Remove the default underline
+                                isExpanded: true,
+                                icon: Icon(
+                                  Icons.arrow_drop_down,
+                                  size: 40.sp,
+                                ),
+                                style: FontThemeClass().caption(
+                                  context,
+                                  color:
+                                      context.colorScheme.secondaryBlackColor,
+                                ),
+                              ),
                             ),
+                            model.dropDownValue == 'BVCOE Student'
+                                ? Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 15.h,
+                                      ),
+                                      TextFormField(
+                                        cursorColor:
+                                            context.colorScheme.primaryColor,
+                                        controller: model.misnoTextController,
+                                        decoration: InputDecoration(
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                                      horizontal: 15,
+                                                      vertical: 15)
+                                                  .r,
+                                          border: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                const Radius.circular(15).r,
+                                              ),
+                                              borderSide: BorderSide.none),
+                                          fillColor: context
+                                              .colorScheme.secondaryWhiteColor,
+                                          filled: true,
+                                          focusColor: context
+                                              .colorScheme.secondaryWhiteColor,
+                                          hintText: 'Enter MIS Number',
+                                          hintStyle: FontThemeClass().caption(
+                                              context,
+                                              color: context.colorScheme
+                                                  .secondarySectionColor,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : const SizedBox(),
                             SizedBox(
                               height: 15.h,
                             ),
@@ -64,6 +136,66 @@ class RegisterView extends StatelessWidget {
                                 focusColor:
                                     context.colorScheme.secondaryWhiteColor,
                                 hintText: 'Student Email ID',
+                                errorText: model.isEmailIdValid
+                                    ? null
+                                    : model.emailIdErrorText,
+                                hintStyle: model.fontTheme.caption(context,
+                                    color: context
+                                        .colorScheme.secondarySectionColor,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            TextFormField(
+                              cursorColor: context.colorScheme.primaryColor,
+                              controller: model.phoneTextController,
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 15, vertical: 15)
+                                    .r,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                      const Radius.circular(15).r,
+                                    ),
+                                    borderSide: BorderSide.none),
+                                fillColor:
+                                    context.colorScheme.secondaryWhiteColor,
+                                filled: true,
+                                focusColor:
+                                    context.colorScheme.secondaryWhiteColor,
+                                hintText: 'Enter Phone No',
+                                errorText: model.isEmailIdValid
+                                    ? null
+                                    : model.emailIdErrorText,
+                                hintStyle: model.fontTheme.caption(context,
+                                    color: context
+                                        .colorScheme.secondarySectionColor,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            TextFormField(
+                              cursorColor: context.colorScheme.primaryColor,
+                              controller: model.userNameController,
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 15, vertical: 15)
+                                    .r,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                      const Radius.circular(15).r,
+                                    ),
+                                    borderSide: BorderSide.none),
+                                fillColor:
+                                    context.colorScheme.secondaryWhiteColor,
+                                filled: true,
+                                focusColor:
+                                    context.colorScheme.secondaryWhiteColor,
+                                hintText: 'Enter Username',
                                 errorText: model.isEmailIdValid
                                     ? null
                                     : model.emailIdErrorText,
@@ -166,6 +298,8 @@ class RegisterView extends StatelessWidget {
                                       model.confirmpasswordTextController.text,
                                       model.dropdownValue,
                                       model.misnoTextController.text,
+                                      model.phoneTextController.text,
+                                      model.userNameController.text,
                                       context);
                                 },
                                 style: ButtonStyle(
@@ -237,18 +371,13 @@ class RegisterView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const Expanded(child: Text("")),
                           ],
                         ),
                       ),
-                      Container(
-                        alignment: Alignment.bottomCenter,
-                        child: Text('Abhiyaan v1.0.0',
-                            style: FontThemeClass().caption(context,
-                                color:
-                                    context.colorScheme.secondarySectionColor,
-                                fontWeight: FontWeight.w500)),
-                      ),
+                      Text('Abhiyaan v1.0.0',
+                          style: FontThemeClass().caption(context,
+                              color: context.colorScheme.secondarySectionColor,
+                              fontWeight: FontWeight.w500)),
                     ],
                   ),
                 ),

@@ -24,7 +24,7 @@ class SettingsViewModel extends BaseViewModel {
       final localStorageService = locator<LocalStorageService>();
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: localStorageService.read('userEmail'))
-          .then((value) => showmessage(context, "reset password email sent !"));
+          .then((value) => showmessage(context, "reset password email sent !",));
     } catch (e) {
       showmessage(context, "something went wrong !");
     }
@@ -58,6 +58,30 @@ class SettingsViewModel extends BaseViewModel {
         });
   }
 
+  void logoutAlert(BuildContext context) {
+    showAdaptiveDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Alert"),
+            content: const Text("Are you sure you want to Logout ?"),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Cancel"),
+              ),
+              TextButton(
+                onPressed: () async {
+                  await logout(context).then(
+                      (value) => showmessage(context, "Logout successful"));
+                },
+                child: const Text("Yes"),
+              ),
+            ],
+          );
+        });
+  }
+
   navigateToHelpSupport() {
     UrlLauncher externalUrlHandler = UrlLauncher();
     externalUrlHandler.launchEmail("technicalteam.bvcoenm@gmail.com");
@@ -71,7 +95,7 @@ class SettingsViewModel extends BaseViewModel {
     // Navigation
   }
 
-  Future<void> logout() async {
+  Future<void> logout(BuildContext context) async {
     setBusy(true);
     LocalStorageService localStorageService = locator<LocalStorageService>();
 
@@ -80,6 +104,8 @@ class SettingsViewModel extends BaseViewModel {
       return value;
     });
     if (success) {
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context);
       log.i('sign out success');
       _navigationService.replaceWith(Routes.authView);
     } else {

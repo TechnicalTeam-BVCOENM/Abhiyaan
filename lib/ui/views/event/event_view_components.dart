@@ -15,14 +15,14 @@ class EventDetails {
         Icon(
           Icons.location_on,
           size: 18.sp,
-          color: context.colorScheme.primaryColor.withOpacity(0.8),
+          color: context.colorScheme.switchColor.withOpacity(0.8),
         ),
         4.horizontalSpace,
         Text(
           location,
           style: fontTheme.body(
             context,
-            color: context.colorScheme.primaryColor.withOpacity(0.8),
+            color: context.colorScheme.switchColor.withOpacity(0.8),
           ),
         ),
       ],
@@ -37,14 +37,14 @@ class EventDetails {
         Icon(
           Icons.timer,
           size: 18.sp,
-          color: context.colorScheme.primaryColor.withOpacity(0.8),
+          color: context.colorScheme.switchColor.withOpacity(0.8),
         ),
         4.horizontalSpace,
         Text(
           time,
           style: fontTheme.body(
             context,
-            color: context.colorScheme.primaryColor.withOpacity(0.8),
+            color: context.colorScheme.switchColor.withOpacity(0.8),
           ),
         ),
       ],
@@ -125,7 +125,7 @@ class EventDateContainer extends ViewModelWidget<EventViewModel> {
                 event.startDate.toDate().day.toString().trim(),
                 textAlign: TextAlign.center,
                 style: fontTheme.title(context,
-                    color: context.colorScheme.primaryColor,
+                    color: context.colorScheme.switchColor,
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -160,6 +160,15 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
 
   @override
   Widget build(BuildContext context, EventViewModel viewModel) {
+    double spreadRadius = 0;
+    double blurRadius = 0;
+    if (context.colorScheme.brightness == Brightness.light) {
+      spreadRadius = 1;
+      blurRadius = 2;
+    } else {
+      spreadRadius = 0;
+      blurRadius = 0;
+    }
     FontThemeClass fontTheme = FontThemeClass();
     EventDetails eventDetails = EventDetails();
     return Positioned(
@@ -219,15 +228,15 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                             height: 40.h,
                             width: 95.w,
                             decoration: BoxDecoration(
-                              color: context.colorScheme.primaryColor
+                              color: context.colorScheme.switchColor
                                   .withOpacity(0.8),
                               boxShadow: [
                                 BoxShadow(
                                   color: context
                                       .colorScheme.secondarySectionColor
                                       .withOpacity(0.4),
-                                  spreadRadius: 1,
-                                  blurRadius: 2,
+                                  spreadRadius: spreadRadius,
+                                  blurRadius: blurRadius,
                                   offset: const Offset(0, 1),
                                 ),
                               ],
@@ -235,7 +244,7 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                             ),
                             child: Center(
                               child: Text(
-                                "Open".toUpperCase(),
+                                "Open",
                                 style: fontTheme.title2(context,
                                     color: context.colorScheme.signInTextColor,
                                     fontWeight: FontWeight.w600),
@@ -265,6 +274,15 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
 
   @override
   Widget build(BuildContext context, EventViewModel viewModel) {
+    double spreadRadius = 0;
+    double blurRadius = 0;
+    if (context.colorScheme.brightness == Brightness.light) {
+      spreadRadius = 1;
+      blurRadius = 2;
+    } else {
+      spreadRadius = 0;
+      blurRadius = 0;
+    }
     EventDetails eventDetails = EventDetails();
     return Positioned(
       child: Container(
@@ -313,13 +331,13 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
                         width: 62.w,
                         decoration: BoxDecoration(
                           color:
-                              context.colorScheme.primaryColor.withOpacity(0.8),
+                              context.colorScheme.switchColor.withOpacity(0.8),
                           boxShadow: [
                             BoxShadow(
                               color: context.colorScheme.secondarySectionColor
                                   .withOpacity(0.4),
-                              spreadRadius: 1,
-                              blurRadius: 2,
+                              spreadRadius: spreadRadius,
+                              blurRadius: blurRadius,
                               offset: const Offset(0, 1),
                             ),
                           ],
@@ -327,7 +345,7 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
                         ),
                         child: Center(
                           child: Text(
-                            "Open".toUpperCase(),
+                            "Open",
                             style: FontThemeClass().body(context,
                                 color: context.colorScheme.signInTextColor),
                           ),
