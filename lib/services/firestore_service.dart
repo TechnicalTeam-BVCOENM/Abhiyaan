@@ -57,7 +57,7 @@ class FirestoreService {
 
   Future<List<SponsorsModel>> getAllSponsors() async {
     final QuerySnapshot snapshot =
-        await _firestore.collection("Sponsors").get();
+        await _firestore.collection("Events").doc("data").collection('sponsors').get();
     return snapshot.docs.map((doc) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       return SponsorsModel(
@@ -66,7 +66,7 @@ class FirestoreService {
   }
 
   Future<List<EventModel>> getAllEvents() async {
-    final QuerySnapshot snapshot = await _firestore.collection("Events").get();
+    final QuerySnapshot snapshot = await _firestore.collection("Events").doc('data').collection('events').get();
     return snapshot.docs.map((doc) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       return EventModel(
