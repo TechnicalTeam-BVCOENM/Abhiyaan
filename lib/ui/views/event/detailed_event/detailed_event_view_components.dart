@@ -162,7 +162,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
           28.verticalSpace,
           Text(
             "About Event",
-            style: fontTheme.header(context),
+            style: fontTheme.title(context),
           ),
           8.verticalSpace,
           Text(
@@ -180,7 +180,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
           20.verticalSpace,
           Text(
             "Contact Section",
-            style: fontTheme.header(
+            style: fontTheme.title(
               context,
             ),
           ),
