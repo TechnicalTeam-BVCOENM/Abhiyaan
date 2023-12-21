@@ -1,8 +1,10 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/ui/common/common_component_model.dart';
 import 'package:abhiyaan/ui/common/shimmer.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:abhiyaan/theme/responsive_utils.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:intl/intl.dart';
 import 'package:abhiyaan/ui/common/cached_network_image.dart';
 import 'package:abhiyaan/file_exporter.dart';
@@ -59,7 +61,11 @@ class EventView extends StatelessWidget {
                                       event: model.todayEvent!,
                                     ),
                                   ],
-                                )
+                                ).animate(delay: 400.ms).shimmer(
+                                  duration: 1000.ms,
+                                  color: context
+                                      .colorScheme.secondaryLPurpleColor
+                                      .withOpacity(0.2))
                               : Center(
                                   child: SizedBox(
                                     height: 261.h,
@@ -102,48 +108,36 @@ class EventView extends StatelessWidget {
                         const SectionText(title: "Upcoming Events"),
                         SizedBox(
                           height: 210.h,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: const BouncingScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
+                          child: CarouselSlider.builder(
                             itemCount: model.remainigEvents.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: index == 0
-                                    ? const EdgeInsets.only(left: 0).r
-                                    : const EdgeInsets.only(left: 12).r,
-                                child: Card(
-                                  clipBehavior: Clip.hardEdge,
-                                  shadowColor: context
-                                      .colorScheme.secondaryLPurpleColor
-                                      .withOpacity(0.8),
-                                  elevation: 4,
-                                  shape: ShapeBorder.lerp(
-                                      RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(18).r,
-                                      ),
-                                      RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(18).r,
-                                      ),
-                                      1),
-                                  child: Stack(
-                                    children: [
-                                      EventCardUpcoming(
-                                        model: model.remainigEvents[index],
-                                      ),
-                                      EventDateContainer(
-                                        top: 8.h,
-                                        left: 8.w,
-                                        height: 70.r,
-                                        width: 70.r,
-                                        timeFontSize: 30.sp,
-                                        textFontSize: 20.sp,
-                                        event: model.remainigEvents[index],
-                                      ),
-                                    ],
-                                  ),
+                            options: CarouselOptions(
+                              autoPlay: true,
+                              autoPlayInterval: 2.seconds,
+                              autoPlayAnimationDuration: 1.seconds,
+                              autoPlayCurve: Curves.easeInOut,
+                              pauseAutoPlayOnTouch: true,
+                              enableInfiniteScroll: true,
+                              viewportFraction: 0.72,
+                              
+                            ),
+                            itemBuilder: (context, index, realIndex) {
+                              return ClipRRect(
+                                borderRadius: BorderRadius.circular(18).r,
+                                child: Stack(
+                                  children: [
+                                    EventCardUpcoming(
+                                      model: model.remainigEvents[index],
+                                    ),
+                                    EventDateContainer(
+                                      top: 8.h,
+                                      left: 8.w,
+                                      height: 70.r,
+                                      width: 70.r,
+                                      timeFontSize: 30.sp,
+                                      textFontSize: 20.sp,
+                                      event: model.remainigEvents[index],
+                                    ),
+                                  ],
                                 ),
                               );
                             },
