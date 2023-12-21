@@ -1,24 +1,39 @@
 part of 'event_view.dart';
 
 class EventViewModel extends BaseViewModel {
-  final FirestoreService _firestoreService = FirestoreService();
   final log = getLogger('EventViewModel');
-
+  final FirestoreService _firestoreService = FirestoreService();
   final _navigationService = locator<NavigationService>();
-
-  navigateToDetailedEventView() {
-    _navigationService.navigateTo(Routes.detailedEventView);
-  }
-
-  // Init Method
-  void init() async {
-    await loadData();
-  }
-
   List<SponsorsModel> _sponsors = [];
   List<SponsorsModel> get sponsors => _sponsors;
   List<EventModel> _events = [];
   List<EventModel> get events => _events;
+  EventModel? _todayEvent;
+  EventModel? get todayEvent => _todayEvent;
+  late final List<EventModel> _upcomingEvents = [];
+  List<EventModel> get upcomingEvents => _upcomingEvents;
+
+  var carouselOptions = CarouselOptions(
+    scrollPhysics: const BouncingScrollPhysics(),
+    autoPlayCurve: Curves.easeInOut,
+    autoPlay: true,
+    autoPlayInterval: 5.seconds,
+    autoPlayAnimationDuration: 1.seconds,
+    pauseAutoPlayOnTouch: true,
+    pauseAutoPlayInFiniteScroll: true,
+    viewportFraction: 0.70,
+  );
+
+
+  void init() async {
+    await loadData();
+  }
+
+
+
+  navigateToDetailedEventView() {
+    _navigationService.navigateTo(Routes.detailedEventView);
+  }
 
   Future<void> loadData() async {
     setBusy(true);
@@ -53,8 +68,6 @@ class EventViewModel extends BaseViewModel {
     return currentMonth;
   }
 
-  EventModel? _todayEvent;
-  EventModel? get todayEvent => _todayEvent;
   EventModel? setTodayEvent(EventModel? event) {
     _todayEvent = event;
     notifyListeners();
@@ -77,8 +90,6 @@ class EventViewModel extends BaseViewModel {
     }
   }
 
-  late final List<EventModel> _remainigEvents = [];
-  List<EventModel> get remainigEvents => _remainigEvents;
   void getRemainingEvents() {
     for (EventModel event in events) {
       DateTime now = DateTime.now();
@@ -88,16 +99,15 @@ class EventViewModel extends BaseViewModel {
       if (year > now.year ||
           (year == now.year &&
               (month > now.month || (month == now.month && day > now.day)))) {
-        remainigEvents.add(event);
-        for (EventModel event in remainigEvents) {
+        upcomingEvents.add(event);
+        for (EventModel event in upcomingEvents) {
           log.i(event.title);
         }
         notifyListeners();
       }
     }
-
     //Doc:  This is sorting according to year, month and date
-    remainigEvents.sort(
+    upcomingEvents.sort(
       (a, b) {
         int yearComparison =
             a.startDate.toDate().year.compareTo(b.startDate.toDate().year);

@@ -65,8 +65,7 @@ class EventDetails {
     );
   }
 
-  Padding eventTitle(BuildContext context, String title, EdgeInsets padding,
-      {double fontSize = 26}) {
+  Padding eventTitle(BuildContext context, String title, EdgeInsets padding) {
     return Padding(
       padding: padding,
       child: Text(
@@ -178,11 +177,23 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
         width: double.infinity,
         child: Column(
           children: [
-            eventDetails.eventImage(
-              context,
-              model.imageUrl,
-              178.h,
-              double.infinity,
+            Hero(
+              tag: "eventImage",
+              child: Image.network(
+                model.imageUrl,
+                height: 178.h,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                frameBuilder: (context, child, frame, wasSynchronouslyLoaded) =>
+                    wasSynchronouslyLoaded
+                        ? child
+                        : AnimatedOpacity(
+                            opacity: frame == null ? 0 : 1,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeOut,
+                            child: child,
+                          ),
+              ),
             ),
             6.verticalSpace,
             Padding(
@@ -196,10 +207,12 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           4.verticalSpace,
-                          eventDetails.eventTitle(
-                            context,
-                            model.title,
-                            const EdgeInsets.only(left: 18).r,
+                          Padding(
+                            padding: const EdgeInsets.only(left: 18.0).r,
+                            child: Text(
+                              model.title,
+                              style: fontTheme.header(context),
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 18).r,
@@ -409,10 +422,10 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
           delay: 300.ms,
         )
         .shimmer(
-            padding: 0,
-            delay: 200.ms,
-            duration: 1000.ms,
-            color: context.colorScheme.secondaryLPurpleColor.withOpacity(0.3));
+          padding: 0,
+          delay: 200.ms,
+          duration: 1000.ms,
+        );
   }
 }
 

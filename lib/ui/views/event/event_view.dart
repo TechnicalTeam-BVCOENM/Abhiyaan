@@ -63,9 +63,7 @@ class EventView extends StatelessWidget {
                                   ],
                                 ).animate(delay: 400.ms).shimmer(
                                   duration: 1000.ms,
-                                  color: context
-                                      .colorScheme.secondaryLPurpleColor
-                                      .withOpacity(0.2))
+                                  )
                               : Center(
                                   child: SizedBox(
                                     height: 261.h,
@@ -109,20 +107,8 @@ class EventView extends StatelessWidget {
                         SizedBox(
                           height: 210.h,
                           child: CarouselSlider.builder(
-                            itemCount: model.remainigEvents.length,
-                            options: CarouselOptions(
-                              enlargeCenterPage: true,
-                              autoPlay: true,
-                              autoPlayInterval: 2.seconds,
-                              autoPlayAnimationDuration: 1.seconds,
-                              autoPlayCurve: Curves.easeInOutCubic,
-                              pauseAutoPlayOnTouch: true,
-                              scrollPhysics: const BouncingScrollPhysics(),
-                              enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-                              enableInfiniteScroll: true,
-                              pauseAutoPlayInFiniteScroll: true,
-                              viewportFraction: 0.70,
-                            ),
+                            itemCount: model.upcomingEvents.length,
+                            options: model.carouselOptions,
                             itemBuilder: (context, index, realIndex) {
                               return Card(
                                 clipBehavior: Clip.hardEdge,
@@ -141,7 +127,7 @@ class EventView extends StatelessWidget {
                                 child: Stack(
                                   children: [
                                     EventCardUpcoming(
-                                      model: model.remainigEvents[index],
+                                      model: model.upcomingEvents[index],
                                     ),
                                     EventDateContainer(
                                       top: 8.h,
@@ -150,15 +136,10 @@ class EventView extends StatelessWidget {
                                       width: 70.r,
                                       timeFontSize: 30.sp,
                                       textFontSize: 20.sp,
-                                      event: model.remainigEvents[index],
+                                      event: model.upcomingEvents[index],
                                     ),
                                   ],
-                                ).animate(delay: 400.ms).shimmer(
-                                    duration: 1000.ms,
-                                    delay: 1100.ms,
-                                    color: context
-                                        .colorScheme.secondaryLPurpleColor
-                                        .withOpacity(0.2)),
+                                ),
                               );
                             },
                           ),
