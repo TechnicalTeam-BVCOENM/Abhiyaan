@@ -61,9 +61,7 @@ class EventView extends StatelessWidget {
                                       event: model.todayEvent!,
                                     ),
                                   ],
-                                ).animate(delay: 400.ms).shimmer(
-                                  duration: 1000.ms,
-                                  )
+                                )
                               : Center(
                                   child: SizedBox(
                                     height: 261.h,
@@ -104,13 +102,13 @@ class EventView extends StatelessWidget {
                           ),
                         ),
                         const SectionText(title: "Upcoming Events"),
-                        SizedBox(
-                          height: 210.h,
-                          child: CarouselSlider.builder(
-                            itemCount: model.upcomingEvents.length,
-                            options: model.carouselOptions,
-                            itemBuilder: (context, index, realIndex) {
-                              return Card(
+                        CarouselSlider.builder(
+                          itemCount: model.upcomingEvents.length,
+                          options: model.carouselOptions,
+                          itemBuilder: (context, index, realIndex) {
+                            return SizedBox(
+                              height: 210.h,
+                              child: Card(
                                 clipBehavior: Clip.hardEdge,
                                 shadowColor: context
                                     .colorScheme.secondaryLPurpleColor
@@ -140,9 +138,9 @@ class EventView extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                              );
-                            },
-                          ),
+                              ),
+                            );
+                          },
                         ),
                         4.verticalSpace,
                       ],

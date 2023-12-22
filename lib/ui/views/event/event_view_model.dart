@@ -15,13 +15,14 @@ class EventViewModel extends BaseViewModel {
 
   var carouselOptions = CarouselOptions(
     scrollPhysics: const BouncingScrollPhysics(),
-    autoPlayCurve: Curves.easeInOut,
+    autoPlayCurve: Curves.easeInOutCubic,
+    enableInfiniteScroll: true,
     autoPlay: true,
-    autoPlayInterval: 5.seconds,
+    autoPlayInterval: 4.seconds,
     autoPlayAnimationDuration: 1.seconds,
     pauseAutoPlayOnTouch: true,
     pauseAutoPlayInFiniteScroll: true,
-    viewportFraction: 0.70,
+    viewportFraction: 0.65,
   );
 
 

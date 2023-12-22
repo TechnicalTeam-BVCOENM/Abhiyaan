@@ -305,11 +305,11 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            eventDetails.eventImage(
-              context,
+            Image.network(
               model.imageUrl,
-              135.h,
-              ResponsiveUtils.screenWidth(context),
+              height: 135.h,
+              width: ResponsiveUtils.screenWidth(context),
+              fit: BoxFit.cover,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
