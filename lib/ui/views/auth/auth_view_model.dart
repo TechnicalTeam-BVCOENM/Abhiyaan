@@ -9,6 +9,6 @@ class AuthViewModel extends BaseViewModel {
   }
 
   void toRegisterPage(BuildContext context) {
-    _navigationService.navigateTo(Routes.onboardingView);
+    _navigationService.replaceWith(Routes.registerView);
   }
 }
