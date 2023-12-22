@@ -55,7 +55,7 @@ void _showmessage(BuildContext context, String message, String type) {
           height: 60.h,
           width: double.infinity,
           child: Card(
-            color: Colors.white,
+            color: context.colorScheme.secondaryWhiteColor.withOpacity(0.7),
             clipBehavior: Clip.hardEdge,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20).r),
@@ -67,11 +67,11 @@ void _showmessage(BuildContext context, String message, String type) {
                     decoration: BoxDecoration(
                       color: backgroundColor,
                     ),
-                    child:  Icon(
-                     icon,
+                    child: Icon(
+                      icon,
                       color: Colors.white,
                     )),
-                    20.horizontalSpace,
+                20.horizontalSpace,
                 Text(
                   message,
                   maxLines: 1,

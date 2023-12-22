@@ -59,13 +59,9 @@ class RegisterViewModel extends BaseViewModel {
     String userName,
     BuildContext context,
   ) async {
-    // Validate email format
-    if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
-        .hasMatch(email)) {
-      showErrorMessage(context, "Invalid email format");
-      return;
-    }
-    if (misNo == "" ||
+    if (dropDownValue == "Explorer") {
+      misNo = "null";
+    } else if (misNo == "" ||
         createpassword == "" ||
         confirmPassword == "" ||
         phoneNo == "" ||
@@ -73,12 +69,41 @@ class RegisterViewModel extends BaseViewModel {
       showErrorMessage(context, "some fields are empty!");
       return;
     }
-
+    // Check MIS number only if the dropdown is not "explorer"
+    else if (dropDownValue != "Explorer" &&
+        !RegExp(r'^[0-9]{8}$').hasMatch(misNo)) {
+      showErrorMessage(context, "MIS number should be an 8-digit number");
+    }
     // Validate that create password and confirm password are the same
-    if (createpassword != confirmPassword) {
+    else if (createpassword != confirmPassword) {
       showErrorMessage(context, "Passwords do not match");
       return;
     }
+    // Validate email format
+    else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+        .hasMatch(email)) {
+      showErrorMessage(
+        context,
+        "Invalid email format",
+      );
+      return;
+    } // Check if phone number contains only numbers and has a length of 10
+    else if (!RegExp(r'^[0-9]{10}$').hasMatch(phoneNo)) {
+      showErrorMessage(context, "Phone number should be a 10-digit number");
+      return;
+    } else if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(userName)) {
+      showErrorMessage(context, "Username should contain only alphabets");
+      return;
+    }
+
+// Check if the first letter of the username is capitalized
+    else if (userName[0] != userName[0].toUpperCase()) {
+      showErrorMessage(context, "Username should start with a capital letter");
+      return;
+    }
+
+    // Check if MIS number contains only numbers and has a length of 8
+
     AuthenticationService().showLoadingOverlay(context);
     await _authenticationService.signUpWithEmailAndPassword(
         context, email, confirmPassword);
@@ -91,19 +116,20 @@ class RegisterViewModel extends BaseViewModel {
       "userEmail": email,
       "userPhone": phoneNo,
       "userName": userName,
-          "isUserNew": true,
+      "isUserNew": true,
+      "userProfile": dropDownValue,
     });
-
 
     await AuthenticationService().storeUserDataLocally();
     // ignore: use_build_context_synchronously
     NavigationService().back();
-    await _navigationService
-        .navigateWithTransition(const OnboardingView(),
+    _navigationService
+        .replaceWithTransition(const OnboardingView(),
             transitionStyle: Transition.rightToLeftWithFade,
-            curve: Curves.easeInOutQuad,
-            duration: const Duration(milliseconds: 400))
-        ?.then((value) => showSuccessMessage(context, "Registration successful"));
+            curve: Curves.fastEaseInToSlowEaseOut,
+            duration: const Duration(milliseconds: 1500))
+        ?.then(
+            (value) => showSuccessMessage(context, "Registration successful"));
     notifyListeners();
   }
 

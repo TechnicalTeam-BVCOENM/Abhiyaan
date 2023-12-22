@@ -9,10 +9,10 @@ class OnboardingView extends StatelessWidget {
     return ViewModelBuilder<OnboardingViewModel>.reactive(
       viewModelBuilder: () => OnboardingViewModel(),
       builder: (context, model, child) {
-        return SafeArea(
-          child: Scaffold(
-            backgroundColor: context.colorScheme.backgroundColor,
-            body: Stack(
+        return Scaffold(
+          backgroundColor: context.colorScheme.backgroundColor,
+          body: SafeArea(
+            child: Stack(
               children: [
                 PageView(
                   onPageChanged: (index) {
@@ -26,9 +26,9 @@ class OnboardingView extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  alignment: const Alignment(-0.65, 0.42),
+                  alignment: const Alignment(0, 0.65),
                   child: SmoothPageIndicator(
-                      effect: const WormEffect(dotHeight: 5),
+                      effect: const WormEffect(dotHeight: 10, dotWidth: 10),
                       onDotClicked: (index) {
                         model.pageController.jumpToPage(index);
                       },

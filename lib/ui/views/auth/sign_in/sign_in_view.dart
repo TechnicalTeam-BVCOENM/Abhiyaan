@@ -6,6 +6,7 @@ import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:abhiyaan/ui/views/profile/settings/settings_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 part 'sign_in_view_model.dart';
 
 class SignInView extends StatelessWidget {
@@ -38,7 +39,11 @@ class SignInView extends StatelessWidget {
                             child: Image.asset(
                               AssetImagePath.logoImg,
                             ),
-                          ),
+                          ).animate(delay: 100.ms).fadeIn(
+                                delay: 100.ms,
+                                curve: Curves.easeInOut,
+                                duration: 500.ms,
+                              ),
                           const Expanded(child: Text("")),
                           TextFormField(
                             cursorColor: context.colorScheme.primaryColor,
@@ -66,7 +71,11 @@ class SignInView extends StatelessWidget {
                                       context.colorScheme.secondarySectionColor,
                                   fontWeight: FontWeight.w500),
                             ),
-                          ),
+                          ).animate(delay: 300.ms).fadeIn(
+                                delay: 100.ms,
+                                curve: Curves.easeInOut,
+                                duration: 500.ms,
+                              ),
                           SizedBox(
                             height: 15.h,
                           ),
@@ -108,7 +117,11 @@ class SignInView extends StatelessWidget {
                                 errorText: model.isPasswordValid
                                     ? null
                                     : model.passwordErrorText),
-                          ),
+                          ).animate(delay: 300.ms).fadeIn(
+                                delay: 100.ms,
+                                curve: Curves.easeInOut,
+                                duration: 500.ms,
+                              ),
                           InkWell(
                             onTap: () => SettingsViewModel()
                                 .passwordChangeAlert(context),
@@ -124,7 +137,11 @@ class SignInView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          ),
+                          ).animate(delay: 100.ms).fadeIn(
+                                delay: 100.ms,
+                                curve: Curves.easeInOut,
+                                duration: 500.ms,
+                              ),
                           Padding(
                             padding: EdgeInsetsDirectional.only(top: 10.r),
                             child: TextButton(
@@ -151,7 +168,11 @@ class SignInView extends StatelessWidget {
                                     color: context.colorScheme.signInTextColor),
                               ),
                             ),
-                          ),
+                          ).animate(delay: 500.ms).fadeIn(
+                                delay: 100.ms,
+                                curve: Curves.easeInOut,
+                                duration: 500.ms,
+                              ),
                           Padding(
                             padding: EdgeInsetsDirectional.only(top: 15.r),
                             child: RichText(
@@ -175,7 +196,11 @@ class SignInView extends StatelessWidget {
                                 ],
                               ),
                             ),
-                          ),
+                          ).animate(delay: 100.ms).fadeIn(
+                                delay: 100.ms,
+                                curve: Curves.easeInOut,
+                                duration: 500.ms,
+                              ),
                           Padding(
                             padding: EdgeInsetsDirectional.only(top: 10.r),
                             child: InkWell(
@@ -199,7 +224,11 @@ class SignInView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          ),
+                          ).animate(delay: 100.ms).fadeIn(
+                                delay: 100.ms,
+                                curve: Curves.easeInOut,
+                                duration: 500.ms,
+                              ),
                           const Expanded(child: Text("")),
                         ],
                       ),

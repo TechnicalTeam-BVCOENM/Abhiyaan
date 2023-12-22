@@ -19,7 +19,7 @@ class ProfileDetailsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return value != "feed me data"
+    return value != "null"
         ? Container(
             width: double.infinity,
             height: 75.h,

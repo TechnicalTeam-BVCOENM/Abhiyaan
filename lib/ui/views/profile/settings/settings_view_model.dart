@@ -105,7 +105,8 @@ class SettingsViewModel extends BaseViewModel {
     });
     if (success) {
       // ignore: use_build_context_synchronously
-      Navigator.pop(context);
+      NavigationService().back();
+      NavigationService().back();
       log.i('sign out success');
       _navigationService.replaceWith(Routes.authView);
     } else {

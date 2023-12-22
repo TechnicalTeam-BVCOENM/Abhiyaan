@@ -9,13 +9,13 @@ class OnboardingViewModel extends BaseViewModel {
     if (increment && index != 2) {
       activeindex = activeindex + 1;
       pageController.nextPage(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOutQuad);
+          curve: Curves.fastEaseInToSlowEaseOut,
+          duration: const Duration(milliseconds: 1500));
     } else if (!increment && index != 0) {
       activeindex = activeindex - 1;
       pageController.previousPage(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOutQuad);
+          curve: Curves.fastEaseInToSlowEaseOut,
+          duration: const Duration(milliseconds: 1500));
     } else if (increment && index == 2) {
       _navigationService.replaceWith(Routes.bottomNavView);
     }

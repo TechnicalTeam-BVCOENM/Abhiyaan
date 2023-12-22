@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/ui/views/profile/profile_view_component.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 part 'profile_view_model.dart';
 
 class ProfileView extends StatelessWidget {
@@ -73,18 +74,22 @@ class ProfileView extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                LocalStorageService().read('userName'),
-                                style: FontThemeClass().title2(context,
-                                    color:
-                                        context.colorScheme.secondaryBlackColor,
-                                    fontWeight: FontWeight.w500),
+                              SizedBox(
+                                width: 220.w,
+                                child: Text(
+                                  LocalStorageService().read('userName'),
+                                  overflow: TextOverflow.ellipsis,
+                                  style: FontThemeClass().title2(context,
+                                      color: context
+                                          .colorScheme.secondaryBlackColor,
+                                      fontWeight: FontWeight.w500),
+                                ),
                               ),
                               SizedBox(
                                 height: 4.h,
                               ),
-                              LocalStorageService().read('userMisNo') ==
-                                      "feed me data"
+                              LocalStorageService().read('userProfile') ==
+                                      "Explorer"
                                   ? Text("Explorer",
                                       style: FontThemeClass().body(context,
                                           color: context.colorScheme
@@ -98,11 +103,24 @@ class ProfileView extends StatelessWidget {
                             ],
                           )
                         ],
-                      ),
+                      ).animate(delay: 0.ms).fadeIn(
+                            delay: 100.ms,
+                            curve: Curves.easeInOut,
+                            duration: 600.ms,
+                          ),
                     ),
-                    for (var profileCard in model.profileCardList) profileCard,
+                    for (var profileCard in model.profileCardList)
+                      profileCard.animate(delay: 200.ms).fadeIn(
+                            delay: 100.ms,
+                            curve: Curves.easeInOut,
+                            duration: 600.ms,
+                          ),
                     // Display each profile card widget
-                    const Cerificatation(),
+                    const Cerificatation().animate(delay: 200.ms).fadeIn(
+                          delay: 100.ms,
+                          curve: Curves.easeInOut,
+                          duration: 600.ms,
+                        ),
                     const Expanded(child: Text("")),
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -120,7 +138,11 @@ class ProfileView extends StatelessWidget {
                           url: AssetUrls.twitterUrl,
                         ),
                       ],
-                    ),
+                    ).animate(delay: 400.ms).fadeIn(
+                          delay: 100.ms,
+                          curve: Curves.easeInOut,
+                          duration: 600.ms,
+                        ),
                     SizedBox(
                       height: 20.h,
                     )
