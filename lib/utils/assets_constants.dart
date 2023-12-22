@@ -1,5 +1,6 @@
 class AssetImagePath {
   static const String copyImg = 'assets/images/profile/copy.png';
+  static const String login = 'assets/images/login.png';
   static const String settingImg = 'assets/images/profile/setting.png';
   static const String misImg = 'assets/images/profile/mis.png';
   static const String prnImg = 'assets/images/profile/prn_no.png';

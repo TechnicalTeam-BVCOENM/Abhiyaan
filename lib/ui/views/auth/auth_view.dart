@@ -11,9 +11,8 @@ class AuthView extends StatelessWidget {
       viewModelBuilder: () => AuthViewModel(),
       builder: (context, model, child) {
         return Scaffold(
-          
             appBar: AppBar(
-                 backgroundColor: context.colorScheme.backgroundColor,
+              backgroundColor: context.colorScheme.backgroundColor,
               toolbarHeight: 100,
               title: SizedBox(
                   width: 180.w,
@@ -25,15 +24,14 @@ class AuthView extends StatelessWidget {
                         duration: 500.ms,
                       )),
             ),
-            backgroundColor: context.colorScheme.backgroundColor,
+            backgroundColor: context.colorScheme.secondaryBlackColor,
             body: SafeArea(
               child: Column(
                 children: [
                   Container(
                           margin: EdgeInsets.symmetric(vertical: 50.r),
                           child: Image(
-                              image:
-                                  Image.asset("assets/images/login.png").image))
+                              image: Image.asset(AssetImagePath.login).image))
                       .animate(delay: 200.ms)
                       .fadeIn(
                         delay: 100.ms,
@@ -41,12 +39,12 @@ class AuthView extends StatelessWidget {
                         duration: 600.ms,
                       ),
                   16.verticalSpace,
-                  InkWell(
-                    splashColor: context.colorScheme.secondaryLPurpleColor,
+                  GestureDetector(
                     onTap: () {
                       model.toSignInPage(context);
                     },
                     child: Container(
+                      width: 100,
                       margin: const EdgeInsets.symmetric(horizontal: 36),
                       padding: const EdgeInsets.all(10).r,
                       decoration: BoxDecoration(
@@ -67,8 +65,7 @@ class AuthView extends StatelessWidget {
                         duration: 700.ms,
                       ),
                   20.verticalSpace,
-                  InkWell(
-                    splashColor: context.colorScheme.secondaryLPurpleColor,
+                  GestureDetector(
                     onTap: () {
                       model.toRegisterPage(context);
                     },

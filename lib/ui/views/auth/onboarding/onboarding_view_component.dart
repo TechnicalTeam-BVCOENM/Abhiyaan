@@ -111,7 +111,6 @@ class _FloatingImage extends StatefulWidget {
   final Offset endOffset; // End position of the animation
 
   const _FloatingImage({
-    super.key,
     required this.left,
     this.top,
     this.right,
