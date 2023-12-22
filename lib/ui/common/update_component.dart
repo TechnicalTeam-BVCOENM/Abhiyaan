@@ -39,8 +39,8 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                     child: Text(
                       "Read More",
                       style: fontTheme.body(context,
-                          color: context.colorScheme.primaryColor
-                              .withOpacity(0.9)),
+                          color:
+                              context.colorScheme.switchColor.withOpacity(0.9)),
                     ),
                   ),
                 ],
@@ -80,8 +80,8 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                     child: Text(
                       "Read Less",
                       style: fontTheme.body(context,
-                          color: context.colorScheme.primaryColor
-                              .withOpacity(0.9)),
+                          color:
+                              context.colorScheme.switchColor.withOpacity(0.9)),
                     ),
                   ),
                 ],
@@ -166,7 +166,7 @@ class CardTitle extends StatelessWidget {
     return Text(
       title,
       style: fontTheme.body(context,
-          color: context.colorScheme.primaryColor, fontWeight: FontWeight.w600),
+          color: context.colorScheme.switchColor, fontWeight: FontWeight.w600),
     );
   }
 }

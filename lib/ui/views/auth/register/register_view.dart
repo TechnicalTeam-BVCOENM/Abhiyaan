@@ -30,7 +30,9 @@ class RegisterView extends StatelessWidget {
                             .r,
                         child: Column(
                           children: [
-                            SizedBox(
+                            Container(
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 30, vertical: 50),
                               width: ResponsiveUtils.screenWidth(context) * 0.6,
                               child: Image.asset(
                                 AssetImagePath.logoImg,
@@ -85,6 +87,7 @@ class RegisterView extends StatelessWidget {
                                         height: 15.h,
                                       ),
                                       TextFormField(
+                                        keyboardType: TextInputType.number,
                                         cursorColor:
                                             context.colorScheme.primaryColor,
                                         controller: model.misnoTextController,
@@ -119,6 +122,7 @@ class RegisterView extends StatelessWidget {
                               height: 15.h,
                             ),
                             TextFormField(
+                              keyboardType: TextInputType.emailAddress,
                               cursorColor: context.colorScheme.primaryColor,
                               controller: model.emailIdTextController,
                               decoration: InputDecoration(
@@ -149,6 +153,7 @@ class RegisterView extends StatelessWidget {
                               height: 15.h,
                             ),
                             TextFormField(
+                              keyboardType: TextInputType.number,
                               cursorColor: context.colorScheme.primaryColor,
                               controller: model.phoneTextController,
                               decoration: InputDecoration(
@@ -209,6 +214,7 @@ class RegisterView extends StatelessWidget {
                               height: 15.h,
                             ),
                             TextFormField(
+                              keyboardType: TextInputType.visiblePassword,
                               cursorColor: context.colorScheme.primaryColor,
                               controller: model.createpasswordTextController,
                               obscureText:
@@ -249,6 +255,7 @@ class RegisterView extends StatelessWidget {
                             ),
                             15.verticalSpace,
                             TextFormField(
+                              keyboardType: TextInputType.visiblePassword,
                               cursorColor: context.colorScheme.primaryColor,
                               controller: model.confirmpasswordTextController,
                               obscureText:

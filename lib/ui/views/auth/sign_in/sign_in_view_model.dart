@@ -41,7 +41,7 @@ class SignInViewModel extends BaseViewModel {
       await AuthenticationService().storeUserDataLocally();
       NavigationService().back();
       showSuccessMessage(context, "Login successful",);
-      _navigationService.navigateTo(Routes.bottomNavView);
+      _navigationService.replaceWith(Routes.bottomNavView);
     } on FirebaseException {
       isPasswordValid = false;
       isEmailIdValid = false;
