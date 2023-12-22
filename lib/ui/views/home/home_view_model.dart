@@ -1,5 +1,4 @@
 part of 'home_view.dart';
-
 bool isCelebrationShown = false;
 
 class HomeViewModel extends BaseViewModel {
@@ -22,115 +21,26 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
     return isCelebrationShown;
   }
-
-  Future showCelebrationModal(BuildContext context, CelebrationData data) async{
-    await showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (context) {
-        return AlertDialog.adaptive(
-          clipBehavior: Clip.hardEdge,
-          insetPadding: EdgeInsets.zero,
-          contentPadding: EdgeInsets.zero,
-          content: IntrinsicHeight(
-            child: Column(
-              children: [
-                Stack(
-                  alignment: Alignment.topRight,
-                  children: [
-                    Container(
-                      height: 220.h,
-                      width: 340.w,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: Image.network(data.image,
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return Center(
-                              child: CircularProgressIndicator(
-                                color: context.colorScheme.primaryColor,
-                                value: loadingProgress.expectedTotalBytes != null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                        loadingProgress.expectedTotalBytes!
-                                    : null,
-                              ),
-                            );
-                          },
-                          ).image,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(20.0).r,
-                      child: GestureDetector(
-                        onTap: () {
-                          toggleCelebrationShown();
-                          Navigator.pop(context);
-                        },
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12).r,
-                          ),
-                          color: context.colorScheme.secondaryWhiteColor
-                              .withOpacity(0.6),
-                          child: Icon(
-                            Icons.close,
-                            color: context.colorScheme.secondaryWhiteColor,
-                            size: 30.0.sp,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                10.verticalSpace,
-                Container(
-                  padding: const EdgeInsets.all(20).r,
-                  width: 340.w,
-                  child: Column(
-                    children: [
-                      Text(
-                        data.title,
-                        style: fontThemeClass.header(
-                          context,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      10.verticalSpace,
-                      Text(
-                        data.description,
-                        maxLines: 5,
-                        overflow: TextOverflow.ellipsis,
-                        style: fontThemeClass.body(
-                          context,
-                          color: context.colorScheme.secondarySectionColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                10.verticalSpace,
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
+ 
   Future getCelebrationData() async {
     try {
-      List<CelebrationData> unsortedList = [];
-      unsortedList = await _firestoreService.getCelebrationData();
+      List<CelebrationData> unsortedList =
+          await _firestoreService.getCelebrationData();
 
       if (unsortedList.isEmpty) {
-        debugPrint("Celebration data is empty");
-        return;
+        debugPrint("UnsortedList data is empty");
+        return [];
       } else {
-        unsortedList.sort((a, b) => a.startdate.compareTo(b.startdate));
-        _celebrationData.add(unsortedList.first);
-        notifyListeners();
+        unsortedList.sort(
+            (a, b) => b.startdate.toDate().compareTo(a.startdate.toDate()));
+        if (unsortedList.first.startdate
+            .toDate()
+            .isBefore(DateTime(DateTime.now().year, DateTime.now().month))) {
+          return [];
+        } else {
+          _celebrationData.add(unsortedList.first);
+          notifyListeners();
+        }
       }
     } catch (e) {
       debugPrint("Error in getting celebration data : ${e.toString()}");
@@ -144,9 +54,9 @@ class HomeViewModel extends BaseViewModel {
     return firstname[0];
   }
 
-  bool toggleisNewUser() {
+  Future<bool> toggleisNewUser() async {
     isUserNew = false;
-    _firestoreService
+   await _firestoreService
         .updateUserStatus()
         .then((value) => LocalStorageService().write('isUserNew', isUserNew));
     notifyListeners();
@@ -156,19 +66,23 @@ class HomeViewModel extends BaseViewModel {
   void showWelcomeAndCelebration(BuildContext context) async {
     if (isUserNew) {
       debugPrint("User is new");
-      await showWelcomPopUp(context).then((value) async {
+      await showWelcomPopUp(context,toggleisNewUser: toggleisNewUser , username: splitusername() ).then((value) async {
         debugPrint("Showed welcome pop up");
-        if (isCelebrationShown == false && celebrationData.isNotEmpty) {
-          await showCelebrationModal(context, celebrationData[0]);
+        Future.delayed(2.seconds, () async{
+          if (isCelebrationShown == false && _celebrationData.isNotEmpty) {
+          await showCelebrationModal(context, _celebrationData[0],toggleCelebrationShown);
           debugPrint("Showed Celebration pop up");
         }
+        });
       });
-    } else {
-      if (celebrationData.isNotEmpty && isCelebrationShown == false) {
-        await showCelebrationModal(context, celebrationData[0]);
-      }else{
-        debugPrint("Celebration data is empty");
-      }
+    } else if (_celebrationData.isNotEmpty && isCelebrationShown == false) {
+      showCelebrationModal(context, _celebrationData[0],toggleCelebrationShown);
+    } else if (_celebrationData.isNotEmpty && isCelebrationShown == true) {
+      debugPrint("Celebration is already shown");
+    } else if (celebrationData.isEmpty) {
+      debugPrint("Celebration data: ${celebrationData.length}");
+      debugPrint("User is not new");
+      debugPrint("Celebration data is empty & isCelebrationShown is true");
     }
   }
 
@@ -240,107 +154,7 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future showWelcomPopUp(BuildContext context) async {
-    FontThemeClass fontThemeClass = FontThemeClass();
-    await showAdaptiveDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            backgroundColor: context.colorScheme.secondaryWhiteColor,
-            title: SizedBox(
-              height: 100.h,
-              width: 100.w,
-              child: Lottie.asset(
-                AnimationAssets.welcome,
-                repeat: true,
-                reverse: false,
-                frameRate: FrameRate(60),
-                fit: BoxFit.contain,
-              ),
-            ),
-            content: IntrinsicHeight(
-              child: Column(
-                children: [
-                  Text(
-                    splitusername(),
-                    style: fontThemeClass.title(
-                      context,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  10.verticalSpace,
-                  Row(
-                    children: [
-                      Image.asset(
-                        AssetImagePath.community,
-                        width: 40.w,
-                        height: 40.h,
-                      ).animate(delay: 300.ms).fadeIn().shake(
-                            delay: 500.ms,
-                            curve: Curves.easeInOut,
-                            duration: 1000.ms,
-                          ),
-                      16.horizontalSpace,
-                      Expanded(
-                        child: Text(
-                          "We are thrilled to have you join our digital community!",
-                          style: fontThemeClass.body(context),
-                        ),
-                      ),
-                    ],
-                  ),
-                  10.verticalSpace,
-                  Row(
-                    children: [
-                      Image.asset(
-                        AssetImagePath.poper,
-                        width: 40.w,
-                        height: 40.h,
-                      ).animate(delay: 300.ms).fadeIn().shake(
-                            delay: 500.ms,
-                            curve: Curves.easeInOut,
-                            duration: 1000.ms,
-                          ),
-                      16.horizontalSpace,
-                      Expanded(
-                        child: Text(
-                          "Explore events, from cultural festivals to academic seminars.",
-                          style: fontThemeClass.body(context),
-                        ),
-                      ),
-                    ],
-                  ),
-                  10.verticalSpace,
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  color: context.colorScheme.primaryColor.withOpacity(0.8),
-                  borderRadius: BorderRadius.circular(12).r,
-                ),
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-                    toggleisNewUser();
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(
-                    "Let's Go!",
-                    style: fontThemeClass.body(
-                      context,
-                      color: context.colorScheme.secondaryWhiteColor,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ).animate().fadeIn();
-        }) ;
-  }
+ 
 }
 
 void handleQuickLinksNavigation(List model, int i) {

@@ -32,7 +32,6 @@ class FirestoreService {
       if (snapshot.docs.isEmpty) {
         return [];
       } else {
-        debugPrint("Celebration data : ${snapshot.docs.length}");
         return snapshot.docs.map((doc) {
           Map<dynamic, dynamic> data = doc.data() as Map<dynamic, dynamic>;
           return CelebrationData(
