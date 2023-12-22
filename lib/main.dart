@@ -52,10 +52,12 @@ class MyApp extends StatelessWidget {
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: context.colorScheme.secondaryBlackColor,
+        statusBarColor: themeService.brightness == Brightness.light
+            ? context.colorScheme.backgroundColor
+            : context.colorScheme.secondaryBlackColor,
         statusBarIconBrightness: themeService.brightness == Brightness.light
-            ? Brightness.light
-            : Brightness.dark,
+            ? Brightness.dark
+            : Brightness.light,
         statusBarBrightness: themeService.brightness == Brightness.light
             ? Brightness.dark
             : Brightness.light,

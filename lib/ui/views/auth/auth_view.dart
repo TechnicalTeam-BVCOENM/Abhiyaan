@@ -11,7 +11,7 @@ class AuthView extends StatelessWidget {
       viewModelBuilder: () => AuthViewModel(),
       builder: (context, model, child) {
         return Scaffold(
-            backgroundColor: context.colorScheme.secondaryBlackColor,
+            backgroundColor: context.colorScheme.backgroundColor,
             body: SafeArea(
               bottom: true,
               minimum: const EdgeInsets.symmetric(horizontal: 18).r,
@@ -125,7 +125,7 @@ class AuthView extends StatelessWidget {
                     "Discover College Events and Updates",
                     textAlign: TextAlign.center,
                     style: FontThemeClass().title(context,
-                        color: context.colorScheme.signInTextColor,
+                        color: context.colorScheme.secondaryBlackColor,
                         fontWeight: FontWeight.w500),
                   ).animate(delay: 200.ms).fadeIn(
                         delay: 100.ms,
@@ -141,7 +141,7 @@ class AuthView extends StatelessWidget {
                       style: FontThemeClass().caption(
                         context,
                         color:
-                            context.colorScheme.signInTextColor.withOpacity(0.8),
+                            context.colorScheme.secondaryBlackColor.withOpacity(0.8),
                       ),
                     ).animate(delay: 200.ms).fadeIn(
                           delay: 100.ms,
@@ -188,13 +188,13 @@ class AuthView extends StatelessWidget {
                           width: 2,
                           color: context.colorScheme.primaryColor,
                         ),
-                        color: context.colorScheme.secondaryBlackColor,
+                        color: context.colorScheme.backgroundColor,
                       ),
                       child: Center(
                         child: Text(
                           'Register',
                           style: FontThemeClass().title(context,
-                              color: context.colorScheme.signInTextColor),
+                              color: context.colorScheme.secondaryBlackColor),
                         ),
                       ),
                     ),
