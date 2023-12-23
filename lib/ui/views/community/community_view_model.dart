@@ -14,7 +14,7 @@ class CommunityViewModel extends BaseViewModel {
   Future<List<CommunityBlogsData>> getBlogData() async {
     final List<CommunityBlogsData> unsortedList =
         await firestoreService.getBlogs();
-    unsortedList.sort((a, b) => a.date.toDate().compareTo(b.date.toDate()));
+    unsortedList.sort((a, b) => b.date.toDate().compareTo(a.date.toDate()));
     for (int i = 0; i < 3; i++) {
       blogsData.add(unsortedList[i]);
     }
@@ -22,10 +22,18 @@ class CommunityViewModel extends BaseViewModel {
     return blogsData;
   }
 
+   int _currentBlogIndex = 0;
+  int get currentBlogIndex => _currentBlogIndex;
+  void updateBlogIndex(int newIndex) {
+    _currentBlogIndex = newIndex;
+    notifyListeners();
+  }
+
   Future<void> init(context) async{
     setBusy(true);
     try {
     await  getBlogData();
+    log.i("Blogs data: ${blogsData.length}");
     notifyListeners();
     } catch (e) {
       log.e(e.toString());
