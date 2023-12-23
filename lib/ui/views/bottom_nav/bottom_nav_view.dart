@@ -1,4 +1,5 @@
 import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/ui/views/community/community_view.dart';
 import 'package:abhiyaan/ui/views/event/event_view.dart';
 import 'package:abhiyaan/ui/views/home/home_view.dart';
 import 'package:abhiyaan/ui/views/profile/profile_view.dart';
@@ -50,7 +51,15 @@ class BottomNavView extends StatelessWidget {
                   ),
                   const BottomNavigationBarItem(
                     label: '',
-                    icon: Icon(Icons.calendar_month_outlined),
+                    icon: Icon(Icons.celebration_rounded),
+                    activeIcon: BottomNavActiveIcon(
+                      icon: Icons.celebration_outlined,
+                      text: "Community",
+                    ),
+                  ),
+                  const BottomNavigationBarItem(
+                    label: '',
+                    icon: Icon(Icons.calendar_month_rounded),
                     activeIcon: BottomNavActiveIcon(
                       icon: Icons.calendar_month_outlined,
                       text: "Events",
@@ -58,7 +67,7 @@ class BottomNavView extends StatelessWidget {
                   ),
                   const BottomNavigationBarItem(
                     label: '',
-                    icon: Icon(Icons.person_2_outlined),
+                    icon: Icon(Icons.person_2),
                     activeIcon: BottomNavActiveIcon(
                       icon: Icons.person_2_outlined,
                       text: "Profile",

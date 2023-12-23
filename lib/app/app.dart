@@ -6,6 +6,7 @@ import 'package:abhiyaan/ui/views/auth/onboarding/onboarding_view.dart';
 import 'package:abhiyaan/ui/views/auth/register/register_view.dart';
 import 'package:abhiyaan/ui/views/auth/sign_in/sign_in_view.dart';
 import 'package:abhiyaan/ui/views/bottom_nav/bottom_nav_view.dart';
+import 'package:abhiyaan/ui/views/community/community_view.dart';
 import 'package:abhiyaan/ui/views/event/detailed_event/detailed_event_view.dart';
 import 'package:abhiyaan/ui/views/event/event_view.dart';
 import 'package:abhiyaan/ui/views/notifications/notification_view.dart';
@@ -29,6 +30,7 @@ import 'package:abhiyaan/ui/views/splash/splash_view.dart';
     MaterialRoute(page: SignInView),
     MaterialRoute(page: RegisterView),
     MaterialRoute(page: OnboardingView),
+    MaterialRoute(page: CommunityView),
     MaterialRoute(page: NotificationView),
   ],
   dependencies: [
