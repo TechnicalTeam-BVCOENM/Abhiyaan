@@ -39,8 +39,11 @@ class CommunityView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SectionText(title: "Blogs"),
+                  // Add Blogs here
                   SectionText(title: "Departmental Clubs"),
+                  // Add Departmental Clubs here
                   SectionText(title: "Qoute of the day"),
+                  // Add Qoute of the day here
                 ],
               ),
             ),
