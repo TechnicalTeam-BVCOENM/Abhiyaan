@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -137,9 +139,7 @@ class _FloatingImage extends StatefulWidget {
   const _FloatingImage({
     required this.left,
     this.top,
-    // ignore: unused_element
     this.right,
-    // ignore: unused_element
     this.bottom,
     required this.width,
     required this.imagePath,

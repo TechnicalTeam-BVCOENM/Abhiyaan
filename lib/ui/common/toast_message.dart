@@ -55,7 +55,7 @@ void _showmessage(BuildContext context, String message, String type) {
           height: 60.h,
           width: double.infinity,
           child: Card(
-            color: context.colorScheme.secondaryWhiteColor.withOpacity(0.7),
+            color: context.colorScheme.secondaryWhiteColor,
             clipBehavior: Clip.hardEdge,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20).r),

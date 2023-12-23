@@ -1,4 +1,5 @@
 part of 'home_view.dart';
+
 bool isCelebrationShown = false;
 
 class HomeViewModel extends BaseViewModel {
@@ -21,7 +22,7 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
     return isCelebrationShown;
   }
- 
+
   Future getCelebrationData() async {
     try {
       List<CelebrationData> unsortedList =
@@ -35,7 +36,8 @@ class HomeViewModel extends BaseViewModel {
             (a, b) => b.startdate.toDate().compareTo(a.startdate.toDate()));
         if (unsortedList.first.startdate
             .toDate()
-            .isBefore(DateTime(DateTime.now().year, DateTime.now().month))) {
+            .isBefore(DateTime(DateTime.now().year, DateTime.now().month,
+                DateTime.now().day))) {
           return [];
         } else {
           _celebrationData.add(unsortedList.first);
@@ -50,13 +52,12 @@ class HomeViewModel extends BaseViewModel {
   String splitusername() {
     final user = LocalStorageService().read('userName');
     firstname = user.split(' ');
-    log.i(isUserNew);
     return firstname[0];
   }
 
   Future<bool> toggleisNewUser() async {
     isUserNew = false;
-   await _firestoreService
+    await _firestoreService
         .updateUserStatus()
         .then((value) => LocalStorageService().write('isUserNew', isUserNew));
     notifyListeners();
@@ -66,17 +67,21 @@ class HomeViewModel extends BaseViewModel {
   void showWelcomeAndCelebration(BuildContext context) async {
     if (isUserNew) {
       debugPrint("User is new");
-      await showWelcomPopUp(context,toggleisNewUser: toggleisNewUser , username: splitusername() ).then((value) async {
+      await showWelcomPopUp(context,
+              toggleisNewUser: toggleisNewUser, username: splitusername())
+          .then((value) async {
         debugPrint("Showed welcome pop up");
-        Future.delayed(2.seconds, () async{
+        Future.delayed(2.seconds, () async {
           if (isCelebrationShown == false && _celebrationData.isNotEmpty) {
-          await showCelebrationModal(context, _celebrationData[0],toggleCelebrationShown);
-          debugPrint("Showed Celebration pop up");
-        }
+            await showCelebrationModal(
+                context, _celebrationData[0], toggleCelebrationShown);
+            debugPrint("Showed Celebration pop up");
+          }
         });
       });
     } else if (_celebrationData.isNotEmpty && isCelebrationShown == false) {
-      showCelebrationModal(context, _celebrationData[0],toggleCelebrationShown);
+      showCelebrationModal(
+          context, _celebrationData[0], toggleCelebrationShown);
     } else if (_celebrationData.isNotEmpty && isCelebrationShown == true) {
       debugPrint("Celebration is already shown");
     } else if (celebrationData.isEmpty) {
@@ -123,6 +128,12 @@ class HomeViewModel extends BaseViewModel {
     ),
   ];
 
+  Future<void> afterInit(context) async {
+    await getCelebrationData();
+    showWelcomeAndCelebration(context);
+    notifyListeners();
+  }
+
   Future<void> init(context) async {
     setBusy(true);
     try {
@@ -131,13 +142,9 @@ class HomeViewModel extends BaseViewModel {
         notificationService.getDeviceToken();
       });
       notificationService.getDeviceToken();
-      await getCelebrationData();
       _highlights = await _firestoreService.getHighlights();
       _departmentUpdates = await _firestoreService.getCollegeUpdates();
       notifyListeners();
-      log.i(highlights);
-      log.i(highlights.length);
-      showWelcomeAndCelebration(context);
       debugPrint(
           DateFormat("MMMM d").format((departmentUpdates[0].date).toDate()));
     } catch (e) {
@@ -153,8 +160,6 @@ class HomeViewModel extends BaseViewModel {
     _activeIndex = newIndex;
     notifyListeners();
   }
-
- 
 }
 
 void handleQuickLinksNavigation(List model, int i) {
