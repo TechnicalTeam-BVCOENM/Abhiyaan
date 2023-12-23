@@ -9,7 +9,6 @@ class CommunityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FontThemeClass fontTheme = FontThemeClass();
     return ViewModelBuilder<CommunityViewModel>.reactive(
         viewModelBuilder: () => CommunityViewModel(),
         builder: (context, model, child) {
