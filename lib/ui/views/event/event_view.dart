@@ -34,7 +34,7 @@ class EventView extends StatelessWidget {
                         const SectionText(title: "Ongoing Events"),
                         Card(
                           clipBehavior: Clip.hardEdge,
-                          shadowColor: context.colorScheme.secondaryLPurpleColor
+                          shadowColor: context.colorScheme.secondaryWhiteColor
                               .withOpacity(0.8),
                           elevation: 2,
                           shape: ShapeBorder.lerp(
@@ -45,6 +45,7 @@ class EventView extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(18).r,
                               ),
                               1),
+                              color: context.colorScheme.secondaryWhiteColor,
                           child: model.todayEvent != null
                               ? Stack(
                                   children: [

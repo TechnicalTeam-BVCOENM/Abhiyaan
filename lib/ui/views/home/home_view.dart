@@ -24,7 +24,14 @@ class HomeView extends StatelessWidget {
     FontThemeClass fontTheme = FontThemeClass();
     return ViewModelBuilder<HomeViewModel>.reactive(
       viewModelBuilder: () => HomeViewModel(),
-      onViewModelReady: (viewModel) => viewModel.init(context),
+      onViewModelReady: (viewModel) {
+        viewModel.init(context).then(
+              (value) => Future.delayed(
+                const Duration(milliseconds: 500),
+                () => viewModel.afterInit(context),
+              ),
+            );
+      },
       builder: (context, model, child) {
         return Scaffold(
           backgroundColor: context.colorScheme.backgroundColor,
