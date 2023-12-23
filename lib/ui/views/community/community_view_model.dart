@@ -7,41 +7,41 @@ class CommunityViewModel extends BaseViewModel {
 }
 
 
-// Higlights component model
+// Community blogs component model => Community => data => blogs => random ID => 'author'/'content'/'title'/'imageUrl'/'date'/'likes' (For now there is only one blog)
+// If creating post add username at that time of cureent user (only for student not for outsiders)
 class CommunityBlogsData {
-  final String userName;
-  final String profileImage;
-  final String topic;
-  final String image;
-  final String link;
-  // description 
-  // likes
-  // title 
+  final String author;
+  final String content;
+  final String title;
+  final String imageUrl;
+  final String date;
+  final int likes;
 
   CommunityBlogsData({
-    required this.userName,
-    required this.topic,
-    required this.profileImage,
-    required this.image,
-    required this.link,
+    required this.author,
+    required this.content,
+    required this.title,
+    required this.imageUrl,
+    required this.date,
+    required this.likes,
   });
 }
 
-// Departmental Clubs model
+// Departmental Clubs model => Community => data => clubs => 'cesa'/'mesa'/'itsa' etc (For now there is only cesa club)
 class DepartmentalClubsData {
-  final String clubName;
-  final String clubImage;
-  final String clubDescription;
-  final String clubLink; // optional (website)
-  final Array clubFest; // (Array of fest names) => fest image 
-  final Array clubMembers; // now there will be only two members (Array of two members)  => name , image , position for each member
+  final String clubName; // full name of the club
+  final String clubImage; // Logo of the club
+  final String clubShortHand; // short name of the club
+  final Array clubFest; // (Array of fest ) => festImage , festName
+  final Array clubMembers; // (Array of members)  => memberName , memberImage , memberPosition for each member
+  final String clubLink; // optional (website link of the club )
 
   DepartmentalClubsData({
     required this.clubName,
+    required this.clubImage,
+    required this.clubShortHand,
     required this.clubFest,
     required this.clubMembers,
-    required this.clubImage,
-    required this.clubDescription,
     required this.clubLink,
   });
 }
