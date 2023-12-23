@@ -7,45 +7,53 @@ class OnboardingComponents {
   static List<Widget> getOnboardingPages(BuildContext context) {
     return [
       onboardingPage(
-          context,
-          const Color.fromARGB(255, 193, 192, 238),
-          500,
-          ["Let's", "Explore", "Bvcoenm"],
-          AssetImagePath.boy,
-          30,
-          0,
-          const Offset(0, 0.02)),
+        context,
+        const Color.fromARGB(255, 193, 192, 238),
+        500,
+        ["Let's", "Explore", "Bvcoenm"],
+        AssetImagePath.boy,
+        30,
+        0,
+        const Offset(0, 0.02),
+        "Discover & Explore Exciting Activities",
+      ),
       onboardingPage(
-          context,
-          const Color.fromARGB(255, 149, 219, 219),
-          250,
-          ["Build", "New", "Network"],
-          AssetImagePath.connect,
-          130,
-          300,
-          const Offset(0, 0.08)),
+        context,
+        const Color.fromARGB(255, 149, 219, 219),
+        250,
+        ["Build", "New", "Network"],
+        AssetImagePath.connect,
+        130,
+        300,
+        const Offset(0, 0.08),
+        "Meaningful Connections For Future",
+      ),
       onboardingPage(
-          context,
-          const Color.fromARGB(255, 192, 230, 149),
-          310,
-          ["Get", "Latest", "Updates"],
-          AssetImagePath.events,
-          100,
-          250,
-          const Offset(0, 0.06)),
+        context,
+        const Color.fromARGB(255, 192, 230, 149),
+        310,
+        ["Get", "Latest", "Updates"],
+        AssetImagePath.events,
+        100,
+        250,
+        const Offset(0, 0.06),
+        "About Events & Departments",
+      ),
       // Add more onboarding pages here as needed
     ];
   }
 
   static Widget onboardingPage(
-      BuildContext context,
-      Color backgroundColor,
-      double width,
-      List<String> quote,
-      String imagePath,
-      double left,
-      double top,
-      Offset offset) {
+    BuildContext context,
+    Color backgroundColor,
+    double width,
+    List<String> quote,
+    String imagePath,
+    double left,
+    double top,
+    Offset offset,
+    String description, // Adding description here
+  ) {
     return Container(
       color: backgroundColor,
       child: Column(
@@ -56,7 +64,7 @@ class OnboardingComponents {
               Container(
                 width: double.infinity,
                 height: 600.h,
-                padding: const EdgeInsets.only(left: 20, top: 20, right: 140),
+                padding: const EdgeInsets.only(left: 20, top: 20),
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(72, 249, 233, 232),
@@ -65,9 +73,9 @@ class OnboardingComponents {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    for (var quote in quote)
+                    for (var quoteText in quote)
                       Text(
-                        quote,
+                        quoteText,
                         style: FontThemeClass().display(
                           context,
                           color: const Color.fromARGB(255, 69, 69, 69),
@@ -78,6 +86,22 @@ class OnboardingComponents {
                             curve: Curves.easeInOut,
                             duration: 500.ms,
                           ),
+                    const SizedBox(
+                        height:
+                            10), // Adding spacing between heading and description
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: SizedBox(
+                        child: Text(
+                          description,
+                          style: const TextStyle(
+                            color: Color.fromARGB(255, 117, 117, 117),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ).animate(delay: 200.ms).fadeIn(

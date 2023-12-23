@@ -64,7 +64,10 @@ class EventView extends StatelessWidget {
                                   ],
                                 )
                               : Center(
-                                  child: SizedBox(
+                                  child: Container(
+                                    color: context
+                                        .colorScheme.secondaryWhiteColor
+                                        .withOpacity(0.5),
                                     height: 261.h,
                                     width: ResponsiveUtils.screenWidth(context),
                                     child: Column(
