@@ -1,4 +1,5 @@
 import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/ui/views/community/community_view.dart';
 import 'package:abhiyaan/ui/views/home/celebration/celebration_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/ui/views/event/event_view.dart';
@@ -144,6 +145,36 @@ class FirestoreService {
       return snapshot.data() as Map<String, dynamic>;
     } else {
       return null;
+    }
+  }
+
+  Future<List<CommunityBlogsData>> getBlogs() async {
+    try {
+      final QuerySnapshot snapshot = await _firestore
+          .collection('Community')
+          .doc("data")
+          .collection("blogs")
+          .get();
+
+          debugPrint("✅✅✅ Blogs data length : ${snapshot.docs.length}");
+
+      if (snapshot.docs.isEmpty) {
+        return [];
+      } else {
+        return snapshot.docs.map((data) {
+          return CommunityBlogsData(
+              author: data["author"],
+              title: data['title'],
+              imageUrl: data["imageUrl"],
+              date: data["date"],
+              likes: data["likes"],
+              // content: data["content"]
+              );
+        }).toList();
+      }
+    } catch (e) {
+      debugPrint("Error in getting blogs data from firebase : ${e.toString()}");
+      return [];
     }
   }
 }
