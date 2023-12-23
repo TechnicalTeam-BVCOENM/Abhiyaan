@@ -11,7 +11,7 @@ class CommunityViewModel extends BaseViewModel {
 // If creating post add username at that time of cureent user (only for student not for outsiders)
 class CommunityBlogsData {
   final String author;
-  final String content;
+  // final String content;
   final String title;
   final String imageUrl;
   final String date;
@@ -19,7 +19,7 @@ class CommunityBlogsData {
 
   CommunityBlogsData({
     required this.author,
-    required this.content,
+    // required this.content,
     required this.title,
     required this.imageUrl,
     required this.date,
