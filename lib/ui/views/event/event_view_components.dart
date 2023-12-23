@@ -300,7 +300,7 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
     return Positioned(
       child: Container(
         color: context.colorScheme.secondaryWhiteColor.withOpacity(0.5),
-        height: 210.h,
+        height: 220.h,
         width: 232.w,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

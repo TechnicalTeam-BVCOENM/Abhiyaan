@@ -111,7 +111,7 @@ class CollapsedDescription extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       textAlign: TextAlign.justify,
       style: fontTheme.caption(context,
-          color: context.colorScheme.secondarySectionColor),
+          color: context.colorScheme.secondaryBlackColor.withOpacity(0.6)),
     );
   }
 }
@@ -133,7 +133,7 @@ class ExpandedDescription extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
         textAlign: TextAlign.justify,
         style: fontTheme.caption(context,
-            color: context.colorScheme.secondarySectionColor));
+            color: context.colorScheme.secondaryBlackColor.withOpacity(0.6)));
   }
 }
 
