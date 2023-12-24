@@ -7,6 +7,7 @@ import 'package:abhiyaan/ui/common/common_component_model.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 part 'register_view_model.dart';
 
 class RegisterView extends StatelessWidget {
@@ -33,7 +34,11 @@ class RegisterView extends StatelessWidget {
                         child: Image.asset(
                           AssetImagePath.logoImg,
                         ),
-                      ),
+                      ).animate(delay: 200.ms).fadeIn(
+                            delay: 100.ms,
+                            curve: Curves.easeInOut,
+                            duration: 700.ms,
+                          ),
                       30.verticalSpace,
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
@@ -59,7 +64,11 @@ class RegisterView extends StatelessWidget {
                               color: context.colorScheme.secondarySectionColor,
                               fontWeight: FontWeight.w500),
                         ),
-                      ),
+                      ).animate(delay: 300.ms).fadeIn(
+                            delay: 100.ms,
+                            curve: Curves.easeInOut,
+                            duration: 700.ms,
+                          ),
                       15.verticalSpace,
                       TextFormField(
                         cursorColor: context.colorScheme.primaryColor,
@@ -84,7 +93,11 @@ class RegisterView extends StatelessWidget {
                               color: context.colorScheme.secondarySectionColor,
                               fontWeight: FontWeight.w500),
                         ),
-                      ),
+                      ).animate(delay: 400.ms).fadeIn(
+                            delay: 100.ms,
+                            curve: Curves.easeInOut,
+                            duration: 700.ms,
+                          ),
                       15.verticalSpace,
                       TextFormField(
                         keyboardType: TextInputType.visiblePassword,
@@ -123,7 +136,11 @@ class RegisterView extends StatelessWidget {
                             color: context.colorScheme.secondarySectionColor,
                           ),
                         ),
-                      ),
+                      ).animate(delay: 500.ms).fadeIn(
+                            delay: 100.ms,
+                            curve: Curves.easeInOut,
+                            duration: 700.ms,
+                          ),
                       15.verticalSpace,
                       TextFormField(
                         keyboardType: TextInputType.visiblePassword,
@@ -162,7 +179,11 @@ class RegisterView extends StatelessWidget {
                             color: context.colorScheme.secondarySectionColor,
                           ),
                         ),
-                      ),
+                      ).animate(delay: 600.ms).fadeIn(
+                            delay: 100.ms,
+                            curve: Curves.easeInOut,
+                            duration: 700.ms,
+                          ),
                       25.verticalSpace,
                       TextButton(
                         onPressed: () async {
@@ -189,7 +210,11 @@ class RegisterView extends StatelessWidget {
                           style: FontThemeClass().title(context,
                               color: context.colorScheme.signInTextColor),
                         ),
-                      ),
+                      ).animate(delay: 700.ms).fadeIn(
+                            delay: 100.ms,
+                            curve: Curves.easeInOut,
+                            duration: 700.ms,
+                          ),
                       10.verticalSpace,
                       RichText(
                         textAlign: TextAlign.center,
@@ -211,7 +236,11 @@ class RegisterView extends StatelessWidget {
                             ),
                           ],
                         ),
-                      ),
+                      ).animate(delay: 800.ms).fadeIn(
+                            delay: 100.ms,
+                            curve: Curves.easeInOut,
+                            duration: 700.ms,
+                          ),
                       const Spacer(),
                       InkWell(
                         onTap: () => model.navigateToHelpSupport(),
@@ -232,7 +261,11 @@ class RegisterView extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ),
+                      ).animate(delay: 900.ms).fadeIn(
+                            delay: 100.ms,
+                            curve: Curves.easeInOut,
+                            duration: 700.ms,
+                          ),
                       10.verticalSpace,
                       Text(
                         'Abhiyaan v1.0.0',
@@ -240,7 +273,11 @@ class RegisterView extends StatelessWidget {
                         style: FontThemeClass().caption(context,
                             color: context.colorScheme.secondarySectionColor,
                             fontWeight: FontWeight.w500),
-                      ),
+                      ).animate(delay: 1000.ms).fadeIn(
+                            delay: 100.ms,
+                            curve: Curves.easeInOut,
+                            duration: 700.ms,
+                          ),
                       10.verticalSpace,
                     ],
                   ),
