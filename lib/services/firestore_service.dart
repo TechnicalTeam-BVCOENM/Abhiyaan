@@ -1,4 +1,5 @@
 import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/ui/views/community/community_view.dart';
 import 'package:abhiyaan/ui/views/home/celebration/celebration_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/ui/views/event/event_view.dart';
@@ -18,6 +19,15 @@ class FirestoreService {
       return;
     } catch (e) {
       debugPrint("User status failed to update with : ${e.toString()}");
+    }
+  }
+
+  Future updateLikes(String id, int likes) async {
+    try {
+      await _firestore.collection('Community').doc("data").collection("blogs").doc(id).update({'likes': likes}).then((value) => debugPrint("Updated likes: $likes"));
+      return;
+    } catch (e) {
+      debugPrint("Likes failed to update with : ${e.toString()}");
     }
   }
 
@@ -144,6 +154,35 @@ class FirestoreService {
       return snapshot.data() as Map<String, dynamic>;
     } else {
       return null;
+    }
+  }
+
+  Future<List<CommunityBlogsData>> getBlogs() async {
+    try {
+      final QuerySnapshot snapshot = await _firestore
+          .collection('Community')
+          .doc("data")
+          .collection("blogs").orderBy("date",descending: true).limit(3).get();
+
+      if (snapshot.docs.isEmpty) {
+        return [];
+      } else {
+        return snapshot.docs.map((data) {
+          debugPrint(data.id);
+          return CommunityBlogsData(
+              documentId: data.id,
+              author: data["author"],
+              title: data['title'],
+              imageUrl: data["imageUrl"],
+              date: data["date"],
+              likes: data["likes"],
+              // content: data["content"]
+              );
+        }).toList();
+      }
+    } catch (e) {
+      debugPrint("Error in getting blogs data from firebase : ${e.toString()}");
+      return [];
     }
   }
 }

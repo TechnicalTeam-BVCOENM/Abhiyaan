@@ -190,27 +190,6 @@ class HomePageShimmerEffect extends StatelessWidget {
   }
 }
 
-class SectionTextShimmerEffect extends StatelessWidget {
-  const SectionTextShimmerEffect({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 18, bottom: 8).r,
-      child: Row(
-        children: [
-          ShimmerLoadingWidget(
-            width: 180.w,
-            height: 20.h,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 Future showCelebrationModal(BuildContext context, CelebrationData data,
     Function toggleCelebrationShown) async {
   FontThemeClass fontThemeClass = FontThemeClass();
