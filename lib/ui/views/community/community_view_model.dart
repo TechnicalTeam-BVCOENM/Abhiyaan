@@ -7,7 +7,6 @@ class CommunityViewModel extends BaseViewModel {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   LocalStorageService localStorageService = locator<LocalStorageService>();
 
-  // Blogs data
   final List<CommunityBlogsData> _blogsData = [];
   List<CommunityBlogsData> get blogsData => _blogsData;
   set blogsData(List<CommunityBlogsData> blogsData) {
@@ -27,8 +26,10 @@ class CommunityViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  // Stream to track likes
   Stream<int> getLikesStream(String id) {
+    AuthenticationService authenticationService =
+        locator<AuthenticationService>();
+    final userId = authenticationService.currentUser!.uid;
     return _firestore
         .collection('Community')
         .doc("data")
@@ -36,45 +37,33 @@ class CommunityViewModel extends BaseViewModel {
         .doc(id)
         .snapshots()
         .map((snapshot) {
-      return snapshot.data()!['likes'];
+      final likesArray = snapshot.data()?["likes"];
+      localStorageService.write("isLiked_$id", likesArray.contains(userId));
+      log.i(likesArray);
+      return likesArray.length;
     });
   }
 
-  // Blog Likes
-  Future<int> incrementLikes(int likes, String blogId) async {
-    if (localStorageService.storage.hasData("liked_$blogId")) {
-      if (localStorageService.read("liked_$blogId") == false) {
-        likes = likes + 1;
-        await firestoreService.updateLikes(blogId, likes);
-        localStorageService.write("liked_$blogId", true);
-        log.i(localStorageService.read("liked_$blogId"));
-        notifyListeners();
-        return likes;
-      } else {
-        log.i("Already liked : ${localStorageService.read("liked_$blogId")}");
-        return likes;
+  Future<void> updateLikes(String blogId) async {
+    final currentBlog = localStorageService.read("isLiked_$blogId");
+    AuthenticationService authenticationService =
+        locator<AuthenticationService>();
+    final userId = authenticationService.currentUser!.uid;
+    try {
+      if (currentBlog == true) {
+        log.i("Already liked");
+        return;
       }
-    }else{
-        likes = likes + 1;
-        await firestoreService.updateLikes(blogId, likes);
-        localStorageService.write("liked_$blogId", true);
-        log.i(localStorageService.read("liked_$blogId"));
-        notifyListeners();
-        return likes;
-    }
-  }
-
-  Future<int> decrementLike(int likes, String blogId) async {
-    if (localStorageService.read("liked_$blogId") == true) {
-      likes = likes - 1;
-      localStorageService.write("liked_$blogId", false);
-      log.i(localStorageService.read("liked_$blogId"));
-      await firestoreService.updateLikes(blogId, likes);
-      notifyListeners();
-      return likes;
-    } else {
-      log.i("Already liked : ${localStorageService.read("liked_$blogId")}");
-      return likes;
+      await _firestore
+          .collection('Community')
+          .doc("data")
+          .collection("blogs")
+          .doc(blogId)
+          .update({
+        "likes": FieldValue.arrayUnion([userId]),
+      }).then((value) => log.i("Updated likes"));
+    } catch (e) {
+      log.i(e.toString());
     }
   }
 
@@ -90,8 +79,6 @@ class CommunityViewModel extends BaseViewModel {
   }
 }
 
-// Community blogs component model => Community => data => blogs => random ID => 'author'/'content'/'title'/'imageUrl'/'date'/'likes' (For now there is only one blog)
-// If creating post add username at that time of cureent user (only for student not for outsiders)
 class CommunityBlogsData {
   final String documentId;
   final String author;
@@ -99,7 +86,7 @@ class CommunityBlogsData {
   final String title;
   final String imageUrl;
   final Timestamp date;
-  final int likes;
+  final List<dynamic> likes;
 
   CommunityBlogsData({
     required this.documentId,

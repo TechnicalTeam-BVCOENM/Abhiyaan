@@ -29,7 +29,7 @@ class OnboardingView extends StatelessWidget {
                   alignment: const Alignment(0, 0.65),
                   child: SmoothPageIndicator(
                       effect: const WormEffect(dotHeight: 10, dotWidth: 10),
-                     onDotClicked: (index) {
+                      onDotClicked: (index) {
                         model.pageController.jumpToPage(index);
                       },
                       controller: model.pageController,

@@ -22,9 +22,17 @@ class FirestoreService {
     }
   }
 
-  Future updateLikes(String id, int likes) async {
+  Future updateLikes(String id) async {
     try {
-      await _firestore.collection('Community').doc("data").collection("blogs").doc(id).update({'likes': likes}).then((value) => debugPrint("Updated likes: $likes"));
+      final userId = _firestore.collection("Users").doc().id;
+      await _firestore
+          .collection('Community')
+          .doc("data")
+          .collection("blogs")
+          .doc(id)
+          .update({
+        'likes': FieldValue.arrayUnion([userId])
+      }).then((value) => debugPrint("Updated likes of Post"));
       return;
     } catch (e) {
       debugPrint("Likes failed to update with : ${e.toString()}");
@@ -162,7 +170,10 @@ class FirestoreService {
       final QuerySnapshot snapshot = await _firestore
           .collection('Community')
           .doc("data")
-          .collection("blogs").orderBy("date",descending: true).limit(3).get();
+          .collection("blogs")
+          .orderBy("date", descending: true)
+          .limit(3)
+          .get();
 
       if (snapshot.docs.isEmpty) {
         return [];
@@ -170,14 +181,14 @@ class FirestoreService {
         return snapshot.docs.map((data) {
           debugPrint(data.id);
           return CommunityBlogsData(
-              documentId: data.id,
-              author: data["author"],
-              title: data['title'],
-              imageUrl: data["imageUrl"],
-              date: data["date"],
-              likes: data["likes"],
-              // content: data["content"]
-              );
+            documentId: data.id,
+            author: data["author"],
+            title: data['title'],
+            imageUrl: data["imageUrl"],
+            date: data["date"],
+            likes: data["likes"],
+            // content: data["content"]
+          );
         }).toList();
       }
     } catch (e) {

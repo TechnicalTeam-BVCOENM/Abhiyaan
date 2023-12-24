@@ -140,8 +140,8 @@ class AuthView extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: FontThemeClass().caption(
                         context,
-                        color:
-                            context.colorScheme.secondaryBlackColor.withOpacity(0.8),
+                        color: context.colorScheme.secondaryBlackColor
+                            .withOpacity(0.8),
                       ),
                     ).animate(delay: 200.ms).fadeIn(
                           delay: 100.ms,
