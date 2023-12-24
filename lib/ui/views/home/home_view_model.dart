@@ -34,10 +34,8 @@ class HomeViewModel extends BaseViewModel {
       } else {
         unsortedList.sort(
             (a, b) => b.startdate.toDate().compareTo(a.startdate.toDate()));
-        if (unsortedList.first.startdate
-            .toDate()
-            .isBefore(DateTime(DateTime.now().year, DateTime.now().month,
-                DateTime.now().day))) {
+        if (unsortedList.first.startdate.toDate().isBefore(DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day))) {
           return [];
         } else {
           _celebrationData.add(unsortedList.first);

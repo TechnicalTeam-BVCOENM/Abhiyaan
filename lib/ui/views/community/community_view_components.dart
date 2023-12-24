@@ -22,9 +22,11 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
             ? "Posted Yesterday"
             : "Posted ${currentDate.difference(postDate).inDays} days ago";
 
-    final bool isLiked =
-        viewModel.localStorageService.read("liked_${blogsData.documentId}") ??
-            false;
+    // Future<bool> toggleLike() async {
+    //   isLiked = await viewModel.isUserAlreadyLikedPost(blogsData.documentId);
+    //   viewModel.notifyListeners();
+    //   return isLiked;
+    // }
 
     return StreamBuilder<int>(
         stream: viewModel.getLikesStream(blogsData.documentId),
@@ -32,8 +34,11 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
           if (viewModel.hasError) {
             return const Text('Error: Backend Error');
           }
+          bool isLiked = viewModel.localStorageService
+                  .read("isLiked_${blogsData.documentId}") ??
+              false;
 
-          final int streamLikes = snapshot.data ?? blogsData.likes;
+          final int streamLikes = snapshot.data ?? 0;
           return Card(
             elevation: 1,
             shadowColor:
@@ -91,6 +96,9 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                 Container(
                     height: 45.h,
                     padding: const EdgeInsets.symmetric(horizontal: 12).r,
+                    decoration: BoxDecoration(
+                      color: context.colorScheme.secondaryWhiteColor,
+                    ),
                     child: Row(
                       children: [
                         Image.network(
@@ -103,8 +111,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                         Text(
                           blogsData.title,
                           style: fontThemeClass.caption(context,
-                              color: context.colorScheme.primaryColor
-                                  .withOpacity(0.8),
+                              color: context.colorScheme.secondaryBlackColor,
                               fontWeight: FontWeight.w500),
                         ).animate(delay: 500.ms).scale(),
                         const Spacer(),
@@ -117,11 +124,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                         4.horizontalSpace,
                         InkWell(
                           onTap: () {
-                            isLiked
-                                ? viewModel.decrementLike(
-                                    streamLikes, blogsData.documentId)
-                                : viewModel.incrementLikes(
-                                    streamLikes, blogsData.documentId);
+                            viewModel.updateLikes(blogsData.documentId);
                           },
                           child: isLiked
                               ? const Icon(
@@ -132,7 +135,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                                       color: Colors.red,
                                       blurRadius: 7,
                                       spreadRadius: 0.8,
-                                    )
+                                    ),
                                   ],
                                   fill: 1,
                                   size: 25,
@@ -140,7 +143,6 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                               : const Icon(
                                   Icons.favorite_border_rounded,
                                   color: Colors.black,
-                                  shadows: [],
                                   fill: 0,
                                   size: 25,
                                 ).animate(delay: 500.ms).scale(),
@@ -223,6 +225,7 @@ class CommunityPageShimmerEffect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.colorScheme.backgroundColor,
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(horizontal: 18).r,
         child: Column(

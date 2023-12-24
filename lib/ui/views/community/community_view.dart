@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'package:http/http.dart' as http;
 import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/services/auth_service.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:abhiyaan/ui/common/cached_network_image.dart';
 import 'package:abhiyaan/ui/common/shimmer.dart';

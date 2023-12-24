@@ -14,7 +14,7 @@ class NotificationView extends StatelessWidget {
         return Scaffold(
           backgroundColor: context.colorScheme.backgroundColor,
           appBar: AppBar(
-               backgroundColor: context.colorScheme.backgroundColor,
+            backgroundColor: context.colorScheme.backgroundColor,
             title: Text(
               "Notifications",
               style: fontTheme.title(context,
