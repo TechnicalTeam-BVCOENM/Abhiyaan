@@ -6,7 +6,7 @@ class CommunityViewModel extends BaseViewModel {
   final FirestoreService firestoreService = FirestoreService();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   LocalStorageService localStorageService = locator<LocalStorageService>();
-
+  String affirmation = "";
   // Blogs data
   final List<CommunityBlogsData> _blogsData = [];
   List<CommunityBlogsData> get blogsData => _blogsData;
@@ -40,6 +40,18 @@ class CommunityViewModel extends BaseViewModel {
     });
   }
 
+  Future<void> fetchAffirmation() async {
+    final response = await http.get(Uri.parse('https://www.affirmations.dev/'));
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      affirmation = data['affirmation'];
+    } else {
+      // Handle error cases here
+      debugPrint('Failed to fetch affirmation');
+    }
+  }
+
   // Blog Likes
   Future<int> incrementLikes(int likes, String blogId) async {
     if (localStorageService.storage.hasData("liked_$blogId")) {
@@ -54,13 +66,13 @@ class CommunityViewModel extends BaseViewModel {
         log.i("Already liked : ${localStorageService.read("liked_$blogId")}");
         return likes;
       }
-    }else{
-        likes = likes + 1;
-        await firestoreService.updateLikes(blogId, likes);
-        localStorageService.write("liked_$blogId", true);
-        log.i(localStorageService.read("liked_$blogId"));
-        notifyListeners();
-        return likes;
+    } else {
+      likes = likes + 1;
+      await firestoreService.updateLikes(blogId, likes);
+      localStorageService.write("liked_$blogId", true);
+      log.i(localStorageService.read("liked_$blogId"));
+      notifyListeners();
+      return likes;
     }
   }
 
@@ -82,6 +94,7 @@ class CommunityViewModel extends BaseViewModel {
     setBusy(true);
     try {
       await getBlogData();
+      await fetchAffirmation();
       notifyListeners();
     } catch (e) {
       log.e(e.toString());
