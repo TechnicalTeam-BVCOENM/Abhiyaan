@@ -22,6 +22,15 @@ class FirestoreService {
     }
   }
 
+  Future updateLikes(String id, int likes) async {
+    try {
+      await _firestore.collection('Community').doc("data").collection("blogs").doc(id).update({'likes': likes}).then((value) => debugPrint("Updated likes: $likes"));
+      return;
+    } catch (e) {
+      debugPrint("Likes failed to update with : ${e.toString()}");
+    }
+  }
+
   Future<List<CelebrationData>> getCelebrationData() async {
     try {
       final QuerySnapshot snapshot = await _firestore
@@ -153,8 +162,7 @@ class FirestoreService {
       final QuerySnapshot snapshot = await _firestore
           .collection('Community')
           .doc("data")
-          .collection("blogs")
-          .get();
+          .collection("blogs").orderBy("date",descending: true).get();
 
           debugPrint("✅✅✅ Blogs data length : ${snapshot.docs.length}");
 
@@ -162,7 +170,9 @@ class FirestoreService {
         return [];
       } else {
         return snapshot.docs.map((data) {
+          debugPrint(data.id);
           return CommunityBlogsData(
+              documentId: data.id,
               author: data["author"],
               title: data['title'],
               imageUrl: data["imageUrl"],
