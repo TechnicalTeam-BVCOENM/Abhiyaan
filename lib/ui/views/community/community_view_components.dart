@@ -228,50 +228,52 @@ class CommunityPageShimmerEffect extends StatelessWidget {
       backgroundColor: context.colorScheme.backgroundColor,
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(horizontal: 18).r,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 34.h,
-              width: 250.w,
-              child: const ShimmerLoadingWidget(),
-            ),
-            4.verticalSpace,
-            const SectionTextShimmerEffect(),
-            8.verticalSpace,
-            SizedBox(
-              height: 270.h,
-              child: const Card(
-                child: ShimmerLoadingWidget(),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 34.h,
+                width: 250.w,
+                child: const ShimmerLoadingWidget(),
               ),
-            ),
-            12.verticalSpace,
-            const SectionTextShimmerEffect(),
-            8.verticalSpace,
-            SizedBox(
-              height: 120.h,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 3,
-                itemBuilder: (context, index) => Container(
-                  margin: EdgeInsets.only(right: index == 2 ? 0 : 16).r,
-                  height: 120.h,
-                  width: 120.w,
-                  child: const Card(
-                    child: ShimmerLoadingWidget(),
+              4.verticalSpace,
+              const SectionTextShimmerEffect(),
+              8.verticalSpace,
+              SizedBox(
+                height: 270.h,
+                child: const Card(
+                  child: ShimmerLoadingWidget(),
+                ),
+              ),
+              12.verticalSpace,
+              const SectionTextShimmerEffect(),
+              8.verticalSpace,
+              SizedBox(
+                height: 120.h,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3,
+                  itemBuilder: (context, index) => Container(
+                    margin: EdgeInsets.only(right: index == 2 ? 0 : 16).r,
+                    height: 120.h,
+                    width: 120.w,
+                    child: const Card(
+                      child: ShimmerLoadingWidget(),
+                    ),
                   ),
                 ),
               ),
-            ),
-            12.verticalSpace,
-            const SectionTextShimmerEffect(),
-            8.verticalSpace,
-            SizedBox(
-              height: 220.h,
-              child: const Card(
-                child: ShimmerLoadingWidget(),
-              ),
-            )
-          ],
+              12.verticalSpace,
+              const SectionTextShimmerEffect(),
+              8.verticalSpace,
+              SizedBox(
+                height: 220.h,
+                child: const Card(
+                  child: ShimmerLoadingWidget(),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
