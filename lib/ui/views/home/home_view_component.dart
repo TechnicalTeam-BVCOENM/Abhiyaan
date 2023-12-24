@@ -322,7 +322,7 @@ Future showWelcomPopUp(BuildContext context,
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: context.colorScheme.secondaryWhiteColor,
+          backgroundColor: context.colorScheme.signInTextColor,
           title: SizedBox(
             height: 100.h,
             width: 100.w,
