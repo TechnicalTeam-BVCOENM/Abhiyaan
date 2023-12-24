@@ -22,7 +22,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
             ? "Posted Yesterday"
             : "Posted ${currentDate.difference(postDate).inDays} days ago";
 
-    
+    final bool isLiked = viewModel.localStorageService.read("liked_${blogsData.documentId}");
 
     return StreamBuilder<int>(
       stream: viewModel.getLikesStream(blogsData.documentId),
@@ -113,13 +113,22 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                       ),
                       4.horizontalSpace,
                       InkWell(
+                        // onDoubleTap: () {
+                        //   viewModel.decrementLike(streamLikes, blogsData.documentId);
+                        // },
                         onTap: () {
+                          isLiked ? viewModel.decrementLike(streamLikes,blogsData.documentId) :
                           viewModel.incrementLikes(streamLikes,blogsData.documentId);
                         },
-                        child: const Icon(
+                        child:isLiked ? const Icon(
                           Icons.favorite,
                           color: Colors.red,
-                        ),
+                          size: 25,
+                        ).animate(delay: 600.ms).scale() : const Icon(
+                          Icons.favorite_border,
+                          color: Colors.black,
+                          size: 25,
+                        ).animate(delay: 600.ms).scale(),
                       )
                     ],
                   )),

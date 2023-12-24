@@ -5,6 +5,7 @@ class CommunityViewModel extends BaseViewModel {
   final NavigationService navigationService = locator<NavigationService>();
   final FirestoreService firestoreService = FirestoreService();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  LocalStorageService localStorageService = locator<LocalStorageService>();
 
   // Blogs data
   final List<CommunityBlogsData> _blogsData = [];
@@ -29,26 +30,42 @@ class CommunityViewModel extends BaseViewModel {
   // Stream to track likes
   Stream<int>  getLikesStream(String id) {
     return _firestore.collection('Community').doc("data").collection("blogs").doc(id).snapshots().map((snapshot) {
-      debugPrint("✅✅✅ Likes : ${snapshot.data()!['likes']}");
       return snapshot.data()!['likes'];
     });
   }
 
   // Blog Likes
   Future<int> incrementLikes(int likes, String blogId) async {
-    likes = likes + 1;
-    log.i("Likes updated : $likes");
-    log.i("Blog id : $blogId");
+    if (localStorageService.read("liked_$blogId") == false || localStorageService.read("liked_$blogId") == null) {
+      likes = likes + 1;
+    localStorageService.write("liked_$blogId", true);
+    log.i(localStorageService.read("liked_$blogId"));
     await firestoreService.updateLikes(blogId, likes);
     notifyListeners();
     return likes;
+    }else{
+      log.i("Already liked : ${localStorageService.read("liked_$blogId")}");
+      return likes;
+    }
+  }
+  Future<int> decrementLike(int likes, String blogId) async {
+    if (localStorageService.read("liked_$blogId") == true) {
+      likes = likes -1;
+    localStorageService.write("liked_$blogId", false);
+    log.i(localStorageService.read("liked_$blogId"));
+    await firestoreService.updateLikes(blogId, likes);
+    notifyListeners();
+    return likes;
+    }else{
+      log.i("Already liked : ${localStorageService.read("liked_$blogId")}");
+      return likes;
+    }
   }
 
   Future<void> init(context) async {
     setBusy(true);
     try {
-      getBlogData();
-      log.i("Blogs data: ${blogsData.length}");
+      await getBlogData();
       notifyListeners();
     } catch (e) {
       log.e(e.toString());

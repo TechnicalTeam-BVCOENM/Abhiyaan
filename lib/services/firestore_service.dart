@@ -162,9 +162,7 @@ class FirestoreService {
       final QuerySnapshot snapshot = await _firestore
           .collection('Community')
           .doc("data")
-          .collection("blogs").orderBy("date",descending: true).get();
-
-          debugPrint("✅✅✅ Blogs data length : ${snapshot.docs.length}");
+          .collection("blogs").orderBy("date",descending: true).limit(3).get();
 
       if (snapshot.docs.isEmpty) {
         return [];
