@@ -58,7 +58,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                         width: 34.w,
                         height: 34.h,
                       ),
-                    ),
+                    ).animate(delay: 500.ms).fadeIn(delay: 10.ms),
                     //Author name
                     8.horizontalSpace,
                     Text(
@@ -66,7 +66,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                       style: fontThemeClass.caption(context,
                           color: context.colorScheme.secondaryBlackColor,
                           fontWeight: FontWeight.w500),
-                    ),
+                    ).animate(delay: 500.ms).slide(delay: 10.ms).fadeIn(),
                     const Spacer(),
                     //Posted on date
                     Text(
@@ -74,7 +74,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                       style: fontThemeClass.caption(context,
                           color: context.colorScheme.secondarySectionColor,
                           fontWeight: FontWeight.w400),
-                    ),
+                    ).animate(delay: 500.ms).slide(delay: 10.ms).fadeIn(),
                   ],
                 ),
               ),
@@ -84,7 +84,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                 width: double.infinity,
                 fit: BoxFit.cover,
                 maxHeightDiskCache: 1600.h,
-              ),
+              ).animate(delay: 100.ms).fadeIn(),
               Container(
                   height: 45.h,
                   padding: const EdgeInsets.symmetric(horizontal: 12).r,
@@ -95,7 +95,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                         height: 25.h,
                         width: 25.w,
                         fit: BoxFit.cover,
-                      ),
+                      ).animate(delay: 500.ms).scale(),
                       8.horizontalSpace,
                       Text(
                         blogsData.title,
@@ -103,19 +103,16 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                             color:
                                 context.colorScheme.primaryColor.withOpacity(0.8),
                             fontWeight: FontWeight.w500),
-                      ),
+                      ).animate(delay: 500.ms).scale(),
                       const Spacer(),
                       Text(
                         streamLikes.toString(),
                         style: fontThemeClass.caption(context,
                             color: context.colorScheme.secondaryBlackColor,
                             fontWeight: FontWeight.w500),
-                      ),
+                      ).animate(delay: 500.ms).scale(),
                       4.horizontalSpace,
                       InkWell(
-                        // onDoubleTap: () {
-                        //   viewModel.decrementLike(streamLikes, blogsData.documentId);
-                        // },
                         onTap: () {
                           isLiked ? viewModel.decrementLike(streamLikes,blogsData.documentId) :
                           viewModel.incrementLikes(streamLikes,blogsData.documentId);
@@ -131,7 +128,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                             )],
                           fill: 1,
                           size: 25,
-                        ).animate(delay: 600.ms).scale() : const Icon(
+                        ).animate(delay: 500.ms).scale() : const Icon(
                           Icons.favorite_border_rounded,
                           color: Colors.black,
                           shadows: [
@@ -139,7 +136,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                           ],
                           fill: 0,
                           size: 25,
-                        ).animate(delay: 600.ms).scale(),
+                        ).animate(delay: 500.ms).scale(),
                       )
                     ],
                   )),
