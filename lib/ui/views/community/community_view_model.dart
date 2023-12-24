@@ -4,37 +4,70 @@ class CommunityViewModel extends BaseViewModel {
   final log = getLogger("CommunityViewModel");
   final NavigationService navigationService = locator<NavigationService>();
   final FirestoreService firestoreService = FirestoreService();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  LocalStorageService localStorageService = locator<LocalStorageService>();
 
-  // Add ViewModel specific code here
 
   // Blogs data
   final List<CommunityBlogsData> _blogsData = [];
   List<CommunityBlogsData> get blogsData => _blogsData;
+  set blogsData(List<CommunityBlogsData> blogsData) {
+    _blogsData.addAll(blogsData);
+    notifyListeners();
+  }
 
   Future<List<CommunityBlogsData>> getBlogData() async {
-    final List<CommunityBlogsData> unsortedList =
-        await firestoreService.getBlogs();
-    unsortedList.sort((a, b) => b.date.toDate().compareTo(a.date.toDate()));
-    for (int i = 0; i < 3; i++) {
-      blogsData.add(unsortedList[i]);
-    }
-    log.i("Overall Blogs data: ${blogsData.length}");
+    blogsData = await firestoreService.getBlogs();
     return blogsData;
   }
 
-   int _currentBlogIndex = 0;
+  int _currentBlogIndex = 0;
   int get currentBlogIndex => _currentBlogIndex;
   void updateBlogIndex(int newIndex) {
     _currentBlogIndex = newIndex;
     notifyListeners();
   }
 
-  Future<void> init(context) async{
+  // Stream to track likes
+  Stream<int>  getLikesStream(String id) {
+    return _firestore.collection('Community').doc("data").collection("blogs").doc(id).snapshots().map((snapshot) {
+      return snapshot.data()!['likes'];
+    });
+  }
+
+  // Blog Likes
+  Future<int> incrementLikes(int likes, String blogId) async {
+    if (localStorageService.read("liked_$blogId") == false || localStorageService.read("liked_$blogId") == null) {
+      likes = likes + 1;
+    localStorageService.write("liked_$blogId", true);
+    log.i(localStorageService.read("liked_$blogId"));
+    await firestoreService.updateLikes(blogId, likes);
+    notifyListeners();
+    return likes;
+    }else{
+      log.i("Already liked : ${localStorageService.read("liked_$blogId")}");
+      return likes;
+    }
+  }
+  Future<int> decrementLike(int likes, String blogId) async {
+    if (localStorageService.read("liked_$blogId") == true) {
+      likes = likes -1;
+    localStorageService.write("liked_$blogId", false);
+    log.i(localStorageService.read("liked_$blogId"));
+    await firestoreService.updateLikes(blogId, likes);
+    notifyListeners();
+    return likes;
+    }else{
+      log.i("Already liked : ${localStorageService.read("liked_$blogId")}");
+      return likes;
+    }
+  }
+
+  Future<void> init(context) async {
     setBusy(true);
     try {
-    await  getBlogData();
-    log.i("Blogs data: ${blogsData.length}");
-    notifyListeners();
+      await getBlogData();
+      notifyListeners();
     } catch (e) {
       log.e(e.toString());
     }
@@ -45,6 +78,7 @@ class CommunityViewModel extends BaseViewModel {
 // Community blogs component model => Community => data => blogs => random ID => 'author'/'content'/'title'/'imageUrl'/'date'/'likes' (For now there is only one blog)
 // If creating post add username at that time of cureent user (only for student not for outsiders)
 class CommunityBlogsData {
+  final String documentId;
   final String author;
   // final String content;
   final String title;
@@ -53,6 +87,7 @@ class CommunityBlogsData {
   final int likes;
 
   CommunityBlogsData({
+    required this.documentId,
     required this.author,
     // required this.content,
     required this.title,
