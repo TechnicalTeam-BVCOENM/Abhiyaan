@@ -3,11 +3,9 @@ import 'dart:ffi';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:abhiyaan/ui/common/cached_network_image.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:injectable/injectable.dart';
 part "community_view_components.dart";
 part "community_view_model.dart";
 
@@ -85,6 +83,7 @@ class CommunityView extends StatelessWidget {
                       ),
                     ),
                   ),
+                  
                   const SectionText(title: "Departmental Clubs"),
                   // Add Departmental Clubs here
                   const SectionText(title: "Qoute of the day"),

@@ -10,6 +10,14 @@ class CommunityBlogs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FontThemeClass fontThemeClass = FontThemeClass();
+    DateTime postDate = blogsData.date.toDate();
+    DateTime currentDate = DateTime.now().toLocal();
+    currentDate = DateTime(currentDate.year, currentDate.month, currentDate.day);
+    postDate = DateTime(postDate.year, postDate.month, postDate.day);
+
+    String actualPostTime =  currentDate.difference(postDate).inDays == 0 ? "Posted Today" :currentDate.difference(postDate).inDays == 1 ? "Posted Yesterday" : "Posted ${currentDate.difference(postDate).inDays} days ago"  ;
+
+
     return Card(
       elevation: 1,
       shadowColor: context.colorScheme.secondaryBlackColor.withOpacity(0.8),
@@ -48,8 +56,7 @@ class CommunityBlogs extends StatelessWidget {
                 const Spacer(),
                 //Posted on date
                 Text(
-                  DateTime.now().difference(blogsData.date.toDate()).inDays == 0
-                      ? "Posted today" :"Posted on ${DateTime.now().difference(blogsData.date.toDate()).inDays} day ago",
+                  actualPostTime,
                   style: fontThemeClass.caption(context,
                       color: context.colorScheme.secondarySectionColor,
                       fontWeight: FontWeight.w400),
@@ -57,11 +64,13 @@ class CommunityBlogs extends StatelessWidget {
               ],
             ),
           ),
-          CachedNetworkImageWidget(imageUrl: blogsData.imageUrl,
+          CachedNetworkImageWidget(
+            imageUrl: blogsData.imageUrl,
             height: 170.h,
             width: double.infinity,
-            fit: BoxFit.cover, maxHeightDiskCache: 1600.h,
-           ),
+            fit: BoxFit.cover,
+            maxHeightDiskCache: 1600.h,
+          ),
           Container(
               height: 45.h,
               padding: const EdgeInsets.symmetric(horizontal: 12).r,
