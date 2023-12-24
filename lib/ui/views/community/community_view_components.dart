@@ -12,11 +12,15 @@ class CommunityBlogs extends StatelessWidget {
     FontThemeClass fontThemeClass = FontThemeClass();
     DateTime postDate = blogsData.date.toDate();
     DateTime currentDate = DateTime.now().toLocal();
-    currentDate = DateTime(currentDate.year, currentDate.month, currentDate.day);
+    currentDate =
+        DateTime(currentDate.year, currentDate.month, currentDate.day);
     postDate = DateTime(postDate.year, postDate.month, postDate.day);
 
-    String actualPostTime =  currentDate.difference(postDate).inDays == 0 ? "Posted Today" :currentDate.difference(postDate).inDays == 1 ? "Posted Yesterday" : "Posted ${currentDate.difference(postDate).inDays} days ago"  ;
-
+    String actualPostTime = currentDate.difference(postDate).inDays == 0
+        ? "Posted Today"
+        : currentDate.difference(postDate).inDays == 1
+            ? "Posted Yesterday"
+            : "Posted ${currentDate.difference(postDate).inDays} days ago";
 
     return Card(
       elevation: 1,
@@ -117,8 +121,62 @@ class CommunityBlogs extends StatelessWidget {
 // 1. Use Card Component for each club
 // 2. Must be carousel like upcoming events
 
-
-
-
 // Qoute of the day
 // 1. Use Card Component for a quote of the day
+
+// Community page Shimmer Effect
+class CommunityPageShimmerEffect extends StatelessWidget {
+  const CommunityPageShimmerEffect({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        minimum: const EdgeInsets.symmetric(horizontal: 18).r,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 34.h,
+              width: 250.w,
+              child: const ShimmerLoadingWidget(),
+            ),
+            4.verticalSpace,
+            const SectionTextShimmerEffect(),
+            8.verticalSpace,
+            SizedBox(
+              height: 270.h,
+              child: const Card(
+                child: ShimmerLoadingWidget(),
+              ),
+            ),
+            12.verticalSpace,
+            const SectionTextShimmerEffect(),
+            8.verticalSpace,
+             SizedBox(
+              height: 120.h,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 3,
+                itemBuilder: (context, index) => 
+                Container(
+                  margin: EdgeInsets.only(right: index == 2 ? 0 : 16).r,
+                  height: 120.h,
+                  width: 120.w,
+                  child: const Card(
+                    child: ShimmerLoadingWidget(),
+                  ),
+                ),
+              ),
+            ),
+            12.verticalSpace,
+            const SectionTextShimmerEffect(),
+            8.verticalSpace,
+             SizedBox(
+              height: 220.h,
+              child: const Card(child: ShimmerLoadingWidget(),),)
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:abhiyaan/ui/common/cached_network_image.dart';
+import 'package:abhiyaan/ui/common/shimmer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -19,19 +20,12 @@ class CommunityView extends StatelessWidget {
         onViewModelReady: (viewModel) => viewModel.init(context),
         builder: (context, model, child) {
           FontThemeClass fontThemeClass = FontThemeClass();
-          return Scaffold(
+          return model.isBusy ?
+          const CommunityPageShimmerEffect()
+           :  Scaffold(
             appBar: AppBar(
               backgroundColor: context.colorScheme.backgroundColor,
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context); // pop to home screen
-                },
-                icon: Icon(
-                  Icons.arrow_back_rounded,
-                  size: 30.sp,
-                  color: context.colorScheme.secondaryBlackColor,
-                ),
-              ),
+              elevation: 0,
               title: Text(
                 "Community",
                 style: fontThemeClass.title(context,
