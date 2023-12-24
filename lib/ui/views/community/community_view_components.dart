@@ -121,12 +121,23 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                           viewModel.incrementLikes(streamLikes,blogsData.documentId);
                         },
                         child:isLiked ? const Icon(
-                          Icons.favorite,
+                          Icons.favorite_rounded,
                           color: Colors.red,
+                          shadows: [
+                            BoxShadow(
+                              color: Colors.red,
+                              blurRadius: 7,
+                              spreadRadius: 0.8,
+                            )],
+                          fill: 1,
                           size: 25,
                         ).animate(delay: 600.ms).scale() : const Icon(
-                          Icons.favorite_border,
+                          Icons.favorite_border_rounded,
                           color: Colors.black,
+                          shadows: [
+                            
+                          ],
+                          fill: 0,
                           size: 25,
                         ).animate(delay: 600.ms).scale(),
                       )

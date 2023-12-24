@@ -7,6 +7,7 @@ class CommunityViewModel extends BaseViewModel {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   LocalStorageService localStorageService = locator<LocalStorageService>();
 
+
   // Blogs data
   final List<CommunityBlogsData> _blogsData = [];
   List<CommunityBlogsData> get blogsData => _blogsData;
