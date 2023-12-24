@@ -22,7 +22,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
             ? "Posted Yesterday"
             : "Posted ${currentDate.difference(postDate).inDays} days ago";
 
-    final bool isLiked = viewModel.localStorageService.read("liked_${blogsData.documentId}");
+    final bool isLiked = viewModel.localStorageService.read("liked_${blogsData.documentId}") ?? false;
 
     return StreamBuilder<int>(
       stream: viewModel.getLikesStream(blogsData.documentId),

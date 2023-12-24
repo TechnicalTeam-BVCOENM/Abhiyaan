@@ -7,7 +7,6 @@ class CommunityViewModel extends BaseViewModel {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   LocalStorageService localStorageService = locator<LocalStorageService>();
 
-
   // Blogs data
   final List<CommunityBlogsData> _blogsData = [];
   List<CommunityBlogsData> get blogsData => _blogsData;
@@ -29,35 +28,51 @@ class CommunityViewModel extends BaseViewModel {
   }
 
   // Stream to track likes
-  Stream<int>  getLikesStream(String id) {
-    return _firestore.collection('Community').doc("data").collection("blogs").doc(id).snapshots().map((snapshot) {
+  Stream<int> getLikesStream(String id) {
+    return _firestore
+        .collection('Community')
+        .doc("data")
+        .collection("blogs")
+        .doc(id)
+        .snapshots()
+        .map((snapshot) {
       return snapshot.data()!['likes'];
     });
   }
 
   // Blog Likes
   Future<int> incrementLikes(int likes, String blogId) async {
-    if (localStorageService.read("liked_$blogId") == false || localStorageService.read("liked_$blogId") == null) {
-      likes = likes + 1;
-    localStorageService.write("liked_$blogId", true);
-    log.i(localStorageService.read("liked_$blogId"));
-    await firestoreService.updateLikes(blogId, likes);
-    notifyListeners();
-    return likes;
+    if (localStorageService.storage.hasData("liked_$blogId")) {
+      if (localStorageService.read("liked_$blogId") == false) {
+        likes = likes + 1;
+        await firestoreService.updateLikes(blogId, likes);
+        localStorageService.write("liked_$blogId", true);
+        log.i(localStorageService.read("liked_$blogId"));
+        notifyListeners();
+        return likes;
+      } else {
+        log.i("Already liked : ${localStorageService.read("liked_$blogId")}");
+        return likes;
+      }
     }else{
-      log.i("Already liked : ${localStorageService.read("liked_$blogId")}");
-      return likes;
+        likes = likes + 1;
+        await firestoreService.updateLikes(blogId, likes);
+        localStorageService.write("liked_$blogId", true);
+        log.i(localStorageService.read("liked_$blogId"));
+        notifyListeners();
+        return likes;
     }
   }
+
   Future<int> decrementLike(int likes, String blogId) async {
     if (localStorageService.read("liked_$blogId") == true) {
-      likes = likes -1;
-    localStorageService.write("liked_$blogId", false);
-    log.i(localStorageService.read("liked_$blogId"));
-    await firestoreService.updateLikes(blogId, likes);
-    notifyListeners();
-    return likes;
-    }else{
+      likes = likes - 1;
+      localStorageService.write("liked_$blogId", false);
+      log.i(localStorageService.read("liked_$blogId"));
+      await firestoreService.updateLikes(blogId, likes);
+      notifyListeners();
+      return likes;
+    } else {
       log.i("Already liked : ${localStorageService.read("liked_$blogId")}");
       return likes;
     }
