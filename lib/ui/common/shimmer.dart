@@ -25,8 +25,6 @@ class ShimmerLoadingWidget extends StatelessWidget {
   }
 }
 
-
-
 class SectionTextShimmerEffect extends StatelessWidget {
   const SectionTextShimmerEffect({
     super.key,

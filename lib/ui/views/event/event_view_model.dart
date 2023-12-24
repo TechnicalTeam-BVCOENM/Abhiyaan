@@ -25,12 +25,9 @@ class EventViewModel extends BaseViewModel {
     viewportFraction: 0.65,
   );
 
-
   void init() async {
     await loadData();
   }
-
-
 
   navigateToDetailedEventView() {
     _navigationService.navigateTo(Routes.detailedEventView);

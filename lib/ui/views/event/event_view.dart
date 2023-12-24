@@ -45,7 +45,7 @@ class EventView extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(18).r,
                               ),
                               1),
-                              color: context.colorScheme.secondaryWhiteColor,
+                          color: context.colorScheme.secondaryWhiteColor,
                           child: model.todayEvent != null
                               ? Stack(
                                   children: [

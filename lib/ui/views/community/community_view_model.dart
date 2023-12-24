@@ -12,12 +12,6 @@ class CommunityViewModel extends BaseViewModel {
   set blogsData(List<CommunityBlogsData> blogsData) {
     _blogsData.addAll(blogsData);
     notifyListeners();
-
-
-
-
-
-    
   }
 
   Future<List<CommunityBlogsData>> getBlogData() async {
@@ -32,45 +26,46 @@ class CommunityViewModel extends BaseViewModel {
     notifyListeners();
   }
 
- Stream<int> getLikesStream(String id) {
-     AuthenticationService authenticationService = locator<AuthenticationService>();
-      final userId = authenticationService.currentUser!.uid;
-  return _firestore
-      .collection('Community')
-      .doc("data")
-      .collection("blogs")
-      .doc(id)
-      .snapshots()
-      .map((snapshot) {
-    final likesArray = snapshot.data()?["likes"];
-    localStorageService.write("isLiked_$id", likesArray.contains(userId));
-    log.i(likesArray);
-    return likesArray.length;
+  Stream<int> getLikesStream(String id) {
+    AuthenticationService authenticationService =
+        locator<AuthenticationService>();
+    final userId = authenticationService.currentUser!.uid;
+    return _firestore
+        .collection('Community')
+        .doc("data")
+        .collection("blogs")
+        .doc(id)
+        .snapshots()
+        .map((snapshot) {
+      final likesArray = snapshot.data()?["likes"];
+      localStorageService.write("isLiked_$id", likesArray.contains(userId));
+      log.i(likesArray);
+      return likesArray.length;
     });
-}
-
-  Future<void> updateLikes (String blogId) async{
-   final currentBlog =  localStorageService.read("isLiked_$blogId");
-        AuthenticationService authenticationService = locator<AuthenticationService>();
-      final userId = authenticationService.currentUser!.uid;
-       try {
-        if (currentBlog == true) {
-          log.i("Already liked");
-          return ;
-        }
-        await _firestore
-            .collection('Community')
-            .doc("data")
-            .collection("blogs")
-            .doc(blogId)
-            .update({
-          "likes": FieldValue.arrayUnion([userId]),
-        }).then((value) => log.i("Updated likes"));   
-       } catch (e) {
-          log.i(e.toString());
-       }
   }
 
+  Future<void> updateLikes(String blogId) async {
+    final currentBlog = localStorageService.read("isLiked_$blogId");
+    AuthenticationService authenticationService =
+        locator<AuthenticationService>();
+    final userId = authenticationService.currentUser!.uid;
+    try {
+      if (currentBlog == true) {
+        log.i("Already liked");
+        return;
+      }
+      await _firestore
+          .collection('Community')
+          .doc("data")
+          .collection("blogs")
+          .doc(blogId)
+          .update({
+        "likes": FieldValue.arrayUnion([userId]),
+      }).then((value) => log.i("Updated likes"));
+    } catch (e) {
+      log.i(e.toString());
+    }
+  }
 
   Future<void> init(context) async {
     setBusy(true);
