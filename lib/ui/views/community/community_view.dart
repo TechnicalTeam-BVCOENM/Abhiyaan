@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:ffi';
+import 'package:http/http.dart' as http;
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/auth_service.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
@@ -85,6 +87,7 @@ class CommunityView extends StatelessWidget {
                         // Add Departmental Clubs here
                         const SectionText(title: "Qoute of the day"),
                         // Add Qoute of the day here
+                         QuoteCard(quote: model.affirmation,)
                       ],
                     ),
                   ),

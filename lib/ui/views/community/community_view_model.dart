@@ -6,7 +6,8 @@ class CommunityViewModel extends BaseViewModel {
   final FirestoreService firestoreService = FirestoreService();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   LocalStorageService localStorageService = locator<LocalStorageService>();
-
+  String affirmation = "";
+  // Blogs data
   final List<CommunityBlogsData> _blogsData = [];
   List<CommunityBlogsData> get blogsData => _blogsData;
   set blogsData(List<CommunityBlogsData> blogsData) {
@@ -44,6 +45,19 @@ class CommunityViewModel extends BaseViewModel {
     });
   }
 
+ Future<void> fetchAffirmation() async {
+    final response = await http.get(Uri.parse('https://www.affirmations.dev/'));
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      affirmation = data['affirmation'];
+    } else {
+      // Handle error cases here
+      debugPrint('Failed to fetch affirmation');
+    }
+  }
+
+  
   Future<void> updateLikes(String blogId) async {
     final currentBlog = localStorageService.read("isLiked_$blogId");
     AuthenticationService authenticationService =
@@ -71,6 +85,7 @@ class CommunityViewModel extends BaseViewModel {
     setBusy(true);
     try {
       await getBlogData();
+      await fetchAffirmation();
       notifyListeners();
     } catch (e) {
       log.e(e.toString());
