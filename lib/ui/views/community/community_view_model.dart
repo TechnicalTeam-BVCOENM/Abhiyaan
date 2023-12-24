@@ -12,6 +12,12 @@ class CommunityViewModel extends BaseViewModel {
   set blogsData(List<CommunityBlogsData> blogsData) {
     _blogsData.addAll(blogsData);
     notifyListeners();
+
+
+
+
+
+    
   }
 
   Future<List<CommunityBlogsData>> getBlogData() async {
