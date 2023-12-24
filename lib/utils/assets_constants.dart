@@ -40,6 +40,8 @@ class AssetImagePath {
 }
 
 class AssetUrls {
+  static const dummyImageUrl =
+      "https://firebasestorage.googleapis.com/v0/b/darpan-b94d6.appspot.com/o/user%2Fimages.jpeg?alt=media&token=a9889ba7-3958-4784-9708-e43ade1016d4";
   static const instagramUrl =
       "https://www.instagram.com/bvcoenm/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==";
   static const linkedinUrl =
