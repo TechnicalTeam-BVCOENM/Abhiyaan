@@ -8,7 +8,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
   const CommunityBlogs({super.key, required this.blogsData});
 
   @override
-  Widget build(BuildContext context , CommunityViewModel viewModel) {
+  Widget build(BuildContext context, CommunityViewModel viewModel) {
     FontThemeClass fontThemeClass = FontThemeClass();
     DateTime postDate = blogsData.date.toDate();
     DateTime currentDate = DateTime.now().toLocal();
@@ -22,129 +22,137 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
             ? "Posted Yesterday"
             : "Posted ${currentDate.difference(postDate).inDays} days ago";
 
-    final bool isLiked = viewModel.localStorageService.read("liked_${blogsData.documentId}") ?? false;
+    // Future<bool> toggleLike() async {
+    //   isLiked = await viewModel.isUserAlreadyLikedPost(blogsData.documentId);
+    //   viewModel.notifyListeners();
+    //   return isLiked;
+    // }
 
     return StreamBuilder<int>(
-      stream: viewModel.getLikesStream(blogsData.documentId),
-      builder: (context, snapshot) {
-        if (viewModel.hasError) {
-          return const Text('Error: Backend Error');
-        }
+        stream: viewModel.getLikesStream(blogsData.documentId),
+        builder: (context, snapshot) {
+          if (viewModel.hasError) {
+            return const Text('Error: Backend Error');
+          }
+          bool isLiked = viewModel.localStorageService
+                  .read("isLiked_${blogsData.documentId}") ??
+              false;
 
-        final int streamLikes = snapshot.data ?? blogsData.likes;
-        return Card(
-          elevation: 1,
-          shadowColor: context.colorScheme.secondaryBlackColor.withOpacity(0.8),
-          clipBehavior: Clip.hardEdge,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.r),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                height: 45.h,
-                padding: const EdgeInsets.symmetric(horizontal: 12).r,
-                decoration: BoxDecoration(
-                  color: context.colorScheme.secondaryWhiteColor,
-                ),
-                child: Row(
-                  children: [
-                    //Author image
-                    ClipOval(
-                      child: Image.network(
-                        "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1703289600&semt=ais",
-                        width: 34.w,
-                        height: 34.h,
-                      ),
-                    ).animate(delay: 500.ms).fadeIn(delay: 10.ms),
-                    //Author name
-                    8.horizontalSpace,
-                    Text(
-                      blogsData.author,
-                      style: fontThemeClass.caption(context,
-                          color: context.colorScheme.secondaryBlackColor,
-                          fontWeight: FontWeight.w500),
-                    ).animate(delay: 500.ms).slide(delay: 10.ms).fadeIn(),
-                    const Spacer(),
-                    //Posted on date
-                    Text(
-                      actualPostTime,
-                      style: fontThemeClass.caption(context,
-                          color: context.colorScheme.secondarySectionColor,
-                          fontWeight: FontWeight.w400),
-                    ).animate(delay: 500.ms).slide(delay: 10.ms).fadeIn(),
-                  ],
-                ),
-              ),
-              CachedNetworkImageWidget(
-                imageUrl: blogsData.imageUrl,
-                height: 170.h,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                maxHeightDiskCache: 1600.h,
-              ).animate(delay: 100.ms).fadeIn(),
-              Container(
+          final int streamLikes = snapshot.data ?? 0;
+          return Card(
+            elevation: 1,
+            shadowColor:
+                context.colorScheme.secondaryBlackColor.withOpacity(0.8),
+            clipBehavior: Clip.hardEdge,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.r),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
                   height: 45.h,
                   padding: const EdgeInsets.symmetric(horizontal: 12).r,
+                  decoration: BoxDecoration(
+                    color: context.colorScheme.secondaryWhiteColor,
+                  ),
                   child: Row(
                     children: [
-                      Image.network(
-                        "https://cdn3d.iconscout.com/3d/premium/thumb/bulb-3994347-3307681.png?f=webp",
-                        height: 25.h,
-                        width: 25.w,
-                        fit: BoxFit.cover,
-                      ).animate(delay: 500.ms).scale(),
+                      //Author image
+                      ClipOval(
+                        child: Image.network(
+                          "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1703289600&semt=ais",
+                          width: 34.w,
+                          height: 34.h,
+                        ),
+                      ).animate(delay: 500.ms).fadeIn(delay: 10.ms),
+                      //Author name
                       8.horizontalSpace,
                       Text(
-                        blogsData.title,
-                        style: fontThemeClass.caption(context,
-                            color:
-                                context.colorScheme.primaryColor.withOpacity(0.8),
-                            fontWeight: FontWeight.w500),
-                      ).animate(delay: 500.ms).scale(),
-                      const Spacer(),
-                      Text(
-                        streamLikes.toString(),
+                        blogsData.author,
                         style: fontThemeClass.caption(context,
                             color: context.colorScheme.secondaryBlackColor,
                             fontWeight: FontWeight.w500),
-                      ).animate(delay: 500.ms).scale(),
-                      4.horizontalSpace,
-                      InkWell(
-                        onTap: () {
-                          isLiked ? viewModel.decrementLike(streamLikes,blogsData.documentId) :
-                          viewModel.incrementLikes(streamLikes,blogsData.documentId);
-                        },
-                        child:isLiked ? const Icon(
-                          Icons.favorite_rounded,
-                          color: Colors.red,
-                          shadows: [
-                            BoxShadow(
-                              color: Colors.red,
-                              blurRadius: 7,
-                              spreadRadius: 0.8,
-                            )],
-                          fill: 1,
-                          size: 25,
-                        ).animate(delay: 500.ms).scale() : const Icon(
-                          Icons.favorite_border_rounded,
-                          color: Colors.black,
-                          shadows: [
-                            
-                          ],
-                          fill: 0,
-                          size: 25,
-                        ).animate(delay: 500.ms).scale(),
-                      )
+                      ).animate(delay: 500.ms).slide(delay: 10.ms).fadeIn(),
+                      const Spacer(),
+                      //Posted on date
+                      Text(
+                        actualPostTime,
+                        style: fontThemeClass.caption(context,
+                            color: context.colorScheme.secondarySectionColor,
+                            fontWeight: FontWeight.w400),
+                      ).animate(delay: 500.ms).slide(delay: 10.ms).fadeIn(),
                     ],
-                  )),
-            ],
-          ),
-        );
-      }
-    );
+                  ),
+                ),
+                CachedNetworkImageWidget(
+                  imageUrl: blogsData.imageUrl,
+                  height: 170.h,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  maxHeightDiskCache: 1600.h,
+                ).animate(delay: 100.ms).fadeIn(),
+                Container(
+                    height: 45.h,
+                    padding: const EdgeInsets.symmetric(horizontal: 12).r,
+                    decoration: BoxDecoration(
+                      color: context.colorScheme.secondaryWhiteColor,
+                    ),
+                    child: Row(
+                      children: [
+                        Image.network(
+                          "https://cdn3d.iconscout.com/3d/premium/thumb/bulb-3994347-3307681.png?f=webp",
+                          height: 25.h,
+                          width: 25.w,
+                          fit: BoxFit.cover,
+                        ).animate(delay: 500.ms).scale(),
+                        8.horizontalSpace,
+                        Text(
+                          blogsData.title,
+                          style: fontThemeClass.caption(context,
+                              color: context.colorScheme.secondaryBlackColor,
+                              fontWeight: FontWeight.w500),
+                        ).animate(delay: 500.ms).scale(),
+                        const Spacer(),
+                        Text(
+                          streamLikes.toString(),
+                          style: fontThemeClass.caption(context,
+                              color: context.colorScheme.secondaryBlackColor,
+                              fontWeight: FontWeight.w500),
+                        ).animate(delay: 500.ms).scale(),
+                        4.horizontalSpace,
+                        InkWell(
+                          onTap: () {
+                              viewModel.updateLikes(blogsData.documentId);
+                          },
+                          child: isLiked
+                              ? const Icon(
+                                  Icons.favorite_rounded,
+                                  color: Colors.red,
+                                  shadows: [
+                                    BoxShadow(
+                                      color: Colors.red,
+                                      blurRadius: 7,
+                                      spreadRadius: 0.8,
+                                    ),
+                                  ],
+                                  fill: 1,
+                                  size: 25,
+                                ).animate(delay: 500.ms).scale()
+                              : const Icon(
+                                  Icons.favorite_border_rounded,
+                                  color: Colors.black,
+                                  fill: 0,
+                                  size: 25,
+                                ).animate(delay: 500.ms).scale(),
+                        )
+                      ],
+                    )),
+              ],
+            ),
+          );
+        });
   }
 }
 
@@ -162,6 +170,7 @@ class CommunityPageShimmerEffect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.colorScheme.backgroundColor,
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(horizontal: 18).r,
         child: Column(
@@ -183,13 +192,12 @@ class CommunityPageShimmerEffect extends StatelessWidget {
             12.verticalSpace,
             const SectionTextShimmerEffect(),
             8.verticalSpace,
-             SizedBox(
+            SizedBox(
               height: 120.h,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 3,
-                itemBuilder: (context, index) => 
-                Container(
+                itemBuilder: (context, index) => Container(
                   margin: EdgeInsets.only(right: index == 2 ? 0 : 16).r,
                   height: 120.h,
                   width: 120.w,
@@ -202,9 +210,12 @@ class CommunityPageShimmerEffect extends StatelessWidget {
             12.verticalSpace,
             const SectionTextShimmerEffect(),
             8.verticalSpace,
-             SizedBox(
+            SizedBox(
               height: 220.h,
-              child: const Card(child: ShimmerLoadingWidget(),),)
+              child: const Card(
+                child: ShimmerLoadingWidget(),
+              ),
+            )
           ],
         ),
       ),

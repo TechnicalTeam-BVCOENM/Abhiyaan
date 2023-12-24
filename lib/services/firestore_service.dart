@@ -22,9 +22,10 @@ class FirestoreService {
     }
   }
 
-  Future updateLikes(String id, int likes) async {
+  Future updateLikes(String id) async {
     try {
-      await _firestore.collection('Community').doc("data").collection("blogs").doc(id).update({'likes': likes}).then((value) => debugPrint("Updated likes: $likes"));
+      final userId = _firestore.collection("Users").doc().id;
+      await _firestore.collection('Community').doc("data").collection("blogs").doc(id).update({'likes':  FieldValue.arrayUnion([userId])}).then((value) => debugPrint("Updated likes of Post"));
       return;
     } catch (e) {
       debugPrint("Likes failed to update with : ${e.toString()}");
