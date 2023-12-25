@@ -170,12 +170,14 @@ class QuoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FontThemeClass fontThemeClass = FontThemeClass();
     return Card(
       elevation: 8.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Container(
+        width: double.infinity,
         decoration: BoxDecoration(
           gradient: const LinearGradient(
             colors: [
@@ -187,29 +189,37 @@ class QuoteCard extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(12.0),
         ),
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(18.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Transform.flip(
-              flipY: true,
-              flipX: true,
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Transform.flip(
+                flipY: true,
+                flipX: true,
+                child: const Icon(
+                  Icons.format_quote,
+                  size: 50,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            Text(
+              '" $quote "',
+              style: fontThemeClass.paragraph(context,
+                  fontWeight: FontWeight.w700,
+                  color: context.colorScheme.signInTextColor),
+              textAlign: TextAlign.center,
+            ),
+            Container(
+              alignment: Alignment.centerRight,
               child: const Icon(
                 Icons.format_quote,
                 size: 50,
                 color: Colors.white,
               ),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              quote ?? '',
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
             ),
           ],
         ),
