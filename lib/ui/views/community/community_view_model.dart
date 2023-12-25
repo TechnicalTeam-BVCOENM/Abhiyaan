@@ -8,7 +8,8 @@ class CommunityViewModel extends BaseViewModel {
   LocalStorageService localStorageService = locator<LocalStorageService>();
   String affirmation = "";
   String authorName = "";
-  // Blogs data
+
+
   final List<CommunityBlogsData> _blogsData = [];
   List<CommunityBlogsData> get blogsData => _blogsData;
   set blogsData(List<CommunityBlogsData> blogsData) {
@@ -20,6 +21,22 @@ class CommunityViewModel extends BaseViewModel {
     blogsData = await firestoreService.getBlogs();
     return blogsData;
   }
+
+
+   final List<DepartmentalClubsData> _departmentClubsData = [];
+  List<DepartmentalClubsData> get departmentClubsData => _departmentClubsData;
+  set departmentClubsData(List<DepartmentalClubsData> departmentClubsData) {
+    _departmentClubsData.addAll(departmentClubsData);
+    notifyListeners();
+  }
+
+  Future<List<DepartmentalClubsData>> getDepartmentClubsData() async {
+    departmentClubsData = await firestoreService.getDepartmentClubsData();
+    return departmentClubsData;
+  }
+
+
+
 
   int _currentBlogIndex = 0;
   int get currentBlogIndex => _currentBlogIndex;
@@ -93,6 +110,7 @@ class CommunityViewModel extends BaseViewModel {
     try {
       await getBlogData();
       await fetchAffirmation();
+      await getDepartmentClubsData();
       notifyListeners();
     } catch (e) {
       log.e(e.toString());
@@ -121,15 +139,14 @@ class CommunityBlogsData {
   });
 }
 
-// Departmental Clubs model => Community => data => clubs => 'cesa'/'mesa'/'itsa' etc (For now there is only cesa club)
+
 class DepartmentalClubsData {
-  final String clubName; // full name of the club
-  final String clubImage; // Logo of the club
-  final String clubShortHand; // short name of the club
-  final Array clubFest; // (Array of fest ) => festImage , festName
-  final Array
-      clubMembers; // (Array of members)  => memberName , memberImage , memberPosition for each member
-  final String clubLink; // optional (website link of the club )
+  final String clubName; 
+  final String clubImage;
+  final String clubShortHand; 
+  final List<FestInfo> clubFest; 
+  final List<ClubMemberInfo> clubMembers; 
+  // final String clubLink; 
 
   DepartmentalClubsData({
     required this.clubName,
@@ -137,6 +154,28 @@ class DepartmentalClubsData {
     required this.clubShortHand,
     required this.clubFest,
     required this.clubMembers,
-    required this.clubLink,
+    // required this.clubLink,
+  });
+}
+
+class FestInfo {
+  final String festName;
+  final String festImage;
+
+  FestInfo({
+    required this.festName,
+    required this.festImage,
+  });
+}
+
+class ClubMemberInfo {
+  final String memberName;
+  final String memberImage;
+  final String memberPosition;
+
+  ClubMemberInfo({
+    required this.memberName,
+    required this.memberImage,
+    required this.memberPosition,
   });
 }

@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class FirestoreService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final log = getLogger("FirestoreService");
 
   Future updateUserStatus() async {
     try {
@@ -65,6 +66,49 @@ class FirestoreService {
           "Error in getting celebration data from firebase : ${e.toString()}");
       return [];
     }
+  }
+
+  Future<List<DepartmentalClubsData>> getDepartmentClubsData() async {
+    final QuerySnapshot snapshot = await _firestore
+        .collection("Community")
+        .doc("data")
+        .collection("clubs")
+        .get();
+    return snapshot.docs.map((doc) {
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      Map<String, dynamic> aClubData = data["data"] as Map<String, dynamic>;
+      List<dynamic> clubMm = data["data"]["clubMember"] ;
+      List<dynamic> clubFst = data["data"]["clubFest"] ;
+
+      String clubName = aClubData['clubName'];
+      String clubShortHand = aClubData['clubShortHand'];
+      String clubImage = aClubData['clubImage'];
+      log.d(clubName);
+      List<ClubMemberInfo> clubMembers = clubMm.map((e) {
+        log.i(e['memberName']);
+        return ClubMemberInfo(
+          memberName: e['memberName'],
+          memberImage: e['memberImage'],
+          memberPosition: e['memberPosition'],
+        );
+      }).toList();
+      List<FestInfo> clubFests = clubFst.map((e) {
+        log.i(e['festName']);
+        return FestInfo(
+          festName: e['festName'],
+          festImage: e['festImage'],
+        );
+      }).toList();
+
+
+      return DepartmentalClubsData(
+        clubName: clubName,
+        clubShortHand: clubShortHand,
+        clubImage: clubImage,
+        clubMembers: clubMembers,
+        clubFest: clubFests,
+      );
+    }).toList();
   }
 
   Future<List<Map<String, dynamic>>> getAllData(String collection) async {
