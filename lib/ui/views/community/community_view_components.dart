@@ -165,8 +165,9 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
 
 class QuoteCard extends StatelessWidget {
   final String? quote;
+  final String? autherName;
 
-  const QuoteCard({super.key, this.quote});
+  const QuoteCard({super.key, this.quote, this.autherName});
 
   @override
   Widget build(BuildContext context) {
@@ -205,26 +206,30 @@ class QuoteCard extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-            ),
+            ).animate(delay: 600.ms).scale(),
             Text(
               '" $quote "',
               style: fontThemeClass.paragraph(context,
                   fontWeight: FontWeight.w700,
                   color: context.colorScheme.signInTextColor),
               textAlign: TextAlign.center,
-            ),
+            ).animate(delay: 700.ms).scale(),
+            15.verticalSpace,
             Container(
               alignment: Alignment.centerRight,
-              child: const Icon(
-                Icons.format_quote,
-                size: 50,
-                color: Colors.white,
+              child: Text(
+                "- $autherName", // Replace 'Author Name' with the actual author's name
+                style: fontThemeClass.body(context,
+                    color: context.colorScheme.signInTextColor,
+                    fontWeight: FontWeight.w400),
+                textAlign: TextAlign.right,
               ),
-            ),
+            ).animate(delay: 800.ms).scale(),
+            15.verticalSpace,
           ],
         ),
       ),
-    );
+    ).animate(delay: 500.ms).fadeIn();
   }
 }
 

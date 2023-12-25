@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi';
+import 'dart:math';
 import 'package:http/http.dart' as http;
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/auth_service.dart';
@@ -38,8 +39,6 @@ class CommunityView extends StatelessWidget {
                   ),
                   backgroundColor: context.colorScheme.backgroundColor,
                   body: RefreshIndicator(
-                    color: Colors.white,
-                    backgroundColor: Colors.blue,
                     strokeWidth: 3.0,
                     onRefresh: () async {
                       await Future.delayed(const Duration(seconds: 1));
@@ -103,6 +102,7 @@ class CommunityView extends StatelessWidget {
                             // Add Qoute of the day here
                             QuoteCard(
                               quote: model.affirmation,
+                              autherName: model.authorName,
                             ),
 
                             Container(
