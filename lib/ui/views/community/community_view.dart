@@ -104,7 +104,10 @@ class CommunityView extends StatelessWidget {
                                 scrollDirection: Axis.horizontal,
                                 itemCount: model.departmentClubsData.length,
                                   itemBuilder: (context, index) {
-                                    return  DepartmentClubs(data: model.departmentClubsData[index]);
+                                    return  Padding(
+                                      padding: index ==0 ? const EdgeInsets.only(right: 0) : const EdgeInsets.only(left: 12.0) ,
+                                      child: DepartmentClubs(data: model.departmentClubsData[index]),
+                                    );
                                   }),
                             ),
                             const SectionText(title: "Quote of the day"),
