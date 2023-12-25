@@ -132,16 +132,14 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+      NotificationsService notificationService = NotificationsService();
   Future<void> init(context) async {
     setBusy(true);
     try {
-      NotificationService notificationService = NotificationService();
-      notificationService.messaging.onTokenRefresh.listen((event) {
-        notificationService.getDeviceToken();
-      });
-      notificationService.getDeviceToken();
       _highlights = await _firestoreService.getHighlights();
       _departmentUpdates = await _firestoreService.getCollegeUpdates();
+      notificationService.onTokenRefresh();
+      notificationService.getToken();
       notifyListeners();
       debugPrint(
           DateFormat("MMMM d").format((departmentUpdates[0].date).toDate()));
