@@ -61,14 +61,6 @@
             </intent-filter>
 
         </activity>
-  <!-- Service for handling background messages -->
-            <!-- <service
-                android:name="io.flutter.plugins.firebasemessaging.FlutterFirebaseMessagingBackgroundService"
-                android:exported="false">
-                <intent-filter>
-                    <action android:name="com.google.firebase.MESSAGING_EVENT" />
-                </intent-filter>
-            </service> -->
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
@@ -76,6 +68,10 @@
             android:value="2" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="high_importance_channel" />
+            android:value="Abhiyaan App" />
+        <meta-data
+            android:name="com.dexterous.flutterlocalnotifications.default_small_icon"
+            android:resource="@mipmap/ic_launcher" /> 
+
     </application>
 </manifest>

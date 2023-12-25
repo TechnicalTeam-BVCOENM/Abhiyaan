@@ -9,26 +9,27 @@ import 'package:flutter/services.dart';
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   if (Firebase.apps.isNotEmpty) {
-    return;
+    return;  
   }
+  debugPrint('Handling a background message ${message.data.toString()}');
+  debugPrint('Handling a background message ${message.notification!.title}');
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 }
 
-void notificationServicesAfterAppStart(BuildContext context) {
-  NotificationService notificationService = NotificationService();
-  notificationService.reqestNotificationPermission();
-  notificationService.initFirebaseNotification(context);
-  notificationService.setupInteractMessage(context);
-}
-
 Future<void> servicesToInitializeBeforeAppStart() async {
   WidgetsFlutterBinding.ensureInitialized();
+  NotificationsService notificationsService = NotificationsService();
   if (Firebase.apps.isEmpty) {
+  LocalNotificationService.initialize();
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+  notificationsService.registerNotification();
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  notificationsService.onForegroundMessage();
+  notificationsService.onBackgroundMessage();
   }
   setupLocator();
   await Future.wait([
@@ -38,7 +39,6 @@ Future<void> servicesToInitializeBeforeAppStart() async {
 
 void main() async {
   await servicesToInitializeBeforeAppStart();
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
 }
 
@@ -48,7 +48,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeService = locator<ThemeService>();
-    notificationServicesAfterAppStart(context);
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
