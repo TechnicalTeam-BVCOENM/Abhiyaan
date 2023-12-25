@@ -118,7 +118,7 @@ class CommunityView extends StatelessWidget {
                                 padding: const EdgeInsets.all(10),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  "Scroll Up To Refresh",
+                                  "Scroll Down To Refresh",
                                   style: FontThemeClass().caption(context,
                                       color: context
                                           .colorScheme.secondarySectionColor,

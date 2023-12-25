@@ -95,24 +95,24 @@ class HomeViewModel extends BaseViewModel {
 
   List<QuickLinksModel> quickLinksList = [
     QuickLinksModel(
-      imageUrl: "assets/images/home/Rectangle 88.png",
+      imageUrl: "assets/images/home/college.png",
       title: "BVCOENM",
       url: 'https://www.bvcoenm.edu.in/',
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/home/Rectangle_89.png",
+      imageUrl: "assets/images/logo.png",
       title: "Abhiyaan",
       url: 'https://abhiyaan-2023.netlify.app/',
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/home/Rectangle 90.png",
+      imageUrl: "assets/images/home/Rectangle_89.png",
       title: "Sigma",
       view: const SocietiesView(),
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/home/Rectangle_91.png",
-      title: "Blogs",
-      url: 'https://www.dev.com/',
+      imageUrl: "assets/images/cesa.png",
+      title: "CESA",
+      url: 'https://www.clubcesa.tech/',
     ),
   ];
 
@@ -132,7 +132,7 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-      NotificationsService notificationService = NotificationsService();
+  NotificationsService notificationService = NotificationsService();
   Future<void> init(context) async {
     setBusy(true);
     try {
