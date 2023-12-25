@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:math';
 import 'package:http/http.dart' as http;
 import 'package:abhiyaan/file_exporter.dart';
@@ -98,6 +97,16 @@ class CommunityView extends StatelessWidget {
 
                             const SectionText(title: "Departmental Clubs"),
                             // Add Departmental Clubs here
+                            SizedBox(
+                              height: 120.h,
+                              width: double.infinity,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: model.departmentClubsData.length,
+                                  itemBuilder: (context, index) {
+                                    return  DepartmentClubs(data: model.departmentClubsData[index]);
+                                  }),
+                            ),
                             const SectionText(title: "Quote of the day"),
                             // Add Qoute of the day here
                             QuoteCard(
