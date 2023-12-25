@@ -68,7 +68,7 @@
             android:value="2" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="Abhiyaan App" />
+            android:value="Abhiyaan" />
         <meta-data
             android:name="com.dexterous.flutterlocalnotifications.default_small_icon"
             android:resource="@mipmap/ic_launcher" /> 

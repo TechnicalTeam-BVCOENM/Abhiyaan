@@ -1,29 +1,39 @@
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/auth_service.dart';
 import 'package:app_settings/app_settings.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationsService {
   final log = getLogger('NotificationsService');
-   late final FirebaseMessaging messaging = FirebaseMessaging.instance;
+  late final FirebaseMessaging messaging = FirebaseMessaging.instance;
 
+  void subscribeToTopic({required String topic}) async {
+    // Topics may be
+    // 1. All
+    // 2. Events
+    // 3. CollegeUpdates
+    // 4. Important
+    // 5. Students
+    await FirebaseMessaging.instance.subscribeToTopic(topic);
+    log.i('Subscribed to $topic');
+  }
 
   void registerNotification() async {
     // this is not required if you have already called it in main.dart
     // await Firebase.initializeApp();
-    // messaging = FirebaseMessaging.instance;
     messaging.getInitialMessage().then((message) {
       if (message != null) {
         handleNotificationRoute(message);
       }
     });
-
-    messaging.subscribeToTopic("all");
-
     NotificationSettings settings = await messaging.requestPermission(
-        alert: true, badge: true, provisional: false, sound: true);
+      alert: true,
+      badge: true,
+      provisional: false,
+      sound: true,
+    );
+    subscribeToTopic(topic: "all");
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       log.i('User granted permission');
@@ -43,7 +53,7 @@ class NotificationsService {
       String? token = await messaging.getToken();
       log.d('Token: $token');
       if (token != null) {
-       await authenticationService.saveDeviceToken(token);
+        await authenticationService.saveDeviceToken(token);
       } else {
         log.e('Unable to get token');
       }
@@ -53,14 +63,14 @@ class NotificationsService {
       return null;
     }
   }
-  
+
   void onTokenRefresh() {
     messaging.onTokenRefresh.listen((token) {
       log.i('Token Refreshed');
       getToken();
     });
   }
-  
+
   void onForegroundMessage() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       log.i('Got a message in the foreground!');
@@ -121,7 +131,7 @@ class LocalNotificationService {
 
       const notificationDetails = NotificationDetails(
         android: AndroidNotificationDetails(
-          "Abhiyaan App",
+          "Abhiyaan",
           'Abhiyaan App',
           channelDescription: "Abhiyaan Notification Channel",
           importance: Importance.max,
