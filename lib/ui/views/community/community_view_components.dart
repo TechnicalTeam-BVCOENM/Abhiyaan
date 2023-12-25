@@ -162,8 +162,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
 
 class DepartmentClubs extends StatelessWidget {
   final DepartmentalClubsData data;
-  const DepartmentClubs(
-      {super.key, required this.data});
+  const DepartmentClubs({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -182,7 +181,7 @@ class DepartmentClubs extends StatelessWidget {
               height: 80.h,
               width: 120.w,
               fit: BoxFit.fitHeight,
-            ).animate(delay: 500.ms).scale(),
+            ).animate(delay: 400.ms).fadeIn(duration: 900.ms),
             Container(
               height: 30.h,
               width: 120.w,
