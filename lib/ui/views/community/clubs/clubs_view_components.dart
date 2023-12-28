@@ -184,7 +184,7 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
                     color: context.colorScheme.secondarySectionColor),
               ),
             ),
-            28.verticalSpace,
+            15.verticalSpace,
           ])),
     );
   }
