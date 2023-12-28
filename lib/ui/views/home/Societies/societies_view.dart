@@ -33,10 +33,13 @@ class SocietiesView extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     itemCount: model.allsocietyCards.length,
                     itemBuilder: (context, index) {
-                      return SocietyCard(
-                        title: model.allsocietyCards[index].title,
-                        value: model.allsocietyCards[index].value,
-                        leading: model.allsocietyCards[index].leading,
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 12.0),
+                        child: SocietyCard(
+                          title: model.allsocietyCards[index].title,
+                          value: model.allsocietyCards[index].value,
+                          leading: model.allsocietyCards[index].leading,
+                        ),
                       );
                     }),
               ));

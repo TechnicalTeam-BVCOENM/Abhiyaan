@@ -20,8 +20,6 @@ class NotificationsService {
   }
 
   void registerNotification() async {
-    // this is not required if you have already called it in main.dart
-    // await Firebase.initializeApp();
     messaging.getInitialMessage().then((message) {
       if (message != null) {
         handleNotificationRoute(message);

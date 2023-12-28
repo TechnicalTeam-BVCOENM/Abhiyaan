@@ -20,22 +20,13 @@ class CommunityView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CommunityViewModel>.reactive(
         viewModelBuilder: () => CommunityViewModel(),
+        disposeViewModel: false,
         onViewModelReady: (viewModel) => viewModel.init(context),
         builder: (context, model, child) {
           FontThemeClass fontThemeClass = FontThemeClass();
           return model.isBusy
               ? const CommunityPageShimmerEffect()
               : Scaffold(
-                  appBar: AppBar(
-                    backgroundColor: context.colorScheme.backgroundColor,
-                    elevation: 0,
-                    title: Text(
-                      "Community",
-                      style: fontThemeClass.title(context,
-                          color: context.colorScheme.secondaryBlackColor),
-                    ),
-                    centerTitle: true,
-                  ),
                   backgroundColor: context.colorScheme.backgroundColor,
                   body: RefreshIndicator(
                     strokeWidth: 3.0,
@@ -52,6 +43,11 @@ class CommunityView extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                             Center(
+                               child: Text("Community",
+                                  style: fontThemeClass.title(context,
+                                                         color: context.colorScheme.secondaryBlackColor),),
+                             ),
                             const SectionText(title: "Blogs"),
                             // Add Blogs here
                             SizedBox(
@@ -96,11 +92,11 @@ class CommunityView extends StatelessWidget {
                             ),
 
                             const SectionText(title: "Departmental Clubs"),
-                            // Add Departmental Clubs here
                             SizedBox(
                               height: 120.h,
                               width: double.infinity,
                               child: ListView.builder(
+                                physics: const BouncingScrollPhysics(),
                                   scrollDirection: Axis.horizontal,
                                   itemCount: model.departmentClubsData.length,
                                   itemBuilder: (context, index) {
@@ -114,8 +110,8 @@ class CommunityView extends StatelessWidget {
                                     );
                                   }),
                             ),
+                            
                             const SectionText(title: "Quote of the day"),
-                            // Add Qoute of the day here
                             QuoteCard(
                               quote: model.affirmation,
                               autherName: model.authorName,

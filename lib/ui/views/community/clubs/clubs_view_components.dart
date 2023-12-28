@@ -45,11 +45,12 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
       child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18).r,
           child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start, 
+            children: [
             10.verticalSpace,
             ClipRRect(
-              borderRadius:
-                  BorderRadius.circular(16.0).r, // Adjust the radius as needed
+              borderRadius: BorderRadius.circular(16.0).r,
               child: Image.network(
                 clubImage,
                 fit: BoxFit.cover,
@@ -80,8 +81,9 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
                         child: SizedBox(
                           width: 130.w,
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              // Circular image
                               Container(
                                 width: 80.w,
                                 height: 80.h,
@@ -130,10 +132,12 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
               ),
             ),
             SizedBox(
-              height: 237.h,
+              height: 230.h,
               child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   itemCount: clubFest.length,
+                  shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return Card(
                       color: context.colorScheme.secondaryWhiteColor,
@@ -141,7 +145,7 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
                         borderRadius: BorderRadius.circular(18.0).r,
                       ),
                       elevation: 4.0,
-                      margin: const EdgeInsets.all(16.0).r,
+                      margin: const EdgeInsets.all(12.0).r,
                       clipBehavior: Clip.hardEdge,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -149,9 +153,9 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
                         children: [
                           Image.network(
                             clubFest[index].festImage,
-                            height: 151.h,
+                            height: 155.h,
                             width: 147.w,
-                            fit: BoxFit.fill,
+                            fit: BoxFit.fitWidth,
                           ).animate(delay: 400.ms).fadeIn(duration: 900.ms),
                           Container(
                             height: 50.h,

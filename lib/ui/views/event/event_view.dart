@@ -18,6 +18,7 @@ class EventView extends StatelessWidget {
     FontThemeClass fontTheme = FontThemeClass();
     return ViewModelBuilder<EventViewModel>.reactive(
       viewModelBuilder: () => EventViewModel(),
+      disposeViewModel: false,
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
         return Scaffold(
