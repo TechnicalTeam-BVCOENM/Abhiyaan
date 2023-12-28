@@ -21,6 +21,7 @@ class CommunityView extends StatelessWidget {
     return ViewModelBuilder<CommunityViewModel>.reactive(
         viewModelBuilder: () => CommunityViewModel(),
         onViewModelReady: (viewModel) => viewModel.init(context),
+        disposeViewModel: false,
         builder: (context, model, child) {
           FontThemeClass fontThemeClass = FontThemeClass();
           return model.isBusy
