@@ -8,7 +8,6 @@ class HomeViewModel extends BaseViewModel {
   final navigationService = locator<NavigationService>();
   FontThemeClass fontThemeClass = FontThemeClass();
   List<String> firstname = [];
-  List<Activity> get activityList => _activityList;
   List<Map<String, dynamic>> _highlights = [];
   List<Map<String, dynamic>> get highlights => _highlights;
   List<DepartmentUpdates> _departmentUpdates = [];
@@ -89,9 +88,6 @@ class HomeViewModel extends BaseViewModel {
     }
   }
 
-  void navigateToNotificationView() {
-    navigationService.navigateToNotificationView(id: '');
-  }
 
   List<QuickLinksModel> quickLinksList = [
     QuickLinksModel(
@@ -113,16 +109,6 @@ class HomeViewModel extends BaseViewModel {
       imageUrl: "assets/images/cesa.png",
       title: "CESA",
       url: 'https://www.clubcesa.tech/',
-    ),
-  ];
-
-  final List<Activity> _activityList = [
-    Activity(
-      startTime: const TimeOfDay(hour: 11, minute: 15),
-      endTime: const TimeOfDay(hour: 12, minute: 15),
-      subName: "Computer Network",
-      profName: "Prof. Aruna Kamble",
-      location: "Floor 1, Class Room 137",
     ),
   ];
 

@@ -24,10 +24,11 @@ class HomeView extends StatelessWidget {
     FontThemeClass fontTheme = FontThemeClass();
     return ViewModelBuilder<HomeViewModel>.reactive(
       viewModelBuilder: () => HomeViewModel(),
+      disposeViewModel: false,
       onViewModelReady: (viewModel) {
         viewModel.init(context).then(
               (value) => Future.delayed(
-                const Duration(milliseconds: 500),
+                const Duration(milliseconds: 200),
                 () => viewModel.afterInit(context),
               ),
             );
@@ -59,20 +60,6 @@ class HomeView extends StatelessWidget {
                                       fontWeight: FontWeight.w600),
                                 ).animate().fadeIn(),
                               ),
-                              IconButton(
-                                splashRadius: 30.sp,
-                                splashColor:
-                                    context.colorScheme.secondaryBlackColor,
-                                icon: ImageIcon(
-                                  const AssetImage(
-                                    "assets/images/home/Notification Bell.png",
-                                  ),
-                                  size: 24.sp,
-                                ),
-                                onPressed: () {
-                                  model.navigateToNotificationView();
-                                },
-                              )
                             ],
                           ),
                         ),

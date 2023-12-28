@@ -20,8 +20,6 @@ class NotificationsService {
   }
 
   void registerNotification() async {
-    // this is not required if you have already called it in main.dart
-    // await Firebase.initializeApp();
     messaging.getInitialMessage().then((message) {
       if (message != null) {
         handleNotificationRoute(message);
@@ -98,10 +96,6 @@ class NotificationsService {
 
   void handleNotificationRoute(RemoteMessage message) {
     final navigationService = locator<NavigationService>();
-
-    if (message.data['type'] == 'msg') {
-      navigationService.navigateToNotificationView(id: message.data['title']);
-    }
     if (message.data['type'] == 'eventPage') {
       navigationService.navigateToEventView();
     }
