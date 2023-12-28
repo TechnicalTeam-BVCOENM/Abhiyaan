@@ -10,7 +10,6 @@ import 'package:abhiyaan/ui/views/community/clubs/clubs_view.dart';
 import 'package:abhiyaan/ui/views/community/community_view.dart';
 import 'package:abhiyaan/ui/views/event/detailed_event/detailed_event_view.dart';
 import 'package:abhiyaan/ui/views/event/event_view.dart';
-import 'package:abhiyaan/ui/views/notifications/notification_view.dart';
 import 'package:abhiyaan/ui/views/profile/profile_view.dart';
 import 'package:abhiyaan/ui/views/profile/settings/settings_view.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -32,7 +31,6 @@ import 'package:abhiyaan/ui/views/splash/splash_view.dart';
     MaterialRoute(page: RegisterView),
     MaterialRoute(page: OnboardingView),
     MaterialRoute(page: CommunityView),
-    MaterialRoute(page: NotificationView),
     MaterialRoute(page: ClubsView),
   ],
   dependencies: [
