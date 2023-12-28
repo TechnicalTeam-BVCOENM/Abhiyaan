@@ -45,9 +45,7 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
       child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18).r,
           child:
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start, 
-            children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             10.verticalSpace,
             ClipRRect(
               borderRadius: BorderRadius.circular(16.0).r,
@@ -68,58 +66,61 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
             10.verticalSpace,
             SizedBox(
               height: 220.h,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: clubMembers.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      elevation: 4.0,
-                      margin: const EdgeInsets.all(16.0).r,
-                      color: context.colorScheme.secondaryWhiteColor,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0).r,
-                        child: SizedBox(
-                          width: 130.w,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 80.w,
-                                height: 80.h,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                        clubMembers[index].memberImage),
+              child: Center(
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: clubMembers.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        elevation: 4.0,
+                        margin: const EdgeInsets.all(16.0).r,
+                        color: context.colorScheme.secondaryWhiteColor,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0).r,
+                          child: SizedBox(
+                            width: 130.w,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 80.w,
+                                  height: 80.h,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          clubMembers[index].memberImage),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              // Name
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 8.0, bottom: 8.0)
-                                        .r,
-                                child: Text(
-                                  clubMembers[index].memberName,
+                                // Name
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                          top: 8.0, bottom: 8.0)
+                                      .r,
+                                  child: Text(
+                                    clubMembers[index].memberName,
+                                    style: fontTheme.body(context,
+                                        fontWeight: FontWeight.w500),
+                                  ).animate(delay: 500.ms).scale(),
+                                ),
+                                // Position
+                                Text(
+                                  clubMembers[index].memberPosition,
                                   style: fontTheme.body(context,
-                                      fontWeight: FontWeight.w500),
+                                      color: context
+                                          .colorScheme.secondarySectionColor),
                                 ).animate(delay: 500.ms).scale(),
-                              ),
-                              // Position
-                              Text(
-                                clubMembers[index].memberPosition,
-                                style: fontTheme.body(context,
-                                    color: context
-                                        .colorScheme.secondarySectionColor),
-                              ).animate(delay: 500.ms).scale(),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  }),
+                      );
+                    }),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 16.0).r,
