@@ -88,9 +88,6 @@ class HomeViewModel extends BaseViewModel {
     }
   }
 
-  void navigateToNotificationView() {
-    navigationService.navigateToNotificationView(id: '');
-  }
 
   List<QuickLinksModel> quickLinksList = [
     QuickLinksModel(

@@ -96,10 +96,6 @@ class NotificationsService {
 
   void handleNotificationRoute(RemoteMessage message) {
     final navigationService = locator<NavigationService>();
-
-    if (message.data['type'] == 'msg') {
-      navigationService.navigateToNotificationView(id: message.data['title']);
-    }
     if (message.data['type'] == 'eventPage') {
       navigationService.navigateToEventView();
     }
