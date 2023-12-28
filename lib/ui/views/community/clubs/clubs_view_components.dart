@@ -66,14 +66,14 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
             ),
             10.verticalSpace,
             SizedBox(
-              height: 230.h,
+              height: 220.h,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: clubMembers.length,
                   itemBuilder: (context, index) {
                     return Card(
                       elevation: 4.0,
-                      margin: const EdgeInsets.all(16.0),
+                      margin: const EdgeInsets.all(16.0).r,
                       color: context.colorScheme.secondaryWhiteColor,
                       child: Padding(
                         padding: const EdgeInsets.all(16.0).r,
@@ -83,8 +83,8 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
                             children: [
                               // Circular image
                               Container(
-                                width: 80.0,
-                                height: 80.0,
+                                width: 80.w,
+                                height: 80.h,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
@@ -120,7 +120,7 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
                   }),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 8.0),
+              padding: const EdgeInsets.only(left: 16.0).r,
               child: Text(
                 "Fests",
                 style: fontTheme.body(
@@ -130,14 +130,18 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
               ),
             ),
             SizedBox(
-              height: 210.h,
+              height: 237.h,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: clubFest.length,
                   itemBuilder: (context, index) {
                     return Card(
+                      color: context.colorScheme.secondaryWhiteColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0).r,
+                      ),
                       elevation: 4.0,
-                      margin: const EdgeInsets.all(16.0),
+                      margin: const EdgeInsets.all(16.0).r,
                       clipBehavior: Clip.hardEdge,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -145,18 +149,18 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
                         children: [
                           Image.network(
                             clubFest[index].festImage,
-                            height: 124.h,
-                            width: 140.w,
-                            fit: BoxFit.fitWidth,
+                            height: 151.h,
+                            width: 147.w,
+                            fit: BoxFit.fill,
                           ).animate(delay: 400.ms).fadeIn(duration: 900.ms),
                           Container(
                             height: 50.h,
-                            width: 140.w,
+                            width: 147.w,
                             decoration: BoxDecoration(
                               color: context.colorScheme.secondaryWhiteColor,
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0).r,
                               child: Center(
                                 child: Text(
                                   clubFest[index].festName,
