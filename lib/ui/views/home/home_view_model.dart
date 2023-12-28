@@ -100,7 +100,7 @@ class HomeViewModel extends BaseViewModel {
       url: 'https://www.bvcoenm.edu.in/',
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/logo.png",
+      imageUrl: "assets/images/abhiyaan_logo.png",
       title: "Abhiyaan",
       url: 'https://abhiyaan-2023.netlify.app/',
     ),
