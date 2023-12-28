@@ -101,12 +101,16 @@ class CommunityView extends StatelessWidget {
                               height: 120.h,
                               width: double.infinity,
                               child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: model.departmentClubsData.length,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: model.departmentClubsData.length,
                                   itemBuilder: (context, index) {
-                                    return  Padding(
-                                      padding: index ==0 ? const EdgeInsets.only(right: 0) : const EdgeInsets.only(left: 12.0) ,
-                                      child: DepartmentClubs(data: model.departmentClubsData[index]),
+                                    return Padding(
+                                      padding: index == 0
+                                          ? const EdgeInsets.only(right: 0)
+                                          : const EdgeInsets.only(left: 12.0),
+                                      child: DepartmentClubs(
+                                          data:
+                                              model.departmentClubsData[index]),
                                     );
                                   }),
                             ),

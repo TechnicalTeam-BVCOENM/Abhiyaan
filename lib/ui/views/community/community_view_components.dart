@@ -160,58 +160,65 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
 // 1. Use Card Component for each club
 // 2. Must be carousel like upcoming events
 
-class DepartmentClubs extends StatelessWidget {
+class DepartmentClubs extends ViewModelWidget<CommunityViewModel> {
   final DepartmentalClubsData data;
   const DepartmentClubs({super.key, required this.data});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, CommunityViewModel viewModel) {
     FontThemeClass fontThemeClass = FontThemeClass();
-    return SizedBox(
-      height: 120.h,
-      width: 120.w,
-      child: Card(
-        clipBehavior: Clip.hardEdge,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.network(
-              data.clubImage,
-              height: 80.h,
-              width: 120.w,
-              fit: BoxFit.fitHeight,
-            ).animate(delay: 400.ms).fadeIn(duration: 900.ms),
-            Container(
-              height: 30.h,
-              width: 120.w,
-              decoration: BoxDecoration(
-                color: context.colorScheme.secondaryWhiteColor,
-              ),
-              child: Row(
+    return Padding(
+        padding: const EdgeInsets.only(right: 10).r,
+        child: InkWell(
+          onTap: () {
+            viewModel.navigationService.navigateToClubsView(clubsData: data);
+          },
+          child: SizedBox(
+            height: 120.h,
+            width: 120.w,
+            child: Card(
+              clipBehavior: Clip.hardEdge,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.bookmark_rounded,
-                          color:
-                              context.colorScheme.primaryColor.withOpacity(0.8),
-                          size: 18.sp)
-                      .animate(delay: 500.ms)
-                      .scale(),
-                  2.horizontalSpace,
-                  Center(
-                    child: Text(
-                      data.clubShortHand,
-                      style: fontThemeClass.caption(context,
-                          fontWeight: FontWeight.w500),
-                    ).animate(delay: 500.ms).scale(),
+                  Image.network(
+                    data.clubImage,
+                    height: 80.h,
+                    width: 120.w,
+                    fit: BoxFit.fitHeight,
+                  ).animate(delay: 400.ms).fadeIn(duration: 900.ms),
+                  Container(
+                    height: 30.h,
+                    width: 120.w,
+                    decoration: BoxDecoration(
+                      color: context.colorScheme.secondaryWhiteColor,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.bookmark_rounded,
+                                color: context.colorScheme.primaryColor
+                                    .withOpacity(0.8),
+                                size: 18.sp)
+                            .animate(delay: 500.ms)
+                            .scale(),
+                        2.horizontalSpace,
+                        Center(
+                          child: Text(
+                            data.clubShortHand,
+                            style: fontThemeClass.caption(context,
+                                fontWeight: FontWeight.w500),
+                          ).animate(delay: 500.ms).scale(),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }
 
