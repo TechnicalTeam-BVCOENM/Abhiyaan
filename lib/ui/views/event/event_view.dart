@@ -79,9 +79,7 @@ class EventView extends StatelessWidget {
                                           height: 200.h,
                                           width: 200.w,
                                           fit: BoxFit.cover,
-                                          maxHeightDiskCache:
-                                              ResponsiveUtils.screenWidth(
-                                                  context),
+                                          maxHeightDiskCache: 400,
                                         ),
                                         Text(
                                           "No Ongoing Events",
@@ -93,6 +91,9 @@ class EventView extends StatelessWidget {
                                   ),
                                 ),
                         ),
+                        model.sponsors.isEmpty
+                            ? Container()
+                            :
                         const SectionText(title: "Sponsors"),
                         SizedBox(
                           height: 80.h,
@@ -105,7 +106,7 @@ class EventView extends StatelessWidget {
                               return Sponsors(model: model.sponsors[index]);
                             },
                           ),
-                        ),
+                        ).animate(delay: 200.ms).fadeIn(),
                         const SectionText(title: "Upcoming Events"),
                         CarouselSlider.builder(
                           itemCount: model.upcomingEvents.length,
@@ -148,7 +149,7 @@ class EventView extends StatelessWidget {
                           },
                         ),
                         4.verticalSpace,
-                      ],
+                      ].animate(delay: 500.ms , interval: 150.ms).fadeIn(),
                     ),
                   ),
                 ),

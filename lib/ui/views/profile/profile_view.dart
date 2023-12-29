@@ -118,27 +118,27 @@ class ProfileView extends StatelessWidget {
                           duration: 600.ms,
                         ),
                     const Expanded(child: Text("")),
-                    const Row(
+                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SocialLinks(
+                        const SocialLinks(
                           iconpath: AssetImagePath.instagramImg,
                           url: AssetUrls.instagramUrl,
                         ),
-                        SocialLinks(
+                        const SocialLinks(
                           iconpath: AssetImagePath.linkedinImg,
                           url: AssetUrls.linkedinUrl,
                         ),
-                        SocialLinks(
+                        const SocialLinks(
                           iconpath: AssetImagePath.xImg,
                           url: AssetUrls.twitterUrl,
                         ),
-                      ],
-                    ).animate(delay: 400.ms).fadeIn(
+                      ].animate(delay: 500.ms,interval: 200.ms).fadeIn(
                           delay: 100.ms,
                           curve: Curves.easeInOut,
                           duration: 600.ms,
                         ),
+                    ),
                     SizedBox(
                       height: 20.h,
                     )

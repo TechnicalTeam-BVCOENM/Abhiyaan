@@ -6,43 +6,61 @@ class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
   final FirestoreService _firestoreService = FirestoreService();
   final navigationService = locator<NavigationService>();
+  NotificationsService notificationService = NotificationsService();
   FontThemeClass fontThemeClass = FontThemeClass();
+  late bool isUserNew = LocalStorageService().read('isUserNew');
+
+
+  int _activeIndex = 0;
   List<String> firstname = [];
   List<Map<String, dynamic>> _highlights = [];
-  List<Map<String, dynamic>> get highlights => _highlights;
-  List<DepartmentUpdates> _departmentUpdates = [];
-  List<DepartmentUpdates> get departmentUpdates => _departmentUpdates;
-  late bool isUserNew = LocalStorageService().read('isUserNew');
+  List<DepartmentUpdates> _collegeUpdates = [];
   final List<CelebrationData> _celebrationData = [];
+  List<Map<String, dynamic>> get highlights => _highlights;
+  List<DepartmentUpdates> get collegeUpdates => _collegeUpdates;
   List<CelebrationData> get celebrationData => _celebrationData;
+  int get activeIndex => _activeIndex;
 
   bool toggleCelebrationShown() {
-    isCelebrationShown = true;
-    notifyListeners();
-    return isCelebrationShown;
+    try {
+      isCelebrationShown = true;
+      notifyListeners();
+      return isCelebrationShown;
+    } on Exception catch (e) {
+      log.e("Error in toggling celebration shown : ${e.toString()}");
+      return isCelebrationShown = false;
+    }
   }
 
-  Future getCelebrationData() async {
+  Future<void> getCelebrationData() async {
     try {
+      DateTime today = DateTime.now();
       List<CelebrationData> unsortedList =
           await _firestoreService.getCelebrationData();
 
       if (unsortedList.isEmpty) {
-        debugPrint("UnsortedList data is empty");
-        return [];
+        return;
+      } else if (unsortedList.length == 1 &&
+          unsortedList.first.startdate.toDate().year == today.year &&
+          unsortedList.first.startdate.toDate().month == today.month &&
+          unsortedList.first.startdate.toDate().day == today.day) {
+        _celebrationData.add(unsortedList.first);
+        notifyListeners();
       } else {
-        unsortedList.sort(
-            (a, b) => b.startdate.toDate().compareTo(a.startdate.toDate()));
-        if (unsortedList.first.startdate.toDate().isBefore(DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day))) {
-          return [];
-        } else {
-          _celebrationData.add(unsortedList.first);
+        List<CelebrationData> filteredList = unsortedList.where((item) {
+          return item.startdate.toDate().year == today.year &&
+              item.startdate.toDate().month == today.month &&
+              item.startdate.toDate().day == today.day;
+        }).toList();
+        if (filteredList.isEmpty) {
+          return;
+        } else if (filteredList.isNotEmpty) {
+          _celebrationData.add(filteredList.first);
           notifyListeners();
         }
       }
     } catch (e) {
-      debugPrint("Error in getting celebration data : ${e.toString()}");
+      log.e("Error in getting celebration data : ${e.toString()}");
     }
   }
 
@@ -53,41 +71,44 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<bool> toggleisNewUser() async {
-    isUserNew = false;
-    await _firestoreService
-        .updateUserStatus()
-        .then((value) => LocalStorageService().write('isUserNew', isUserNew));
-    notifyListeners();
-    return isUserNew;
-  }
-
-  void showWelcomeAndCelebration(BuildContext context) async {
-    if (isUserNew) {
-      debugPrint("User is new");
-      await showWelcomPopUp(context,
-              toggleisNewUser: toggleisNewUser, username: splitusername())
-          .then((value) async {
-        debugPrint("Showed welcome pop up");
-        Future.delayed(2.seconds, () async {
-          if (isCelebrationShown == false && _celebrationData.isNotEmpty) {
-            await showCelebrationModal(
-                context, _celebrationData[0], toggleCelebrationShown);
-            debugPrint("Showed Celebration pop up");
-          }
-        });
-      });
-    } else if (_celebrationData.isNotEmpty && isCelebrationShown == false) {
-      showCelebrationModal(
-          context, _celebrationData[0], toggleCelebrationShown);
-    } else if (_celebrationData.isNotEmpty && isCelebrationShown == true) {
-      debugPrint("Celebration is already shown");
-    } else if (celebrationData.isEmpty) {
-      debugPrint("Celebration data: ${celebrationData.length}");
-      debugPrint("User is not new");
-      debugPrint("Celebration data is empty & isCelebrationShown is true");
+    try {
+      isUserNew = false;
+      await _firestoreService
+          .updateUserStatus()
+          .then((value) => LocalStorageService().write('isUserNew', isUserNew));
+      notifyListeners();
+      return isUserNew;
+    } on Exception catch (e) {
+      log.e("Error in toggling user status : ${e.toString()}");
+      return isUserNew = true;
     }
   }
 
+  void showWelcomeAndCelebration(BuildContext context) async {
+    try {
+      if (isUserNew) {
+        await showWelcomPopUp(context,
+                toggleisNewUser: toggleisNewUser, username: splitusername())
+            .then((value) async {
+          Future.delayed(2.seconds, () async {
+            if (isCelebrationShown == false && _celebrationData.isNotEmpty) {
+              await showCelebrationModal(
+                  context, _celebrationData[0], toggleCelebrationShown);
+            }
+          });
+        });
+      } else if (_celebrationData.isNotEmpty && isCelebrationShown == false) {
+        showCelebrationModal(
+            context, _celebrationData[0], toggleCelebrationShown);
+      } else if (_celebrationData.isNotEmpty && isCelebrationShown == true) {
+        log.i("Celebration is already shown");
+      } else if (celebrationData.isEmpty) {
+        log.i("User is not new");
+      }
+    } on Exception catch (e) {
+      log.e("Error in showing welcome and celebration : ${e.toString()}");
+    }
+  }
 
   List<QuickLinksModel> quickLinksList = [
     QuickLinksModel(
@@ -113,34 +134,38 @@ class HomeViewModel extends BaseViewModel {
   ];
 
   Future<void> afterInit(context) async {
-    await getCelebrationData();
-    showWelcomeAndCelebration(context);
-    notifyListeners();
+    try {
+      await getCelebrationData();
+      showWelcomeAndCelebration(context);
+      notifyListeners();
+    } on Exception catch (e) {
+      log.e("Error in after init : ${e.toString()}");
+    }
   }
 
-  NotificationsService notificationService = NotificationsService();
   Future<void> init(context) async {
-    setBusy(true);
     try {
+      setBusy(true);
       _highlights = await _firestoreService.getHighlights();
-      _departmentUpdates = await _firestoreService.getCollegeUpdates();
+      _collegeUpdates = await _firestoreService.getCollegeUpdates();
+      notifyListeners();
+      setBusy(false);
+      await Future.delayed(2.seconds);
       notificationService.onTokenRefresh();
       notificationService.getToken();
-      notifyListeners();
-      debugPrint(
-          DateFormat("MMMM d").format((departmentUpdates[0].date).toDate()));
     } catch (e) {
       log.e(e);
+      showErrorMessage(context, "Error in getting data");
     }
-
-    setBusy(false);
   }
 
-  int _activeIndex = 0;
-  int get activeIndex => _activeIndex;
   void updateActiveIndex(int newIndex) {
-    _activeIndex = newIndex;
-    notifyListeners();
+    try {
+      _activeIndex = newIndex;
+      notifyListeners();
+    } on Exception catch (e) {
+      log.e("Error in updating active index : ${e.toString()}");
+    }
   }
 }
 
@@ -161,7 +186,7 @@ void handleQuickLinksNavigation(List model, int i) {
       debugPrint("Error");
     }
   } catch (e) {
-    debugPrint(e.toString());
+    debugPrint("Error in handling quick links navigation : ${e.toString()}");
   }
 }
 

@@ -6,18 +6,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lottie/lottie.dart';
 
 class AuthenticationService {
+  final log = getLogger('AuthService');
   List userTag = [
     "userMisNo",
     "userEmail",
     "userName",
-    "userPhone",
     "userCertifications",
     "isUserNew",
     "userProfile",
   ];
   final localStorageService = locator<LocalStorageService>();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final log = getLogger('AuthService');
   User? get currentUser => _firebaseAuth.currentUser;
 
   Future<void> signInWithEmailAndPassword(String email, String password) async {
@@ -26,11 +25,8 @@ class AuthenticationService {
         email: email,
         password: password,
       );
-
-      log.i('Auth success');
     } on FirebaseAuthException catch (e) {
-      log.i(e);
-      rethrow;
+      log.e('Auth error: ${e.message}');
     }
   }
 
@@ -43,25 +39,22 @@ class AuthenticationService {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
-        showErrorMessage(context, "email-already-in-use");
+        showErrorMessage(context, "Email already in use");
       } else if (e.code == 'weak-password') {
-        showErrorMessage(context, "weak-password");
+        showErrorMessage(context, "Password is too weak");
       }
       NavigationService().back();
     }
   }
 
-  registerWithEmailAndPassword(String email, String password) {}
-
   Future<bool> signOut() async {
     bool firebaseSignOutSuccess = false;
-
     try {
       await _firebaseAuth.signOut();
       firebaseSignOutSuccess = true;
       return firebaseSignOutSuccess;
     } catch (error) {
-      log.i("Firebase Sign Out Error: $error");
+      log.e("Firebase Sign Out Error: ${error.toString()}");
       return firebaseSignOutSuccess;
     }
   }
@@ -71,48 +64,13 @@ class AuthenticationService {
       Map<String, dynamic>? userData = await FirestoreService().getUserData();
       for (var i = 0; i < userTag.length; i++) {
         if (userData?[userTag[i]] == null) {
-          await localStorageService.write(userTag[i], "feed me data");
+          await localStorageService.write(userTag[i], "Not Available");
         } else {
           await localStorageService.write(userTag[i], userData?[userTag[i]]);
-          log.i(localStorageService..read('${userTag[i]}'));
         }
       }
-
-      await misBreakdown();
     } catch (e) {
-      log.i(e);
-      rethrow;
-    }
-  }
-
-  Future<void> misBreakdown() async {
-    try {
-      final localStorageService = locator<LocalStorageService>();
-      int misNo = int.parse(localStorageService.read('userMisNo'));
-      int admissionYear = (misNo ~/ 1000000); // 21
-      int departmentCode = ((misNo % 1000000) ~/ 10000); // 12
-      int division = ((misNo % 10000) ~/ 1000); // 1
-      int rollNo = (misNo % 1000); // 17
-      await localStorageService.write('addmissionYear', admissionYear);
-      await localStorageService.write('departmentCode', departmentCode);
-      await localStorageService.write('division', division);
-      await localStorageService.write('rollNo', rollNo);
-      await departmentCodeDatabase(departmentCode);
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-  }
-
-  Future<void> departmentCodeDatabase(int code) async {
-    final localStorageService = locator<LocalStorageService>();
-    try {
-      if (code == 12) {
-        String departmentCodeDatabase = '${code}_computer';
-        await localStorageService.write(
-            'departmentCodeDatabase', departmentCodeDatabase);
-      }
-    } catch (e) {
-      debugPrint(e.toString());
+      log.e("Error storing user data locally: ${e.toString()}");
     }
   }
 
@@ -151,22 +109,25 @@ class AuthenticationService {
         }
       }
     } catch (e) {
-      debugPrint('Error saving  token to database: ${e.toString()}');
+      log.e('Error saving  token to database: ${e.toString()}');
     }
   }
 
   void showLoadingOverlay(BuildContext context) async {
     showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (context) {
-          return Center(
-              child: SizedBox(
-                  width: 250,
-                  child: LottieBuilder.asset(
-                    repeat: true,
-                    AnimationAssets.handLoading,
-                  )));
-        });
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return Center(
+          child: SizedBox(
+            width: 250,
+            child: LottieBuilder.asset(
+              repeat: true,
+              AnimationAssets.handLoading,
+            ),
+          ),
+        );
+      },
+    );
   }
 }

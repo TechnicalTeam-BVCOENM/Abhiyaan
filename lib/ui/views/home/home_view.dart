@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:abhiyaan/services/notification_service.dart';
+import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:abhiyaan/ui/views/home/celebration/celebration_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,7 +11,6 @@ import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:abhiyaan/ui/views/home/Societies/societies_view.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:intl/intl.dart';
 import 'package:abhiyaan/ui/common/common_component_model.dart';
 import 'package:lottie/lottie.dart';
 part 'home_view_model.dart';
@@ -70,29 +70,67 @@ class HomeView extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                CarouselSlider.builder(
-                                  itemCount: model.highlights.length,
-                                  itemBuilder: (context, index, realIndex) {
-                                    return CarouselUtils.buildImage(
-                                      context,
-                                      model.highlights[index]['imageUrl'],
-                                      model._activeIndex,
-                                    );
-                                  },
-                                  options: CarouselOptions(
-                                    height: 230.h,
-                                    onPageChanged: (index, reason) =>
-                                        model.updateActiveIndex(index),
-                                    autoPlay: true,
-                                    autoPlayInterval: 4.seconds,
-                                    viewportFraction: 1,
-                                    enableInfiniteScroll: true,
-                                    autoPlayAnimationDuration: 1.seconds,
-                                    autoPlayCurve: Curves.easeInOut,
-                                    enlargeCenterPage: true,
-                                  ),
-                                ),
-                                SizedBox(height: 20.h),
+                                model._highlights.isEmpty
+                                    ? SizedBox(
+                                        height: 230.h,
+                                        child: Card(
+                                          margin:
+                                              const EdgeInsets.only(bottom: 8)
+                                                  .r,
+                                          elevation: 0,
+                                          clipBehavior: Clip.hardEdge,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(16).r,
+                                            side: BorderSide(
+                                              color: context.colorScheme
+                                                  .secondaryLPurpleColor,
+                                              width: 1.0,
+                                            ),
+                                          ),
+                                          child: Center(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Icon(
+                                                  Icons.info_rounded,
+                                                  color: context.colorScheme
+                                                      .secondaryBlackColor,
+                                                ),
+                                                10.horizontalSpace,
+                                                Text("No updates yet",
+                                                    style: fontTheme
+                                                        .body(context)),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : CarouselSlider.builder(
+                                        itemCount: model.highlights.length,
+                                        itemBuilder:
+                                            (context, index, realIndex) {
+                                          return CarouselUtils.buildImage(
+                                            context,
+                                            model.highlights[index]['imageUrl'],
+                                            model._activeIndex,
+                                          );
+                                        },
+                                        options: CarouselOptions(
+                                          height: 230.h,
+                                          onPageChanged: (index, reason) =>
+                                              model.updateActiveIndex(index),
+                                          autoPlay: true,
+                                          autoPlayInterval: 4.seconds,
+                                          viewportFraction: 1,
+                                          enableInfiniteScroll: true,
+                                          autoPlayAnimationDuration: 1.seconds,
+                                          autoPlayCurve: Curves.easeInOut,
+                                          enlargeCenterPage: true,
+                                        ),
+                                      ),
+                                20.verticalSpace,
                                 CarouselUtils.buildIndicator(
                                   context,
                                   model.activeIndex,
@@ -112,7 +150,7 @@ class HomeView extends StatelessWidget {
                         const SectionText(
                           title: "College Updates",
                         ),
-                        model.departmentUpdates.isEmpty
+                        model.collegeUpdates.isEmpty
                             ? SizedBox(
                                 height: 120.h,
                                 child: Card(
@@ -146,10 +184,10 @@ class HomeView extends StatelessWidget {
                               )
                             : ListView.builder(
                                 itemBuilder: (context, index) {
-                                  return updatesCard(model.departmentUpdates,
+                                  return updatesCard(model.collegeUpdates,
                                       index, context, model);
                                 },
-                                itemCount: model.departmentUpdates.length,
+                                itemCount: model.collegeUpdates.length,
                                 shrinkWrap: true,
                                 physics: const BouncingScrollPhysics(),
                               ).animate().fadeIn(),
