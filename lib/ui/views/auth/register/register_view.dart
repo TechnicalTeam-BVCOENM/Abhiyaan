@@ -134,6 +134,7 @@ class RegisterView extends StatelessWidget {
                           hintStyle: model.fontTheme.caption(
                             context,
                             color: context.colorScheme.secondarySectionColor,
+                            fontWeight: FontWeight.w500
                           ),
                         ),
                       ).animate(delay: 500.ms).fadeIn(
@@ -177,6 +178,7 @@ class RegisterView extends StatelessWidget {
                           hintStyle: model.fontTheme.caption(
                             context,
                             color: context.colorScheme.secondarySectionColor,
+                            fontWeight: FontWeight.w500
                           ),
                         ),
                       ).animate(delay: 600.ms).fadeIn(

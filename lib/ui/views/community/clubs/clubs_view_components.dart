@@ -133,7 +133,7 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
               ),
             ),
             SizedBox(
-              height: 230.h,
+              height: 229.h,
               child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
@@ -155,12 +155,12 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
                           Image.network(
                             clubFest[index].festImage,
                             height: 155.h,
-                            width: 147.w,
-                            fit: BoxFit.fitWidth,
+                            width: 150.w,
+                            fit: BoxFit.fill,
                           ).animate(delay: 400.ms).fadeIn(duration: 900.ms),
                           Container(
                             height: 50.h,
-                            width: 147.w,
+                            width: 150.w,
                             decoration: BoxDecoration(
                               color: context.colorScheme.secondaryWhiteColor,
                             ),
