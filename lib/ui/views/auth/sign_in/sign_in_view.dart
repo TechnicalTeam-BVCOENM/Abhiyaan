@@ -196,6 +196,7 @@ class SignInView extends StatelessWidget {
                               curve: Curves.easeInOut,
                               duration: 500.ms,
                             ),
+                              const Spacer(),
                         Padding(
                           padding: EdgeInsetsDirectional.only(top: 10.r),
                           child: InkWell(
@@ -223,7 +224,7 @@ class SignInView extends StatelessWidget {
                               curve: Curves.easeInOut,
                               duration: 500.ms,
                             ),
-                        const Spacer(),
+                          10.verticalSpace,
                         Container(
                           alignment: Alignment.center,
                           child: Text('Abhiyaan v1.0.0',
