@@ -19,16 +19,7 @@ class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   User? get currentUser => _firebaseAuth.currentUser;
 
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
-    try {
-      await _firebaseAuth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } on FirebaseAuthException catch (e) {
-      log.e('Auth error: ${e.message}');
-    }
-  }
+ 
 
   Future<void> signUpWithEmailAndPassword(
       context, String email, String password) async {

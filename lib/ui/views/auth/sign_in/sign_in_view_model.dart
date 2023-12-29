@@ -2,6 +2,7 @@ part of 'sign_in_view.dart';
 
 class SignInViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final _authenticationService = locator<AuthenticationService>();
   bool isloading = false;
   final log = getLogger('AuthViewModel');
@@ -34,25 +35,31 @@ class SignInViewModel extends BaseViewModel {
   Future<void> login(String email, String password, context) async {
     setBusy(true);
 
-    try {
-      // Show a loading indicator over your UI
-      AuthenticationService().showLoadingOverlay(context);
-      await _authenticationService.signInWithEmailAndPassword(email, password);
-      await AuthenticationService().storeUserDataLocally();
-      NavigationService().back();
-      showSuccessMessage(
-        context,
-        "Login successful",
-      );
-      _navigationService.replaceWith(Routes.bottomNavView);
-    } on FirebaseException {
-      isPasswordValid = false;
-      isEmailIdValid = false;
-      NavigationService().back();
-      notifyListeners();
-      // Handle Firebase exceptions here
+    if (email != "" && password != "") {
+      try {
+        // Show a loading indicator over your UI
+        _authenticationService.showLoadingOverlay(context);
+        await _firebaseAuth.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        await _authenticationService.storeUserDataLocally();
+        _navigationService.back();
+        showSuccessMessage(
+          context,
+          "Login successful",
+        );
+        await _navigationService.replaceWith(Routes.bottomNavView);
+      } on FirebaseAuthException catch (e) {
+        isPasswordValid = false;
+        isEmailIdValid = false;
+        _navigationService.back();
+        showErrorMessage(context, e.code);
+        notifyListeners();
+      }
+    } else {
+      showErrorMessage(context, "Email or Password is empty");
     }
-
     setBusy(false);
   }
 
