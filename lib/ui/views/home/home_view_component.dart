@@ -452,7 +452,7 @@ class ShowAppExitPopUp {
                   style: fontThemeClass.title2(context,
                       fontWeight: FontWeight.w700,
                       color: context.colorScheme.secondaryBlackColor),
-                ),
+                ).animate(delay: 300.ms).fadeIn(duration: 800.ms),
                 2.verticalSpace,
                  Padding(
                    padding: const EdgeInsets.all(10.0).r,
@@ -460,7 +460,7 @@ class ShowAppExitPopUp {
                    child: Text("Stay tuned for more updates and events. Your presence makes our community special.\nHave a great day and see you next time! 👋🌟",
                    textAlign: TextAlign.center,
                      style: fontThemeClass.caption(context , color: context.colorScheme.secondaryBlackColor.withOpacity(0.8)) ,
-                                   ),
+                                   ).animate(delay: 300.ms).fadeIn(duration: 800.ms),
                  ),
                 4.verticalSpace,
                 Row(
@@ -513,7 +513,7 @@ class ShowAppExitPopUp {
                         ),
                       ),
                     ),
-                  ],
+                  ].animate(delay: 300.ms , interval: 200.ms).fadeIn(curve: Curves.easeInCubic),
                 ),
               ],
             ),
