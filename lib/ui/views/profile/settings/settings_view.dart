@@ -4,6 +4,7 @@ import 'package:abhiyaan/theme/theme_service.dart';
 import 'package:abhiyaan/ui/common/common_component_model.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 part 'settings_view_model.dart';
 part 'settings_view_components.dart';
 
@@ -96,7 +97,7 @@ class SettingsView extends StatelessWidget {
                             ),
                             leadingIcon: model.settings[4].leading),
                       )
-                    ],
+                    ].animate(delay: 200.ms , interval: 200.ms).fadeIn(duration: 800.ms,curve: Curves.easeInOut),
                   ),
                   const Expanded(
                     child: Text(''),

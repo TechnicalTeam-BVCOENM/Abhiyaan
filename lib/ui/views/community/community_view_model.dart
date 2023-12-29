@@ -8,8 +8,8 @@ class CommunityViewModel extends BaseViewModel {
   LocalStorageService localStorageService = locator<LocalStorageService>();
   String affirmation = "";
   String authorName = "";
-
-
+  int _currentBlogIndex = 0;
+  int get currentBlogIndex => _currentBlogIndex;
   final List<CommunityBlogsData> _blogsData = [];
   List<CommunityBlogsData> get blogsData => _blogsData;
   set blogsData(List<CommunityBlogsData> blogsData) {
@@ -17,68 +17,82 @@ class CommunityViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<List<CommunityBlogsData>> getBlogData() async {
-    blogsData = await firestoreService.getBlogs();
-    return blogsData;
-  }
-
-
-   final List<DepartmentalClubsData> _departmentClubsData = [];
+  final List<DepartmentalClubsData> _departmentClubsData = [];
   List<DepartmentalClubsData> get departmentClubsData => _departmentClubsData;
   set departmentClubsData(List<DepartmentalClubsData> departmentClubsData) {
     _departmentClubsData.addAll(departmentClubsData);
     notifyListeners();
   }
 
-  Future<List<DepartmentalClubsData>> getDepartmentClubsData() async {
-    departmentClubsData = await firestoreService.getDepartmentClubsData();
-    return departmentClubsData;
+  Future<List<CommunityBlogsData>> getBlogData() async {
+    try {
+      blogsData = await firestoreService.getBlogs();
+      return blogsData;
+    } on Exception catch (e) {
+      log.e("Error in fetching blogs: ${e.toString()}");
+      return [];
+    }
   }
 
+  Future<List<DepartmentalClubsData>> getDepartmentClubsData() async {
+    try {
+      departmentClubsData = await firestoreService.getDepartmentClubsData();
+      return departmentClubsData;
+    } on Exception catch (e) {
+      log.e("Error in fetching department clubs data: ${e.toString()}");
+      return [];
+    }
+  }
 
-
-
-  int _currentBlogIndex = 0;
-  int get currentBlogIndex => _currentBlogIndex;
   void updateBlogIndex(int newIndex) {
-    _currentBlogIndex = newIndex;
-    notifyListeners();
+    try {
+      _currentBlogIndex = newIndex;
+      notifyListeners();
+    } on Exception catch (e) {
+      log.e("Error in updating blog index: ${e.toString()}");
+    }
   }
 
   Stream<int> getLikesStream(String id) {
-    AuthenticationService authenticationService =
-        locator<AuthenticationService>();
-    final userId = authenticationService.currentUser!.uid;
-    return _firestore
-        .collection('Community')
-        .doc("data")
-        .collection("blogs")
-        .doc(id)
-        .snapshots()
-        .map((snapshot) {
-      final likesArray = snapshot.data()?["likes"];
-      localStorageService.write("isLiked_$id", likesArray.contains(userId));
-      log.i(likesArray);
-      return likesArray.length;
-    });
+    try {
+      AuthenticationService authenticationService =
+          locator<AuthenticationService>();
+      final userId = authenticationService.currentUser!.uid;
+      return _firestore
+          .collection('Community')
+          .doc("data")
+          .collection("blogs")
+          .doc(id)
+          .snapshots()
+          .map((snapshot) {
+        final likesArray = snapshot.data()?["likes"];
+        localStorageService.write("isLiked_$id", likesArray.contains(userId));
+        return likesArray.length;
+      });
+    } on Exception catch (e) {
+      log.e("Error in getting likes stream: ${e.toString()}");
+      return const Stream.empty();
+    }
   }
 
   Future<void> fetchAffirmation() async {
-    Random random = Random();
-    int randomNumber = random.nextInt(15);
-    List<String> author;
-    var response = await http.get(Uri.parse('https://type.fit/api/quotes'));
+    try {
+      Random random = Random();
+      int randomNumber = random.nextInt(15);
+      List<String> author;
+      var response = await http.get(Uri.parse('https://type.fit/api/quotes'));
 
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body.toString());
-      affirmation = data[randomNumber]['text'];
-      authorName =
-          data[randomNumber]['author']; // Corrected 'author' to 'author'
-      author = authorName.split(",");
-      authorName = author[0];
-    } else {
-      // Handle error cases here
-      debugPrint('Failed to fetch affirmation');
+      if (response.statusCode != 200) {
+        return;
+      } else if (response.statusCode == 200) {
+        final data = jsonDecode(response.body.toString());
+        affirmation = data[randomNumber]['text'];
+        authorName = data[randomNumber]['author'];
+        author = authorName.split(",");
+        authorName = author[0];
+      }
+    } on Exception catch (e) {
+      log.e("Error in fetching affirmation: ${e.toString()}");
     }
   }
 
@@ -89,7 +103,7 @@ class CommunityViewModel extends BaseViewModel {
     final userId = authenticationService.currentUser!.uid;
     try {
       if (currentBlog == true) {
-        log.i("Already liked");
+        log.d("Already liked");
         return;
       }
       await _firestore
@@ -101,27 +115,29 @@ class CommunityViewModel extends BaseViewModel {
         "likes": FieldValue.arrayUnion([userId]),
       }).then((value) => log.i("Updated likes"));
     } catch (e) {
-      log.i(e.toString());
+      log.e("Error in updating likes: ${e.toString()}");
     }
   }
 
   Future<void> init(context) async {
-    setBusy(true);
+    // setBusy(true);
     try {
-      await getBlogData();
-      await fetchAffirmation();
+      await runBusyFuture(getBlogData());
       await getDepartmentClubsData();
+      notifyListeners();
+      await fetchAffirmation();
       notifyListeners();
     } catch (e) {
       log.e(e.toString());
     }
-    setBusy(false);
+    // setBusy(false);
   }
 }
 
 class CommunityBlogsData {
   final String documentId;
   final String author;
+  final String authorImageUrl;
   // final String content;
   final String title;
   final String imageUrl;
@@ -131,6 +147,7 @@ class CommunityBlogsData {
   CommunityBlogsData({
     required this.documentId,
     required this.author,
+    required this.authorImageUrl,
     // required this.content,
     required this.title,
     required this.imageUrl,
@@ -139,14 +156,13 @@ class CommunityBlogsData {
   });
 }
 
-
 class DepartmentalClubsData {
-  final String clubName; 
+  final String clubName;
   final String clubImage;
-  final String clubShortHand; 
-  final List<FestInfo> clubFest; 
-  final List<ClubMemberInfo> clubMembers; 
-  // final String clubLink; 
+  final String clubShortHand;
+  final List<FestInfo> clubFest;
+  final List<ClubMemberInfo> clubMembers;
+  // final String clubLink;
 
   DepartmentalClubsData({
     required this.clubName,

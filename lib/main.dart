@@ -9,10 +9,8 @@ import 'package:flutter/services.dart';
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   if (Firebase.apps.isNotEmpty) {
-    return;  
+    return;
   }
-  debugPrint('Handling a background message ${message.data.toString()}');
-  debugPrint('Handling a background message ${message.notification!.title}');
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -21,15 +19,15 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 Future<void> servicesToInitializeBeforeAppStart() async {
   WidgetsFlutterBinding.ensureInitialized();
   NotificationsService notificationsService = NotificationsService();
-  if (Firebase.apps.isEmpty) {
   LocalNotificationService.initialize();
+  if (Firebase.apps.isEmpty) {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-  notificationsService.registerNotification();
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-  notificationsService.onForegroundMessage();
-  notificationsService.onBackgroundMessage();
+    notificationsService.registerNotification();
+    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    notificationsService.onForegroundMessage();
+    notificationsService.onBackgroundMessage();
   }
   setupLocator();
   await Future.wait([

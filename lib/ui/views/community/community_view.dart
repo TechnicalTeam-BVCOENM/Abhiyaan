@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:http/http.dart' as http;
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/auth_service.dart';
@@ -32,9 +33,7 @@ class CommunityView extends StatelessWidget {
                     strokeWidth: 3.0,
                     onRefresh: () async {
                       await Future.delayed(const Duration(seconds: 1));
-                      model.setBusy(true);
                       await model.fetchAffirmation();
-                      model.setBusy(false);
                     },
                     child: SingleChildScrollView(
                       physics: const AlwaysScrollableScrollPhysics(),
@@ -43,11 +42,14 @@ class CommunityView extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Center(
-                               child: Text("Community",
-                                  style: fontThemeClass.title(context,
-                                                         color: context.colorScheme.secondaryBlackColor),),
-                             ),
+                            Center(
+                              child: Text(
+                                "Community",
+                                style: fontThemeClass.title(context,
+                                    color: context
+                                        .colorScheme.secondaryBlackColor),
+                              ),
+                            ),
                             const SectionText(title: "Blogs"),
                             // Add Blogs here
                             SizedBox(
@@ -90,27 +92,29 @@ class CommunityView extends StatelessWidget {
                                 ),
                               ),
                             ),
-
-                            const SectionText(title: "Departmental Clubs"),
+                            model.departmentClubsData.isEmpty
+                                ? Container()
+                                :
+                            const SectionText(title: "Departmental Clubs").animate(delay: 250.ms).fadeIn( curve: Curves.easeInOutCubic, duration: 600.ms),
                             SizedBox(
                               height: 120.h,
                               width: double.infinity,
                               child: ListView.builder(
                                 physics: const BouncingScrollPhysics(),
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: model.departmentClubsData.length,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: index == 0
-                                          ? const EdgeInsets.only(right: 0)
-                                          : const EdgeInsets.only(left: 12.0),
-                                      child: DepartmentClubs(
-                                          data:
-                                              model.departmentClubsData[index]),
-                                    );
-                                  }),
-                            ),
-                            
+                                scrollDirection: Axis.horizontal,
+                                itemCount: model.departmentClubsData.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: index == 0
+                                        ? const EdgeInsets.only(right: 0).r
+                                        : const EdgeInsets.only(left: 8.0).r,
+                                    child: DepartmentClubs(
+                                        data: model.departmentClubsData[index]),
+                                  );
+                                },
+                              ),
+                            ).animate(delay: 200.ms).fadeIn(curve: Curves.easeInOutCubic, duration: 600.ms),
+
                             const SectionText(title: "Quote of the day"),
                             QuoteCard(
                               quote: model.affirmation,
@@ -127,7 +131,7 @@ class CommunityView extends StatelessWidget {
                                           .colorScheme.secondarySectionColor,
                                       fontWeight: FontWeight.w600),
                                 )),
-                          ],
+                          ].animate(delay: 500.ms , interval: 150.ms).fadeIn(),
                         ),
                       ),
                     ),

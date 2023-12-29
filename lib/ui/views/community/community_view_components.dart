@@ -19,12 +19,6 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
             ? "Posted Yesterday"
             : "Posted ${currentDate.difference(postDate).inDays} days ago";
 
-    // Future<bool> toggleLike() async {
-    //   isLiked = await viewModel.isUserAlreadyLikedPost(blogsData.documentId);
-    //   viewModel.notifyListeners();
-    //   return isLiked;
-    // }
-
     return StreamBuilder<int>(
         stream: viewModel.getLikesStream(blogsData.documentId),
         builder: (context, snapshot) {
@@ -58,11 +52,18 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                     children: [
                       //Author image
                       ClipOval(
-                        child: Image.network(
-                          "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1703289600&semt=ais",
-                          width: 34.w,
-                          height: 34.h,
-                        ),
+                        child: blogsData.authorImageUrl != ''
+                            ? CachedNetworkImage(
+                                imageUrl: blogsData.authorImageUrl,
+                                width: 34.w,
+                                height: 34.h,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.asset(
+                                AssetImagePath.emptyPerson,
+                                width: 34.w,
+                                height: 34.h,
+                              ),
                       ).animate(delay: 500.ms).fadeIn(delay: 10.ms),
                       //Author name
                       8.horizontalSpace,
@@ -175,12 +176,25 @@ class DepartmentClubs extends ViewModelWidget<CommunityViewModel> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.network(
-                    data.clubImage,
+                  CachedNetworkImage(
+                    imageUrl: data.clubImage,
                     height: 80.h,
                     width: 120.w,
                     fit: BoxFit.fitHeight,
-                  ).animate(delay: 400.ms).fadeIn(duration: 900.ms),
+                    maxHeightDiskCache: 200,
+                    imageBuilder: (context, imageProvider) {
+                      return Container(
+                        height: 80.h,
+                        width: 120.w,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                   Container(
                     height: 30.h,
                     width: 120.w,
@@ -191,30 +205,27 @@ class DepartmentClubs extends ViewModelWidget<CommunityViewModel> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.bookmark_rounded,
-                                color: context.colorScheme.primaryColor
-                                    .withOpacity(0.8),
-                                size: 18.sp)
-                            .animate(delay: 500.ms)
-                            .scale(),
-                        2.horizontalSpace,
+                            color: context.colorScheme.primaryColor
+                                .withOpacity(0.8),
+                            size: 18.sp),
+                        12.horizontalSpace,
                         Center(
                           child: Text(
                             data.clubShortHand,
                             style: fontThemeClass.caption(context,
                                 fontWeight: FontWeight.w500),
-                          ).animate(delay: 500.ms).scale(),
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ],
+                ].animate(delay: 300.ms).fadeIn(),
               ),
             ),
           ),
         ));
   }
 }
-
 
 class QuoteCard extends StatelessWidget {
   final String? quote;
@@ -261,7 +272,9 @@ class QuoteCard extends StatelessWidget {
               ),
             ).animate(delay: 600.ms).scale(),
             Text(
-              '" $quote "',
+              quote == ''
+                  ? "Education for us is not a matter of degree, but of life."
+                  : ' $quote ',
               style: fontThemeClass.paragraph(context,
                   fontWeight: FontWeight.w700,
                   color: context.colorScheme.signInTextColor),
@@ -271,7 +284,7 @@ class QuoteCard extends StatelessWidget {
             Container(
               alignment: Alignment.centerRight,
               child: Text(
-                "- $autherName", // Replace 'Author Name' with the actual author's name
+                autherName == '' ? "- John Ruskin" : "- $autherName",
                 style: fontThemeClass.body(context,
                     color: context.colorScheme.signInTextColor,
                     fontWeight: FontWeight.w400),
@@ -286,7 +299,6 @@ class QuoteCard extends StatelessWidget {
   }
 }
 
-// Community page Shimmer Effect
 class CommunityPageShimmerEffect extends StatelessWidget {
   const CommunityPageShimmerEffect({super.key});
 

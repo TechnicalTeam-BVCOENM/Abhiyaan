@@ -34,19 +34,17 @@ class EventViewModel extends BaseViewModel {
   }
 
   Future<void> loadData() async {
-    setBusy(true);
+
     try {
-      _sponsors = await _firestoreService.getAllSponsors();
-      _events = await _firestoreService.getAllEvents();
-      getTodaysEvent();
+      _events = await runBusyFuture(_firestoreService.getAllEvents());
       getRemainingEvents();
-      log.i(_events[0].title);
+      notifyListeners();
+      getTodaysEvent();
+      _sponsors = await _firestoreService.getAllSponsors();
       notifyListeners();
     } catch (e) {
-      log.e(e);
+      log.e("Error Loading Sponsors: ${e.toString()}");
     }
-    setBusy(false);
-    log.i("Sponsors Loaded");
   }
 
   // Methods
@@ -98,13 +96,9 @@ class EventViewModel extends BaseViewModel {
           (year == now.year &&
               (month > now.month || (month == now.month && day > now.day)))) {
         upcomingEvents.add(event);
-        for (EventModel event in upcomingEvents) {
-          log.i(event.title);
-        }
         notifyListeners();
       }
     }
-    //Doc:  This is sorting according to year, month and date
     upcomingEvents.sort(
       (a, b) {
         int yearComparison =
