@@ -417,13 +417,15 @@ Future showWelcomPopUp(BuildContext context,
 
 class ShowAppExitPopUp {
   static Future showAppExitPopUp(BuildContext context) {
+  FontThemeClass fontThemeClass = FontThemeClass();
+    
     return showModalBottomSheet(
         useSafeArea: true,
         constraints: BoxConstraints(
-          maxHeight: 300.h,
+          maxHeight: 350.h,
           minWidth: double.infinity,
         ),
-        backgroundColor: context.colorScheme.secondaryWhiteColor,
+        backgroundColor: context.colorScheme.backgroundColor,
         clipBehavior: Clip.hardEdge,
         elevation: 0,
         showDragHandle: true,
@@ -433,7 +435,7 @@ class ShowAppExitPopUp {
             width: double.infinity,
             padding: const EdgeInsets.symmetric( vertical: 20 , horizontal: 10).r,
             decoration: BoxDecoration(
-              color: context.colorScheme.secondaryWhiteColor,
+              color: context.colorScheme.backgroundColor,
               borderRadius: BorderRadius.circular(32).r,
             ),
             child: Column(
@@ -447,11 +449,20 @@ class ShowAppExitPopUp {
                 12.verticalSpace,
                 Text(
                   "Are you sure you want to exit ?",
-                  style: FontThemeClass().title2(context,
+                  style: fontThemeClass.title2(context,
                       fontWeight: FontWeight.w700,
                       color: context.colorScheme.secondaryBlackColor),
                 ),
-                8.verticalSpace,
+                2.verticalSpace,
+                 Padding(
+                   padding: const EdgeInsets.all(10.0).r,
+
+                   child: Text("Stay tuned for more updates and events. Your presence makes our community special.\nHave a great day and see you next time! 👋🌟",
+                   textAlign: TextAlign.center,
+                     style: fontThemeClass.caption(context , color: context.colorScheme.secondaryBlackColor.withOpacity(0.8)) ,
+                                   ),
+                 ),
+                4.verticalSpace,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -470,9 +481,9 @@ class ShowAppExitPopUp {
                         child: Center(
                           child: Text(
                             "No",
-                            style: FontThemeClass().title2(context,
-                                fontWeight: FontWeight.w700,
-                                color: context.colorScheme.secondaryWhiteColor),
+                            style: FontThemeClass().body(context,
+                                fontWeight: FontWeight.w600,color: context.colorScheme.signInTextColor
+                                ),
                           ),
                         ),
                       ),
