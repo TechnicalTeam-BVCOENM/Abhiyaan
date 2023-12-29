@@ -17,9 +17,16 @@ class BottomNavView extends StatelessWidget {
         builder: (context, model, child) {
           return Scaffold(
             extendBody: true,
-            // ignore: deprecated_member_use
-            body: WillPopScope(
-              onWillPop: model.onPop,
+            body: PopScope(
+              canPop: model._canPopNow,
+              onPopInvoked: (bool didPop) async {
+                if (!didPop) {
+                  await ShowAppExitPopUp.showAppExitPopUp(context)
+                      .then((value) => {
+                            if (value) {model._canPopNow = true}
+                          });
+                }
+              },
               child: model.getViewForCurrentIndex(model.currentIndex),
             ),
             bottomNavigationBar: Theme(

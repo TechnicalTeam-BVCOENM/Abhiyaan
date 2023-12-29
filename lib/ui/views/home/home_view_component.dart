@@ -1,6 +1,5 @@
 part of 'home_view.dart';
 
-// Carousel
 class CarouselUtils {
   static Widget buildIndicator(
           BuildContext context, int activeIndex, int length) =>
@@ -49,7 +48,6 @@ class CarouselUtils {
       );
 }
 
-// Quick Links
 Widget quickLinksList(BuildContext context, List model,
     [double? borderRadius]) {
   return SizedBox(
@@ -415,4 +413,100 @@ Future showWelcomPopUp(BuildContext context,
           ],
         ).animate().fadeIn();
       });
+}
+
+class ShowAppExitPopUp {
+  static Future showAppExitPopUp(BuildContext context) {
+    return showModalBottomSheet(
+        useSafeArea: true,
+        constraints: BoxConstraints(
+          maxHeight: 300.h,
+          minWidth: double.infinity,
+        ),
+        backgroundColor: context.colorScheme.secondaryWhiteColor,
+        clipBehavior: Clip.hardEdge,
+        elevation: 0,
+        showDragHandle: true,
+        context: context,
+        builder: (context) {
+          return Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric( vertical: 20 , horizontal: 10).r,
+            decoration: BoxDecoration(
+              color: context.colorScheme.secondaryWhiteColor,
+              borderRadius: BorderRadius.circular(32).r,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Icon(
+                  Icons.exit_to_app_rounded,
+                  size: 50.sp,
+                  color: context.colorScheme.primaryColor,
+                ),
+                12.verticalSpace,
+                Text(
+                  "Are you sure you want to exit ?",
+                  style: FontThemeClass().title2(context,
+                      fontWeight: FontWeight.w700,
+                      color: context.colorScheme.secondaryBlackColor),
+                ),
+                8.verticalSpace,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        width: 120.w,
+                        height: 45.h,
+                        decoration: BoxDecoration(
+                          color:
+                              context.colorScheme.primaryColor.withOpacity(0.8),
+                          borderRadius: BorderRadius.circular(12).r,
+                        ),
+                        child: Center(
+                          child: Text(
+                            "No",
+                            style: FontThemeClass().title2(context,
+                                fontWeight: FontWeight.w700,
+                                color: context.colorScheme.secondaryWhiteColor),
+                          ),
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        SystemNavigator.pop();
+                      },
+                      child: Container(
+                        width: 120.w,
+                        height: 45.h,
+                        decoration: BoxDecoration(
+                          color: context.colorScheme.secondaryWhiteColor,
+                          border: Border.all(
+                            color: context.colorScheme.primaryColor
+                                .withOpacity(0.8),
+                            width: 2.w,
+                          ),
+                          borderRadius: BorderRadius.circular(12).r,
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Yes",
+                            style: FontThemeClass()
+                                .body(context, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        });
+  }
 }

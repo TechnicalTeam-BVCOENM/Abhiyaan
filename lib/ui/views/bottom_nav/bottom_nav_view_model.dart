@@ -1,11 +1,9 @@
 part of 'bottom_nav_view.dart';
 
 class BottomNavViewModel extends IndexTrackingViewModel {
+  final log = getLogger('BottomNavViewModel');
+  bool _canPopNow = false;
   void init() {}
-
-  Future<bool> onPop() async {
-    return false;
-  }
 
   Widget getViewForCurrentIndex(int index) {
     switch (index) {
