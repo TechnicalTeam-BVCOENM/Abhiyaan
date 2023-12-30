@@ -74,7 +74,7 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
                     Text(
                       eventLocation,
                       textAlign: TextAlign.center,
-                      style: fontTheme.title2(context,
+                      style: fontTheme.body(context,
                           color: context.colorScheme.primaryDarkColor,
                           fontWeight: FontWeight.w700),
                     ),
@@ -121,7 +121,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
               10.verticalSpace,
               Text(
                 eventName,
-                style: fontTheme.header(context),
+                style: fontTheme.title(context, fontWeight: FontWeight.w700),
               ),
               10.verticalSpace,
               Row(
@@ -133,12 +133,13 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                     margin: const EdgeInsets.only(right: 8.0).r,
                     child: Icon(
                       Icons.calendar_month,
+                      size: 20,
                       color: context.colorScheme.primaryColor,
                     ),
                   ),
                   Text(
                     "${eventStartDate.day}-${eventEndDate.day} ${DateFormat('MMMM yyyy').format(eventEndDate)}",
-                    style: fontTheme.body(context,
+                    style: fontTheme.caption(context,
                         color: context.colorScheme.secondarySectionColor,
                         fontWeight: FontWeight.w500),
                   ),
@@ -155,11 +156,12 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                     child: Icon(
                       Icons.timer,
                       color: context.colorScheme.primaryColor,
+                      size: 20,
                     ),
                   ),
                   Text(
                     "${eventStartDate.hour}:${eventStartDate.minute} AM",
-                    style: fontTheme.body(context,
+                    style: fontTheme.caption(context,
                         color: context.colorScheme.secondarySectionColor,
                         fontWeight: FontWeight.w500),
                   ),
@@ -168,12 +170,14 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
               28.verticalSpace,
               Text(
                 "About Event",
-                style: fontTheme.title(context),
+                style:
+                    fontTheme.paragraph(context, fontWeight: FontWeight.w600),
               ),
               8.verticalSpace,
               Text(
                 eventInfo,
-                style: fontTheme.body(
+                textAlign: TextAlign.justify,
+                style: fontTheme.caption(
                   context,
                   color:
                       context.colorScheme.secondaryBlackColor.withOpacity(0.8),
@@ -187,9 +191,8 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
               20.verticalSpace,
               Text(
                 "Contact Section",
-                style: fontTheme.title(
-                  context,
-                ),
+                style:
+                    fontTheme.paragraph(context, fontWeight: FontWeight.w700),
               ),
               20.verticalSpace,
               Row(
@@ -201,13 +204,11 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                     margin: const EdgeInsets.only(right: 8.0).r,
                     child: Icon(
                       Icons.account_circle,
-                      size: 28.sp,
+                      size: 24.sp,
                       color: context.colorScheme.primaryColor,
                     ),
                   ),
-                  Text(eventContactName,
-                      style:
-                          fontTheme.body(context, fontWeight: FontWeight.w500)),
+                  Text(eventContactName, style: fontTheme.caption(context)),
                 ],
               ),
               8.verticalSpace,
@@ -220,13 +221,14 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                     margin: const EdgeInsets.only(right: 8.0),
                     child: Icon(
                       Icons.email,
-                      size: 28.h,
+                      size: 24.h,
                       color: context.colorScheme.primaryColor,
                     ),
                   ),
                   Text(eventContactEmail,
-                      style:
-                          fontTheme.body(context, fontWeight: FontWeight.w500)),
+                      style: fontTheme.caption(
+                        context,
+                      )),
                 ],
               ),
               8.verticalSpace,
@@ -243,13 +245,12 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                     // ),
                     child: Icon(
                       Icons.phone_in_talk_rounded,
-                      size: 28.h,
+                      size: 24.sp,
                       color: context.colorScheme.primaryColor,
                     ),
                   ),
                   Text(eventContactNumber.toString(),
-                      style:
-                          fontTheme.body(context, fontWeight: FontWeight.w500)),
+                      style: fontTheme.caption(context)),
                 ],
               ),
               28.verticalSpace,
@@ -291,13 +292,13 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
         children: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              minimumSize: Size(160.w, 55.h),
+              minimumSize: Size(160.w, 45.h),
               backgroundColor: context.colorScheme.secondaryWhiteColor,
               elevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   const Radius.circular(
-                    50,
+                    10,
                   ).r,
                 ),
               ),
@@ -309,7 +310,7 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
             },
             child: Text(
               'Share',
-              style: fontTheme.title(
+              style: fontTheme.paragraph(
                 context,
                 color: context.colorScheme.secondaryBlackColor,
               ),
@@ -317,12 +318,13 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              minimumSize: Size(160.w, 55.h),
+              minimumSize: Size(160.w, 45.h),
+
               backgroundColor: context.colorScheme.primaryColor,
               elevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
-                  const Radius.circular(50).r,
+                  const Radius.circular(10).r,
                 ),
                 side: BorderSide(color: context.colorScheme.primaryColor),
               ),
@@ -332,8 +334,9 @@ class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
             },
             child: Text(
               'Register',
-              style: fontTheme.title(context,
-                  color: context.colorScheme.signInTextColor),
+              style: fontTheme.paragraph(context,
+                  color: context.colorScheme.signInTextColor,
+                  fontWeight: FontWeight.w500),
             ),
           ),
         ],
