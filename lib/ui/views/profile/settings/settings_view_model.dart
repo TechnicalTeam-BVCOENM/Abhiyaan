@@ -19,16 +19,30 @@ class SettingsViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> changePassword(context, [String? email]) async {
+  Future<void> changePassword(context) async {
     final localStorageService = locator<LocalStorageService>();
-    String? storedEmail = localStorageService.read('userEmail');
+    String storedEmail = localStorageService.read('userEmail');
     log.i(storedEmail);
-    log.i(email);
-    if (storedEmail == null && email == "" ||
-        storedEmail == null && email == null) {
+    try {
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: storedEmail)
+          .then((value) => showNormalMessage(
+                context,
+                "reset password email sent !",
+              ));
+    } catch (e) {
+      showErrorMessage(context, "something went wrong !");
+    }
+
+    // Change password logic
+  }
+
+  Future<void> changePasswordForSignin(context, String? email) async {
+    setBusy(true);
+    if (email == "" || email == null) {
       showErrorMessage(context, "Email Field Empty");
     } else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
-        .hasMatch(email!)) {
+        .hasMatch(email)) {
       showErrorMessage(
         context,
         "Invalid email format",
@@ -36,7 +50,7 @@ class SettingsViewModel extends BaseViewModel {
     } else {
       try {
         await FirebaseAuth.instance
-            .sendPasswordResetEmail(email: storedEmail ?? "$email")
+            .sendPasswordResetEmail(email: email)
             .then((value) => showNormalMessage(
                   context,
                   "reset password email sent !",
@@ -45,6 +59,7 @@ class SettingsViewModel extends BaseViewModel {
         showErrorMessage(context, "something went wrong !");
       }
     }
+    setBusy(false);
     // Change password logic
   }
 
@@ -63,8 +78,13 @@ class SettingsViewModel extends BaseViewModel {
               ),
               TextButton(
                 onPressed: () {
-                  changePassword(context, email)
-                      .then((value) => Navigator.pop(context));
+                  if (FirebaseAuth.instance.currentUser != null) {
+                    changePassword(context)
+                        .then((value) => Navigator.pop(context));
+                  } else {
+                    changePasswordForSignin(context, email)
+                        .then((value) => Navigator.pop(context));
+                  }
                 },
                 child: const Text("Yes"),
               ),
