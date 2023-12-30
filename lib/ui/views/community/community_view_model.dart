@@ -104,7 +104,7 @@ class CommunityViewModel extends BaseViewModel {
     }
   }
 
-  Future<void> updateLikes(String blogId) async {
+  Future<void> updateLikes(String blogId,BuildContext context) async {
     final currentBlog = localStorageService.read("isLiked_$blogId");
     AuthenticationService authenticationService =
         locator<AuthenticationService>();
@@ -112,6 +112,7 @@ class CommunityViewModel extends BaseViewModel {
     try {
       if (currentBlog == true) {
         log.d("Already liked");
+        showNormalMessage(context, "Already liked");
         return;
       }
       await _firestore
@@ -121,7 +122,9 @@ class CommunityViewModel extends BaseViewModel {
           .doc(blogId)
           .update({
         "likes": FieldValue.arrayUnion([userId]),
-      }).then((value) => log.i("Updated likes"));
+      }).then((value){
+        showSuccessMessage(context, "You Liked this blog");
+      } );
     } catch (e) {
       log.e("Error in updating likes: ${e.toString()}");
     }

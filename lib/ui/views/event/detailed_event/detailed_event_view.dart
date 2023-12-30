@@ -1,7 +1,7 @@
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:abhiyaan/ui/common/carousel_utils.dart';
-import 'package:abhiyaan/ui/common/common_component_model.dart';
+import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:abhiyaan/ui/views/event/event_view.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -28,7 +28,7 @@ class DetailedEventView extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: FloatingActionButton(
-                  backgroundColor: context.colorScheme.secondaryWhiteColor,
+                  backgroundColor: context.colorScheme.signInTextColor,
                   isExtended: true,
                   heroTag: "register",
                   mini: false,
@@ -37,7 +37,7 @@ class DetailedEventView extends StatelessWidget {
                   },
                   child: Text(
                     "Register",
-                    style: FontThemeClass().title2(context,color: context.colorScheme.secondaryBlackColor,fontWeight: FontWeight.w600)
+                    style: FontThemeClass().title2(context,color:Colors.black,fontWeight: FontWeight.w600)
                   ),
                 ),
               ),
@@ -48,9 +48,7 @@ class DetailedEventView extends StatelessWidget {
                   backgroundColor: context.colorScheme.primaryColor,
                   heroTag: "share_event",
                   onPressed: () {
-                    Share.share(
-                        'Check out this event on Abhiyaan App\n\n${eventData.title}\n${eventData.about}\n${DateFormat('dd-MM-yyyy').format(eventData.startDate.toDate())} to ${DateFormat('dd-MM-yyyy').format(eventData.endDate.toDate())}\n${eventData.location}\n\nContact Details:\n${eventData.cName}\n${eventData.cEmail}\n${eventData.cPhone}\n\n${eventData.registerUrl}'
-                    );
+                    model.shareEvent(eventData);
                   },
                   child:  Text(
                       "Share",
