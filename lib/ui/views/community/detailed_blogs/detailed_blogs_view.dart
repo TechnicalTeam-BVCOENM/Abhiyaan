@@ -36,18 +36,20 @@ class DettailedBlogPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       FloatingActionButton(
+                        backgroundColor: context.colorScheme.primaryColor,
                           heroTag: "share_blog",
                           onPressed: () async {
                             model.shareBlog(context, blogData);
                           },
-                          child: const Icon(
+                          child:  Icon(
                             Icons.share,
-                            color: Colors.black,
+                            color: context.colorScheme.signInTextColor,
                             fill: 0,
                             size: 25,
                           ).animate(delay: 500.ms).scale()),
                       12.verticalSpace,
                       FloatingActionButton(
+                        backgroundColor: context.colorScheme.primaryColor,
                         heroTag: "like",
                         onPressed: () async {
                           communityViewModel.updateLikes(blogData.documentId,context);
@@ -78,6 +80,16 @@ class DettailedBlogPage extends StatelessWidget {
                     ],
                   ),
                   appBar: AppBar(
+                    backgroundColor: context.colorScheme.backgroundColor,
+                    leading: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon:  Icon(
+                        Icons.arrow_back_ios_rounded,
+                        color: context.colorScheme.secondaryBlackColor,
+                      ),
+                    ),
                     title: Text(
                       blogData.title,
                       maxLines: 2,

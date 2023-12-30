@@ -28,7 +28,7 @@ class DetailedEventView extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: FloatingActionButton(
-                  backgroundColor: context.colorScheme.secondaryWhiteColor,
+                  backgroundColor: context.colorScheme.signInTextColor,
                   isExtended: true,
                   heroTag: "register",
                   mini: false,
@@ -37,7 +37,7 @@ class DetailedEventView extends StatelessWidget {
                   },
                   child: Text(
                     "Register",
-                    style: FontThemeClass().title2(context,color: context.colorScheme.secondaryBlackColor,fontWeight: FontWeight.w600)
+                    style: FontThemeClass().title2(context,color:Colors.black,fontWeight: FontWeight.w600)
                   ),
                 ),
               ),
