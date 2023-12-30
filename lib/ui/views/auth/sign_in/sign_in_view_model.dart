@@ -34,7 +34,7 @@ class SignInViewModel extends BaseViewModel {
 
   Future<void> login(String email, String password, context) async {
     setBusy(true);
-
+    FocusScope.of(context).requestFocus(FocusNode());
     if (email != "" && password != "") {
       try {
         // Show a loading indicator over your UI
