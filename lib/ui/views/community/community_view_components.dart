@@ -82,13 +82,17 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                     ],
                   ),
                 ),
-                CachedNetworkImageWidget(
-                  imageUrl: blogsData.imageUrl,
-                  height: 170.h,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  maxHeightDiskCache: 1600.h,
-                ).animate(delay: 100.ms).fadeIn(),
+                Hero(
+                  transitionOnUserGestures: true  ,
+                  tag: blogsData.documentId,
+                  child: CachedNetworkImageWidget(
+                    imageUrl: blogsData.imageUrl,
+                    height: 170.h,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    maxHeightDiskCache: 1600.h,
+                  ),
+                ),
                 Container(
                     height: 45.h,
                     padding: const EdgeInsets.symmetric(horizontal: 12).r,
