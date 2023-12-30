@@ -29,35 +29,36 @@ class DettailedBlogPage extends StatelessWidget {
 
               final int streamLikes = snapshot.data ?? 0;
               return Scaffold(
-                floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+                  floatingActionButtonLocation:
+                      FloatingActionButtonLocation.endFloat,
                   floatingActionButton: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                       FloatingActionButton(
-                        heroTag: "share_blog",
-                        onPressed: () async {
-                          model.shareBlog(context, blogData);
-                        },
-                        child: const Icon(
-                          Icons.share,
-                          color: Colors.black,
-                          fill: 0,
-                          size: 25,
-                        ).animate(delay: 500.ms).scale()
-                      ),
-                      12.verticalSpace, 
+                      FloatingActionButton(
+                          heroTag: "share_blog",
+                          onPressed: () async {
+                            model.shareBlog(context, blogData);
+                          },
+                          child: const Icon(
+                            Icons.share,
+                            color: Colors.black,
+                            fill: 0,
+                            size: 25,
+                          ).animate(delay: 500.ms).scale()),
+                      12.verticalSpace,
                       FloatingActionButton(
                         heroTag: "like",
                         onPressed: () async {
                           communityViewModel.updateLikes(blogData.documentId);
                         },
                         child: isLiked
-                            ?  Icon(
+                            ? Icon(
                                 Icons.favorite_rounded,
                                 color: Colors.red,
                                 shadows: [
                                   BoxShadow(
-                                    color: context.colorScheme.secondaryBlackColor
+                                    color: context
+                                        .colorScheme.secondaryBlackColor
                                         .withOpacity(0.25),
                                     blurRadius: 20,
                                     spreadRadius: 0.8,
@@ -80,7 +81,8 @@ class DettailedBlogPage extends StatelessWidget {
                       blogData.title,
                       maxLines: 2,
                       style: fontThemeClass.body(context,
-                          color: context.colorScheme.secondaryBlackColor, fontWeight: FontWeight.bold),
+                          color: context.colorScheme.secondaryBlackColor,
+                          fontWeight: FontWeight.bold),
                     ),
                     centerTitle: true,
                   ),
@@ -102,7 +104,7 @@ class DettailedBlogPage extends StatelessWidget {
                           4.verticalSpace,
                           Center(
                             child: Text(
-                              "Reference Image: ${blogData.title.toLowerCase()}",
+                              "Image: ${blogData.title.toLowerCase()}",
                               textAlign: TextAlign.start,
                               style: fontThemeClass.caption(context,
                                   color: context
@@ -117,45 +119,8 @@ class DettailedBlogPage extends StatelessWidget {
                                 color: context.colorScheme.secondaryBlackColor),
                           ),
                           2.verticalSpace,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 25.h,
-                                width: 25.w,
-                                child: ClipOval(
-                                  child: Image.network(blogData.authorImageUrl),
-                                ),
-                              ),
-                              12.horizontalSpace,
-                              Text(
-                                blogData.author,
-                                textAlign: TextAlign.center,
-                                style: fontThemeClass.caption(context,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              Text(
-                                " | ${DateFormat.MMMM().format(blogData.date.toDate())} ${blogData.date.toDate().day}",
-                                textAlign: TextAlign.center,
-                                style: fontThemeClass.caption(context,
-                                    fontWeight: FontWeight.normal,
-                                    color: context
-                                        .colorScheme.secondarySectionColor),
-                              ),
-                              const Spacer(),
-                              Text(
-                                "Likes ${streamLikes.toString()}",
-                                textAlign: TextAlign.center,
-                                style: fontThemeClass.caption(
-                                  context,
-                                  fontWeight: FontWeight.normal,
-                                  color: context.colorScheme.secondaryBlackColor
-                                      .withOpacity(0.85),
-                                ),
-                              ),
-                            ],
-                          ),
+                          BlogAuthorDetailes(
+                              blogData: blogData, streamLikes: streamLikes),
                           2.verticalSpace,
                           Divider(
                             thickness: 1.8,
@@ -178,3 +143,4 @@ class DettailedBlogPage extends StatelessWidget {
     );
   }
 }
+
