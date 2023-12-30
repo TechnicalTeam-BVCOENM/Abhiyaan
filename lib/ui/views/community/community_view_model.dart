@@ -138,7 +138,7 @@ class CommunityBlogsData {
   final String documentId;
   final String author;
   final String authorImageUrl;
-  // final String content;
+  final String content;
   final String title;
   final String imageUrl;
   final Timestamp date;
@@ -148,7 +148,7 @@ class CommunityBlogsData {
     required this.documentId,
     required this.author,
     required this.authorImageUrl,
-    // required this.content,
+    required this.content,
     required this.title,
     required this.imageUrl,
     required this.date,
