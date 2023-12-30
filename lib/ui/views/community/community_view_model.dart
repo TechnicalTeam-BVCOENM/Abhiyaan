@@ -24,6 +24,14 @@ class CommunityViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  void navigateToDetailedBlogPage(CommunityBlogsData blogData) {
+    try {
+      navigationService.navigateToView(DettailedBlogPage(blogData: blogData));
+    } on Exception catch (e) {
+      log.e("Error in navigating to detailed blog page: ${e.toString()}");
+    }
+  }
+
   Future<List<CommunityBlogsData>> getBlogData() async {
     try {
       blogsData = await firestoreService.getBlogs();

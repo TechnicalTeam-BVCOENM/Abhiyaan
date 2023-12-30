@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+import 'package:abhiyaan/ui/views/community/detailed_blogs/detailed_blogs_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:http/http.dart' as http;
 import 'package:abhiyaan/file_exporter.dart';
@@ -72,8 +73,12 @@ class CommunityView extends StatelessWidget {
                                         const BouncingScrollPhysics(),
                                   ),
                                   items: model.blogsData
-                                      .map((data) =>
-                                          CommunityBlogs(blogsData: data))
+                                      .map((data) => GestureDetector(
+                                          onTap: () {
+                                            model.navigateToDetailedBlogPage(data);
+                                          },
+                                          child:
+                                              CommunityBlogs(blogsData: data)))
                                       .toList()),
                             ),
                             12.verticalSpace,
@@ -94,8 +99,11 @@ class CommunityView extends StatelessWidget {
                             ),
                             model.departmentClubsData.isEmpty
                                 ? Container()
-                                :
-                            const SectionText(title: "Departmental Clubs").animate(delay: 250.ms).fadeIn( curve: Curves.easeInOutCubic, duration: 600.ms),
+                                : const SectionText(title: "Departmental Clubs")
+                                    .animate(delay: 250.ms)
+                                    .fadeIn(
+                                        curve: Curves.easeInOutCubic,
+                                        duration: 600.ms),
                             SizedBox(
                               height: 120.h,
                               width: double.infinity,
@@ -113,7 +121,8 @@ class CommunityView extends StatelessWidget {
                                   );
                                 },
                               ),
-                            ).animate(delay: 200.ms).fadeIn(curve: Curves.easeInOutCubic, duration: 600.ms),
+                            ).animate(delay: 200.ms).fadeIn(
+                                curve: Curves.easeInOutCubic, duration: 600.ms),
 
                             const SectionText(title: "Quote of the day"),
                             QuoteCard(
@@ -131,7 +140,7 @@ class CommunityView extends StatelessWidget {
                                           .colorScheme.secondarySectionColor,
                                       fontWeight: FontWeight.w600),
                                 )),
-                          ].animate(delay: 500.ms , interval: 150.ms).fadeIn(),
+                          ].animate(delay: 500.ms, interval: 150.ms).fadeIn(),
                         ),
                       ),
                     ),
