@@ -124,7 +124,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                         4.horizontalSpace,
                         InkWell(
                           onTap: () {
-                            viewModel.updateLikes(blogsData.documentId);
+                            viewModel.updateLikes(blogsData.documentId,context);
                           },
                           child: isLiked
                               ? const Icon(

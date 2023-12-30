@@ -50,7 +50,7 @@ class DettailedBlogPage extends StatelessWidget {
                       FloatingActionButton(
                         heroTag: "like",
                         onPressed: () async {
-                          communityViewModel.updateLikes(blogData.documentId);
+                          communityViewModel.updateLikes(blogData.documentId,context);
                         },
                         child: isLiked
                             ? Icon(

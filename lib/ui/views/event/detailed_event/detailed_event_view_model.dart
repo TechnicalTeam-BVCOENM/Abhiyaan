@@ -27,4 +27,9 @@ class DetailedEventViewModel extends BaseViewModel {
       log.e("Error in updating active index : ${e.toString()}");
     }
   }
+
+  Future shareEvent(EventModel eventData) async {
+    await Share.share(
+        'Check out this event on Abhiyaan App\n\n${eventData.title}\n${eventData.about}\n${DateFormat('dd-MM-yyyy').format(eventData.startDate.toDate())} to ${DateFormat('dd-MM-yyyy').format(eventData.endDate.toDate())}\n${eventData.location}\n\nContact Details:\n${eventData.cName}\n${eventData.cEmail}\n${eventData.cPhone}\n\n${eventData.registerUrl}');
+  }
 }

@@ -48,9 +48,7 @@ class DetailedEventView extends StatelessWidget {
                   backgroundColor: context.colorScheme.primaryColor,
                   heroTag: "share_event",
                   onPressed: () {
-                    Share.share(
-                        'Check out this event on Abhiyaan App\n\n${eventData.title}\n${eventData.about}\n${DateFormat('dd-MM-yyyy').format(eventData.startDate.toDate())} to ${DateFormat('dd-MM-yyyy').format(eventData.endDate.toDate())}\n${eventData.location}\n\nContact Details:\n${eventData.cName}\n${eventData.cEmail}\n${eventData.cPhone}\n\n${eventData.registerUrl}'
-                    );
+                    model.shareEvent(eventData);
                   },
                   child:  Text(
                       "Share",
