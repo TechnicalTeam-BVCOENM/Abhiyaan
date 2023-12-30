@@ -8,14 +8,15 @@ class HomeViewModel extends BaseViewModel {
   final navigationService = locator<NavigationService>();
   NotificationsService notificationService = NotificationsService();
   FontThemeClass fontThemeClass = FontThemeClass();
+  CarouselUtils carouselUtils = CarouselUtils();
   late bool isUserNew = LocalStorageService().read('isUserNew');
 
 
   int _activeIndex = 0;
   List<String> firstname = [];
-  List<Map<String, dynamic>> _highlights = [];
   List<DepartmentUpdates> _collegeUpdates = [];
   final List<CelebrationData> _celebrationData = [];
+  List<Map<String, dynamic>> _highlights = [];
   List<Map<String, dynamic>> get highlights => _highlights;
   List<DepartmentUpdates> get collegeUpdates => _collegeUpdates;
   List<CelebrationData> get celebrationData => _celebrationData;
