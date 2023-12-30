@@ -108,12 +108,15 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                           fit: BoxFit.cover,
                         ).animate(delay: 500.ms).scale(),
                         8.horizontalSpace,
-                        Text(
-                          blogsData.title,
-                          style: fontThemeClass.caption(context,
-                              color: context.colorScheme.secondaryBlackColor,
-                              fontWeight: FontWeight.w500),
-                        ).animate(delay: 500.ms).scale(),
+                        Hero(
+                          tag: blogsData.title,
+                          child: Text(
+                            blogsData.title,
+                            style: fontThemeClass.caption(context,
+                                color: context.colorScheme.secondaryBlackColor,
+                                fontWeight: FontWeight.w500),
+                          ).animate(delay: 500.ms).scale(),
+                        ),
                         const Spacer(),
                         Text(
                           streamLikes.toString(),
@@ -124,7 +127,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                         4.horizontalSpace,
                         InkWell(
                           onTap: () {
-                            viewModel.updateLikes(blogsData.documentId);
+                            viewModel.updateLikes(blogsData.documentId,context);
                           },
                           child: isLiked
                               ? const Icon(
