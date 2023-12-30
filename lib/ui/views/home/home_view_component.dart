@@ -417,12 +417,12 @@ Future showWelcomPopUp(BuildContext context,
 
 class ShowAppExitPopUp {
   static Future showAppExitPopUp(BuildContext context) {
-  FontThemeClass fontThemeClass = FontThemeClass();
-    
+    FontThemeClass fontThemeClass = FontThemeClass();
+
     return showModalBottomSheet(
         useSafeArea: true,
         constraints: BoxConstraints(
-          maxHeight: 350.h,
+          maxHeight: MediaQuery.of(context).size.height / 3,
           minWidth: double.infinity,
         ),
         backgroundColor: context.colorScheme.backgroundColor,
@@ -433,13 +433,13 @@ class ShowAppExitPopUp {
         builder: (context) {
           return Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric( vertical: 20 , horizontal: 10).r,
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10).r,
             decoration: BoxDecoration(
               color: context.colorScheme.backgroundColor,
               borderRadius: BorderRadius.circular(32).r,
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Icon(
                   Icons.exit_to_app_rounded,
@@ -453,15 +453,13 @@ class ShowAppExitPopUp {
                       fontWeight: FontWeight.w700,
                       color: context.colorScheme.secondaryBlackColor),
                 ).animate(delay: 300.ms).fadeIn(duration: 800.ms),
-                2.verticalSpace,
-                 Padding(
-                   padding: const EdgeInsets.all(10.0).r,
-
-                   child: Text("Stay tuned for more updates and events. Your presence makes our community special.\nHave a great day and see you next time! 👋🌟",
-                   textAlign: TextAlign.center,
-                     style: fontThemeClass.caption(context , color: context.colorScheme.secondaryBlackColor.withOpacity(0.8)) ,
-                                   ).animate(delay: 300.ms).fadeIn(duration: 800.ms),
-                 ),
+                Text(
+                  "Have a great day and see you next time! 👋",
+                  textAlign: TextAlign.center,
+                  style: fontThemeClass.caption(context,
+                      color: context.colorScheme.secondaryBlackColor
+                          .withOpacity(0.8)),
+                ).animate(delay: 300.ms).fadeIn(duration: 800.ms),
                 4.verticalSpace,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -482,8 +480,8 @@ class ShowAppExitPopUp {
                           child: Text(
                             "No",
                             style: FontThemeClass().body(context,
-                                fontWeight: FontWeight.w600,color: context.colorScheme.signInTextColor
-                                ),
+                                fontWeight: FontWeight.w600,
+                                color: context.colorScheme.signInTextColor),
                           ),
                         ),
                       ),
@@ -513,7 +511,9 @@ class ShowAppExitPopUp {
                         ),
                       ),
                     ),
-                  ].animate(delay: 300.ms , interval: 200.ms).fadeIn(curve: Curves.easeInCubic),
+                  ]
+                      .animate(delay: 300.ms, interval: 200.ms)
+                      .fadeIn(curve: Curves.easeInCubic),
                 ),
               ],
             ),

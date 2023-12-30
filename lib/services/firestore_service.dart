@@ -241,7 +241,7 @@ class FirestoreService {
             imageUrl: data["imageUrl"],
             date: data["date"],
             likes: data["likes"],
-            // content: data["content"]
+            content: data["content"]
           );
         }).toList();
       }
