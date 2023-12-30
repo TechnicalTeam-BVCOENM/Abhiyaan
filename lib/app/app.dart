@@ -8,6 +8,7 @@ import 'package:abhiyaan/ui/views/auth/sign_in/sign_in_view.dart';
 import 'package:abhiyaan/ui/views/bottom_nav/bottom_nav_view.dart';
 import 'package:abhiyaan/ui/views/community/clubs/clubs_view.dart';
 import 'package:abhiyaan/ui/views/community/community_view.dart';
+import 'package:abhiyaan/ui/views/community/detailed_blogs/detailed_blogs_view.dart';
 import 'package:abhiyaan/ui/views/event/detailed_event/detailed_event_view.dart';
 import 'package:abhiyaan/ui/views/event/event_view.dart';
 import 'package:abhiyaan/ui/views/profile/profile_view.dart';
@@ -32,6 +33,7 @@ import 'package:abhiyaan/ui/views/splash/splash_view.dart';
     MaterialRoute(page: OnboardingView),
     MaterialRoute(page: CommunityView),
     MaterialRoute(page: ClubsView),
+    MaterialRoute(page: DettailedBlogPage)
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),
