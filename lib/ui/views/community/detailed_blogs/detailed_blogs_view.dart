@@ -1,5 +1,6 @@
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/ui/views/community/community_view.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
@@ -96,9 +97,13 @@ class DettailedBlogPage extends StatelessWidget {
                           12.verticalSpace,
                           ClipRRect(
                             borderRadius: BorderRadius.circular(12).r,
-                            child: Image.network(
-                              blogData.imageUrl,
-                              fit: BoxFit.cover,
+                            child: Hero(
+                              transitionOnUserGestures: true,
+                              tag: blogData.documentId,
+                              child: CachedNetworkImage(
+                                imageUrl: blogData.imageUrl,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                           4.verticalSpace,
@@ -143,4 +148,3 @@ class DettailedBlogPage extends StatelessWidget {
     );
   }
 }
-
