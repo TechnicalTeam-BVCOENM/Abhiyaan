@@ -22,19 +22,28 @@ class SettingsViewModel extends BaseViewModel {
   Future<void> changePassword(context, [String? email]) async {
     final localStorageService = locator<LocalStorageService>();
     String? storedEmail = localStorageService.read('userEmail');
-    try {
-      if (storedEmail == null && email == null) {
-        showErrorMessage(context, "Email Field Empty");
-      } else {
+    log.i(storedEmail);
+    log.i(email);
+    if (storedEmail == null && email == "" ||
+        storedEmail == null && email == null) {
+      showErrorMessage(context, "Email Field Empty");
+    } else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+        .hasMatch(email!)) {
+      showErrorMessage(
+        context,
+        "Invalid email format",
+      );
+    } else {
+      try {
         await FirebaseAuth.instance
             .sendPasswordResetEmail(email: storedEmail ?? "$email")
             .then((value) => showNormalMessage(
                   context,
                   "reset password email sent !",
                 ));
+      } catch (e) {
+        showErrorMessage(context, "something went wrong !");
       }
-    } catch (e) {
-      showErrorMessage(context, "something went wrong !");
     }
     // Change password logic
   }
