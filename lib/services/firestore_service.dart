@@ -129,12 +129,32 @@ class FirestoreService {
     }
   }
 
+  Future<List<Map<String, dynamic>>> getBestMoments(String docId) async {
+    try {
+      final QuerySnapshot snapshot = await _firestore
+          .collection('Events')
+          .doc('data')
+          .collection('events')
+          .doc(docId)
+          .collection("bestMoments")
+          .get();
+      return snapshot.docs
+          .map((doc) => doc.data() as Map<String, dynamic>)
+          .toList();
+    } on Exception catch (e) {
+      log.e("Error in getting bestMoments : ${e.toString()}");
+      return [];
+    }
+  }
+
   Future<List<DepartmentUpdates>> getCollegeUpdates() async {
     try {
       final QuerySnapshot snapshot = await _firestore
           .collection('CollegeUpdates')
           .doc("data")
-          .collection("updates").orderBy("date", descending: true).limit(8)
+          .collection("updates")
+          .orderBy("date", descending: true)
+          .limit(8)
           .get();
 
       if (snapshot.docs.isEmpty) {
@@ -193,6 +213,7 @@ class FirestoreService {
           cPhone: data['coordinatorPhone'],
           about: data['about'],
           registerUrl: data['registerUrl'],
+          docID: doc.id
         );
       }).toList();
     } on Exception catch (e) {
@@ -234,15 +255,14 @@ class FirestoreService {
       } else {
         return snapshot.docs.map((data) {
           return CommunityBlogsData(
-            documentId: data.id,
-            author: data["author"],
-            authorImageUrl: data["authorImageUrl"],
-            title: data['title'],
-            imageUrl: data["imageUrl"],
-            date: data["date"],
-            likes: data["likes"],
-            content: data["content"]
-          );
+              documentId: data.id,
+              author: data["author"],
+              authorImageUrl: data["authorImageUrl"],
+              title: data['title'],
+              imageUrl: data["imageUrl"],
+              date: data["date"],
+              likes: data["likes"],
+              content: data["content"]);
         }).toList();
       }
     } catch (e) {

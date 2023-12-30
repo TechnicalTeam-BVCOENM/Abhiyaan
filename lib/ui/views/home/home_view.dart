@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:abhiyaan/services/notification_service.dart';
+import 'package:abhiyaan/ui/common/carousel_utils.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:abhiyaan/ui/views/home/celebration/celebration_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:abhiyaan/ui/common/cached_network_image.dart';
 import 'package:abhiyaan/ui/common/shimmer.dart';
 import 'package:abhiyaan/ui/common/update_component.dart';
 import 'package:abhiyaan/file_exporter.dart';

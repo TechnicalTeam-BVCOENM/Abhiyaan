@@ -34,7 +34,6 @@ class EventViewModel extends BaseViewModel {
   }
 
   Future<void> loadData() async {
-
     try {
       _events = await runBusyFuture(_firestoreService.getAllEvents());
       getRemainingEvents();
@@ -129,6 +128,7 @@ class EventModel {
   int cPhone;
   String about;
   String registerUrl;
+  String docID;
 
   EventModel(
       {required this.title,
@@ -140,7 +140,9 @@ class EventModel {
       required this.cEmail,
       required this.cPhone,
       required this.about,
-      required this.registerUrl});
+      required this.registerUrl,
+      required this.docID
+      });
 }
 
 class SponsorsModel {
