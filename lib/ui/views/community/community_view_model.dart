@@ -122,7 +122,9 @@ class CommunityViewModel extends BaseViewModel {
           .doc(blogId)
           .update({
         "likes": FieldValue.arrayUnion([userId]),
-      }).then((value) => log.i("Updated likes"));
+      }).then((value){
+        showSuccessMessage(context, "You Liked this blog");
+      } );
     } catch (e) {
       log.e("Error in updating likes: ${e.toString()}");
     }
