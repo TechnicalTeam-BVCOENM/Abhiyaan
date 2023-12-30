@@ -50,7 +50,6 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                   ),
                   child: Row(
                     children: [
-                      //Author image
                       ClipOval(
                         child: blogsData.authorImageUrl != ''
                             ? CachedNetworkImage(
@@ -65,7 +64,6 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                                 height: 34.h,
                               ),
                       ).animate(delay: 500.ms).fadeIn(delay: 10.ms),
-                      //Author name
                       8.horizontalSpace,
                       Text(
                         blogsData.author,
