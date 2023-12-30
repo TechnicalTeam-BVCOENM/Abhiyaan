@@ -4,6 +4,7 @@ class SignInViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final _authenticationService = locator<AuthenticationService>();
+  final SettingsViewModel settingsViewModel = SettingsViewModel();
   bool isloading = false;
   final log = getLogger('AuthViewModel');
   final fontTheme = FontThemeClass();
@@ -30,6 +31,10 @@ class SignInViewModel extends BaseViewModel {
 
   void toRegisterPage(BuildContext context) {
     _navigationService.replaceWith(Routes.registerView);
+  }
+
+  void changePassword(context) {
+    settingsViewModel.passwordChangeAlert(context, emailIdTextController.text);
   }
 
   Future<void> login(String email, String password, context) async {

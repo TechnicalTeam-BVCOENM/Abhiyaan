@@ -119,7 +119,7 @@ class SignInView extends StatelessWidget {
                             ),
                         InkWell(
                           onTap: () =>
-                              SettingsViewModel().passwordChangeAlert(context),
+                              model.changePassword(context),
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: Padding(

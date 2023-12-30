@@ -19,24 +19,27 @@ class SettingsViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> changePassword(context) async {
+  Future<void> changePassword(context, [String? email]) async {
+    final localStorageService = locator<LocalStorageService>();
+    String? storedEmail = localStorageService.read('userEmail');
     try {
-      final localStorageService = locator<LocalStorageService>();
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: localStorageService.read('userEmail'))
-          .then((value) => showNormalMessage(
-                context,
-                "reset password email sent !",
-              ));
+      if (storedEmail == null && email == null) {
+        showErrorMessage(context, "Email Field Empty");
+      } else {
+        await FirebaseAuth.instance
+            .sendPasswordResetEmail(email: storedEmail ?? "$email")
+            .then((value) => showNormalMessage(
+                  context,
+                  "reset password email sent !",
+                ));
+      }
     } catch (e) {
       showErrorMessage(context, "something went wrong !");
     }
     // Change password logic
   }
 
-  void passwordChangeAlert(
-    context,
-  ) {
+  void passwordChangeAlert(context, [String? email]) {
     showAdaptiveDialog(
         context: context,
         builder: (context) {
@@ -51,7 +54,7 @@ class SettingsViewModel extends BaseViewModel {
               ),
               TextButton(
                 onPressed: () {
-                  changePassword(context)
+                  changePassword(context, email)
                       .then((value) => Navigator.pop(context));
                 },
                 child: const Text("Yes"),
