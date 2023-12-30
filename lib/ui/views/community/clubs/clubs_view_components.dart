@@ -49,11 +49,13 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
             10.verticalSpace,
             ClipRRect(
               borderRadius: BorderRadius.circular(16.0).r,
-              child: Image.network(
-                clubImage,
-                fit: BoxFit.cover,
-                width: double.infinity,
+              child: CachedNetworkImage(
                 height: 276.h,
+                fit: BoxFit.cover,
+                imageUrl: clubImage,
+                placeholder: (context, url) =>
+                    const Center(child: CircularProgressIndicator.adaptive()),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
             10.verticalSpace,
@@ -84,16 +86,17 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Container(
-                                  width: 80.w,
-                                  height: 80.h,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: NetworkImage(
-                                          clubMembers[index].memberImage),
-                                    ),
+                                ClipOval(
+                                  child: CachedNetworkImage(
+                                    width: 80.r,
+                                    height: 80.r,
+                                    fit: BoxFit.cover,
+                                    imageUrl: clubMembers[index].memberImage,
+                                    placeholder: (context, url) => const Center(
+                                        child: CircularProgressIndicator
+                                            .adaptive()),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
                                   ),
                                 ),
                                 // Name
@@ -141,23 +144,26 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return Card(
-                      color: context.colorScheme.secondaryWhiteColor,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0).r,
-                      ),
+                          borderRadius: BorderRadius.circular(12).r),
+                      clipBehavior: Clip.hardEdge,
+                      color: context.colorScheme.secondaryWhiteColor,
                       elevation: 4.0,
                       margin: const EdgeInsets.all(12.0).r,
-                      clipBehavior: Clip.hardEdge,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.network(
-                            clubFest[index].festImage,
-                            height: 155.h,
-                            width: 150.w,
-                            fit: BoxFit.fill,
-                          ).animate(delay: 400.ms).fadeIn(duration: 900.ms),
+                          Expanded(
+                            child: CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              imageUrl: clubFest[index].festImage,
+                              placeholder: (context, url) => const Center(
+                                  child: CircularProgressIndicator.adaptive()),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            ),
+                          ),
                           Container(
                             height: 50.h,
                             width: 150.w,

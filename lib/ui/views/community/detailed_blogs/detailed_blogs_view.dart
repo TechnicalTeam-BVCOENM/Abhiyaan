@@ -36,12 +36,12 @@ class DettailedBlogPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       FloatingActionButton(
-                        backgroundColor: context.colorScheme.primaryColor,
+                          backgroundColor: context.colorScheme.primaryColor,
                           heroTag: "share_blog",
                           onPressed: () async {
                             model.shareBlog(context, blogData);
                           },
-                          child:  Icon(
+                          child: Icon(
                             Icons.share,
                             color: context.colorScheme.signInTextColor,
                             fill: 0,
@@ -52,7 +52,8 @@ class DettailedBlogPage extends StatelessWidget {
                         backgroundColor: context.colorScheme.primaryColor,
                         heroTag: "like",
                         onPressed: () async {
-                          communityViewModel.updateLikes(blogData.documentId,context);
+                          communityViewModel.updateLikes(
+                              blogData.documentId, context);
                         },
                         child: isLiked
                             ? Icon(
@@ -85,7 +86,7 @@ class DettailedBlogPage extends StatelessWidget {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon:  Icon(
+                      icon: Icon(
                         Icons.arrow_back_ios_rounded,
                         color: context.colorScheme.secondaryBlackColor,
                       ),
@@ -147,7 +148,7 @@ class DettailedBlogPage extends StatelessWidget {
                           12.verticalSpace,
                           Text(
                             blogData.content,
-                            textAlign: TextAlign.start,
+                            textAlign: TextAlign.justify,
                             style: fontThemeClass.body(context),
                           ),
                           12.verticalSpace,
