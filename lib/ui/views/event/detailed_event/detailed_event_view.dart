@@ -21,6 +21,45 @@ class DetailedEventView extends StatelessWidget {
       onViewModelReady: (viewModel) => viewModel.getbestMoments(),
       builder: (context, model, child) {
         return Scaffold(
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: FloatingActionButton(
+                  backgroundColor: context.colorScheme.secondaryWhiteColor,
+                  isExtended: true,
+                  heroTag: "register",
+                  mini: false,
+                  onPressed: () {
+                    UrlLauncher().launchURL(eventData.registerUrl);
+                  },
+                  child: Text(
+                    "Register",
+                    style: FontThemeClass().title2(context,color: context.colorScheme.secondaryBlackColor,fontWeight: FontWeight.w600)
+                  ),
+                ),
+              ),
+              12.horizontalSpace,
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: FloatingActionButton(
+                  backgroundColor: context.colorScheme.primaryColor,
+                  heroTag: "share_event",
+                  onPressed: () {
+                    Share.share(
+                        'Check out this event on Abhiyaan App\n\n${eventData.title}\n${eventData.about}\n${DateFormat('dd-MM-yyyy').format(eventData.startDate.toDate())} to ${DateFormat('dd-MM-yyyy').format(eventData.endDate.toDate())}\n${eventData.location}\n\nContact Details:\n${eventData.cName}\n${eventData.cEmail}\n${eventData.cPhone}\n\n${eventData.registerUrl}'
+                    );
+                  },
+                  child:  Text(
+                      "Share",
+                      style: FontThemeClass().title2(context,color: context.colorScheme.signInTextColor,fontWeight: FontWeight.w600)
+                    ),
+                ),
+              ),
+            ].animate(delay: 300.ms).fadeIn(),
+          ),
           backgroundColor: context.colorScheme.backgroundColor,
           body: CustomScrollView(
             physics: const BouncingScrollPhysics(),
@@ -38,86 +77,7 @@ class DetailedEventView extends StatelessWidget {
                 eventContactEmail: eventData.cEmail,
                 eventContactNumber: eventData.cPhone,
               ),
-              SliverToBoxAdapter(
-                child: model._bestMoments.isEmpty
-                    ? Container(
-                        height: 230.h,
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Card(
-                          margin: const EdgeInsets.only(bottom: 8).r,
-                          elevation: 0,
-                          clipBehavior: Clip.hardEdge,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16).r,
-                            side: BorderSide(
-                              color: context.colorScheme.secondaryLPurpleColor,
-                              width: 1.0,
-                            ),
-                          ),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.info_rounded,
-                                  color:
-                                      context.colorScheme.secondaryBlackColor,
-                                ),
-                                10.horizontalSpace,
-                                Text("Stay Tuned Comming Soon !",
-                                    style: model.fontThemeClass.body(context)),
-                              ],
-                            ),
-                          ),
-                        ),
-                      )
-                    : Container(
-                        height: 230.h,
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: CarouselSlider.builder(
-                          itemCount: model._bestMoments.length,
-                          itemBuilder: (context, index, realIndex) {
-                            return CarouselUtils.buildImage(
-                              context,
-                              model._bestMoments[index]['imageUrl'],
-                              model.activeIndex,
-                            );
-                          },
-                          options: CarouselOptions(
-                            height: 230.h,
-                            onPageChanged: (index, reason) =>
-                                model.updateActiveIndex(index),
-                            autoPlay: true,
-                            autoPlayInterval: 4.seconds,
-                            viewportFraction: 1,
-                            enableInfiniteScroll: true,
-                            autoPlayAnimationDuration: 1.seconds,
-                            autoPlayCurve: Curves.easeInOut,
-                            enlargeCenterPage: true,
-                          ),
-                        ),
-                      ),
-              ),
-              SliverToBoxAdapter(child: 20.verticalSpace),
-              SliverToBoxAdapter(
-                child: Center(
-                  child: CarouselUtils.buildIndicator(
-                    context,
-                    model.activeIndex,
-                    model._bestMoments.length,
-                  ),
-                ),
-              ),
             ],
-          ),
-          bottomNavigationBar: BottomNavBarDetailedPage(
-            eventName: eventData.title,
-            eventInfo: eventData.about,
-            eventStartDate: eventData.startDate.toDate(),
-            eventEndDate: eventData.endDate.toDate(),
-            eventContactName: eventData.cName,
-            eventContactEmail: eventData.cEmail,
-            eventContactNumber: eventData.cPhone,
           ),
         );
       },
