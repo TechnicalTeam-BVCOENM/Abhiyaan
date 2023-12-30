@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:abhiyaan/ui/common/common_component_model.dart';
+import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:abhiyaan/ui/common/shimmer.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:abhiyaan/theme/responsive_utils.dart';
