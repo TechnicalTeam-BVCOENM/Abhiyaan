@@ -12,7 +12,7 @@ import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:abhiyaan/ui/views/home/Societies/societies_view.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:abhiyaan/ui/common/common_component_model.dart';
+import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:lottie/lottie.dart';
 part 'home_view_model.dart';
 part 'home_view_component.dart';
