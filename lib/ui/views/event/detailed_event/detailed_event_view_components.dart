@@ -189,6 +189,74 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                 height: 1.h,
               ),
               20.verticalSpace,
+
+              viewModel._bestMoments.isEmpty
+                  ? Container(
+                      height: 230.h,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Card(
+                        margin: const EdgeInsets.only(bottom: 8).r,
+                        elevation: 0,
+                        clipBehavior: Clip.hardEdge,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16).r,
+                          side: BorderSide(
+                            color: context.colorScheme.secondaryLPurpleColor,
+                            width: 1.0,
+                          ),
+                        ),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.info_rounded,
+                                color: context.colorScheme.secondaryBlackColor,
+                              ),
+                              10.horizontalSpace,
+                              Text("Stay Tuned Comming Soon !",
+                                  style:
+                                      viewModel.fontThemeClass.body(context)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  : SizedBox(
+                      height: 230.h,
+                      width: double.infinity,
+                      child: CarouselSlider.builder(
+                        itemCount: viewModel._bestMoments.length,
+                        itemBuilder: (context, index, realIndex) {
+                          return CarouselUtils.buildImage(
+                            context,
+                            viewModel._bestMoments[index]['imageUrl'],
+                            viewModel.activeIndex,
+                          );
+                        },
+                        options: CarouselOptions(
+                          height: 230.h,
+                          onPageChanged: (index, reason) =>
+                              viewModel.updateActiveIndex(index),
+                          autoPlay: true,
+                          autoPlayInterval: 4.seconds,
+                          viewportFraction: 1,
+                          enableInfiniteScroll: true,
+                          autoPlayAnimationDuration: 1.seconds,
+                          autoPlayCurve: Curves.easeInOut,
+                          enlargeCenterPage: true,
+                        ),
+                      ),
+                    ),
+              12.verticalSpace,
+              Center(
+                child: CarouselUtils.buildIndicator(
+                  context,
+                  viewModel.activeIndex,
+                  viewModel._bestMoments.length,
+                ),
+              ),
+
               Text(
                 "Contact Section",
                 style:
@@ -253,93 +321,14 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                       style: fontTheme.caption(context)),
                 ],
               ),
-              28.verticalSpace,
+              40.verticalSpace,
+              const Text(""),
+              32.verticalSpace,
+
             ]
                 .animate(delay: 0.ms, interval: 100.ms)
                 .fadeIn(curve: Curves.easeIn)),
-      ),
-    );
-  }
-}
 
-class BottomNavBarDetailedPage extends ViewModelWidget<DetailedEventViewModel> {
-  final String eventName;
-  final DateTime eventStartDate;
-  final DateTime eventEndDate;
-  final String eventInfo;
-  final String eventContactName;
-  final String eventContactEmail;
-  final int eventContactNumber;
-  const BottomNavBarDetailedPage({
-    super.key,
-    required this.eventName,
-    required this.eventStartDate,
-    required this.eventInfo,
-    required this.eventEndDate,
-    required this.eventContactName,
-    required this.eventContactEmail,
-    required this.eventContactNumber,
-  });
-
-  @override
-  Widget build(BuildContext context, DetailedEventViewModel viewModel) {
-    FontThemeClass fontTheme = FontThemeClass();
-
-    return SizedBox(
-      height: 80.h,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              minimumSize: Size(160.w, 45.h),
-              backgroundColor: context.colorScheme.secondaryWhiteColor,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  const Radius.circular(
-                    10,
-                  ).r,
-                ),
-              ),
-              side: BorderSide(color: context.colorScheme.primaryColor),
-            ),
-            onPressed: () {
-              Share.share(
-                  "$eventName\n$eventInfo\nEvent Date: ${eventStartDate.day}${DateFormat('MMMM yyyy').format(eventEndDate)}\nTiming: ${eventStartDate.hour}:${eventStartDate.minute}\nContact $eventContactName for more details\nContact Number: $eventContactNumber");
-            },
-            child: Text(
-              'Share',
-              style: fontTheme.paragraph(
-                context,
-                color: context.colorScheme.secondaryBlackColor,
-              ),
-            ),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              minimumSize: Size(160.w, 45.h),
-
-              backgroundColor: context.colorScheme.primaryColor,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  const Radius.circular(10).r,
-                ),
-                side: BorderSide(color: context.colorScheme.primaryColor),
-              ),
-            ),
-            onPressed: () {
-              UrlLauncher().launchURL(viewModel.eventData.registerUrl);
-            },
-            child: Text(
-              'Register',
-              style: fontTheme.paragraph(context,
-                  color: context.colorScheme.signInTextColor,
-                  fontWeight: FontWeight.w500),
-            ),
-          ),
-        ],
       ),
     );
   }
