@@ -36,7 +36,7 @@ void _showmessage(BuildContext context, String message, String type) {
       icon = Icons.warning;
       break;
     case 'normal':
-      backgroundColor = context.colorScheme.secondaryLPurpleColor;
+      backgroundColor = context.colorScheme.primaryColor.withOpacity(0.6);
       icon = Icons.message;
       break;
     default:

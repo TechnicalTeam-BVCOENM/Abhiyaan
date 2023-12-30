@@ -16,7 +16,7 @@ class SettingsView extends StatelessWidget {
     return ViewModelBuilder<SettingsViewModel>.nonReactive(
       viewModelBuilder: () => SettingsViewModel(),
       builder: (context, model, child) {
-        final FocusNode _focusScope = FocusNode();
+        final FocusNode focusScope = FocusNode();
 
         return Scaffold(
           backgroundColor: context.colorScheme.backgroundColor,
@@ -59,7 +59,7 @@ class SettingsView extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          _focusScope.unfocus();
+                          focusScope.unfocus();
                           model.passwordChangeAlert(context);
                         },
                         child: settingsListTile(model, context,
