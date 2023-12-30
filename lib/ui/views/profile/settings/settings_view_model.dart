@@ -64,6 +64,8 @@ class SettingsViewModel extends BaseViewModel {
   }
 
   void passwordChangeAlert(context, [String? email]) {
+    FocusScope.of(context).requestFocus(FocusNode());
+
     showAdaptiveDialog(
         context: context,
         builder: (context) {
@@ -91,6 +93,7 @@ class SettingsViewModel extends BaseViewModel {
             ],
           );
         });
+    notifyListeners();
   }
 
   void logoutAlert(BuildContext context) {
