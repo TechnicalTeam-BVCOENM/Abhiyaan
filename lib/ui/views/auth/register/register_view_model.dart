@@ -39,6 +39,7 @@ class RegisterViewModel extends BaseViewModel {
     String userName,
     BuildContext context,
   ) async {
+    FocusScope.of(context).requestFocus(FocusNode());
     if (createpassword == "" ||
         confirmPassword == "" ||
         email == "" ||
