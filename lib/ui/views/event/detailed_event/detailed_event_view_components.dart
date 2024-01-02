@@ -21,7 +21,7 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
           FlexibleSpaceBar(
             background: Hero(
               transitionOnUserGestures: true,
-              tag: "eventImage",
+              tag: "eventImage+$imageLink",
               child: Image.network(
                 imageLink,
                 fit: BoxFit.cover,
