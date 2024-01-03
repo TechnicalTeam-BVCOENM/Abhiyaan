@@ -105,11 +105,29 @@ class SettingsViewModel extends BaseViewModel {
             content:
                 const Text("Are you sure you want to change your password ?"),
             actions: [
-              TextButton(
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(0),
+                  foregroundColor: Colors.white,
+                  backgroundColor: context.colorScheme.primaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10), // Rounded corners
+                  ),
+                ),
                 onPressed: () => Navigator.pop(context),
                 child: const Text("Cancel"),
               ),
-              TextButton(
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  side: BorderSide(
+                      width: 2, color: context.colorScheme.primaryColor),
+                  padding: const EdgeInsets.all(0),
+                  foregroundColor: context.colorScheme.secondaryBlackColor,
+                  backgroundColor: context.colorScheme.secondaryWhiteColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10), // Rounded corners
+                  ),
+                ),
                 onPressed: () {
                   if (FirebaseAuth.instance.currentUser != null) {
                     changePassword(context)
@@ -168,11 +186,29 @@ class SettingsViewModel extends BaseViewModel {
                 width: 400.w,
                 child: const Text("Are you sure you want to Logout ?")),
             actions: [
-              TextButton(
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(0),
+                  foregroundColor: Colors.white,
+                  backgroundColor: context.colorScheme.primaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10), // Rounded corners
+                  ),
+                ),
                 onPressed: () => Navigator.pop(context),
                 child: const Text("Cancel"),
               ),
-              TextButton(
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  side: BorderSide(
+                      width: 2, color: context.colorScheme.primaryColor),
+                  padding: const EdgeInsets.all(0),
+                  foregroundColor: context.colorScheme.secondaryBlackColor,
+                  backgroundColor: context.colorScheme.secondaryWhiteColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10), // Rounded corners
+                  ),
+                ),
                 onPressed: () async {
                   await logout(context).then((value) =>
                       showSuccessMessage(context, "Logout successful"));
