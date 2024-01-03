@@ -178,7 +178,7 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
         child: Column(
           children: [
             Hero(
-              tag: "eventImage",
+              tag: "eventImage+${model.imageUrl}",
               child: Image.network(
                 model.imageUrl,
                 height: 178.h,
@@ -305,11 +305,14 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.network(
-              model.imageUrl,
-              height: 135.h,
-              width: ResponsiveUtils.screenWidth(context),
-              fit: BoxFit.cover,
+            Hero(
+              tag: "eventImage+${model.imageUrl}",
+              child: Image.network(
+                model.imageUrl,
+                height: 135.h,
+                width: ResponsiveUtils.screenWidth(context),
+                fit: BoxFit.cover,
+              ),
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
