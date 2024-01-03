@@ -70,7 +70,38 @@ class SettingsViewModel extends BaseViewModel {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text("Alert"),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+            clipBehavior: Clip.hardEdge,
+            titlePadding: const EdgeInsets.all(0),
+            title: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Divider(
+                  height: 10,
+                  thickness: 100,
+                  color: Colors.red,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 24.0, vertical: 10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.warning_rounded,
+                        color: Colors.red,
+                        size: 36,
+                      ),
+                      10.horizontalSpace,
+                      const Text(
+                        "Alert",
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
             content:
                 const Text("Are you sure you want to change your password ?"),
             actions: [
@@ -101,8 +132,41 @@ class SettingsViewModel extends BaseViewModel {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text("Alert"),
-            content: const Text("Are you sure you want to Logout ?"),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+            clipBehavior: Clip.hardEdge,
+            titlePadding: const EdgeInsets.all(0),
+            title: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Divider(
+                  height: 10,
+                  thickness: 100,
+                  color: Colors.red,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 24.0, vertical: 10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.warning_rounded,
+                        color: Colors.red,
+                        size: 36,
+                      ),
+                      10.horizontalSpace,
+                      const Text(
+                        "Alert",
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            content: SizedBox(
+                width: 400.w,
+                child: const Text("Are you sure you want to Logout ?")),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
