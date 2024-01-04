@@ -58,9 +58,6 @@ class SignInView extends StatelessWidget {
                             filled: true,
                             focusColor: context.colorScheme.secondaryWhiteColor,
                             hintText: 'Student Email ID',
-                            // errorText: model.isEmailIdValid
-                            //     ? null
-                            //     : model.emailIdErrorText,
                             hintStyle: model.fontTheme.caption(context,
                                 color:
                                     context.colorScheme.secondarySectionColor,
@@ -118,8 +115,7 @@ class SignInView extends StatelessWidget {
                               duration: 500.ms,
                             ),
                         InkWell(
-                          onTap: () =>
-                              model.changePassword(context),
+                          onTap: () => model.changePassword(context),
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: Padding(
@@ -168,35 +164,38 @@ class SignInView extends StatelessWidget {
                               curve: Curves.easeInOut,
                               duration: 500.ms,
                             ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.only(top: 15.r),
-                          child: RichText(
-                            text: TextSpan(
-                              text: 'Don\'t have an account? ',
-                              style: FontThemeClass().caption(context,
-                                  color:
-                                      context.colorScheme.secondaryBlackColor,
-                                  fontWeight: FontWeight.w500),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'Register Now',
-                                  style: FontThemeClass().caption(context,
-                                      color: context.colorScheme.primaryColor,
-                                      fontWeight: FontWeight.w500),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      model.toRegisterPage(context);
-                                    },
+                        model.showRegister
+                            ? Padding(
+                                padding: EdgeInsetsDirectional.only(top: 15.r),
+                                child: RichText(
+                                  text: TextSpan(
+                                    text: 'Don\'t have an account? ',
+                                    style: FontThemeClass().caption(context,
+                                        color: context
+                                            .colorScheme.secondaryBlackColor,
+                                        fontWeight: FontWeight.w500),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: 'Register Now',
+                                        style: FontThemeClass().caption(context,
+                                            color: context
+                                                .colorScheme.primaryColor,
+                                            fontWeight: FontWeight.w500),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            model.toRegisterPage(context);
+                                          },
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ).animate(delay: 600.ms).fadeIn(
-                              delay: 100.ms,
-                              curve: Curves.easeInOut,
-                              duration: 500.ms,
-                            ),
-                              const Spacer(),
+                              ).animate(delay: 600.ms).fadeIn(
+                                  delay: 100.ms,
+                                  curve: Curves.easeInOut,
+                                  duration: 500.ms,
+                                )
+                            : Container(),
+                        model.showRegister ? const Spacer() : 10.verticalSpace,
                         Padding(
                           padding: EdgeInsetsDirectional.only(top: 10.r),
                           child: InkWell(
@@ -224,7 +223,7 @@ class SignInView extends StatelessWidget {
                               curve: Curves.easeInOut,
                               duration: 500.ms,
                             ),
-                          10.verticalSpace,
+                       model.showRegister?  10.verticalSpace : const Spacer(),
                         Container(
                           alignment: Alignment.center,
                           child: Text('Abhiyaan v1.0.0',
