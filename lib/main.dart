@@ -37,6 +37,7 @@ Future<void> servicesToInitializeBeforeAppStart() async {
 
 void main() async {
   await servicesToInitializeBeforeAppStart();
+  // await Upgrader.clearSavedSettings(); // REMOVE this for release builds
   runApp(const MyApp());
 }
 

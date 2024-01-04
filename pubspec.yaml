@@ -39,6 +39,7 @@ dependencies:
   lottie: ^2.7.0
   flutter_animate: ^4.3.0
   http: ^1.1.2
+  upgrader: ^8.4.0
   
 dev_dependencies:
   flutter_test:
