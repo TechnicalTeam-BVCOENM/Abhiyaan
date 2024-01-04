@@ -189,40 +189,8 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                 height: 1.h,
               ),
               20.verticalSpace,
-
-              viewModel._bestMoments.isEmpty
-                  ? Container(
-                      height: 230.h,
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Card(
-                        margin: const EdgeInsets.only(bottom: 8).r,
-                        elevation: 0,
-                        clipBehavior: Clip.hardEdge,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16).r,
-                          side: BorderSide(
-                            color: context.colorScheme.secondaryLPurpleColor,
-                            width: 1.0,
-                          ),
-                        ),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.info_rounded,
-                                color: context.colorScheme.secondaryBlackColor,
-                              ),
-                              10.horizontalSpace,
-                              Text("Stay Tuned Comming Soon !",
-                                  style:
-                                      viewModel.fontThemeClass.body(context)),
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  : SizedBox(
+              viewModel._bestMoments.isNotEmpty
+                  ? SizedBox(
                       height: 230.h,
                       width: double.infinity,
                       child: CarouselSlider.builder(
@@ -247,16 +215,18 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                           enlargeCenterPage: true,
                         ),
                       ),
-                    ),
+                    )
+                  : Container(),
               12.verticalSpace,
-              Center(
-                child: CarouselUtils.buildIndicator(
-                  context,
-                  viewModel.activeIndex,
-                  viewModel._bestMoments.length,
-                ),
-              ),
-
+              viewModel._bestMoments.isNotEmpty
+                  ? Center(
+                      child: CarouselUtils.buildIndicator(
+                        context,
+                        viewModel.activeIndex,
+                        viewModel._bestMoments.length,
+                      ),
+                    )
+                  : Container(),
               Text(
                 "Contact Section",
                 style:
@@ -324,11 +294,9 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
               40.verticalSpace,
               const Text(""),
               32.verticalSpace,
-
             ]
                 .animate(delay: 0.ms, interval: 100.ms)
                 .fadeIn(curve: Curves.easeIn)),
-
       ),
     );
   }
