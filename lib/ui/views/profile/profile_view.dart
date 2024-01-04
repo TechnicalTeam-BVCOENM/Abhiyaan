@@ -88,14 +88,21 @@ class ProfileView extends StatelessWidget {
                                 height: 4.h,
                               ),
                               Text(
-                                  LocalStorageService().read('userProfile') ==
-                                          "Explorer"
-                                      ? "Explorer"
-                                      : "BVP Student",
-                                  style: FontThemeClass().body(context,
-                                      color: context
-                                          .colorScheme.secondarySectionColor,
-                                      fontWeight: FontWeight.w500))
+                                model.localStorageService.read('userProfile') ==
+                                        "Explorer"
+                                    ? "Explorer"
+                                    : model.localStorageService
+                                                .read('userProfile') ==
+                                            "Faculty"
+                                        ? "Faculty"
+                                        : "BVP Student",
+                                style: FontThemeClass().body(
+                                  context,
+                                  color:
+                                      context.colorScheme.secondarySectionColor,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )
                             ],
                           )
                         ],
@@ -111,14 +118,22 @@ class ProfileView extends StatelessWidget {
                             curve: Curves.easeInOut,
                             duration: 600.ms,
                           ),
-                    // Display each profile card widget
-                    const Cerificatation().animate(delay: 200.ms).fadeIn(
-                          delay: 100.ms,
-                          curve: Curves.easeInOut,
-                          duration: 600.ms,
-                        ),
+                    model.localStorageService.read('userProfile') == "Explorer"
+                        ? const SizedBox()
+                        : model.localStorageService.read('userProfile') ==
+                                "Faculty"
+                            ? const SizedBox()
+                            :
+                            // Display each profile card widget
+                            const Cerificatation()
+                                .animate(delay: 200.ms)
+                                .fadeIn(
+                                  delay: 100.ms,
+                                  curve: Curves.easeInOut,
+                                  duration: 600.ms,
+                                ),
                     const Expanded(child: Text("")),
-                     Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const SocialLinks(
@@ -133,11 +148,11 @@ class ProfileView extends StatelessWidget {
                           iconpath: AssetImagePath.xImg,
                           url: AssetUrls.twitterUrl,
                         ),
-                      ].animate(delay: 500.ms,interval: 200.ms).fadeIn(
-                          delay: 100.ms,
-                          curve: Curves.easeInOut,
-                          duration: 600.ms,
-                        ),
+                      ].animate(delay: 500.ms, interval: 200.ms).fadeIn(
+                            delay: 100.ms,
+                            curve: Curves.easeInOut,
+                            duration: 600.ms,
+                          ),
                     ),
                     SizedBox(
                       height: 20.h,

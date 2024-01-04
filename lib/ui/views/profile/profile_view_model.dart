@@ -31,19 +31,26 @@ class ProfileViewModel extends BaseViewModel {
   ];
 
   List<ProfileDetailsCard> profileCardList = [
-    LocalStorageService().read('userProfile') != "Explorer"
-        ? ProfileDetailsCard(
-            leading: AssetImagePath.misImg,
-            title: "MIS Number",
-            value: LocalStorageService().read('userMisNo').toString(),
-            icon: Icons.content_copy,
-          )
-        : const ProfileDetailsCard(
+    LocalStorageService().read('userProfile') == "Explorer"
+        ? const ProfileDetailsCard(
             leading: AssetImagePath.misImg,
             title: "MIS Number",
             value: "",
             icon: Icons.content_copy,
-          ),
+          )
+        : LocalStorageService().read('userProfile') == "Faculty"
+            ? const ProfileDetailsCard(
+                leading: AssetImagePath.misImg,
+                title: "MIS Number",
+                value: "",
+                icon: Icons.content_copy,
+              )
+            : ProfileDetailsCard(
+                leading: AssetImagePath.misImg,
+                title: "MIS Number",
+                value: LocalStorageService().read('userMisNo').toString(),
+                icon: Icons.content_copy,
+              ),
     ProfileDetailsCard(
       leading: AssetImagePath.emailImg,
       title: "Email ID",
