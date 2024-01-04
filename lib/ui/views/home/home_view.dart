@@ -205,7 +205,7 @@ class HomeView extends StatelessWidget {
                                   physics: const BouncingScrollPhysics(),
                                 ).animate().fadeIn(),
                           60.verticalSpace,
-                          Text("Innovate.",
+                          Text("Innovate",
                               maxLines: 2,
                               softWrap: true,
                               overflow: TextOverflow.ellipsis,
@@ -214,7 +214,7 @@ class HomeView extends StatelessWidget {
                                   color: context
                                       .colorScheme.secondarySectionColor
                                       .withOpacity(0.8))),
-                          Text("Inspire. Achieve.",
+                          Text("Achieve Inspire",
                               maxLines: 2,
                               softWrap: true,
                               overflow: TextOverflow.ellipsis,
@@ -224,7 +224,7 @@ class HomeView extends StatelessWidget {
                                       .colorScheme.secondarySectionColor
                                       .withOpacity(0.8))),
                           3.verticalSpace,
-                          Text('Made with ❤️ by Technical Team of SC',
+                          Text('Made with ❤️ by Technical Team',
                               style: fontTheme.caption(context,
                                   color: context.colorScheme.secondaryBlackColor
                                       .withOpacity(0.8),
