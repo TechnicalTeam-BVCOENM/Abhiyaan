@@ -1,4 +1,5 @@
 import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 part 'auth_view_model.dart';
 
@@ -59,7 +60,7 @@ class AuthView extends StatelessWidget {
                         curve: Curves.easeInOut,
                         duration: 700.ms,
                       ),
-                  6.verticalSpace,
+                 model.showRegister?  6.verticalSpace : 16.verticalSpace,
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 7.0).r,
                     child: Text(
@@ -76,7 +77,7 @@ class AuthView extends StatelessWidget {
                           duration: 700.ms,
                         ),
                   ),
-                  30.verticalSpace,
+                  model.showRegister ?  30.verticalSpace :  40.verticalSpace,
                   GestureDetector(
                     onTap: () {
                       model.toSignInPage(context);
@@ -102,6 +103,8 @@ class AuthView extends StatelessWidget {
                         duration: 700.ms,
                       ),
                   12.verticalSpace,
+                  
+                  model.showRegister ?
                   GestureDetector(
                     onTap: () {
                       model.toRegisterPage(context);
@@ -129,7 +132,7 @@ class AuthView extends StatelessWidget {
                         delay: 100.ms,
                         curve: Curves.easeInOut,
                         duration: 700.ms,
-                      ),
+                      ) : Container(),
                   10.verticalSpace,
                 ].animate(interval: 50.ms).fadeIn(
                       delay: 100.ms,
