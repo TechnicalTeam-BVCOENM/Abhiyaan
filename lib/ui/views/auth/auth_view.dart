@@ -29,6 +29,7 @@ class AuthView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image(
+                                width: 350.w,
                                 image:
                                     Image.asset(AssetImagePath.logoImg).image,
                               ),

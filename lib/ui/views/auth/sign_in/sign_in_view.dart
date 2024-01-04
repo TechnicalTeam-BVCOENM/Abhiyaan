@@ -32,7 +32,7 @@ class SignInView extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 90).r,
                           child: SizedBox(
-                            width: ResponsiveUtils.screenWidth(context) * 0.6,
+                            width: 320.w,
                             child: Image.asset(
                               AssetImagePath.logoImg,
                             ),
