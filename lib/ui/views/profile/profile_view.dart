@@ -88,14 +88,21 @@ class ProfileView extends StatelessWidget {
                                 height: 4.h,
                               ),
                               Text(
-                                  LocalStorageService().read('userProfile') ==
-                                          "Explorer"
-                                      ? "Explorer"
-                                      : "BVCOE Student",
-                                  style: FontThemeClass().body(context,
-                                      color: context
-                                          .colorScheme.secondarySectionColor,
-                                      fontWeight: FontWeight.w500))
+                                model.localStorageService.read('userProfile') ==
+                                        "Explorer"
+                                    ? "Explorer"
+                                    : model.localStorageService
+                                                .read('userProfile') ==
+                                            "Faculty"
+                                        ? "Faculty"
+                                        : "BVP Student",
+                                style: FontThemeClass().body(
+                                  context,
+                                  color:
+                                      context.colorScheme.secondarySectionColor,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )
                             ],
                           )
                         ],
@@ -111,12 +118,20 @@ class ProfileView extends StatelessWidget {
                             curve: Curves.easeInOut,
                             duration: 600.ms,
                           ),
-                    // Display each profile card widget
-                    const Cerificatation().animate(delay: 200.ms).fadeIn(
-                          delay: 100.ms,
-                          curve: Curves.easeInOut,
-                          duration: 600.ms,
-                        ),
+                    model.localStorageService.read('userProfile') == "Explorer"
+                        ? const SizedBox()
+                        : model.localStorageService.read('userProfile') ==
+                                "Faculty"
+                            ? const SizedBox()
+                            :
+                            // Display each profile card widget
+                            const Cerificatation()
+                                .animate(delay: 200.ms)
+                                .fadeIn(
+                                  delay: 100.ms,
+                                  curve: Curves.easeInOut,
+                                  duration: 600.ms,
+                                ),
                     const Expanded(child: Text("")),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
