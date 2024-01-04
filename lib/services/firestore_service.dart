@@ -203,18 +203,17 @@ class FirestoreService {
       return snapshot.docs.map((doc) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         return EventModel(
-          title: data['title'],
-          startDate: data['startDate'],
-          endDate: data['endDate'],
-          location: data['location'],
-          imageUrl: data['imageUrl'],
-          cName: data['coordinatorName'],
-          cEmail: data['coordinatorEmail'],
-          cPhone: data['coordinatorPhone'],
-          about: data['about'],
-          registerUrl: data['registerUrl'],
-          docID: doc.id
-        );
+            title: data['title'],
+            startDate: data['startDate'],
+            endDate: data['endDate'],
+            location: data['location'],
+            imageUrl: data['imageUrl'],
+            cName: data['coordinatorName'],
+            cEmail: data['coordinatorEmail'],
+            cPhone: data['coordinatorPhone'],
+            about: data['about'],
+            registerUrl: data['registerUrl'],
+            docID: doc.id);
       }).toList();
     } on Exception catch (e) {
       log.e("Error in getting events : ${e.toString()}");
@@ -268,6 +267,19 @@ class FirestoreService {
     } catch (e) {
       log.e("Error in getting blogs data from firebase : ${e.toString()}");
       return [];
+    }
+  }
+
+  Future<bool> showRegistration() async {
+    try {
+      final response =
+          await _firestore.collection('Users').doc("showRegistration").get();
+      final success = response.data() as Map<String, dynamic>;
+      final bool value = success["value"];
+      return value;
+    } catch (e) {
+      log.e("Error in showing register button from firebase : ${e.toString()}");
+      return false;
     }
   }
 }

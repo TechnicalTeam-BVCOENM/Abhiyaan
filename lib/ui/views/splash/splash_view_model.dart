@@ -1,19 +1,23 @@
 part of 'splash_view.dart';
 
 class SplashViewModel extends BaseViewModel {
-  final _navigationService = locator<NavigationService>();
   final log = getLogger('SplashViewModel');
-
+  final _navigationService = locator<NavigationService>();
+  final _storageService = locator<LocalStorageService>();
   void init() async {
     await Future.delayed(const Duration(milliseconds: 3000));
 
     if (FirebaseAuth.instance.currentUser != null) {
-      // signed in
       _navigationService.replaceWith(Routes.bottomNavView);
     } else {
+      final bool value = await FirestoreService().showRegistration();
+      _storageService.write("showRegister", value);
       _navigationService.replaceWith(Routes.authView);
-
-      // signed out
     }
   }
+
+  // Future<bool> showRegistration() async {
+  //   final value = await locator<FirestoreService>().showRegistration();
+  //   return value;
+  // }
 }

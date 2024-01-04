@@ -19,7 +19,7 @@ class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   User? get currentUser => _firebaseAuth.currentUser;
 
- 
+
 
   Future<void> signUpWithEmailAndPassword(
       context, String email, String password) async {
