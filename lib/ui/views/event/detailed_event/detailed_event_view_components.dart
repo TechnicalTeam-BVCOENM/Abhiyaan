@@ -189,8 +189,9 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                 height: 1.h,
               ),
               20.verticalSpace,
-              viewModel._bestMoments.isNotEmpty
-                  ? SizedBox(
+              viewModel._bestMoments.isEmpty
+                  ? Container()
+                  : SizedBox(
                       height: 230.h,
                       width: double.infinity,
                       child: CarouselSlider.builder(
@@ -215,18 +216,17 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                           enlargeCenterPage: true,
                         ),
                       ),
-                    )
-                  : Container(),
+                    ),
               12.verticalSpace,
-              viewModel._bestMoments.isNotEmpty
-                  ? Center(
+              viewModel._bestMoments.isEmpty
+                  ? Container()
+                  : Center(
                       child: CarouselUtils.buildIndicator(
                         context,
                         viewModel.activeIndex,
                         viewModel._bestMoments.length,
                       ),
-                    )
-                  : Container(),
+                    ),
               Text(
                 "Contact Section",
                 style:

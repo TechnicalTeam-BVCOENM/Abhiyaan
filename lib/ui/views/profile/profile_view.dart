@@ -88,14 +88,7 @@ class ProfileView extends StatelessWidget {
                                 height: 4.h,
                               ),
                               Text(
-                                model.localStorageService.read('userProfile') ==
-                                        "Explorer"
-                                    ? "Explorer"
-                                    : model.localStorageService
-                                                .read('userProfile') ==
-                                            "Faculty"
-                                        ? "Faculty"
-                                        : "BVP Student",
+                                model.localStorageService.read('userProfile'),
                                 style: FontThemeClass().body(
                                   context,
                                   color:
