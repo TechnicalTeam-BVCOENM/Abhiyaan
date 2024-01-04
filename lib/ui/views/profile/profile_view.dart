@@ -91,7 +91,7 @@ class ProfileView extends StatelessWidget {
                                   LocalStorageService().read('userProfile') ==
                                           "Explorer"
                                       ? "Explorer"
-                                      : "BVP Student",
+                                      : "BVCOE Student",
                                   style: FontThemeClass().body(context,
                                       color: context
                                           .colorScheme.secondarySectionColor,
@@ -118,7 +118,7 @@ class ProfileView extends StatelessWidget {
                           duration: 600.ms,
                         ),
                     const Expanded(child: Text("")),
-                     Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const SocialLinks(
@@ -133,11 +133,11 @@ class ProfileView extends StatelessWidget {
                           iconpath: AssetImagePath.xImg,
                           url: AssetUrls.twitterUrl,
                         ),
-                      ].animate(delay: 500.ms,interval: 200.ms).fadeIn(
-                          delay: 100.ms,
-                          curve: Curves.easeInOut,
-                          duration: 600.ms,
-                        ),
+                      ].animate(delay: 500.ms, interval: 200.ms).fadeIn(
+                            delay: 100.ms,
+                            curve: Curves.easeInOut,
+                            duration: 600.ms,
+                          ),
                     ),
                     SizedBox(
                       height: 20.h,
