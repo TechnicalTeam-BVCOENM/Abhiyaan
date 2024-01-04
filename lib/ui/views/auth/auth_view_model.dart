@@ -13,6 +13,5 @@ class AuthViewModel extends BaseViewModel {
   void toRegisterPage(BuildContext context) {
     _navigationService.replaceWith(Routes.registerView);
   }
-
- 
+  
 }
