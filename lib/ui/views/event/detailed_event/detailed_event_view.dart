@@ -10,6 +10,7 @@ import 'package:share_plus/share_plus.dart';
 part 'detailed_event_view_model.dart';
 part 'detailed_event_view_components.dart';
 
+
 class DetailedEventView extends StatelessWidget {
   final EventModel eventData;
   const DetailedEventView({super.key, required this.eventData});
@@ -18,8 +19,10 @@ class DetailedEventView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<DetailedEventViewModel>.reactive(
       viewModelBuilder: () => DetailedEventViewModel(eventData),
-      onViewModelReady: (viewModel) => viewModel.getbestMoments(),
+      onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
+          final _analyticsService = locator<AnalyticsService>();
+
         return Scaffold(
           floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
           floatingActionButton: Row(
@@ -33,6 +36,7 @@ class DetailedEventView extends StatelessWidget {
                   heroTag: "register",
                   mini: false,
                   onPressed: () {
+                    _analyticsService.logEvent(eventName: "Register_Event", value: "${eventData.title} Event Register button clicked : ${eventData.docID}");
                     UrlLauncher().launchURL(eventData.registerUrl);
                   },
                   child: Text(

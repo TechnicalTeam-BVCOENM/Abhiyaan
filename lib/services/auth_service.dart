@@ -7,6 +7,8 @@ import 'package:lottie/lottie.dart';
 
 class AuthenticationService {
   final log = getLogger('AuthService');
+  
+
   List userTag = [
     "userMisNo",
     "userEmail",
@@ -24,10 +26,12 @@ class AuthenticationService {
   Future<void> signUpWithEmailAndPassword(
       context, String email, String password) async {
     try {
+      // _analyticsService.logLogin();
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      // _analyticsService.setUserProperties(userId: _firebaseAuth.currentUser!.uid);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         showErrorMessage(context, "Email already in use");

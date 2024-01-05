@@ -1,6 +1,5 @@
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/auth_service.dart';
-import 'package:abhiyaan/theme/theme_service.dart';
 import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,13 +14,14 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SettingsViewModel>.nonReactive(
       viewModelBuilder: () => SettingsViewModel(),
+      onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
         return Scaffold(
           backgroundColor: context.colorScheme.backgroundColor,
           appBar: AppBar(
             iconTheme: IconThemeData(
               color: context
-                  .colorScheme.secondaryBlackColor, //change your color here
+                  .colorScheme.secondaryBlackColor,
             ),
             backgroundColor: context.colorScheme.backgroundColor,
             elevation: 0,
@@ -50,7 +50,6 @@ class SettingsView extends StatelessWidget {
                         trailingIcon: Switch.adaptive(
                           activeColor: context.colorScheme.switchColor,
                           value: model._themeService.valueListenable.value,
-                          // trackColor: context.colorScheme.secondarySectionColor,
                           onChanged: (val) => model.changeTheme(),
                         ),
                         leadingIcon: model.settings[0].leading,
@@ -68,7 +67,9 @@ class SettingsView extends StatelessWidget {
                             leadingIcon: model.settings[1].leading),
                       ),
                       GestureDetector(
-                        onTap: () => model.navigateToHelpSupport(),
+                        onTap: () {
+                            
+                           model.navigateToHelpSupport();},
                         child: settingsListTile(model, context,
                             title: model.settings[2].title,
                             trailingIcon: Icon(

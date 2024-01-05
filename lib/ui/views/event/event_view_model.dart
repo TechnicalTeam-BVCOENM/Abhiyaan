@@ -4,6 +4,8 @@ class EventViewModel extends BaseViewModel {
   final log = getLogger('EventViewModel');
   final FirestoreService _firestoreService = FirestoreService();
   final _navigationService = locator<NavigationService>();
+  final _analyticsService = locator<AnalyticsService>();
+
   List<SponsorsModel> _sponsors = [];
   List<SponsorsModel> get sponsors => _sponsors;
   List<EventModel> _events = [];
@@ -26,6 +28,7 @@ class EventViewModel extends BaseViewModel {
   );
 
   void init() async {
+    _analyticsService.logScreen(screenName: "Event Screen Opened");
     await loadData();
   }
 
@@ -141,8 +144,7 @@ class EventModel {
       required this.cPhone,
       required this.about,
       required this.registerUrl,
-      required this.docID
-      });
+      required this.docID});
 }
 
 class SponsorsModel {

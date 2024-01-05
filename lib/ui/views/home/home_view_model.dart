@@ -7,10 +7,11 @@ class HomeViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
   final navigationService = locator<NavigationService>();
   NotificationsService notificationService = NotificationsService();
+  final AnalyticsService _analyticsService = locator<AnalyticsService>();
+
   FontThemeClass fontThemeClass = FontThemeClass();
   CarouselUtils carouselUtils = CarouselUtils();
   late bool isUserNew = LocalStorageService().read('isUserNew');
-
 
   int _activeIndex = 0;
   List<String> firstname = [];
@@ -146,6 +147,7 @@ class HomeViewModel extends BaseViewModel {
 
   Future<void> init(context) async {
     try {
+      _analyticsService.logScreen(screenName: 'HomeView Screen Opened');
       setBusy(true);
       _highlights = await _firestoreService.getHighlights();
       _collegeUpdates = await _firestoreService.getCollegeUpdates();
@@ -173,18 +175,17 @@ class HomeViewModel extends BaseViewModel {
 void handleQuickLinksNavigation(List model, int i) {
   try {
     if (model[i].url != '' && model[i].url != null) {
-      debugPrint("Route Url");
       UrlLauncher externalUrlHandler = UrlLauncher();
+      _analyticsService.logEvent(
+          eventName: "Quick_Links", value: "Button Clicked : ${model[i].title}");
       externalUrlHandler.launchURL(
         model[i].url,
       );
     } else if (model[i].view != '' && model[i].view != null) {
       final navigationService = locator<NavigationService>();
-
-      debugPrint("Page View");
       navigationService.navigateToView(model[i].view);
     } else {
-      debugPrint("Error");
+      debugPrint("Error in handling quick links navigation");
     }
   } catch (e) {
     debugPrint("Error in handling quick links navigation : ${e.toString()}");

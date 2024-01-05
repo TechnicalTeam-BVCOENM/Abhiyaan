@@ -1,10 +1,8 @@
 import 'package:abhiyaan/firebase_options.dart';
 import 'package:abhiyaan/services/notification_service.dart';
-import 'package:abhiyaan/theme/theme_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/services.dart';
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -37,6 +35,8 @@ Future<void> servicesToInitializeBeforeAppStart() async {
 
 void main() async {
   await servicesToInitializeBeforeAppStart();
+  final analytics = FirebaseAnalytics.instance;
+  await analytics.logAppOpen();
   // await Upgrader.clearSavedSettings(); // REMOVE this for release builds
   runApp(const MyApp());
 }
@@ -86,6 +86,9 @@ class MyApp extends StatelessWidget {
                     foregroundColor: context.colorScheme.secondaryBlackColor,
                   ),
                 ),
+                navigatorObservers: [
+                  locator<AnalyticsService>().getAnalyticsObserver()
+                ],
                 onGenerateRoute: StackedRouter().onGenerateRoute,
                 navigatorKey: StackedService.navigatorKey,
                 initialRoute: Routes.splashView,

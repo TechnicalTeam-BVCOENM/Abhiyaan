@@ -2,7 +2,6 @@ import 'package:abhiyaan/ui/views/auth/onboarding/onboarding_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/auth_service.dart';
-import 'package:abhiyaan/theme/responsive_utils.dart';
 import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,6 +16,7 @@ class RegisterView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<RegisterViewModel>.reactive(
         viewModelBuilder: () => RegisterViewModel(),
+        onViewModelReady: (viewModel) => viewModel.init(),
         builder: (context, model, child) {
           return GestureDetector(
               onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
