@@ -11,7 +11,6 @@ class HomeViewModel extends BaseViewModel {
   CarouselUtils carouselUtils = CarouselUtils();
   late bool isUserNew = LocalStorageService().read('isUserNew');
 
-
   int _activeIndex = 0;
   List<String> firstname = [];
   List<DepartmentUpdates> _collegeUpdates = [];

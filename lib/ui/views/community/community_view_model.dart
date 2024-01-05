@@ -104,7 +104,7 @@ class CommunityViewModel extends BaseViewModel {
     }
   }
 
-  Future<void> updateLikes(String blogId,BuildContext context) async {
+  Future<void> updateLikes(String blogId, BuildContext context) async {
     final currentBlog = localStorageService.read("isLiked_$blogId");
     AuthenticationService authenticationService =
         locator<AuthenticationService>();
@@ -122,9 +122,9 @@ class CommunityViewModel extends BaseViewModel {
           .doc(blogId)
           .update({
         "likes": FieldValue.arrayUnion([userId]),
-      }).then((value){
+      }).then((value) {
         showSuccessMessage(context, "You Liked this blog");
-      } );
+      });
     } catch (e) {
       log.e("Error in updating likes: ${e.toString()}");
     }
@@ -133,6 +133,7 @@ class CommunityViewModel extends BaseViewModel {
   Future<void> init(context) async {
     // setBusy(true);
     try {
+      SettingsViewModel().logout(context);
       await runBusyFuture(getBlogData());
       await getDepartmentClubsData();
       notifyListeners();
