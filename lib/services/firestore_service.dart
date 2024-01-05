@@ -273,7 +273,7 @@ class FirestoreService {
   Future<bool> showRegistration() async {
     try {
       final response =
-          await _firestore.collection('Users').doc("showRegistration").get();
+          await _firestore.collection('AppCheck').doc("showRegistration").get();
       final success = response.data() as Map<String, dynamic>;
       final bool value = success["value"];
       return value;

@@ -30,7 +30,7 @@ class RegisterView extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.symmetric(
                             horizontal: 30, vertical: 50),
-                        width: ResponsiveUtils.screenWidth(context) * 0.6,
+                        width: 320.w,
                         child: Image.asset(
                           AssetImagePath.logoImg,
                         ),

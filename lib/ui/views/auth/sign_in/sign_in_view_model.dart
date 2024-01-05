@@ -8,7 +8,7 @@ class SignInViewModel extends BaseViewModel {
   bool isloading = false;
   final log = getLogger('AuthViewModel');
   final fontTheme = FontThemeClass();
-
+  final showRegister = LocalStorageService().read("showRegister") ?? true;
   final TextEditingController emailIdTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
 
