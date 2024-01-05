@@ -131,11 +131,9 @@ class RegisterView extends StatelessWidget {
                                 : const Icon(Icons.visibility),
                           ),
                           hintText: 'Create Password',
-                          hintStyle: model.fontTheme.caption(
-                            context,
-                            color: context.colorScheme.secondarySectionColor,
-                            fontWeight: FontWeight.w500
-                          ),
+                          hintStyle: model.fontTheme.caption(context,
+                              color: context.colorScheme.secondarySectionColor,
+                              fontWeight: FontWeight.w500),
                         ),
                       ).animate(delay: 500.ms).fadeIn(
                             delay: 100.ms,
@@ -175,11 +173,9 @@ class RegisterView extends StatelessWidget {
                                 : const Icon(Icons.visibility),
                           ),
                           hintText: 'Confirm Password',
-                          hintStyle: model.fontTheme.caption(
-                            context,
-                            color: context.colorScheme.secondarySectionColor,
-                            fontWeight: FontWeight.w500
-                          ),
+                          hintStyle: model.fontTheme.caption(context,
+                              color: context.colorScheme.secondarySectionColor,
+                              fontWeight: FontWeight.w500),
                         ),
                       ).animate(delay: 600.ms).fadeIn(
                             delay: 100.ms,
@@ -189,12 +185,7 @@ class RegisterView extends StatelessWidget {
                       25.verticalSpace,
                       TextButton(
                         onPressed: () async {
-                          await model.register(
-                              model.emailIdTextController.text,
-                              model.createpasswordTextController.text,
-                              model.confirmpasswordTextController.text,
-                              model.userNameController.text,
-                              context);
+                          await model.register(context);
                         },
                         style: ButtonStyle(
                           minimumSize: MaterialStateProperty.all(
