@@ -6,7 +6,7 @@ class AuthViewModel extends BaseViewModel {
 
   final log = getLogger('auth_view');
 
-  final showRegister = LocalStorageService().read("showRegister") ?? true;
+  final showRegister = LocalStorageService().read("showRegister") ?? false;
 
   void init() async{
    await _analyticsService.logScreen(screenName: "Auth Screen");
