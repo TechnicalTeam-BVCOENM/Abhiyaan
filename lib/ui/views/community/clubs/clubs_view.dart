@@ -13,6 +13,7 @@ class ClubsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ClubsViewModel>.reactive(
       viewModelBuilder: () => ClubsViewModel(clubsData),
+      onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
         return Scaffold(
           backgroundColor: context.colorScheme.backgroundColor,

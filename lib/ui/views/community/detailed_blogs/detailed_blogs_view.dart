@@ -16,7 +16,7 @@ class DettailedBlogPage extends StatelessWidget {
     return ViewModelBuilder<DettailedBlogPageModel>.reactive(
       viewModelBuilder: () => DettailedBlogPageModel(),
       disposeViewModel: false,
-      onViewModelReady: (viewModels) => viewModels.init(context),
+      onViewModelReady: (viewModels) => viewModels.init(blogData),
       builder: (context, model, child) {
         FontThemeClass fontThemeClass = FontThemeClass();
         final CommunityViewModel communityViewModel = CommunityViewModel();

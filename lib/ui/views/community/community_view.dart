@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'package:abhiyaan/ui/common/toast_message.dart';
+import 'package:abhiyaan/ui/views/community/clubs/clubs_view.dart';
 import 'package:abhiyaan/ui/views/community/detailed_blogs/detailed_blogs_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:http/http.dart' as http;
@@ -26,6 +27,7 @@ class CommunityView extends StatelessWidget {
         disposeViewModel: false,
         onViewModelReady: (viewModel) => viewModel.init(context),
         builder: (context, model, child) {
+          final analyticsService = locator<AnalyticsService>();
           FontThemeClass fontThemeClass = FontThemeClass();
           return model.isBusy
               ? const CommunityPageShimmerEffect()
@@ -34,6 +36,9 @@ class CommunityView extends StatelessWidget {
                   body: RefreshIndicator(
                     strokeWidth: 3.0,
                     onRefresh: () async {
+                      analyticsService.logEvent(
+                          eventName: "Qoute_Refreshed",
+                          value: "Refresh Qoute drag down");
                       await Future.delayed(const Duration(seconds: 1));
                       await model.fetchAffirmation();
                     },

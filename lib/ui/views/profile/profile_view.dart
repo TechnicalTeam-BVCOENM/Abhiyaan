@@ -11,6 +11,7 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileViewModel>.nonReactive(
         viewModelBuilder: () => ProfileViewModel(),
+        onViewModelReady: (viewModel) => viewModel.init(),
         builder: (context, model, child) {
           return Scaffold(
             backgroundColor: context.colorScheme.backgroundColor,

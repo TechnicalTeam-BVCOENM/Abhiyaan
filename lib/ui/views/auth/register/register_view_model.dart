@@ -1,24 +1,28 @@
 part of 'register_view.dart';
 
 class RegisterViewModel extends BaseViewModel {
-  final _navigationService = locator<NavigationService>();
-  final _authenticationService = locator<AuthenticationService>();
-
   final log = getLogger('AuthViewModel');
   final fontTheme = FontThemeClass();
 
+  final _navigationService = locator<NavigationService>();
+  final _authenticationService = locator<AuthenticationService>();
+  final AnalyticsService _analyticsService = locator<AnalyticsService>();
+
+  final TextEditingController userNameController = TextEditingController();
   final TextEditingController emailIdTextController = TextEditingController();
   final TextEditingController createpasswordTextController =
       TextEditingController();
   final TextEditingController confirmpasswordTextController =
       TextEditingController();
-  final TextEditingController userNameController = TextEditingController();
 
   final String emailIdErrorText = "Please enter a valid email id";
-
   bool isCreatePasswordVisible = false;
   bool isConfirmPasswordVisible = false;
   bool isEmailIdValid = true;
+
+  void init() {
+    _analyticsService.logScreen(screenName: 'RegisterView');
+  }
 
   bool toggleCreatePasswordVisibility() {
     isCreatePasswordVisible = !isCreatePasswordVisible;
@@ -73,8 +77,13 @@ class RegisterViewModel extends BaseViewModel {
     // Check if MIS number contains only numbers and has a length of 8
 
     AuthenticationService().showLoadingOverlay(context);
+
+    _analyticsService.logSignUp(method: 'Register - Email');
+
     await _authenticationService.signUpWithEmailAndPassword(
         context, email, confirmPassword);
+    _analyticsService.setUserProperties(
+        userId: FirebaseAuth.instance.currentUser!.uid);
 
     await FirebaseFirestore.instance
         .collection("Users")

@@ -1,4 +1,6 @@
 part of "community_view.dart";
+final AnalyticsService _analyticsService = locator<AnalyticsService>();
+
 
 class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
   final CommunityBlogsData blogsData;
@@ -170,6 +172,9 @@ class DepartmentClubs extends ViewModelWidget<CommunityViewModel> {
         padding: const EdgeInsets.only(right: 10).r,
         child: InkWell(
           onTap: () {
+            _analyticsService.logEvent(
+                eventName: "Departmental_Club_View",
+                value: "${data.clubShortHand} Club Viewed");
             viewModel.navigationService.navigateToClubsView(clubsData: data);
           },
           child: SizedBox(
@@ -228,7 +233,7 @@ class DepartmentClubs extends ViewModelWidget<CommunityViewModel> {
               ),
             ),
           ),
-        ));
+        ),);
   }
 }
 

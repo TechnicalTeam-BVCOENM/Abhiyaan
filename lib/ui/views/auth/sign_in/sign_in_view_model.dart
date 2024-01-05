@@ -1,12 +1,12 @@
 part of 'sign_in_view.dart';
 
 class SignInViewModel extends BaseViewModel {
-  final _navigationService = locator<NavigationService>();
+  final log = getLogger('AuthViewModel');
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final AnalyticsService _analyticsService = locator<AnalyticsService>();
+  final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
   final SettingsViewModel settingsViewModel = SettingsViewModel();
-  bool isloading = false;
-  final log = getLogger('AuthViewModel');
   final fontTheme = FontThemeClass();
   final showRegister = LocalStorageService().read("showRegister") ?? true;
   final TextEditingController emailIdTextController = TextEditingController();
@@ -15,9 +15,14 @@ class SignInViewModel extends BaseViewModel {
   final String emailIdErrorText = "Please enter a valid email id";
   final String passwordErrorText = "Please enter a valid email and password";
 
+  bool isloading = false;
   bool isPasswordVisible = false;
   bool isEmailIdValid = true;
   bool isPasswordValid = true;
+
+  void init(){
+    _analyticsService.logScreen(screenName: 'SignInView');
+  }
 
   bool togglePasswordVisibility() {
     isPasswordVisible = !isPasswordVisible;
@@ -44,10 +49,12 @@ class SignInViewModel extends BaseViewModel {
       try {
         // Show a loading indicator over your UI
         _authenticationService.showLoadingOverlay(context);
+        _analyticsService.logSignUp(method: 'SignIn - Email');
         await _firebaseAuth.signInWithEmailAndPassword(
           email: email,
           password: password,
         );
+        _analyticsService.setUserProperties(userId: _firebaseAuth.currentUser!.uid);
         await _authenticationService.storeUserDataLocally();
         _navigationService.back();
         showSuccessMessage(

@@ -1,6 +1,5 @@
+import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/auth_service.dart';
-import 'package:abhiyaan/services/local_storage_service.dart';
-import 'package:abhiyaan/theme/theme_service.dart';
 import 'package:abhiyaan/ui/views/auth/auth_view.dart';
 import 'package:abhiyaan/ui/views/auth/onboarding/onboarding_view.dart';
 import 'package:abhiyaan/ui/views/auth/register/register_view.dart';
@@ -14,7 +13,6 @@ import 'package:abhiyaan/ui/views/event/event_view.dart';
 import 'package:abhiyaan/ui/views/profile/profile_view.dart';
 import 'package:abhiyaan/ui/views/profile/settings/settings_view.dart';
 import 'package:stacked/stacked_annotations.dart';
-import 'package:stacked_services/stacked_services.dart';
 import 'package:abhiyaan/ui/views/home/home_view.dart';
 import 'package:abhiyaan/ui/views/splash/splash_view.dart';
 
@@ -39,7 +37,8 @@ import 'package:abhiyaan/ui/views/splash/splash_view.dart';
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: LocalStorageService),
     LazySingleton(classType: ThemeService),
-    LazySingleton(classType: AuthenticationService)
+    LazySingleton(classType: AuthenticationService),
+    LazySingleton(classType: AnalyticsService),
   ],
   logger: StackedLogger(),
 )
