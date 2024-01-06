@@ -1,3 +1,4 @@
+import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expandable/expandable.dart';
 import 'package:intl/intl.dart';
@@ -74,7 +75,7 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                 ],
               ),
               2.verticalSpace,
-              ExpandedDescription(description: updateList[i].description),
+              ExpandedDescription(description: updateList[i].description , url: updateList[i].url),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -120,22 +121,58 @@ class CollapsedDescription extends StatelessWidget {
 
 class ExpandedDescription extends StatelessWidget {
   final String description;
+  final String url;
   const ExpandedDescription({
     super.key,
     required this.description,
+    required this.url,
   });
 
   @override
   Widget build(BuildContext context) {
     FontThemeClass fontTheme = FontThemeClass();
 
-    return Text(description,
-        maxLines: 100,
-        softWrap: true,
-        overflow: TextOverflow.ellipsis,
-        textAlign: TextAlign.justify,
-        style: fontTheme.caption(context,
-            color: context.colorScheme.secondaryBlackColor.withOpacity(0.6)));
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          description,
+          maxLines: 100,
+          softWrap: true,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.justify,
+          style: fontTheme.caption(
+            context,
+            color: context.colorScheme.secondaryBlackColor.withOpacity(0.6),
+          ),
+        ),
+        4.verticalSpace,
+        Visibility(
+          visible: url.isNotEmpty || url != "",
+          child: Row(
+            children: [
+               const Text("For more details :-\t"),
+              2.horizontalSpace,
+              GestureDetector(
+                onTap: () {
+                  UrlLauncher().launchURL(url);
+                },
+                child: Text(
+                  url,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                  style: fontTheme.caption(
+                    context,
+                    color: Colors.blue,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
 

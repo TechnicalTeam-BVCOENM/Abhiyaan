@@ -8,7 +8,6 @@ class HomeViewModel extends BaseViewModel {
   final navigationService = locator<NavigationService>();
   NotificationsService notificationService = NotificationsService();
   final AnalyticsService _analyticsService = locator<AnalyticsService>();
-  final _authenticationService = locator<AuthenticationService>();
 
   FontThemeClass fontThemeClass = FontThemeClass();
   CarouselUtils carouselUtils = CarouselUtils();
@@ -153,8 +152,8 @@ class HomeViewModel extends BaseViewModel {
       _highlights = await _firestoreService.getHighlights();
       _collegeUpdates = await _firestoreService.getCollegeUpdates();
       // await _authenticationService.checkPermission(Permission.appTrackingTransparency,context);
-      await _authenticationService.checkPermission(
-          Permission.notification, context);
+      // await _authenticationService.checkPermission(
+      //     Permission.notification, context);
       notifyListeners();
       setBusy(false);
       await Future.delayed(2.seconds);
@@ -199,21 +198,23 @@ void handleQuickLinksNavigation(List model, int i) {
 
 // Models
 class DepartmentUpdates {
-  late String title;
-  late String description;
-  late Timestamp date;
+  final String title;
+  final String description;
+  final Timestamp date;
+  final String url;
   DepartmentUpdates({
     required this.title,
     required this.description,
     required this.date,
+    required this.url,
   });
 }
 
 class QuickLinksModel {
-  late String imageUrl;
-  late String title;
-  late String url;
-  late Widget view;
+  final String imageUrl;
+  final String title;
+  final String url;
+  final Widget view;
   QuickLinksModel({
     required this.imageUrl,
     required this.title,

@@ -166,6 +166,7 @@ class FirestoreService {
             title: data['title'] ?? '',
             description: data['description'] ?? '',
             date: data['date'] ?? '',
+            url: data['url'] ?? '',
           );
         }).toList();
       }
