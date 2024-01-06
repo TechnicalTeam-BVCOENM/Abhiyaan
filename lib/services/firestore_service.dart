@@ -82,6 +82,7 @@ class FirestoreService {
         List<dynamic> clubFst = data["data"]["clubFest"];
 
         String clubName = aClubData['clubName'];
+        String clubLink = aClubData['clubLink'] ?? '';
         String clubShortHand = aClubData['clubShortHand'];
         String clubImage = aClubData['clubImage'];
         List<ClubMemberInfo> clubMembers = clubMm.map((e) {
@@ -93,8 +94,9 @@ class FirestoreService {
         }).toList();
         List<FestInfo> clubFests = clubFst.map((e) {
           return FestInfo(
-            festName: e['festName'],
-            festImage: e['festImage'],
+            festName: e['festName'] ?? '',
+            festImage: e['festImage'] ?? '',
+            festLink: e['festLink'] ?? '',
           );
         }).toList();
 
@@ -104,6 +106,7 @@ class FirestoreService {
           clubImage: clubImage,
           clubMembers: clubMembers,
           clubFest: clubFests,
+          clubLink: clubLink,
         );
       }).toList();
     } on Exception catch (e) {

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:abhiyaan/ui/views/community/detailed_blogs/detailed_blogs_view.dart';
-import 'package:abhiyaan/ui/views/profile/settings/settings_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:http/http.dart' as http;
 import 'package:abhiyaan/file_exporter.dart';

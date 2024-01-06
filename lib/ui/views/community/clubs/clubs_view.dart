@@ -1,4 +1,6 @@
 import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/ui/common/toast_message.dart';
+import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:abhiyaan/ui/views/community/community_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -29,6 +31,7 @@ class ClubsView extends StatelessWidget {
                 clubShortHand: clubsData.clubShortHand,
                 clubMembers: clubsData.clubMembers,
                 clubFest: clubsData.clubFest,
+                clubLink: clubsData.clubLink,
               ),
             ],
           ),
