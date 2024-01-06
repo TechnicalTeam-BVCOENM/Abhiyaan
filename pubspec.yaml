@@ -46,7 +46,6 @@ dependencies:
   http: ^1.1.2
   upgrader: ^8.4.0
   pinput: ^3.0.1
-  email_otp: ^2.1.1
   mailer: ^6.0.1
   # permission_handler: ^11.1.0
   

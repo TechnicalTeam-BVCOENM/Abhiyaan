@@ -10,7 +10,6 @@ class RegisterViewModel extends BaseViewModel {
   final AnalyticsService _analyticsService = locator<AnalyticsService>();
   final TextEditingController userNameController = TextEditingController();
   String? signupStatus;
-  final EmailOTP myauth = EmailOTP();
   late int otp;
   final log = getLogger('AuthViewModel');
   final fontTheme = FontThemeClass();
