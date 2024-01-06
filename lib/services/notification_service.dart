@@ -1,6 +1,5 @@
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/auth_service.dart';
-import 'package:app_settings/app_settings.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -39,8 +38,11 @@ class NotificationsService {
         AuthorizationStatus.provisional) {
       log.i('User granted provisional permission');
     } else {
-      AppSettings.openAppSettings(type: AppSettingsType.notification);
-      log.i('User declined or has not accepted permission');
+      log.e('User declined or has not accepted permission');
+      // ignore: use_build_context_synchronously
+      // PermissionRequestPopup().showPermissionRequestPopup(context);
+      // AppSettings.openAppSettings(type: AppSettingsType.notification);
+      
     }
   }
 
@@ -140,16 +142,6 @@ class LocalNotificationService {
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
 
 // import 'dart:io';
 // import 'package:app_settings/app_settings.dart';

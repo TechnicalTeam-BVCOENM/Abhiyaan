@@ -1,6 +1,6 @@
 part of 'societies_view.dart';
-final AnalyticsService _analyticsService = locator<AnalyticsService>();
 
+final AnalyticsService _analyticsService = locator<AnalyticsService>();
 
 class SocietiesViewModel extends BaseViewModel {
   final log = getLogger('SocietiesViewModel');
@@ -15,7 +15,7 @@ class SocietiesViewModel extends BaseViewModel {
   Future<void> loadData() async {
     setBusy(true);
     try {
-       _analyticsService.logScreen(screenName: 'SocietiesView Screen Opened'); 
+      _analyticsService.logScreen(screenName: 'SocietiesView Screen Opened');
     } catch (e) {
       log.e(e);
     }

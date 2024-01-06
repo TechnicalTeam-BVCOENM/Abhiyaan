@@ -223,7 +223,7 @@ class SignInView extends StatelessWidget {
                               curve: Curves.easeInOut,
                               duration: 500.ms,
                             ),
-                       model.showRegister?  10.verticalSpace : const Spacer(),
+                        model.showRegister ? 10.verticalSpace : const Spacer(),
                         Container(
                           alignment: Alignment.center,
                           child: Text('Abhiyaan v1.0.0',

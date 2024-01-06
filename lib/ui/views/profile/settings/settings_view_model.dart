@@ -119,7 +119,7 @@ class SettingsViewModel extends BaseViewModel {
                     borderRadius: BorderRadius.circular(10), // Rounded corners
                   ),
                 ),
-                onPressed: ()  {
+                onPressed: () {
                   _analyticsService.logEvent(
                       eventName: "Change_password_popup",
                       value: "Change password cancel button clicked");
@@ -208,11 +208,12 @@ class SettingsViewModel extends BaseViewModel {
                     borderRadius: BorderRadius.circular(10), // Rounded corners
                   ),
                 ),
-                onPressed: (){ 
+                onPressed: () {
                   _analyticsService.logEvent(
                       eventName: "Logout_popup",
                       value: "Logout cancel button clicked");
-                  Navigator.pop(context);},
+                  Navigator.pop(context);
+                },
                 child: const Text("Cancel"),
               ),
               ElevatedButton(
@@ -250,8 +251,7 @@ class SettingsViewModel extends BaseViewModel {
 
   navigateToPrivacyPolicy() {
     _analyticsService.logEvent(
-        eventName: "Privacy_policy",
-        value: "Privacy policy button clicked");
+        eventName: "Privacy_policy", value: "Privacy policy button clicked");
     UrlLauncher externalUrlHandler = UrlLauncher();
     externalUrlHandler.launchURL(
         "https://docs.google.com/document/d/1WzwkIXbSMIBa-M2_ADZfPJmGa9CkvBjA2j847oVn6C8/edit?usp=sharing");

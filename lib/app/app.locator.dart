@@ -10,7 +10,6 @@ import 'package:abhiyaan/file_exporter.dart';
 import 'package:stacked_shared/stacked_shared.dart';
 import '../services/auth_service.dart';
 
-
 final locator = StackedLocator.instance;
 
 Future<void> setupLocator({

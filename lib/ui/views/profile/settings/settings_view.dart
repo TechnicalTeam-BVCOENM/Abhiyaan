@@ -20,8 +20,7 @@ class SettingsView extends StatelessWidget {
           backgroundColor: context.colorScheme.backgroundColor,
           appBar: AppBar(
             iconTheme: IconThemeData(
-              color: context
-                  .colorScheme.secondaryBlackColor,
+              color: context.colorScheme.secondaryBlackColor,
             ),
             backgroundColor: context.colorScheme.backgroundColor,
             elevation: 0,
@@ -68,8 +67,8 @@ class SettingsView extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                            
-                           model.navigateToHelpSupport();},
+                          model.navigateToHelpSupport();
+                        },
                         child: settingsListTile(model, context,
                             title: model.settings[2].title,
                             trailingIcon: Icon(

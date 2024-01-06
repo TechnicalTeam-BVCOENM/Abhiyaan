@@ -8,19 +8,19 @@ class AuthViewModel extends BaseViewModel {
 
   final showRegister = LocalStorageService().read("showRegister") ?? false;
 
-  void init() async{
-   await _analyticsService.logScreen(screenName: "Auth Screen");
+  void init() async {
+    await _analyticsService.logScreen(screenName: "Auth Screen");
   }
 
   void toSignInPage(BuildContext context) {
     _analyticsService.logEvent(
-        eventName: "Auth Screen", value: "SignIn Button clicked");
+        eventName: "Auth_Screen", value: "SignIn Button clicked");
     _navigationService.replaceWith(Routes.signInView);
   }
 
   void toRegisterPage(BuildContext context) {
     _analyticsService.logEvent(
-        eventName: "Auth Screen", value: "Register Button clicked");
+        eventName: "Auth_Screen", value: "Register Button clicked");
     _navigationService.replaceWith(Routes.registerView);
   }
 }

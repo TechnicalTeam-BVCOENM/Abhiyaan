@@ -10,7 +10,7 @@ class ProfileViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.settingsView);
   }
 
-  void init(){
+  void init() {
     _analyticsService.logScreen(screenName: 'Profile Screen Opened');
   }
 
