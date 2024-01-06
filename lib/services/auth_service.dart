@@ -1,11 +1,10 @@
-import 'package:abhiyaan/ui/common/permission_request_popup.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lottie/lottie.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class AuthenticationService {
   final log = getLogger('AuthService');
@@ -125,15 +124,15 @@ class AuthenticationService {
     );
   }
 
-  Future<void> checkPermission(Permission permission,BuildContext context) async {
-   await permission.request();
-   final status = await permission.status;
-    if (status.isGranted) {
-     log.i("Permission Granted");
-    } else if (status.isDenied){
-      log.e("Permission Denied");
-       // ignore: use_build_context_synchronously
-       PermissionRequestPopup().showPermissionRequestPopup(context);
-    }
-  }
+  // Future<void> checkPermission(Permission permission,BuildContext context) async {
+  //  await permission.request();
+  //  final status = await permission.status;
+  //   if (status.isGranted) {
+  //    log.i("Permission Granted");
+  //   } else if (status.isDenied){
+  //     log.e("Permission Denied");
+  //      // ignore: use_build_context_synchronously
+  //      PermissionRequestPopup().showPermissionRequestPopup(context);
+  //   }
+  // }
 }

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:abhiyaan/services/auth_service.dart';
 import 'package:abhiyaan/services/notification_service.dart';
 import 'package:abhiyaan/ui/common/carousel_utils.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
@@ -14,7 +13,6 @@ import 'package:abhiyaan/ui/views/home/Societies/societies_view.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:lottie/lottie.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:upgrader/upgrader.dart';
 part 'home_view_model.dart';
 part 'home_view_component.dart';

@@ -45,7 +45,7 @@ dependencies:
   flutter_animate: ^4.3.0
   http: ^1.1.2
   upgrader: ^8.4.0
-  permission_handler: ^11.1.0
+  # permission_handler: ^11.1.0
   
 dev_dependencies:
   flutter_test:
