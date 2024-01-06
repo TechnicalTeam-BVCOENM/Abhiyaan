@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:abhiyaan/ui/views/auth/onboarding/onboarding_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/file_exporter.dart';
@@ -7,6 +9,9 @@ import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+import 'package:pinput/pinput.dart';
 part 'register_view_model.dart';
 
 class RegisterView extends StatelessWidget {
@@ -185,12 +190,7 @@ class RegisterView extends StatelessWidget {
                       25.verticalSpace,
                       TextButton(
                         onPressed: () async {
-                          await model.register(
-                              model.emailIdTextController.text,
-                              model.createpasswordTextController.text,
-                              model.confirmpasswordTextController.text,
-                              model.userNameController.text,
-                              context);
+                          model.register(context);
                         },
                         style: ButtonStyle(
                           minimumSize: MaterialStateProperty.all(

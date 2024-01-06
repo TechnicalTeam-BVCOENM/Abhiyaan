@@ -21,7 +21,7 @@ class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   User? get currentUser => _firebaseAuth.currentUser;
 
-  Future<void> signUpWithEmailAndPassword(
+  Future<String> signUpWithEmailAndPassword(
       context, String email, String password) async {
     try {
       // _analyticsService.logLogin();
@@ -29,14 +29,18 @@ class AuthenticationService {
         email: email,
         password: password,
       );
+      return "pass";
       // _analyticsService.setUserProperties(userId: _firebaseAuth.currentUser!.uid);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         showErrorMessage(context, "Email already in use");
+        return "failed";
       } else if (e.code == 'weak-password') {
         showErrorMessage(context, "Password is too weak");
+        return "failed";
+      } else {
+        return "failed";
       }
-      NavigationService().back();
     }
   }
 

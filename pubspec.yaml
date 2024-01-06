@@ -45,6 +45,8 @@ dependencies:
   flutter_animate: ^4.3.0
   http: ^1.1.2
   upgrader: ^8.4.0
+  pinput: ^3.0.1
+  mailer: ^6.0.1
   # permission_handler: ^11.1.0
   
 dev_dependencies:
