@@ -1,5 +1,7 @@
 part of 'event_view.dart';
 
+final _analyticsService = locator<AnalyticsService>();
+
 class EventDetails {
   FontThemeClass fontTheme = FontThemeClass();
 
@@ -234,6 +236,9 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                         padding: const EdgeInsets.only(right: 18).r,
                         child: InkWell(
                           onTap: () {
+                            _analyticsService.logEvent(
+                                eventName: "Event_Screen",
+                                value: " ${model.title} Event Opened");
                             viewModel._navigationService
                                 .navigateToDetailedEventView(eventData: model);
                           },
@@ -398,7 +403,12 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
           child: Column(
             children: [
               InkWell(
-                onTap: () => urlLauncher.launchURL(model.url),
+                onTap: () {
+                  _analyticsService.logEvent(
+                      eventName: "Sponsor_Screen",
+                      value: " ${model.title} Sponsor Opened");
+                  urlLauncher.launchURL(model.url);
+                },
                 child: Image.network(
                   model.imageUrl,
                   height: 80.h,

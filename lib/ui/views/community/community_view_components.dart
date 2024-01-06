@@ -1,5 +1,7 @@
 part of "community_view.dart";
 
+final AnalyticsService _analyticsService = locator<AnalyticsService>();
+
 class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
   final CommunityBlogsData blogsData;
   const CommunityBlogs({super.key, required this.blogsData});
@@ -83,7 +85,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                   ),
                 ),
                 Hero(
-                  transitionOnUserGestures: true  ,
+                  transitionOnUserGestures: true,
                   tag: blogsData.documentId,
                   child: CachedNetworkImageWidget(
                     imageUrl: blogsData.imageUrl,
@@ -127,7 +129,8 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                         4.horizontalSpace,
                         InkWell(
                           onTap: () {
-                            viewModel.updateLikes(blogsData.documentId,context);
+                            viewModel.updateLikes(
+                                blogsData.documentId, context);
                           },
                           child: isLiked
                               ? const Icon(
@@ -167,68 +170,72 @@ class DepartmentClubs extends ViewModelWidget<CommunityViewModel> {
   Widget build(BuildContext context, CommunityViewModel viewModel) {
     FontThemeClass fontThemeClass = FontThemeClass();
     return Padding(
-        padding: const EdgeInsets.only(right: 10).r,
-        child: InkWell(
-          onTap: () {
-            viewModel.navigationService.navigateToClubsView(clubsData: data);
-          },
-          child: SizedBox(
-            height: 120.h,
-            width: 120.w,
-            child: Card(
-              clipBehavior: Clip.hardEdge,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CachedNetworkImage(
-                    imageUrl: data.clubImage,
-                    height: 80.h,
-                    width: 120.w,
-                    fit: BoxFit.fitHeight,
-                    maxHeightDiskCache: 200,
-                    imageBuilder: (context, imageProvider) {
-                      return Container(
-                        height: 80.h,
-                        width: 120.w,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: imageProvider,
-                            fit: BoxFit.cover,
-                          ),
+      padding: const EdgeInsets.only(right: 10).r,
+      child: InkWell(
+        onTap: () {
+          _analyticsService.logEvent(
+              eventName: "Departmental_Club_View",
+              value: "${data.clubShortHand} Club Viewed");
+          viewModel.navigationService.navigateToClubsView(clubsData: data);
+        },
+        child: SizedBox(
+          height: 120.h,
+          width: 120.w,
+          child: Card(
+            clipBehavior: Clip.hardEdge,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CachedNetworkImage(
+                  imageUrl: data.clubImage,
+                  height: 80.h,
+                  width: 120.w,
+                  fit: BoxFit.fitHeight,
+                  maxHeightDiskCache: 200,
+                  imageBuilder: (context, imageProvider) {
+                    return Container(
+                      height: 80.h,
+                      width: 120.w,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
                         ),
-                      );
-                    },
+                      ),
+                    );
+                  },
+                ),
+                Container(
+                  height: 30.h,
+                  width: 120.w,
+                  decoration: BoxDecoration(
+                    color: context.colorScheme.secondaryWhiteColor,
                   ),
-                  Container(
-                    height: 30.h,
-                    width: 120.w,
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.secondaryWhiteColor,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.bookmark_rounded,
-                            color: context.colorScheme.primaryColor
-                                .withOpacity(0.8),
-                            size: 18.sp),
-                        12.horizontalSpace,
-                        Center(
-                          child: Text(
-                            data.clubShortHand,
-                            style: fontThemeClass.caption(context,
-                                fontWeight: FontWeight.w500),
-                          ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.bookmark_rounded,
+                          color:
+                              context.colorScheme.primaryColor.withOpacity(0.8),
+                          size: 18.sp),
+                      12.horizontalSpace,
+                      Center(
+                        child: Text(
+                          data.clubShortHand,
+                          style: fontThemeClass.caption(context,
+                              fontWeight: FontWeight.w500),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ].animate(delay: 300.ms).fadeIn(),
-              ),
+                ),
+              ].animate(delay: 300.ms).fadeIn(),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 

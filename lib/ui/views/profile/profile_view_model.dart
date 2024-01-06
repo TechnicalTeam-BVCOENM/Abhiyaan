@@ -2,11 +2,16 @@ part of 'profile_view.dart';
 
 class ProfileViewModel extends BaseViewModel {
   final log = getLogger('ProfileView');
+  final _analyticsService = locator<AnalyticsService>();
   final _navigationService = locator<NavigationService>();
   final localStorageService = locator<LocalStorageService>();
 
   navigateToSettingsView() {
     _navigationService.navigateTo(Routes.settingsView);
+  }
+
+  void init() {
+    _analyticsService.logScreen(screenName: 'Profile Screen Opened');
   }
 
   List<String> userStorageTag = [

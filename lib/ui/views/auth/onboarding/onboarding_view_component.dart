@@ -32,7 +32,7 @@ class OnboardingComponents {
         context,
         const Color.fromARGB(255, 192, 230, 149),
         310,
-        ["Unleash the","Power of App"],
+        ["Unleash the", "Power of App"],
         AssetImagePath.events,
         100,
         250,

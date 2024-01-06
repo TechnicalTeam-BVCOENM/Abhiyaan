@@ -27,6 +27,7 @@ class CommunityView extends StatelessWidget {
         disposeViewModel: false,
         onViewModelReady: (viewModel) => viewModel.init(context),
         builder: (context, model, child) {
+          final analyticsService = locator<AnalyticsService>();
           FontThemeClass fontThemeClass = FontThemeClass();
           return model.isBusy
               ? const CommunityPageShimmerEffect()
@@ -35,6 +36,9 @@ class CommunityView extends StatelessWidget {
                   body: RefreshIndicator(
                     strokeWidth: 3.0,
                     onRefresh: () async {
+                      analyticsService.logEvent(
+                          eventName: "Qoute_Refreshed",
+                          value: "Refresh Qoute drag down");
                       await Future.delayed(const Duration(seconds: 1));
                       await model.fetchAffirmation();
                     },
@@ -77,7 +81,8 @@ class CommunityView extends StatelessWidget {
                                   items: model.blogsData
                                       .map((data) => GestureDetector(
                                           onTap: () {
-                                            model.navigateToDetailedBlogPage(data);
+                                            model.navigateToDetailedBlogPage(
+                                                data);
                                           },
                                           child:
                                               CommunityBlogs(blogsData: data)))

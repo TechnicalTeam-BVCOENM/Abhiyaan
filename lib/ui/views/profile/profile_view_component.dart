@@ -1,7 +1,8 @@
 import 'package:abhiyaan/ui/common/url_launcher.dart';
-import 'package:flutter/services.dart';
 import 'package:abhiyaan/file_exporter.dart';
 import '../../common/toast_message.dart';
+
+final _analyticsService = locator<AnalyticsService>();
 
 class ProfileDetailsCard extends StatelessWidget {
   final String leading;
@@ -67,6 +68,9 @@ class ProfileDetailsCard extends StatelessWidget {
                 const Expanded(child: Text("")),
                 TextButton(
                     onPressed: () async {
+                      _analyticsService.logEvent(
+                          eventName: "Profile_Details_Copy",
+                          value: "$title Profile Details Copy button clicked");
                       await Clipboard.setData(ClipboardData(text: value))
                           .then((value) => showNormalMessage(
                                 context,
@@ -97,6 +101,9 @@ class SocialLinks extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
         onPressed: () {
+          _analyticsService.logEvent(
+              eventName: "Profile_Social_Links",
+              value: "Social Links button clicked");
           UrlLauncher externalUrlHandler = UrlLauncher();
           externalUrlHandler.launchURL(
             url,

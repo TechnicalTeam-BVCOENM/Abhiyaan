@@ -4,8 +4,10 @@ class CommunityViewModel extends BaseViewModel {
   final log = getLogger("CommunityViewModel");
   final NavigationService navigationService = locator<NavigationService>();
   final FirestoreService firestoreService = FirestoreService();
+  final AnalyticsService _analyticsService = locator<AnalyticsService>();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   LocalStorageService localStorageService = locator<LocalStorageService>();
+
   String affirmation = "";
   String authorName = "";
   int _currentBlogIndex = 0;
@@ -26,6 +28,9 @@ class CommunityViewModel extends BaseViewModel {
 
   void navigateToDetailedBlogPage(CommunityBlogsData blogData) {
     try {
+      _analyticsService.logEvent(
+          eventName: "Detailed_Blog_View",
+          value: "${blogData.title} Blog Viewed : ${blogData.documentId}");
       navigationService.navigateToView(DettailedBlogPage(blogData: blogData));
     } on Exception catch (e) {
       log.e("Error in navigating to detailed blog page: ${e.toString()}");
@@ -123,6 +128,8 @@ class CommunityViewModel extends BaseViewModel {
           .update({
         "likes": FieldValue.arrayUnion([userId]),
       }).then((value) {
+        _analyticsService.logEvent(
+            eventName: "Blog_Likes", value: "Blog Liked : $blogId");
         showSuccessMessage(context, "You Liked this blog");
       });
     } catch (e) {
@@ -131,9 +138,8 @@ class CommunityViewModel extends BaseViewModel {
   }
 
   Future<void> init(context) async {
-    // setBusy(true);
     try {
-      SettingsViewModel().logout(context);
+      _analyticsService.logScreen(screenName: 'CommunityView Screen Opened');
       await runBusyFuture(getBlogData());
       await getDepartmentClubsData();
       notifyListeners();
@@ -142,7 +148,6 @@ class CommunityViewModel extends BaseViewModel {
     } catch (e) {
       log.e(e.toString());
     }
-    // setBusy(false);
   }
 }
 

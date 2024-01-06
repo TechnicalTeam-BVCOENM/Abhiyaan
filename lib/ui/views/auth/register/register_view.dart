@@ -22,6 +22,7 @@ class RegisterView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<RegisterViewModel>.reactive(
         viewModelBuilder: () => RegisterViewModel(),
+        onViewModelReady: (viewModel) => viewModel.init(),
         builder: (context, model, child) {
           return GestureDetector(
               onTap: () => FocusScope.of(context).requestFocus(FocusNode()),

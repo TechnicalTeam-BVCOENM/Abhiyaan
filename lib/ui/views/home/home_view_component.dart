@@ -1,5 +1,7 @@
 part of 'home_view.dart';
 
+final AnalyticsService _analyticsService = locator<AnalyticsService>();
+
 Widget quickLinksList(BuildContext context, List model,
     [double? borderRadius]) {
   return SizedBox(
@@ -231,6 +233,9 @@ Future showCelebrationModal(BuildContext context, CelebrationData data,
                     InkWell(
                       splashColor: context.colorScheme.primaryColor,
                       onTap: () {
+                        _analyticsService.logEvent(
+                            eventName: "Celebration_PopUp",
+                            value: "Closed Celebration Modal");
                         toggleCelebrationShown();
                         Navigator.pop(context);
                       },
@@ -348,6 +353,9 @@ Future showWelcomPopUp(BuildContext context,
               width: double.infinity,
               child: TextButton(
                 onPressed: () {
+                  _analyticsService.logEvent(
+                      eventName: "Welcome_Pop_Up",
+                      value: "Closed Welcome Pop Up");
                   toggleisNewUser();
                   Navigator.of(context).pop();
                 },
@@ -417,6 +425,9 @@ class ShowAppExitPopUp {
                   children: [
                     TextButton(
                       onPressed: () {
+                        _analyticsService.logEvent(
+                            eventName: "App_Exit_Popup",
+                            value: "Closed App Exit Popup");
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -439,6 +450,8 @@ class ShowAppExitPopUp {
                     ),
                     TextButton(
                       onPressed: () {
+                        _analyticsService.logEvent(
+                            eventName: "App_Exit_Popup", value: "Exited App");
                         SystemNavigator.pop();
                       },
                       child: Container(

@@ -1,5 +1,7 @@
 part of 'societies_view.dart';
 
+final AnalyticsService _analyticsService = locator<AnalyticsService>();
+
 class SocietiesViewModel extends BaseViewModel {
   final log = getLogger('SocietiesViewModel');
 
@@ -13,13 +15,11 @@ class SocietiesViewModel extends BaseViewModel {
   Future<void> loadData() async {
     setBusy(true);
     try {
-      log.i(_societyDataList[0].title);
-      notifyListeners();
+      _analyticsService.logScreen(screenName: 'SocietiesView Screen Opened');
     } catch (e) {
       log.e(e);
     }
     setBusy(false);
-    log.i("Subject Loaded");
   }
 
   List<SocietyData> allsocietyCards = [

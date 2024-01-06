@@ -7,6 +7,8 @@ class HomeViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
   final navigationService = locator<NavigationService>();
   NotificationsService notificationService = NotificationsService();
+  final AnalyticsService _analyticsService = locator<AnalyticsService>();
+
   FontThemeClass fontThemeClass = FontThemeClass();
   CarouselUtils carouselUtils = CarouselUtils();
   late bool isUserNew = LocalStorageService().read('isUserNew');
@@ -145,9 +147,13 @@ class HomeViewModel extends BaseViewModel {
 
   Future<void> init(context) async {
     try {
+      _analyticsService.logScreen(screenName: 'HomeView Screen Opened');
       setBusy(true);
       _highlights = await _firestoreService.getHighlights();
       _collegeUpdates = await _firestoreService.getCollegeUpdates();
+      // await _authenticationService.checkPermission(Permission.appTrackingTransparency,context);
+      // await _authenticationService.checkPermission(
+      //     Permission.notification, context);
       notifyListeners();
       setBusy(false);
       await Future.delayed(2.seconds);
@@ -172,18 +178,18 @@ class HomeViewModel extends BaseViewModel {
 void handleQuickLinksNavigation(List model, int i) {
   try {
     if (model[i].url != '' && model[i].url != null) {
-      debugPrint("Route Url");
       UrlLauncher externalUrlHandler = UrlLauncher();
+      _analyticsService.logEvent(
+          eventName: "Quick_Links",
+          value: "Button Clicked : ${model[i].title}");
       externalUrlHandler.launchURL(
         model[i].url,
       );
     } else if (model[i].view != '' && model[i].view != null) {
       final navigationService = locator<NavigationService>();
-
-      debugPrint("Page View");
       navigationService.navigateToView(model[i].view);
     } else {
-      debugPrint("Error");
+      debugPrint("Error in handling quick links navigation");
     }
   } catch (e) {
     debugPrint("Error in handling quick links navigation : ${e.toString()}");
@@ -192,21 +198,23 @@ void handleQuickLinksNavigation(List model, int i) {
 
 // Models
 class DepartmentUpdates {
-  late String title;
-  late String description;
-  late Timestamp date;
+  final String title;
+  final String description;
+  final Timestamp date;
+  final String url;
   DepartmentUpdates({
     required this.title,
     required this.description,
     required this.date,
+    required this.url,
   });
 }
 
 class QuickLinksModel {
-  late String imageUrl;
-  late String title;
-  late String url;
-  late Widget view;
+  final String imageUrl;
+  final String title;
+  final String url;
+  final Widget view;
   QuickLinksModel({
     required this.imageUrl,
     required this.title,

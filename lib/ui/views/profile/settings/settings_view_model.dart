@@ -4,17 +4,24 @@ class SettingsViewModel extends BaseViewModel {
   final log = getLogger('SettingsView');
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
-
+  final _analyticsService = locator<AnalyticsService>();
   final _themeService = locator<ThemeService>();
+  final fontTheme = FontThemeClass();
+
+  Color blue = Colors.blue;
+  var isDark = false;
+
+  void init() {
+    _analyticsService.logScreen(screenName: 'Settings Screen Opened');
+  }
 
   navigateToProfile() {
     _navigationService.replaceWith(Routes.profileView);
   }
 
-  final fontTheme = FontThemeClass();
-  Color blue = Colors.blue;
-  var isDark = false;
   changeTheme() async {
+    _analyticsService.logEvent(
+        eventName: "Dark_mode", value: "Dark mode toggle button clicked");
     _themeService.updateTheme();
     notifyListeners();
   }
@@ -33,8 +40,6 @@ class SettingsViewModel extends BaseViewModel {
     } catch (e) {
       showErrorMessage(context, "something went wrong !");
     }
-
-    // Change password logic
   }
 
   Future<void> changePasswordForSignin(context, String? email) async {
@@ -114,7 +119,12 @@ class SettingsViewModel extends BaseViewModel {
                     borderRadius: BorderRadius.circular(10), // Rounded corners
                   ),
                 ),
-                onPressed: () => Navigator.pop(context),
+                onPressed: () {
+                  _analyticsService.logEvent(
+                      eventName: "Change_password_popup",
+                      value: "Change password cancel button clicked");
+                  Navigator.pop(context);
+                },
                 child: const Text("Cancel"),
               ),
               ElevatedButton(
@@ -129,6 +139,9 @@ class SettingsViewModel extends BaseViewModel {
                   ),
                 ),
                 onPressed: () {
+                  _analyticsService.logEvent(
+                      eventName: "Change_password_popup",
+                      value: "Change password yes button clicked");
                   if (FirebaseAuth.instance.currentUser != null) {
                     changePassword(context)
                         .then((value) => Navigator.pop(context));
@@ -195,7 +208,12 @@ class SettingsViewModel extends BaseViewModel {
                     borderRadius: BorderRadius.circular(10), // Rounded corners
                   ),
                 ),
-                onPressed: () => Navigator.pop(context),
+                onPressed: () {
+                  _analyticsService.logEvent(
+                      eventName: "Logout_popup",
+                      value: "Logout cancel button clicked");
+                  Navigator.pop(context);
+                },
                 child: const Text("Cancel"),
               ),
               ElevatedButton(
@@ -210,6 +228,9 @@ class SettingsViewModel extends BaseViewModel {
                   ),
                 ),
                 onPressed: () async {
+                  _analyticsService.logEvent(
+                      eventName: "Logout_popup",
+                      value: "Logout yes button clicked");
                   await logout(context).then((value) =>
                       showSuccessMessage(context, "Logout successful"));
                 },
@@ -221,12 +242,16 @@ class SettingsViewModel extends BaseViewModel {
   }
 
   navigateToHelpSupport() {
+    _analyticsService.logEvent(
+        eventName: "Help_support", value: "Help and support button clicked");
     UrlLauncher externalUrlHandler = UrlLauncher();
     externalUrlHandler.launchEmail("technicalteam.bvcoenm@gmail.com");
     // Navigation
   }
 
   navigateToPrivacyPolicy() {
+    _analyticsService.logEvent(
+        eventName: "Privacy_policy", value: "Privacy policy button clicked");
     UrlLauncher externalUrlHandler = UrlLauncher();
     externalUrlHandler.launchURL(
         "https://docs.google.com/document/d/1WzwkIXbSMIBa-M2_ADZfPJmGa9CkvBjA2j847oVn6C8/edit?usp=sharing");

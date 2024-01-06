@@ -8,6 +8,9 @@ export 'package:abhiyaan/app/app.logger.dart';
 
 //Services
 export 'package:abhiyaan/services/local_storage_service.dart';
+export 'package:abhiyaan/services/firebase_analytics_service.dart';
+export 'package:abhiyaan/theme/theme_service.dart';
+export 'package:flutter/services.dart';
 
 // Theme
 export 'package:abhiyaan/theme/app_color.dart';
@@ -19,6 +22,7 @@ export 'package:stacked/stacked.dart';
 export 'package:stacked_services/stacked_services.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:smooth_page_indicator/smooth_page_indicator.dart';
+export 'package:firebase_analytics/firebase_analytics.dart';
 
 //Components
 export 'package:abhiyaan/ui/common/section_divider.dart';

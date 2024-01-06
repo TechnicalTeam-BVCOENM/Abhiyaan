@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
@@ -7,6 +8,7 @@ import 'package:lottie/lottie.dart';
 
 class AuthenticationService {
   final log = getLogger('AuthService');
+
   List userTag = [
     "userMisNo",
     "userEmail",
@@ -22,11 +24,13 @@ class AuthenticationService {
   Future<String> signUpWithEmailAndPassword(
       context, String email, String password) async {
     try {
+      // _analyticsService.logLogin();
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
       return "pass";
+      // _analyticsService.setUserProperties(userId: _firebaseAuth.currentUser!.uid);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         showErrorMessage(context, "Email already in use");
@@ -123,4 +127,16 @@ class AuthenticationService {
       },
     );
   }
+
+  // Future<void> checkPermission(Permission permission,BuildContext context) async {
+  //  await permission.request();
+  //  final status = await permission.status;
+  //   if (status.isGranted) {
+  //    log.i("Permission Granted");
+  //   } else if (status.isDenied){
+  //     log.e("Permission Denied");
+  //      // ignore: use_build_context_synchronously
+  //      PermissionRequestPopup().showPermissionRequestPopup(context);
+  //   }
+  // }
 }

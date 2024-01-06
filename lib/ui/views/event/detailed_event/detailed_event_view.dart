@@ -18,10 +18,13 @@ class DetailedEventView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<DetailedEventViewModel>.reactive(
       viewModelBuilder: () => DetailedEventViewModel(eventData),
-      onViewModelReady: (viewModel) => viewModel.getbestMoments(),
+      onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
+        final analyticsService = locator<AnalyticsService>();
+
         return Scaffold(
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
           floatingActionButton: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -33,12 +36,15 @@ class DetailedEventView extends StatelessWidget {
                   heroTag: "register",
                   mini: false,
                   onPressed: () {
+                    analyticsService.logEvent(
+                        eventName: "Register_Event",
+                        value:
+                            "${eventData.title} Event Register button clicked : ${eventData.docID}");
                     UrlLauncher().launchURL(eventData.registerUrl);
                   },
-                  child: Text(
-                    "Register",
-                    style: FontThemeClass().title2(context,color:Colors.black,fontWeight: FontWeight.w600)
-                  ),
+                  child: Text("Register",
+                      style: FontThemeClass().title2(context,
+                          color: Colors.black, fontWeight: FontWeight.w600)),
                 ),
               ),
               12.horizontalSpace,
@@ -50,10 +56,10 @@ class DetailedEventView extends StatelessWidget {
                   onPressed: () {
                     model.shareEvent(eventData);
                   },
-                  child:  Text(
-                      "Share",
-                      style: FontThemeClass().title2(context,color: context.colorScheme.signInTextColor,fontWeight: FontWeight.w600)
-                    ),
+                  child: Text("Share",
+                      style: FontThemeClass().title2(context,
+                          color: context.colorScheme.signInTextColor,
+                          fontWeight: FontWeight.w600)),
                 ),
               ),
             ].animate(delay: 300.ms).fadeIn(),

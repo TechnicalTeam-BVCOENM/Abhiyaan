@@ -7,6 +7,8 @@ int max = 99999; // Maximum value for a 5-digit number
 class RegisterViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
+  final AnalyticsService _analyticsService = locator<AnalyticsService>();
+  final TextEditingController userNameController = TextEditingController();
   String? signupStatus;
   final EmailOTP myauth = EmailOTP();
   late int otp;
@@ -20,7 +22,6 @@ class RegisterViewModel extends BaseViewModel {
       TextEditingController();
   final TextEditingController confirmpasswordTextController =
       TextEditingController();
-  final TextEditingController userNameController = TextEditingController();
 
   final String emailIdErrorText = "Please enter a valid email id";
   final localStorageService = locator<LocalStorageService>();
@@ -30,6 +31,10 @@ class RegisterViewModel extends BaseViewModel {
   bool isCreatePasswordVisible = false;
   bool isConfirmPasswordVisible = false;
   bool isEmailIdValid = true;
+
+  void init() {
+    _analyticsService.logScreen(screenName: 'RegisterView');
+  }
 
   bool toggleCreatePasswordVisibility() {
     isCreatePasswordVisible = !isCreatePasswordVisible;
@@ -150,7 +155,7 @@ class RegisterViewModel extends BaseViewModel {
       NavigationService().back();
       showErrorMessage(context, 'something went wrong');
       for (var p in e.problems) {
-        print('Problem: ${p.code}: ${p.msg}');
+        debugPrint('Problem: ${p.code}: ${p.msg}');
       }
     }
 //     var template = '''
@@ -374,10 +379,16 @@ class RegisterViewModel extends BaseViewModel {
       try {
         NavigationService().back();
         AuthenticationService().showLoadingOverlay(context);
+
+        _analyticsService.logSignUp(method: 'Register - Email');
+
         signupStatus = await _authenticationService.signUpWithEmailAndPassword(
             context,
             emailIdTextController.text,
             confirmpasswordTextController.text);
+        _analyticsService.setUserProperties(
+            userId: FirebaseAuth.instance.currentUser!.uid);
+
         if (signupStatus == "pass") {
           await FirebaseFirestore.instance
               .collection("Users")
