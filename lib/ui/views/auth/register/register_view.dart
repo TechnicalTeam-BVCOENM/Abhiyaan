@@ -131,11 +131,9 @@ class RegisterView extends StatelessWidget {
                                 : const Icon(Icons.visibility),
                           ),
                           hintText: 'Create Password',
-                          hintStyle: model.fontTheme.caption(
-                            context,
-                            color: context.colorScheme.secondarySectionColor,
-                            fontWeight: FontWeight.w500
-                          ),
+                          hintStyle: model.fontTheme.caption(context,
+                              color: context.colorScheme.secondarySectionColor,
+                              fontWeight: FontWeight.w500),
                         ),
                       ).animate(delay: 500.ms).fadeIn(
                             delay: 100.ms,
@@ -175,11 +173,9 @@ class RegisterView extends StatelessWidget {
                                 : const Icon(Icons.visibility),
                           ),
                           hintText: 'Confirm Password',
-                          hintStyle: model.fontTheme.caption(
-                            context,
-                            color: context.colorScheme.secondarySectionColor,
-                            fontWeight: FontWeight.w500
-                          ),
+                          hintStyle: model.fontTheme.caption(context,
+                              color: context.colorScheme.secondarySectionColor,
+                              fontWeight: FontWeight.w500),
                         ),
                       ).animate(delay: 600.ms).fadeIn(
                             delay: 100.ms,

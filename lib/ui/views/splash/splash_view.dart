@@ -19,12 +19,14 @@ class SplashView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                   Expanded(
+                  Expanded(
                     child: Center(
                       // Centered logo
                       child: Image(
                         width: 320.w,
-                        image: const AssetImage(AssetImagePath.logoImg,),
+                        image: const AssetImage(
+                          AssetImagePath.logoImg,
+                        ),
                       ),
                     ),
                   ),

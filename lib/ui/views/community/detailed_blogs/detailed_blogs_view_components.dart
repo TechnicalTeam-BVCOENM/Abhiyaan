@@ -1,7 +1,5 @@
 part of "detailed_blogs_view.dart";
 
-
-
 class BlogAuthorDetailes extends StatelessWidget {
   const BlogAuthorDetailes({
     super.key,

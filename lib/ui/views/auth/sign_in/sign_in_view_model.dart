@@ -20,7 +20,7 @@ class SignInViewModel extends BaseViewModel {
   bool isEmailIdValid = true;
   bool isPasswordValid = true;
 
-  void init(){
+  void init() {
     _analyticsService.logScreen(screenName: 'SignInView');
   }
 
@@ -54,14 +54,19 @@ class SignInViewModel extends BaseViewModel {
           email: email,
           password: password,
         );
-        _analyticsService.setUserProperties(userId: _firebaseAuth.currentUser!.uid);
+        _analyticsService.setUserProperties(
+            userId: _firebaseAuth.currentUser!.uid);
         await _authenticationService.storeUserDataLocally();
         _navigationService.back();
+
         showSuccessMessage(
           context,
           "Login successful",
         );
-        await _navigationService.replaceWith(Routes.bottomNavView);
+
+        // await _authenticationService.checkPermission(Permission.appTrackingTransparency,context);
+
+        await _navigationService.clearStackAndShow(Routes.bottomNavView);
       } on FirebaseAuthException catch (e) {
         isPasswordValid = false;
         isEmailIdValid = false;

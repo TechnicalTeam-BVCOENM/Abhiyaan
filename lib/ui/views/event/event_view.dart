@@ -93,8 +93,7 @@ class EventView extends StatelessWidget {
                         ),
                         model.sponsors.isEmpty
                             ? Container()
-                            :
-                        const SectionText(title: "Sponsors"),
+                            : const SectionText(title: "Sponsors"),
                         SizedBox(
                           height: 80.h,
                           child: ListView.builder(
@@ -149,7 +148,7 @@ class EventView extends StatelessWidget {
                           },
                         ),
                         4.verticalSpace,
-                      ].animate(delay: 500.ms , interval: 150.ms).fadeIn(),
+                      ].animate(delay: 500.ms, interval: 150.ms).fadeIn(),
                     ),
                   ),
                 ),

@@ -451,8 +451,7 @@ class ShowAppExitPopUp {
                     TextButton(
                       onPressed: () {
                         _analyticsService.logEvent(
-                            eventName: "App_Exit_Popup",
-                            value: "Exited App");
+                            eventName: "App_Exit_Popup", value: "Exited App");
                         SystemNavigator.pop();
                       },
                       child: Container(

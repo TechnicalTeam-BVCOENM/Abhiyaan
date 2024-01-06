@@ -8,8 +8,6 @@ class CommunityViewModel extends BaseViewModel {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   LocalStorageService localStorageService = locator<LocalStorageService>();
 
-
-
   String affirmation = "";
   String authorName = "";
   int _currentBlogIndex = 0;
@@ -30,7 +28,9 @@ class CommunityViewModel extends BaseViewModel {
 
   void navigateToDetailedBlogPage(CommunityBlogsData blogData) {
     try {
-      _analyticsService.logEvent(eventName: "Detailed_Blog_View", value: "${blogData.title} Blog Viewed : ${blogData.documentId}");
+      _analyticsService.logEvent(
+          eventName: "Detailed_Blog_View",
+          value: "${blogData.title} Blog Viewed : ${blogData.documentId}");
       navigationService.navigateToView(DettailedBlogPage(blogData: blogData));
     } on Exception catch (e) {
       log.e("Error in navigating to detailed blog page: ${e.toString()}");
@@ -109,7 +109,7 @@ class CommunityViewModel extends BaseViewModel {
     }
   }
 
-  Future<void> updateLikes(String blogId,BuildContext context) async {
+  Future<void> updateLikes(String blogId, BuildContext context) async {
     final currentBlog = localStorageService.read("isLiked_$blogId");
     AuthenticationService authenticationService =
         locator<AuthenticationService>();
@@ -127,19 +127,19 @@ class CommunityViewModel extends BaseViewModel {
           .doc(blogId)
           .update({
         "likes": FieldValue.arrayUnion([userId]),
-      }).then((value){
-      _analyticsService.logEvent(eventName: "Blog_Likes", value: "Blog Liked : $blogId");
+      }).then((value) {
+        _analyticsService.logEvent(
+            eventName: "Blog_Likes", value: "Blog Liked : $blogId");
         showSuccessMessage(context, "You Liked this blog");
-      } );
+      });
     } catch (e) {
       log.e("Error in updating likes: ${e.toString()}");
     }
   }
 
   Future<void> init(context) async {
-
     try {
-       _analyticsService.logScreen(screenName: 'CommunityView Screen Opened');
+      _analyticsService.logScreen(screenName: 'CommunityView Screen Opened');
       await runBusyFuture(getBlogData());
       await getDepartmentClubsData();
       notifyListeners();

@@ -9,8 +9,6 @@ class AnalyticsService {
   Future logLogin(String method) async {
     await _analytics.logLogin(loginMethod: method);
   }
-  
-
 
   Future logScreen({required String screenName}) async {
     await _analytics.logScreenView(screenName: screenName);
@@ -26,7 +24,6 @@ class AnalyticsService {
       parameters: {'value': value},
     );
   }
-
 
   Future setUserProperties({required String userId}) async {
     await _analytics.setUserId(id: userId);

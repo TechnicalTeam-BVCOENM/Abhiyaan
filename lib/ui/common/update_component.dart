@@ -3,7 +3,6 @@ import 'package:expandable/expandable.dart';
 import 'package:intl/intl.dart';
 import 'package:abhiyaan/file_exporter.dart';
 
-
 Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
   FontThemeClass fontTheme = FontThemeClass();
   return ExpandableNotifier(
@@ -41,8 +40,8 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                       child: Text(
                         "Read More",
                         style: fontTheme.body(context,
-                            color:
-                                context.colorScheme.switchColor.withOpacity(0.9)),
+                            color: context.colorScheme.switchColor
+                                .withOpacity(0.9)),
                       ),
                     ),
                   ),
