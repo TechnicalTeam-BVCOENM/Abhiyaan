@@ -148,6 +148,7 @@ class HomeViewModel extends BaseViewModel {
   Future<void> init(context) async {
     try {
       _analyticsService.logScreen(screenName: 'HomeView Screen Opened');
+      
       setBusy(true);
       _highlights = await _firestoreService.getHighlights();
       _collegeUpdates = await _firestoreService.getCollegeUpdates();

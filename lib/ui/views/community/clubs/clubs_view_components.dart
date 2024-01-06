@@ -27,6 +27,7 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
   final String clubImage;
   final String clubShortHand;
   final List<FestInfo> clubFest;
+  final String clubLink;
   final List<ClubMemberInfo> clubMembers;
 
   const ClubsData({
@@ -36,6 +37,7 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
     required this.clubShortHand,
     required this.clubFest,
     required this.clubMembers,
+    required this.clubLink,
   });
 
   @override
@@ -45,17 +47,21 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
       child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18).r,
           child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start, 
+                children: [
             10.verticalSpace,
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16.0).r,
-              child: CachedNetworkImage(
-                height: 276.h,
-                fit: BoxFit.cover,
-                imageUrl: clubImage,
-                placeholder: (context, url) =>
-                    const Center(child: CircularProgressIndicator.adaptive()),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+            Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16.0).r,
+                child: CachedNetworkImage(
+                  height: 276.h,
+                  fit: BoxFit.cover,
+                  imageUrl: clubImage,
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator.adaptive()),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
               ),
             ),
             10.verticalSpace,
@@ -135,64 +141,99 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 229.h,
-              child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: clubFest.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12).r),
-                      clipBehavior: Clip.hardEdge,
-                      color: context.colorScheme.secondaryWhiteColor,
-                      elevation: 4.0,
-                      margin: const EdgeInsets.all(12.0).r,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              imageUrl: clubFest[index].festImage,
-                              placeholder: (context, url) => const Center(
-                                  child: CircularProgressIndicator.adaptive()),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                            ),
-                          ),
-                          Container(
-                            height: 50.h,
-                            width: 150.w,
-                            decoration: BoxDecoration(
+            clubFest.isNotEmpty
+                ? SizedBox(
+                    height: 229.h,
+                    child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: clubFest.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              clubFest[index].festLink != ""
+                                  ? UrlLauncher()
+                                      .launchURL(clubFest[index].festLink)
+                                  : showNormalMessage(context,
+                                      " Direct link not found for this event!");
+                            },
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12).r),
+                              clipBehavior: Clip.hardEdge,
                               color: context.colorScheme.secondaryWhiteColor,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0).r,
-                              child: Center(
-                                child: Text(
-                                  clubFest[index].festName,
-                                  style: fontTheme.body(context,
-                                      fontWeight: FontWeight.w500),
-                                ).animate(delay: 500.ms).scale(),
+                              elevation: 4.0,
+                              margin: const EdgeInsets.all(12.0).r,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: CachedNetworkImage(
+                                      fit: BoxFit.cover,
+                                      imageUrl: clubFest[index].festImage,
+                                      placeholder: (context, url) =>
+                                          const Center(
+                                              child: CircularProgressIndicator
+                                                  .adaptive()),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 50.h,
+                                    width: 150.w,
+                                    decoration: BoxDecoration(
+                                      color: context
+                                          .colorScheme.secondaryWhiteColor,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0).r,
+                                      child: Center(
+                                        child: Text(
+                                          clubFest[index].festName,
+                                          style: fontTheme.body(context,
+                                              fontWeight: FontWeight.w500),
+                                        ).animate(delay: 500.ms).scale(),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
+                          );
+                        }),
+                  )
+                : SizedBox(
+                    height: 229.h,
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.error),
+                          4.horizontalSpace,
+                          const Text("No fests found!"),
                         ],
                       ),
-                    );
-                  }),
-            ),
+                    ),
+                  ),
             5.verticalSpace,
             Center(
-              child: Text(
-                "Let's Explore the $clubShortHand",
-                style: fontTheme.body(context,
-                    fontWeight: FontWeight.w500,
-                    color: context.colorScheme.secondarySectionColor),
+              child: InkWell(
+                onTap:() {
+                  try {
+                     UrlLauncher().launchURL(clubLink);
+                  } catch (e) {
+                    viewModel.log.e(e.toString());
+                  }
+                } ,
+                child: Text(
+                  "Let's Explore the $clubShortHand",
+                  style: fontTheme.body(context,
+                      fontWeight: FontWeight.w500,
+                      color: context.colorScheme.secondarySectionColor),
+                ),
               ),
             ),
             15.verticalSpace,

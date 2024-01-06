@@ -179,7 +179,7 @@ class DepartmentalClubsData {
   final String clubShortHand;
   final List<FestInfo> clubFest;
   final List<ClubMemberInfo> clubMembers;
-  // final String clubLink;
+  final String clubLink;
 
   DepartmentalClubsData({
     required this.clubName,
@@ -187,17 +187,19 @@ class DepartmentalClubsData {
     required this.clubShortHand,
     required this.clubFest,
     required this.clubMembers,
-    // required this.clubLink,
+    required this.clubLink,
   });
 }
 
 class FestInfo {
   final String festName;
   final String festImage;
+  final String festLink;
 
   FestInfo({
     required this.festName,
     required this.festImage,
+    required this.festLink,
   });
 }
 
