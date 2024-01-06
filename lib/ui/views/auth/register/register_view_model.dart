@@ -1,13 +1,19 @@
 part of 'register_view.dart';
 
+final Random random = Random();
+int min = 10000; // Minimum value for a 5-digit number
+int max = 99999; // Maximum value for a 5-digit number
+
 class RegisterViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
   String? signupStatus;
-
+  final EmailOTP myauth = EmailOTP();
+  late int otp;
   final log = getLogger('AuthViewModel');
   final fontTheme = FontThemeClass();
-
+  final smtpServer =
+      gmail("technicalteam.bvcoenm@gmail.com", "wqme jjtx lerr zkkg");
   final TextEditingController emailIdTextController = TextEditingController();
   final TextEditingController otpController = TextEditingController();
   final TextEditingController createpasswordTextController =
@@ -17,6 +23,9 @@ class RegisterViewModel extends BaseViewModel {
   final TextEditingController userNameController = TextEditingController();
 
   final String emailIdErrorText = "Please enter a valid email id";
+  final localStorageService = locator<LocalStorageService>();
+  int? sendOtpCount = LocalStorageService().read('sendOtpCount');
+  DateTime? lastUpdate = LocalStorageService().read("lastOtpCountUpdate");
 
   bool isCreatePasswordVisible = false;
   bool isConfirmPasswordVisible = false;
@@ -34,8 +43,12 @@ class RegisterViewModel extends BaseViewModel {
     return isConfirmPasswordVisible;
   }
 
+  void generateRandomOTP() {
+    otp = min + random.nextInt(max - min + 1);
+  }
+
   Future<void> register(
-    BuildContext context,
+    context,
   ) async {
     FocusScope.of(context).requestFocus(FocusNode());
     if (createpasswordTextController.text == "" ||
@@ -44,67 +57,137 @@ class RegisterViewModel extends BaseViewModel {
         userNameController.text == "") {
       showErrorMessage(context, "some fields are empty!");
       return;
-    } else if (createpasswordTextController.text !=
-        confirmpasswordTextController.text) {
-      showErrorMessage(context, "Passwords do not match");
-      return;
-    }
-    // Validate email format
-    else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+    } else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
         .hasMatch(emailIdTextController.text)) {
       showErrorMessage(
         context,
         "Invalid email format",
       );
       return;
-    } // Check if phone number contains only numbers and has a length of 10
-    else if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(userNameController.text)) {
+    } else if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(userNameController.text)) {
       showErrorMessage(context, "Username should contain only alphabets");
       return;
-    }
-
-// Check if the first letter of the username is capitalized
-    else if (userNameController.text[0] !=
+    } else if (userNameController.text[0] !=
         userNameController.text[0].toUpperCase()) {
       showErrorMessage(context, "Username should start with a capital letter");
       return;
-    }
-
-    // Check if MIS number contains only numbers and has a length of 8
-    try {
-      AuthenticationService().showLoadingOverlay(context);
-      signupStatus = await _authenticationService.signUpWithEmailAndPassword(
-          context,
-          emailIdTextController.text,
-          confirmpasswordTextController.text);
-      if (signupStatus == "pass") {
-        await FirebaseFirestore.instance
-            .collection("Users")
-            .doc(FirebaseAuth.instance.currentUser?.uid)
-            .set({
-          "userEmail": emailIdTextController.text,
-          "userName": userNameController.text,
-          "userProfile": 'Explorer',
-          "isUserNew": true,
-        });
-
-        await AuthenticationService().storeUserDataLocally();
-        // ignore: use_build_context_synchronously
-        NavigationService().back();
-        await _navigationService
-            .replaceWithTransition(const OnboardingView(),
-                transitionStyle: Transition.rightToLeftWithFade,
-                curve: Curves.fastEaseInToSlowEaseOut,
-                duration: const Duration(milliseconds: 1500))
-            ?.then((value) =>
-                showSuccessMessage(context, "Registration successful"));
-      } else {
-        NavigationService().back();
+    } else if (createpasswordTextController.text !=
+        confirmpasswordTextController.text) {
+      showErrorMessage(context, "Passwords do not match");
+      return;
+    } else if (confirmpasswordTextController.text.length < 8) {
+      showErrorMessage(context, "weak password length !");
+      return;
+    } else if (!RegExp(r'[a-zA-Z]')
+        .hasMatch(confirmpasswordTextController.text)) {
+      showErrorMessage(context, "Password should contain a alphabet");
+      return;
+    } else if (!RegExp(r'[0-9]').hasMatch(confirmpasswordTextController.text)) {
+      showErrorMessage(context, "Password should contain a digit");
+      return;
+    } else if (await checkEmailExists(emailIdTextController.text, context)) {
+      // ignore: use_build_context_synchronously
+      showErrorMessage(context, "Email Already Exists");
+      return;
+    } else {
+      DateTime now = DateTime.now();
+      if (lastUpdate != null) {
+        Duration difference = now.difference(lastUpdate!);
+        log.i("difference:- $difference");
+        if (difference.inHours >= 24) {
+          // Reset count if 24 hours have passed
+          await localStorageService.write("sendOtpCount", 3);
+          await localStorageService.write("lastOtpCountUpdate", now);
+          lastUpdate = now;
+          sendOtpCount = 3;
+        }
       }
-    } catch (e) {
-      debugPrint("$e");
+      if (sendOtpCount == null) {
+        lastUpdate = now;
+        sendOtpCount = 3;
+        await localStorageService.write("sendOtpCount", 3);
+        await localStorageService.write("lastOtpCountUpdate", now);
+      } else if (sendOtpCount == 0) {
+        showErrorMessage(context, "Exceeded email verification limit.");
+        return;
+      } else {
+        sendOtpCount = sendOtpCount! - 1;
+        await localStorageService.write("sendOtpCount", sendOtpCount);
+        await sendVerifyMail(context);
+        notifyListeners();
+        return;
+      }
     }
-    notifyListeners();
+  }
+
+  Future<void> sendVerifyMail(context) async {
+    generateRandomOTP();
+    AuthenticationService().showLoadingOverlay(context);
+    final message = Message()
+      ..from = const Address(
+          "technicalteam.bvcoenm@gmail.com", "Abhiyaan Technical Team")
+      ..recipients.add(
+          emailIdTextController.text) // Set the recipient to niranjan@gmail.com
+      ..subject = 'Abhiyaan Email OTP Verification'
+      ..html = ''' <html>
+    <body>
+      <h1>Abhiyaan App Email Verification</h1>
+      <p>Dear user,</p>
+      <p>Your verification code is: <b>$otp</b></p>
+      <p>Please enter this code in the app to complete the registration process.</p>
+      <p>Thank you!</p>
+      <p>Abhiyaan Technical Team</p>
+    </body>
+  </html>''';
+
+    try {
+      final sendReport = await send(message, smtpServer);
+      log.i("SENDOTPCOUNT $sendOtpCount");
+      NavigationService().back();
+      verifyEmailDialogue(context);
+      showSuccessMessage(context, 'Message sent: $sendReport');
+    } on MailerException catch (e) {
+      NavigationService().back();
+      showErrorMessage(context, 'something went wrong');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
+    }
+//     var template = '''
+//   <html>
+//     <body>
+//       <h1>Abhiyaan App Email Verification</h1>
+//       <p>Dear user,</p>
+//       <p>Your verification code is: {{OTP}}</p>
+//       <p>Please enter this code in the app to complete the registration process.</p>
+//       <p>Thank you!</p>
+//       <p>Abhiyaan Technical Team</p>
+//     </body>
+//   </html>
+// ''';
+    // await myauth.setConfig(
+    //     appEmail: "technicalteam.bvcoenm@gmail.com",
+    //     appName: "Abhiyaan",
+    //     userEmail: emailIdTextController.text,
+    //     otpLength: 5,
+    //     otpType: OTPType.digitsOnly);
+    // await myauth.setTemplate(render: template);
+    // await myauth.setSMTP(
+    //     host: "abhiyaan-2023.netlify.app",
+    //     auth: true,
+    //     username: "email-otp@rohitchouhan.com",
+    //     password: "*************",
+    //     secure: "TLS",
+    // port: 576);
+    //   if (await myauth.sendOTP() == false) {
+    //     NavigationService().back();
+    //     verifyEmailDialogue(context);
+    //     showSuccessMessage(context, "OTP Sent");
+    //   } else {
+    //     NavigationService().back();
+    //     print(emailIdTextController.text);
+    //     showErrorMessage(context, "Oops, OTP send failed");
+    //   }
   }
 
   navigateToHelpSupport() async {
@@ -124,7 +207,7 @@ class RegisterViewModel extends BaseViewModel {
         builder: (context) {
           return SizedBox(
               child: AlertDialog(
-            insetPadding: const EdgeInsets.symmetric(horizontal: 15),
+            insetPadding: const EdgeInsets.symmetric(horizontal: 15).r,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
             clipBehavior: Clip.hardEdge,
@@ -133,7 +216,7 @@ class RegisterViewModel extends BaseViewModel {
               children: [
                 const Icon(
                   Icons.verified_rounded,
-                  color: Color.fromARGB(255, 54, 244, 76),
+                  color: Color.fromARGB(255, 43, 250, 67),
                   size: 100,
                 )
                     .animate(
@@ -145,8 +228,9 @@ class RegisterViewModel extends BaseViewModel {
                       duration: 700.ms,
                     ),
                 10.verticalSpace,
-                const Text(
+                Text(
                   "Verification",
+                  style: FontThemeClass().title(context),
                 )
                     .animate(
                       delay: 100.ms,
@@ -164,9 +248,11 @@ class RegisterViewModel extends BaseViewModel {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       "Enter five digit code we have sent to your email address !",
                       textAlign: TextAlign.center,
+                      style: FontThemeClass()
+                          .body(context, fontWeight: FontWeight.w300),
                     )
                         .animate(
                           delay: 100.ms,
@@ -177,6 +263,7 @@ class RegisterViewModel extends BaseViewModel {
                         ),
                     10.verticalSpace,
                     Pinput(
+                      keyboardType: TextInputType.number,
                       length: 5,
                       defaultPinTheme: PinTheme(
                         margin: const EdgeInsets.only(left: 2),
@@ -184,7 +271,7 @@ class RegisterViewModel extends BaseViewModel {
                         width: 75.w,
                         textStyle: const TextStyle(fontSize: 22),
                         decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 246, 246, 246),
+                            color: context.colorScheme.secondaryWhiteColor,
                             borderRadius: BorderRadius.circular(10)),
                       ),
 
@@ -195,8 +282,10 @@ class RegisterViewModel extends BaseViewModel {
                       },
                       showCursor: true,
                       // ignore: avoid_print
-                      onCompleted: (pin) => print(pin),
-                    ),
+                      onCompleted: (pin) => log.i(pin),
+                    )
+                        .animate()
+                        .fadeIn(delay: const Duration(milliseconds: 600)),
                   ],
                 ),
               );
@@ -232,7 +321,13 @@ class RegisterViewModel extends BaseViewModel {
                     borderRadius: BorderRadius.circular(10), // Rounded corners
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  if (!RegExp(r'^[0-9]+$').hasMatch(otpController.text)) {
+                    showErrorMessage(context, "otp should contain only digits");
+                  } else {
+                    onVerify(context, int.parse(otpController.text));
+                  }
+                },
                 child: const Text("verify"),
               )
                   .animate(
@@ -251,5 +346,69 @@ class RegisterViewModel extends BaseViewModel {
                     duration: 400.ms,
                   ));
         });
+  }
+
+  Future<bool> checkEmailExists(String email, context) async {
+    AuthenticationService().showLoadingOverlay(context);
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference usersRef = firestore.collection('Users');
+
+    try {
+      QuerySnapshot querySnapshot =
+          await usersRef.where('userEmail', isEqualTo: email).get();
+      if (querySnapshot.docs.isEmpty) {
+        NavigationService().back();
+        return false;
+      } else {
+        NavigationService().back();
+        return true;
+      }
+    } catch (error) {
+      NavigationService().back();
+      return false;
+    }
+  }
+
+  Future<void> onVerify(context, int pinotp) async {
+    if (pinotp == otp) {
+      try {
+        NavigationService().back();
+        AuthenticationService().showLoadingOverlay(context);
+        signupStatus = await _authenticationService.signUpWithEmailAndPassword(
+            context,
+            emailIdTextController.text,
+            confirmpasswordTextController.text);
+        if (signupStatus == "pass") {
+          await FirebaseFirestore.instance
+              .collection("Users")
+              .doc(FirebaseAuth.instance.currentUser?.uid)
+              .set({
+            "userEmail": emailIdTextController.text,
+            "userName": userNameController.text,
+            "userProfile": 'Explorer',
+            "isUserNew": true,
+          });
+
+          await AuthenticationService().storeUserDataLocally();
+          // ignore: use_build_context_synchronously
+          NavigationService().back();
+          await _navigationService
+              .replaceWithTransition(const OnboardingView(),
+                  transitionStyle: Transition.rightToLeftWithFade,
+                  curve: Curves.fastEaseInToSlowEaseOut,
+                  duration: const Duration(milliseconds: 1500))
+              ?.then((value) =>
+                  showSuccessMessage(context, "Registration successful"));
+        } else {
+          NavigationService().back();
+          showErrorMessage(context, "something went wrong");
+        }
+      } catch (e) {
+        NavigationService().back();
+        showErrorMessage(context, "Invalid OTP");
+      }
+    } else {
+      showErrorMessage(context, "Invalid-OTP");
+    }
   }
 }
