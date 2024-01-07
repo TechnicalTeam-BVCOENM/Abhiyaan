@@ -38,41 +38,63 @@ class SignInViewModel extends BaseViewModel {
     _navigationService.replaceWith(Routes.registerView);
   }
 
-  void changePassword(context) {
-    settingsViewModel.passwordChangeAlert(context, emailIdTextController.text);
+  Future<void> changePassword(context) async {
+    if (emailIdTextController.text.isEmpty) {
+      showErrorMessage(context, "email field is empty");
+    } else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+        .hasMatch(emailIdTextController.text)) {
+      showErrorMessage(
+        context,
+        "Invalid email format",
+      );
+    } else if (await RegisterViewModel()
+        .checkEmailExists(emailIdTextController.text, context)) {
+      settingsViewModel.passwordChangeAlert(
+          context, emailIdTextController.text);
+    } else {
+      showErrorMessage(context, "User Not Found");
+    }
   }
 
   Future<void> login(String email, String password, context) async {
     setBusy(true);
     FocusScope.of(context).requestFocus(FocusNode());
     if (email != "" && password != "") {
-      try {
-        // Show a loading indicator over your UI
-        _authenticationService.showLoadingOverlay(context);
-        _analyticsService.logSignUp(method: 'SignIn - Email');
-        await _firebaseAuth.signInWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
-        _analyticsService.setUserProperties(
-            userId: _firebaseAuth.currentUser!.uid);
-        await _authenticationService.storeUserDataLocally();
-        _navigationService.back();
-
-        showSuccessMessage(
+      if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+          .hasMatch(emailIdTextController.text)) {
+        showErrorMessage(
           context,
-          "Login successful",
+          "Invalid email format",
         );
+      } else {
+        try {
+          // Show a loading indicator over your UI
+          _authenticationService.showLoadingOverlay(context);
+          _analyticsService.logSignUp(method: 'SignIn - Email');
+          await _firebaseAuth.signInWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+          _analyticsService.setUserProperties(
+              userId: _firebaseAuth.currentUser!.uid);
+          await _authenticationService.storeUserDataLocally();
+          _navigationService.back();
 
-        // await _authenticationService.checkPermission(Permission.appTrackingTransparency,context);
+          showSuccessMessage(
+            context,
+            "Login successful",
+          );
 
-        await _navigationService.clearStackAndShow(Routes.bottomNavView);
-      } on FirebaseAuthException catch (e) {
-        isPasswordValid = false;
-        isEmailIdValid = false;
-        _navigationService.back();
-        showErrorMessage(context, e.code);
-        notifyListeners();
+          // await _authenticationService.checkPermission(Permission.appTrackingTransparency,context);
+
+          await _navigationService.clearStackAndShow(Routes.bottomNavView);
+        } on FirebaseAuthException catch (e) {
+          isPasswordValid = false;
+          isEmailIdValid = false;
+          _navigationService.back();
+          showErrorMessage(context, e.code);
+          notifyListeners();
+        }
       }
     } else {
       showErrorMessage(context, "Email or Password is empty");
