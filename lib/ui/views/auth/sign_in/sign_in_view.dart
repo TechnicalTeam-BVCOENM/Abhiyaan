@@ -6,6 +6,8 @@ import 'package:abhiyaan/ui/views/profile/settings/settings_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+
+import '../register/register_view.dart';
 part 'sign_in_view_model.dart';
 
 class SignInView extends StatelessWidget {
@@ -115,7 +117,10 @@ class SignInView extends StatelessWidget {
                               duration: 500.ms,
                             ),
                         InkWell(
-                          onTap: () => model.changePassword(context),
+                          onTap: () {
+                            FocusScope.of(context).requestFocus(FocusNode());
+                            model.changePassword(context);
+                          },
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: Padding(

@@ -47,9 +47,7 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
       child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18).r,
           child:
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start, 
-                children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             10.verticalSpace,
             Center(
               child: ClipRRect(
@@ -64,11 +62,15 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
                 ),
               ),
             ),
-            10.verticalSpace,
-            Center(
-              child: Text(
-                clubName,
-                style: fontTheme.body(context, fontWeight: FontWeight.w500),
+            18.verticalSpace,
+            SizedBox(
+              width: double.infinity,
+              child: Center(
+                child: Text(
+                  clubName,
+                  overflow: TextOverflow.ellipsis,
+                  style: fontTheme.body(context, fontWeight: FontWeight.w500),
+                ),
               ),
             ),
             10.verticalSpace,
@@ -107,14 +109,17 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
                                 ),
                                 // Name
                                 Padding(
-                                  padding: const EdgeInsets.only(
-                                          top: 8.0, bottom: 8.0)
-                                      .r,
-                                  child: Text(
-                                    clubMembers[index].memberName,
-                                    style: fontTheme.body(context,
-                                        fontWeight: FontWeight.w500),
-                                  ).animate(delay: 500.ms).scale(),
+                                  padding: const EdgeInsets.only(top: 16.0).r,
+                                  child: SizedBox(
+                                      width: double.infinity,
+                                      child: Center(
+                                        child: Text(
+                                          clubMembers[index].memberName,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: fontTheme.body(context,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      )).animate(delay: 500.ms).scale(),
                                 ),
                                 // Position
                                 Text(
@@ -221,13 +226,13 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
             5.verticalSpace,
             Center(
               child: InkWell(
-                onTap:() {
+                onTap: () {
                   try {
-                     UrlLauncher().launchURL(clubLink);
+                    UrlLauncher().launchURL(clubLink);
                   } catch (e) {
                     viewModel.log.e(e.toString());
                   }
-                } ,
+                },
                 child: Text(
                   "Let's Explore the $clubShortHand",
                   style: fontTheme.body(context,

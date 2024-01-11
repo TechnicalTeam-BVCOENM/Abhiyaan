@@ -44,32 +44,22 @@ class SettingsViewModel extends BaseViewModel {
 
   Future<void> changePasswordForSignin(context, String? email) async {
     setBusy(true);
-    if (email == "" || email == null) {
-      showErrorMessage(context, "Email Field Empty");
-    } else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
-        .hasMatch(email)) {
-      showErrorMessage(
-        context,
-        "Invalid email format",
-      );
-    } else {
-      try {
-        await FirebaseAuth.instance
-            .sendPasswordResetEmail(email: email)
-            .then((value) => showNormalMessage(
-                  context,
-                  "reset password email sent !",
-                ));
-      } catch (e) {
-        showErrorMessage(context, "something went wrong !");
-      }
+
+    try {
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: email!)
+          .then((value) => showNormalMessage(
+                context,
+                "reset password email sent !",
+              ));
+    } catch (e) {
+      showErrorMessage(context, "something went wrong !");
     }
     setBusy(false);
     // Change password logic
   }
 
   void passwordChangeAlert(context, [String? email]) {
-    FocusScope.of(context).requestFocus(FocusNode());
 
     showAdaptiveDialog(
         context: context,
