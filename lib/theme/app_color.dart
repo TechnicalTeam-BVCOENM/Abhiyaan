@@ -18,6 +18,9 @@ extension ColorSchemeExtension on ColorScheme {
   Color get bottomNavBarBg => brightness == Brightness.dark
       ? const Color.fromARGB(255, 25, 25, 25)
       : const Color(0xFFFFFFFF);
+  Color get toastMessage => brightness == Brightness.dark
+      ? const Color.fromARGB(255, 64, 64, 64)
+      : const Color(0xFFFFFFFF);
 
   Color get selectedBottomNavIcon => const Color(0xFF4E4BD7);
 
