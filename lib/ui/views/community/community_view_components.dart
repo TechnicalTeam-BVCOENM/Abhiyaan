@@ -103,8 +103,8 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                     ),
                     child: Row(
                       children: [
-                        Image.network(
-                          "https://cdn3d.iconscout.com/3d/premium/thumb/bulb-3994347-3307681.png?f=webp",
+                        Image.asset(
+                          AssetImagePath.bulb,
                           height: 25.h,
                           width: 25.w,
                           fit: BoxFit.cover,

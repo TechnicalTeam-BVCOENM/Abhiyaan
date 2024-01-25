@@ -38,6 +38,7 @@ class AssetImagePath {
   static const String poper = 'assets/images/home/poper.png';
   static const String community = 'assets/images/home/community.webp';
   static const String emptyPerson = 'assets/images/community/profile.png';
+  static const String bulb = 'assets/images/community/bulb.webp';
 }
 
 class AssetUrls {
