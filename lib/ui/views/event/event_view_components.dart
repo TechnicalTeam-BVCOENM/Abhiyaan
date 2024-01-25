@@ -21,7 +21,7 @@ class EventDetails {
         ),
         4.horizontalSpace,
         Text(
-          location,
+          location.length > 10 ? "${location.substring(0, 10)}..." : location,
           style: fontTheme.body(
             context,
             color: context.colorScheme.switchColor.withOpacity(0.8),
@@ -180,7 +180,7 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
         child: Column(
           children: [
             Hero(
-              tag: "eventImage+${model.imageUrl}",
+              tag: "eventImage+${model.imageUrl}-${model.title}",
               child: Image.network(
                 model.imageUrl,
                 height: 178.h,
@@ -312,7 +312,7 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Hero(
-              tag: "eventImage+${model.imageUrl}",
+              tag: "eventImage+${model.imageUrl}-${model.title}",
               child: Image.network(
                 model.imageUrl,
                 height: 135.h,

@@ -23,7 +23,7 @@ class EventView extends StatelessWidget {
       builder: (context, model, child) {
         return Scaffold(
           backgroundColor: context.colorScheme.backgroundColor,
-          body: model.isBusy
+          body: model.events.isEmpty
               ? const EventShimmerEffect()
               : SafeArea(
                   child: SingleChildScrollView(
