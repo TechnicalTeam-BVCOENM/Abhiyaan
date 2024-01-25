@@ -19,6 +19,16 @@ class FontThemeClass {
     );
   }
 
+  TextStyle eventCard(BuildContext ctx,
+      {Color? color, FontWeight? fontWeight}) {
+    return TextStyle(
+      fontSize: 30.sp,
+      fontFamily: 'Outfit',
+      fontWeight: fontWeight ?? FontWeight.w600,
+      color: color ?? ctx.colorScheme.primaryDarkColor,
+    );
+  }
+
   TextStyle title(BuildContext ctx, {Color? color, FontWeight? fontWeight}) {
     return TextStyle(
       fontSize: 28.sp,

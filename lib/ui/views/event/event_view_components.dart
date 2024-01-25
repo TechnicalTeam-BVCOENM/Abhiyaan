@@ -208,12 +208,13 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          4.verticalSpace,
+                          8.verticalSpace,
                           Padding(
                             padding: const EdgeInsets.only(left: 18.0).r,
                             child: Text(
                               model.title,
-                              style: fontTheme.header(context),
+                              style: fontTheme.eventCard(context,
+                                  fontWeight: FontWeight.w700),
                             ),
                           ),
                           Padding(
