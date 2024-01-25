@@ -71,6 +71,7 @@ class DetailedEventView extends StatelessWidget {
               DetailedEventAppBar(
                 imageLink: eventData.imageUrl,
                 eventLocation: eventData.location,
+                eventName: eventData.title,
               ),
               DetailedEventData(
                 eventName: eventData.title,

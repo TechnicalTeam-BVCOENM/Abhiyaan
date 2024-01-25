@@ -3,8 +3,12 @@ part of '../detailed_event/detailed_event_view.dart';
 class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
   final String imageLink;
   final String eventLocation;
+  final String eventName;
   const DetailedEventAppBar(
-      {super.key, required this.imageLink, required this.eventLocation});
+      {super.key,
+      required this.imageLink,
+      required this.eventLocation,
+      required this.eventName});
 
   @override
   Widget build(BuildContext context, DetailedEventViewModel viewModel) {
@@ -21,7 +25,7 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
           FlexibleSpaceBar(
             background: Hero(
               transitionOnUserGestures: true,
-              tag: "eventImage+$imageLink",
+              tag: "eventImage+$imageLink-$eventName",
               child: Image.network(
                 imageLink,
                 fit: BoxFit.cover,
