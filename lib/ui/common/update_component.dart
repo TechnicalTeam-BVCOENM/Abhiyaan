@@ -75,7 +75,9 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                 ],
               ),
               2.verticalSpace,
-              ExpandedDescription(description: updateList[i].description , url: updateList[i].url),
+              ExpandedDescription(
+                  description: updateList[i].description,
+                  url: updateList[i].url),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -151,7 +153,7 @@ class ExpandedDescription extends StatelessWidget {
           visible: url.isNotEmpty || url != "",
           child: Row(
             children: [
-               const Text("For more details :-\t"),
+              const Text("For more details :-\t"),
               2.horizontalSpace,
               GestureDetector(
                 onTap: () {
@@ -202,10 +204,14 @@ class CardTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     FontThemeClass fontTheme = FontThemeClass();
 
-    return Text(
-      title,
-      style: fontTheme.body(context,
-          color: context.colorScheme.switchColor, fontWeight: FontWeight.w600),
+    return Expanded(
+      child: Text(
+        title,
+        overflow: TextOverflow.ellipsis,
+        style: fontTheme.body(context,
+            color: context.colorScheme.switchColor,
+            fontWeight: FontWeight.w600),
+      ),
     );
   }
 }

@@ -86,11 +86,11 @@ class HomeViewModel extends BaseViewModel {
     }
   }
 
-  void showWelcomeAndCelebration(BuildContext context) async {
+  void showWelcomeAndCelebration(context) async {
     try {
       if (isUserNew) {
         await showWelcomPopUp(context,
-                toggleisNewUser: toggleisNewUser, username: splitusername())
+                toggleisNewUser: toggleisNewUser, username: splitusername(),isCelebrationShown:isCelebrationShown,celebrationData: _celebrationData,toggleCelebrationShown: toggleCelebrationShown)
             .then((value) async {
           Future.delayed(2.seconds, () async {
             if (isCelebrationShown == false && _celebrationData.isNotEmpty) {
@@ -137,8 +137,8 @@ class HomeViewModel extends BaseViewModel {
 
   Future<void> afterInit(context) async {
     try {
-      await getCelebrationData();
-      showWelcomeAndCelebration(context);
+      await getCelebrationData()
+          .then((value) => showWelcomeAndCelebration(context));
       notifyListeners();
     } on Exception catch (e) {
       log.e("Error in after init : ${e.toString()}");
@@ -148,7 +148,7 @@ class HomeViewModel extends BaseViewModel {
   Future<void> init(context) async {
     try {
       _analyticsService.logScreen(screenName: 'HomeView Screen Opened');
-      
+
       setBusy(true);
       _highlights = await _firestoreService.getHighlights();
       _collegeUpdates = await _firestoreService.getCollegeUpdates();
