@@ -23,7 +23,12 @@ class BlogAuthorDetailes extends StatelessWidget {
           height: 25.h,
           width: 25.w,
           child: ClipOval(
-            child: Image.network(blogData.authorImageUrl),
+            child: CachedNetworkImageWidget(
+              imageUrl: blogData.authorImageUrl,
+              height: 25.h,
+              width: 25.w,
+              maxHeightDiskCache: 500,
+            ),
           ),
         ),
         12.horizontalSpace,

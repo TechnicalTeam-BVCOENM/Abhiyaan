@@ -166,6 +166,8 @@ Future showCelebrationModal(BuildContext context, CelebrationData data,
                       image: DecorationImage(
                         image: Image.network(
                           data.image,
+                          cacheHeight: 500,
+                          cacheWidth: 500,
                           loadingBuilder: (context, child, loadingProgress) {
                             if (loadingProgress == null) return child;
                             return Center(

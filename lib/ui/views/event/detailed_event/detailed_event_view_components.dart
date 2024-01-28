@@ -26,11 +26,12 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
             background: Hero(
               transitionOnUserGestures: true,
               tag: "eventImage+$imageLink-$eventName",
-              child: Image.network(
-                imageLink,
+              child: CachedNetworkImageWidget(
+                imageUrl: imageLink,
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: 276.h,
+                maxHeightDiskCache: MediaQuery.of(context).size.width * 0.65,
               ).animate().shimmer(duration: 1000.ms, padding: 0),
             ),
             stretchModes: const [
