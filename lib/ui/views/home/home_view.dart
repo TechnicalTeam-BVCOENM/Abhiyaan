@@ -212,7 +212,7 @@ class HomeView extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   color: context
                                       .colorScheme.secondarySectionColor
-                                      .withOpacity(0.8))),
+                                      .withOpacity(1))),
                           Text("Achieve Inspire",
                               maxLines: 2,
                               softWrap: true,
@@ -221,7 +221,7 @@ class HomeView extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   color: context
                                       .colorScheme.secondarySectionColor
-                                      .withOpacity(0.8))),
+                                      .withOpacity(1))),
                           3.verticalSpace,
                           Text('Made with ❤️ by Technical Team',
                               style: fontTheme.caption(context,
