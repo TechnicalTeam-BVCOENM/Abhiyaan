@@ -2,9 +2,11 @@ import 'package:abhiyaan/file_exporter.dart';
 
 extension ColorSchemeExtension on ColorScheme {
   Color get primaryColor => const Color.fromARGB(255, 78, 75, 215);
-  Color get backgroundColor => brightness == Brightness.dark
-      ? const Color(0xFF252525)
-      : const Color(0xFFECECFF);
+  Color get primaryDark => const Color(0xFF0B1215);
+
+  // Dark mode color
+  Color get backgroundColor =>
+      brightness == Brightness.dark ? primaryDark : const Color(0xFFECECFF);
   Color get secondaryLPurpleColor => brightness == Brightness.dark
       ? const Color.fromARGB(131, 73, 73, 73)
       : const Color(0xFFD6D5FA);
@@ -16,7 +18,7 @@ extension ColorSchemeExtension on ColorScheme {
   Color get secondarySectionColor => const Color(0xFF8F8FB0);
 
   Color get bottomNavBarBg => brightness == Brightness.dark
-      ? const Color.fromARGB(255, 25, 25, 25)
+      ? const Color.fromARGB(255, 32, 32, 32)
       : const Color(0xFFFFFFFF);
   Color get toastMessage => brightness == Brightness.dark
       ? const Color.fromARGB(255, 64, 64, 64)
