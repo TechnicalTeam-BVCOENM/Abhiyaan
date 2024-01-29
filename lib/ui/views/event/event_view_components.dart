@@ -31,6 +31,36 @@ class EventDetails {
     );
   }
 
+  Row _eventName(
+    BuildContext context,
+    String name,
+  ) {
+    assert(name.isNotEmpty, "Name should not be null or empty");
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Icon(
+          Icons.event,
+          size: 18.sp,
+          color: context.colorScheme.switchColor.withOpacity(0.8),
+        ),
+        4.horizontalSpace,
+        SizedBox(
+          width: 104.w,
+          child: Text(
+            name,
+            overflow: TextOverflow.ellipsis,
+            style: fontTheme.body(
+              context,
+              color: context.colorScheme.switchColor.withOpacity(0.8),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   Row _eventTime(BuildContext context, String time) {
     assert(time.isNotEmpty, "Time should not be null or empty");
     return Row(
@@ -329,14 +359,14 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      eventDetails._eventName(
+                        context,
+                        model.title,
+                      ),
+                      2.verticalSpace,
                       eventDetails.eventTime(
                         context,
                         "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}",
-                      ),
-                      2.verticalSpace,
-                      eventDetails.eventLocation(
-                        context,
-                        model.location,
                       ),
                     ],
                   ),
