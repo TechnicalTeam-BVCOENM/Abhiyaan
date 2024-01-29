@@ -171,7 +171,7 @@ class DepartmentClubs extends ViewModelWidget<CommunityViewModel> {
     FontThemeClass fontThemeClass = FontThemeClass();
     return Padding(
       padding: const EdgeInsets.only(right: 10).r,
-      child: InkWell(
+      child: GestureDetector(
         onTap: () {
           _analyticsService.logEvent(
               eventName: "Departmental_Club_View",

@@ -201,30 +201,38 @@ class HomeView extends StatelessWidget {
                                   physics: const BouncingScrollPhysics(),
                                 ).animate().fadeIn(),
                           60.verticalSpace,
-                          Text("Innovate",
-                              maxLines: 2,
-                              softWrap: true,
-                              overflow: TextOverflow.ellipsis,
-                              style: fontTheme.display(context,
-                                  fontWeight: FontWeight.bold,
-                                  color: context
-                                      .colorScheme.secondarySectionColor
-                                      .withOpacity(0.8))),
-                          Text("Achieve Inspire",
-                              maxLines: 2,
-                              softWrap: true,
-                              overflow: TextOverflow.ellipsis,
-                              style: fontTheme.display(context,
-                                  fontWeight: FontWeight.bold,
-                                  color: context
-                                      .colorScheme.secondarySectionColor
-                                      .withOpacity(0.8))),
+                          Text(
+                            "Innovate",
+                            maxLines: 2,
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                            style: fontTheme.display(
+                              context,
+                              fontWeight: FontWeight.bold,
+                              color: context.colorScheme.secondarySectionColor
+                                  .withOpacity(1),
+                            ),
+                          ),
+                          Text(
+                            "Achieve Inspire",
+                            maxLines: 2,
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                            style: fontTheme.display(
+                              context,
+                              fontWeight: FontWeight.bold,
+                              color: context.colorScheme.secondarySectionColor
+                                  .withOpacity(1),
+                            ),
+                          ),
                           3.verticalSpace,
-                          Text('Made with ❤️ by Technical Team',
-                              style: fontTheme.caption(context,
-                                  color: context.colorScheme.secondaryBlackColor
-                                      .withOpacity(0.8),
-                                  fontWeight: FontWeight.w500)),
+                          Text(
+                            'Made with ❤️ by Technical Team',
+                            style: fontTheme.caption(context,
+                                color: context.colorScheme.secondaryBlackColor
+                                    .withOpacity(0.8),
+                                fontWeight: FontWeight.w500),
+                          ),
                           12.verticalSpace,
                         ],
                       ),

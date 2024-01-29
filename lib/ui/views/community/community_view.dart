@@ -146,7 +146,7 @@ class CommunityView extends StatelessWidget {
                                           .colorScheme.secondarySectionColor,
                                       fontWeight: FontWeight.w600),
                                 )),
-                          ].animate(delay: 500.ms, interval: 150.ms).fadeIn(),
+                          ].animate(delay: 100.ms, interval: 80.ms).fadeIn(),
                         ),
                       ),
                     ),

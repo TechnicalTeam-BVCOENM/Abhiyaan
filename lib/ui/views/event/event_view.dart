@@ -102,7 +102,9 @@ class EventView extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemCount: model.sponsors.length,
                             itemBuilder: (context, index) {
-                              return Sponsors(model: model.sponsors[index]);
+                              return Sponsors(
+                                model: model.sponsors[index],
+                              );
                             },
                           ),
                         ).animate(delay: 200.ms).fadeIn(),
@@ -148,7 +150,7 @@ class EventView extends StatelessWidget {
                           },
                         ),
                         4.verticalSpace,
-                      ].animate(delay: 500.ms, interval: 150.ms).fadeIn(),
+                      ].animate(delay: 100.ms, interval: 40.ms).fadeIn(),
                     ),
                   ),
                 ),

@@ -211,20 +211,12 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
           children: [
             Hero(
               tag: "eventImage+${model.imageUrl}-${model.title}",
-              child: Image.network(
-                model.imageUrl,
+              child: CachedNetworkImageWidget(
+                imageUrl: model.imageUrl,
                 height: 178.h,
                 width: double.infinity,
                 fit: BoxFit.cover,
-                frameBuilder: (context, child, frame, wasSynchronouslyLoaded) =>
-                    wasSynchronouslyLoaded
-                        ? child
-                        : AnimatedOpacity(
-                            opacity: frame == null ? 0 : 1,
-                            duration: const Duration(seconds: 1),
-                            curve: Curves.easeOut,
-                            child: child,
-                          ),
+                maxHeightDiskCache: 400,
               ),
             ),
             6.verticalSpace,
@@ -265,7 +257,7 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                       // Event Button
                       Padding(
                         padding: const EdgeInsets.only(right: 18).r,
-                        child: InkWell(
+                        child: GestureDetector(
                           onTap: () {
                             _analyticsService.logEvent(
                                 eventName: "Event_Screen",
@@ -343,9 +335,10 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
           children: [
             Hero(
               tag: "eventImage+${model.imageUrl}-${model.title}",
-              child: Image.network(
-                model.imageUrl,
+              child: CachedNetworkImageWidget(
+                imageUrl: model.imageUrl,
                 height: 135.h,
+                maxHeightDiskCache: MediaQuery.of(context).size.width * 0.65,
                 width: ResponsiveUtils.screenWidth(context),
                 fit: BoxFit.cover,
               ),
@@ -373,7 +366,7 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
                 ),
                 Padding(
                     padding: const EdgeInsets.only(right: 10).r,
-                    child: InkWell(
+                    child: GestureDetector(
                       onTap: () {
                         viewModel._navigationService
                             .navigateToDetailedEventView(eventData: model);
@@ -433,28 +426,19 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
           height: 80.h,
           child: Column(
             children: [
-              InkWell(
+              GestureDetector(
                 onTap: () {
                   _analyticsService.logEvent(
                       eventName: "Sponsor_Screen",
                       value: " ${model.title} Sponsor Opened");
                   urlLauncher.launchURL(model.url);
                 },
-                child: Image.network(
-                  model.imageUrl,
+                child: CachedNetworkImageWidget(
+                  imageUrl: model.imageUrl,
                   height: 80.h,
                   width: 80.w,
+                  maxHeightDiskCache: 100,
                   fit: BoxFit.cover,
-                  frameBuilder:
-                      (context, child, frame, wasSynchronouslyLoaded) =>
-                          wasSynchronouslyLoaded
-                              ? child
-                              : AnimatedOpacity(
-                                  opacity: frame == null ? 0 : 1,
-                                  duration: const Duration(seconds: 1),
-                                  curve: Curves.easeOut,
-                                  child: child,
-                                ),
                 ),
               ),
             ],
