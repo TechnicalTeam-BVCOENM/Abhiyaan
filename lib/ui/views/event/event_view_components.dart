@@ -234,7 +234,9 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                           Padding(
                             padding: const EdgeInsets.only(left: 18.0).r,
                             child: Text(
-                              model.title,
+                              model.title.length > 13
+                                  ? "${model.title.substring(0, 13)}.."
+                                  : model.title,
                               style: fontTheme.eventCard(context,
                                   fontWeight: FontWeight.w700),
                             ),

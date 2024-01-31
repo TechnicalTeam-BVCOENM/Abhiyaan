@@ -10,12 +10,12 @@ class EventViewModel extends BaseViewModel {
   List<SponsorsModel> get sponsors => _sponsors;
   List<EventModel> _events = [];
   List<EventModel> get events => _events;
-  EventModel? _todayEvent;
-  EventModel? get todayEvent => _todayEvent;
+  final List<EventModel> _todayEvent = [];
+  List<EventModel>? get todayEvent => _todayEvent;
   late final List<EventModel> _upcomingEvents = [];
   List<EventModel> get upcomingEvents => _upcomingEvents;
 
-  var carouselOptions = CarouselOptions(
+  var upcommingCarosoulOptions = CarouselOptions(
     scrollPhysics: const BouncingScrollPhysics(),
     autoPlayCurve: Curves.easeInOutCubic,
     enableInfiniteScroll: true,
@@ -25,6 +25,18 @@ class EventViewModel extends BaseViewModel {
     pauseAutoPlayOnTouch: true,
     pauseAutoPlayInFiniteScroll: true,
     viewportFraction: 0.65,
+  );
+  var ongoingCarosoulOptions = CarouselOptions(
+    height: 280.h,
+    scrollPhysics: const BouncingScrollPhysics(),
+    autoPlayCurve: Curves.easeInOutCubic,
+    enableInfiniteScroll: true,
+    autoPlay: true,
+    autoPlayInterval: 6.seconds,
+    autoPlayAnimationDuration: 1.seconds,
+    pauseAutoPlayOnTouch: true,
+    pauseAutoPlayInFiniteScroll: true,
+    viewportFraction: 1,
   );
 
   void init() async {
@@ -66,14 +78,12 @@ class EventViewModel extends BaseViewModel {
     return currentMonth;
   }
 
-  EventModel? setTodayEvent(EventModel? event) {
-    _todayEvent = event;
+  void setTodayEvent(EventModel event) {
+    _todayEvent.add(event);
     notifyListeners();
-    return null;
   }
 
   void getTodaysEvent() {
-    setTodayEvent(null);
     for (EventModel event in events) {
       DateTime now = DateTime.now();
       int month = event.startDate.toDate().month;
@@ -83,7 +93,6 @@ class EventViewModel extends BaseViewModel {
           day == now.day &&
           year == now.year) {
         setTodayEvent(event);
-        break;
       }
     }
   }
