@@ -142,137 +142,150 @@ class HomePageShimmerEffect extends StatelessWidget {
   }
 }
 
-Future showCelebrationModal(BuildContext context, CelebrationData data,
-    Function toggleCelebrationShown) async {
+Future showCelebrationModal(
+    context, CelebrationData data, Function toggleCelebrationShown) async {
   FontThemeClass fontThemeClass = FontThemeClass();
   await showDialog(
     barrierDismissible: false,
     context: context,
     builder: (context) {
       return AlertDialog.adaptive(
-        clipBehavior: Clip.hardEdge,
-        insetPadding: EdgeInsets.zero,
-        contentPadding: EdgeInsets.zero,
-        content: IntrinsicHeight(
-          child: Column(
-            children: [
-              Stack(
-                alignment: Alignment.topRight,
-                children: [
-                  Container(
-                    height: 220.h,
-                    width: 340.w,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: Image.network(
-                          data.image,
-                          cacheHeight: 500,
-                          cacheWidth: 500,
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return Center(
-                              child: CircularProgressIndicator(
-                                color: context.colorScheme.primaryColor,
-                                value: loadingProgress.expectedTotalBytes !=
-                                        null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                        loadingProgress.expectedTotalBytes!
-                                    : null,
-                              ),
-                            );
-                          },
-                        ).image,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0).r,
-                    child: GestureDetector(
-                      onTap: () {
-                        toggleCelebrationShown();
-                        Navigator.pop(context);
-                      },
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12).r,
-                        ),
-                        color: context.colorScheme.secondaryWhiteColor
-                            .withOpacity(0.6),
-                        child: Icon(
-                          Icons.close,
-                          color: context.colorScheme.signInTextColor,
-                          size: 30.0.sp,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              4.verticalSpace,
-              Container(
-                padding: const EdgeInsets.all(20).r,
-                width: 340.w,
+          clipBehavior: Clip.hardEdge,
+          insetPadding: EdgeInsets.zero,
+          contentPadding: EdgeInsets.zero,
+          content: SizedBox(
+            child: IntrinsicHeight(
+              child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Text(
-                      data.title,
-                      style: fontThemeClass.header(
-                        context,
-                        fontWeight: FontWeight.w700,
+                    Stack(
+                      alignment: Alignment.topRight,
+                      children: [
+                        AspectRatio(
+                          aspectRatio: 1 / 1,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: Image.network(
+                                  data.image,
+                                  loadingBuilder:
+                                      (context, child, loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        color: context.colorScheme.primaryColor,
+                                        value: loadingProgress
+                                                    .expectedTotalBytes !=
+                                                null
+                                            ? loadingProgress
+                                                    .cumulativeBytesLoaded /
+                                                loadingProgress
+                                                    .expectedTotalBytes!
+                                            : null,
+                                      ),
+                                    );
+                                  },
+                                ).image,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0).r,
+                          child: GestureDetector(
+                            onTap: () {
+                              toggleCelebrationShown();
+                              Navigator.pop(context);
+                            },
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(100).r,
+                              ),
+                              color: context.colorScheme.secondaryWhiteColor
+                                  .withOpacity(0.6),
+                              child: Icon(
+                                Icons.close,
+                                color: context.colorScheme.signInTextColor,
+                                size: 30.0.sp,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    10.verticalSpace,
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20).r,
+                      width: 340.w,
+                      child: Column(
+                        children: [
+                          Text(
+                            data.title,
+                            style: fontThemeClass.title(
+                              context,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          10.verticalSpace,
+                          Text(
+                           data.description.length<500? data.description:"${data.description.substring(0,500)}...",
+                            textAlign: TextAlign.justify,
+
+                            style: fontThemeClass.caption(
+                              context,
+                              color: context.colorScheme.secondaryBlackColor
+                                  .withOpacity(0.8),
+                            ),
+                          ),
+                          14.verticalSpace,
+                          InkWell(
+                            splashColor: context.colorScheme.primaryColor,
+                            onTap: () {
+                              _analyticsService.logEvent(
+                                  eventName: "Celebration_PopUp",
+                                  value: "Closed Celebration Modal");
+                              toggleCelebrationShown();
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              width: 340.w,
+                              height: 40.h,
+                              decoration: BoxDecoration(
+                                color: context.colorScheme.primaryColor
+                                    .withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(12).r,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "Thank you!",
+                                  style: fontThemeClass.body(context,
+                                      fontWeight: FontWeight.w600,
+                                      color:
+                                          context.colorScheme.signInTextColor),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     10.verticalSpace,
-                    Text(
-                      data.description,
-                      style: fontThemeClass.body(
-                        context,
-                        color: context.colorScheme.secondaryBlackColor
-                            .withOpacity(0.8),
-                      ),
-                    ),
-                    14.verticalSpace,
-                    InkWell(
-                      splashColor: context.colorScheme.primaryColor,
-                      onTap: () {
-                        _analyticsService.logEvent(
-                            eventName: "Celebration_PopUp",
-                            value: "Closed Celebration Modal");
-                        toggleCelebrationShown();
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        width: 340.w,
-                        height: 40.h,
-                        decoration: BoxDecoration(
-                          color:
-                              context.colorScheme.primaryColor.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(12).r,
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Thank you!",
-                            style: fontThemeClass.body(context,
-                                fontWeight: FontWeight.w600,
-                                color: context.colorScheme.signInTextColor),
-                          ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
-              10.verticalSpace,
-            ],
-          ),
-        ),
-      );
+            ),
+          ));
     },
   );
 }
 
-Future showWelcomPopUp(BuildContext context,
-    {required Function toggleisNewUser, required String username}) async {
+Future showWelcomPopUp(context,
+    {required Function toggleisNewUser,
+    required String username,
+    required bool isCelebrationShown,
+    required List<CelebrationData> celebrationData,
+    required Function toggleCelebrationShown}) async {
   FontThemeClass fontThemeClass = FontThemeClass();
   await showAdaptiveDialog(
       barrierDismissible: false,
@@ -354,12 +367,18 @@ Future showWelcomPopUp(BuildContext context,
               ),
               width: double.infinity,
               child: TextButton(
-                onPressed: () {
+                onPressed: () async {
                   _analyticsService.logEvent(
                       eventName: "Welcome_Pop_Up",
                       value: "Closed Welcome Pop Up");
                   toggleisNewUser();
                   Navigator.of(context).pop();
+                  if (isCelebrationShown == false &&
+                      celebrationData.isNotEmpty) {
+                    await showCelebrationModal(
+                        context, celebrationData[0], toggleCelebrationShown);
+                  }
+                  // ignore: use_build_context_synchronously
                 },
                 child: Text(
                   "Let's Go!",

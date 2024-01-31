@@ -2,7 +2,7 @@ import 'package:abhiyaan/file_exporter.dart';
 
 extension ColorSchemeExtension on ColorScheme {
   Color get primaryColor => const Color.fromARGB(255, 78, 75, 215);
-  Color get primaryDark => const Color(0xFF0B1215);
+  Color get primaryDark => const Color(0xFF252525);
 
   // Dark mode color
   Color get backgroundColor =>

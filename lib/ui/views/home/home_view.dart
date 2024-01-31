@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:abhiyaan/services/notification_service.dart';
-import 'package:abhiyaan/ui/common/cached_network_image.dart';
 import 'package:abhiyaan/ui/common/carousel_utils.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:abhiyaan/ui/views/home/celebration/celebration_model.dart';
@@ -29,10 +28,7 @@ class HomeView extends StatelessWidget {
       disposeViewModel: false,
       onViewModelReady: (viewModel) {
         viewModel.init(context).then(
-              (value) => Future.delayed(
-                const Duration(milliseconds: 200),
-                () => viewModel.afterInit(context),
-              ),
+              (value) =>viewModel.afterInit(context)
             );
       },
       builder: (context, model, child) {

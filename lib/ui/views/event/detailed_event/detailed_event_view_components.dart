@@ -238,64 +238,71 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                     fontTheme.paragraph(context, fontWeight: FontWeight.w700),
               ),
               20.verticalSpace,
-              Row(
-                children: [
-                  Container(
-                    height: 28.h,
-                    width: 28.w,
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.only(right: 8.0).r,
-                    child: Icon(
-                      Icons.account_circle,
-                      size: 24.sp,
-                      color: context.colorScheme.primaryColor,
-                    ),
-                  ),
-                  Text(eventContactName, style: fontTheme.caption(context)),
-                ],
-              ),
+              eventContactName.isNotEmpty
+                  ? Row(
+                      children: [
+                        Container(
+                          height: 28.h,
+                          width: 28.w,
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(right: 8.0).r,
+                          child: Icon(
+                            Icons.account_circle,
+                            size: 24.sp,
+                            color: context.colorScheme.primaryColor,
+                          ),
+                        ),
+                        Text(eventContactName,
+                            style: fontTheme.caption(context)),
+                      ],
+                    )
+                  : const SizedBox(),
               8.verticalSpace,
-              Row(
-                children: [
-                  Container(
-                    height: 28.h,
-                    width: 28.w,
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.only(right: 8.0),
-                    child: Icon(
-                      Icons.email,
-                      size: 24.h,
-                      color: context.colorScheme.primaryColor,
-                    ),
-                  ),
-                  Text(eventContactEmail,
-                      style: fontTheme.caption(
-                        context,
-                      )),
-                ],
-              ),
+              eventContactEmail.isNotEmpty
+                  ? Row(
+                      children: [
+                        Container(
+                          height: 28.h,
+                          width: 28.w,
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(right: 8.0),
+                          child: Icon(
+                            Icons.email,
+                            size: 24.h,
+                            color: context.colorScheme.primaryColor,
+                          ),
+                        ),
+                        Text(eventContactEmail,
+                            style: fontTheme.caption(
+                              context,
+                            )),
+                      ],
+                    )
+                  : const SizedBox(),
               8.verticalSpace,
-              Row(
-                children: [
-                  Container(
-                    height: 28.h,
-                    width: 28.w,
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.only(right: 8.0),
-                    // decoration: BoxDecoration(
-                    //   shape: BoxShape.circle,
-                    //   color: Colors.white,
-                    // ),
-                    child: Icon(
-                      Icons.phone_in_talk_rounded,
-                      size: 24.sp,
-                      color: context.colorScheme.primaryColor,
-                    ),
-                  ),
-                  Text(eventContactNumber.toString(),
-                      style: fontTheme.caption(context)),
-                ],
-              ),
+              eventContactNumber.toString().isNotEmpty
+                  ? Row(
+                      children: [
+                        Container(
+                          height: 28.h,
+                          width: 28.w,
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(right: 8.0),
+                          // decoration: BoxDecoration(
+                          //   shape: BoxShape.circle,
+                          //   color: Colors.white,
+                          // ),
+                          child: Icon(
+                            Icons.phone_in_talk_rounded,
+                            size: 24.sp,
+                            color: context.colorScheme.primaryColor,
+                          ),
+                        ),
+                        Text(eventContactNumber.toString(),
+                            style: fontTheme.caption(context)),
+                      ],
+                    )
+                  : const SizedBox(),
               40.verticalSpace,
               const Text(""),
               32.verticalSpace,
