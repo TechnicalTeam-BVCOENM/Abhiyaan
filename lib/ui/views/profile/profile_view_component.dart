@@ -74,7 +74,7 @@ class ProfileDetailsCard extends StatelessWidget {
                       await Clipboard.setData(ClipboardData(text: value))
                           .then((value) => showNormalMessage(
                                 context,
-                                "Copied",
+                                "$title Copied",
                               ));
                       // ignore: use_build_context_synchronously
                     },
