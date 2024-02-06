@@ -105,7 +105,7 @@ class SettingsView extends StatelessWidget {
                     child: Text(''),
                   ),
                   Text(
-                    'Abhiyaan v.1.0.0',
+                    'Abhiyaan v.1.0.3',
                     style: model.fontTheme.paragraph(context,
                         color: context.colorScheme.secondarySectionColor,
                         fontWeight: FontWeight.w500),

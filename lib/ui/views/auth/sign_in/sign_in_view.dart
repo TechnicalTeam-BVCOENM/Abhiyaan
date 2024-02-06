@@ -231,7 +231,7 @@ class SignInView extends StatelessWidget {
                         model.showRegister ? 10.verticalSpace : const Spacer(),
                         Container(
                           alignment: Alignment.center,
-                          child: Text('Abhiyaan v1.0.0',
+                          child: Text('Abhiyaan v1.0.3',
                               textAlign: TextAlign.center,
                               style: FontThemeClass().caption(context,
                                   color:
