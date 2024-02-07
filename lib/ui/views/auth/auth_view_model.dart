@@ -5,15 +5,15 @@ class AuthViewModel extends BaseViewModel {
   final AnalyticsService _analyticsService = locator<AnalyticsService>();
   final _storageService = locator<LocalStorageService>();
 
-
   final log = getLogger('auth_view');
 
   final showRegister = LocalStorageService().read("showRegister") ?? false;
 
   void init() async {
     await _analyticsService.logScreen(screenName: "Auth Screen");
-    final bool value = await runBusyFuture(FirestoreService().showRegistration());
-     await _storageService.write("showRegister", value);
+    final bool value =
+        await runBusyFuture(FirestoreService().showRegistration());
+    await _storageService.write("showRegister", value);
   }
 
   void toSignInPage(BuildContext context) {

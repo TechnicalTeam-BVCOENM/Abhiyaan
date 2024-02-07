@@ -42,7 +42,6 @@ class NotificationsService {
       // ignore: use_build_context_synchronously
       // PermissionRequestPopup().showPermissionRequestPopup(context);
       // AppSettings.openAppSettings(type: AppSettingsType.notification);
-      
     }
   }
 
