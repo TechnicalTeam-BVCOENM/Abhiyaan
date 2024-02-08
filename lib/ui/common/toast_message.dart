@@ -43,25 +43,33 @@ void _showmessage(BuildContext context, String message, String type) {
       backgroundColor = Colors.blue.shade400;
       icon = Icons.info;
   }
+
+  // Check if a snackbar is currently being shown
+  if (ScaffoldMessenger.of(context).mounted) {
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+  }
+
   try {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      padding: const EdgeInsets.all(10),
-      elevation: 300,
-      duration: const Duration(milliseconds: 2000),
-      backgroundColor: Colors.transparent,
-      clipBehavior: Clip.hardEdge,
-      content: Center(
-        child: SizedBox(
-          height: 60.h,
-          width: double.infinity,
-          child: Card(
-            color: context.colorScheme.toastMessage,
-            clipBehavior: Clip.hardEdge,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20).r),
-            child: Row(
-              children: [
-                Container(
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        padding: const EdgeInsets.all(10),
+        elevation: 300,
+        duration: const Duration(milliseconds: 1500),
+        backgroundColor: Colors.transparent,
+        clipBehavior: Clip.hardEdge,
+        content: Center(
+          child: SizedBox(
+            height: 60.h,
+            width: double.infinity,
+            child: Card(
+              color: context.colorScheme.toastMessage,
+              clipBehavior: Clip.hardEdge,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20).r,
+              ),
+              child: Row(
+                children: [
+                  Container(
                     height: 60.h,
                     width: 60.w,
                     decoration: BoxDecoration(
@@ -70,21 +78,25 @@ void _showmessage(BuildContext context, String message, String type) {
                     child: Icon(
                       icon,
                       color: Colors.white,
-                    )),
-                20.horizontalSpace,
-                Text(
-                  message,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: fontTheme.body(context,
-                      color: context.colorScheme.secondaryBlackColor),
-                ),
-              ],
+                    ),
+                  ),
+                  20.horizontalSpace,
+                  Text(
+                    message,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: fontTheme.body(
+                      context,
+                      color: context.colorScheme.secondaryBlackColor,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
-    ));
+    );
   } catch (e) {
     debugPrint("error is $e");
   }

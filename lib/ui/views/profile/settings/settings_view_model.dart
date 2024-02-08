@@ -242,8 +242,7 @@ class SettingsViewModel extends BaseViewModel {
     _analyticsService.logEvent(
         eventName: "Privacy_policy", value: "Privacy policy button clicked");
     UrlLauncher externalUrlHandler = UrlLauncher();
-    externalUrlHandler.launchURL(
-        "https://docs.google.com/document/d/1WzwkIXbSMIBa-M2_ADZfPJmGa9CkvBjA2j847oVn6C8/edit?usp=sharing");
+    externalUrlHandler.launchURL("https://abhiyaan.tech/privacy-policy");
     // Navigation
   }
 
