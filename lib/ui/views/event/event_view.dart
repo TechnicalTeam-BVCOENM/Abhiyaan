@@ -142,57 +142,122 @@ class EventView extends StatelessWidget {
                             ? Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const SectionText(title: "Upcoming Events"),
-                                  CarouselSlider.builder(
-                                    itemCount: model.upcomingEvents.length,
-                                    options: model.upcommingCarosoulOptions,
-                                    itemBuilder: (context, index, realIndex) {
-                                      return SizedBox(
-                                        height: 210.h,
-                                        child: Card(
-                                          clipBehavior: Clip.hardEdge,
-                                          shadowColor: context
-                                              .colorScheme.secondaryLPurpleColor
-                                              .withOpacity(0.8),
-                                          elevation: 2,
-                                          shape: ShapeBorder.lerp(
-                                              RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(18).r,
-                                              ),
-                                              RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(18).r,
-                                              ),
-                                              1),
-                                          child: Stack(
-                                            children: [
-                                              EventCardUpcoming(
-                                                model:
-                                                    model.upcomingEvents[index],
-                                              ),
-                                              EventDateContainer(
-                                                top: 2.h,
-                                                right: 2.w,
-                                                height: 65.r,
-                                                width: 60.r,
-                                                timeFontSize: 30.sp,
-                                                textFontSize: 20.sp,
-                                                event:
-                                                    model.upcomingEvents[index],
-                                                isUpcomming: true,
-                                              ),
-                                            ],
+                                  SectionText(
+                                      title:
+                                          "Upcoming Events · ${model.upcomingEvents.length}"),
+                                  model.upcomingEvents.length == 1
+                                      ? SizedBox(
+                                          height: 210.h,
+                                          child: Card(
+                                            clipBehavior: Clip.hardEdge,
+                                            shadowColor: context.colorScheme
+                                                .secondaryLPurpleColor
+                                                .withOpacity(0.8),
+                                            elevation: 1,
+                                            shape: ShapeBorder.lerp(
+                                                RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(18)
+                                                          .r,
+                                                ),
+                                                RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(18)
+                                                          .r,
+                                                ),
+                                                1),
+                                            child: Stack(
+                                              children: [
+                                                EventCardUpcoming(
+                                                  model:
+                                                      model.upcomingEvents[0],
+                                                ),
+                                                EventDateContainer(
+                                                  top: 2.h,
+                                                  right: 2.w,
+                                                  height: 65.r,
+                                                  width: 60.r,
+                                                  timeFontSize: 30.sp,
+                                                  textFontSize: 20.sp,
+                                                  event:
+                                                      model.upcomingEvents[0],
+                                                  isUpcomming: true,
+                                                ),
+                                              ],
+                                            ),
                                           ),
+                                        )
+                                      : CarouselSlider.builder(
+                                          itemCount:
+                                              model.upcomingEvents.length,
+                                          options: CarouselOptions(
+                                            scrollPhysics:
+                                                const BouncingScrollPhysics(),
+                                            autoPlayCurve:
+                                                Curves.easeInOutCubic,
+                                            enableInfiniteScroll: true,
+                                            autoPlay: true,
+                                            autoPlayInterval: 4.seconds,
+                                            autoPlayAnimationDuration:
+                                                1.seconds,
+                                            pauseAutoPlayOnTouch: true,
+                                            pauseAutoPlayInFiniteScroll: true,
+                                            viewportFraction: 0.65,
+                                          ),
+                                          itemBuilder:
+                                              (context, index, realIndex) {
+                                            return SizedBox(
+                                              height: 210.h,
+                                              child: Card(
+                                                clipBehavior: Clip.hardEdge,
+                                                shadowColor: context.colorScheme
+                                                    .secondaryLPurpleColor
+                                                    .withOpacity(0.8),
+                                                elevation: 1,
+                                                shape: ShapeBorder.lerp(
+                                                    RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                                  18)
+                                                              .r,
+                                                    ),
+                                                    RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                                  18)
+                                                              .r,
+                                                    ),
+                                                    1),
+                                                child: Stack(
+                                                  children: [
+                                                    EventCardUpcoming(
+                                                      model:
+                                                          model.upcomingEvents[
+                                                              index],
+                                                    ),
+                                                    EventDateContainer(
+                                                      top: 2.h,
+                                                      right: 2.w,
+                                                      height: 65.r,
+                                                      width: 60.r,
+                                                      timeFontSize: 30.sp,
+                                                      textFontSize: 20.sp,
+                                                      event:
+                                                          model.upcomingEvents[
+                                                              index],
+                                                      isUpcomming: true,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
                                         ),
-                                      );
-                                    },
-                                  ),
                                 ],
                               )
                             : 0.verticalSpace,
                         4.verticalSpace,
-                      ].animate(delay: 100.ms, interval: 40.ms).fadeIn(),
+                      ].animate(delay: 100.ms, interval: 60.ms).fadeIn(),
                     ),
                   ),
                 ),
