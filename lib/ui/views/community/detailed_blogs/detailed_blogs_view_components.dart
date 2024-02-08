@@ -45,15 +45,44 @@ class BlogAuthorDetailes extends StatelessWidget {
               color: context.colorScheme.secondarySectionColor),
         ),
         const Spacer(),
-        Text(
-          "Likes ${streamLikes.toString()}",
-          textAlign: TextAlign.center,
-          style: fontThemeClass.caption(
-            context,
-            fontWeight: FontWeight.normal,
-            color: context.colorScheme.secondaryBlackColor.withOpacity(0.85),
+        SizedBox(
+          width: 80.w,
+          height: 25.h,
+          child: Stack(
+            children: [
+              for (int i = 0; i < (streamLikes > 4 ? 4 : streamLikes); i++)
+                Positioned(
+                  right: (15.0 * (i)).w,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12).r,
+                    clipBehavior: Clip.hardEdge,
+                    child: SizedBox(
+                      width: 25.w,
+                      height: 25.h,
+                      child: CachedNetworkImageWidget(
+                        height: 25.h,
+                        width: 25.w,
+                        imageUrl: AssetUrls.dummyImageUrl,
+                        maxHeightDiskCache: 80,
+                      ),
+                    ),
+                  ),
+                )
+            ],
           ),
         ),
+        4.horizontalSpace,
+        streamLikes > 4
+            ? Text(
+                "+ ${(streamLikes - 4).toString()} likes",
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              )
+            : Text(
+                "Likes ${streamLikes.toString()}",
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
       ],
     );
   }

@@ -26,12 +26,27 @@ class CommunityViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void navigateToDetailedBlogPage(CommunityBlogsData blogData) {
+  void navigateToDetailedBlogPage(
+      CommunityBlogsData blogData, BuildContext context) {
     try {
       _analyticsService.logEvent(
           eventName: "Detailed_Blog_View",
           value: "${blogData.title} Blog Viewed : ${blogData.documentId}");
-      navigationService.navigateToView(DettailedBlogPage(blogData: blogData));
+      showModalBottomSheet(
+          enableDrag: true,
+          showDragHandle: true,
+          context: context,
+          elevation: 0,
+          isDismissible: false,
+          backgroundColor: context.colorScheme.backgroundColor,
+          isScrollControlled: true,
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height * 0.9,
+            maxHeight: MediaQuery.of(context).size.height * 0.95,
+          ),
+          builder: (context) {
+            return DettailedBlogPage(blogData: blogData);
+          });
     } on Exception catch (e) {
       log.e("Error in navigating to detailed blog page: ${e.toString()}");
     }
