@@ -98,8 +98,8 @@ class SettingsView extends StatelessWidget {
                             leadingIcon: model.settings[4].leading),
                       )
                     ]
-                        .animate(delay: 200.ms, interval: 200.ms)
-                        .fadeIn(duration: 800.ms, curve: Curves.easeInOut),
+                        .animate(delay: 100.ms, interval: 100.ms)
+                        .fadeIn(duration: 420.ms, curve: Curves.easeInOut),
                   ),
                   const Expanded(
                     child: Text(''),
