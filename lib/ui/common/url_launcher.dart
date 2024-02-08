@@ -1,4 +1,3 @@
-
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -14,11 +13,12 @@ class UrlLauncher {
 
   launchEmail(String email) async {
     String? encodeQueryParameters(Map<String, String> params) {
-  return params.entries
-      .map((MapEntry<String, String> e) =>
-          '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-      .join('&');
-}
+      return params.entries
+          .map((MapEntry<String, String> e) =>
+              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+          .join('&');
+    }
+
     try {
       Uri sendMail = Uri(
         scheme: 'mailto',

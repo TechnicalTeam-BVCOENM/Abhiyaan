@@ -27,9 +27,7 @@ class HomeView extends StatelessWidget {
       viewModelBuilder: () => HomeViewModel(),
       disposeViewModel: false,
       onViewModelReady: (viewModel) {
-        viewModel.init(context).then(
-              (value) =>viewModel.afterInit(context)
-            );
+        viewModel.init(context).then((value) => viewModel.afterInit(context));
       },
       builder: (context, model, child) {
         return UpgradeAlert(
