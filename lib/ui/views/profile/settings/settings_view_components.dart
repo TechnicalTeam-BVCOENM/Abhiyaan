@@ -5,7 +5,7 @@ Padding settingsListTile(
   BuildContext context, {
   String? title,
   Widget? trailingIcon,
-  String? leadingIcon,
+  IconData? leadingIcon,
   Function? onTap,
 }) {
   return Padding(
@@ -19,7 +19,12 @@ Padding settingsListTile(
             fontWeight: FontWeight.w500),
       ),
       titleAlignment: ListTileTitleAlignment.center,
-      leading: SizedBox(width: 40.w, child: Image.asset(leadingIcon!)),
+      leading: Icon(
+        leadingIcon,
+        weight: 30.w,
+        size: 30.sp,
+        color: context.colorScheme.primaryColor,
+      ),
       trailing: trailingIcon,
       tileColor: context.colorScheme.secondaryWhiteColor,
       shape: RoundedRectangleBorder(
