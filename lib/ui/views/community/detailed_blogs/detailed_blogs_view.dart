@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/ui/common/cached_network_image.dart';
 import 'package:abhiyaan/ui/views/community/community_view.dart';
@@ -30,59 +32,31 @@ class DettailedBlogPage extends StatelessWidget {
                   false;
 
               final int streamLikes = snapshot.data ?? 0;
+
+              SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+                  overlays: []);
               return Scaffold(
-                  floatingActionButtonLocation:
-                      FloatingActionButtonLocation.endFloat,
-                  floatingActionButton: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      FloatingActionButton(
-                          backgroundColor: context.colorScheme.primaryColor,
-                          heroTag: "share_blog",
-                          onPressed: () async {
-                            model.shareBlog(context, blogData);
-                          },
-                          child: Icon(
-                            Icons.share,
-                            color: context.colorScheme.signInTextColor,
-                            fill: 0,
-                            size: 25,
-                          ).animate(delay: 500.ms).scale()),
-                      12.verticalSpace,
-                      FloatingActionButton(
-                        backgroundColor: context.colorScheme.primaryColor,
-                        heroTag: "like",
-                        onPressed: () async {
-                          communityViewModel.updateLikes(
-                              blogData.documentId, context);
-                        },
-                        child: isLiked
-                            ? Icon(
-                                Icons.favorite_rounded,
-                                color: Colors.red,
-                                shadows: [
-                                  BoxShadow(
-                                    color: context
-                                        .colorScheme.secondaryBlackColor
-                                        .withOpacity(0.25),
-                                    blurRadius: 20,
-                                    spreadRadius: 0.8,
-                                  ),
-                                ],
-                                fill: 1,
-                                size: 25,
-                              ).animate(delay: 500.ms).scale()
-                            : const Icon(
-                                Icons.favorite_border_rounded,
-                                color: Colors.black,
-                                fill: 0,
-                                size: 25,
-                              ).animate(delay: 500.ms).scale(),
-                      ),
-                    ],
-                  ),
+                  floatingActionButton: FloatingActionButton(
+                    backgroundColor: isLiked
+                        ? Colors.white
+                        : context.colorScheme.primaryColor,
+                    heroTag: "like",
+                    onPressed: () async {
+                      communityViewModel.updateLikes(
+                          blogData.documentId, context);
+                    },
+                    child: Icon(
+                      isLiked
+                          ? Icons.favorite_rounded
+                          : Icons.favorite_border_rounded,
+                      color: isLiked ? Colors.red : Colors.white,
+                      fill: isLiked ? 1 : 0,
+                      size: 25,
+                    ),
+                  ).animate(delay: 200.ms).scale(),
                   appBar: AppBar(
                     backgroundColor: context.colorScheme.backgroundColor,
+                    surfaceTintColor: context.colorScheme.backgroundColor,
                     leading: IconButton(
                       onPressed: () {
                         Navigator.pop(context);
@@ -123,7 +97,7 @@ class DettailedBlogPage extends StatelessWidget {
                           4.verticalSpace,
                           Center(
                             child: Text(
-                              "Image: ${blogData.title.toLowerCase()}",
+                              "image source: ${blogData.title.toLowerCase()}",
                               textAlign: TextAlign.start,
                               style: fontThemeClass.caption(context,
                                   color: context
@@ -131,15 +105,37 @@ class DettailedBlogPage extends StatelessWidget {
                             ),
                           ),
                           32.verticalSpace,
-                          Text(
-                            blogData.title,
-                            textAlign: TextAlign.start,
-                            style: fontThemeClass.header(context,
-                                color: context.colorScheme.secondaryBlackColor),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                blogData.title,
+                                textAlign: TextAlign.start,
+                                style: fontThemeClass.header(
+                                  context,
+                                  color:
+                                      context.colorScheme.secondaryBlackColor,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () async {
+                                  model.shareBlog(context, blogData);
+                                },
+                                icon: Icon(
+                                  Icons.share,
+                                  color:
+                                      context.colorScheme.secondaryBlackColor,
+                                  fill: 0,
+                                  size: 25,
+                                ),
+                              ).animate(delay: 100.ms).scale()
+                            ],
                           ),
                           2.verticalSpace,
                           BlogAuthorDetailes(
-                              blogData: blogData, streamLikes: streamLikes),
+                            blogData: blogData,
+                            streamLikes: streamLikes,
+                          ),
                           2.verticalSpace,
                           Divider(
                             thickness: 1.8,
@@ -152,7 +148,7 @@ class DettailedBlogPage extends StatelessWidget {
                             textAlign: TextAlign.justify,
                             style: fontThemeClass.body(context),
                           ),
-                          12.verticalSpace,
+                          (blogData.content.length / 8).verticalSpace,
                         ],
                       ),
                     ),

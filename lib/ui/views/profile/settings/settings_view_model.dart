@@ -60,7 +60,6 @@ class SettingsViewModel extends BaseViewModel {
   }
 
   void passwordChangeAlert(context, [String? email]) {
-
     showAdaptiveDialog(
         context: context,
         builder: (context) {

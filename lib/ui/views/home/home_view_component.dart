@@ -229,9 +229,10 @@ Future showCelebrationModal(
                           ),
                           10.verticalSpace,
                           Text(
-                           data.description.length<500? data.description:"${data.description.substring(0,500)}...",
+                            data.description.length < 500
+                                ? data.description
+                                : "${data.description.substring(0, 500)}...",
                             textAlign: TextAlign.justify,
-
                             style: fontThemeClass.caption(
                               context,
                               color: context.colorScheme.secondaryBlackColor

@@ -90,7 +90,11 @@ class HomeViewModel extends BaseViewModel {
     try {
       if (isUserNew) {
         await showWelcomPopUp(context,
-                toggleisNewUser: toggleisNewUser, username: splitusername(),isCelebrationShown:isCelebrationShown,celebrationData: _celebrationData,toggleCelebrationShown: toggleCelebrationShown)
+                toggleisNewUser: toggleisNewUser,
+                username: splitusername(),
+                isCelebrationShown: isCelebrationShown,
+                celebrationData: _celebrationData,
+                toggleCelebrationShown: toggleCelebrationShown)
             .then((value) async {
           Future.delayed(2.seconds, () async {
             if (isCelebrationShown == false && _celebrationData.isNotEmpty) {
