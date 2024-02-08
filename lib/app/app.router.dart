@@ -19,8 +19,9 @@ import 'package:abhiyaan/ui/views/event/detailed_event/detailed_event_view.dart'
     as _i9;
 import 'package:abhiyaan/ui/views/event/event_view.dart' as _i8;
 import 'package:abhiyaan/ui/views/home/home_view.dart' as _i3;
+import 'package:abhiyaan/ui/views/profile/preferences/preferences_view.dart'
+    as _i6;
 import 'package:abhiyaan/ui/views/profile/profile_view.dart' as _i5;
-import 'package:abhiyaan/ui/views/profile/settings/settings_view.dart' as _i6;
 import 'package:abhiyaan/ui/views/splash/splash_view.dart' as _i2;
 import 'package:flutter/material.dart' as _i16;
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class Routes {
 
   static const profileView = '/profile-view';
 
-  static const settingsView = '/settings-view';
+  static const preferencesView = '/preferences-view';
 
   static const bottomNavView = '/bottom-nav-view';
 
@@ -61,7 +62,7 @@ class Routes {
     homeView,
     authView,
     profileView,
-    settingsView,
+    preferencesView,
     bottomNavView,
     eventView,
     detailedEventView,
@@ -93,8 +94,8 @@ class StackedRouter extends _i1.RouterBase {
       page: _i5.ProfileView,
     ),
     _i1.RouteDef(
-      Routes.settingsView,
-      page: _i6.SettingsView,
+      Routes.preferencesView,
+      page: _i6.PreferencesView,
     ),
     _i1.RouteDef(
       Routes.bottomNavView,
@@ -159,9 +160,9 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i6.SettingsView: (data) {
+    _i6.PreferencesView: (data) {
       return _i16.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i6.SettingsView(),
+        builder: (context) => const _i6.PreferencesView(),
         settings: data,
       );
     },
@@ -372,14 +373,14 @@ extension NavigatorStateExtension on _i18.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToSettingsView([
+  Future<dynamic> navigateToPreferencesView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return navigateTo<dynamic>(Routes.settingsView,
+    return navigateTo<dynamic>(Routes.preferencesView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -577,14 +578,14 @@ extension NavigatorStateExtension on _i18.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithSettingsView([
+  Future<dynamic> replaceWithPreferencesView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return replaceWith<dynamic>(Routes.settingsView,
+    return replaceWith<dynamic>(Routes.preferencesView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

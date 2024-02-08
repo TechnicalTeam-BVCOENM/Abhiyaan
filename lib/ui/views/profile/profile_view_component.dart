@@ -1,97 +1,6 @@
-import 'package:abhiyaan/ui/common/url_launcher.dart';
-import 'package:abhiyaan/file_exporter.dart';
-import '../../common/toast_message.dart';
+part of 'profile_view.dart';
 
 final _analyticsService = locator<AnalyticsService>();
-
-class ProfileDetailsCard extends StatelessWidget {
-  final String leading;
-  final String title;
-  final String value;
-  final IconData icon;
-
-  const ProfileDetailsCard({
-    super.key,
-    required this.leading,
-    required this.title,
-    required this.value,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return value != ""
-        ? Container(
-            width: double.infinity,
-            height: 75.h,
-            margin: EdgeInsets.only(bottom: 20.r),
-            decoration: BoxDecoration(
-                color: context.colorScheme.secondaryWhiteColor,
-                borderRadius: BorderRadius.circular(20.r)),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 25.w,
-                ),
-                Image.asset(width: 36.w, leading),
-                SizedBox(
-                  width: 32.w,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 200.w,
-                      child: Text(
-                        overflow: TextOverflow.ellipsis,
-                        title,
-                        style: FontThemeClass().body(context,
-                            fontWeight: FontWeight.w500,
-                            color: context.colorScheme.secondaryBlackColor),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 4.h,
-                    ),
-                    SizedBox(
-                      width: 160.w,
-                      child: Text(
-                        value,
-                        overflow: TextOverflow.ellipsis,
-                        style: FontThemeClass().caption(context,
-                            color: context.colorScheme.secondarySectionColor),
-                      ),
-                    ),
-                  ],
-                ),
-                const Expanded(child: Text("")),
-                TextButton(
-                    onPressed: () async {
-                      _analyticsService.logEvent(
-                          eventName: "Profile_Details_Copy",
-                          value: "$title Profile Details Copy button clicked");
-                      await Clipboard.setData(ClipboardData(text: value))
-                          .then((value) => showNormalMessage(
-                                context,
-                                "$title Copied",
-                              ));
-                      // ignore: use_build_context_synchronously
-                    },
-                    child: Icon(
-                      icon,
-                      size: 26.r,
-                      color: context.colorScheme.switchColor,
-                    )),
-                SizedBox(
-                  width: 10.w,
-                )
-              ],
-            ),
-          )
-        : const SizedBox();
-  }
-}
 
 class SocialLinks extends StatelessWidget {
   final String iconpath;
@@ -129,63 +38,288 @@ class Cerificatation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 75.h,
-      margin: EdgeInsets.only(bottom: 20.r),
-      decoration: BoxDecoration(
-          color: context.colorScheme.secondaryWhiteColor,
-          borderRadius: BorderRadius.circular(20.r)),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 25.w,
+    return GestureDetector(
+      onTap: () {},
+      child: ListTile(
+        minVerticalPadding: 15.r,
+        tileColor: context.colorScheme.secondaryWhiteColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        leading: SizedBox(
+          width: 60.w,
+          child: Icon(
+            Icons.credit_card_outlined,
+            size: 30.r,
+            color: context.colorScheme.primaryColor,
           ),
-          Image.asset(width: 36.w, AssetImagePath.certificateImg),
-          SizedBox(
-            width: 32.w,
+        ),
+        title: Text(
+          "Certification",
+          style: FontThemeClass().body(
+            context,
+            color: context.colorScheme.secondaryBlackColor,
+            fontWeight: FontWeight.w600,
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 200.w,
-                child: Text(
-                  overflow: TextOverflow.ellipsis,
-                  "Certifications",
+        ),
+        subtitle: Text(
+          "There are no certifications available",
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+          style: FontThemeClass().caption(
+            context,
+            color: context.colorScheme.secondaryBlackColor.withOpacity(0.6),
+          ),
+        ),
+        trailing: Icon(
+          Icons.arrow_forward_ios_rounded,
+          size: 25.r,
+          color: context.colorScheme.secondaryBlackColor.withOpacity(0.8),
+        ),
+      ),
+    ).animate(delay: 100.ms).fadeIn(
+          delay: 200.ms,
+          curve: Curves.easeInOut,
+          duration: 600.ms,
+        );
+  }
+}
+
+class AppBarWidget extends ViewModelWidget<ProfileViewModel> {
+  const AppBarWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, ProfileViewModel viewModel) {
+    return AppBar(
+      backgroundColor: context.colorScheme.backgroundColor,
+      elevation: 0,
+      centerTitle: true,
+      automaticallyImplyLeading: false,
+      // title: Center(
+      //   child: Text(
+      //     "Profile",
+      //     style: FontThemeClass().title(
+      //       context,
+      //       fontWeight: FontWeight.w600,
+      //       color: context.colorScheme.secondaryBlackColor,
+      //     ),
+      //   ),
+      // ),
+    );
+  }
+}
+
+class ProfileCard extends ViewModelWidget<ProfileViewModel> {
+  const ProfileCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, ProfileViewModel viewModel) {
+    return GestureDetector(
+      onTap: () => viewModel._navigationService.navigateToPreferencesView(),
+      child: ListTile(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
+        tileColor: context.colorScheme.secondaryWhiteColor,
+        minVerticalPadding: 10.r,
+        title: Row(
+          children: [
+            Hero(
+              tag: "profileImage",
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100).r,
+                clipBehavior: Clip.hardEdge,
+                child: CachedNetworkImage(
+                  imageUrl: AssetUrls.dummyImageUrl,
+                  width: 50.w,
+                  height: 50.h,
+                ),
+              ),
+            ),
+            12.horizontalSpace,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  viewModel.localStorageService.read('userName'),
+                  style: FontThemeClass().title2(
+                    context,
+                    color: context.colorScheme.secondaryBlackColor,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Text(
+                  "View Profile Information",
+                  style: FontThemeClass().caption(
+                    context,
+                    color: context.colorScheme.secondaryBlackColor
+                        .withOpacity(0.8),
+                  ),
+                ),
+              ],
+            ),
+            const Spacer(),
+            Row(
+              children: [
+                Text(
+                  "View",
                   style: FontThemeClass().body(context,
-                      fontWeight: FontWeight.w500,
-                      color: context.colorScheme.secondaryBlackColor),
+                      color: context.colorScheme.secondaryBlackColor
+                          .withOpacity(0.6),
+                      fontWeight: FontWeight.w600),
                 ),
-              ),
-              SizedBox(
-                height: 4.h,
-              ),
-              SizedBox(
-                width: 160.w,
-                child: Text(
-                  "0",
-                  overflow: TextOverflow.ellipsis,
-                  style: FontThemeClass().caption(context,
-                      color: context.colorScheme.secondarySectionColor),
+                4.horizontalSpace,
+                Icon(
+                  Icons.arrow_forward_ios_sharp,
+                  color:
+                      context.colorScheme.secondaryBlackColor.withOpacity(0.8),
+                  size: 15.r,
                 ),
-              ),
-            ],
-          ),
-          const Expanded(child: Text("")),
-          TextButton(
-              onPressed: () async {},
-              child: Icon(
-                Icons.navigate_next,
-                size: 26.r,
-                color: context.colorScheme.switchColor,
-              )),
-          SizedBox(
-            width: 10.w,
-          )
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
+  }
+}
+
+class HelpSupportTile extends ViewModelWidget<ProfileViewModel> {
+  const HelpSupportTile({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, ProfileViewModel viewModel) {
+    return GestureDetector(
+      onTap: () {
+        viewModel.navigateToHelpSupport();
+      },
+      child: ListTile(
+        minVerticalPadding: 25.r,
+        tileColor: context.colorScheme.secondaryWhiteColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        leading: SizedBox(
+          width: 60.w,
+          child: Icon(
+            Icons.warning_amber_rounded,
+            size: 30.r,
+            color: context.colorScheme.primaryColor,
+          ),
+        ),
+        title: Text(
+          "Help & Support",
+          style: FontThemeClass().body(
+            context,
+            color: context.colorScheme.secondaryBlackColor,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        trailing: Icon(
+          Icons.arrow_forward_ios_rounded,
+          size: 25.r,
+          color: context.colorScheme.secondaryBlackColor.withOpacity(0.8),
+        ),
+      ),
+    ).animate(delay: 100.ms).fadeIn(
+          delay: 200.ms,
+          curve: Curves.easeInOut,
+          duration: 600.ms,
+        );
+  }
+}
+
+class PrivacyPolicyTile extends ViewModelWidget<ProfileViewModel> {
+  const PrivacyPolicyTile({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, ProfileViewModel viewModel) {
+    return GestureDetector(
+      onTap: () {
+        viewModel.navigateToPrivacyPolicy();
+      },
+      child: ListTile(
+        minVerticalPadding: 25.r,
+        tileColor: context.colorScheme.secondaryWhiteColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        leading: SizedBox(
+          width: 60.w,
+          child: Icon(
+            Icons.privacy_tip_outlined,
+            size: 30.r,
+            color: context.colorScheme.primaryColor,
+          ),
+        ),
+        title: Text(
+          "Privacy Policy",
+          style: FontThemeClass().body(
+            context,
+            color: context.colorScheme.secondaryBlackColor,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        trailing: Icon(
+          Icons.arrow_forward_ios_rounded,
+          size: 25.r,
+          color: context.colorScheme.secondaryBlackColor.withOpacity(0.8),
+        ),
+      ),
+    ).animate(delay: 100.ms).fadeIn(
+          delay: 200.ms,
+          curve: Curves.easeInOut,
+          duration: 600.ms,
+        );
+  }
+}
+
+class DarkModeTile extends ViewModelWidget<ProfileViewModel> {
+  const DarkModeTile({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, ProfileViewModel viewModel) {
+    return ListTile(
+      minVerticalPadding: 25.r,
+      tileColor: context.colorScheme.secondaryWhiteColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.r),
+      ),
+      leading: SizedBox(
+        width: 60.w,
+        child: Icon(
+          Icons.dark_mode_outlined,
+          size: 30.r,
+          color: context.colorScheme.primaryColor,
+        ),
+      ),
+      title: Text(
+        "Dark Mode",
+        style: FontThemeClass().body(
+          context,
+          color: context.colorScheme.secondaryBlackColor,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      trailing: Switch.adaptive(
+        activeColor: context.colorScheme.switchColor,
+        value: viewModel._themeService.valueListenable.value,
+        onChanged: (val) => viewModel.changeTheme(),
+      ),
+    ).animate(delay: 100.ms).fadeIn(
+          delay: 200.ms,
+          curve: Curves.easeInOut,
+          duration: 600.ms,
+        );
   }
 }

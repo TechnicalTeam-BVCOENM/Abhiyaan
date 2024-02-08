@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
             splitScreenMode: true,
             builder: (_, child) {
               return MaterialApp(
-                title: 'abhiyaan',
+                title: 'Abhiyaan',
                 debugShowCheckedModeBanner: false,
                 theme: ThemeData(
                   textTheme: const TextTheme(),

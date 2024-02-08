@@ -1,29 +1,28 @@
-part of '../settings/settings_view.dart';
+part of 'preferences_view.dart';
 
-class SettingsViewModel extends BaseViewModel {
+class PreferencesViewModel extends BaseViewModel {
   final log = getLogger('SettingsView');
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
   final _analyticsService = locator<AnalyticsService>();
-  final _themeService = locator<ThemeService>();
+  final LocalStorageService localStorageService =
+      locator<LocalStorageService>();
   final fontTheme = FontThemeClass();
-
-  Color blue = Colors.blue;
-  var isDark = false;
 
   void init() {
     _analyticsService.logScreen(screenName: 'Settings Screen Opened');
   }
 
-  navigateToProfile() {
-    _navigationService.replaceWith(Routes.profileView);
-  }
-
-  changeTheme() async {
+  void copyText(String title, String value, BuildContext context) async {
     _analyticsService.logEvent(
-        eventName: "Dark_mode", value: "Dark mode toggle button clicked");
-    _themeService.updateTheme();
-    notifyListeners();
+        eventName: "Profile_Details_Copy",
+        value: "$title Profile Details Copy button clicked");
+    await Clipboard.setData(ClipboardData(text: value)).then(
+      (value) => showNormalMessage(
+        context,
+        "$title Copied",
+      ),
+    );
   }
 
   Future<void> changePassword(context) async {
@@ -230,22 +229,6 @@ class SettingsViewModel extends BaseViewModel {
         });
   }
 
-  navigateToHelpSupport() {
-    _analyticsService.logEvent(
-        eventName: "Help_support", value: "Help and support button clicked");
-    UrlLauncher externalUrlHandler = UrlLauncher();
-    externalUrlHandler.launchEmail("technicalteam.bvcoenm@gmail.com");
-    // Navigation
-  }
-
-  navigateToPrivacyPolicy() {
-    _analyticsService.logEvent(
-        eventName: "Privacy_policy", value: "Privacy policy button clicked");
-    UrlLauncher externalUrlHandler = UrlLauncher();
-    externalUrlHandler.launchURL("https://abhiyaan.tech/privacy-policy");
-    // Navigation
-  }
-
   Future<void> logout(BuildContext context) async {
     setBusy(true);
     LocalStorageService localStorageService = locator<LocalStorageService>();
@@ -265,34 +248,4 @@ class SettingsViewModel extends BaseViewModel {
     }
     setBusy(false);
   }
-
-  List<SettingsModel> settings = [
-    SettingsModel(
-      title: 'Dark mode',
-      leading: Icons.dark_mode,
-    ),
-    SettingsModel(
-      title: 'Change Password',
-      leading: Icons.lock,
-    ),
-    SettingsModel(
-      title: 'Help & Support',
-      leading: Icons.help,
-    ),
-    SettingsModel(
-      title: 'Privacy Policy',
-      leading: Icons.privacy_tip_rounded,
-    ),
-    SettingsModel(
-      title: 'Logout',
-      leading: Icons.door_front_door,
-    )
-  ];
-}
-
-class SettingsModel {
-  late String title;
-  IconData trailing = Icons.arrow_forward_ios;
-  late IconData leading;
-  SettingsModel({required this.title, required this.leading});
 }
