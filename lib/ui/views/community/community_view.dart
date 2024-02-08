@@ -81,7 +81,7 @@ class CommunityView extends StatelessWidget {
                                       .map((data) => GestureDetector(
                                           onTap: () {
                                             model.navigateToDetailedBlogPage(
-                                                data);
+                                                data, context);
                                           },
                                           child:
                                               CommunityBlogs(blogsData: data)))

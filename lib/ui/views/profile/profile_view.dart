@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:abhiyaan/file_exporter.dart';
-import 'package:abhiyaan/ui/views/profile/profile_view_component.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:abhiyaan/ui/common/url_launcher.dart';
 part 'profile_view_model.dart';
+part "profile_view_component.dart";
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -15,118 +16,39 @@ class ProfileView extends StatelessWidget {
         builder: (context, model, child) {
           return Scaffold(
             backgroundColor: context.colorScheme.backgroundColor,
-            appBar: AppBar(
-              backgroundColor: context.colorScheme.backgroundColor,
-              actions: [
-                TextButton(
-                  onPressed: () => model.navigateToSettingsView(),
-                  child: SizedBox(
-                    width: 28.w,
-                    child: Icon(
-                      Icons.settings,
-                      size: 32.r,
-                      color: context.colorScheme.switchColor,
-                    ),
-                  ),
-                ),
-              ],
-              elevation: 0,
-              automaticallyImplyLeading: false,
-              title: Padding(
-                padding: const EdgeInsets.only(top: 8, left: 18).r,
-                child: Center(
-                  child: Container(
-                    margin: EdgeInsets.only(left: 40.r),
-                    child: Text(
-                      "Profile",
-                      style: FontThemeClass().title(context,
-                          fontWeight: FontWeight.w500,
-                          color: context.colorScheme.secondaryBlackColor),
-                    ),
-                  ),
-                ),
-              ),
+            appBar: const PreferredSize(
+              preferredSize: Size.fromHeight(kToolbarHeight),
+              child: AppBarWidget(),
             ),
             body: SafeArea(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.r),
+                padding: const EdgeInsets.symmetric(horizontal: 20).r,
                 child: Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 45.r),
-                      child: Row(
-                        children: [
-                          ClipOval(
-                            child: CachedNetworkImage(
-                              width: 90.r,
-                              height: 90.r,
-                              fit: BoxFit.cover,
-                              imageUrl: AssetUrls.dummyImageUrl,
-                              placeholder: (context, url) => const Center(
-                                  child: CircularProgressIndicator.adaptive()),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 25.w,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: 220.w,
-                                child: Text(
-                                  LocalStorageService().read('userName'),
-                                  overflow: TextOverflow.ellipsis,
-                                  style: FontThemeClass().title2(context,
-                                      color: context
-                                          .colorScheme.secondaryBlackColor,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 4.h,
-                              ),
-                              Text(
-                                model.localStorageService.read('userProfile'),
-                                style: FontThemeClass().body(
-                                  context,
-                                  color:
-                                      context.colorScheme.secondarySectionColor,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ).animate(delay: 0.ms).fadeIn(
-                            delay: 100.ms,
-                            curve: Curves.easeInOut,
-                            duration: 600.ms,
-                          ),
-                    ),
-                    for (var profileCard in model.profileCardList)
-                      profileCard.animate(delay: 200.ms).fadeIn(
-                            delay: 100.ms,
-                            curve: Curves.easeInOut,
-                            duration: 600.ms,
-                          ),
-                    model.localStorageService.read('userProfile') == "Explorer"
-                        ? const SizedBox()
-                        : model.localStorageService.read('userProfile') ==
+                  children: [
+                    const ProfileCard(),
+                    16.verticalSpace,
+                    const DarkModeTile(),
+                    16.verticalSpace,
+                    model.localStorageService.read('userProfile') ==
+                                "Explorer" ||
+                            model.localStorageService.read('userProfile') ==
                                 "Faculty"
-                            ? const SizedBox()
-                            :
-                            // Display each profile card widget
-                            const Cerificatation()
-                                .animate(delay: 200.ms)
-                                .fadeIn(
-                                  delay: 100.ms,
-                                  curve: Curves.easeInOut,
-                                  duration: 600.ms,
-                                ),
-                    const Expanded(child: Text("")),
+                        ? const SizedBox()
+                        : const Cerificatation().animate(delay: 200.ms).fadeIn(
+                              delay: 100.ms,
+                              curve: Curves.easeInOut,
+                              duration: 300.ms,
+                            ),
+                    model.localStorageService.read('userProfile') ==
+                                "Explorer" ||
+                            model.localStorageService.read('userProfile') ==
+                                "Faculty"
+                        ? 0.verticalSpace
+                        : 16.verticalSpace,
+                    const HelpSupportTile(),
+                    16.verticalSpace,
+                    const PrivacyPolicyTile(),
+                    const Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -142,15 +64,13 @@ class ProfileView extends StatelessWidget {
                           iconpath: AssetImagePath.xImg,
                           url: AssetUrls.twitterUrl,
                         ),
-                      ].animate(delay: 500.ms, interval: 200.ms).fadeIn(
+                      ].animate(delay: 200.ms, interval: 100.ms).fadeIn(
                             delay: 100.ms,
                             curve: Curves.easeInOut,
-                            duration: 600.ms,
+                            duration: 400.ms,
                           ),
                     ),
-                    SizedBox(
-                      height: 20.h,
-                    )
+                    20.verticalSpace,
                   ],
                 ),
               ),

@@ -6,7 +6,8 @@ class SignInViewModel extends BaseViewModel {
   final AnalyticsService _analyticsService = locator<AnalyticsService>();
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
-  final SettingsViewModel settingsViewModel = SettingsViewModel();
+  // final SettingsViewModel settingsViewModel = SettingsViewModel();
+  final PreferencesViewModel preferencesViewModel = PreferencesViewModel();
   final fontTheme = FontThemeClass();
   final showRegister = LocalStorageService().read("showRegister") ?? true;
   final TextEditingController emailIdTextController = TextEditingController();
@@ -49,7 +50,7 @@ class SignInViewModel extends BaseViewModel {
       );
     } else if (await RegisterViewModel()
         .checkEmailExists(emailIdTextController.text, context)) {
-      settingsViewModel.passwordChangeAlert(
+      preferencesViewModel.passwordChangeAlert(
           context, emailIdTextController.text);
     } else {
       showErrorMessage(context, "User Not Found");

@@ -12,8 +12,8 @@ import 'package:abhiyaan/ui/views/event/detailed_event/detailed_event_view.dart'
 import 'package:abhiyaan/ui/views/event/event_view.dart';
 import 'package:abhiyaan/ui/views/event/gallery/gallery_grid/gallery_view.dart';
 import 'package:abhiyaan/ui/views/event/gallery/gallery_tab_view/gallery_tab_view.dart';
+import 'package:abhiyaan/ui/views/profile/preferences/preferences_view.dart';
 import 'package:abhiyaan/ui/views/profile/profile_view.dart';
-import 'package:abhiyaan/ui/views/profile/settings/settings_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:abhiyaan/ui/views/home/home_view.dart';
 import 'package:abhiyaan/ui/views/splash/splash_view.dart';
@@ -24,7 +24,7 @@ import 'package:abhiyaan/ui/views/splash/splash_view.dart';
     MaterialRoute(page: HomeView),
     MaterialRoute(page: AuthView),
     MaterialRoute(page: ProfileView),
-    MaterialRoute(page: SettingsView),
+    MaterialRoute(page: PreferencesView),
     MaterialRoute(page: BottomNavView),
     MaterialRoute(page: EventView),
     MaterialRoute(page: DetailedEventView),
