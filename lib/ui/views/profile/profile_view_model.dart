@@ -5,9 +5,24 @@ class ProfileViewModel extends BaseViewModel {
   final _analyticsService = locator<AnalyticsService>();
   final _navigationService = locator<NavigationService>();
   final localStorageService = locator<LocalStorageService>();
+  final _themeService = locator<ThemeService>();
 
-  navigateToSettingsView() {
-    _navigationService.navigateTo(Routes.settingsView);
+  navigateToHelpSupport() {
+    _analyticsService.logEvent(
+        eventName: "Help_support", value: "Help and support button clicked");
+    UrlLauncher externalUrlHandler = UrlLauncher();
+    externalUrlHandler.launchEmail("technicalteam.bvcoenm@gmail.com");
+  }
+
+  navigateToPrivacyPolicy() {
+    _analyticsService.logEvent(
+        eventName: "Privacy_policy", value: "Privacy policy button clicked");
+    UrlLauncher externalUrlHandler = UrlLauncher();
+    externalUrlHandler.launchURL("https://abhiyaan.tech/privacy-policy");
+  }
+
+  navigateToProfileDetails() {
+    _navigationService.navigateToPreferencesView();
   }
 
   void init() {
@@ -35,32 +50,10 @@ class ProfileViewModel extends BaseViewModel {
     "prnImg",
   ];
 
-  List<ProfileDetailsCard> profileCardList = [
-    LocalStorageService().read('userProfile') == "Explorer"
-        ? const ProfileDetailsCard(
-            leading: AssetImagePath.misImg,
-            title: "MIS Number",
-            value: "",
-            icon: Icons.content_copy,
-          )
-        : LocalStorageService().read('userProfile') == "Faculty"
-            ? const ProfileDetailsCard(
-                leading: AssetImagePath.misImg,
-                title: "MIS Number",
-                value: "",
-                icon: Icons.content_copy,
-              )
-            : ProfileDetailsCard(
-                leading: AssetImagePath.misImg,
-                title: "MIS Number",
-                value: LocalStorageService().read('userMisNo').toString(),
-                icon: Icons.content_copy,
-              ),
-    ProfileDetailsCard(
-      leading: AssetImagePath.emailImg,
-      title: "Email ID",
-      value: LocalStorageService().read('userEmail'),
-      icon: Icons.content_copy,
-    ),
-  ];
+  changeTheme() async {
+    _analyticsService.logEvent(
+        eventName: "Dark_mode", value: "Dark mode toggle button clicked");
+    _themeService.updateTheme();
+    notifyListeners();
+  }
 }
