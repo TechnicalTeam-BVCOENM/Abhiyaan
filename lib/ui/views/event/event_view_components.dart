@@ -531,3 +531,44 @@ class EventShimmerEffect extends StatelessWidget {
     ));
   }
 }
+
+class GalleryYearWiseCards extends StatelessWidget {
+  const GalleryYearWiseCards({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () {
+              NavigationService().navigateTo(Routes.galleryTabView);
+            },
+            child: Container(
+              width: 100,
+              height: 100,
+              margin: const EdgeInsets.all(10),
+              color: Colors.white,
+              child: const Text("Gallery"),
+            ),
+          ),
+          Container(
+            width: 100,
+            height: 100,
+            color: Colors.white,
+            margin: const EdgeInsets.all(10),
+            child: const Text("Gallery"),
+          ),
+          Container(
+            width: 100,
+            height: 100,
+            color: Colors.white,
+            margin: const EdgeInsets.all(10),
+            child: const Text("Gallery"),
+          ),
+        ],
+      ),
+    );
+  }
+}

@@ -257,7 +257,8 @@ class EventView extends StatelessWidget {
                               )
                             : 0.verticalSpace,
                         4.verticalSpace,
-                      ].animate(delay: 100.ms, interval: 60.ms).fadeIn(),
+                      const  GalleryYearWiseCards()
+                      ].animate(delay: 100.ms, interval: 40.ms).fadeIn(),
                     ),
                   ),
                 ),
