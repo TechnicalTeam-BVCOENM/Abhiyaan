@@ -507,3 +507,116 @@ class ShowAppExitPopUp {
         });
   }
 }
+
+
+
+class HighlightCarouselWidget extends ViewModelWidget<HomeViewModel> {
+  const HighlightCarouselWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, HomeViewModel viewModel) {
+    final FontThemeClass fontTheme = FontThemeClass();
+
+    return SizedBox(
+      width: 386.w,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            viewModel._highlights.isEmpty
+                ? SizedBox(
+                    height: 230.h,
+                    child: Card(
+                      margin: const EdgeInsets.only(bottom: 8).r,
+                      elevation: 0,
+                      clipBehavior: Clip.hardEdge,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16).r,
+                        side: BorderSide(
+                          color: context.colorScheme.secondaryLPurpleColor,
+                          width: 1.0,
+                        ),
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.info_rounded,
+                              color: context.colorScheme.secondaryBlackColor,
+                            ),
+                            10.horizontalSpace,
+                            Text(
+                              "No updates yet",
+                              style: fontTheme.body(context),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                : CarouselSlider.builder(
+                    itemCount: viewModel.highlights.length,
+                    itemBuilder: (context, index, realIndex) {
+                      return CarouselUtils.buildImage(
+                        context,
+                        viewModel.highlights[index]['imageUrl'],
+                        viewModel._activeIndex,
+                      );
+                    },
+                    options: CarouselOptions(
+                      height: 230.h,
+                      onPageChanged: (index, reason) =>
+                          viewModel.updateActiveIndex(index),
+                      autoPlay: true,
+                      autoPlayInterval: 4.seconds,
+                      viewportFraction: 1,
+                      enableInfiniteScroll: true,
+                      autoPlayAnimationDuration: 1.seconds,
+                      autoPlayCurve: Curves.easeInOut,
+                      enlargeCenterPage: true,
+                    ),
+                  ),
+            20.verticalSpace,
+            CarouselUtils.buildIndicator(
+              context,
+              viewModel.activeIndex,
+              viewModel.highlights.length,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class UserGreetingsWidget extends ViewModelWidget<HomeViewModel> {
+  const UserGreetingsWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, HomeViewModel viewModel) {
+    FontThemeClass fontTheme = FontThemeClass();
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0).r,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(
+            width: 280.w,
+            child: Text(
+              overflow: TextOverflow.ellipsis,
+              'Hey ${viewModel.splitusername()} 👋', // Update according to loal storage
+              style: fontTheme.title(context,
+                  color: context.colorScheme.headingColor,
+                  fontWeight: FontWeight.w600),
+            ).animate().fadeIn(),
+          ),
+        ],
+      ),
+    );
+  }
+}
