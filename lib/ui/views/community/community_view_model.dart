@@ -164,6 +164,19 @@ class CommunityViewModel extends BaseViewModel {
       log.e(e.toString());
     }
   }
+
+  var clubsCarosoulOptions = CarouselOptions(
+    scrollPhysics: const BouncingScrollPhysics(),
+    autoPlayCurve: Curves.easeInOutCubic,
+    enableInfiniteScroll: true,
+    autoPlay: true,
+    autoPlayInterval: 4.seconds,
+    autoPlayAnimationDuration: 4.seconds,
+    pauseAutoPlayOnTouch: true,
+    pauseAutoPlayInFiniteScroll: true,
+    viewportFraction: 0.35,
+    height: 120.h,
+  );
 }
 
 class CommunityBlogsData {
