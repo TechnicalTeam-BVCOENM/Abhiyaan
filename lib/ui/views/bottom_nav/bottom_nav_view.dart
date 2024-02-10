@@ -58,9 +58,9 @@ class BottomNavView extends StatelessWidget {
                 ),
                 const BottomNavigationBarItem(
                   label: '',
-                  icon: Icon(Icons.celebration_rounded),
+                  icon: Icon(Icons.group_rounded),
                   activeIcon: BottomNavActiveIcon(
-                    icon: Icons.celebration_outlined,
+                    icon: Icons.group_outlined,
                     text: "Community",
                   ),
                 ),
@@ -74,10 +74,10 @@ class BottomNavView extends StatelessWidget {
                 ),
                 const BottomNavigationBarItem(
                   label: '',
-                  icon: Icon(Icons.person_rounded),
+                  icon: Icon(Icons.menu_rounded),
                   activeIcon: BottomNavActiveIcon(
-                    icon: Icons.person_outline_rounded,
-                    text: "Profile",
+                    icon: Icons.menu_rounded,
+                    text: "Settings",
                   ),
                 ),
               ],

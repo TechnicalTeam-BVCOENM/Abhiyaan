@@ -135,19 +135,14 @@ class EventView extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const SectionText(title: "Sponsors"),
-                                  SizedBox(
-                                    height: 80.h,
-                                    child: ListView.builder(
-                                      shrinkWrap: true,
-                                      physics: const BouncingScrollPhysics(),
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: model.sponsors.length,
-                                      itemBuilder: (context, index) {
-                                        return Sponsors(
-                                          model: model.sponsors[index],
-                                        );
-                                      },
-                                    ),
+                                  CarouselSlider.builder(
+                                    itemCount: model.sponsors.length,
+                                    options: model.sponsorsCarosoulOptions,
+                                    itemBuilder: (context, index, realIndex) {
+                                      return Sponsors(
+                                        model: model.sponsors[index],
+                                      );
+                                    },
                                   ).animate(delay: 200.ms).fadeIn(),
                                 ],
                               ),

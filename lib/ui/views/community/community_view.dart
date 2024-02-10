@@ -108,7 +108,9 @@ class CommunityView extends StatelessWidget {
                           model.departmentClubsData.isEmpty
                               ? Container()
                               : const SectionText(title: "Departmental Clubs")
-                                  .animate(delay: 250.ms)
+                                  .animate(
+                                    delay: 250.ms,
+                                  )
                                   .fadeIn(
                                     curve: Curves.easeInOutCubic,
                                     duration: 600.ms,
@@ -116,11 +118,10 @@ class CommunityView extends StatelessWidget {
                           SizedBox(
                             height: 120.h,
                             width: double.infinity,
-                            child: ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              scrollDirection: Axis.horizontal,
+                            child: CarouselSlider.builder(
                               itemCount: model.departmentClubsData.length,
-                              itemBuilder: (context, index) {
+                              options: model.clubsCarosoulOptions,
+                              itemBuilder: (context, index, realIndex) {
                                 return Padding(
                                   padding: index == 0
                                       ? const EdgeInsets.only(right: 0).r
@@ -131,16 +132,19 @@ class CommunityView extends StatelessWidget {
                               },
                             ),
                           ).animate(delay: 200.ms).fadeIn(
-                                curve: Curves.easeInOutCubic,
-                                duration: 600.ms,
-                              ),
-
+                              curve: Curves.easeInOutCubic, duration: 600.ms),
                           const SectionText(title: "Quote of the day"),
                           QuoteCard(
                             quote: model.affirmation,
                             autherName: model.authorName,
-                          ),
-
+                          )
+                              .animate(
+                                delay: 200.ms,
+                              )
+                              .fadeIn(
+                                curve: Curves.easeInOutCubic,
+                                duration: 600.ms,
+                              ),
                           Container(
                             padding: const EdgeInsets.all(10),
                             alignment: Alignment.center,
