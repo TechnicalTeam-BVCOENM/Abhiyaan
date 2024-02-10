@@ -6,7 +6,7 @@ extension ColorSchemeExtension on ColorScheme {
   Color get white => const Color(0xFFFFFFFF);
   Color get primaryAccentColor => const Color.fromARGB(255, 78, 75, 215);
   Color get primaryLightScaffold => const Color(0xFFD6D5FA);
-  Color get primaryDarkScaffold => const Color(0xFF000000);
+  Color get primaryDarkScaffold => const Color(0xFF010409);
   Color get primaryDarkGrey => black.withOpacity(0.5);
   Color get primaryLightGrey => white.withOpacity(0.5);
   Color get unSelectedBottomNavIcon => const Color(0xFF9DB2CE);
