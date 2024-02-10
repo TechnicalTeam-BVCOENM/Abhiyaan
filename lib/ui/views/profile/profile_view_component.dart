@@ -9,27 +9,27 @@ class SocialLinks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () {
-          _analyticsService.logEvent(
-              eventName: "Profile_Social_Links",
-              value: "Social Links button clicked");
-          UrlLauncher externalUrlHandler = UrlLauncher();
-          externalUrlHandler.launchURL(
-            url,
-          );
-        },
-        child: Container(
-          width: 47.r,
-          height: 47.r,
-          decoration: BoxDecoration(
-            color: context.colorScheme.secondaryWhiteColor,
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(9).r,
-            child: Image.asset(iconpath),
-          ),
-        ));
+      onPressed: () {
+        _analyticsService.logEvent(
+          eventName: "Profile_Social_Links",
+          value: "Social Links button clicked",
+        );
+        UrlLauncher externalUrlHandler = UrlLauncher();
+        externalUrlHandler.launchURL(url);
+      },
+      child: Container(
+        width: 52.r,
+        height: 52.r,
+        decoration: BoxDecoration(
+          color: context.colorScheme.primaryCardColor,
+          borderRadius: BorderRadius.circular(100),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(12).r,
+          child: Image.asset(iconpath),
+        ),
+      ),
+    );
   }
 }
 
@@ -42,7 +42,7 @@ class Cerificatation extends StatelessWidget {
       onTap: () {},
       child: ListTile(
         minVerticalPadding: 15.r,
-        tileColor: context.colorScheme.secondaryWhiteColor,
+        tileColor: context.colorScheme.primaryCardColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.r),
         ),
@@ -51,14 +51,14 @@ class Cerificatation extends StatelessWidget {
           child: Icon(
             Icons.credit_card_outlined,
             size: 30.r,
-            color: context.colorScheme.primaryColor,
+            color: context.colorScheme.primaryAccentColor,
           ),
         ),
         title: Text(
           "Certification",
           style: FontThemeClass().body(
             context,
-            color: context.colorScheme.secondaryBlackColor,
+            color: context.colorScheme.primaryTextColor,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -68,20 +68,16 @@ class Cerificatation extends StatelessWidget {
           maxLines: 1,
           style: FontThemeClass().caption(
             context,
-            color: context.colorScheme.secondaryBlackColor.withOpacity(0.6),
+            color: context.colorScheme.secondaryTextColor,
           ),
         ),
         trailing: Icon(
           Icons.arrow_forward_ios_rounded,
           size: 25.r,
-          color: context.colorScheme.secondaryBlackColor.withOpacity(0.8),
+          color: context.colorScheme.primaryTextColor,
         ),
       ),
-    ).animate(delay: 100.ms).fadeIn(
-          delay: 200.ms,
-          curve: Curves.easeInOut,
-          duration: 600.ms,
-        );
+    );
   }
 }
 
@@ -93,20 +89,16 @@ class AppBarWidget extends ViewModelWidget<ProfileViewModel> {
   @override
   Widget build(BuildContext context, ProfileViewModel viewModel) {
     return AppBar(
-      backgroundColor: context.colorScheme.backgroundColor,
+      backgroundColor: context.colorScheme.scaffoldBackgroundColor,
       elevation: 0,
       centerTitle: true,
       automaticallyImplyLeading: false,
-      // title: Center(
-      //   child: Text(
-      //     "Profile",
-      //     style: FontThemeClass().title(
-      //       context,
-      //       fontWeight: FontWeight.w600,
-      //       color: context.colorScheme.secondaryBlackColor,
-      //     ),
-      //   ),
-      // ),
+      title: Center(
+        child: Text(
+          "Profile",
+          style: FontThemeClass().title(context),
+        ),
+      ),
     );
   }
 }
@@ -121,9 +113,10 @@ class ProfileCard extends ViewModelWidget<ProfileViewModel> {
     return GestureDetector(
       onTap: () => viewModel._navigationService.navigateToPreferencesView(),
       child: ListTile(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
-        tileColor: context.colorScheme.secondaryWhiteColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        tileColor: context.colorScheme.primaryCardColor,
         minVerticalPadding: 10.r,
         title: Row(
           children: [
@@ -146,7 +139,7 @@ class ProfileCard extends ViewModelWidget<ProfileViewModel> {
                   viewModel.localStorageService.read('userName'),
                   style: FontThemeClass().title2(
                     context,
-                    color: context.colorScheme.secondaryBlackColor,
+                    color: context.colorScheme.primaryTextColor,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -154,8 +147,8 @@ class ProfileCard extends ViewModelWidget<ProfileViewModel> {
                   "View Profile Information",
                   style: FontThemeClass().caption(
                     context,
-                    color: context.colorScheme.secondaryBlackColor
-                        .withOpacity(0.8),
+                    color: context.colorScheme.secondaryTextColor,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],
@@ -165,16 +158,16 @@ class ProfileCard extends ViewModelWidget<ProfileViewModel> {
               children: [
                 Text(
                   "View",
-                  style: FontThemeClass().body(context,
-                      color: context.colorScheme.secondaryBlackColor
-                          .withOpacity(0.6),
-                      fontWeight: FontWeight.w600),
+                  style: FontThemeClass().body(
+                    context,
+                    color: context.colorScheme.secondaryTextColor,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 4.horizontalSpace,
                 Icon(
                   Icons.arrow_forward_ios_sharp,
-                  color:
-                      context.colorScheme.secondaryBlackColor.withOpacity(0.8),
+                  color: context.colorScheme.secondaryTextColor,
                   size: 15.r,
                 ),
               ],
@@ -199,7 +192,7 @@ class HelpSupportTile extends ViewModelWidget<ProfileViewModel> {
       },
       child: ListTile(
         minVerticalPadding: 25.r,
-        tileColor: context.colorScheme.secondaryWhiteColor,
+        tileColor: context.colorScheme.primaryCardColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.r),
         ),
@@ -208,28 +201,24 @@ class HelpSupportTile extends ViewModelWidget<ProfileViewModel> {
           child: Icon(
             Icons.warning_amber_rounded,
             size: 30.r,
-            color: context.colorScheme.primaryColor,
+            color: context.colorScheme.primaryAccentColor,
           ),
         ),
         title: Text(
           "Help & Support",
           style: FontThemeClass().body(
             context,
-            color: context.colorScheme.secondaryBlackColor,
+            color: context.colorScheme.primaryTextColor,
             fontWeight: FontWeight.w600,
           ),
         ),
         trailing: Icon(
           Icons.arrow_forward_ios_rounded,
           size: 25.r,
-          color: context.colorScheme.secondaryBlackColor.withOpacity(0.8),
+          color: context.colorScheme.primaryTextColor,
         ),
       ),
-    ).animate(delay: 100.ms).fadeIn(
-          delay: 200.ms,
-          curve: Curves.easeInOut,
-          duration: 600.ms,
-        );
+    );
   }
 }
 
@@ -246,7 +235,7 @@ class PrivacyPolicyTile extends ViewModelWidget<ProfileViewModel> {
       },
       child: ListTile(
         minVerticalPadding: 25.r,
-        tileColor: context.colorScheme.secondaryWhiteColor,
+        tileColor: context.colorScheme.primaryCardColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.r),
         ),
@@ -255,28 +244,24 @@ class PrivacyPolicyTile extends ViewModelWidget<ProfileViewModel> {
           child: Icon(
             Icons.privacy_tip_outlined,
             size: 30.r,
-            color: context.colorScheme.primaryColor,
+            color: context.colorScheme.primaryAccentColor,
           ),
         ),
         title: Text(
           "Privacy Policy",
           style: FontThemeClass().body(
             context,
-            color: context.colorScheme.secondaryBlackColor,
+            color: context.colorScheme.primaryTextColor,
             fontWeight: FontWeight.w600,
           ),
         ),
         trailing: Icon(
           Icons.arrow_forward_ios_rounded,
           size: 25.r,
-          color: context.colorScheme.secondaryBlackColor.withOpacity(0.8),
+          color: context.colorScheme.primaryTextColor,
         ),
       ),
-    ).animate(delay: 100.ms).fadeIn(
-          delay: 200.ms,
-          curve: Curves.easeInOut,
-          duration: 600.ms,
-        );
+    );
   }
 }
 
@@ -289,7 +274,7 @@ class DarkModeTile extends ViewModelWidget<ProfileViewModel> {
   Widget build(BuildContext context, ProfileViewModel viewModel) {
     return ListTile(
       minVerticalPadding: 25.r,
-      tileColor: context.colorScheme.secondaryWhiteColor,
+      tileColor: context.colorScheme.primaryCardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.r),
       ),
@@ -298,26 +283,27 @@ class DarkModeTile extends ViewModelWidget<ProfileViewModel> {
         child: Icon(
           Icons.dark_mode_outlined,
           size: 30.r,
-          color: context.colorScheme.primaryColor,
+          color: context.colorScheme.primaryAccentColor,
         ),
       ),
       title: Text(
         "Dark Mode",
         style: FontThemeClass().body(
           context,
-          color: context.colorScheme.secondaryBlackColor,
+          color: context.colorScheme.primaryTextColor,
           fontWeight: FontWeight.w600,
         ),
       ),
       trailing: Switch.adaptive(
-        activeColor: context.colorScheme.switchColor,
+        activeColor: context.colorScheme.primaryAccentColor,
+        inactiveThumbColor: context.colorScheme.primaryAccentColor,
+        inactiveTrackColor: context.colorScheme.primaryLightScaffold,
+        trackOutlineColor: MaterialStateColor.resolveWith(
+          (states) => context.colorScheme.primaryAccentColor,
+        ),
         value: viewModel._themeService.valueListenable.value,
         onChanged: (val) => viewModel.changeTheme(),
       ),
-    ).animate(delay: 100.ms).fadeIn(
-          delay: 200.ms,
-          curve: Curves.easeInOut,
-          duration: 600.ms,
-        );
+    );
   }
 }

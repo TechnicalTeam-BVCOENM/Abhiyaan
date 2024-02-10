@@ -1,8 +1,10 @@
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/auth_service.dart';
+import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 part 'preferences_view_model.dart';
 part 'preferences_view_components.dart';
 
@@ -16,7 +18,7 @@ class PreferencesView extends StatelessWidget {
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: context.colorScheme.backgroundColor,
+          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
           appBar: AppBar(
             leading: GestureDetector(
               onTap: () {
@@ -24,17 +26,17 @@ class PreferencesView extends StatelessWidget {
               },
               child: Icon(
                 Icons.arrow_back_ios_new_rounded,
-                color: context.colorScheme.secondaryBlackColor,
+                color: context.colorScheme.primaryTextColor,
               ),
             ),
-            backgroundColor: context.colorScheme.backgroundColor,
+            backgroundColor: context.colorScheme.scaffoldBackgroundColor,
             centerTitle: true,
             elevation: 0,
             title: Text(
               "My Details",
               style: model.fontTheme.title(
                 context,
-                color: context.colorScheme.secondaryBlackColor,
+                color: context.colorScheme.primaryTextColor,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -53,11 +55,11 @@ class PreferencesView extends StatelessWidget {
                         height: 100.r,
                         fit: BoxFit.cover,
                         imageUrl: AssetUrls.dummyImageUrl,
-                        placeholder: (context, url) => const Center(
-                          child: CircularProgressIndicator.adaptive(),
-                        ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                        placeholder: (context, url) =>
+                            const CircularLoadingIndicator(),
+                        errorWidget: (context, url, error) {
+                          return const Icon(Icons.error);
+                        },
                       ),
                     ),
                   ),
@@ -66,7 +68,7 @@ class PreferencesView extends StatelessWidget {
                     model.localStorageService.read('userName'),
                     style: model.fontTheme.title2(
                       context,
-                      color: context.colorScheme.secondaryBlackColor,
+                      color: context.colorScheme.primaryTextColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

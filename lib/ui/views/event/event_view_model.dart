@@ -14,6 +14,19 @@ class EventViewModel extends BaseViewModel {
   late final List<EventModel> _upcomingEvents = [];
   List<EventModel> get upcomingEvents => _upcomingEvents;
 
+  var sponsorsCarosoulOptions = CarouselOptions(
+    scrollPhysics: const BouncingScrollPhysics(),
+    autoPlayCurve: Curves.easeInOutCubic,
+    enableInfiniteScroll: true,
+    autoPlay: true,
+    autoPlayInterval: 4.seconds,
+    autoPlayAnimationDuration: 4.seconds,
+    pauseAutoPlayOnTouch: true,
+    pauseAutoPlayInFiniteScroll: true,
+    viewportFraction: 0.25,
+    height: 80.h,
+  );
+
   var upcommingCarosoulOptions = CarouselOptions(
     scrollPhysics: const BouncingScrollPhysics(),
     autoPlayCurve: Curves.easeInOutCubic,
@@ -58,6 +71,9 @@ class EventViewModel extends BaseViewModel {
       notifyListeners();
       getTodaysEvent();
       _sponsors = await _firestoreService.getAllSponsors();
+      notifyListeners();
+      getRemainingEvents();
+      getTodaysEvent();
       notifyListeners();
     } catch (e) {
       log.e("Error Loading Sponsors: ${e.toString()}");

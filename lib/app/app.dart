@@ -48,4 +48,4 @@ import 'package:abhiyaan/ui/views/splash/splash_view.dart';
 )
 class $AppRouter {}
 
-//dart run build_runner build --delete-conflicting-outputs
+// dart run build_runner build --delete-conflicting-outputs

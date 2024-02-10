@@ -207,13 +207,14 @@ class RegisterViewModel extends BaseViewModel {
     FocusScope.of(context).requestFocus(FocusNode());
 
     showAdaptiveDialog(
-        context: context,
-        builder: (context) {
-          return SizedBox(
-              child: AlertDialog(
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          child: AlertDialog(
             insetPadding: const EdgeInsets.symmetric(horizontal: 15).r,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+            backgroundColor: context.colorScheme.primaryCardColor,
             clipBehavior: Clip.hardEdge,
             title: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -255,8 +256,10 @@ class RegisterViewModel extends BaseViewModel {
                     Text(
                       "Enter five digit code we have sent to your email address !",
                       textAlign: TextAlign.center,
-                      style: FontThemeClass()
-                          .body(context, fontWeight: FontWeight.w300),
+                      style: FontThemeClass().body(
+                        context,
+                        fontWeight: FontWeight.w300,
+                      ),
                     )
                         .animate(
                           delay: 100.ms,
@@ -275,10 +278,10 @@ class RegisterViewModel extends BaseViewModel {
                         width: 75.w,
                         textStyle: const TextStyle(fontSize: 22),
                         decoration: BoxDecoration(
-                            color: context.colorScheme.secondaryWhiteColor,
-                            borderRadius: BorderRadius.circular(10)),
+                          color: context.colorScheme.primaryTextColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-
                       // focusedPinTheme: focusedPinTheme,
                       // submittedPinTheme: submittedPinTheme,
                       onChanged: (value) {
@@ -287,9 +290,9 @@ class RegisterViewModel extends BaseViewModel {
                       showCursor: true,
                       // ignore: avoid_print
                       onCompleted: (pin) => log.i(pin),
-                    )
-                        .animate()
-                        .fadeIn(delay: const Duration(milliseconds: 600)),
+                    ).animate().fadeIn(
+                          delay: const Duration(milliseconds: 600),
+                        ),
                   ],
                 ),
               );
@@ -299,7 +302,7 @@ class RegisterViewModel extends BaseViewModel {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   foregroundColor: Colors.white,
-                  backgroundColor: context.colorScheme.primaryColor,
+                  backgroundColor: context.colorScheme.primaryAccentColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10), // Rounded corners
                   ),
@@ -317,10 +320,10 @@ class RegisterViewModel extends BaseViewModel {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   side: BorderSide(
-                      width: 2, color: context.colorScheme.primaryColor),
+                      width: 2, color: context.colorScheme.primaryAccentColor),
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  foregroundColor: context.colorScheme.secondaryBlackColor,
-                  backgroundColor: context.colorScheme.secondaryWhiteColor,
+                  foregroundColor: context.colorScheme.primaryTextColor,
+                  backgroundColor: context.colorScheme.primaryCardColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10), // Rounded corners
                   ),
@@ -343,13 +346,15 @@ class RegisterViewModel extends BaseViewModel {
                   ),
             ],
           )
-                  .animate(
-                    delay: 100.ms,
-                  )
-                  .fadeIn(
-                    duration: 400.ms,
-                  ));
-        });
+              .animate(
+                delay: 100.ms,
+              )
+              .fadeIn(
+                duration: 400.ms,
+              ),
+        );
+      },
+    );
   }
 
   Future<bool> checkEmailExists(String email, context) async {
@@ -358,8 +363,12 @@ class RegisterViewModel extends BaseViewModel {
     CollectionReference usersRef = firestore.collection('Users');
 
     try {
-      QuerySnapshot querySnapshot =
-          await usersRef.where('userEmail', isEqualTo: email).get();
+      QuerySnapshot querySnapshot = await usersRef
+          .where(
+            'userEmail',
+            isEqualTo: email,
+          )
+          .get();
       if (querySnapshot.docs.isEmpty) {
         NavigationService().back();
         return false;
@@ -382,16 +391,20 @@ class RegisterViewModel extends BaseViewModel {
         _analyticsService.logSignUp(method: 'Register - Email');
 
         signupStatus = await _authenticationService.signUpWithEmailAndPassword(
-            context,
-            emailIdTextController.text,
-            confirmpasswordTextController.text);
+          context,
+          emailIdTextController.text,
+          confirmpasswordTextController.text,
+        );
         _analyticsService.setUserProperties(
-            userId: FirebaseAuth.instance.currentUser!.uid);
+          userId: FirebaseAuth.instance.currentUser!.uid,
+        );
 
         if (signupStatus == "pass") {
           await FirebaseFirestore.instance
               .collection("Users")
-              .doc(FirebaseAuth.instance.currentUser?.uid)
+              .doc(
+                FirebaseAuth.instance.currentUser?.uid,
+              )
               .set({
             "userEmail": emailIdTextController.text,
             "userName": userNameController.text,
@@ -403,12 +416,18 @@ class RegisterViewModel extends BaseViewModel {
           // ignore: use_build_context_synchronously
           NavigationService().back();
           await _navigationService
-              .replaceWithTransition(const OnboardingView(),
-                  transitionStyle: Transition.rightToLeftWithFade,
-                  curve: Curves.fastEaseInToSlowEaseOut,
-                  duration: const Duration(milliseconds: 1500))
-              ?.then((value) =>
-                  showSuccessMessage(context, "Registration successful"));
+              .replaceWithTransition(
+                const OnboardingView(),
+                transitionStyle: Transition.rightToLeftWithFade,
+                curve: Curves.fastEaseInToSlowEaseOut,
+                duration: const Duration(milliseconds: 1500),
+              )
+              ?.then(
+                (value) => showSuccessMessage(
+                  context,
+                  "Registration successful",
+                ),
+              );
         } else {
           NavigationService().back();
           showErrorMessage(context, "something went wrong");

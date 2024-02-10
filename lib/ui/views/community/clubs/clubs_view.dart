@@ -1,9 +1,11 @@
 import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:abhiyaan/ui/views/community/community_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+
 part 'clubs_view_model.dart';
 part 'clubs_view_components.dart';
 
@@ -20,7 +22,7 @@ class ClubsView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: context.colorScheme.backgroundColor,
+            backgroundColor: context.colorScheme.scaffoldBackgroundColor,
             elevation: 0,
             forceMaterialTransparency: true,
             leading: GestureDetector(
@@ -29,18 +31,18 @@ class ClubsView extends StatelessWidget {
               },
               child: Icon(
                 Icons.arrow_back_ios_new,
-                color: context.colorScheme.secondaryBlackColor,
+                color: context.colorScheme.primaryTextColor,
               ),
             ),
             title: Text(
               clubsData.clubShortHand,
               style: FontThemeClass().header(
                 context,
-                color: context.colorScheme.secondaryBlackColor,
+                color: context.colorScheme.primaryTextColor,
               ),
             ),
           ),
-          backgroundColor: context.colorScheme.backgroundColor,
+          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
           body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(
@@ -57,7 +59,6 @@ class ClubsView extends StatelessWidget {
             ),
           ),
         );
-        // );
       },
     );
   }

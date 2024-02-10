@@ -8,16 +8,18 @@ class ClubsAppBar extends ViewModelWidget<ClubsViewModel> {
   Widget build(BuildContext context, ClubsViewModel viewModel) {
     return SliverAppBar(
       iconTheme: IconThemeData(
-        color: context.colorScheme.secondaryBlackColor, //change your color here
+        color: context.colorScheme.primaryTextColor, //change your color here
       ),
       elevation: 0,
       title: Text(
         clubShortHand,
-        style: FontThemeClass()
-            .header(context, color: context.colorScheme.secondaryBlackColor),
+        style: FontThemeClass().header(
+          context,
+          color: context.colorScheme.primaryTextColor,
+        ),
       ),
       centerTitle: true,
-      backgroundColor: context.colorScheme.backgroundColor,
+      backgroundColor: context.colorScheme.scaffoldBackgroundColor,
     );
   }
 }
@@ -57,9 +59,8 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
                   width: 395.w,
                   fit: BoxFit.fill,
                   imageUrl: clubImage,
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator.adaptive(),
-                  ),
+                  placeholder: (context, url) =>
+                      const CircularLoadingIndicator(),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
@@ -166,7 +167,7 @@ class MemberCard extends StatelessWidget {
     return Card(
       elevation: 4.0,
       margin: const EdgeInsets.all(16.0).r,
-      color: context.colorScheme.secondaryWhiteColor,
+      color: context.colorScheme.primaryCardColor,
       child: Padding(
         padding: const EdgeInsets.all(16.0).r,
         child: SizedBox(
@@ -181,8 +182,9 @@ class MemberCard extends StatelessWidget {
                   height: 80.r,
                   fit: BoxFit.cover,
                   imageUrl: clubMembers[index].memberImage,
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator.adaptive()),
+                  placeholder: (context, url) {
+                    return const CircularLoadingIndicator();
+                  },
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
@@ -249,7 +251,7 @@ class FestCard extends StatelessWidget {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12).r),
         clipBehavior: Clip.hardEdge,
-        color: context.colorScheme.secondaryWhiteColor,
+        color: context.colorScheme.primaryCardColor,
         elevation: 4.0,
         margin: const EdgeInsets.all(12.0).r,
         child: Column(
@@ -262,8 +264,7 @@ class FestCard extends StatelessWidget {
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
                 imageUrl: clubFest[index].festImage,
-                placeholder: (context, url) =>
-                    const Center(child: CircularProgressIndicator.adaptive()),
+                placeholder: (context, url) => const CircularLoadingIndicator(),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
@@ -274,7 +275,7 @@ class FestCard extends StatelessWidget {
                   height: 52.h,
                   width: 150.w,
                   decoration: BoxDecoration(
-                    color: context.colorScheme.secondaryWhiteColor,
+                    color: context.colorScheme.primaryCardColor,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0).r,

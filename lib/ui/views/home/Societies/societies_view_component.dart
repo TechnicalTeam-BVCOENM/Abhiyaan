@@ -16,9 +16,12 @@ class SocietyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     FontThemeClass fontThemeClass = FontThemeClass();
     return Card(
-      color: context.colorScheme.secondaryWhiteColor,
-      shadowColor: context.colorScheme.secondaryLPurpleColor,
+      color: context.colorScheme.primaryCardColor,
+      shadowColor: context.colorScheme.primaryCardColor.withOpacity(0.5),
       elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: Column(
         children: [
           ListTile(
@@ -28,15 +31,24 @@ class SocietyCard extends StatelessWidget {
               leading,
               scale: 5,
             ),
-            title: Text(title,
-                style: fontThemeClass.title2(context,
-                    fontWeight: FontWeight.bold,
-                    color: context.colorScheme.primaryDarkColor)),
-            subtitle: Text(value,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-                style: fontThemeClass.body(context,
-                    color: context.colorScheme.secondaryBlackColor)),
+            title: Text(
+              title,
+              style: fontThemeClass.title2(
+                context,
+                fontWeight: FontWeight.bold,
+                color: context.colorScheme.primaryTextColor,
+              ),
+            ),
+            subtitle: Text(
+              value,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: fontThemeClass.body(
+                context,
+                color: context.colorScheme.secondaryTextColor,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           ),
         ],
       ),

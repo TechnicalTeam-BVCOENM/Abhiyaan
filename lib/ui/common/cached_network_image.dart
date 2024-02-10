@@ -1,5 +1,6 @@
+import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../file_exporter.dart';
+import 'package:abhiyaan/file_exporter.dart';
 
 class CachedNetworkImageWidget extends StatelessWidget {
   final String imageUrl;
@@ -25,14 +26,12 @@ class CachedNetworkImageWidget extends StatelessWidget {
       height: height,
       width: width,
       maxHeightDiskCache: maxHeightDiskCache.toInt(),
-      // placeholder: (context, url) => CircularLoadingIndicator(height: 90.sp),
-      progressIndicatorBuilder: (context, url, downloadProgress) => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-            child: CircularProgressIndicator.adaptive(
-          value: downloadProgress.progress,
-        )),
-      ),
+      progressIndicatorBuilder: (context, url, downloadProgress) {
+        return const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: CircularLoadingIndicator(),
+        );
+      },
       errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }
@@ -80,7 +79,7 @@ Container horizontalStoryRow(
                     model[idx].title,
                     style: fontTheme.title2(
                       context,
-                      color: context.colorScheme.secondaryBlackColor,
+                      color: context.colorScheme.primaryTextColor,
                     ),
                   ),
                 ],

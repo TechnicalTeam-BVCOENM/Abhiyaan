@@ -37,7 +37,6 @@ void main() async {
   await servicesToInitializeBeforeAppStart();
   final analytics = FirebaseAnalytics.instance;
   await analytics.logAppOpen();
-  // await Upgrader.clearSavedSettings(); // REMOVE this for release builds
   runApp(const MyApp());
 }
 
@@ -51,11 +50,10 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    // TODO: Change the status bar color
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: themeService.brightness == Brightness.light
-            ? context.colorScheme.backgroundColor
-            : context.colorScheme.secondaryBlackColor,
+        statusBarColor: context.colorScheme.scaffoldBackgroundColor,
         statusBarIconBrightness: themeService.brightness == Brightness.light
             ? Brightness.dark
             : Brightness.light,
@@ -65,36 +63,38 @@ class MyApp extends StatelessWidget {
       ),
     );
     return ValueListenableBuilder(
-        valueListenable: themeService.valueListenable,
-        builder: ((context, value, child) {
-          return ScreenUtilInit(
-            designSize: const Size(430, 932),
-            minTextAdapt: true,
-            splitScreenMode: true,
-            builder: (_, child) {
-              return MaterialApp(
-                title: 'Abhiyaan',
-                debugShowCheckedModeBanner: false,
-                theme: ThemeData(
-                  textTheme: const TextTheme(),
-                  primaryColor: context.colorScheme.primaryColor,
-                  brightness: themeService.brightness,
-                  scaffoldBackgroundColor: context.colorScheme.backgroundColor,
-                  appBarTheme: AppBarTheme(
-                    elevation: 0,
-                    backgroundColor: context.colorScheme.backgroundColor,
-                    foregroundColor: context.colorScheme.secondaryBlackColor,
-                  ),
+      valueListenable: themeService.valueListenable,
+      builder: ((context, value, child) {
+        return ScreenUtilInit(
+          designSize: const Size(430, 932),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (_, child) {
+            return MaterialApp(
+              title: 'Abhiyaan',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                textTheme: const TextTheme(),
+                primaryColor: context.colorScheme.primaryAccentColor,
+                brightness: themeService.brightness,
+                scaffoldBackgroundColor:
+                    context.colorScheme.scaffoldBackgroundColor,
+                appBarTheme: AppBarTheme(
+                  elevation: 0,
+                  backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+                  foregroundColor: context.colorScheme.primaryTextColor,
                 ),
-                navigatorObservers: [
-                  locator<AnalyticsService>().getAnalyticsObserver()
-                ],
-                onGenerateRoute: StackedRouter().onGenerateRoute,
-                navigatorKey: StackedService.navigatorKey,
-                initialRoute: Routes.splashView,
-              );
-            },
-          );
-        }));
+              ),
+              navigatorObservers: [
+                locator<AnalyticsService>().getAnalyticsObserver()
+              ],
+              onGenerateRoute: StackedRouter().onGenerateRoute,
+              navigatorKey: StackedService.navigatorKey,
+              initialRoute: Routes.splashView,
+            );
+          },
+        );
+      }),
+    );
   }
 }
