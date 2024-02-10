@@ -50,6 +50,10 @@ class EventViewModel extends BaseViewModel {
   Future<void> loadData() async {
     try {
       _events = await runBusyFuture(_firestoreService.getAllEvents());
+      print("gallery images loading");
+      await _firestoreService.getGalleryImages();
+      print(" loading complete");
+
       getRemainingEvents();
       notifyListeners();
       getTodaysEvent();
@@ -165,4 +169,44 @@ class SponsorsModel {
     required this.url,
     required this.imageUrl,
   });
+}
+
+class GalleryModel {
+  final String logoUrl;
+  final String themeName;
+  final int year;
+  final Map<String, dynamic> abhiyaan;
+  final Map<String, dynamic> cultural;
+  final Map<String, dynamic> sports;
+
+  GalleryModel({
+    required this.logoUrl,
+    required this.themeName,
+    required this.year,
+    required this.abhiyaan,
+    required this.cultural,
+    required this.sports,
+  });
+
+  factory GalleryModel.fromJson(Map<String, dynamic> json) {
+    return GalleryModel(
+      logoUrl: json['LogoUrl'] ?? "",
+      themeName: json['ThemeName'] ?? "",
+      year: json['year'] ?? 0,
+      abhiyaan: json['abhiyaan'] ?? {},
+      cultural: json['cultural'] ?? {},
+      sports: json['sports'] ?? {},
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'LogoUrl': logoUrl,
+      'ThemeName': themeName,
+      'year': year,
+      'abhiyaan': abhiyaan,
+      'cultural': cultural,
+      'sports': sports,
+    };
+  }
 }

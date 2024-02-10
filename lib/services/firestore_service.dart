@@ -286,4 +286,64 @@ class FirestoreService {
       return false;
     }
   }
+
+// Future<List<EventModel>> getGalleryImages() async {
+//   try {
+//     final QuerySnapshot snapshot = await _firestore.collection("gallery").get();
+//     return snapshot.docs.map((doc) {
+//       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+//       return EventModel(
+//           title: data['title'],
+//           startDate: data['startDate'],
+//           endDate: data['endDate'],
+//           location: data['location'],
+//           imageUrl: data['imageUrl'],
+//           cName: data['coordinatorName'],
+//           cEmail: data['coordinatorEmail'],
+//           cPhone: data['coordinatorPhone'],
+//           about: data['about'],
+//           registerUrl: data['registerUrl'],
+//           docID: doc.id);
+//     }).toList();
+//   } on Exception catch (e) {
+//     log.e("Error in getting events : ${e.toString()}");
+//     return []; // return an empty list on error
+//   }
+// }
+
+  Future<List<GalleryModel>> getGalleryImages() async {
+    try {
+      final QuerySnapshot snapshot =
+          await FirebaseFirestore.instance.collection("Gallery").get();
+
+      List<GalleryModel> galleryList = [];
+
+      // Iterate over each document in the snapshot
+      for (QueryDocumentSnapshot doc in snapshot.docs) {
+        // Access the data of each document using doc.data()
+        final data =
+            doc.data() as Map<String, dynamic>; // Cast to Map<String, dynamic>
+        print(data);
+        // Add null check before accessing properties of data
+        galleryList.add(
+          GalleryModel(
+            logoUrl: data['LogoUrl'] ?? "null",
+            themeName: data['ThemeName'] ?? "null",
+            year: data['year'] ?? 0,
+            abhiyaan: data['abhiyaan'] ?? {},
+            cultural: data['cultural'] ?? {},
+            sports: data['sports'] ?? {},
+          ),
+        );
+      }
+
+      // Return the list of GalleryModel objects
+      print(galleryList);
+      return galleryList;
+    } catch (e) {
+      log.e("Error in getting events : ${e.toString()}");
+      // Handle error by throwing the exception
+      throw e;
+    }
+  }
 }
