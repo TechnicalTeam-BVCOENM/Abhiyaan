@@ -46,7 +46,6 @@ dependencies:
   upgrader: ^8.4.0
   pinput: ^3.0.1
   mailer: ^6.0.1
-  flutter_staggered_grid_view: ^0.7.0
   # permission_handler: ^11.1.0
 
 dev_dependencies:
@@ -77,3 +76,16 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
+  fonts:
+    - family: Outfit
+      fonts:
+        - asset: fonts/Outfit-Regular.ttf
+        - asset: fonts/Outfit-SemiBold.ttf
+        - asset: fonts/Outfit-Bold.ttf
+        - asset: fonts/Outfit-Thin.ttf
+        - asset: fonts/Outfit-Medium.ttf
+        - asset: fonts/Outfit-Light.ttf
+        - asset: fonts/Outfit-ExtraBold.ttf
+        - asset: fonts/Outfit-ExtraLight.ttf
+        - asset: fonts/Outfit-Black.ttf
