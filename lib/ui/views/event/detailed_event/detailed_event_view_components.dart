@@ -1,4 +1,4 @@
-part of '../detailed_event/detailed_event_view.dart';
+part of 'detailed_event_view.dart';
 
 class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
   final String imageLink;
@@ -14,8 +14,8 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
   Widget build(BuildContext context, DetailedEventViewModel viewModel) {
     FontThemeClass fontTheme = FontThemeClass();
     return SliverAppBar(
-      foregroundColor: context.colorScheme.signInTextColor,
-      backgroundColor: context.colorScheme.backgroundColor,
+      foregroundColor: context.colorScheme.primaryTextColor,
+      backgroundColor: context.colorScheme.scaffoldBackgroundColor,
       elevation: 0.0,
       pinned: false,
       stretch: true,
@@ -47,7 +47,7 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
               height: 30.h,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: context.colorScheme.backgroundColor,
+                color: context.colorScheme.primaryCardColor,
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(15),
                   topRight: Radius.circular(15),
@@ -64,7 +64,7 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
               child: Container(
                 padding: const EdgeInsets.all(15).r,
                 decoration: BoxDecoration(
-                  color: context.colorScheme.secondaryWhiteColor,
+                  color: context.colorScheme.primaryCardColor.withOpacity(0.4),
                   borderRadius: BorderRadius.circular(10).r,
                 ),
                 height: 60.h,
@@ -73,15 +73,17 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
                   children: [
                     Icon(
                       Icons.pin_drop,
-                      color: context.colorScheme.primaryColor,
+                      color: context.colorScheme.primaryAccentColor,
                     ),
                     4.horizontalSpace,
                     Text(
                       eventLocation,
                       textAlign: TextAlign.center,
-                      style: fontTheme.body(context,
-                          color: context.colorScheme.primaryDarkColor,
-                          fontWeight: FontWeight.w700),
+                      style: fontTheme.body(
+                        context,
+                        color: context.colorScheme.primaryTextColor,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ],
                 ),
@@ -121,194 +123,201 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18).r,
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              10.verticalSpace,
-              Text(
-                eventName,
-                style: fontTheme.title(context, fontWeight: FontWeight.w700),
-              ),
-              10.verticalSpace,
-              Row(
-                children: [
-                  Container(
-                    height: 24.h,
-                    width: 24.w,
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.only(right: 8.0).r,
-                    child: Icon(
-                      Icons.calendar_month,
-                      size: 20,
-                      color: context.colorScheme.primaryColor,
-                    ),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            10.verticalSpace,
+            Text(
+              eventName,
+              style: fontTheme.title(context, fontWeight: FontWeight.w700),
+            ),
+            10.verticalSpace,
+            Row(
+              children: [
+                Container(
+                  height: 24.h,
+                  width: 24.w,
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(right: 8.0).r,
+                  child: Icon(
+                    Icons.calendar_month,
+                    size: 20,
+                    color: context.colorScheme.primaryAccentColor,
                   ),
-                  Text(
-                    "${eventStartDate.day}-${eventEndDate.day} ${DateFormat('MMMM yyyy').format(eventEndDate)}",
-                    style: fontTheme.caption(context,
-                        color: context.colorScheme.secondarySectionColor,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
-              6.verticalSpace,
-              Row(
-                children: [
-                  Container(
-                    height: 24.h,
-                    width: 24.w,
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.only(right: 8.0).r,
-                    child: Icon(
-                      Icons.timer,
-                      color: context.colorScheme.primaryColor,
-                      size: 20,
-                    ),
-                  ),
-                  Text(
-                    "${eventStartDate.hour}:${eventStartDate.minute} AM",
-                    style: fontTheme.caption(context,
-                        color: context.colorScheme.secondarySectionColor,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
-              28.verticalSpace,
-              Text(
-                "About Event",
-                style:
-                    fontTheme.paragraph(context, fontWeight: FontWeight.w600),
-              ),
-              8.verticalSpace,
-              Text(
-                eventInfo,
-                textAlign: TextAlign.justify,
-                style: fontTheme.caption(
-                  context,
-                  color:
-                      context.colorScheme.secondaryBlackColor.withOpacity(0.8),
                 ),
+                Text(
+                  "${eventStartDate.day}-${eventEndDate.day} ${DateFormat('MMMM yyyy').format(eventEndDate)}",
+                  style: fontTheme.caption(
+                    context,
+                    color: context.colorScheme.primaryTextColor,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+            6.verticalSpace,
+            Row(
+              children: [
+                Container(
+                  height: 24.h,
+                  width: 24.w,
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(right: 8.0).r,
+                  child: Icon(
+                    Icons.timer,
+                    color: context.colorScheme.primaryAccentColor,
+                    size: 20,
+                  ),
+                ),
+                Text(
+                  "${eventStartDate.hour}:${eventStartDate.minute} AM",
+                  style: fontTheme.caption(
+                    context,
+                    color: context.colorScheme.primaryTextColor,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+            28.verticalSpace,
+            Text(
+              "About Event",
+              style: fontTheme.paragraph(
+                context,
+                fontWeight: FontWeight.w600,
               ),
-              20.verticalSpace,
-              Divider(
-                color: context.colorScheme.secondaryBlackColor.withOpacity(0.2),
-                height: 1.h,
+            ),
+            8.verticalSpace,
+            Text(
+              eventInfo,
+              textAlign: TextAlign.justify,
+              style: fontTheme.caption(
+                context,
+                color: context.colorScheme.primaryTextColor.withOpacity(0.8),
               ),
-              20.verticalSpace,
-              viewModel._bestMoments.isEmpty
-                  ? Container()
-                  : SizedBox(
-                      height: 230.h,
-                      width: double.infinity,
-                      child: CarouselSlider.builder(
-                        itemCount: viewModel._bestMoments.length,
-                        itemBuilder: (context, index, realIndex) {
-                          return CarouselUtils.buildImage(
+            ),
+            20.verticalSpace,
+            Divider(
+              color: context.colorScheme.primaryTextColor.withOpacity(0.2),
+              height: 1.h,
+            ),
+            20.verticalSpace,
+            viewModel._bestMoments.isEmpty
+                ? Container()
+                : SizedBox(
+                    height: 230.h,
+                    width: double.infinity,
+                    child: CarouselSlider.builder(
+                      itemCount: viewModel._bestMoments.length,
+                      itemBuilder: (context, index, realIndex) {
+                        return CarouselUtils.buildImage(
+                          context,
+                          viewModel._bestMoments[index]['imageUrl'],
+                          viewModel.activeIndex,
+                        );
+                      },
+                      options: CarouselOptions(
+                        height: 230.h,
+                        onPageChanged: (index, reason) =>
+                            viewModel.updateActiveIndex(index),
+                        autoPlay: true,
+                        autoPlayInterval: 4.seconds,
+                        viewportFraction: 1,
+                        enableInfiniteScroll: true,
+                        autoPlayAnimationDuration: 1.seconds,
+                        autoPlayCurve: Curves.easeInOut,
+                        enlargeCenterPage: true,
+                      ),
+                    ),
+                  ),
+            12.verticalSpace,
+            viewModel._bestMoments.isEmpty
+                ? Container()
+                : Center(
+                    child: CarouselUtils.buildIndicator(
+                      context,
+                      viewModel.activeIndex,
+                      viewModel._bestMoments.length,
+                    ),
+                  ),
+            Text(
+              "Contact Section",
+              style: fontTheme.paragraph(context, fontWeight: FontWeight.w700),
+            ),
+            20.verticalSpace,
+            eventContactName.isNotEmpty
+                ? Row(
+                    children: [
+                      Container(
+                        height: 28.h,
+                        width: 28.w,
+                        alignment: Alignment.center,
+                        margin: const EdgeInsets.only(right: 8.0).r,
+                        child: Icon(
+                          Icons.account_circle,
+                          size: 24.sp,
+                          color: context.colorScheme.primaryAccentColor,
+                        ),
+                      ),
+                      Text(
+                        eventContactName,
+                        style: fontTheme.caption(context),
+                      ),
+                    ],
+                  )
+                : const SizedBox(),
+            8.verticalSpace,
+            eventContactEmail.isNotEmpty
+                ? Row(
+                    children: [
+                      Container(
+                        height: 28.h,
+                        width: 28.w,
+                        alignment: Alignment.center,
+                        margin: const EdgeInsets.only(right: 8.0),
+                        child: Icon(
+                          Icons.email,
+                          size: 24.h,
+                          color: context.colorScheme.primaryAccentColor,
+                        ),
+                      ),
+                      Text(eventContactEmail,
+                          style: fontTheme.caption(
                             context,
-                            viewModel._bestMoments[index]['imageUrl'],
-                            viewModel.activeIndex,
-                          );
-                        },
-                        options: CarouselOptions(
-                          height: 230.h,
-                          onPageChanged: (index, reason) =>
-                              viewModel.updateActiveIndex(index),
-                          autoPlay: true,
-                          autoPlayInterval: 4.seconds,
-                          viewportFraction: 1,
-                          enableInfiniteScroll: true,
-                          autoPlayAnimationDuration: 1.seconds,
-                          autoPlayCurve: Curves.easeInOut,
-                          enlargeCenterPage: true,
+                          )),
+                    ],
+                  )
+                : const SizedBox(),
+            8.verticalSpace,
+            eventContactNumber.toString().isNotEmpty
+                ? Row(
+                    children: [
+                      Container(
+                        height: 28.h,
+                        width: 28.w,
+                        alignment: Alignment.center,
+                        margin: const EdgeInsets.only(right: 8.0),
+                        // decoration: BoxDecoration(
+                        //   shape: BoxShape.circle,
+                        //   color: Colors.white,
+                        // ),
+                        child: Icon(
+                          Icons.phone_in_talk_rounded,
+                          size: 24.sp,
+                          color: context.colorScheme.primaryAccentColor,
                         ),
                       ),
-                    ),
-              12.verticalSpace,
-              viewModel._bestMoments.isEmpty
-                  ? Container()
-                  : Center(
-                      child: CarouselUtils.buildIndicator(
-                        context,
-                        viewModel.activeIndex,
-                        viewModel._bestMoments.length,
+                      Text(
+                        eventContactNumber.toString(),
+                        style: fontTheme.caption(context),
                       ),
-                    ),
-              Text(
-                "Contact Section",
-                style:
-                    fontTheme.paragraph(context, fontWeight: FontWeight.w700),
-              ),
-              20.verticalSpace,
-              eventContactName.isNotEmpty
-                  ? Row(
-                      children: [
-                        Container(
-                          height: 28.h,
-                          width: 28.w,
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.only(right: 8.0).r,
-                          child: Icon(
-                            Icons.account_circle,
-                            size: 24.sp,
-                            color: context.colorScheme.primaryColor,
-                          ),
-                        ),
-                        Text(eventContactName,
-                            style: fontTheme.caption(context)),
-                      ],
-                    )
-                  : const SizedBox(),
-              8.verticalSpace,
-              eventContactEmail.isNotEmpty
-                  ? Row(
-                      children: [
-                        Container(
-                          height: 28.h,
-                          width: 28.w,
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.only(right: 8.0),
-                          child: Icon(
-                            Icons.email,
-                            size: 24.h,
-                            color: context.colorScheme.primaryColor,
-                          ),
-                        ),
-                        Text(eventContactEmail,
-                            style: fontTheme.caption(
-                              context,
-                            )),
-                      ],
-                    )
-                  : const SizedBox(),
-              8.verticalSpace,
-              eventContactNumber.toString().isNotEmpty
-                  ? Row(
-                      children: [
-                        Container(
-                          height: 28.h,
-                          width: 28.w,
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.only(right: 8.0),
-                          // decoration: BoxDecoration(
-                          //   shape: BoxShape.circle,
-                          //   color: Colors.white,
-                          // ),
-                          child: Icon(
-                            Icons.phone_in_talk_rounded,
-                            size: 24.sp,
-                            color: context.colorScheme.primaryColor,
-                          ),
-                        ),
-                        Text(eventContactNumber.toString(),
-                            style: fontTheme.caption(context)),
-                      ],
-                    )
-                  : const SizedBox(),
-              40.verticalSpace,
-              const Text(""),
-              32.verticalSpace,
-            ]
-                .animate(delay: 0.ms, interval: 100.ms)
-                .fadeIn(curve: Curves.easeIn)),
+                    ],
+                  )
+                : const SizedBox(),
+            40.verticalSpace,
+            const Text(""),
+            32.verticalSpace,
+          ].animate(delay: 0.ms, interval: 100.ms).fadeIn(curve: Curves.easeIn),
+        ),
       ),
     );
   }

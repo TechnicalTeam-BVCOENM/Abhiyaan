@@ -1,5 +1,6 @@
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 part 'splash_view_model.dart';
 
 class SplashView extends StatelessWidget {
@@ -12,7 +13,7 @@ class SplashView extends StatelessWidget {
       onViewModelReady: (model) => model.init(),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: context.colorScheme.backgroundColor,
+          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
           body: SafeArea(
             child: Center(
               child: Column(
@@ -33,7 +34,8 @@ class SplashView extends StatelessWidget {
                     'Version 1.0.3',
                     style: FontThemeClass().caption(
                       context,
-                      color: context.colorScheme.headingColor,
+                      color: context.colorScheme.secondaryTextColor,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                   const SizedBox(height: 18), // Additional spacing if needed

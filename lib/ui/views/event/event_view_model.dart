@@ -51,10 +51,10 @@ class EventViewModel extends BaseViewModel {
   Future<void> loadData() async {
     try {
       _events = await runBusyFuture(_firestoreService.getAllEvents());
-      getRemainingEvents();
-      notifyListeners();
-      getTodaysEvent();
       _sponsors = await _firestoreService.getAllSponsors();
+      notifyListeners();
+      getRemainingEvents();
+      getTodaysEvent();
       notifyListeners();
     } catch (e) {
       log.e("Error Loading Sponsors: ${e.toString()}");

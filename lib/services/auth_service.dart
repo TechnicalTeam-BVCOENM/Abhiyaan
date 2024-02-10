@@ -1,9 +1,9 @@
+import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:lottie/lottie.dart';
 
 class AuthenticationService {
   final log = getLogger('AuthService');
@@ -114,15 +114,7 @@ class AuthenticationService {
       barrierDismissible: false,
       context: context,
       builder: (context) {
-        return Center(
-          child: SizedBox(
-            width: 250,
-            child: LottieBuilder.asset(
-              repeat: true,
-              AnimationAssets.handLoading,
-            ),
-          ),
-        );
+        return const CircularLoadingIndicator();
       },
     );
   }

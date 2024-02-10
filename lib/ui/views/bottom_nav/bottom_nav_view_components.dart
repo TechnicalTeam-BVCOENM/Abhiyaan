@@ -15,7 +15,7 @@ class BottomNavActiveIcon extends ViewModelWidget<BottomNavViewModel> {
       height: kBottomNavigationBarHeight,
       margin: EdgeInsets.symmetric(horizontal: 0.sp),
       decoration: BoxDecoration(
-        color: context.colorScheme.selectedBottomNavIconbg,
+        color: context.colorScheme.primaryAccentColor.withOpacity(0.1),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -23,20 +23,20 @@ class BottomNavActiveIcon extends ViewModelWidget<BottomNavViewModel> {
           Container(
             height: 3.sp,
             decoration: BoxDecoration(
-              color: context.colorScheme.primaryColor,
+              color: context.colorScheme.primaryAccentColor,
             ),
           ),
           const Spacer(),
           Icon(
             icon,
-            color: context.colorScheme.selectedBottomNavIcon,
+            color: context.colorScheme.primaryAccentColor,
           ),
           SizedBox(height: 2.sp),
           Text(
             text,
             style: TextStyle(
               fontSize: 12.sp,
-              color: context.colorScheme.selectedBottomNavIcon,
+              color: context.colorScheme.primaryAccentColor,
               fontWeight: FontWeight.w700,
             ),
           ),

@@ -31,19 +31,18 @@ dependencies:
   get_storage: ^2.1.1
   cached_network_image: ^3.3.0
   url_launcher: ^6.2.1
-  intl: 0.18.1
+  intl: ^0.19.0
   carousel_slider: ^4.2.1
   flutter_native_splash: ^2.3.5
-  shimmer: ^3.0.0
   expandable: ^5.0.1
   flutter_screenutil: ^5.9.0
   share_plus: ^7.2.1
   flutter_local_notifications: ^16.2.0
   app_settings: ^5.1.1
-  lottie: ^2.7.0
+  lottie: ^3.0.0
   flutter_animate: ^4.3.0
   http: ^1.1.2
-  upgrader: ^8.4.0
+  upgrader: ^9.0.0
   pinput: ^3.0.1
   mailer: ^6.0.1
   # permission_handler: ^11.1.0

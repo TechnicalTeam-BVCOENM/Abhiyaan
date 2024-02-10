@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:abhiyaan/services/notification_service.dart';
 import 'package:abhiyaan/ui/common/carousel_utils.dart';
+import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:abhiyaan/ui/views/home/celebration/celebration_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:abhiyaan/ui/common/shimmer.dart';
 import 'package:abhiyaan/ui/common/update_component.dart';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
@@ -33,13 +33,11 @@ class HomeView extends StatelessWidget {
         return UpgradeAlert(
           upgrader: Upgrader(
             durationUntilAlertAgain: const Duration(days: 2),
-            showIgnore: false,
-            showReleaseNotes: false,
           ),
           child: Scaffold(
-            backgroundColor: context.colorScheme.backgroundColor,
+            backgroundColor: context.colorScheme.scaffoldBackgroundColor,
             body: model.isBusy
-                ? const HomePageShimmerEffect()
+                ? const CircularLoadingIndicator()
                 : SafeArea(
                     child: SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),
@@ -50,20 +48,17 @@ class HomeView extends StatelessWidget {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(vertical: 8.0).r,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                  width: 280.w,
-                                  child: Text(
-                                    overflow: TextOverflow.ellipsis,
-                                    'Hey ${model.splitusername()} 👋', // Update according to loal storage
-                                    style: fontTheme.title(context,
-                                        color: context.colorScheme.headingColor,
-                                        fontWeight: FontWeight.w600),
-                                  ).animate().fadeIn(),
+                            child: SizedBox(
+                              width: 280.w,
+                              child: Text(
+                                overflow: TextOverflow.ellipsis,
+                                'Hey ${model.splitusername()} 👋', // Update according to loal storage
+                                style: fontTheme.title(
+                                  context,
+                                  color: context.colorScheme.primaryTextColor,
+                                  fontWeight: FontWeight.w600,
                                 ),
-                              ],
+                              ).animate().fadeIn(),
                             ),
                           ),
                           const SectionText(title: 'Highlights'),
@@ -87,7 +82,7 @@ class HomeView extends StatelessWidget {
                                                   BorderRadius.circular(16).r,
                                               side: BorderSide(
                                                 color: context.colorScheme
-                                                    .secondaryLPurpleColor,
+                                                    .primaryAccentColor,
                                                 width: 1.0,
                                               ),
                                             ),
@@ -99,7 +94,7 @@ class HomeView extends StatelessWidget {
                                                   Icon(
                                                     Icons.info_rounded,
                                                     color: context.colorScheme
-                                                        .secondaryBlackColor,
+                                                        .primaryTextColor,
                                                   ),
                                                   10.horizontalSpace,
                                                   Text("No updates yet",
@@ -147,10 +142,14 @@ class HomeView extends StatelessWidget {
                           ),
                           const SectionText(title: "Quick Links"),
                           SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              child: Center(
-                                  child: quickLinksList(
-                                      context, model.quickLinksList))),
+                            width: MediaQuery.of(context).size.width,
+                            child: Center(
+                              child: quickLinksList(
+                                context,
+                                model.quickLinksList,
+                              ),
+                            ),
+                          ),
                           10.verticalSpace,
                           const SectionText(
                             title: "College Updates",
@@ -167,8 +166,8 @@ class HomeView extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(16).r,
                                         side: BorderSide(
-                                          color: context.colorScheme
-                                              .secondaryLPurpleColor,
+                                          color: context
+                                              .colorScheme.primaryAccentColor,
                                           width: 1.0,
                                         ),
                                       ),
@@ -178,8 +177,8 @@ class HomeView extends StatelessWidget {
                                         children: [
                                           Icon(
                                             Icons.info_rounded,
-                                            color: context.colorScheme
-                                                .secondaryBlackColor,
+                                            color: context
+                                                .colorScheme.primaryTextColor,
                                           ),
                                           10.horizontalSpace,
                                           Text(
@@ -191,8 +190,12 @@ class HomeView extends StatelessWidget {
                                 )
                               : ListView.builder(
                                   itemBuilder: (context, index) {
-                                    return updatesCard(model.collegeUpdates,
-                                        index, context, model);
+                                    return updatesCard(
+                                      model.collegeUpdates,
+                                      index,
+                                      context,
+                                      model,
+                                    );
                                   },
                                   itemCount: model.collegeUpdates.length,
                                   shrinkWrap: true,
@@ -226,10 +229,12 @@ class HomeView extends StatelessWidget {
                           3.verticalSpace,
                           Text(
                             'Made with ❤️ by Technical Team',
-                            style: fontTheme.caption(context,
-                                color: context.colorScheme.secondaryBlackColor
-                                    .withOpacity(0.8),
-                                fontWeight: FontWeight.w500),
+                            style: fontTheme.caption(
+                              context,
+                              color: context.colorScheme.primaryTextColor
+                                  .withOpacity(0.8),
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                           12.verticalSpace,
                         ],

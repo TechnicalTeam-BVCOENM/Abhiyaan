@@ -22,143 +22,152 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
             : "Posted ${currentDate.difference(postDate).inDays} days ago";
 
     return StreamBuilder<int>(
-        stream: viewModel.getLikesStream(blogsData.documentId),
-        builder: (context, snapshot) {
-          if (viewModel.hasError) {
-            return const Text('Error: Backend Error');
-          }
-          bool isLiked = viewModel.localStorageService
-                  .read("isLiked_${blogsData.documentId}") ??
-              false;
+      stream: viewModel.getLikesStream(blogsData.documentId),
+      builder: (context, snapshot) {
+        if (viewModel.hasError) {
+          return const Text('Error: Backend Error');
+        }
+        bool isLiked = viewModel.localStorageService
+                .read("isLiked_${blogsData.documentId}") ??
+            false;
 
-          final int streamLikes = snapshot.data ?? 0;
-          return Card(
-            elevation: 1,
-            shadowColor:
-                context.colorScheme.secondaryBlackColor.withOpacity(0.8),
-            clipBehavior: Clip.hardEdge,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.r),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: 45.h,
-                  padding: const EdgeInsets.symmetric(horizontal: 12).r,
-                  decoration: BoxDecoration(
-                    color: context.colorScheme.secondaryWhiteColor,
-                  ),
-                  child: Row(
-                    children: [
-                      ClipOval(
-                        child: blogsData.authorImageUrl != ''
-                            ? CachedNetworkImage(
-                                imageUrl: blogsData.authorImageUrl,
-                                width: 34.w,
-                                height: 34.h,
-                                fit: BoxFit.cover,
-                              )
-                            : Image.asset(
-                                AssetImagePath.emptyPerson,
-                                width: 34.w,
-                                height: 34.h,
-                              ),
-                      ).animate(delay: 500.ms).fadeIn(delay: 10.ms),
-                      8.horizontalSpace,
-                      Text(
-                        blogsData.author,
-                        style: fontThemeClass.caption(context,
-                            color: context.colorScheme.secondaryBlackColor,
-                            fontWeight: FontWeight.w500),
-                      ).animate(delay: 500.ms).slide(delay: 10.ms).fadeIn(),
-                      const Spacer(),
-                      //Posted on date
-                      Text(
-                        actualPostTime,
-                        style: fontThemeClass.caption(context,
-                            color: context.colorScheme.secondarySectionColor,
-                            fontWeight: FontWeight.w400),
-                      ).animate(delay: 500.ms).slide(delay: 10.ms).fadeIn(),
-                    ],
-                  ),
+        final int streamLikes = snapshot.data ?? 0;
+        return Card(
+          elevation: 1,
+          shadowColor: context.colorScheme.primaryCardColor.withOpacity(0.8),
+          color: context.colorScheme.primaryCardColor,
+          clipBehavior: Clip.hardEdge,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.r),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 45.h,
+                padding: const EdgeInsets.symmetric(horizontal: 12).r,
+                decoration: BoxDecoration(
+                  color: context.colorScheme.primaryCardColor,
                 ),
-                Hero(
-                  transitionOnUserGestures: true,
-                  tag: blogsData.documentId,
-                  child: CachedNetworkImageWidget(
-                    imageUrl: blogsData.imageUrl,
-                    height: 170.h,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                    maxHeightDiskCache: 1600.h,
-                  ),
+                child: Row(
+                  children: [
+                    ClipOval(
+                      child: blogsData.authorImageUrl != ''
+                          ? CachedNetworkImage(
+                              imageUrl: blogsData.authorImageUrl,
+                              width: 34.w,
+                              height: 34.h,
+                              fit: BoxFit.cover,
+                            )
+                          : Image.asset(
+                              AssetImagePath.emptyPerson,
+                              width: 34.w,
+                              height: 34.h,
+                            ),
+                    ).animate(delay: 500.ms).fadeIn(delay: 10.ms),
+                    8.horizontalSpace,
+                    Text(
+                      blogsData.author,
+                      style: fontThemeClass.caption(
+                        context,
+                        color: context.colorScheme.primaryTextColor,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ).animate(delay: 500.ms).slide(delay: 10.ms).fadeIn(),
+                    const Spacer(),
+                    //Posted on date
+                    Text(
+                      actualPostTime,
+                      style: fontThemeClass.caption(
+                        context,
+                        color: context.colorScheme.secondaryTextColor,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ).animate(delay: 500.ms).slide(delay: 10.ms).fadeIn(),
+                  ],
                 ),
-                Container(
-                    height: 45.h,
-                    padding: const EdgeInsets.symmetric(horizontal: 12).r,
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.secondaryWhiteColor,
-                    ),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          AssetImagePath.bulb,
-                          height: 25.h,
-                          width: 25.w,
-                          fit: BoxFit.cover,
-                        ).animate(delay: 500.ms).scale(),
-                        8.horizontalSpace,
-                        Hero(
-                          tag: blogsData.title,
-                          child: Text(
-                            blogsData.title,
-                            style: fontThemeClass.caption(context,
-                                color: context.colorScheme.secondaryBlackColor,
-                                fontWeight: FontWeight.w500),
-                          ).animate(delay: 500.ms).scale(),
+              ),
+              Hero(
+                transitionOnUserGestures: true,
+                tag: blogsData.documentId,
+                child: CachedNetworkImageWidget(
+                  imageUrl: blogsData.imageUrl,
+                  height: 170.h,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  maxHeightDiskCache: 1600.h,
+                ),
+              ),
+              Container(
+                height: 45.h,
+                padding: const EdgeInsets.symmetric(horizontal: 12).r,
+                decoration: BoxDecoration(
+                  color: context.colorScheme.primaryCardColor,
+                ),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      AssetImagePath.bulb,
+                      height: 25.h,
+                      width: 25.w,
+                      fit: BoxFit.cover,
+                    ).animate(delay: 500.ms).scale(),
+                    8.horizontalSpace,
+                    Hero(
+                      tag: blogsData.title,
+                      child: Text(
+                        blogsData.title,
+                        style: fontThemeClass.caption(
+                          context,
+                          color: context.colorScheme.primaryTextColor,
+                          fontWeight: FontWeight.w500,
                         ),
-                        const Spacer(),
-                        Text(
-                          streamLikes.toString(),
-                          style: fontThemeClass.caption(context,
-                              color: context.colorScheme.secondaryBlackColor,
-                              fontWeight: FontWeight.w500),
-                        ).animate(delay: 500.ms).scale(),
-                        4.horizontalSpace,
-                        InkWell(
-                          onTap: () {
-                            viewModel.updateLikes(
-                                blogsData.documentId, context);
-                          },
-                          child: isLiked
-                              ? const Icon(
-                                  Icons.favorite_rounded,
+                      ).animate(delay: 500.ms).scale(),
+                    ),
+                    const Spacer(),
+                    Text(
+                      streamLikes.toString(),
+                      style: fontThemeClass.caption(
+                        context,
+                        color: context.colorScheme.primaryTextColor,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ).animate(delay: 500.ms).scale(),
+                    4.horizontalSpace,
+                    InkWell(
+                      onTap: () {
+                        viewModel.updateLikes(blogsData.documentId, context);
+                      },
+                      child: isLiked
+                          ? const Icon(
+                              Icons.favorite_rounded,
+                              color: Colors.red,
+                              shadows: [
+                                BoxShadow(
                                   color: Colors.red,
-                                  shadows: [
-                                    BoxShadow(
-                                      color: Colors.red,
-                                      blurRadius: 7,
-                                      spreadRadius: 0.8,
-                                    ),
-                                  ],
-                                  fill: 1,
-                                  size: 25,
-                                ).animate(delay: 500.ms).scale()
-                              : const Icon(
-                                  Icons.favorite_border_rounded,
-                                  color: Colors.black,
-                                  fill: 0,
-                                  size: 25,
-                                ).animate(delay: 500.ms).scale(),
-                        )
-                      ],
-                    )),
-              ],
-            ),
-          );
-        });
+                                  blurRadius: 7,
+                                  spreadRadius: 0.8,
+                                ),
+                              ],
+                              fill: 1,
+                              size: 25,
+                            ).animate(delay: 500.ms).scale()
+                          : const Icon(
+                              Icons.favorite_border_rounded,
+                              color: Colors.black,
+                              fill: 0,
+                              size: 25,
+                            ).animate(delay: 500.ms).scale(),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -210,21 +219,24 @@ class DepartmentClubs extends ViewModelWidget<CommunityViewModel> {
                   height: 30.h,
                   width: 120.w,
                   decoration: BoxDecoration(
-                    color: context.colorScheme.secondaryWhiteColor,
+                    color: context.colorScheme.primaryCardColor,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.bookmark_rounded,
-                          color:
-                              context.colorScheme.primaryColor.withOpacity(0.8),
-                          size: 18.sp),
-                      12.horizontalSpace,
+                      Icon(
+                        Icons.bookmark_rounded,
+                        color: context.colorScheme.primaryAccentColor,
+                        size: 18.sp,
+                      ),
+                      4.horizontalSpace,
                       Center(
                         child: Text(
                           data.clubShortHand,
-                          style: fontThemeClass.caption(context,
-                              fontWeight: FontWeight.w500),
+                          style: fontThemeClass.caption(
+                            context,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ],
@@ -287,9 +299,11 @@ class QuoteCard extends StatelessWidget {
               quote == ''
                   ? "Education for us is not a matter of degree, but of life."
                   : ' $quote ',
-              style: fontThemeClass.paragraph(context,
-                  fontWeight: FontWeight.w700,
-                  color: context.colorScheme.signInTextColor),
+              style: fontThemeClass.paragraph(
+                context,
+                fontWeight: FontWeight.w700,
+                color: context.colorScheme.white,
+              ),
               textAlign: TextAlign.center,
             ).animate(delay: 700.ms).scale(),
             15.verticalSpace,
@@ -297,9 +311,11 @@ class QuoteCard extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: Text(
                 autherName == '' ? "- John Ruskin" : "- $autherName",
-                style: fontThemeClass.body(context,
-                    color: context.colorScheme.signInTextColor,
-                    fontWeight: FontWeight.w400),
+                style: fontThemeClass.body(
+                  context,
+                  color: context.colorScheme.white,
+                  fontWeight: FontWeight.w400,
+                ),
                 textAlign: TextAlign.right,
               ),
             ).animate(delay: 800.ms).scale(),
@@ -308,66 +324,5 @@ class QuoteCard extends StatelessWidget {
         ),
       ),
     ).animate(delay: 500.ms).fadeIn();
-  }
-}
-
-class CommunityPageShimmerEffect extends StatelessWidget {
-  const CommunityPageShimmerEffect({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: context.colorScheme.backgroundColor,
-      body: SafeArea(
-        minimum: const EdgeInsets.symmetric(horizontal: 18).r,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 34.h,
-                width: 250.w,
-                child: const ShimmerLoadingWidget(),
-              ),
-              4.verticalSpace,
-              const SectionTextShimmerEffect(),
-              8.verticalSpace,
-              SizedBox(
-                height: 270.h,
-                child: const Card(
-                  child: ShimmerLoadingWidget(),
-                ),
-              ),
-              12.verticalSpace,
-              const SectionTextShimmerEffect(),
-              8.verticalSpace,
-              SizedBox(
-                height: 120.h,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 3,
-                  itemBuilder: (context, index) => Container(
-                    margin: EdgeInsets.only(right: index == 2 ? 0 : 16).r,
-                    height: 120.h,
-                    width: 120.w,
-                    child: const Card(
-                      child: ShimmerLoadingWidget(),
-                    ),
-                  ),
-                ),
-              ),
-              12.verticalSpace,
-              const SectionTextShimmerEffect(),
-              8.verticalSpace,
-              SizedBox(
-                height: 220.h,
-                child: const Card(
-                  child: ShimmerLoadingWidget(),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }

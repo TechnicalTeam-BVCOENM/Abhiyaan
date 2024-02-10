@@ -1,4 +1,4 @@
-import '../../file_exporter.dart';
+import 'package:abhiyaan/file_exporter.dart';
 
 void showSuccessMessage(BuildContext context, String message) {
   _showmessage(context, message, 'success');
@@ -36,7 +36,7 @@ void _showmessage(BuildContext context, String message, String type) {
       icon = Icons.warning;
       break;
     case 'normal':
-      backgroundColor = context.colorScheme.primaryColor.withOpacity(0.6);
+      backgroundColor = context.colorScheme.primaryAccentColor;
       icon = Icons.message;
       break;
     default:
@@ -62,7 +62,7 @@ void _showmessage(BuildContext context, String message, String type) {
             height: 60.h,
             width: double.infinity,
             child: Card(
-              color: context.colorScheme.toastMessage,
+              color: context.colorScheme.primaryCardColor,
               clipBehavior: Clip.hardEdge,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20).r,
@@ -85,10 +85,7 @@ void _showmessage(BuildContext context, String message, String type) {
                     message,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: fontTheme.body(
-                      context,
-                      color: context.colorScheme.secondaryBlackColor,
-                    ),
+                    style: fontTheme.body(context),
                   ),
                 ],
               ),
