@@ -13,7 +13,7 @@ class GalleryTabView extends StatelessWidget {
       viewModelBuilder: () => GalleryTabViewModel(),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: context.colorScheme.backgroundColor,
+          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
           body: GestureDetector(
             onTap: () {
               NavigationService().navigateTo(Routes.galleryView);

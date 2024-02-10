@@ -1,4 +1,5 @@
-import '../../file_exporter.dart';
+import 'package:abhiyaan/file_exporter.dart';
+import 'package:flutter/cupertino.dart';
 
 class CircularLoadingIndicator extends StatelessWidget {
   final double height;
@@ -8,16 +9,8 @@ class CircularLoadingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        height: height.sp,
-        width: height.sp,
-        alignment: Alignment.center,
-        child: CircularProgressIndicator(
-          backgroundColor: context.colorScheme.secondaryWhiteColor,
-          valueColor: AlwaysStoppedAnimation<Color>(
-            context.colorScheme.secondarySectionColor,
-          ),
-        ),
+      child: CupertinoActivityIndicator(
+        color: context.colorScheme.primaryTextColor,
       ),
     );
   }

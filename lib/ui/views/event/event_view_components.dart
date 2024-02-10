@@ -17,14 +17,14 @@ class EventDetails {
         Icon(
           Icons.location_on,
           size: 18.sp,
-          color: context.colorScheme.switchColor.withOpacity(0.8),
+          color: context.colorScheme.primaryAccentColor,
         ),
         4.horizontalSpace,
         Text(
-          location.length > 10 ? "${location.substring(0, 10)}..." : location,
+          location.length > 16 ? "${location.substring(0, 16)}..." : location,
           style: fontTheme.body(
             context,
-            color: context.colorScheme.switchColor.withOpacity(0.8),
+            color: context.colorScheme.secondaryTextColor,
           ),
         ),
       ],
@@ -43,7 +43,7 @@ class EventDetails {
         Icon(
           Icons.event,
           size: 18.sp,
-          color: context.colorScheme.switchColor.withOpacity(0.8),
+          color: context.colorScheme.primaryAccentColor,
         ),
         4.horizontalSpace,
         SizedBox(
@@ -53,7 +53,7 @@ class EventDetails {
             overflow: TextOverflow.ellipsis,
             style: fontTheme.body(
               context,
-              color: context.colorScheme.switchColor.withOpacity(0.8),
+              color: context.colorScheme.secondaryTextColor,
             ),
           ),
         ),
@@ -69,14 +69,14 @@ class EventDetails {
         Icon(
           Icons.timer,
           size: 18.sp,
-          color: context.colorScheme.switchColor.withOpacity(0.8),
+          color: context.colorScheme.primaryAccentColor,
         ),
         4.horizontalSpace,
         Text(
           time,
           style: fontTheme.body(
             context,
-            color: context.colorScheme.switchColor.withOpacity(0.8),
+            color: context.colorScheme.secondaryTextColor,
           ),
         ),
       ],
@@ -148,38 +148,51 @@ class EventDateContainer extends ViewModelWidget<EventViewModel> {
       bottom: bottom,
       right: right,
       child: Card(
-        shadowColor: context.colorScheme.secondarySectionColor,
+        shadowColor: context.colorScheme.primaryTextColor,
+        color: context.colorScheme.primaryCardColor,
         child: Column(
           children: [
             SizedBox(
               width: isUpcomming! ? (width * 0.9) : width,
               height: isUpcomming! ? (height / 2.3) : (height / 2),
-              child: Text(event.startDate.toDate().day.toString().trim(),
-                  textAlign: TextAlign.center,
-                  style: isUpcomming!
-                      ? fontTheme.title2(context,
-                          color: context.colorScheme.switchColor,
-                          fontWeight: FontWeight.bold)
-                      : fontTheme.title(context,
-                          color: context.colorScheme.switchColor,
-                          fontWeight: FontWeight.bold)),
+              child: Text(
+                event.startDate.toDate().day.toString().trim(),
+                textAlign: TextAlign.center,
+                style: isUpcomming!
+                    ? fontTheme.title2(
+                        context,
+                        color: context.colorScheme.primaryAccentColor,
+                        fontWeight: FontWeight.bold,
+                      )
+                    : fontTheme.title(
+                        context,
+                        color: context.colorScheme.primaryAccentColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+              ),
             ),
             SizedBox(
               width: isUpcomming! ? (width * 0.9) : width,
               height: isUpcomming! ? (height / 2.3) : (height / 2),
               child: Text(
                 viewModel
-                    .getMonthName(event.startDate.toDate().month,
-                        event.startDate.toDate().year)
+                    .getMonthName(
+                      event.startDate.toDate().month,
+                      event.startDate.toDate().year,
+                    )
                     .trim(),
                 textAlign: TextAlign.center,
                 style: isUpcomming!
-                    ? fontTheme.caption(context,
-                        color: context.colorScheme.secondaryBlackColor,
-                        fontWeight: FontWeight.w700)
-                    : fontTheme.body(context,
-                        color: context.colorScheme.secondaryBlackColor,
-                        fontWeight: FontWeight.w700),
+                    ? fontTheme.caption(
+                        context,
+                        color: context.colorScheme.primaryTextColor,
+                        fontWeight: FontWeight.w700,
+                      )
+                    : fontTheme.body(
+                        context,
+                        color: context.colorScheme.primaryTextColor,
+                        fontWeight: FontWeight.w700,
+                      ),
               ),
             ),
           ],
@@ -212,7 +225,7 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
     EventDetails eventDetails = EventDetails();
     return Positioned(
       child: Container(
-        color: context.colorScheme.secondaryWhiteColor.withOpacity(0.5),
+        color: context.colorScheme.primaryCardColor.withOpacity(0.5),
         height: 275.h,
         width: double.infinity,
         child: Column(
@@ -227,40 +240,43 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                 maxHeightDiskCache: 400,
               ),
             ),
-            6.verticalSpace,
+            20.verticalSpace,
             Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        8.verticalSpace,
-                        Padding(
-                          padding: const EdgeInsets.only(left: 18.0).r,
-                          child: Text(
-                            model.title.length > 13
-                                ? "${model.title.substring(0, 13)}.."
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18).r,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          8.verticalSpace,
+                          Text(
+                            model.title.length > 20
+                                ? "${model.title.substring(0, 20)}.."
                                 : model.title,
-                            style: fontTheme.eventCard(context,
-                                fontWeight: FontWeight.w700),
+                            style: fontTheme.title2(
+                              context,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 18).r,
-                          child: Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              eventDetails.eventTime(context,
-                                  "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}"),
+                              eventDetails.eventTime(
+                                context,
+                                "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}",
+                              ),
                               10.horizontalSpace,
                               eventDetails.eventLocation(
-                                  context, model.location),
+                                context,
+                                model.location,
+                              ),
                             ],
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     // Event Button
                     Padding(
@@ -268,8 +284,9 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                       child: GestureDetector(
                         onTap: () {
                           _analyticsService.logEvent(
-                              eventName: "Event_Screen",
-                              value: " ${model.title} Event Opened");
+                            eventName: "Event_Screen",
+                            value: " ${model.title} Event Opened",
+                          );
                           viewModel._navigationService
                               .navigateToDetailedEventView(eventData: model);
                         },
@@ -277,11 +294,10 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                           height: 40.h,
                           width: 95.w,
                           decoration: BoxDecoration(
-                            color: context.colorScheme.switchColor
-                                .withOpacity(0.8),
+                            color: context.colorScheme.primaryAccentColor,
                             boxShadow: [
                               BoxShadow(
-                                color: context.colorScheme.secondarySectionColor
+                                color: context.colorScheme.primaryAccentColor
                                     .withOpacity(0.4),
                                 spreadRadius: spreadRadius,
                                 blurRadius: blurRadius,
@@ -293,9 +309,11 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                           child: Center(
                             child: Text(
                               "Open",
-                              style: fontTheme.title2(context,
-                                  color: context.colorScheme.signInTextColor,
-                                  fontWeight: FontWeight.w600),
+                              style: fontTheme.title2(
+                                context,
+                                color: context.colorScheme.white,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),
@@ -333,7 +351,7 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
     EventDetails eventDetails = EventDetails();
     return Positioned(
       child: Container(
-        color: context.colorScheme.secondaryWhiteColor.withOpacity(0.5),
+        color: context.colorScheme.primaryCardColor,
         height: 220.h,
         width: 232.w,
         child: Column(
@@ -371,38 +389,41 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
                   ),
                 ),
                 Padding(
-                    padding: const EdgeInsets.only(right: 10).r,
-                    child: GestureDetector(
-                      onTap: () {
-                        viewModel._navigationService
-                            .navigateToDetailedEventView(eventData: model);
-                      },
-                      child: Container(
-                        height: 30.h,
-                        width: 62.w,
-                        decoration: BoxDecoration(
-                          color:
-                              context.colorScheme.switchColor.withOpacity(0.8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: context.colorScheme.secondarySectionColor
-                                  .withOpacity(0.4),
-                              spreadRadius: spreadRadius,
-                              blurRadius: blurRadius,
-                              offset: const Offset(0, 1),
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(12).r,
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Open",
-                            style: FontThemeClass().body(context,
-                                color: context.colorScheme.signInTextColor),
+                  padding: const EdgeInsets.only(right: 10).r,
+                  child: GestureDetector(
+                    onTap: () {
+                      viewModel._navigationService.navigateToDetailedEventView(
+                        eventData: model,
+                      );
+                    },
+                    child: Container(
+                      height: 30.h,
+                      width: 62.w,
+                      decoration: BoxDecoration(
+                        color: context.colorScheme.primaryAccentColor,
+                        boxShadow: [
+                          BoxShadow(
+                            color: context.colorScheme.primaryAccentColor
+                                .withOpacity(0.4),
+                            spreadRadius: spreadRadius,
+                            blurRadius: blurRadius,
+                            offset: const Offset(0, 1),
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(12).r,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Open",
+                          style: FontThemeClass().body(
+                            context,
+                            color: context.colorScheme.white,
                           ),
                         ),
                       ),
-                    ))
+                    ),
+                  ),
+                )
               ],
             ),
             2.verticalSpace
@@ -426,8 +447,9 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(18.0).r,
         child: Container(
-          decoration:
-              BoxDecoration(color: context.colorScheme.secondaryWhiteColor),
+          decoration: BoxDecoration(
+            color: context.colorScheme.primaryCardColor,
+          ),
           width: 80.w,
           height: 80.h,
           child: Column(
@@ -435,8 +457,9 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
               GestureDetector(
                 onTap: () {
                   _analyticsService.logEvent(
-                      eventName: "Sponsor_Screen",
-                      value: " ${model.title} Sponsor Opened");
+                    eventName: "Sponsor_Screen",
+                    value: " ${model.title} Sponsor Opened",
+                  );
                   urlLauncher.launchURL(model.url);
                 },
                 child: CachedNetworkImageWidget(
@@ -451,84 +474,14 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
           ),
         ),
       ),
-    )
-        .animate(
-          delay: 300.ms,
-        )
-        .shimmer(
-          padding: 0,
-          delay: 200.ms,
-          duration: 1000.ms,
-        );
-  }
-}
-
-class EventShimmerEffect extends StatelessWidget {
-  const EventShimmerEffect({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-        child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          44.verticalSpace,
-          Card(
-              clipBehavior: Clip.hardEdge,
-              shadowColor:
-                  context.colorScheme.secondaryLPurpleColor.withOpacity(0.8),
-              elevation: 4,
-              shape: ShapeBorder.lerp(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.sp),
-                  ),
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.sp),
-                  ),
-                  1),
-              child: ShimmerLoadingWidget(
-                height: 260.h,
-              )),
-          44.verticalSpace,
-          SizedBox(
-            height: 80.h,
-            child: ListView.builder(
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: 4,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 25.0).r,
-                  child: ShimmerLoadingWidget(
-                    height: 70.sp,
-                    width: 70.sp,
-                  ),
-                );
-              },
-            ),
-          ),
-          44.verticalSpace,
-          SizedBox(
-            height: 200.h,
-            child: ListView.builder(
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: 2,
-              itemBuilder: (context, index) {
-                return ShimmerLoadingWidget(
-                  height: 200.h,
-                  width: 240.h,
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    ));
+    );
+    // .animate(
+    //   delay: 80.ms,
+    // )
+    // .shimmer(
+    //   padding: 0,
+    //   duration: 1000.ms,
+    // );
   }
 }
 

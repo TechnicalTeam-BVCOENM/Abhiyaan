@@ -15,8 +15,9 @@ class PreferencesViewModel extends BaseViewModel {
 
   void copyText(String title, String value, BuildContext context) async {
     _analyticsService.logEvent(
-        eventName: "Profile_Details_Copy",
-        value: "$title Profile Details Copy button clicked");
+      eventName: "Profile_Details_Copy",
+      value: "$title Profile Details Copy button clicked",
+    );
     await Clipboard.setData(ClipboardData(text: value)).then(
       (value) => showNormalMessage(
         context,
@@ -32,10 +33,12 @@ class PreferencesViewModel extends BaseViewModel {
     try {
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: storedEmail)
-          .then((value) => showNormalMessage(
-                context,
-                "reset password email sent !",
-              ));
+          .then(
+            (value) => showNormalMessage(
+              context,
+              "reset password email sent !",
+            ),
+          );
     } catch (e) {
       showErrorMessage(context, "something went wrong !");
     }
@@ -45,12 +48,12 @@ class PreferencesViewModel extends BaseViewModel {
     setBusy(true);
 
     try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: email!)
-          .then((value) => showNormalMessage(
-                context,
-                "reset password email sent !",
-              ));
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email!).then(
+            (value) => showNormalMessage(
+              context,
+              "reset password email sent !",
+            ),
+          );
     } catch (e) {
       showErrorMessage(context, "something went wrong !");
     }
@@ -60,173 +63,192 @@ class PreferencesViewModel extends BaseViewModel {
 
   void passwordChangeAlert(context, [String? email]) {
     showAdaptiveDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-            clipBehavior: Clip.hardEdge,
-            titlePadding: const EdgeInsets.all(0),
-            title: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Divider(
-                  height: 10,
-                  thickness: 100,
-                  color: Colors.red,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 24.0, vertical: 10),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.warning_rounded,
-                        color: Colors.red,
-                        size: 36,
-                      ),
-                      10.horizontalSpace,
-                      const Text(
-                        "Alert",
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            content:
-                const Text("Are you sure you want to change your password ?"),
-            actions: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.all(0),
-                  foregroundColor: Colors.white,
-                  backgroundColor: context.colorScheme.primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10), // Rounded corners
-                  ),
-                ),
-                onPressed: () {
-                  _analyticsService.logEvent(
-                      eventName: "Change_password_popup",
-                      value: "Change password cancel button clicked");
-                  Navigator.pop(context);
-                },
-                child: const Text("Cancel"),
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: context.colorScheme.primaryCardColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
+          clipBehavior: Clip.hardEdge,
+          titlePadding: const EdgeInsets.all(0),
+          title: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Divider(
+                height: 20,
+                thickness: 100,
+                color: Colors.red,
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  side: BorderSide(
-                      width: 2, color: context.colorScheme.primaryColor),
-                  padding: const EdgeInsets.all(0),
-                  foregroundColor: context.colorScheme.secondaryBlackColor,
-                  backgroundColor: context.colorScheme.secondaryWhiteColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10), // Rounded corners
-                  ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24.0,
+                  vertical: 12,
                 ),
-                onPressed: () {
-                  _analyticsService.logEvent(
-                      eventName: "Change_password_popup",
-                      value: "Change password yes button clicked");
-                  if (FirebaseAuth.instance.currentUser != null) {
-                    changePassword(context)
-                        .then((value) => Navigator.pop(context));
-                  } else {
-                    changePasswordForSignin(context, email)
-                        .then((value) => Navigator.pop(context));
-                  }
-                },
-                child: const Text("Yes"),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.warning_rounded,
+                      color: Colors.red,
+                      size: 36,
+                    ),
+                    10.horizontalSpace,
+                    const Text(
+                      "Alert",
+                    ),
+                  ],
+                ),
               ),
             ],
-          );
-        });
+          ),
+          content:
+              const Text("Are you sure you want to change your password ?"),
+          actions: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(0),
+                foregroundColor: Colors.white,
+                backgroundColor: context.colorScheme.primaryAccentColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10), // Rounded corners
+                ),
+              ),
+              onPressed: () {
+                _analyticsService.logEvent(
+                  eventName: "Change_password_popup",
+                  value: "Change password cancel button clicked",
+                );
+                Navigator.pop(context);
+              },
+              child: const Text("Cancel"),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                side: BorderSide(
+                  width: 2,
+                  color: context.colorScheme.primaryAccentColor,
+                ),
+                padding: const EdgeInsets.all(0),
+                foregroundColor: context.colorScheme.primaryTextColor,
+                backgroundColor: context.colorScheme.primaryCardColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10), // Rounded corners
+                ),
+              ),
+              onPressed: () {
+                _analyticsService.logEvent(
+                  eventName: "Change_password_popup",
+                  value: "Change password yes button clicked",
+                );
+                if (FirebaseAuth.instance.currentUser != null) {
+                  changePassword(context).then(
+                    (value) => Navigator.pop(context),
+                  );
+                } else {
+                  changePasswordForSignin(context, email).then(
+                    (value) => Navigator.pop(context),
+                  );
+                }
+              },
+              child: const Text("Yes"),
+            ),
+          ],
+        );
+      },
+    );
     notifyListeners();
   }
 
   void logoutAlert(BuildContext context) {
     showAdaptiveDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-            clipBehavior: Clip.hardEdge,
-            titlePadding: const EdgeInsets.all(0),
-            title: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Divider(
-                  height: 10,
-                  thickness: 100,
-                  color: Colors.red,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 24.0, vertical: 10),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.warning_rounded,
-                        color: Colors.red,
-                        size: 36,
-                      ),
-                      10.horizontalSpace,
-                      const Text(
-                        "Alert",
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            content: SizedBox(
-                width: 400.w,
-                child: const Text("Are you sure you want to Logout ?")),
-            actions: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.all(0),
-                  foregroundColor: Colors.white,
-                  backgroundColor: context.colorScheme.primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10), // Rounded corners
-                  ),
-                ),
-                onPressed: () {
-                  _analyticsService.logEvent(
-                      eventName: "Logout_popup",
-                      value: "Logout cancel button clicked");
-                  Navigator.pop(context);
-                },
-                child: const Text("Cancel"),
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+          clipBehavior: Clip.hardEdge,
+          titlePadding: const EdgeInsets.all(0),
+          backgroundColor: context.colorScheme.primaryCardColor,
+          title: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Divider(
+                height: 20,
+                thickness: 100,
+                color: Colors.red,
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  side: BorderSide(
-                      width: 2, color: context.colorScheme.primaryColor),
-                  padding: const EdgeInsets.all(0),
-                  foregroundColor: context.colorScheme.secondaryBlackColor,
-                  backgroundColor: context.colorScheme.secondaryWhiteColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10), // Rounded corners
-                  ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24.0,
+                  vertical: 10,
                 ),
-                onPressed: () async {
-                  _analyticsService.logEvent(
-                      eventName: "Logout_popup",
-                      value: "Logout yes button clicked");
-                  await logout(context).then((value) =>
-                      showSuccessMessage(context, "Logout successful"));
-                },
-                child: const Text("Yes"),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.warning_rounded,
+                      color: Colors.red,
+                      size: 36,
+                    ),
+                    10.horizontalSpace,
+                    const Text(
+                      "Alert",
+                    ),
+                  ],
+                ),
               ),
             ],
-          );
-        });
+          ),
+          content: SizedBox(
+            width: 400.w,
+            child: const Text("Are you sure you want to Logout ?"),
+          ),
+          actions: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(0),
+                foregroundColor: Colors.white,
+                backgroundColor: context.colorScheme.primaryAccentColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10), // Rounded corners
+                ),
+              ),
+              onPressed: () {
+                _analyticsService.logEvent(
+                  eventName: "Logout_popup",
+                  value: "Logout cancel button clicked",
+                );
+                Navigator.pop(context);
+              },
+              child: const Text("Cancel"),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                side: BorderSide(
+                    width: 2, color: context.colorScheme.primaryAccentColor),
+                padding: const EdgeInsets.all(0),
+                foregroundColor: context.colorScheme.primaryTextColor,
+                backgroundColor: context.colorScheme.primaryCardColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10), // Rounded corners
+                ),
+              ),
+              onPressed: () async {
+                _analyticsService.logEvent(
+                  eventName: "Logout_popup",
+                  value: "Logout yes button clicked",
+                );
+                await logout(context).then(
+                  (value) => showSuccessMessage(context, "Logout successful"),
+                );
+              },
+              child: const Text("Yes"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> logout(BuildContext context) async {

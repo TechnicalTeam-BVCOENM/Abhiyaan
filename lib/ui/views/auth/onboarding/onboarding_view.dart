@@ -10,7 +10,7 @@ class OnboardingView extends StatelessWidget {
       viewModelBuilder: () => OnboardingViewModel(),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: context.colorScheme.backgroundColor,
+          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
           body: SafeArea(
             child: Stack(
               children: [

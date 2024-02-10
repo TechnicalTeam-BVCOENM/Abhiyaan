@@ -13,7 +13,6 @@ class GalleryViewModel extends BaseViewModel {
     'https://www.pcgamesn.com/wp-content/sites/pcgamesn/2023/04/Killjoy-best-agent-550x309.jpg',
   ];
 
-
   Future<void> fetchImages() async {
     // Fetch updated images here
     // For example:

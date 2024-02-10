@@ -20,11 +20,12 @@ class GalleryTabs extends StatelessWidget {
       child: DefaultTabController(
         length: myTabs.length,
         child: Scaffold(
-          backgroundColor: context.colorScheme.backgroundColor,
+          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
           appBar: AppBar(
-            iconTheme:
-                IconThemeData(color: context.colorScheme.secondaryBlackColor),
-            backgroundColor: context.colorScheme.backgroundColor,
+            iconTheme: IconThemeData(
+              color: context.colorScheme.primaryTextColor,
+            ),
+            backgroundColor: context.colorScheme.scaffoldBackgroundColor,
             titleSpacing: 0,
             automaticallyImplyLeading: false,
             leading: IconButton(
@@ -68,7 +69,7 @@ class TabViewCard extends StatelessWidget {
         width: 190,
         height: 184,
         child: Card(
-          color: context.colorScheme.secondaryWhiteColor,
+          color: context.colorScheme.primaryCardColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -86,15 +87,16 @@ class TabViewCard extends StatelessWidget {
                     width: 190,
                     fit: BoxFit.cover,
                   )),
-              Container(
-                  width: 190,
-                  height: 39,
-                  child: Text(
-                    "Abhiyaan",
-                    textAlign: TextAlign.center,
-                    style: FontThemeClass()
-                        .body(context, fontWeight: FontWeight.w500),
-                  )),
+              SizedBox(
+                width: 190,
+                height: 39,
+                child: Text(
+                  "Abhiyaan",
+                  textAlign: TextAlign.center,
+                  style: FontThemeClass()
+                      .body(context, fontWeight: FontWeight.w500),
+                ),
+              ),
             ],
           ),
         ),
@@ -121,12 +123,12 @@ class TabViewGrid extends StatelessWidget {
 }
 
 List<TabViewCard> tabViewCardList = [
-  TabViewCard(),
-  TabViewCard(),
-  TabViewCard(),
-  TabViewCard(),
-  TabViewCard(),
-  TabViewCard(),
-  TabViewCard(),
-  TabViewCard(),
+  const TabViewCard(),
+  const TabViewCard(),
+  const TabViewCard(),
+  const TabViewCard(),
+  const TabViewCard(),
+  const TabViewCard(),
+  const TabViewCard(),
+  const TabViewCard(),
 ];
