@@ -113,11 +113,10 @@ class CommunityView extends StatelessWidget {
                             SizedBox(
                               height: 120.h,
                               width: double.infinity,
-                              child: ListView.builder(
-                                physics: const BouncingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
+                              child: CarouselSlider.builder(
                                 itemCount: model.departmentClubsData.length,
-                                itemBuilder: (context, index) {
+                                options: model.clubsCarosoulOptions,
+                                itemBuilder: (context, index, realIndex) {
                                   return Padding(
                                     padding: index == 0
                                         ? const EdgeInsets.only(right: 0).r
