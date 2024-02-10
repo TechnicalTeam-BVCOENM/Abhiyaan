@@ -5,7 +5,6 @@ class EventViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
   final _navigationService = locator<NavigationService>();
   final _analyticsService = locator<AnalyticsService>();
-
   List<SponsorsModel> _sponsors = [];
   List<SponsorsModel> get sponsors => _sponsors;
   List<EventModel> _events = [];

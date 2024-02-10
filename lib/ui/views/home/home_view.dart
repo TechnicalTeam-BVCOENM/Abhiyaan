@@ -14,6 +14,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:lottie/lottie.dart';
 import 'package:upgrader/upgrader.dart';
+
 part 'home_view_model.dart';
 part 'home_view_component.dart';
 
@@ -45,101 +46,9 @@ class HomeView extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(vertical: 8.0).r,
-                            child: SizedBox(
-                              width: 280.w,
-                              child: Text(
-                                overflow: TextOverflow.ellipsis,
-                                'Hey ${model.splitusername()} 👋', // Update according to loal storage
-                                style: fontTheme.title(
-                                  context,
-                                  color: context.colorScheme.primaryTextColor,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ).animate().fadeIn(),
-                            ),
-                          ),
+                          const UserGreetingsWidget(),
                           const SectionText(title: 'Highlights'),
-                          SizedBox(
-                            width: 386.w,
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  model._highlights.isEmpty
-                                      ? SizedBox(
-                                          height: 230.h,
-                                          child: Card(
-                                            margin:
-                                                const EdgeInsets.only(bottom: 8)
-                                                    .r,
-                                            elevation: 0,
-                                            clipBehavior: Clip.hardEdge,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16).r,
-                                              side: BorderSide(
-                                                color: context.colorScheme
-                                                    .primaryAccentColor,
-                                                width: 1.0,
-                                              ),
-                                            ),
-                                            child: Center(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(
-                                                    Icons.info_rounded,
-                                                    color: context.colorScheme
-                                                        .primaryTextColor,
-                                                  ),
-                                                  10.horizontalSpace,
-                                                  Text("No updates yet",
-                                                      style: fontTheme
-                                                          .body(context)),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      : CarouselSlider.builder(
-                                          itemCount: model.highlights.length,
-                                          itemBuilder:
-                                              (context, index, realIndex) {
-                                            return CarouselUtils.buildImage(
-                                              context,
-                                              model.highlights[index]
-                                                  ['imageUrl'],
-                                              model._activeIndex,
-                                            );
-                                          },
-                                          options: CarouselOptions(
-                                            height: 230.h,
-                                            onPageChanged: (index, reason) =>
-                                                model.updateActiveIndex(index),
-                                            autoPlay: true,
-                                            autoPlayInterval: 4.seconds,
-                                            viewportFraction: 1,
-                                            enableInfiniteScroll: true,
-                                            autoPlayAnimationDuration:
-                                                1.seconds,
-                                            autoPlayCurve: Curves.easeInOut,
-                                            enlargeCenterPage: true,
-                                          ),
-                                        ),
-                                  20.verticalSpace,
-                                  CarouselUtils.buildIndicator(
-                                    context,
-                                    model.activeIndex,
-                                    model.highlights.length,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          const HighlightCarouselWidget(),
                           const SectionText(title: "Quick Links"),
                           SizedBox(
                             width: MediaQuery.of(context).size.width,
@@ -158,27 +67,22 @@ class HomeView extends StatelessWidget {
                               ? SizedBox(
                                   height: 120.h,
                                   child: Card(
-                                      margin:
-                                          const EdgeInsets.only(bottom: 8).r,
+                                      margin: const EdgeInsets.only(bottom: 8).r,
                                       elevation: 0,
                                       clipBehavior: Clip.hardEdge,
                                       shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(16).r,
+                                        borderRadius: BorderRadius.circular(16).r,
                                         side: BorderSide(
-                                          color: context
-                                              .colorScheme.primaryAccentColor,
+                                          color: context.colorScheme.primaryAccentColor,
                                           width: 1.0,
                                         ),
                                       ),
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Icon(
                                             Icons.info_rounded,
-                                            color: context
-                                                .colorScheme.primaryTextColor,
+                                            color: context.colorScheme.primaryTextColor,
                                           ),
                                           10.horizontalSpace,
                                           Text(
@@ -200,7 +104,7 @@ class HomeView extends StatelessWidget {
                                   itemCount: model.collegeUpdates.length,
                                   shrinkWrap: true,
                                   physics: const BouncingScrollPhysics(),
-                                ).animate().fadeIn(),
+                                ).animate(delay: 200.ms).fadeIn(),
                           60.verticalSpace,
                           Text(
                             "Innovate",
@@ -210,8 +114,7 @@ class HomeView extends StatelessWidget {
                             style: fontTheme.display(
                               context,
                               fontWeight: FontWeight.bold,
-                              color: context.colorScheme.secondarySectionColor
-                                  .withOpacity(1),
+                              color: context.colorScheme.secondarySectionColor.withOpacity(1),
                             ),
                           ),
                           Text(
@@ -222,8 +125,7 @@ class HomeView extends StatelessWidget {
                             style: fontTheme.display(
                               context,
                               fontWeight: FontWeight.bold,
-                              color: context.colorScheme.secondarySectionColor
-                                  .withOpacity(1),
+                              color: context.colorScheme.secondarySectionColor.withOpacity(1),
                             ),
                           ),
                           3.verticalSpace,
@@ -231,8 +133,7 @@ class HomeView extends StatelessWidget {
                             'Made with ❤️ by Technical Team',
                             style: fontTheme.caption(
                               context,
-                              color: context.colorScheme.primaryTextColor
-                                  .withOpacity(0.8),
+                              color: context.colorScheme.primaryTextColor.withOpacity(0.8),
                               fontWeight: FontWeight.w500,
                             ),
                           ),
