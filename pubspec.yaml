@@ -81,12 +81,12 @@ flutter:
   fonts:
     - family: Outfit
       fonts:
-        - asset: fonts/Outfit-Regular.ttf
-        - asset: fonts/Outfit-SemiBold.ttf
-        - asset: fonts/Outfit-Bold.ttf
-        - asset: fonts/Outfit-Thin.ttf
-        - asset: fonts/Outfit-Medium.ttf
-        - asset: fonts/Outfit-Light.ttf
-        - asset: fonts/Outfit-ExtraBold.ttf
-        - asset: fonts/Outfit-ExtraLight.ttf
-        - asset: fonts/Outfit-Black.ttf
+        - asset: fonts/Outfit/Outfit-Regular.ttf
+        - asset: fonts/Outfit/Outfit-SemiBold.ttf
+        - asset: fonts/Outfit/Outfit-Bold.ttf
+        - asset: fonts/Outfit/Outfit-Thin.ttf
+        - asset: fonts/Outfit/Outfit-Medium.ttf
+        - asset: fonts/Outfit/Outfit-Light.ttf
+        - asset: fonts/Outfit/Outfit-ExtraBold.ttf
+        - asset: fonts/Outfit/Outfit-ExtraLight.ttf
+        - asset: fonts/Outfit/Outfit-Black.ttf
