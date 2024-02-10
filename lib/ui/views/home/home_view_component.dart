@@ -2,7 +2,8 @@ part of 'home_view.dart';
 
 final AnalyticsService _analyticsService = locator<AnalyticsService>();
 
-Widget quickLinksList(BuildContext context, List model, [double? borderRadius]) {
+Widget quickLinksList(BuildContext context, List model,
+    [double? borderRadius]) {
   return SizedBox(
     height: 110.h,
     width: 386.w,
@@ -54,7 +55,8 @@ Widget quickLinksList(BuildContext context, List model, [double? borderRadius]) 
   );
 }
 
-Future showCelebrationModal(context, CelebrationData data, Function toggleCelebrationShown) async {
+Future showCelebrationModal(
+    context, CelebrationData data, Function toggleCelebrationShown) async {
   FontThemeClass fontThemeClass = FontThemeClass();
   await showDialog(
     barrierDismissible: false,
@@ -79,14 +81,10 @@ Future showCelebrationModal(context, CelebrationData data, Function toggleCelebr
                             image: DecorationImage(
                               image: Image.network(
                                 data.image,
-                                loadingBuilder: (context, child, loadingProgress) {
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
                                   if (loadingProgress == null) return child;
-                                  return Center(
-                                    child: CircularProgressIndicator(
-                                      color: context.colorScheme.primaryAccentColor,
-                                      value: loadingProgress.expectedTotalBytes != null ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes! : null,
-                                    ),
-                                  );
+                                  return const CircularLoadingIndicator();
                                 },
                               ).image,
                               fit: BoxFit.cover,
@@ -131,7 +129,9 @@ Future showCelebrationModal(context, CelebrationData data, Function toggleCelebr
                         ),
                         10.verticalSpace,
                         Text(
-                          data.description.length < 500 ? data.description : "${data.description.substring(0, 500)}...",
+                          data.description.length < 500
+                              ? data.description
+                              : "${data.description.substring(0, 500)}...",
                           textAlign: TextAlign.justify,
                           style: fontThemeClass.caption(
                             context,
@@ -141,7 +141,9 @@ Future showCelebrationModal(context, CelebrationData data, Function toggleCelebr
                         14.verticalSpace,
                         GestureDetector(
                           onTap: () {
-                            _analyticsService.logEvent(eventName: "Celebration_PopUp", value: "Closed Celebration Modal");
+                            _analyticsService.logEvent(
+                                eventName: "Celebration_PopUp",
+                                value: "Closed Celebration Modal");
                             toggleCelebrationShown();
                             Navigator.pop(context);
                           },
@@ -179,7 +181,12 @@ Future showCelebrationModal(context, CelebrationData data, Function toggleCelebr
   );
 }
 
-Future showWelcomPopUp(context, {required Function toggleisNewUser, required String username, required bool isCelebrationShown, required List<CelebrationData> celebrationData, required Function toggleCelebrationShown}) async {
+Future showWelcomPopUp(context,
+    {required Function toggleisNewUser,
+    required String username,
+    required bool isCelebrationShown,
+    required List<CelebrationData> celebrationData,
+    required Function toggleCelebrationShown}) async {
   FontThemeClass fontThemeClass = FontThemeClass();
   await showAdaptiveDialog(
     barrierDismissible: false,
@@ -402,7 +409,9 @@ class ShowAppExitPopUp {
                       ),
                     ),
                   ),
-                ].animate(delay: 300.ms, interval: 200.ms).fadeIn(curve: Curves.easeInCubic),
+                ]
+                    .animate(delay: 300.ms, interval: 200.ms)
+                    .fadeIn(curve: Curves.easeInCubic),
               ),
             ],
           ),
@@ -470,7 +479,8 @@ class HighlightCarouselWidget extends ViewModelWidget<HomeViewModel> {
                     },
                     options: CarouselOptions(
                       height: 230.h,
-                      onPageChanged: (index, reason) => viewModel.updateActiveIndex(index),
+                      onPageChanged: (index, reason) =>
+                          viewModel.updateActiveIndex(index),
                       autoPlay: true,
                       autoPlayInterval: 4.seconds,
                       viewportFraction: 1,

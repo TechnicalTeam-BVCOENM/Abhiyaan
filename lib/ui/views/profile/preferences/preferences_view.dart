@@ -55,9 +55,8 @@ class PreferencesView extends StatelessWidget {
                         height: 100.r,
                         fit: BoxFit.cover,
                         imageUrl: AssetUrls.dummyImageUrl,
-                        placeholder: (context, url) => const Center(
-                          child: CircularLoadingIndicator(),
-                        ),
+                        placeholder: (context, url) =>
+                            const CircularLoadingIndicator(),
                         errorWidget: (context, url, error) {
                           return const Icon(Icons.error);
                         },

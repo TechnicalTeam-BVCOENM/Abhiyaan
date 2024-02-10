@@ -30,16 +30,6 @@ class CommunityView extends StatelessWidget {
         final analyticsService = locator<AnalyticsService>();
         FontThemeClass fontThemeClass = FontThemeClass();
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: context.colorScheme.scaffoldBackgroundColor,
-            surfaceTintColor: context.colorScheme.scaffoldBackgroundColor,
-            elevation: 0,
-            title: Text(
-              "Community",
-              style: fontThemeClass.title(context),
-            ),
-            centerTitle: true,
-          ),
           backgroundColor: context.colorScheme.scaffoldBackgroundColor,
           body: model.isBusy
               ? const CircularLoadingIndicator()
@@ -60,6 +50,13 @@ class CommunityView extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          18.verticalSpace,
+                          Center(
+                            child: Text(
+                              "Community",
+                              style: fontThemeClass.title(context),
+                            ),
+                          ),
                           const SectionText(title: "Blogs"),
                           // Add Blogs here
                           SizedBox(

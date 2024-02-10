@@ -29,7 +29,7 @@ class CachedNetworkImageWidget extends StatelessWidget {
       progressIndicatorBuilder: (context, url, downloadProgress) {
         return const Padding(
           padding: EdgeInsets.all(8.0),
-          child: Center(child: CircularLoadingIndicator()),
+          child: CircularLoadingIndicator(),
         );
       },
       errorWidget: (context, url, error) => const Icon(Icons.error),

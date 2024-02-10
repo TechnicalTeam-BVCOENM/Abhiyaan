@@ -17,8 +17,9 @@ class DettailedBlogPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<DettailedBlogPageModel>.reactive(
       viewModelBuilder: () => DettailedBlogPageModel(),
-      disposeViewModel: false,
+      disposeViewModel: true,
       onViewModelReady: (viewModels) => viewModels.init(blogData),
+      onDispose: (model) => model.disposeModel(),
       builder: (context, model, child) {
         FontThemeClass fontThemeClass = FontThemeClass();
         final CommunityViewModel communityViewModel = CommunityViewModel();
@@ -29,8 +30,6 @@ class DettailedBlogPage extends StatelessWidget {
                     .read("isLiked_${blogData.documentId}") ??
                 false;
             final int streamLikes = snapshot.data ?? 0;
-            SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-                overlays: []);
             return Scaffold(
               floatingActionButton: Row(
                 mainAxisAlignment: MainAxisAlignment.end,

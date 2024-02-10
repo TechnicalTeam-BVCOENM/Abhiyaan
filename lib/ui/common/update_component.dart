@@ -17,7 +17,7 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16).r,
           side: BorderSide(
-            color: context.colorScheme.secondarySectionColor,
+            color: context.colorScheme.secondaryPurpleColor,
             width: 1.w,
           ),
         ),

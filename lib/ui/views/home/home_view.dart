@@ -67,30 +67,34 @@ class HomeView extends StatelessWidget {
                               ? SizedBox(
                                   height: 120.h,
                                   child: Card(
-                                      margin: const EdgeInsets.only(bottom: 8).r,
-                                      elevation: 0,
-                                      clipBehavior: Clip.hardEdge,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(16).r,
-                                        side: BorderSide(
-                                          color: context.colorScheme.primaryAccentColor,
-                                          width: 1.0,
-                                        ),
+                                    margin: const EdgeInsets.only(bottom: 8).r,
+                                    elevation: 0,
+                                    clipBehavior: Clip.hardEdge,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16).r,
+                                      side: BorderSide(
+                                        color: context
+                                            .colorScheme.primaryAccentColor,
+                                        width: 1.0,
                                       ),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Icon(
-                                            Icons.info_rounded,
-                                            color: context.colorScheme.primaryTextColor,
-                                          ),
-                                          10.horizontalSpace,
-                                          Text(
-                                            "No updates yet, Stay Tuned",
-                                            style: fontTheme.body(context),
-                                          ),
-                                        ],
-                                      )).animate().fadeIn(),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.info_rounded,
+                                          color: context
+                                              .colorScheme.primaryTextColor,
+                                        ),
+                                        10.horizontalSpace,
+                                        Text(
+                                          "No updates yet, Stay Tuned",
+                                          style: fontTheme.body(context),
+                                        ),
+                                      ],
+                                    ),
+                                  ).animate().fadeIn(),
                                 )
                               : ListView.builder(
                                   itemBuilder: (context, index) {
@@ -114,7 +118,8 @@ class HomeView extends StatelessWidget {
                             style: fontTheme.display(
                               context,
                               fontWeight: FontWeight.bold,
-                              color: context.colorScheme.secondarySectionColor.withOpacity(1),
+                              color: context.colorScheme.secondarySectionColor
+                                  .withOpacity(1),
                             ),
                           ),
                           Text(
@@ -125,7 +130,8 @@ class HomeView extends StatelessWidget {
                             style: fontTheme.display(
                               context,
                               fontWeight: FontWeight.bold,
-                              color: context.colorScheme.secondarySectionColor.withOpacity(1),
+                              color: context.colorScheme.secondarySectionColor
+                                  .withOpacity(1),
                             ),
                           ),
                           3.verticalSpace,
@@ -133,7 +139,8 @@ class HomeView extends StatelessWidget {
                             'Made with ❤️ by Technical Team',
                             style: fontTheme.caption(
                               context,
-                              color: context.colorScheme.primaryTextColor.withOpacity(0.8),
+                              color: context.colorScheme.primaryTextColor
+                                  .withOpacity(0.8),
                               fontWeight: FontWeight.w500,
                             ),
                           ),

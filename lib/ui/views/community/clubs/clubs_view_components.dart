@@ -59,9 +59,8 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
                   width: 395.w,
                   fit: BoxFit.fill,
                   imageUrl: clubImage,
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator.adaptive(),
-                  ),
+                  placeholder: (context, url) =>
+                      const CircularLoadingIndicator(),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
@@ -91,7 +90,9 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
               },
               child: Text(
                 "Let's Explore the $clubShortHand",
-                style: fontTheme.body(context, fontWeight: FontWeight.w500, color: context.colorScheme.secondarySectionColor),
+                style: fontTheme.body(context,
+                    fontWeight: FontWeight.w500,
+                    color: context.colorScheme.secondarySectionColor),
               ),
             ),
           ),
@@ -182,9 +183,7 @@ class MemberCard extends StatelessWidget {
                   fit: BoxFit.cover,
                   imageUrl: clubMembers[index].memberImage,
                   placeholder: (context, url) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return const CircularLoadingIndicator();
                   },
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
@@ -249,7 +248,8 @@ class FestCard extends StatelessWidget {
               );
       },
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12).r),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12).r),
         clipBehavior: Clip.hardEdge,
         color: context.colorScheme.primaryCardColor,
         elevation: 4.0,
@@ -264,7 +264,7 @@ class FestCard extends StatelessWidget {
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
                 imageUrl: clubFest[index].festImage,
-                placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
+                placeholder: (context, url) => const CircularLoadingIndicator(),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
@@ -284,7 +284,8 @@ class FestCard extends StatelessWidget {
                         clubFest[index].festName,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
-                        style: fontTheme.body(context, fontWeight: FontWeight.w500),
+                        style: fontTheme.body(context,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
                   ),
