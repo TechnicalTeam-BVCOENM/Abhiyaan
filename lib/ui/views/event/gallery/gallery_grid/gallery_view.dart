@@ -14,6 +14,7 @@ class GalleryView extends StatelessWidget {
       viewModelBuilder: () => GalleryViewModel(),
       builder: (context, model, child) {
         return Scaffold(
+          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
           body: RefreshIndicator(
               onRefresh: () async {
                 model.fetchImages(images);

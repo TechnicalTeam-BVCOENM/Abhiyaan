@@ -501,7 +501,8 @@ class GalleryYearWiseView extends StatelessWidget {
           return GestureDetector(
               onTap: () {
                 NavigationService().navigateTo(Routes.galleryTabView,
-                    arguments: GalleryTabViewArguments(gallery: gallery[index]));
+                    arguments:
+                        GalleryTabViewArguments(gallery: gallery[index]));
               },
               child: GalleryYearWiseCards(
                 gallery: gallery,
@@ -556,7 +557,8 @@ class GalleryYearWiseCards extends StatelessWidget {
                           Text(gallery[index].themeName,
                               style: FontThemeClass().small(context,
                                   fontWeight: FontWeight.w500,
-                                  color: context.colorScheme.primaryDarkGrey)),
+                                  color:
+                                      context.colorScheme.secondaryTextColor)),
                         ],
                       ),
                       const Spacer(),
