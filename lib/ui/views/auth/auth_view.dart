@@ -1,5 +1,4 @@
 import 'package:abhiyaan/file_exporter.dart';
-import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 part 'auth_view_model.dart';
@@ -26,7 +25,8 @@ class AuthView extends StatelessWidget {
                   height: 500.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30).r,
-                    color: context.colorScheme.primaryCardColor,
+                    color:
+                        context.colorScheme.primaryAccentColor.withOpacity(0.3),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

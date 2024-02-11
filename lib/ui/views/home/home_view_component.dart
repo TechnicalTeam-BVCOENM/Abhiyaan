@@ -28,12 +28,14 @@ Widget quickLinksList(BuildContext context, List model,
                   width: 80.w,
                   decoration: BoxDecoration(
                     color: context.colorScheme.primaryCardColor,
-                    borderRadius: BorderRadius.circular(borderRadius ?? 18).r,
+                    borderRadius: BorderRadius.circular(borderRadius ?? 100).r,
                   ),
-                  child: Image.asset(
-                    model[idx].imageUrl,
-                    width: 40.w,
-                    height: 40.h,
+                  child: Center(
+                    child: Image.asset(
+                      model[idx].imageUrl,
+                      width: 80.w,
+                      height: 80.h,
+                    ),
                   ),
                 ),
               ),
