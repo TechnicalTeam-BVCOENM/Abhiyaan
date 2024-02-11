@@ -8,7 +8,9 @@ class EventViewModel extends BaseViewModel {
   List<SponsorsModel> _sponsors = [];
   List<SponsorsModel> get sponsors => _sponsors;
   List<EventModel> _events = [];
+  List<GalleryModel> _gallery = [];
   List<EventModel> get events => _events;
+  List<GalleryModel> get gallery => _gallery;
   final List<EventModel> _todayEvent = [];
   List<EventModel>? get todayEvent => _todayEvent;
   late final List<EventModel> _upcomingEvents = [];
@@ -64,7 +66,8 @@ class EventViewModel extends BaseViewModel {
     try {
       _events = await runBusyFuture(_firestoreService.getAllEvents());
       print("gallery images loading");
-      await _firestoreService.getGalleryImages();
+      _gallery = await _firestoreService.getGalleryImages();
+      _gallery.sort((a, b) => b.year.compareTo(a.year));
       print(" loading complete");
 
       getRemainingEvents();

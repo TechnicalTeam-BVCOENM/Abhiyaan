@@ -33,12 +33,7 @@ class ProfileView extends StatelessWidget {
                         // model.localStorageService.read('userProfile') == "Explorer" || model.localStorageService.read('userProfile') == "Faculty"
                         //     ? const SizedBox()
                         //     : const Cerificatation(),
-                        model.localStorageService.read('userProfile') ==
-                                    "Explorer" ||
-                                model.localStorageService.read('userProfile') ==
-                                    "Faculty"
-                            ? 0.verticalSpace
-                            : 16.verticalSpace,
+                        16.verticalSpace,
                         const HelpSupportTile(),
                         16.verticalSpace,
                         const PrivacyPolicyTile(),
