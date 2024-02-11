@@ -123,12 +123,12 @@ class HomeViewModel extends BaseViewModel {
       url: 'https://www.bvcoenm.edu.in/',
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/abhiyaan_logo.png",
+      imageUrl: "assets/images/home/abhiyaan.png",
       title: "Abhiyaan",
       url: 'https://abhiyaan.tech/',
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/home/Rectangle_89.png",
+      imageUrl: "assets/images/home/sigma.png",
       title: "Sigma",
       view: const SocietiesView(),
     ),

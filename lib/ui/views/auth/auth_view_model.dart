@@ -3,7 +3,6 @@ part of 'auth_view.dart';
 class AuthViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final AnalyticsService _analyticsService = locator<AnalyticsService>();
-  final _storageService = locator<LocalStorageService>();
 
   final log = getLogger('auth_view');
 
@@ -11,9 +10,6 @@ class AuthViewModel extends BaseViewModel {
 
   void init() async {
     await _analyticsService.logScreen(screenName: "Auth Screen");
-    final bool value =
-        await runBusyFuture(FirestoreService().showRegistration());
-    await _storageService.write("showRegister", value);
   }
 
   void toSignInPage(BuildContext context) {

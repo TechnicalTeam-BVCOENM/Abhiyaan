@@ -118,7 +118,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
               children: [
                 Text(
                   eventData.title.length > 20
-                      ? eventData.title.substring(0, 20) + "..."
+                      ? "${eventData.title.substring(0, 20)}..."
                       : eventData.title,
                   style: fontTheme.title(context, fontWeight: FontWeight.w700),
                 ),
