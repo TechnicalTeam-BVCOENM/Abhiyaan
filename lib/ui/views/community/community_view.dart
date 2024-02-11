@@ -120,24 +120,31 @@ class CommunityView extends StatelessWidget {
                                       curve: Curves.easeInOutCubic,
                                       duration: 600.ms,
                                     ),
-                            SizedBox(
-                              height: 120.h,
-                              width: double.infinity,
-                              child: CarouselSlider.builder(
-                                itemCount: model.departmentClubsData.length,
-                                options: model.clubsCarosoulOptions,
-                                itemBuilder: (context, index, realIndex) {
-                                  return Padding(
-                                    padding: index == 0
-                                        ? const EdgeInsets.only(right: 0).r
-                                        : const EdgeInsets.only(left: 8.0).r,
-                                    child: DepartmentClubs(
-                                        data: model.departmentClubsData[index]),
-                                  );
-                                },
-                              ),
-                            ).animate(delay: 200.ms).fadeIn(
-                                curve: Curves.easeInOutCubic, duration: 600.ms),
+                            model.departmentClubsData.isEmpty
+                                ? Container()
+                                : SizedBox(
+                                    height: 120.h,
+                                    width: double.infinity,
+                                    child: CarouselSlider.builder(
+                                      itemCount:
+                                          model.departmentClubsData.length,
+                                      options: model.clubsCarosoulOptions,
+                                      itemBuilder: (context, index, realIndex) {
+                                        return Padding(
+                                          padding: index == 0
+                                              ? const EdgeInsets.only(right: 0)
+                                                  .r
+                                              : const EdgeInsets.only(left: 8.0)
+                                                  .r,
+                                          child: DepartmentClubs(
+                                              data: model
+                                                  .departmentClubsData[index]),
+                                        );
+                                      },
+                                    ),
+                                  ).animate(delay: 200.ms).fadeIn(
+                                    curve: Curves.easeInOutCubic,
+                                    duration: 600.ms),
                             const SectionText(title: "Quote of the day"),
                             QuoteCard(
                               quote: model.affirmation,

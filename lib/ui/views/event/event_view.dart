@@ -153,48 +153,9 @@ class EventView extends StatelessWidget {
                                 children: [
                                   SectionText(
                                       title:
-                                          "Upcoming Events · ${model.upcomingEvents.length}"),
-                                  model.upcomingEvents.length == 1
-                                      ? SizedBox(
-                                          height: 210.h,
-                                          child: Card(
-                                            clipBehavior: Clip.hardEdge,
-                                            shadowColor: context
-                                                .colorScheme.primaryCardColor
-                                                .withOpacity(0.8),
-                                            elevation: 2,
-                                            shape: ShapeBorder.lerp(
-                                              RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(18).r,
-                                              ),
-                                              RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(18).r,
-                                              ),
-                                              1,
-                                            ),
-                                            child: Stack(
-                                              children: [
-                                                EventCardUpcoming(
-                                                  model:
-                                                      model.upcomingEvents[0],
-                                                ),
-                                                EventDateContainer(
-                                                  top: 2.h,
-                                                  right: 2.w,
-                                                  height: 65.r,
-                                                  width: 60.r,
-                                                  timeFontSize: 30.sp,
-                                                  textFontSize: 20.sp,
-                                                  event:
-                                                      model.upcomingEvents[0],
-                                                  isUpcomming: true,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ).animate(delay: 300.ms).fadeIn()
+                                          "Upcoming Events | ${model.upcomingEvents.length}"),
+                                  model.upcomingEvents.isEmpty
+                                      ? Container()
                                       : CarouselSlider.builder(
                                           itemCount:
                                               model.upcomingEvents.length,

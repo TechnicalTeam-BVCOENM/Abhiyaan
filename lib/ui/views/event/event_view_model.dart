@@ -65,17 +65,15 @@ class EventViewModel extends BaseViewModel {
   Future<void> loadData() async {
     try {
       _events = await runBusyFuture(_firestoreService.getAllEvents());
-      print("gallery images loading");
+
       _gallery = await _firestoreService.getGalleryImages();
       _gallery.sort((a, b) => b.year.compareTo(a.year));
-      print(" loading complete");
 
       getRemainingEvents();
       notifyListeners();
       getTodaysEvent();
       _sponsors = await _firestoreService.getAllSponsors();
       notifyListeners();
-      getRemainingEvents();
       getTodaysEvent();
       notifyListeners();
     } catch (e) {
@@ -125,10 +123,12 @@ class EventViewModel extends BaseViewModel {
       int month = event.startDate.toDate().month;
       int year = event.startDate.toDate().year;
       int day = event.startDate.toDate().day;
+
       if (year > now.year ||
           (year == now.year &&
               (month > now.month || (month == now.month && day > now.day)))) {
         upcomingEvents.add(event);
+
         notifyListeners();
       }
     }

@@ -30,6 +30,14 @@
 		<string>Main</string>
 		<key>NSLocalNotificationUsageDescription</key>
         <string>Allow notifications to receive important updates</string>
+		<key>NSCalendarsUsageDescription</key>
+        <string>Add Events to your Calender</string>
+		<key>CFBundleLocalizations</key>
+	     <array>
+		     <string>en</string>
+		     <string>es</string>
+		     <string>ja</string>
+	     </array>
 		<key>LSApplicationQueriesSchemes</key>
 		<array>
 			<string>sms</string>

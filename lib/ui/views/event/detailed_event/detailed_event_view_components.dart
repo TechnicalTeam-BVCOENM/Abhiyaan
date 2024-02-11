@@ -97,22 +97,10 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
 }
 
 class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
-  final String eventName;
-  final DateTime eventStartDate;
-  final DateTime eventEndDate;
-  final String eventInfo;
-  final String eventContactName;
-  final String eventContactEmail;
-  final int eventContactNumber;
+  final EventModel eventData;
   const DetailedEventData({
     super.key,
-    required this.eventName,
-    required this.eventStartDate,
-    required this.eventInfo,
-    required this.eventEndDate,
-    required this.eventContactName,
-    required this.eventContactEmail,
-    required this.eventContactNumber,
+    required this.eventData,
   });
 
   @override
@@ -126,9 +114,15 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             10.verticalSpace,
-            Text(
-              eventName,
-              style: fontTheme.title(context, fontWeight: FontWeight.w700),
+            Row(
+              children: [
+                Text(
+                  eventData.title.length > 20
+                      ? eventData.title.substring(0, 20) + "..."
+                      : eventData.title,
+                  style: fontTheme.title(context, fontWeight: FontWeight.w700),
+                ),
+              ],
             ),
             10.verticalSpace,
             Row(
@@ -145,7 +139,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                   ),
                 ),
                 Text(
-                  "${eventStartDate.day}-${eventEndDate.day} ${DateFormat('MMMM yyyy').format(eventEndDate)}",
+                  "${eventData.startDate.toDate().day}-${eventData.endDate.toDate().day} ${DateFormat('MMMM yyyy').format(eventData.startDate.toDate())}",
                   style: fontTheme.caption(
                     context,
                     color: context.colorScheme.primaryTextColor,
@@ -169,7 +163,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                   ),
                 ),
                 Text(
-                  "${eventStartDate.hour}:${eventStartDate.minute} AM",
+                  "${eventData.startDate.toDate().hour}:${eventData.startDate.toDate().minute} AM",
                   style: fontTheme.caption(
                     context,
                     color: context.colorScheme.primaryTextColor,
@@ -188,11 +182,37 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
             ),
             8.verticalSpace,
             Text(
-              eventInfo,
+              eventData.about,
               textAlign: TextAlign.justify,
               style: fontTheme.caption(
                 context,
                 color: context.colorScheme.primaryTextColor.withOpacity(0.8),
+              ),
+            ),
+            12.verticalSpace,
+            GestureDetector(
+              onTap: () {
+                viewModel.addEventToCalender(eventData);
+              },
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                      context.colorScheme.primaryAccentColor.withOpacity(0.7),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10).r,
+                  ),
+                ),
+                onPressed: () {
+                  viewModel.addEventToCalender(eventData);
+                },
+                child: Text(
+                  "Add to Calender",
+                  style: fontTheme.body(
+                    context,
+                    color: context.colorScheme.primaryCardColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ),
             20.verticalSpace,
@@ -244,7 +264,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
               style: fontTheme.paragraph(context, fontWeight: FontWeight.w700),
             ),
             20.verticalSpace,
-            eventContactName.isNotEmpty
+            eventData.cName.isNotEmpty
                 ? Row(
                     children: [
                       Container(
@@ -259,14 +279,14 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                         ),
                       ),
                       Text(
-                        eventContactName,
+                        eventData.cName,
                         style: fontTheme.caption(context),
                       ),
                     ],
                   )
                 : const SizedBox(),
             8.verticalSpace,
-            eventContactEmail.isNotEmpty
+            eventData.cEmail.isNotEmpty
                 ? Row(
                     children: [
                       Container(
@@ -280,7 +300,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                           color: context.colorScheme.primaryAccentColor,
                         ),
                       ),
-                      Text(eventContactEmail,
+                      Text(eventData.cEmail,
                           style: fontTheme.caption(
                             context,
                           )),
@@ -288,7 +308,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                   )
                 : const SizedBox(),
             8.verticalSpace,
-            eventContactNumber.toString().isNotEmpty
+            eventData.cPhone.toString().isNotEmpty
                 ? Row(
                     children: [
                       Container(
@@ -307,7 +327,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                         ),
                       ),
                       Text(
-                        eventContactNumber.toString(),
+                        eventData.cPhone.toString(),
                         style: fontTheme.caption(context),
                       ),
                     ],

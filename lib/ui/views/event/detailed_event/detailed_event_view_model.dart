@@ -22,6 +22,25 @@ class DetailedEventViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  void addEventToCalender(EventModel data) {
+    _analyticsService.logEvent(
+        eventName: "Adding_Event_To_Calender",
+        value:
+            "${data.title} Event Add to Calender button clicked : ${data.docID}");
+
+    final Event event = Event(
+      title: data.title,
+      description: data.about,
+      location: data.location,
+      startDate: data.startDate.toDate(),
+      endDate: data.endDate.toDate(),
+    );
+
+    Add2Calendar.addEvent2Cal(
+      event,
+    );
+  }
+
   void updateActiveIndex(int newIndex) {
     try {
       activeIndex = newIndex;
