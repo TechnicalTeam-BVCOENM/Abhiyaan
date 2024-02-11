@@ -25,8 +25,9 @@ class ProfileViewModel extends BaseViewModel {
     _navigationService.navigateToPreferencesView();
   }
 
-  void init() {
+  Future init() async {
     _analyticsService.logScreen(screenName: 'Profile Screen Opened');
+    await runBusyFuture(Future.delayed(const Duration(milliseconds: 500)));
   }
 
   List<String> userStorageTag = [

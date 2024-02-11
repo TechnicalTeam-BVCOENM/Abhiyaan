@@ -4,6 +4,7 @@ import 'package:abhiyaan/ui/common/cached_network_image.dart';
 import 'package:abhiyaan/ui/common/carousel_utils.dart';
 import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:abhiyaan/ui/views/event/event_view.dart';
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:intl/intl.dart';
@@ -86,13 +87,7 @@ class DetailedEventView extends StatelessWidget {
                 eventName: eventData.title,
               ),
               DetailedEventData(
-                eventName: eventData.title,
-                eventInfo: eventData.about,
-                eventStartDate: eventData.startDate.toDate(),
-                eventEndDate: eventData.endDate.toDate(),
-                eventContactName: eventData.cName,
-                eventContactEmail: eventData.cEmail,
-                eventContactNumber: eventData.cPhone,
+                eventData: eventData,
               ),
             ],
           ),

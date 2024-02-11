@@ -46,18 +46,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeService = locator<ThemeService>();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-    // TODO: Change the status bar color
+    SystemChrome.setPreferredOrientations(
+      [
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ],
+    );
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: context.colorScheme.scaffoldBackgroundColor,
+        statusBarColor: themeService.brightness == Brightness.light
+            ? context.colorScheme.scaffoldBackgroundColor
+            : Colors.transparent,
         statusBarIconBrightness: themeService.brightness == Brightness.light
-            ? Brightness.dark
-            : Brightness.light,
-        statusBarBrightness: themeService.brightness == Brightness.light
             ? Brightness.dark
             : Brightness.light,
       ),

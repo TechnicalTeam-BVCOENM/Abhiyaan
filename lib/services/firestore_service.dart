@@ -323,7 +323,6 @@ class FirestoreService {
         // Access the data of each document using doc.data()
         final data =
             doc.data() as Map<String, dynamic>; // Cast to Map<String, dynamic>
-        print(data);
         // Add null check before accessing properties of data
         galleryList.add(
           GalleryModel(
@@ -338,12 +337,12 @@ class FirestoreService {
       }
 
       // Return the list of GalleryModel objects
-      print(galleryList);
+
       return galleryList;
     } catch (e) {
       log.e("Error in getting events : ${e.toString()}");
       // Handle error by throwing the exception
-      throw e;
+      rethrow;
     }
   }
 }

@@ -350,52 +350,52 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
     }
     EventDetails eventDetails = EventDetails();
     return Positioned(
-      child: Container(
-        color: context.colorScheme.primaryCardColor,
-        height: 220.h,
-        width: 232.w,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Hero(
-              tag: "eventImage+${model.imageUrl}-${model.title}",
-              child: CachedNetworkImageWidget(
-                imageUrl: model.imageUrl,
-                height: 135.h,
-                maxHeightDiskCache: MediaQuery.of(context).size.width * 0.65,
-                width: ResponsiveUtils.screenWidth(context),
-                fit: BoxFit.cover,
-              ),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 12, right: 16).r,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      eventDetails._eventName(
-                        context,
-                        model.title,
-                      ),
-                      2.verticalSpace,
-                      eventDetails.eventTime(
-                        context,
-                        "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}",
-                      ),
-                    ],
-                  ),
+      child: GestureDetector(
+        onTap: () {
+          viewModel._navigationService.navigateToDetailedEventView(
+            eventData: model,
+          );
+        },
+        child: Container(
+          color: context.colorScheme.primaryCardColor,
+          height: 220.h,
+          width: 232.w,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Hero(
+                tag: "eventImage+${model.imageUrl}-${model.title}",
+                child: CachedNetworkImageWidget(
+                  imageUrl: model.imageUrl,
+                  height: 135.h,
+                  maxHeightDiskCache: MediaQuery.of(context).size.width * 0.65,
+                  width: ResponsiveUtils.screenWidth(context),
+                  fit: BoxFit.cover,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 10).r,
-                  child: GestureDetector(
-                    onTap: () {
-                      viewModel._navigationService.navigateToDetailedEventView(
-                        eventData: model,
-                      );
-                    },
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 12, right: 16).r,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        eventDetails._eventName(
+                          context,
+                          model.title,
+                        ),
+                        2.verticalSpace,
+                        eventDetails.eventTime(
+                          context,
+                          "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}",
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10).r,
                     child: Container(
                       height: 30.h,
                       width: 62.w,
@@ -422,12 +422,12 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
                         ),
                       ),
                     ),
-                  ),
-                )
-              ],
-            ),
-            2.verticalSpace
-          ],
+                  )
+                ],
+              ),
+              2.verticalSpace
+            ],
+          ),
         ),
       ),
     );

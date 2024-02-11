@@ -41,7 +41,7 @@ class GalleryView extends StatelessWidget {
                         )),
                   ),
                 ).animate().fade(
-                      duration: Duration(milliseconds: 1500),
+                      duration: const Duration(milliseconds: 1500),
                     ),
               )),
         );

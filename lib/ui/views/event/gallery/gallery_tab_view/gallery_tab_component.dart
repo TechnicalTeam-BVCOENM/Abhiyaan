@@ -69,12 +69,17 @@ class TabViewCard extends StatelessWidget {
   final String imageUrl;
   final String name;
   final List<dynamic> imageList;
-  const TabViewCard({super.key, required this.imageUrl, required this.name, required this.imageList});
+  const TabViewCard(
+      {super.key,
+      required this.imageUrl,
+      required this.name,
+      required this.imageList});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => NavigationService().navigateToGalleryView(images: imageList, title: name),
+      onTap: () => NavigationService()
+          .navigateToGalleryView(images: imageList, title: name),
       child: Center(
         child: SizedBox(
           width: 190,
