@@ -13,6 +13,7 @@ import 'package:abhiyaan/ui/common/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter/cupertino.dart';
 
 part "community_view_components.dart";
 part "community_view_model.dart";
@@ -35,132 +36,137 @@ class CommunityView extends StatelessWidget {
               ? const CircularLoadingIndicator()
               : SafeArea(
                   minimum: const EdgeInsets.symmetric(horizontal: 18).r,
-                  child: RefreshIndicator(
-                    strokeWidth: 3.0,
-                    onRefresh: () async {
-                      analyticsService.logEvent(
-                        eventName: "Qoute_Refreshed",
-                        value: "Refresh Qoute drag down",
-                      );
-                      await Future.delayed(const Duration(seconds: 1));
-                      await model.fetchAffirmation();
-                    },
-                    child: SingleChildScrollView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          18.verticalSpace,
-                          Center(
-                            child: Text(
-                              "Community",
-                              style: fontThemeClass.title(context),
-                            ),
-                          ),
-                          const SectionText(title: "Blogs"),
-                          // Add Blogs here
-                          SizedBox(
-                            height: 270.h,
-                            width: double.infinity,
-                            child: CarouselSlider(
-                                options: CarouselOptions(
-                                  onPageChanged: (index, reason) {
-                                    model.updateBlogIndex(index);
-                                  },
-                                  height: 270.h,
-                                  viewportFraction: 1,
-                                  autoPlay: true,
-                                  initialPage: 0,
-                                  autoPlayAnimationDuration: 900.milliseconds,
-                                  autoPlayCurve: Curves.easeInOutCubic,
-                                  autoPlayInterval: 4.seconds,
-                                  pauseAutoPlayOnTouch: true,
-                                  scrollPhysics: const BouncingScrollPhysics(),
-                                ),
-                                items: model.blogsData
-                                    .map(
-                                      (data) => GestureDetector(
-                                        onTap: () {
-                                          model.navigateToDetailedBlogPage(
-                                              data, context);
-                                        },
-                                        child: CommunityBlogs(blogsData: data),
-                                      ),
-                                    )
-                                    .toList()),
-                          ),
-                          12.verticalSpace,
-                          Center(
-                            child: AnimatedSmoothIndicator(
-                              activeIndex: model.currentBlogIndex,
-                              count: model.blogsData.length,
-                              effect: JumpingDotEffect(
-                                dotHeight: 8,
-                                dotWidth: 8,
-                                dotColor:
-                                    context.colorScheme.secondarySectionColor,
-                                activeDotColor:
-                                    context.colorScheme.primaryAccentColor,
-                                spacing: 4,
-                              ),
-                            ),
-                          ),
-                          model.departmentClubsData.isEmpty
-                              ? Container()
-                              : const SectionText(title: "Departmental Clubs")
-                                  .animate(
-                                    delay: 250.ms,
-                                  )
-                                  .fadeIn(
-                                    curve: Curves.easeInOutCubic,
-                                    duration: 600.ms,
-                                  ),
-                          SizedBox(
-                            height: 120.h,
-                            width: double.infinity,
-                            child: CarouselSlider.builder(
-                              itemCount: model.departmentClubsData.length,
-                              options: model.clubsCarosoulOptions,
-                              itemBuilder: (context, index, realIndex) {
-                                return Padding(
-                                  padding: index == 0
-                                      ? const EdgeInsets.only(right: 0).r
-                                      : const EdgeInsets.only(left: 8.0).r,
-                                  child: DepartmentClubs(
-                                      data: model.departmentClubsData[index]),
-                                );
-                              },
-                            ),
-                          ).animate(delay: 200.ms).fadeIn(
-                              curve: Curves.easeInOutCubic, duration: 600.ms),
-                          const SectionText(title: "Quote of the day"),
-                          QuoteCard(
-                            quote: model.affirmation,
-                            autherName: model.authorName,
-                          )
-                              .animate(
-                                delay: 200.ms,
-                              )
-                              .fadeIn(
-                                curve: Curves.easeInOutCubic,
-                                duration: 600.ms,
-                              ),
-                          Container(
-                            padding: const EdgeInsets.all(10),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Scroll Down To Refresh",
-                              style: FontThemeClass().caption(
-                                context,
-                                color:
-                                    context.colorScheme.secondarySectionColor,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ].animate(delay: 100.ms, interval: 80.ms).fadeIn(),
+                  child: CustomScrollView(
+                    physics: const BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics()),
+                    slivers: <Widget>[
+                      CupertinoSliverRefreshControl(
+                        onRefresh: () async {
+                          analyticsService.logEvent(
+                            eventName: "Quote_Refreshed",
+                            value: "Refresh Quote drag down",
+                          );
+                          await Future.delayed(const Duration(seconds: 1));
+                          await model.fetchAffirmation();
+                        },
                       ),
-                    ),
+                      SliverList(
+                        delegate: SliverChildListDelegate(
+                          [
+                            18.verticalSpace,
+                            Center(
+                              child: Text(
+                                "Community",
+                                style: fontThemeClass.title(context),
+                              ),
+                            ),
+                            const SectionText(title: "Blogs"),
+                            // Add Blogs here
+                            SizedBox(
+                              height: 270.h,
+                              width: double.infinity,
+                              child: CarouselSlider(
+                                  options: CarouselOptions(
+                                    onPageChanged: (index, reason) {
+                                      model.updateBlogIndex(index);
+                                    },
+                                    height: 270.h,
+                                    viewportFraction: 1,
+                                    autoPlay: true,
+                                    initialPage: 0,
+                                    autoPlayAnimationDuration: 900.milliseconds,
+                                    autoPlayCurve: Curves.easeInOutCubic,
+                                    autoPlayInterval: 4.seconds,
+                                    pauseAutoPlayOnTouch: true,
+                                    scrollPhysics:
+                                        const BouncingScrollPhysics(),
+                                  ),
+                                  items: model.blogsData
+                                      .map(
+                                        (data) => GestureDetector(
+                                          onTap: () {
+                                            model.navigateToDetailedBlogPage(
+                                                data, context);
+                                          },
+                                          child:
+                                              CommunityBlogs(blogsData: data),
+                                        ),
+                                      )
+                                      .toList()),
+                            ),
+                            12.verticalSpace,
+                            Center(
+                              child: AnimatedSmoothIndicator(
+                                activeIndex: model.currentBlogIndex,
+                                count: model.blogsData.length,
+                                effect: JumpingDotEffect(
+                                  dotHeight: 8,
+                                  dotWidth: 8,
+                                  dotColor:
+                                      context.colorScheme.secondarySectionColor,
+                                  activeDotColor:
+                                      context.colorScheme.primaryAccentColor,
+                                  spacing: 4,
+                                ),
+                              ),
+                            ),
+                            model.departmentClubsData.isEmpty
+                                ? Container()
+                                : const SectionText(title: "Departmental Clubs")
+                                    .animate(
+                                      delay: 250.ms,
+                                    )
+                                    .fadeIn(
+                                      curve: Curves.easeInOutCubic,
+                                      duration: 600.ms,
+                                    ),
+                            SizedBox(
+                              height: 120.h,
+                              width: double.infinity,
+                              child: CarouselSlider.builder(
+                                itemCount: model.departmentClubsData.length,
+                                options: model.clubsCarosoulOptions,
+                                itemBuilder: (context, index, realIndex) {
+                                  return Padding(
+                                    padding: index == 0
+                                        ? const EdgeInsets.only(right: 0).r
+                                        : const EdgeInsets.only(left: 8.0).r,
+                                    child: DepartmentClubs(
+                                        data: model.departmentClubsData[index]),
+                                  );
+                                },
+                              ),
+                            ).animate(delay: 200.ms).fadeIn(
+                                curve: Curves.easeInOutCubic, duration: 600.ms),
+                            const SectionText(title: "Quote of the day"),
+                            QuoteCard(
+                              quote: model.affirmation,
+                              autherName: model.authorName,
+                            )
+                                .animate(
+                                  delay: 200.ms,
+                                )
+                                .fadeIn(
+                                  curve: Curves.easeInOutCubic,
+                                  duration: 600.ms,
+                                ),
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Scroll Down To Refresh",
+                                style: FontThemeClass().caption(
+                                  context,
+                                  color:
+                                      context.colorScheme.secondarySectionColor,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ].animate(delay: 100.ms, interval: 80.ms).fadeIn(),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
         );
