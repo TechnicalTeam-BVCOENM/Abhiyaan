@@ -8,7 +8,9 @@ class EventViewModel extends BaseViewModel {
   List<SponsorsModel> _sponsors = [];
   List<SponsorsModel> get sponsors => _sponsors;
   List<EventModel> _events = [];
+  List<GalleryModel> _gallery = [];
   List<EventModel> get events => _events;
+  List<GalleryModel> get gallery => _gallery;
   final List<EventModel> _todayEvent = [];
   List<EventModel>? get todayEvent => _todayEvent;
   late final List<EventModel> _upcomingEvents = [];
@@ -63,6 +65,14 @@ class EventViewModel extends BaseViewModel {
   Future<void> loadData() async {
     try {
       _events = await runBusyFuture(_firestoreService.getAllEvents());
+      print("gallery images loading");
+      _gallery = await _firestoreService.getGalleryImages();
+      _gallery.sort((a, b) => b.year.compareTo(a.year));
+      print(" loading complete");
+
+      getRemainingEvents();
+      notifyListeners();
+      getTodaysEvent();
       _sponsors = await _firestoreService.getAllSponsors();
       notifyListeners();
       getRemainingEvents();
@@ -178,4 +188,44 @@ class SponsorsModel {
     required this.url,
     required this.imageUrl,
   });
+}
+
+class GalleryModel {
+  final String logoUrl;
+  final String themeName;
+  final int year;
+  final Map<String, dynamic> abhiyaan;
+  final Map<String, dynamic> cultural;
+  final Map<String, dynamic> sports;
+
+  GalleryModel({
+    required this.logoUrl,
+    required this.themeName,
+    required this.year,
+    required this.abhiyaan,
+    required this.cultural,
+    required this.sports,
+  });
+
+  factory GalleryModel.fromJson(Map<String, dynamic> json) {
+    return GalleryModel(
+      logoUrl: json['LogoUrl'] ?? "",
+      themeName: json['ThemeName'] ?? "",
+      year: json['year'] ?? 0,
+      abhiyaan: json['abhiyaan'] ?? {},
+      cultural: json['cultural'] ?? {},
+      sports: json['sports'] ?? {},
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'LogoUrl': logoUrl,
+      'ThemeName': themeName,
+      'year': year,
+      'abhiyaan': abhiyaan,
+      'cultural': cultural,
+      'sports': sports,
+    };
+  }
 }

@@ -485,42 +485,93 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
   }
 }
 
+class GalleryYearWiseView extends StatelessWidget {
+  final List<GalleryModel> gallery;
+  const GalleryYearWiseView({super.key, required this.gallery});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 210,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        itemCount: gallery.length,
+        itemBuilder: (BuildContext context, int index) {
+          return GestureDetector(
+              onTap: () {
+                NavigationService().navigateTo(Routes.galleryTabView,
+                    arguments:
+                        GalleryTabViewArguments(gallery: gallery[index]));
+              },
+              child: GalleryYearWiseCards(
+                gallery: gallery,
+                index: index,
+              ));
+        },
+      ),
+    );
+  }
+}
+
 class GalleryYearWiseCards extends StatelessWidget {
-  const GalleryYearWiseCards({super.key});
+  final List<GalleryModel> gallery;
+  final int index;
+  const GalleryYearWiseCards(
+      {super.key, required this.gallery, required this.index});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              NavigationService().navigateTo(Routes.galleryTabView);
-            },
-            child: Container(
-              width: 100,
-              height: 100,
-              margin: const EdgeInsets.all(10),
-              color: Colors.white,
-              child: const Text("Gallery"),
-            ),
-          ),
-          Container(
-            width: 100,
-            height: 100,
-            color: Colors.white,
-            margin: const EdgeInsets.all(10),
-            child: const Text("Gallery"),
-          ),
-          Container(
-            width: 100,
-            height: 100,
-            color: Colors.white,
-            margin: const EdgeInsets.all(10),
-            child: const Text("Gallery"),
-          ),
-        ],
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        margin: const EdgeInsets.all(10),
+        color: context.colorScheme.primaryCardColor,
+        child: Container(
+            width: 190,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            child: Column(
+              children: [
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: CachedNetworkImage(
+                      imageUrl: gallery[index].logoUrl,
+                      height: 113,
+                      fit: BoxFit.cover,
+                    )),
+                5.verticalSpace,
+                Padding(
+                  padding: const EdgeInsets.only(left: 5).r,
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(gallery[index].year.toString(),
+                              style: FontThemeClass().paragraph(context,
+                                  fontWeight: FontWeight.w600,
+                                  color: context.colorScheme.primary)),
+                          Text(gallery[index].themeName,
+                              style: FontThemeClass().small(context,
+                                  fontWeight: FontWeight.w500,
+                                  color:
+                                      context.colorScheme.secondaryTextColor)),
+                        ],
+                      ),
+                      const Spacer(),
+                      const Image(
+                          width: 35,
+                          height: 35,
+                          image:
+                              AssetImage("assets/images/gallery/bookmark.png")),
+                    ],
+                  ),
+                )
+              ],
+            )),
       ),
     );
   }

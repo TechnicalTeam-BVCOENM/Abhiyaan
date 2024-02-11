@@ -1,11 +1,13 @@
 import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/ui/views/event/event_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 part 'gallery_tab_view_model.dart';
 part "gallery_tab_component.dart";
 
 class GalleryTabView extends StatelessWidget {
-  const GalleryTabView({super.key});
+  final GalleryModel gallery;
+  const GalleryTabView({super.key, required this.gallery});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +16,11 @@ class GalleryTabView extends StatelessWidget {
       builder: (context, model, child) {
         return Scaffold(
           backgroundColor: context.colorScheme.scaffoldBackgroundColor,
-          body: GestureDetector(
-            onTap: () {
-              NavigationService().navigateTo(Routes.galleryView);
-            },
-            child: const Center(
-              child: GalleryTabs(),
+          body: Center(
+            child: GalleryTabs(
+              abhiyaan: gallery.abhiyaan,
+              sports: gallery.sports,
+              cultural: gallery.cultural,
             ),
           ),
         );

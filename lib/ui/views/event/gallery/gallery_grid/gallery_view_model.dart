@@ -12,16 +12,9 @@ class GalleryViewModel extends BaseViewModel {
     'https://images.pexels.com/photos/13876836/pexels-photo-13876836.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     'https://www.pcgamesn.com/wp-content/sites/pcgamesn/2023/04/Killjoy-best-agent-550x309.jpg',
   ];
-
-  Future<void> fetchImages() async {
-    // Fetch updated images here
-    // For example:
-    // final List<String> newImages = await yourImageFetchingFunction();
-    // images.clear();
-    // images.addAll(newImages);
-    // notifyListeners();
-    // For demonstration, I'll just shuffle the existing list
+  Future<List<dynamic>?> fetchImages(List<dynamic> images) async {
     images.shuffle();
     notifyListeners();
+    return images;
   }
 }

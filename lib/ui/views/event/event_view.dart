@@ -1,4 +1,5 @@
 import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/ui/common/url_launcher.dart';
@@ -261,11 +262,14 @@ class EventView extends StatelessWidget {
                                             );
                                           },
                                         ).animate(delay: 300.ms).fadeIn(),
+                                  const SectionText(title: "Gallery"),
                                 ],
                               )
                             : 0.verticalSpace,
                         4.verticalSpace,
-                        const GalleryYearWiseCards()
+                        GalleryYearWiseView(
+                          gallery: model.gallery,
+                        ).animate(delay: 1400.ms).fadeIn()
                       ].animate(delay: 100.ms, interval: 40.ms).fadeIn(),
                     ),
                   ),

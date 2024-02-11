@@ -245,14 +245,18 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i16.GalleryTabView: (data) {
+      final args = data.getArgs<GalleryTabViewArguments>(nullOk: false);
       return _i18.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i16.GalleryTabView(),
+        builder: (context) =>
+            _i16.GalleryTabView(key: args.key, gallery: args.gallery),
         settings: data,
       );
     },
     _i17.GalleryView: (data) {
+      final args = data.getArgs<GalleryViewArguments>(nullOk: false);
       return _i18.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i17.GalleryView(),
+        builder: (context) => _i17.GalleryView(
+            key: args.key, images: args.images, title: args.title),
         settings: data,
       );
     },
@@ -343,6 +347,63 @@ class DettailedBlogPageArguments {
   @override
   int get hashCode {
     return key.hashCode ^ blogData.hashCode;
+  }
+}
+
+class GalleryTabViewArguments {
+  const GalleryTabViewArguments({
+    this.key,
+    required this.gallery,
+  });
+
+  final _i19.Key? key;
+
+  final _i8.GalleryModel gallery;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "gallery": "$gallery"}';
+  }
+
+  @override
+  bool operator ==(covariant GalleryTabViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.gallery == gallery;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ gallery.hashCode;
+  }
+}
+
+class GalleryViewArguments {
+  const GalleryViewArguments({
+    this.key,
+    required this.images,
+    required this.title,
+  });
+
+  final _i19.Key? key;
+
+  final List<dynamic> images;
+
+  final String title;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "images": "$images", "title": "$title"}';
+  }
+
+  @override
+  bool operator ==(covariant GalleryViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.images == images && other.title == title;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ images.hashCode ^ title.hashCode;
   }
 }
 
@@ -552,28 +613,35 @@ extension NavigatorStateExtension on _i20.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToGalleryTabView([
+  Future<dynamic> navigateToGalleryTabView({
+    _i19.Key? key,
+    required _i8.GalleryModel gallery,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.galleryTabView,
+        arguments: GalleryTabViewArguments(key: key, gallery: gallery),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
         transition: transition);
   }
 
-  Future<dynamic> navigateToGalleryView([
+  Future<dynamic> navigateToGalleryView({
+    _i19.Key? key,
+    required List<dynamic> images,
+    required String title,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.galleryView,
+        arguments: GalleryViewArguments(key: key, images: images, title: title),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -785,28 +853,35 @@ extension NavigatorStateExtension on _i20.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithGalleryTabView([
+  Future<dynamic> replaceWithGalleryTabView({
+    _i19.Key? key,
+    required _i8.GalleryModel gallery,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.galleryTabView,
+        arguments: GalleryTabViewArguments(key: key, gallery: gallery),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
         transition: transition);
   }
 
-  Future<dynamic> replaceWithGalleryView([
+  Future<dynamic> replaceWithGalleryView({
+    _i19.Key? key,
+    required List<dynamic> images,
+    required String title,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.galleryView,
+        arguments: GalleryViewArguments(key: key, images: images, title: title),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

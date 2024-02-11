@@ -1,17 +1,21 @@
 part of 'gallery_tab_view.dart';
 
 class GalleryTabs extends StatelessWidget {
-  const GalleryTabs({super.key});
+  final Map<String, dynamic> abhiyaan;
+  final Map<String, dynamic> sports;
+  final Map<String, dynamic> cultural;
+  const GalleryTabs(
+      {super.key,
+      required this.abhiyaan,
+      required this.sports,
+      required this.cultural});
 
   @override
   Widget build(BuildContext context) {
     final List<Tab> myTabs = <Tab>[
       const Tab(text: 'Abhiyaan'),
       const Tab(text: 'Sports'),
-      const Tab(text: 'Sports'),
-      const Tab(text: 'Sports'),
-      const Tab(text: 'Sports'),
-      const Tab(text: 'Sports'),
+      const Tab(text: 'Cultural'),
     ];
 
     return SizedBox(
@@ -35,7 +39,6 @@ class GalleryTabs extends StatelessWidget {
               },
             ),
             bottom: TabBar(
-              isScrollable: true,
               tabs: myTabs,
             ),
             title: SizedBox(
@@ -45,13 +48,16 @@ class GalleryTabs extends StatelessWidget {
                   style: FontThemeClass().paragraph(context),
                 )),
           ),
-          body: const TabBarView(children: [
-            Center(child: Text("tab")),
-            TabViewGrid(),
-            Center(child: Text("tab")),
-            Center(child: Text("tab")),
-            Center(child: Text("tab")),
-            Center(child: Text("tab")),
+          body: TabBarView(children: [
+            TabViewGrid(
+              tabData: abhiyaan,
+            ),
+            TabViewGrid(
+              tabData: sports,
+            ),
+            TabViewGrid(
+              tabData: cultural,
+            ),
           ]),
         ),
       ),
@@ -60,44 +66,50 @@ class GalleryTabs extends StatelessWidget {
 }
 
 class TabViewCard extends StatelessWidget {
-  const TabViewCard({super.key});
+  final String imageUrl;
+  final String name;
+  final List<dynamic> imageList;
+  const TabViewCard({super.key, required this.imageUrl, required this.name, required this.imageList});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: 190,
-        height: 184,
-        child: Card(
-          color: context.colorScheme.primaryCardColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20)),
-                  child: CachedNetworkImage(
-                    imageUrl: "https://cdn.imgchest.com/files/345xck3w597.png",
-                    height: 130,
-                    width: 190,
-                    fit: BoxFit.cover,
-                  )),
-              SizedBox(
-                width: 190,
-                height: 39,
-                child: Text(
-                  "Abhiyaan",
-                  textAlign: TextAlign.center,
-                  style: FontThemeClass()
-                      .body(context, fontWeight: FontWeight.w500),
+    return GestureDetector(
+      onTap: () => NavigationService().navigateToGalleryView(images: imageList, title: name),
+      child: Center(
+        child: SizedBox(
+          width: 190,
+          height: 184,
+          child: Card(
+            color: context.colorScheme.primaryCardColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20)),
+                    child: CachedNetworkImage(
+                      imageUrl: imageUrl,
+                      height: 130,
+                      width: 190,
+                      fit: BoxFit.cover,
+                    )),
+                SizedBox(
+                  width: 190,
+                  height: 39,
+                  child: Text(
+                    name,
+                    textAlign: TextAlign.center,
+                    style: FontThemeClass()
+                        .body(context, fontWeight: FontWeight.w500),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -106,29 +118,33 @@ class TabViewCard extends StatelessWidget {
 }
 
 class TabViewGrid extends StatelessWidget {
-  const TabViewGrid({super.key});
+  final Map<String, dynamic> tabData;
+  const TabViewGrid({super.key, required this.tabData});
 
   @override
   Widget build(BuildContext context) {
+    List<List<dynamic>> listOfLists = [];
+    List<String> keys = [];
+
+    // Run function to create list of lists
+    tabData.forEach((key, value) {
+      if (value is List) {
+        keys.add(key);
+        listOfLists.add(value);
+      }
+    });
+
     return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-      ),
-      itemCount: tabViewCardList.length,
-      itemBuilder: (BuildContext context, int index) {
-        return tabViewCardList[index];
-      },
-    );
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+        ),
+        itemCount: listOfLists.length,
+        itemBuilder: (BuildContext context, int index) {
+          return TabViewCard(
+            imageUrl: listOfLists[index][0],
+            imageList: listOfLists[index],
+            name: keys[index],
+          );
+        });
   }
 }
-
-List<TabViewCard> tabViewCardList = [
-  const TabViewCard(),
-  const TabViewCard(),
-  const TabViewCard(),
-  const TabViewCard(),
-  const TabViewCard(),
-  const TabViewCard(),
-  const TabViewCard(),
-  const TabViewCard(),
-];

@@ -74,4 +74,13 @@ class FontThemeClass {
       color: color ?? ctx.colorScheme.primaryTextColor,
     );
   }
+
+  TextStyle small(BuildContext ctx, {Color? color, FontWeight? fontWeight}) {
+    return TextStyle(
+      fontSize: 12.sp,
+      fontFamily: 'Outfit',
+      fontWeight: fontWeight ?? FontWeight.w400,
+      color: color ?? ctx.colorScheme.primaryTextColor,
+    );
+  }
 }
