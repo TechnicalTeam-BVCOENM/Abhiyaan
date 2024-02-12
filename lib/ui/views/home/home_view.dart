@@ -135,13 +135,19 @@ class HomeView extends StatelessWidget {
                             ),
                           ),
                           3.verticalSpace,
-                          Text(
-                            'Made with ❤️ by Technical Team',
-                            style: fontTheme.caption(
-                              context,
-                              color: context.colorScheme.primaryTextColor
-                                  .withOpacity(0.8),
-                              fontWeight: FontWeight.w500,
+                          InkWell(
+                            onTap: () {
+                              UrlLauncher()
+                                  .launchURL("https://abhiyaan.tech/web-team");
+                            },
+                            child: Text(
+                              'Made with ❤️ by Technical Team',
+                              style: fontTheme.caption(
+                                context,
+                                color: context.colorScheme.primaryTextColor
+                                    .withOpacity(0.8),
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                           12.verticalSpace,

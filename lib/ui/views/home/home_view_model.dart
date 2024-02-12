@@ -12,9 +12,8 @@ class HomeViewModel extends BaseViewModel {
 
     notificationsService.registerNotification();
 
-     SystemChrome.setSystemUIOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-
         statusBarColor: themeService.brightness == Brightness.light
             ? context.colorScheme.scaffoldBackgroundColor
             : Colors.transparent,
@@ -149,7 +148,7 @@ class HomeViewModel extends BaseViewModel {
       url: 'https://abhiyaan.tech/',
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/home/sigma.png",
+      imageUrl: "assets/images/home/sigma.jpeg",
       title: "Sigma",
       view: const SocietiesView(),
     ),
