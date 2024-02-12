@@ -4,6 +4,14 @@ bool isCelebrationShown = false;
 
 class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
+
+  // Contructor
+  HomeViewModel() {
+    NotificationsService notificationsService = NotificationsService();
+
+    notificationsService.registerNotification();
+  }
+
   final FirestoreService _firestoreService = FirestoreService();
   final navigationService = locator<NavigationService>();
   NotificationsService notificationService = NotificationsService();
