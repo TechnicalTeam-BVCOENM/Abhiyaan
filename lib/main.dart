@@ -22,7 +22,6 @@ Future<void> servicesToInitializeBeforeAppStart() async {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    notificationsService.registerNotification();
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
     notificationsService.onForegroundMessage();
     notificationsService.onBackgroundMessage();
