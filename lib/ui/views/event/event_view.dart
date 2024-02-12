@@ -55,11 +55,11 @@ class EventView extends StatelessWidget {
                                     shape: ShapeBorder.lerp(
                                       RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(18).r,
+                                            BorderRadius.circular(25).r,
                                       ),
                                       RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(18).r,
+                                            BorderRadius.circular(25).r,
                                       ),
                                       1,
                                     ),
@@ -105,6 +105,19 @@ class EventView extends StatelessWidget {
                                               elevation: 2,
                                               color: context
                                                   .colorScheme.primaryCardColor,
+                                              shape: ShapeBorder.lerp(
+                                                RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25)
+                                                          .r,
+                                                ),
+                                                RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25)
+                                                          .r,
+                                                ),
+                                                1,
+                                              ),
                                               child: Stack(
                                                 children: [
                                                   EventCardInfo(
@@ -230,7 +243,7 @@ class EventView extends StatelessWidget {
                         4.verticalSpace,
                         GalleryYearWiseView(
                           gallery: model.gallery,
-                        ).animate(delay: 1400.ms).fadeIn()
+                        ).animate(delay: 1000.ms).fadeIn()
                       ].animate(delay: 100.ms, interval: 40.ms).fadeIn(),
                     ),
                   ),

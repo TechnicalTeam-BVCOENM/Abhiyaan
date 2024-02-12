@@ -15,7 +15,7 @@ class EventDetails {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Icon(
-          Icons.location_on,
+          Icons.location_on_rounded,
           size: 18.sp,
           color: context.colorScheme.primaryAccentColor,
         ),
@@ -67,7 +67,7 @@ class EventDetails {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Icon(
-          Icons.timer,
+          Icons.access_time_filled_outlined,
           size: 18.sp,
           color: context.colorScheme.primaryAccentColor,
         ),
@@ -253,8 +253,8 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                         children: [
                           8.verticalSpace,
                           Text(
-                            model.title.length > 20
-                                ? "${model.title.substring(0, 20)}.."
+                            model.title.length > 15
+                                ? "${model.title.substring(0, 15)}.."
                                 : model.title,
                             style: fontTheme.title2(
                               context,
@@ -291,8 +291,7 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                               .navigateToDetailedEventView(eventData: model);
                         },
                         child: Container(
-                          height: 40.h,
-                          width: 95.w,
+                          padding: const EdgeInsets.all(10).r,
                           decoration: BoxDecoration(
                             color: context.colorScheme.primaryAccentColor,
                             boxShadow: [
@@ -308,8 +307,8 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                           ),
                           child: Center(
                             child: Text(
-                              "Open",
-                              style: fontTheme.title2(
+                              "Dive Deeper",
+                              style: fontTheme.caption(
                                 context,
                                 color: context.colorScheme.white,
                                 fontWeight: FontWeight.w600,
@@ -526,20 +525,20 @@ class GalleryYearWiseCards extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20).r,
         ),
-        margin: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10).r,
         color: context.colorScheme.primaryCardColor,
         child: Container(
-            width: 190,
+            width: 190.w,
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Column(
               children: [
                 ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(20).r,
                     child: CachedNetworkImage(
                       imageUrl: gallery[index].logoUrl,
-                      height: 113,
+                      height: 113.h,
                       fit: BoxFit.cover,
                     )),
                 5.verticalSpace,
@@ -562,11 +561,11 @@ class GalleryYearWiseCards extends StatelessWidget {
                         ],
                       ),
                       const Spacer(),
-                      const Image(
-                          width: 35,
-                          height: 35,
-                          image:
-                              AssetImage("assets/images/gallery/bookmark.png")),
+                      Image(
+                          width: 35.w,
+                          height: 35.h,
+                          image: const AssetImage(
+                              "assets/images/gallery/bookmark.png")),
                     ],
                   ),
                 )
