@@ -21,6 +21,7 @@ class GalleryTabView extends StatelessWidget {
               abhiyaan: gallery.abhiyaan,
               sports: gallery.sports,
               cultural: gallery.cultural,
+              year: gallery.year,
             ),
           ),
         );

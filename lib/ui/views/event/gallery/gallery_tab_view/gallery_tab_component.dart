@@ -4,11 +4,13 @@ class GalleryTabs extends StatelessWidget {
   final Map<String, dynamic> abhiyaan;
   final Map<String, dynamic> sports;
   final Map<String, dynamic> cultural;
+  final int year;
   const GalleryTabs(
       {super.key,
       required this.abhiyaan,
       required this.sports,
-      required this.cultural});
+      required this.cultural,
+      required this.year});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class GalleryTabs extends StatelessWidget {
             title: SizedBox(
                 width: 100,
                 child: Text(
-                  '2024',
+                  year.toString(),
                   style: FontThemeClass().paragraph(context),
                 )),
           ),

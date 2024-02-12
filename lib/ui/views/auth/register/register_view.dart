@@ -14,8 +14,6 @@ import 'package:pinput/pinput.dart';
 
 part 'register_view_model.dart';
 
-// TODO: Register view and other related widgets are partially tested for dark theme
-
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
 
