@@ -2,14 +2,17 @@ import 'package:abhiyaan/file_exporter.dart';
 
 extension ColorSchemeExtension on ColorScheme {
   // new
-  Color get black => const Color(0xFF181818);
+  Color get black => const Color(0xFF202020);
   Color get white => const Color(0xFFFFFFFF);
   Color get primaryAccentColor => const Color.fromARGB(255, 78, 75, 215);
   Color get primaryLightScaffold => const Color(0xFFD6D5FA);
-  Color get primaryDarkScaffold => const Color(0xFF010409);
+  Color get primaryDarkScaffold => const Color(0xFF121212);
   Color get primaryDarkGrey => black.withOpacity(0.5);
   Color get primaryLightGrey => white.withOpacity(0.5);
   Color get unSelectedBottomNavIcon => const Color(0xFF9DB2CE);
+  Color get selectedBottomNavIcon => brightness == Brightness.dark
+      ? const Color.fromARGB(255, 189, 188, 255)
+      : primaryAccentColor;
 
   // don't know why
   Color get secondaryPurpleColor => const Color.fromARGB(131, 73, 73, 73);

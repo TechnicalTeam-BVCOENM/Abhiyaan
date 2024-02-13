@@ -51,16 +51,7 @@ class MyApp extends StatelessWidget {
         DeviceOrientation.portraitDown,
       ],
     );
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: themeService.brightness == Brightness.light
-            ? context.colorScheme.scaffoldBackgroundColor
-            : Colors.transparent,
-        statusBarIconBrightness: themeService.brightness == Brightness.light
-            ? Brightness.dark
-            : Brightness.light,
-      ),
-    );
+
     return ValueListenableBuilder(
       valueListenable: themeService.valueListenable,
       builder: ((context, value, child) {

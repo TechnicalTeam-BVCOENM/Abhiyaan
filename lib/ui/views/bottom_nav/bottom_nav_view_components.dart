@@ -23,20 +23,20 @@ class BottomNavActiveIcon extends ViewModelWidget<BottomNavViewModel> {
           Container(
             height: 3.sp,
             decoration: BoxDecoration(
-              color: context.colorScheme.primaryAccentColor,
+              color: context.colorScheme.selectedBottomNavIcon,
             ),
           ),
           const Spacer(),
           Icon(
             icon,
-            color: context.colorScheme.primaryAccentColor,
+            color: context.colorScheme.selectedBottomNavIcon,
           ),
           SizedBox(height: 2.sp),
           Text(
             text,
             style: TextStyle(
               fontSize: 12.sp,
-              color: context.colorScheme.primaryAccentColor,
+              color: context.colorScheme.selectedBottomNavIcon,
               fontWeight: FontWeight.w700,
             ),
           ),

@@ -23,17 +23,21 @@ Widget quickLinksList(BuildContext context, List model,
                 onTap: () {
                   handleQuickLinksNavigation(model, idx);
                 },
-                child: Container(
-                  height: 80.h,
-                  width: 80.w,
-                  decoration: BoxDecoration(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(100).r,
+                  child: Container(
+                    height: 80.h,
+                    width: 80.w,
+                    decoration: BoxDecoration(
                       color: context.colorScheme.primaryCardColor,
-                      shape: BoxShape.circle),
-                  child: Center(
-                    child: Image.asset(
-                      model[idx].imageUrl,
-                      width: 80.w,
-                      height: 80.h,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Image.asset(
+                        model[idx].imageUrl,
+                        width: 80.w,
+                        height: 80.h,
+                      ),
                     ),
                   ),
                 ),
