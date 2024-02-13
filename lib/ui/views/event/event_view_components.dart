@@ -234,13 +234,13 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
               tag: "eventImage+${model.imageUrl}-${model.title}",
               child: CachedNetworkImageWidget(
                 imageUrl: model.imageUrl,
-                height: 178.h,
+                height: 200.h,
                 width: double.infinity,
                 fit: BoxFit.cover,
                 maxHeightDiskCache: 400,
               ),
             ),
-            20.verticalSpace,
+            2.verticalSpace,
             Column(
               children: [
                 Row(
@@ -291,7 +291,7 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                               .navigateToDetailedEventView(eventData: model);
                         },
                         child: Container(
-                          padding: const EdgeInsets.all(10).r,
+                          padding: const EdgeInsets.all(8).r,
                           decoration: BoxDecoration(
                             color: context.colorScheme.primaryAccentColor,
                             boxShadow: [
@@ -366,7 +366,7 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
                 tag: "eventImage+${model.imageUrl}-${model.title}",
                 child: CachedNetworkImageWidget(
                   imageUrl: model.imageUrl,
-                  height: 135.h,
+                  height: 150.h,
                   maxHeightDiskCache: MediaQuery.of(context).size.width * 0.65,
                   width: ResponsiveUtils.screenWidth(context),
                   fit: BoxFit.cover,
