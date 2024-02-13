@@ -447,11 +447,11 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(18.0).r,
         child: Container(
+          width: 80.w,
+          height: 80.h,
           decoration: BoxDecoration(
             color: context.colorScheme.primaryCardColor,
           ),
-          width: 80.w,
-          height: 80.h,
           child: Column(
             children: [
               GestureDetector(
