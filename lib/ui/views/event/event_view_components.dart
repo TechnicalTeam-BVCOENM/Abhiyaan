@@ -15,7 +15,7 @@ class EventDetails {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Icon(
-          Icons.location_on_rounded,
+          Icons.location_on,
           size: 18.sp,
           color: context.colorScheme.primaryAccentColor,
         ),
@@ -67,7 +67,7 @@ class EventDetails {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Icon(
-          Icons.access_time_filled_outlined,
+          Icons.timer,
           size: 18.sp,
           color: context.colorScheme.primaryAccentColor,
         ),
@@ -234,13 +234,13 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
               tag: "eventImage+${model.imageUrl}-${model.title}",
               child: CachedNetworkImageWidget(
                 imageUrl: model.imageUrl,
-                height: 200.h,
+                height: 178.h,
                 width: double.infinity,
                 fit: BoxFit.cover,
                 maxHeightDiskCache: 400,
               ),
             ),
-            2.verticalSpace,
+            20.verticalSpace,
             Column(
               children: [
                 Row(
@@ -253,8 +253,8 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                         children: [
                           8.verticalSpace,
                           Text(
-                            model.title.length > 15
-                                ? "${model.title.substring(0, 15)}.."
+                            model.title.length > 20
+                                ? "${model.title.substring(0, 20)}.."
                                 : model.title,
                             style: fontTheme.title2(
                               context,
@@ -291,7 +291,8 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                               .navigateToDetailedEventView(eventData: model);
                         },
                         child: Container(
-                          padding: const EdgeInsets.all(8).r,
+                          height: 40.h,
+                          width: 95.w,
                           decoration: BoxDecoration(
                             color: context.colorScheme.primaryAccentColor,
                             boxShadow: [
@@ -307,8 +308,8 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                           ),
                           child: Center(
                             child: Text(
-                              "Dive Deeper",
-                              style: fontTheme.caption(
+                              "Open",
+                              style: fontTheme.title2(
                                 context,
                                 color: context.colorScheme.white,
                                 fontWeight: FontWeight.w600,
@@ -357,7 +358,6 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
         },
         child: Container(
           color: context.colorScheme.primaryCardColor,
-          height: 220.h,
           width: 232.w,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -366,7 +366,7 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
                 tag: "eventImage+${model.imageUrl}-${model.title}",
                 child: CachedNetworkImageWidget(
                   imageUrl: model.imageUrl,
-                  height: 150.h,
+                  height: 135.h,
                   maxHeightDiskCache: MediaQuery.of(context).size.width * 0.65,
                   width: ResponsiveUtils.screenWidth(context),
                   fit: BoxFit.cover,
@@ -446,11 +446,11 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(18.0).r,
         child: Container(
-          width: 80.w,
-          height: 80.h,
           decoration: BoxDecoration(
             color: context.colorScheme.primaryCardColor,
           ),
+          width: 80.w,
+          height: 80.h,
           child: Column(
             children: [
               GestureDetector(
@@ -525,20 +525,20 @@ class GalleryYearWiseCards extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20).r,
+          borderRadius: BorderRadius.circular(20),
         ),
-        margin: const EdgeInsets.all(10).r,
+        margin: const EdgeInsets.all(10),
         color: context.colorScheme.primaryCardColor,
         child: Container(
-            width: 190.w,
+            width: 190,
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Column(
               children: [
                 ClipRRect(
-                    borderRadius: BorderRadius.circular(20).r,
+                    borderRadius: BorderRadius.circular(20),
                     child: CachedNetworkImage(
                       imageUrl: gallery[index].logoUrl,
-                      height: 113.h,
+                      height: 113,
                       fit: BoxFit.cover,
                     )),
                 5.verticalSpace,
@@ -561,11 +561,11 @@ class GalleryYearWiseCards extends StatelessWidget {
                         ],
                       ),
                       const Spacer(),
-                      Image(
-                          width: 35.w,
-                          height: 35.h,
-                          image: const AssetImage(
-                              "assets/images/gallery/bookmark.png")),
+                      const Image(
+                          width: 35,
+                          height: 35,
+                          image:
+                              AssetImage("assets/images/gallery/bookmark.png")),
                     ],
                   ),
                 )

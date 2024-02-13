@@ -209,7 +209,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                   "Add to Calender",
                   style: fontTheme.body(
                     context,
-                    color: context.colorScheme.primaryCardColor,
+                    color: context.colorScheme.white,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
