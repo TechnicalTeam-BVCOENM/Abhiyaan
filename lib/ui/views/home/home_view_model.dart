@@ -6,10 +6,22 @@ class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
 
   // Contructor
-  HomeViewModel() {
+  HomeViewModel(BuildContext context) {
     NotificationsService notificationsService = NotificationsService();
+    final themeService = locator<ThemeService>();
 
     notificationsService.registerNotification();
+
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: themeService.brightness == Brightness.light
+            ? context.colorScheme.scaffoldBackgroundColor
+            : Colors.transparent,
+        statusBarIconBrightness: themeService.brightness == Brightness.light
+            ? Brightness.dark
+            : Brightness.light,
+      ),
+    );
   }
 
   final FirestoreService _firestoreService = FirestoreService();
@@ -136,7 +148,7 @@ class HomeViewModel extends BaseViewModel {
       url: 'https://abhiyaan.tech/',
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/home/sigma.png",
+      imageUrl: "assets/images/home/sigma.jpeg",
       title: "Sigma",
       view: const SocietiesView(),
     ),

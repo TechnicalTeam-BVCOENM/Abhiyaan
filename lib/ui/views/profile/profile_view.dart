@@ -11,6 +11,18 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeService = locator<ThemeService>();
+
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: themeService.brightness == Brightness.light
+            ? context.colorScheme.scaffoldBackgroundColor
+            : Colors.transparent,
+        statusBarIconBrightness: themeService.brightness == Brightness.light
+            ? Brightness.dark
+            : Brightness.light,
+      ),
+    );
     return ViewModelBuilder<ProfileViewModel>.reactive(
       viewModelBuilder: () => ProfileViewModel(),
       onViewModelReady: (viewModel) => viewModel.init(),

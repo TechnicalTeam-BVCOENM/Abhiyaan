@@ -32,23 +32,20 @@ class GalleryTabs extends StatelessWidget {
               color: context.colorScheme.primaryTextColor,
             ),
             backgroundColor: context.colorScheme.scaffoldBackgroundColor,
-            titleSpacing: 0,
-            automaticallyImplyLeading: false,
             leading: IconButton(
-              icon: const Icon(Icons.navigate_before),
+              icon: const Icon(Icons.arrow_back_ios),
               onPressed: () {
                 NavigationService().back();
               },
             ),
+            centerTitle: true,
             bottom: TabBar(
               tabs: myTabs,
             ),
-            title: SizedBox(
-                width: 100,
-                child: Text(
-                  year.toString(),
-                  style: FontThemeClass().paragraph(context),
-                )),
+            title: Text(
+              year.toString(),
+              style: FontThemeClass().title(context),
+            ),
           ),
           body: TabBarView(children: [
             TabViewGrid(
@@ -84,8 +81,8 @@ class TabViewCard extends StatelessWidget {
           .navigateToGalleryView(images: imageList, title: name),
       child: Center(
         child: SizedBox(
-          width: 190,
-          height: 184,
+          width: 190.w,
+          height: 184.h,
           child: Card(
             color: context.colorScheme.primaryCardColor,
             shape: RoundedRectangleBorder(
@@ -101,15 +98,15 @@ class TabViewCard extends StatelessWidget {
                         topRight: Radius.circular(20)),
                     child: CachedNetworkImage(
                       imageUrl: imageUrl,
-                      height: 130,
-                      width: 190,
+                      height: 130.h,
+                      width: 190.w,
                       fit: BoxFit.cover,
                     )),
                 SizedBox(
-                  width: 190,
-                  height: 39,
+                  width: 190.w,
+                  height: 39.h,
                   child: Text(
-                    name,
+                    name.toUpperCase(),
                     textAlign: TextAlign.center,
                     style: FontThemeClass()
                         .body(context, fontWeight: FontWeight.w500),

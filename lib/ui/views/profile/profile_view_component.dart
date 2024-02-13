@@ -302,7 +302,7 @@ class DarkModeTile extends ViewModelWidget<ProfileViewModel> {
           (states) => context.colorScheme.primaryAccentColor,
         ),
         value: viewModel._themeService.valueListenable.value,
-        onChanged: (val) => viewModel.changeTheme(),
+        onChanged: (val) => viewModel.changeTheme(context),
       ),
     );
   }

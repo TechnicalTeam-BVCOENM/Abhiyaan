@@ -167,7 +167,7 @@ class ExpandedDescription extends StatelessWidget {
                   UrlLauncher().launchURL(url);
                 },
                 child: Text(
-                  url,
+                  url.split("/").last,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,

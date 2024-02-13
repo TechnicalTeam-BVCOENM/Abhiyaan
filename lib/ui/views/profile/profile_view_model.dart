@@ -51,10 +51,11 @@ class ProfileViewModel extends BaseViewModel {
     "prnImg",
   ];
 
-  changeTheme() async {
+  changeTheme(BuildContext context) async {
     _analyticsService.logEvent(
         eventName: "Dark_mode", value: "Dark mode toggle button clicked");
     _themeService.updateTheme();
+
     notifyListeners();
   }
 }
