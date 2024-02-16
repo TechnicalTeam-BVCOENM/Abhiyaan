@@ -240,7 +240,7 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                 maxHeightDiskCache: 400,
               ),
             ),
-            20.verticalSpace,
+            const Spacer(),
             Column(
               children: [
                 Row(
@@ -253,8 +253,8 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                         children: [
                           8.verticalSpace,
                           Text(
-                            model.title.length > 20
-                                ? "${model.title.substring(0, 20)}.."
+                            model.title.length > 15
+                                ? "${model.title.substring(0, 15)}.."
                                 : model.title,
                             style: fontTheme.title2(
                               context,
@@ -291,8 +291,7 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                               .navigateToDetailedEventView(eventData: model);
                         },
                         child: Container(
-                          height: 40.h,
-                          width: 95.w,
+                          padding: const EdgeInsets.all(8).r,
                           decoration: BoxDecoration(
                             color: context.colorScheme.primaryAccentColor,
                             boxShadow: [
@@ -308,8 +307,8 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                           ),
                           child: Center(
                             child: Text(
-                              "Open",
-                              style: fontTheme.title2(
+                              "Dive Deeper",
+                              style: fontTheme.caption(
                                 context,
                                 color: context.colorScheme.white,
                                 fontWeight: FontWeight.w600,
@@ -323,6 +322,7 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                 )
               ],
             ),
+            const Spacer(),
           ],
         ),
       ),
@@ -491,7 +491,7 @@ class GalleryYearWiseView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 210,
+      height: 210.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
@@ -525,29 +525,30 @@ class GalleryYearWiseCards extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20).r,
         ),
-        margin: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10).r,
         color: context.colorScheme.primaryCardColor,
         child: Container(
-            width: 190,
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            width: 190.w,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(20).r,
                     child: Container(
                       color: context.colorScheme.primaryCardColor,
                       child: CachedNetworkImage(
                         imageUrl: gallery[index].logoUrl,
-                        height: 113,
+                        height: 113.h,
                         width: double.infinity,
                         fit: BoxFit.cover,
                         progressIndicatorBuilder:
                             (context, url, downloadProgress) {
-                          return const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: CircularLoadingIndicator(),
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0).r,
+                            child: const CircularLoadingIndicator(),
                           );
                         },
                       ),
@@ -572,11 +573,11 @@ class GalleryYearWiseCards extends StatelessWidget {
                         ],
                       ),
                       const Spacer(),
-                      const Image(
-                          width: 35,
-                          height: 35,
-                          image:
-                              AssetImage("assets/images/gallery/bookmark.png")),
+                      Image(
+                          width: 35.w,
+                          height: 35.h,
+                          image: const AssetImage(
+                              "assets/images/gallery/bookmark.png")),
                     ],
                   ),
                 )
