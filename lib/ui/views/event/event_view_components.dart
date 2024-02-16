@@ -536,10 +536,21 @@ class GalleryYearWiseCards extends StatelessWidget {
               children: [
                 ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: CachedNetworkImage(
-                      imageUrl: gallery[index].logoUrl,
-                      height: 113,
-                      fit: BoxFit.cover,
+                    child: Container(
+                      color: context.colorScheme.primaryCardColor,
+                      child: CachedNetworkImage(
+                        imageUrl: gallery[index].logoUrl,
+                        height: 113,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) {
+                          return const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CircularLoadingIndicator(),
+                          );
+                        },
+                      ),
                     )),
                 5.verticalSpace,
                 Padding(

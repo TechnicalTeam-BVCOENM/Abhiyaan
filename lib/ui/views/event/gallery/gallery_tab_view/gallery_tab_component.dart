@@ -101,15 +101,26 @@ class TabViewCard extends StatelessWidget {
                       height: 130.h,
                       width: 190.w,
                       fit: BoxFit.cover,
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) {
+                        return const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: CircularLoadingIndicator(),
+                        );
+                      },
                     )),
-                SizedBox(
-                  width: 190.w,
-                  height: 39.h,
-                  child: Text(
-                    name.toUpperCase(),
-                    textAlign: TextAlign.center,
-                    style: FontThemeClass()
-                        .body(context, fontWeight: FontWeight.w500),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0).r,
+                  child: SizedBox(
+                    width: 190.w,
+                    height: 39.h,
+                    child: Text(
+                      name.toUpperCase(),
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: FontThemeClass()
+                          .body(context, fontWeight: FontWeight.w500),
+                    ),
                   ),
                 ),
               ],
