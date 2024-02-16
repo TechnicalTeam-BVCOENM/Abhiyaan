@@ -17,7 +17,7 @@ Widget quickLinksList(BuildContext context, List model,
         return Padding(
           padding: EdgeInsets.only(right: 22.w, left: 0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               GestureDetector(
                 onTap: () {
@@ -41,9 +41,9 @@ Widget quickLinksList(BuildContext context, List model,
               ),
               Text(
                 model[idx].title.toString().toUpperCase(),
-                style: FontThemeClass().caption(
+                style: FontThemeClass().small(
                   context,
-                  color: context.colorScheme.primaryTextColor,
+                  color: context.colorScheme.primaryTextColor.withOpacity(0.8),
                   fontWeight: FontWeight.w600,
                 ),
                 textAlign: TextAlign.center,
