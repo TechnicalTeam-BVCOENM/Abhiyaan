@@ -138,7 +138,7 @@ class HomeViewModel extends BaseViewModel {
 
   List<QuickLinksModel> quickLinksList = [
     QuickLinksModel(
-      imageUrl: "assets/images/home/college.png",
+      imageUrl: "assets/images/android_splash_logo.png",
       title: "BVCOENM",
       url: 'https://www.bvcoenm.edu.in/',
     ),

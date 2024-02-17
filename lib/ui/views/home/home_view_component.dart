@@ -25,14 +25,15 @@ Widget quickLinksList(BuildContext context, List model,
                 },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(200).r,
-                  child: SizedBox(
-                    height: 82.h,
+                  child: Container(
+                    color: context.colorScheme.primaryCardColor,
+                    height: 80.h,
                     width: 80.w,
                     child: Center(
                       child: Image.asset(
                         model[idx].imageUrl,
                         width: 80.w,
-                        height: 82.h,
+                        height: 80.h,
                         fit: BoxFit.cover,
                       ),
                     ),
