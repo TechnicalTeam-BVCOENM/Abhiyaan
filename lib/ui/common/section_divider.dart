@@ -12,7 +12,7 @@ class SectionText extends StatelessWidget {
         title,
         style: FontThemeClass().body(
           context,
-          color: context.colorScheme.secondaryTextColor,
+          color: context.colorScheme.primaryTextColor,
           fontWeight: FontWeight.w600,
         ),
       ),

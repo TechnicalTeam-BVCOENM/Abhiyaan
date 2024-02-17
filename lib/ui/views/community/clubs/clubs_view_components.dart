@@ -256,7 +256,8 @@ class FestCard extends StatelessWidget {
         margin: const EdgeInsets.all(12.0).r,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment:
+              MainAxisAlignment.start, // Align children to the start
           children: [
             SizedBox(
               width: 150.w,

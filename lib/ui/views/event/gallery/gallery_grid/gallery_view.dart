@@ -26,7 +26,8 @@ class GalleryView extends StatelessWidget {
             ),
             title: Text(
               title.toUpperCase(),
-              style: FontThemeClass().title(context),
+              style:
+                  FontThemeClass().title2(context, fontWeight: FontWeight.w500),
             ),
             backgroundColor: context.colorScheme.scaffoldBackgroundColor,
             centerTitle: true,
@@ -54,27 +55,43 @@ class GalleryView extends StatelessWidget {
                       itemBuilder: (context, index) => Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
-                          onLongPress: () {
+                          onTap: () {
                             showDialog(
                                 barrierColor: Colors.black.withOpacity(0.4),
                                 context: context,
                                 builder: (context) {
-                                  return BackdropFilter(
-                                    filter: ImageFilter.blur(
-                                      sigmaX: 10,
-                                      sigmaY: 10,
-                                    ),
-                                    child: AlertDialog(
-                                      contentPadding: EdgeInsets.zero,
-                                      titlePadding: const EdgeInsets.symmetric(
-                                          vertical: 4, horizontal: 12),
-                                      content: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(20).r,
-                                          child: CachedNetworkImage(
-                                            imageUrl: images[index],
-                                            fit: BoxFit.cover,
-                                          )),
+                                  return GestureDetector(
+                                    onTap: () => Navigator.pop(context),
+                                    child: InteractiveViewer(
+                                      child: BackdropFilter(
+                                        filter: ImageFilter.blur(
+                                          sigmaX: 10,
+                                          sigmaY: 10,
+                                        ),
+                                        child: AlertDialog(
+                                          contentPadding: EdgeInsets.zero,
+                                          titlePadding:
+                                              const EdgeInsets.symmetric(
+                                                  vertical: 4, horizontal: 12),
+                                          content: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(20).r,
+                                              child: CachedNetworkImage(
+                                                imageUrl: images[index],
+                                                fit: BoxFit.cover,
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                        downloadProgress) {
+                                                  return const Padding(
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child:
+                                                        CircularLoadingIndicator(),
+                                                  );
+                                                },
+                                              )),
+                                        ),
+                                      ),
                                     ),
                                   );
                                 });

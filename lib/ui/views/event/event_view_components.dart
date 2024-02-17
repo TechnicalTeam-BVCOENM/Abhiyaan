@@ -15,7 +15,7 @@ class EventDetails {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Icon(
-          Icons.location_on_rounded,
+          Icons.location_on,
           size: 18.sp,
           color: context.colorScheme.primaryAccentColor,
         ),
@@ -67,7 +67,7 @@ class EventDetails {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Icon(
-          Icons.access_time_filled_outlined,
+          Icons.timer,
           size: 18.sp,
           color: context.colorScheme.primaryAccentColor,
         ),
@@ -234,13 +234,13 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
               tag: "eventImage+${model.imageUrl}-${model.title}",
               child: CachedNetworkImageWidget(
                 imageUrl: model.imageUrl,
-                height: 200.h,
+                height: 178.h,
                 width: double.infinity,
                 fit: BoxFit.cover,
                 maxHeightDiskCache: 400,
               ),
             ),
-            2.verticalSpace,
+            const Spacer(),
             Column(
               children: [
                 Row(
@@ -322,6 +322,7 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                 )
               ],
             ),
+            const Spacer(),
           ],
         ),
       ),
@@ -357,7 +358,6 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
         },
         child: Container(
           color: context.colorScheme.primaryCardColor,
-          height: 220.h,
           width: 232.w,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -366,7 +366,7 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
                 tag: "eventImage+${model.imageUrl}-${model.title}",
                 child: CachedNetworkImageWidget(
                   imageUrl: model.imageUrl,
-                  height: 150.h,
+                  height: 135.h,
                   maxHeightDiskCache: MediaQuery.of(context).size.width * 0.65,
                   width: ResponsiveUtils.screenWidth(context),
                   fit: BoxFit.cover,
@@ -491,7 +491,7 @@ class GalleryYearWiseView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 210,
+      height: 210.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
@@ -531,15 +531,27 @@ class GalleryYearWiseCards extends StatelessWidget {
         color: context.colorScheme.primaryCardColor,
         child: Container(
             width: 190.w,
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ClipRRect(
                     borderRadius: BorderRadius.circular(20).r,
-                    child: CachedNetworkImage(
-                      imageUrl: gallery[index].logoUrl,
-                      height: 113.h,
-                      fit: BoxFit.cover,
+                    child: Container(
+                      color: context.colorScheme.primaryCardColor,
+                      child: CachedNetworkImage(
+                        imageUrl: gallery[index].logoUrl,
+                        height: 113.h,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0).r,
+                            child: const CircularLoadingIndicator(),
+                          );
+                        },
+                      ),
                     )),
                 5.verticalSpace,
                 Padding(

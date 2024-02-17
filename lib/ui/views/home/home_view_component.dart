@@ -17,26 +17,24 @@ Widget quickLinksList(BuildContext context, List model,
         return Padding(
           padding: EdgeInsets.only(right: 22.w, left: 0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               GestureDetector(
                 onTap: () {
                   handleQuickLinksNavigation(model, idx);
                 },
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100).r,
+                  borderRadius: BorderRadius.circular(200).r,
                   child: Container(
+                    color: context.colorScheme.primaryCardColor,
                     height: 80.h,
                     width: 80.w,
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.primaryCardColor,
-                      shape: BoxShape.circle,
-                    ),
                     child: Center(
                       child: Image.asset(
                         model[idx].imageUrl,
                         width: 80.w,
                         height: 80.h,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -44,9 +42,9 @@ Widget quickLinksList(BuildContext context, List model,
               ),
               Text(
                 model[idx].title.toString().toUpperCase(),
-                style: FontThemeClass().caption(
+                style: FontThemeClass().small(
                   context,
-                  color: context.colorScheme.primaryTextColor,
+                  color: context.colorScheme.primaryTextColor.withOpacity(0.8),
                   fontWeight: FontWeight.w600,
                 ),
                 textAlign: TextAlign.center,
