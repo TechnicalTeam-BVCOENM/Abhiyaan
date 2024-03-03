@@ -24,9 +24,12 @@ class PreferencesView extends StatelessWidget {
               onTap: () {
                 model._navigationService.back();
               },
-              child: Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: context.colorScheme.primaryTextColor,
+              child: Container(
+                color: context.colorScheme.scaffoldBackgroundColor,
+                child: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: context.colorScheme.primaryTextColor,
+                ),
               ),
             ),
             backgroundColor: context.colorScheme.scaffoldBackgroundColor,
