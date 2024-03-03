@@ -32,7 +32,7 @@ class SplashView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Version 1.0.4',
+                    'Version 1.0.5',
                     style: FontThemeClass().caption(
                       context,
                       color: context.colorScheme.secondaryTextColor,
