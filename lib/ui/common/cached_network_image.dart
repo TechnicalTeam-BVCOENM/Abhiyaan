@@ -4,17 +4,17 @@ import 'package:abhiyaan/file_exporter.dart';
 
 class CachedNetworkImageWidget extends StatelessWidget {
   final String imageUrl;
-  final double height;
-  final double width;
-  final double maxHeightDiskCache;
+  final double? height;
+  final double? width;
+  final double? maxHeightDiskCache;
   final BoxFit fit;
 
   const CachedNetworkImageWidget({
     super.key,
     required this.imageUrl,
-    required this.height,
-    required this.width,
-    required this.maxHeightDiskCache,
+     this.height,
+     this.width,
+     this.maxHeightDiskCache,
     this.fit = BoxFit.cover,
   });
 
@@ -25,7 +25,7 @@ class CachedNetworkImageWidget extends StatelessWidget {
       fit: fit,
       height: height,
       width: width,
-      maxHeightDiskCache: maxHeightDiskCache.toInt(),
+      maxHeightDiskCache: maxHeightDiskCache?.toInt(),
       progressIndicatorBuilder: (context, url, downloadProgress) {
         return const Padding(
           padding: EdgeInsets.all(8.0),

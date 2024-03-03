@@ -527,7 +527,7 @@ class GalleryYearWiseCards extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20).r,
         ),
-        margin: const EdgeInsets.all(10).r,
+        margin: const EdgeInsets.only(right: 20, bottom: 10).r,
         color: context.colorScheme.primaryCardColor,
         child: Container(
             width: 190.w,
@@ -583,6 +583,116 @@ class GalleryYearWiseCards extends StatelessWidget {
                 )
               ],
             )),
+      ),
+    );
+  }
+}
+
+class BestMemories extends StatelessWidget {
+  final List<MemoriesModel> bestMemories;
+  const BestMemories({super.key, required this.bestMemories});
+
+  @override
+  Widget build(BuildContext context) {
+    return bestMemories.isEmpty
+        ? const SizedBox()
+        : StaggeredGrid.count(
+            crossAxisCount: 4,
+            mainAxisSpacing: 4,
+            crossAxisSpacing: 4,
+            children: [
+              StaggeredGridTile.count(
+                crossAxisCellCount: 2,
+                mainAxisCellCount: 2,
+                child: MemoryCard(
+                  imageUrl: bestMemories[0].imageUrl,
+                ),
+              ),
+              StaggeredGridTile.count(
+                crossAxisCellCount: 2,
+                mainAxisCellCount: 1,
+                child: MemoryCard(
+                  imageUrl: bestMemories[1].imageUrl,
+                ),
+              ),
+              StaggeredGridTile.count(
+                crossAxisCellCount: 1,
+                mainAxisCellCount: 1,
+                child: MemoryCard(
+                  imageUrl: bestMemories[2].imageUrl,
+                ),
+              ),
+              StaggeredGridTile.count(
+                crossAxisCellCount: 1,
+                mainAxisCellCount: 1,
+                child: MemoryCard(
+                  imageUrl: bestMemories[3].imageUrl,
+                ),
+              ),
+              StaggeredGridTile.count(
+                crossAxisCellCount: 4,
+                mainAxisCellCount: 2,
+                child: MemoryCard(
+                  imageUrl: bestMemories[4].imageUrl,
+                ),
+              ),
+            ],
+          ).animate(delay: 2500.ms).shimmer();
+  }
+}
+
+class MemoryCard extends StatelessWidget {
+  final String? imageUrl;
+  const MemoryCard({super.key, required this.imageUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+            barrierColor: Colors.black.withOpacity(0.4),
+            context: context,
+            builder: (context) {
+              return GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: InteractiveViewer(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 10,
+                      sigmaY: 10,
+                    ),
+                    child: AlertDialog(
+                      contentPadding: EdgeInsets.zero,
+                      titlePadding: const EdgeInsets.symmetric(
+                          vertical: 4, horizontal: 12),
+                      content: ClipRRect(
+                          borderRadius: BorderRadius.circular(20).r,
+                          child: CachedNetworkImage(
+                            imageUrl: imageUrl!,
+                            fit: BoxFit.cover,
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) {
+                              return const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: CircularLoadingIndicator(),
+                              );
+                            },
+                          )),
+                    ),
+                  ),
+                ),
+              );
+            });
+      },
+      child: Container(
+        color: Brightness.dark == context.colorScheme.brightness
+            ? context.colorScheme.white.withOpacity(0.8)
+            : context.colorScheme.white,
+        padding: const EdgeInsets.all(8),
+        child: CachedNetworkImageWidget(
+          imageUrl: imageUrl!,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

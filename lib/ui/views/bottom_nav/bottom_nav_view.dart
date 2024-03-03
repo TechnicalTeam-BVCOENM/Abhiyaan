@@ -74,10 +74,10 @@ class BottomNavView extends StatelessWidget {
                 ),
                 const BottomNavigationBarItem(
                   label: '',
-                  icon: Icon(Icons.menu_rounded),
+                  icon: Icon(Icons.person),
                   activeIcon: BottomNavActiveIcon(
-                    icon: Icons.menu_rounded,
-                    text: "Settings",
+                    icon: Icons.person_outline_rounded,
+                    text: "Profile",
                   ),
                 ),
               ],

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -6,6 +8,7 @@ import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:abhiyaan/theme/responsive_utils.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
 import 'package:abhiyaan/ui/common/cached_network_image.dart';
 import 'package:abhiyaan/file_exporter.dart';
@@ -254,7 +257,16 @@ class EventView extends StatelessWidget {
                               : 0.verticalSpace,
                           model.todayEvent!.isEmpty &&
                                   model.upcomingEvents.isEmpty
-                              ? const Text("")
+                              ? Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SectionText(title: "Best Memories"),
+                                    BestMemories(
+                                      bestMemories: model._bestMemories,
+                                    ).animate(delay: 1500.ms).fadeIn(
+                                        duration: const Duration(milliseconds: 1000))
+                                  ],
+                                )
                               : 0.verticalSpace
                         ].animate(delay: 100.ms, interval: 40.ms).fadeIn()),
                   ),
