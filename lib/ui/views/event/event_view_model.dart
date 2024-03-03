@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'event_view.dart';
 
 class EventViewModel extends BaseViewModel {
@@ -6,6 +7,7 @@ class EventViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _analyticsService = locator<AnalyticsService>();
   List<SponsorsModel> _sponsors = [];
+  List<MemoriesModel> _bestMemories = [];
   List<SponsorsModel> get sponsors => _sponsors;
   List<EventModel> _events = [];
   List<GalleryModel> _gallery = [];
@@ -65,8 +67,8 @@ class EventViewModel extends BaseViewModel {
   Future<void> loadData() async {
     try {
       _events = await runBusyFuture(_firestoreService.getAllEvents());
-
-      _gallery = await _firestoreService.getGalleryImages();
+      _gallery = await runBusyFuture(_firestoreService.getGalleryImages());
+      _bestMemories = await runBusyFuture(_firestoreService.getAllMemories());
       _gallery.sort((a, b) => b.year.compareTo(a.year));
 
       getRemainingEvents();
@@ -228,4 +230,11 @@ class GalleryModel {
       'sports': sports,
     };
   }
+}
+
+class MemoriesModel {
+  String imageUrl;
+  MemoriesModel({
+    required this.imageUrl,
+  });
 }

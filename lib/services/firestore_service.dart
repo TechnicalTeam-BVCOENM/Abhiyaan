@@ -345,4 +345,21 @@ class FirestoreService {
       rethrow;
     }
   }
+
+  Future<List<MemoriesModel>> getAllMemories() async {
+    try {
+      final QuerySnapshot snapshot = await _firestore
+          .collection("Events")
+          .doc('data')
+          .collection('bestMemories')
+          .get();
+      return snapshot.docs.map((doc) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        return MemoriesModel(imageUrl: data['imageUrl']);
+      }).toList();
+    } on Exception catch (e) {
+      log.e("Error in getting events : ${e.toString()}");
+      return [];
+    }
+  }
 }
