@@ -253,7 +253,7 @@ class SignInView extends StatelessWidget {
                     Container(
                       alignment: Alignment.center,
                       child: Text(
-                        'Abhiyaan v1.0.4',
+                        'Abhiyaan v1.0.5',
                         textAlign: TextAlign.center,
                         style: FontThemeClass().caption(
                           context,

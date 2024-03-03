@@ -7,7 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   if (Firebase.apps.isNotEmpty) {
-    return;
+    return; 
   }
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

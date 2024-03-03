@@ -685,13 +685,24 @@ class MemoryCard extends StatelessWidget {
             });
       },
       child: Container(
-        color: Brightness.dark == context.colorScheme.brightness
-            ? context.colorScheme.white.withOpacity(0.8)
-            : context.colorScheme.white,
+        decoration: BoxDecoration(
+          color: context.colorScheme.primaryCardColor,
+          borderRadius: BorderRadius.all(
+            const Radius.circular(12).r,
+          ),
+        ),
         padding: const EdgeInsets.all(8),
-        child: CachedNetworkImageWidget(
-          imageUrl: imageUrl!,
-          fit: BoxFit.cover,
+        child: Container(
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(
+              const Radius.circular(8).r,
+            ),
+          ),
+          child: CachedNetworkImageWidget(
+            imageUrl: imageUrl!,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );
