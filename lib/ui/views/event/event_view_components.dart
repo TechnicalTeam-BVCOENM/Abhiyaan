@@ -527,7 +527,7 @@ class GalleryYearWiseCards extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20).r,
         ),
-        margin: const EdgeInsets.all(10).r,
+        margin: const EdgeInsets.only(right: 20, bottom: 10).r,
         color: context.colorScheme.primaryCardColor,
         child: Container(
             width: 190.w,
@@ -584,6 +584,56 @@ class GalleryYearWiseCards extends StatelessWidget {
               ],
             )),
       ),
+    );
+  }
+}
+
+class BestMemories extends StatelessWidget {
+  const BestMemories({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StaggeredGrid.count(
+      crossAxisCount: 4,
+      mainAxisSpacing: 4,
+      crossAxisSpacing: 4,
+      children: [
+        StaggeredGridTile.count(
+          crossAxisCellCount: 2,
+          mainAxisCellCount: 2,
+          child: Container(
+            color: Colors.green,
+          ),
+        ),
+        StaggeredGridTile.count(
+          crossAxisCellCount: 2,
+          mainAxisCellCount: 1,
+          child: Container(
+            color: Colors.green,
+          ),
+        ),
+        StaggeredGridTile.count(
+          crossAxisCellCount: 1,
+          mainAxisCellCount: 1,
+          child: Container(
+            color: Colors.green,
+          ),
+        ),
+        StaggeredGridTile.count(
+          crossAxisCellCount: 1,
+          mainAxisCellCount: 1,
+          child: Container(
+            color: Colors.green,
+          ),
+        ),
+        StaggeredGridTile.count(
+          crossAxisCellCount: 4,
+          mainAxisCellCount: 2,
+          child: Container(
+            color: Colors.green,
+          ),
+        ),
+      ],
     );
   }
 }

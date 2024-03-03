@@ -5,7 +5,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:abhiyaan/theme/responsive_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
 import 'package:abhiyaan/ui/common/cached_network_image.dart';
 import 'package:abhiyaan/file_exporter.dart';
@@ -254,7 +256,13 @@ class EventView extends StatelessWidget {
                               : 0.verticalSpace,
                           model.todayEvent!.isEmpty &&
                                   model.upcomingEvents.isEmpty
-                              ? const Text("")
+                              ? const Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SectionText(title: "Best Memories"),
+                                    BestMemories()
+                                  ],
+                                )
                               : 0.verticalSpace
                         ].animate(delay: 100.ms, interval: 40.ms).fadeIn()),
                   ),
