@@ -16,7 +16,7 @@ class GalleryTabView extends StatelessWidget {
       viewModelBuilder: () => GalleryTabViewModel(),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+          backgroundColor: context.colorScheme.scaffold,
           body: Center(
             child: GalleryTabs(
               abhiyaan: gallery.abhiyaan,

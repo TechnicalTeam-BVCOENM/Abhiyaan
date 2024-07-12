@@ -35,7 +35,7 @@ class DettailedBlogPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   FloatingActionButton(
-                    backgroundColor: context.colorScheme.primaryAccentColor,
+                    backgroundColor: context.colorScheme.accentColor,
                     heroTag: "like",
                     onPressed: () async {
                       model.shareBlog(context, blogData);
@@ -49,7 +49,7 @@ class DettailedBlogPage extends StatelessWidget {
                   ).animate(delay: 200.ms).scale(),
                   12.horizontalSpace,
                   FloatingActionButton(
-                    backgroundColor: context.colorScheme.primaryAccentColor,
+                    backgroundColor: context.colorScheme.accentColor,
                     heroTag: "like",
                     onPressed: () async {
                       communityViewModel.updateLikes(
@@ -67,15 +67,15 @@ class DettailedBlogPage extends StatelessWidget {
                 ],
               ),
               appBar: AppBar(
-                backgroundColor: context.colorScheme.primaryCardColor,
-                surfaceTintColor: context.colorScheme.primaryCardColor,
+                backgroundColor: context.colorScheme.card,
+                surfaceTintColor: context.colorScheme.card,
                 leading: IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   icon: Icon(
                     Icons.arrow_back_ios_rounded,
-                    color: context.colorScheme.primaryTextColor,
+                    color: context.colorScheme.primaryText,
                   ),
                 ),
                 title: Text(
@@ -83,13 +83,13 @@ class DettailedBlogPage extends StatelessWidget {
                   maxLines: 2,
                   style: fontThemeClass.title2(
                     context,
-                    color: context.colorScheme.primaryTextColor,
+                    color: context.colorScheme.primaryText,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 centerTitle: true,
               ),
-              backgroundColor: context.colorScheme.primaryCardColor,
+              backgroundColor: context.colorScheme.card,
               body: SafeArea(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(horizontal: 18).r,
@@ -115,7 +115,7 @@ class DettailedBlogPage extends StatelessWidget {
                           textAlign: TextAlign.start,
                           style: fontThemeClass.caption(
                             context,
-                            color: context.colorScheme.secondaryTextColor,
+                            color: context.colorScheme.secondaryText,
                           ),
                         ),
                       ),
@@ -128,7 +128,7 @@ class DettailedBlogPage extends StatelessWidget {
                       Divider(
                         thickness: 1.8,
                         endIndent: 300.w,
-                        color: context.colorScheme.primaryAccentColor,
+                        color: context.colorScheme.accentColor,
                       ),
                       12.verticalSpace,
                       Text(

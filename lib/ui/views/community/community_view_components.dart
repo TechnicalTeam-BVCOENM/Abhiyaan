@@ -34,8 +34,8 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
         final int streamLikes = snapshot.data ?? 0;
         return Card(
           elevation: 1,
-          shadowColor: context.colorScheme.primaryCardColor.withOpacity(0.8),
-          color: context.colorScheme.primaryCardColor,
+          shadowColor: context.colorScheme.card.withOpacity(0.8),
+          color: context.colorScheme.card,
           clipBehavior: Clip.hardEdge,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.r),
@@ -48,7 +48,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                 height: 45.h,
                 padding: const EdgeInsets.symmetric(horizontal: 12).r,
                 decoration: BoxDecoration(
-                  color: context.colorScheme.primaryCardColor,
+                  color: context.colorScheme.card,
                 ),
                 child: Row(
                   children: [
@@ -71,7 +71,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                       blogsData.author,
                       style: fontThemeClass.caption(
                         context,
-                        color: context.colorScheme.primaryTextColor,
+                        color: context.colorScheme.primaryText,
                         fontWeight: FontWeight.w500,
                       ),
                     ).animate(delay: 500.ms).slide(delay: 10.ms).fadeIn(),
@@ -81,7 +81,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                       actualPostTime,
                       style: fontThemeClass.caption(
                         context,
-                        color: context.colorScheme.secondaryTextColor,
+                        color: context.colorScheme.secondaryText,
                         fontWeight: FontWeight.w400,
                       ),
                     ).animate(delay: 500.ms).slide(delay: 10.ms).fadeIn(),
@@ -103,7 +103,7 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                 height: 45.h,
                 padding: const EdgeInsets.symmetric(horizontal: 12).r,
                 decoration: BoxDecoration(
-                  color: context.colorScheme.primaryCardColor,
+                  color: context.colorScheme.card,
                 ),
                 child: Row(
                   children: [
@@ -116,21 +116,25 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
                     8.horizontalSpace,
                     Hero(
                       tag: blogsData.title,
-                      child: Text(
-                        blogsData.title,
-                        style: fontThemeClass.caption(
-                          context,
-                          color: context.colorScheme.primaryTextColor,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ).animate(delay: 500.ms).scale(),
+                      child: SizedBox(
+                        width: ResponsiveUtils.screenWidth(context) * 0.65,
+                        child: Text(
+                          blogsData.title,
+                          overflow: TextOverflow.ellipsis,
+                          style: fontThemeClass.caption(
+                            context,
+                            color: context.colorScheme.primaryText,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ).animate(delay: 500.ms).scale(),
+                      ),
                     ),
                     const Spacer(),
                     Text(
                       streamLikes.toString(),
                       style: fontThemeClass.caption(
                         context,
-                        color: context.colorScheme.primaryTextColor,
+                        color: context.colorScheme.primaryText,
                         fontWeight: FontWeight.w500,
                       ),
                     ).animate(delay: 500.ms).scale(),
@@ -222,14 +226,14 @@ class DepartmentClubs extends ViewModelWidget<CommunityViewModel> {
                   height: 30.h,
                   width: 120.w,
                   decoration: BoxDecoration(
-                    color: context.colorScheme.primaryCardColor,
+                    color: context.colorScheme.card,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.bookmark_rounded,
-                        color: context.colorScheme.primaryAccentColor,
+                        color: context.colorScheme.accentColor,
                         size: 18.sp,
                       ),
                       4.horizontalSpace,

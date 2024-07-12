@@ -8,7 +8,7 @@ class ExpandImageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+      backgroundColor: context.colorScheme.scaffold,
       body: SafeArea(
         child: Center(
           child: InteractiveViewer(
@@ -17,7 +17,7 @@ class ExpandImageView extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
-                color: context.colorScheme.scaffoldBackgroundColor,
+                color: context.colorScheme.scaffold,
                 image: DecorationImage(
                   fit: BoxFit.contain,
                   image: NetworkImage(imageUrl),

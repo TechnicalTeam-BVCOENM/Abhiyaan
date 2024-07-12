@@ -12,9 +12,9 @@ class CachedNetworkImageWidget extends StatelessWidget {
   const CachedNetworkImageWidget({
     super.key,
     required this.imageUrl,
-     this.height,
-     this.width,
-     this.maxHeightDiskCache,
+    this.height,
+    this.width,
+    this.maxHeightDiskCache,
     this.fit = BoxFit.cover,
   });
 
@@ -79,7 +79,7 @@ Container horizontalStoryRow(
                     model[idx].title,
                     style: fontTheme.title2(
                       context,
-                      color: context.colorScheme.primaryTextColor,
+                      color: context.colorScheme.primaryText,
                     ),
                   ),
                 ],

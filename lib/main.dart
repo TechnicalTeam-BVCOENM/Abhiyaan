@@ -7,7 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   if (Firebase.apps.isNotEmpty) {
-    return; 
+    return;
   }
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -65,14 +65,13 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 textTheme: const TextTheme(),
-                primaryColor: context.colorScheme.primaryAccentColor,
+                primaryColor: context.colorScheme.accentColor,
                 brightness: themeService.brightness,
-                scaffoldBackgroundColor:
-                    context.colorScheme.scaffoldBackgroundColor,
+                scaffoldBackgroundColor: context.colorScheme.scaffold,
                 appBarTheme: AppBarTheme(
                   elevation: 0,
-                  backgroundColor: context.colorScheme.scaffoldBackgroundColor,
-                  foregroundColor: context.colorScheme.primaryTextColor,
+                  backgroundColor: context.colorScheme.scaffold,
+                  foregroundColor: context.colorScheme.primaryText,
                 ),
               ),
               navigatorObservers: [

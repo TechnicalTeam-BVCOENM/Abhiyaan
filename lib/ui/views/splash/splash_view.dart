@@ -14,7 +14,7 @@ class SplashView extends StatelessWidget {
       onViewModelReady: (model) => model.init(),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+          backgroundColor: context.colorScheme.scaffold,
           body: SafeArea(
             child: Center(
               child: Column(
@@ -35,7 +35,7 @@ class SplashView extends StatelessWidget {
                     'Version 1.0.5',
                     style: FontThemeClass().caption(
                       context,
-                      color: context.colorScheme.secondaryTextColor,
+                      color: context.colorScheme.secondaryText,
                       fontWeight: FontWeight.w500,
                     ),
                   ),

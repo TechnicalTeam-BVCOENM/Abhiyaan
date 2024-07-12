@@ -21,7 +21,7 @@ class SocialLinks extends StatelessWidget {
         width: 52.r,
         height: 52.r,
         decoration: BoxDecoration(
-          color: context.colorScheme.primaryCardColor,
+          color: context.colorScheme.card,
           borderRadius: BorderRadius.circular(100),
         ),
         child: Padding(
@@ -42,7 +42,7 @@ class Cerificatation extends StatelessWidget {
       onTap: () {},
       child: ListTile(
         minVerticalPadding: 15.r,
-        tileColor: context.colorScheme.primaryCardColor,
+        tileColor: context.colorScheme.card,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.r),
         ),
@@ -51,14 +51,14 @@ class Cerificatation extends StatelessWidget {
           child: Icon(
             Icons.credit_card_outlined,
             size: 30.r,
-            color: context.colorScheme.primaryAccentColor,
+            color: context.colorScheme.accentColor,
           ),
         ),
         title: Text(
           "Certification",
           style: FontThemeClass().body(
             context,
-            color: context.colorScheme.primaryTextColor,
+            color: context.colorScheme.primaryText,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -68,13 +68,13 @@ class Cerificatation extends StatelessWidget {
           maxLines: 1,
           style: FontThemeClass().caption(
             context,
-            color: context.colorScheme.secondaryTextColor,
+            color: context.colorScheme.secondaryText,
           ),
         ),
         trailing: Icon(
           Icons.arrow_forward_ios_rounded,
           size: 25.r,
-          color: context.colorScheme.primaryTextColor,
+          color: context.colorScheme.primaryText,
         ),
       ),
     );
@@ -89,7 +89,7 @@ class AppBarWidget extends ViewModelWidget<ProfileViewModel> {
   @override
   Widget build(BuildContext context, ProfileViewModel viewModel) {
     return AppBar(
-      backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+      backgroundColor: context.colorScheme.scaffold,
       elevation: 0,
       centerTitle: true,
       automaticallyImplyLeading: false,
@@ -116,7 +116,7 @@ class ProfileCard extends ViewModelWidget<ProfileViewModel> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.r),
         ),
-        tileColor: context.colorScheme.primaryCardColor,
+        tileColor: context.colorScheme.card,
         minVerticalPadding: 10.r,
         title: Row(
           children: [
@@ -139,7 +139,7 @@ class ProfileCard extends ViewModelWidget<ProfileViewModel> {
                   viewModel.localStorageService.read('userName'),
                   style: FontThemeClass().title2(
                     context,
-                    color: context.colorScheme.primaryTextColor,
+                    color: context.colorScheme.primaryText,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -147,7 +147,7 @@ class ProfileCard extends ViewModelWidget<ProfileViewModel> {
                   "View Profile Information",
                   style: FontThemeClass().caption(
                     context,
-                    color: context.colorScheme.secondaryTextColor,
+                    color: context.colorScheme.secondaryText,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -160,14 +160,14 @@ class ProfileCard extends ViewModelWidget<ProfileViewModel> {
                   "View",
                   style: FontThemeClass().body(
                     context,
-                    color: context.colorScheme.secondaryTextColor,
+                    color: context.colorScheme.secondaryText,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 4.horizontalSpace,
                 Icon(
                   Icons.arrow_forward_ios_sharp,
-                  color: context.colorScheme.secondaryTextColor,
+                  color: context.colorScheme.secondaryText,
                   size: 15.r,
                 ),
               ],
@@ -192,7 +192,7 @@ class HelpSupportTile extends ViewModelWidget<ProfileViewModel> {
       },
       child: ListTile(
         minVerticalPadding: 25.r,
-        tileColor: context.colorScheme.primaryCardColor,
+        tileColor: context.colorScheme.card,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.r),
         ),
@@ -201,21 +201,21 @@ class HelpSupportTile extends ViewModelWidget<ProfileViewModel> {
           child: Icon(
             Icons.warning_amber_rounded,
             size: 30.r,
-            color: context.colorScheme.primaryAccentColor,
+            color: context.colorScheme.accentColor,
           ),
         ),
         title: Text(
           "Help & Support",
           style: FontThemeClass().body(
             context,
-            color: context.colorScheme.primaryTextColor,
+            color: context.colorScheme.primaryText,
             fontWeight: FontWeight.w600,
           ),
         ),
         trailing: Icon(
           Icons.arrow_forward_ios_rounded,
           size: 25.r,
-          color: context.colorScheme.primaryTextColor,
+          color: context.colorScheme.primaryText,
         ),
       ),
     );
@@ -235,7 +235,7 @@ class PrivacyPolicyTile extends ViewModelWidget<ProfileViewModel> {
       },
       child: ListTile(
         minVerticalPadding: 25.r,
-        tileColor: context.colorScheme.primaryCardColor,
+        tileColor: context.colorScheme.card,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.r),
         ),
@@ -244,21 +244,21 @@ class PrivacyPolicyTile extends ViewModelWidget<ProfileViewModel> {
           child: Icon(
             Icons.privacy_tip_outlined,
             size: 30.r,
-            color: context.colorScheme.primaryAccentColor,
+            color: context.colorScheme.accentColor,
           ),
         ),
         title: Text(
           "Privacy Policy",
           style: FontThemeClass().body(
             context,
-            color: context.colorScheme.primaryTextColor,
+            color: context.colorScheme.primaryText,
             fontWeight: FontWeight.w600,
           ),
         ),
         trailing: Icon(
           Icons.arrow_forward_ios_rounded,
           size: 25.r,
-          color: context.colorScheme.primaryTextColor,
+          color: context.colorScheme.primaryText,
         ),
       ),
     );
@@ -274,7 +274,7 @@ class DarkModeTile extends ViewModelWidget<ProfileViewModel> {
   Widget build(BuildContext context, ProfileViewModel viewModel) {
     return ListTile(
       minVerticalPadding: 25.r,
-      tileColor: context.colorScheme.primaryCardColor,
+      tileColor: context.colorScheme.card,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.r),
       ),
@@ -283,23 +283,23 @@ class DarkModeTile extends ViewModelWidget<ProfileViewModel> {
         child: Icon(
           Icons.dark_mode_outlined,
           size: 30.r,
-          color: context.colorScheme.primaryAccentColor,
+          color: context.colorScheme.accentColor,
         ),
       ),
       title: Text(
         "Dark Mode",
         style: FontThemeClass().body(
           context,
-          color: context.colorScheme.primaryTextColor,
+          color: context.colorScheme.primaryText,
           fontWeight: FontWeight.w600,
         ),
       ),
       trailing: Switch.adaptive(
-        activeColor: context.colorScheme.primaryAccentColor,
-        inactiveThumbColor: context.colorScheme.primaryAccentColor,
-        inactiveTrackColor: context.colorScheme.primaryLightScaffold,
+        activeColor: context.colorScheme.accentColor,
+        inactiveThumbColor: context.colorScheme.accentColor,
+        inactiveTrackColor: context.colorScheme.lightScaffold,
         trackOutlineColor: MaterialStateColor.resolveWith(
-          (states) => context.colorScheme.primaryAccentColor,
+          (states) => context.colorScheme.accentColor,
         ),
         value: viewModel._themeService.valueListenable.value,
         onChanged: (val) => viewModel.changeTheme(context),

@@ -27,7 +27,7 @@ class RegisterView extends StatelessWidget {
           onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
           child: Scaffold(
             resizeToAvoidBottomInset: false,
-            backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+            backgroundColor: context.colorScheme.scaffold,
             body: Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
               child: Column(
@@ -47,7 +47,7 @@ class RegisterView extends StatelessWidget {
                   30.verticalSpace,
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,
-                    cursorColor: context.colorScheme.primaryAccentColor,
+                    cursorColor: context.colorScheme.accentColor,
                     controller: model.emailIdTextController,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
@@ -59,15 +59,15 @@ class RegisterView extends StatelessWidget {
                         ),
                         borderSide: BorderSide.none,
                       ),
-                      fillColor: context.colorScheme.primaryCardColor,
+                      fillColor: context.colorScheme.card,
                       filled: true,
-                      focusColor: context.colorScheme.primaryCardColor,
+                      focusColor: context.colorScheme.card,
                       hintText: 'Student Email ID',
                       errorText:
                           model.isEmailIdValid ? null : model.emailIdErrorText,
                       hintStyle: model.fontTheme.caption(
                         context,
-                        color: context.colorScheme.secondaryTextColor,
+                        color: context.colorScheme.secondaryText,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -78,7 +78,7 @@ class RegisterView extends StatelessWidget {
                       ),
                   15.verticalSpace,
                   TextFormField(
-                    cursorColor: context.colorScheme.primaryAccentColor,
+                    cursorColor: context.colorScheme.accentColor,
                     controller: model.userNameController,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
@@ -90,15 +90,15 @@ class RegisterView extends StatelessWidget {
                         ),
                         borderSide: BorderSide.none,
                       ),
-                      fillColor: context.colorScheme.primaryCardColor,
+                      fillColor: context.colorScheme.card,
                       filled: true,
-                      focusColor: context.colorScheme.primaryCardColor,
+                      focusColor: context.colorScheme.card,
                       hintText: 'Enter Username',
                       errorText:
                           model.isEmailIdValid ? null : model.emailIdErrorText,
                       hintStyle: model.fontTheme.caption(
                         context,
-                        color: context.colorScheme.secondaryTextColor,
+                        color: context.colorScheme.secondaryText,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -110,7 +110,7 @@ class RegisterView extends StatelessWidget {
                   15.verticalSpace,
                   TextFormField(
                     keyboardType: TextInputType.visiblePassword,
-                    cursorColor: context.colorScheme.primaryAccentColor,
+                    cursorColor: context.colorScheme.accentColor,
                     controller: model.createpasswordTextController,
                     obscureText: model.isCreatePasswordVisible ? false : true,
                     decoration: InputDecoration(
@@ -122,9 +122,9 @@ class RegisterView extends StatelessWidget {
                             const Radius.circular(15).r,
                           ),
                           borderSide: BorderSide.none),
-                      fillColor: context.colorScheme.primaryCardColor,
+                      fillColor: context.colorScheme.card,
                       filled: true,
-                      focusColor: context.colorScheme.primaryCardColor,
+                      focusColor: context.colorScheme.card,
                       suffixIcon: InkWell(
                         splashColor: Colors.transparent,
                         onTap: () {
@@ -133,17 +133,17 @@ class RegisterView extends StatelessWidget {
                         child: model.isCreatePasswordVisible
                             ? Icon(
                                 Icons.visibility_off,
-                                color: context.colorScheme.secondaryTextColor,
+                                color: context.colorScheme.secondaryText,
                               )
                             : Icon(
                                 Icons.visibility,
-                                color: context.colorScheme.secondaryTextColor,
+                                color: context.colorScheme.secondaryText,
                               ),
                       ),
                       hintText: 'Create Password',
                       hintStyle: model.fontTheme.caption(
                         context,
-                        color: context.colorScheme.secondaryTextColor,
+                        color: context.colorScheme.secondaryText,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -155,7 +155,7 @@ class RegisterView extends StatelessWidget {
                   15.verticalSpace,
                   TextFormField(
                     keyboardType: TextInputType.visiblePassword,
-                    cursorColor: context.colorScheme.primaryAccentColor,
+                    cursorColor: context.colorScheme.accentColor,
                     controller: model.confirmpasswordTextController,
                     obscureText: model.isConfirmPasswordVisible ? false : true,
                     decoration: InputDecoration(
@@ -168,9 +168,9 @@ class RegisterView extends StatelessWidget {
                         ),
                         borderSide: BorderSide.none,
                       ),
-                      fillColor: context.colorScheme.primaryCardColor,
+                      fillColor: context.colorScheme.card,
                       filled: true,
-                      focusColor: context.colorScheme.primaryCardColor,
+                      focusColor: context.colorScheme.card,
                       suffixIcon: InkWell(
                         splashColor: Colors.transparent,
                         onTap: () {
@@ -179,17 +179,17 @@ class RegisterView extends StatelessWidget {
                         child: model.isConfirmPasswordVisible
                             ? Icon(
                                 Icons.visibility_off,
-                                color: context.colorScheme.secondaryTextColor,
+                                color: context.colorScheme.secondaryText,
                               )
                             : Icon(
                                 Icons.visibility,
-                                color: context.colorScheme.secondaryTextColor,
+                                color: context.colorScheme.secondaryText,
                               ),
                       ),
                       hintText: 'Confirm Password',
                       hintStyle: model.fontTheme.caption(
                         context,
-                        color: context.colorScheme.secondaryTextColor,
+                        color: context.colorScheme.secondaryText,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -207,7 +207,7 @@ class RegisterView extends StatelessWidget {
                       minimumSize: MaterialStateProperty.all(
                           const Size(double.infinity, 50)),
                       backgroundColor: MaterialStateProperty.all(
-                          context.colorScheme.primaryAccentColor),
+                          context.colorScheme.accentColor),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40.0).r,
@@ -234,7 +234,7 @@ class RegisterView extends StatelessWidget {
                       text: 'Already have an account? ',
                       style: FontThemeClass().caption(
                         context,
-                        color: context.colorScheme.secondaryTextColor,
+                        color: context.colorScheme.secondaryText,
                         fontWeight: FontWeight.w500,
                       ),
                       children: <TextSpan>[
@@ -242,7 +242,7 @@ class RegisterView extends StatelessWidget {
                           text: 'Sign In',
                           style: FontThemeClass().caption(
                             context,
-                            color: context.colorScheme.primaryAccentColor,
+                            color: context.colorScheme.accentColor,
                             fontWeight: FontWeight.w500,
                           ),
                           recognizer: TapGestureRecognizer()
@@ -266,7 +266,7 @@ class RegisterView extends StatelessWidget {
                         text: 'Problem with Registration? ',
                         style: FontThemeClass().caption(
                           context,
-                          color: context.colorScheme.secondaryTextColor,
+                          color: context.colorScheme.secondaryText,
                           fontWeight: FontWeight.w500,
                         ),
                         children: <TextSpan>[
@@ -274,7 +274,7 @@ class RegisterView extends StatelessWidget {
                             text: 'Report Issue',
                             style: FontThemeClass().caption(
                               context,
-                              color: context.colorScheme.primaryAccentColor,
+                              color: context.colorScheme.accentColor,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -292,7 +292,7 @@ class RegisterView extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: FontThemeClass().caption(
                       context,
-                      color: context.colorScheme.secondaryTextColor,
+                      color: context.colorScheme.secondaryText,
                       fontWeight: FontWeight.w500,
                     ),
                   ).animate(delay: 1000.ms).fadeIn(

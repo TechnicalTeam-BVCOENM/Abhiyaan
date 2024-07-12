@@ -36,7 +36,7 @@ void _showmessage(BuildContext context, String message, String type) {
       icon = Icons.warning;
       break;
     case 'normal':
-      backgroundColor = context.colorScheme.primaryAccentColor;
+      backgroundColor = context.colorScheme.accentColor;
       icon = Icons.message;
       break;
     default:
@@ -62,7 +62,7 @@ void _showmessage(BuildContext context, String message, String type) {
             height: 60.h,
             width: double.infinity,
             child: Card(
-              color: context.colorScheme.primaryCardColor,
+              color: context.colorScheme.card,
               clipBehavior: Clip.hardEdge,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20).r,

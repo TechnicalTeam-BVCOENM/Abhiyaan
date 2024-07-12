@@ -23,7 +23,7 @@ class SignInView extends StatelessWidget {
           onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
           child: Scaffold(
             resizeToAvoidBottomInset: false,
-            backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+            backgroundColor: context.colorScheme.scaffold,
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.only(
@@ -48,7 +48,7 @@ class SignInView extends StatelessWidget {
                           ),
                     ),
                     TextFormField(
-                      cursorColor: context.colorScheme.primaryAccentColor,
+                      cursorColor: context.colorScheme.accentColor,
                       controller: model.emailIdTextController,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
@@ -61,13 +61,13 @@ class SignInView extends StatelessWidget {
                           ),
                           borderSide: BorderSide.none,
                         ),
-                        fillColor: context.colorScheme.primaryCardColor,
+                        fillColor: context.colorScheme.card,
                         filled: true,
-                        focusColor: context.colorScheme.primaryCardColor,
+                        focusColor: context.colorScheme.card,
                         hintText: 'Student Email ID',
                         hintStyle: model.fontTheme.caption(
                           context,
-                          color: context.colorScheme.secondaryTextColor,
+                          color: context.colorScheme.secondaryText,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -80,7 +80,7 @@ class SignInView extends StatelessWidget {
                       height: 15.h,
                     ),
                     TextFormField(
-                      cursorColor: context.colorScheme.primaryAccentColor,
+                      cursorColor: context.colorScheme.accentColor,
                       controller: model.passwordTextController,
                       obscureText: model.isPasswordVisible ? false : true,
                       decoration: InputDecoration(
@@ -92,7 +92,7 @@ class SignInView extends StatelessWidget {
                               const Radius.circular(15).r,
                             ),
                             borderSide: BorderSide.none),
-                        fillColor: context.colorScheme.primaryCardColor,
+                        fillColor: context.colorScheme.card,
                         filled: true,
                         focusColor: Colors.white,
                         suffixIcon: InkWell(
@@ -103,17 +103,17 @@ class SignInView extends StatelessWidget {
                           child: model.isPasswordVisible
                               ? Icon(
                                   Icons.visibility_off,
-                                  color: context.colorScheme.secondaryTextColor,
+                                  color: context.colorScheme.secondaryText,
                                 )
                               : Icon(
                                   Icons.visibility,
-                                  color: context.colorScheme.secondaryTextColor,
+                                  color: context.colorScheme.secondaryText,
                                 ),
                         ),
                         hintText: 'Password',
                         hintStyle: model.fontTheme.caption(
                           context,
-                          color: context.colorScheme.secondaryTextColor,
+                          color: context.colorScheme.secondaryText,
                           fontWeight: FontWeight.w500,
                         ),
                         errorText: model.isPasswordValid
@@ -138,7 +138,7 @@ class SignInView extends StatelessWidget {
                             'Forgot password?',
                             style: FontThemeClass().caption(
                               context,
-                              color: context.colorScheme.primaryAccentColor,
+                              color: context.colorScheme.accentColor,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -163,7 +163,7 @@ class SignInView extends StatelessWidget {
                           minimumSize: MaterialStateProperty.all(
                               const Size(double.infinity, 50)),
                           backgroundColor: MaterialStateProperty.all(
-                              context.colorScheme.primaryAccentColor),
+                              context.colorScheme.accentColor),
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40.0).r,
@@ -192,7 +192,7 @@ class SignInView extends StatelessWidget {
                                 text: 'Don\'t have an account? ',
                                 style: FontThemeClass().caption(
                                   context,
-                                  color: context.colorScheme.secondaryTextColor,
+                                  color: context.colorScheme.secondaryText,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 children: <TextSpan>[
@@ -200,8 +200,7 @@ class SignInView extends StatelessWidget {
                                     text: 'Register Now',
                                     style: FontThemeClass().caption(
                                       context,
-                                      color: context
-                                          .colorScheme.primaryAccentColor,
+                                      color: context.colorScheme.accentColor,
                                       fontWeight: FontWeight.w500,
                                     ),
                                     recognizer: TapGestureRecognizer()
@@ -228,7 +227,7 @@ class SignInView extends StatelessWidget {
                             text: 'Problem with Sign In? ',
                             style: FontThemeClass().caption(
                               context,
-                              color: context.colorScheme.secondaryTextColor,
+                              color: context.colorScheme.secondaryText,
                               fontWeight: FontWeight.w500,
                             ),
                             children: <TextSpan>[
@@ -236,7 +235,7 @@ class SignInView extends StatelessWidget {
                                 text: 'Report Issue',
                                 style: FontThemeClass().caption(
                                   context,
-                                  color: context.colorScheme.primaryAccentColor,
+                                  color: context.colorScheme.accentColor,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -257,7 +256,7 @@ class SignInView extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: FontThemeClass().caption(
                           context,
-                          color: context.colorScheme.secondaryTextColor,
+                          color: context.colorScheme.secondaryText,
                           fontWeight: FontWeight.w500,
                         ),
                       ),

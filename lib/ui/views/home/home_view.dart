@@ -8,7 +8,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
-import 'package:abhiyaan/ui/views/home/Societies/societies_view.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:abhiyaan/ui/common/url_launcher.dart';
@@ -37,7 +36,7 @@ class HomeView extends StatelessWidget {
             durationUntilAlertAgain: const Duration(days: 2),
           ),
           child: Scaffold(
-            backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+            backgroundColor: context.colorScheme.scaffold,
             body: model.isBusy
                 ? const CircularLoadingIndicator()
                 : SafeArea(
@@ -74,8 +73,7 @@ class HomeView extends StatelessWidget {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(16).r,
                                       side: BorderSide(
-                                        color: context
-                                            .colorScheme.primaryAccentColor,
+                                        color: context.colorScheme.accentColor,
                                         width: 1.0,
                                       ),
                                     ),
@@ -85,8 +83,8 @@ class HomeView extends StatelessWidget {
                                       children: [
                                         Icon(
                                           Icons.info_rounded,
-                                          color: context
-                                              .colorScheme.primaryTextColor,
+                                          color:
+                                              context.colorScheme.primaryText,
                                         ),
                                         10.horizontalSpace,
                                         Text(
@@ -145,7 +143,7 @@ class HomeView extends StatelessWidget {
                               'Made with ❤️ by Technical Team',
                               style: fontTheme.caption(
                                 context,
-                                color: context.colorScheme.primaryTextColor
+                                color: context.colorScheme.primaryText
                                     .withOpacity(0.8),
                                 fontWeight: FontWeight.w500,
                               ),

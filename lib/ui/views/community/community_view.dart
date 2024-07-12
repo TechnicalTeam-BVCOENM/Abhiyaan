@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+import 'package:abhiyaan/theme/responsive_utils.dart';
 import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:abhiyaan/ui/views/community/detailed_blogs/detailed_blogs_view.dart';
@@ -31,7 +32,7 @@ class CommunityView extends StatelessWidget {
         final analyticsService = locator<AnalyticsService>();
         FontThemeClass fontThemeClass = FontThemeClass();
         return Scaffold(
-          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+          backgroundColor: context.colorScheme.scaffold,
           body: model.isBusy
               ? const CircularLoadingIndicator()
               : SafeArea(
@@ -105,7 +106,7 @@ class CommunityView extends StatelessWidget {
                                   dotColor:
                                       context.colorScheme.secondarySectionColor,
                                   activeDotColor:
-                                      context.colorScheme.primaryAccentColor,
+                                      context.colorScheme.accentColor,
                                   spacing: 4,
                                 ),
                               ),
