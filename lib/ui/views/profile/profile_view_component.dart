@@ -298,7 +298,7 @@ class DarkModeTile extends ViewModelWidget<ProfileViewModel> {
         activeColor: context.colorScheme.primaryAccentColor,
         inactiveThumbColor: context.colorScheme.primaryAccentColor,
         inactiveTrackColor: context.colorScheme.primaryLightScaffold,
-        trackOutlineColor: MaterialStateColor.resolveWith(
+        trackOutlineColor: WidgetStateColor.resolveWith(
           (states) => context.colorScheme.primaryAccentColor,
         ),
         value: viewModel._themeService.valueListenable.value,
