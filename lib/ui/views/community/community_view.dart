@@ -61,6 +61,17 @@ class CommunityView extends StatelessWidget {
                                 style: fontThemeClass.title(context),
                               ),
                             ),
+                            QuoteCard(
+                              quote: model.affirmation,
+                              autherName: model.authorName,
+                            )
+                                .animate(
+                                  delay: 200.ms,
+                                )
+                                .fadeIn(
+                                  curve: Curves.easeInOutCubic,
+                                  duration: 600.ms,
+                                ),
                             const SectionText(title: "Blogs"),
                             // Add Blogs here
                             SizedBox(
@@ -146,18 +157,7 @@ class CommunityView extends StatelessWidget {
                                   ).animate(delay: 200.ms).fadeIn(
                                     curve: Curves.easeInOutCubic,
                                     duration: 600.ms),
-                            const SectionText(title: "Quote of the day"),
-                            QuoteCard(
-                              quote: model.affirmation,
-                              autherName: model.authorName,
-                            )
-                                .animate(
-                                  delay: 200.ms,
-                                )
-                                .fadeIn(
-                                  curve: Curves.easeInOutCubic,
-                                  duration: 600.ms,
-                                ),
+
                             Container(
                               padding: const EdgeInsets.all(10),
                               alignment: Alignment.center,

@@ -110,7 +110,7 @@ class PreferencesView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Made with ❤️ by Technical Team ',
+                    'Made with ❤️ by TheDevCrew ',
                     style: model.fontTheme.caption(
                       context,
                       color: context.colorScheme.secondarySectionColor,

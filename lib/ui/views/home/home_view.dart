@@ -140,7 +140,7 @@ class HomeView extends StatelessWidget {
                                   .launchURL("https://abhiyaan.tech/web-team");
                             },
                             child: Text(
-                              'Made with ❤️ by Technical Team',
+                              'Made with ❤️ by TheDevCrew',
                               style: fontTheme.caption(
                                 context,
                                 color: context.colorScheme.primaryText

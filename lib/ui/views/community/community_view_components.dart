@@ -267,69 +267,50 @@ class QuoteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FontThemeClass fontThemeClass = FontThemeClass();
-    return Card(
-      elevation: 8.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [
-              Color(0xFF2F80ED),
-              Color(0xFF56CCF2),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        15.verticalSpace,
+        Container(
+          width: double.maxFinite,
+          alignment: Alignment.centerLeft,
+          child: Center(
+            child: Transform.flip(
+              flipY: true,
+              flipX: true,
+              child:  Icon(
+                Icons.format_quote_outlined,
+                color: context.colorScheme.darkScaffold,
+                size: 40,
+              ),
+            ),
           ),
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        padding: const EdgeInsets.all(18.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Transform.flip(
-                flipY: true,
-                flipX: true,
-                child: const Icon(
-                  Icons.format_quote,
-                  size: 50,
-                  color: Colors.white,
-                ),
-              ),
-            ).animate(delay: 600.ms).scale(),
-            Text(
-              quote == ''
-                  ? "Education for us is not a matter of degree, but of life."
-                  : ' $quote ',
-              style: fontThemeClass.paragraph(
-                context,
-                fontWeight: FontWeight.w700,
-                color: context.colorScheme.white,
-              ),
-              textAlign: TextAlign.center,
-            ).animate(delay: 700.ms).scale(),
-            15.verticalSpace,
-            Container(
-              alignment: Alignment.centerRight,
-              child: Text(
-                autherName == '' ? "- John Ruskin" : "- $autherName",
-                style: fontThemeClass.body(
-                  context,
-                  color: context.colorScheme.white,
-                  fontWeight: FontWeight.w400,
-                ),
-                textAlign: TextAlign.right,
-              ),
-            ).animate(delay: 800.ms).scale(),
-            15.verticalSpace,
-          ],
-        ),
-      ),
+        ).animate(delay: 600.ms).scale(),
+        Text(
+          quote == ''
+              ? "Education for us is not a matter of degree, but of life."
+              : ' $quote ',
+          style: fontThemeClass.body(
+            context,
+            fontWeight: FontWeight.w600,
+          ),
+          textAlign: TextAlign.center,
+        ).animate(delay: 700.ms).scale(),
+        15.verticalSpace,
+        Container(
+          alignment: Alignment.centerRight,
+          child: Text(
+            autherName == '' ? "- John Ruskin" : "- $autherName",
+            style: fontThemeClass.caption(
+              context,
+              fontWeight: FontWeight.w400,
+            ),
+            textAlign: TextAlign.right,
+          ),
+        ).animate(delay: 800.ms).scale(),
+        15.verticalSpace,
+      ],
     ).animate(delay: 500.ms).fadeIn();
   }
 }
