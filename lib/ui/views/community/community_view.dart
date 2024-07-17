@@ -31,7 +31,7 @@ class CommunityView extends StatelessWidget {
         final analyticsService = locator<AnalyticsService>();
         FontThemeClass fontThemeClass = FontThemeClass();
         return Scaffold(
-          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+          backgroundColor: context.colorScheme.scaffold,
           body: model.isBusy
               ? const CircularLoadingIndicator()
               : SafeArea(
@@ -105,7 +105,7 @@ class CommunityView extends StatelessWidget {
                                   dotColor:
                                       context.colorScheme.secondarySectionColor,
                                   activeDotColor:
-                                      context.colorScheme.primaryAccentColor,
+                                      context.colorScheme.accentColor,
                                   spacing: 4,
                                 ),
                               ),

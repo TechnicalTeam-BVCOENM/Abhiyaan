@@ -65,14 +65,14 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 textTheme: const TextTheme(),
-                primaryColor: context.colorScheme.primaryAccentColor,
+                primaryColor: context.colorScheme.accentColor,
                 brightness: themeService.brightness,
                 scaffoldBackgroundColor:
-                    context.colorScheme.scaffoldBackgroundColor,
+                    context.colorScheme.scaffold,
                 appBarTheme: AppBarTheme(
                   elevation: 0,
-                  backgroundColor: context.colorScheme.scaffoldBackgroundColor,
-                  foregroundColor: context.colorScheme.primaryTextColor,
+                  backgroundColor: context.colorScheme.scaffold,
+                  foregroundColor: context.colorScheme.primaryText,
                 ),
               ),
               navigatorObservers: [

@@ -13,7 +13,7 @@ class AuthView extends StatelessWidget {
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+          backgroundColor: context.colorScheme.scaffold,
           body: SafeArea(
             bottom: true,
             minimum: const EdgeInsets.symmetric(horizontal: 18).r,
@@ -26,7 +26,7 @@ class AuthView extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30).r,
                     color:
-                        context.colorScheme.primaryAccentColor.withOpacity(0.3),
+                        context.colorScheme.accentColor.withOpacity(0.3),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +55,7 @@ class AuthView extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: FontThemeClass().title(
                     context,
-                    color: context.colorScheme.primaryTextColor,
+                    color: context.colorScheme.primaryText,
                     fontWeight: FontWeight.w500,
                   ),
                 ).animate(delay: 200.ms).fadeIn(
@@ -71,7 +71,7 @@ class AuthView extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: FontThemeClass().caption(
                       context,
-                      color: context.colorScheme.secondaryTextColor,
+                      color: context.colorScheme.secondaryText,
                       fontWeight: FontWeight.w500,
                     ),
                   ).animate(delay: 200.ms).fadeIn(
@@ -90,7 +90,7 @@ class AuthView extends StatelessWidget {
                     padding: const EdgeInsets.all(8).r,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15).r,
-                      color: context.colorScheme.primaryAccentColor,
+                      color: context.colorScheme.accentColor,
                     ),
                     child: Center(
                       child: Text(
@@ -121,16 +121,16 @@ class AuthView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15).r,
                             border: Border.all(
                               width: 2,
-                              color: context.colorScheme.primaryAccentColor,
+                              color: context.colorScheme.accentColor,
                             ),
-                            color: context.colorScheme.scaffoldBackgroundColor,
+                            color: context.colorScheme.scaffold,
                           ),
                           child: Center(
                             child: Text(
                               'Register',
                               style: FontThemeClass().title2(
                                 context,
-                                color: context.colorScheme.primaryTextColor,
+                                color: context.colorScheme.primaryText,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),

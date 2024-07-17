@@ -79,7 +79,7 @@ Container horizontalStoryRow(
                     model[idx].title,
                     style: fontTheme.title2(
                       context,
-                      color: context.colorScheme.primaryTextColor,
+                      color: context.colorScheme.primaryText,
                     ),
                   ),
                 ],

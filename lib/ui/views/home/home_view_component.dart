@@ -26,7 +26,7 @@ Widget quickLinksList(BuildContext context, List model,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(200).r,
                   child: Container(
-                    color: context.colorScheme.primaryCardColor,
+                    color: context.colorScheme.card,
                     height: 80.h,
                     width: 80.w,
                     child: Center(
@@ -44,7 +44,7 @@ Widget quickLinksList(BuildContext context, List model,
                 model[idx].title.toString().toUpperCase(),
                 style: FontThemeClass().small(
                   context,
-                  color: context.colorScheme.primaryTextColor.withOpacity(0.8),
+                  color: context.colorScheme.primaryText.withOpacity(0.8),
                   fontWeight: FontWeight.w600,
                 ),
                 textAlign: TextAlign.center,
@@ -106,10 +106,10 @@ Future showCelebrationModal(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(100).r,
                             ),
-                            color: context.colorScheme.primaryCardColor,
+                            color: context.colorScheme.card,
                             child: Icon(
                               Icons.close,
-                              color: context.colorScheme.primaryTextColor,
+                              color: context.colorScheme.primaryText,
                               size: 30.0.sp,
                             ),
                           ),
@@ -138,7 +138,7 @@ Future showCelebrationModal(
                           textAlign: TextAlign.justify,
                           style: fontThemeClass.caption(
                             context,
-                            color: context.colorScheme.secondaryTextColor,
+                            color: context.colorScheme.secondaryText,
                           ),
                         ),
                         14.verticalSpace,
@@ -154,7 +154,7 @@ Future showCelebrationModal(
                             width: 340.w,
                             height: 40.h,
                             decoration: BoxDecoration(
-                              color: context.colorScheme.primaryAccentColor,
+                              color: context.colorScheme.accentColor,
                               borderRadius: BorderRadius.circular(12).r,
                             ),
                             child: Center(
@@ -266,7 +266,7 @@ Future showWelcomPopUp(context,
         actions: <Widget>[
           Container(
             decoration: BoxDecoration(
-              color: context.colorScheme.primaryAccentColor,
+              color: context.colorScheme.accentColor,
               borderRadius: BorderRadius.circular(12).r,
             ),
             width: double.infinity,
@@ -312,7 +312,7 @@ class ShowAppExitPopUp {
         maxHeight: MediaQuery.of(context).size.height / 3,
         minWidth: double.infinity,
       ),
-      backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+      backgroundColor: context.colorScheme.scaffold,
       clipBehavior: Clip.hardEdge,
       elevation: 0,
       showDragHandle: true,
@@ -322,7 +322,7 @@ class ShowAppExitPopUp {
           width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10).r,
           decoration: BoxDecoration(
-            color: context.colorScheme.scaffoldBackgroundColor,
+            color: context.colorScheme.scaffold,
             borderRadius: BorderRadius.circular(32).r,
           ),
           child: Column(
@@ -331,7 +331,7 @@ class ShowAppExitPopUp {
               Icon(
                 Icons.exit_to_app_rounded,
                 size: 50.sp,
-                color: context.colorScheme.primaryAccentColor,
+                color: context.colorScheme.accentColor,
               ),
               12.verticalSpace,
               Text(
@@ -339,7 +339,7 @@ class ShowAppExitPopUp {
                 style: fontThemeClass.title2(
                   context,
                   fontWeight: FontWeight.w700,
-                  color: context.colorScheme.primaryTextColor,
+                  color: context.colorScheme.primaryText,
                 ),
               ).animate(delay: 300.ms).fadeIn(duration: 800.ms),
               Text(
@@ -347,7 +347,7 @@ class ShowAppExitPopUp {
                 textAlign: TextAlign.center,
                 style: fontThemeClass.caption(
                   context,
-                  color: context.colorScheme.secondaryTextColor,
+                  color: context.colorScheme.secondaryText,
                 ),
               ).animate(delay: 300.ms).fadeIn(duration: 800.ms),
               4.verticalSpace,
@@ -366,7 +366,7 @@ class ShowAppExitPopUp {
                       width: 120.w,
                       height: 45.h,
                       decoration: BoxDecoration(
-                        color: context.colorScheme.primaryAccentColor,
+                        color: context.colorScheme.accentColor,
                         borderRadius: BorderRadius.circular(12).r,
                       ),
                       child: Center(
@@ -395,7 +395,7 @@ class ShowAppExitPopUp {
                       decoration: BoxDecoration(
                         color: context.colorScheme.white,
                         border: Border.all(
-                          color: context.colorScheme.primaryAccentColor,
+                          color: context.colorScheme.accentColor,
                           width: 2.w,
                         ),
                         borderRadius: BorderRadius.circular(12).r,
@@ -459,7 +459,7 @@ class HighlightCarouselWidget extends ViewModelWidget<HomeViewModel> {
                           children: [
                             Icon(
                               Icons.info_rounded,
-                              color: context.colorScheme.primaryTextColor,
+                              color: context.colorScheme.primaryText,
                             ),
                             10.horizontalSpace,
                             Text(
@@ -526,7 +526,7 @@ class UserGreetingsWidget extends ViewModelWidget<HomeViewModel> {
               'Hey ${viewModel.splitusername()} 👋',
               style: fontTheme.title(
                 context,
-                color: context.colorScheme.primaryTextColor,
+                color: context.colorScheme.primaryText,
                 fontWeight: FontWeight.w600,
               ),
             ).animate().fadeIn(),

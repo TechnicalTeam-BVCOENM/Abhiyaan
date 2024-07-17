@@ -11,7 +11,7 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
     child: Expandable(
       collapsed: Card(
         margin: const EdgeInsets.only(bottom: 8).r,
-        color: context.colorScheme.primaryCardColor,
+        color: context.colorScheme.card,
         elevation: 0,
         clipBehavior: Clip.hardEdge,
         shape: RoundedRectangleBorder(
@@ -43,7 +43,7 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                         "Read More",
                         style: fontTheme.body(
                           context,
-                          color: context.colorScheme.switchColor,
+                          color: context.colorScheme.toggle,
                         ),
                       ),
                     ),
@@ -56,7 +56,7 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
       ),
       expanded: Card(
         margin: const EdgeInsets.only(bottom: 8).r,
-        color: context.colorScheme.primaryCardColor,
+        color: context.colorScheme.card,
         elevation: 0,
         clipBehavior: Clip.hardEdge,
         shape: RoundedRectangleBorder(
@@ -90,7 +90,7 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
                       "Read Less",
                       style: fontTheme.body(
                         context,
-                        color: context.colorScheme.switchColor,
+                        color: context.colorScheme.toggle,
                       ),
                     ),
                   ),
@@ -122,7 +122,7 @@ class CollapsedDescription extends StatelessWidget {
       textAlign: TextAlign.justify,
       style: fontTheme.caption(
         context,
-        color: context.colorScheme.primaryTextColor.withOpacity(0.6),
+        color: context.colorScheme.primaryText.withOpacity(0.6),
       ),
     );
   }
@@ -152,7 +152,7 @@ class ExpandedDescription extends StatelessWidget {
           textAlign: TextAlign.justify,
           style: fontTheme.caption(
             context,
-            color: context.colorScheme.primaryTextColor.withOpacity(0.6),
+            color: context.colorScheme.primaryText.withOpacity(0.6),
           ),
         ),
         4.verticalSpace,
@@ -197,7 +197,7 @@ class CardDate extends StatelessWidget {
       "Posted ${DateFormat("MMM d").format((date).toDate())}",
       style: fontTheme.caption(
         context,
-        color: context.colorScheme.secondaryTextColor,
+        color: context.colorScheme.secondaryText,
       ),
     );
   }
@@ -217,7 +217,7 @@ class CardTitle extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
         style: fontTheme.body(
           context,
-          color: context.colorScheme.switchColor,
+          color: context.colorScheme.toggle,
           fontWeight: FontWeight.w600,
         ),
       ),

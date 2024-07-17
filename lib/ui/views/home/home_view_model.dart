@@ -15,7 +15,7 @@ class HomeViewModel extends BaseViewModel {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         statusBarColor: themeService.brightness == Brightness.light
-            ? context.colorScheme.scaffoldBackgroundColor
+            ? context.colorScheme.scaffold
             : Colors.transparent,
         statusBarIconBrightness: themeService.brightness == Brightness.light
             ? Brightness.dark

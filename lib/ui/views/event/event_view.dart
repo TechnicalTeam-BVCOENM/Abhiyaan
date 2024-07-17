@@ -26,7 +26,7 @@ class EventView extends StatelessWidget {
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+          backgroundColor: context.colorScheme.scaffold,
           body: model.events.isEmpty
               ? const CircularLoadingIndicator()
               : SafeArea(
@@ -51,9 +51,9 @@ class EventView extends StatelessWidget {
                                     Card(
                                       clipBehavior: Clip.hardEdge,
                                       color:
-                                          context.colorScheme.primaryCardColor,
+                                          context.colorScheme.card,
                                       shadowColor: context
-                                          .colorScheme.primaryCardColor
+                                          .colorScheme.card
                                           .withOpacity(0.8),
                                       elevation: 2,
                                       shape: ShapeBorder.lerp(
@@ -104,11 +104,11 @@ class EventView extends StatelessWidget {
                                               child: Card(
                                                 clipBehavior: Clip.hardEdge,
                                                 shadowColor: context.colorScheme
-                                                    .primaryCardColor
+                                                    .card
                                                     .withOpacity(0.8),
                                                 elevation: 2,
                                                 color: context.colorScheme
-                                                    .primaryCardColor,
+                                                    .card,
                                                 shape: ShapeBorder.lerp(
                                                   RoundedRectangleBorder(
                                                     borderRadius:
@@ -200,7 +200,7 @@ class EventView extends StatelessWidget {
                                                   clipBehavior: Clip.hardEdge,
                                                   shadowColor: context
                                                       .colorScheme
-                                                      .primaryCardColor
+                                                      .card
                                                       .withOpacity(0.8),
                                                   elevation: 1,
                                                   shape: ShapeBorder.lerp(

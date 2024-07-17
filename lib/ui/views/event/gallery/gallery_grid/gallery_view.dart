@@ -22,14 +22,14 @@ class GalleryView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             iconTheme: IconThemeData(
-              color: context.colorScheme.primaryTextColor,
+              color: context.colorScheme.primaryText,
             ),
             title: Text(
               title.toUpperCase(),
               style:
                   FontThemeClass().title2(context, fontWeight: FontWeight.w500),
             ),
-            backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+            backgroundColor: context.colorScheme.scaffold,
             centerTitle: true,
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios),
@@ -38,7 +38,7 @@ class GalleryView extends StatelessWidget {
               },
             ),
           ),
-          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+          backgroundColor: context.colorScheme.scaffold,
           body: SafeArea(
             child: Scrollbar(
               child: Column(
