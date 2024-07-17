@@ -207,7 +207,9 @@ class RegisterView extends StatelessWidget {
                       minimumSize: const WidgetStatePropertyAll(
                           Size(double.infinity, 50)),
                       backgroundColor: WidgetStatePropertyAll(
+
                           context.colorScheme.accentColor),
+
                       shape: WidgetStatePropertyAll(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40.0).r,

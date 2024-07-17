@@ -295,11 +295,13 @@ class DarkModeTile extends ViewModelWidget<ProfileViewModel> {
         ),
       ),
       trailing: Switch.adaptive(
+
         activeColor: context.colorScheme.accentColor,
         inactiveThumbColor: context.colorScheme.accentColor,
         inactiveTrackColor: context.colorScheme.lightScaffold,
         trackOutlineColor: WidgetStateColor.resolveWith(
           (states) => context.colorScheme.accentColor,
+
         ),
         value: viewModel._themeService.valueListenable.value,
         onChanged: (val) => viewModel.changeTheme(context),

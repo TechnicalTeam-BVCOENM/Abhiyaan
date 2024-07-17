@@ -164,6 +164,7 @@ class SignInView extends StatelessWidget {
                               Size(double.infinity, 50)),
                           backgroundColor: WidgetStatePropertyAll(
                               context.colorScheme.accentColor),
+
                           shape: WidgetStatePropertyAll(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40.0).r,
