@@ -160,11 +160,11 @@ class SignInView extends StatelessWidget {
                           );
                         },
                         style: ButtonStyle(
-                          minimumSize: MaterialStateProperty.all(
-                              const Size(double.infinity, 50)),
-                          backgroundColor: MaterialStateProperty.all(
+                          minimumSize: const WidgetStatePropertyAll(
+                              Size(double.infinity, 50)),
+                          backgroundColor: WidgetStatePropertyAll(
                               context.colorScheme.accentColor),
-                          shape: MaterialStateProperty.all(
+                          shape: WidgetStatePropertyAll(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40.0).r,
                             ),
