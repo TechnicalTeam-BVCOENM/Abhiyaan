@@ -147,7 +147,7 @@ class EventView extends StatelessWidget {
                                       ],
                                     ),
                           model.sponsors.isEmpty
-                              ? Container()
+                              ? SizedBox(height: 145.h,)
                               : Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -160,9 +160,9 @@ class EventView extends StatelessWidget {
                                           model: model.sponsors[index],
                                         );
                                       },
-                                    ).animate(delay: 200.ms).fadeIn(),
+                                    )
                                   ],
-                                ),
+                                ).animate(delay: 200.ms).fadeIn(),
                           model.upcomingEvents.isNotEmpty
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,12 +244,12 @@ class EventView extends StatelessWidget {
                               : 0.verticalSpace,
                           4.verticalSpace,
                           model.gallery.isNotEmpty
-                              ? const SectionText(title: "Gallery")
+                              ? const SectionText(title: "Gallery").animate(delay: 1000.ms).fadeIn()
                               : 0.verticalSpace,
                           model.gallery.isNotEmpty
                               ? GalleryYearWiseView(
                                   gallery: model.gallery,
-                                ).animate(delay: 1000.ms).fadeIn()
+                                ).animate(delay: 800.ms).fadeIn()
                               : 0.verticalSpace,
                           model.todayEvent!.isEmpty &&
                                   model.upcomingEvents.isEmpty
@@ -259,11 +259,11 @@ class EventView extends StatelessWidget {
                                     const SectionText(title: "Best Memories"),
                                     BestMemories(
                                       bestMemories: model._bestMemories,
-                                    ).animate(delay: 1500.ms).fadeIn(
+                                    )],
+                                ).animate(delay: 1000.ms).fadeIn(
                                         duration:
                                             const Duration(milliseconds: 1000))
-                                  ],
-                                )
+                                  
                               : 0.verticalSpace
                         ].animate(delay: 100.ms, interval: 40.ms).fadeIn()),
                   ),

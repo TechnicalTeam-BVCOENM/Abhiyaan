@@ -100,6 +100,7 @@ class TabViewCard extends StatelessWidget {
                       imageUrl: imageUrl,
                       height: 130.h,
                       width: 190.w,
+                      memCacheHeight: 500,
                       fit: BoxFit.cover,
                       progressIndicatorBuilder:
                           (context, url, downloadProgress) {

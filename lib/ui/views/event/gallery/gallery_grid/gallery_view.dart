@@ -73,6 +73,7 @@ class GalleryView extends StatelessWidget {
                                           titlePadding:
                                               const EdgeInsets.symmetric(
                                                   vertical: 4, horizontal: 12),
+                                                  backgroundColor: Colors.transparent,
                                           content: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(20).r,
@@ -104,6 +105,7 @@ class GalleryView extends StatelessWidget {
                             ),
                             child: CachedNetworkImage(
                               imageUrl: images[index],
+                              memCacheHeight: 600,
                               fit: BoxFit.cover,
                               progressIndicatorBuilder:
                                   (context, url, downloadProgress) {

@@ -465,6 +465,7 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
                   imageUrl: model.imageUrl,
                   height: 80.h,
                   width: 80.w,
+                  cachedHeight: 300,
                   maxHeightDiskCache: 100,
                   fit: BoxFit.cover,
                 ),
@@ -662,6 +663,7 @@ class MemoryCard extends StatelessWidget {
                     ),
                     child: AlertDialog(
                       contentPadding: EdgeInsets.zero,
+                      backgroundColor: Colors.transparent,
                       titlePadding: const EdgeInsets.symmetric(
                           vertical: 4, horizontal: 12),
                       content: ClipRRect(
@@ -701,6 +703,7 @@ class MemoryCard extends StatelessWidget {
           child: CachedNetworkImageWidget(
             imageUrl: imageUrl!,
             fit: BoxFit.cover,
+            cachedHeight: 800,
           ),
         ),
       ),
