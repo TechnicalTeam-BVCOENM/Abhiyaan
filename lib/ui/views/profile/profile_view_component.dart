@@ -125,7 +125,7 @@ class ProfileCard extends ViewModelWidget<ProfileViewModel> {
               child: ClipOval(
                 clipBehavior: Clip.hardEdge,
                 child: CachedNetworkImage(
-                  imageUrl: AssetUrls.dummyImageUrl,
+                  imageUrl: AssetUrls.profileImageUrl==''?AssetUrls.dummyImageUrl:AssetUrls.profileImageUrl,
                   width: 50.w,
                 ),
               ),

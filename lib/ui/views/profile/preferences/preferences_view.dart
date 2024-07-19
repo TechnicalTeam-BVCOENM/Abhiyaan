@@ -2,6 +2,7 @@ import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/auth_service.dart';
 import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
+import 'package:abhiyaan/ui/views/profile/profile_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -14,7 +15,7 @@ class PreferencesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<PreferencesViewModel>.nonReactive(
+    return ViewModelBuilder<PreferencesViewModel>.reactive(
       viewModelBuilder: () => PreferencesViewModel(),
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
@@ -53,65 +54,7 @@ class PreferencesView extends StatelessWidget {
                   35.verticalSpace,
                   InkWell(
                     onTap: () {
-                      showModalBottomSheet(
-                        useSafeArea: true,
-                        constraints: BoxConstraints(
-                          maxHeight: MediaQuery.of(context).size.height / 3,
-                          minWidth: double.infinity,
-                        ),
-                        backgroundColor: context.colorScheme.scaffold,
-                        clipBehavior: Clip.hardEdge,
-                        elevation: 0,
-                        showDragHandle: true,
-                        context: context,
-                        builder: (context) {
-                          return Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.symmetric(
-                                    vertical: 20, horizontal: 20)
-                                .r,
-                            decoration: BoxDecoration(
-                              color: context.colorScheme.scaffold,
-                              borderRadius: BorderRadius.circular(32).r,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                TextFormField(
-                                  keyboardType: TextInputType.name,
-                                  cursorColor: context.colorScheme.accentColor,
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.symmetric(
-                                            horizontal: 15, vertical: 15)
-                                        .r,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        const Radius.circular(15).r,
-                                      ),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    fillColor: context.colorScheme.card,
-                                    filled: true,
-                                    focusColor: context.colorScheme.card,
-                                    hintText: 'Enter image link.....',
-                                    // errorText:
-                                    //     model.isEmailIdValid ? null : model.emailIdErrorText,
-                                    hintStyle: model.fontTheme.caption(
-                                      context,
-                                      color: context.colorScheme.secondaryText,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ).animate(delay: 300.ms).fadeIn(
-                                      delay: 100.ms,
-                                      curve: Curves.easeInOut,
-                                      duration: 700.ms,
-                                    ),
-                              ],
-                            ),
-                          );
-                        },
-                      );
+                      model.updateImageSheet(context);
                     },
                     splashColor: Colors.transparent,
                     child: Stack(
@@ -123,7 +66,7 @@ class PreferencesView extends StatelessWidget {
                               width: 100.r,
                               height: 100.r,
                               fit: BoxFit.cover,
-                              imageUrl: AssetUrls.dummyImageUrl,
+                              imageUrl: AssetUrls.profileImageUrl==''?AssetUrls.dummyImageUrl:AssetUrls.profileImageUrl,
                               placeholder: (context, url) =>
                                   const CircularLoadingIndicator(),
                               errorWidget: (context, url, error) {

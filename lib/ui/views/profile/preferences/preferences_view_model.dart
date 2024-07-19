@@ -5,6 +5,9 @@ class PreferencesViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
   final _analyticsService = locator<AnalyticsService>();
+  final TextEditingController profileImageUrlController =
+      TextEditingController();
+
   final LocalStorageService localStorageService =
       locator<LocalStorageService>();
   final fontTheme = FontThemeClass();
@@ -270,4 +273,110 @@ class PreferencesViewModel extends BaseViewModel {
     }
     setBusy(false);
   }
+
+  void updateImageSheet(BuildContext context) {
+    showModalBottomSheet(
+      useSafeArea: true,
+      isScrollControlled: true,
+      backgroundColor: context.colorScheme.scaffold,
+      clipBehavior: Clip.hardEdge,
+      elevation: 0,
+      showDragHandle: true,
+      context: context,
+      builder: (context) {
+        return Container(
+          width: double.infinity,
+          padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+              top: 20.r,
+              left: 20.r,
+              right: 20.r),
+          decoration: BoxDecoration(
+            color: context.colorScheme.scaffold,
+            borderRadius: BorderRadius.circular(32).r,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                controller: profileImageUrlController,
+                keyboardType: TextInputType.name,
+                cursorColor: context.colorScheme.accentColor,
+                decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15)
+                          .r,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      const Radius.circular(15).r,
+                    ),
+                    borderSide: BorderSide.none,
+                  ),
+                  fillColor: context.colorScheme.card,
+                  filled: true,
+                  focusColor: context.colorScheme.card,
+                  hintText: 'Enter image link.....',
+                  // errorText:
+                  //     model.isEmailIdValid ? null : model.emailIdErrorText,
+                  hintStyle: fontTheme.caption(
+                    context,
+                    color: context.colorScheme.secondaryText,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ).animate(delay: 300.ms).fadeIn(
+                    delay: 100.ms,
+                    curve: Curves.easeInOut,
+                    duration: 700.ms,
+                  ),
+              SizedBox(
+                height: 20.h,
+              ),
+              GestureDetector(
+                onTap: () async {
+                  await localStorageService.write(
+                      "profileImageUrl", profileImageUrlController.text);
+                  AssetUrls.profileImageUrl = profileImageUrlController.text;
+                  _navigationService.back();
+                  ProfileViewModel().notifyListeners();
+                  notifyListeners();
+                },
+                child: Container(
+                  width: 200,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ).r,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15).r,
+                    color: context.colorScheme.accentColor,
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Update',
+                      style: FontThemeClass().body(
+                        context,
+                        color: context.colorScheme.white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+              ).animate(delay: 200.ms).fadeIn(
+                    delay: 100.ms,
+                    curve: Curves.easeInOut,
+                    duration: 700.ms,
+                  ),
+              SizedBox(
+                height: 20.h,
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> updateProfileImage(String imageUrl) async {}
 }
