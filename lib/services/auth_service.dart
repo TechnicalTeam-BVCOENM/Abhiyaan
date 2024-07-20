@@ -15,6 +15,7 @@ class AuthenticationService {
     "userCertifications",
     "isUserNew",
     "userProfile",
+    "userProfileImageUrl",
   ];
   final localStorageService = locator<LocalStorageService>();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;

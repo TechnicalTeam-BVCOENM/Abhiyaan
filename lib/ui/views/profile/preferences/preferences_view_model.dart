@@ -5,6 +5,8 @@ class PreferencesViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
   final _analyticsService = locator<AnalyticsService>();
+  bool isProfileError = false;
+  bool isPreview = true;
   final TextEditingController profileImageUrlController =
       TextEditingController();
 
@@ -275,6 +277,7 @@ class PreferencesViewModel extends BaseViewModel {
   }
 
   void updateImageSheet(BuildContext context) {
+    isProfileError = false;
     showModalBottomSheet(
       useSafeArea: true,
       isScrollControlled: true,
@@ -284,6 +287,8 @@ class PreferencesViewModel extends BaseViewModel {
       showDragHandle: true,
       context: context,
       builder: (context) {
+        isProfileError = false;
+
         return Container(
           width: double.infinity,
           padding: EdgeInsets.only(
@@ -299,8 +304,56 @@ class PreferencesViewModel extends BaseViewModel {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
+              ClipOval(
+                child: profileImageUrlController.text == ''
+                    ? Container(
+                        width: 100.r,
+                        height: 100.r,
+                        decoration: const BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.grey),
+                        child: const Icon(
+                          Icons.person,
+                          color: Colors.white,
+                          size: 70,
+                        ),
+                      )
+                    : CachedNetworkImage(
+                        width: 100.r,
+                        height: 100.r,
+                        fit: BoxFit.cover,
+                        imageUrl: profileImageUrlController.text,
+                        placeholder: (context, url) =>
+                            const CircularLoadingIndicator(),
+                        errorWidget: (context, url, error) {
+                          isProfileError = true;
+                          isPreview = true;
+                          return Container(
+                            width: 100.r,
+                            height: 100.r,
+                            decoration: const BoxDecoration(
+                                shape: BoxShape.circle, color: Colors.white),
+                            child: const Icon(
+                              Icons.error,
+                              color: Colors.red,
+                              size: 50,
+                            ),
+                          );
+                        },
+                      ),
+              ),
+              16.verticalSpace,
               TextFormField(
+                onTap: () {
+                  if (!isPreview) {
+                    isPreview = true;
+                    notifyListeners();
+                  }
+                },
                 controller: profileImageUrlController,
+                // onChanged: (value) {
+                //   isPreview = true;
+                //   notifyListeners();
+                // },
                 keyboardType: TextInputType.name,
                 cursorColor: context.colorScheme.accentColor,
                 decoration: InputDecoration(
@@ -316,9 +369,7 @@ class PreferencesViewModel extends BaseViewModel {
                   fillColor: context.colorScheme.card,
                   filled: true,
                   focusColor: context.colorScheme.card,
-                  hintText: 'Enter image link.....',
-                  // errorText:
-                  //     model.isEmailIdValid ? null : model.emailIdErrorText,
+                  hintText: 'Enter Image Url.....',
                   hintStyle: fontTheme.caption(
                     context,
                     color: context.colorScheme.secondaryText,
@@ -335,12 +386,26 @@ class PreferencesViewModel extends BaseViewModel {
               ),
               GestureDetector(
                 onTap: () async {
-                  await localStorageService.write(
-                      "profileImageUrl", profileImageUrlController.text);
-                  AssetUrls.profileImageUrl = profileImageUrlController.text;
-                  _navigationService.back();
-                  ProfileViewModel().notifyListeners();
-                  notifyListeners();
+                  if (isProfileError && isPreview) {
+                    profileImageUrlController.text = '';
+                    _navigationService.back();
+                    showErrorMessage(context, "Invalid Image URL");
+                  } else if (isPreview) {
+                    isPreview = false;
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    notifyListeners();
+                  } else if (isProfileError) {
+                    _navigationService.back();
+                    showErrorMessage(context, "Invalid Image URL");
+                  } else {
+                    await localStorageService.write(
+                        "userProfileImageUrl", profileImageUrlController.text);
+                    AssetUrls.profileImageUrl = profileImageUrlController.text;
+                    _navigationService.back();
+                    notifyListeners();
+                    updateProfileImage(profileImageUrlController.text);
+                    profileImageUrlController.text = '';
+                  }
                 },
                 child: Container(
                   width: 200,
@@ -354,7 +419,7 @@ class PreferencesViewModel extends BaseViewModel {
                   ),
                   child: Center(
                     child: Text(
-                      'Update',
+                      isPreview ? 'Preview' : 'Update',
                       style: FontThemeClass().body(
                         context,
                         color: context.colorScheme.white,
@@ -378,5 +443,14 @@ class PreferencesViewModel extends BaseViewModel {
     );
   }
 
-  Future<void> updateProfileImage(String imageUrl) async {}
+  Future<void> updateProfileImage(String imageUrl) async {
+    await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(
+          FirebaseAuth.instance.currentUser?.uid,
+        )
+        .update({
+      "userProfileImageUrl": imageUrl,
+    });
+  }
 }

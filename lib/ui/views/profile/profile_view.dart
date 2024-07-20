@@ -24,7 +24,7 @@ class ProfileView extends StatelessWidget {
       ),
     );
     return ViewModelBuilder<ProfileViewModel>.reactive(
-      viewModelBuilder: () => ProfileViewModel(),
+    viewModelBuilder: () => ProfileViewModel(),
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
         return Scaffold(

@@ -44,7 +44,7 @@ class AssetImagePath {
 }
 
 class AssetUrls {
-  static String profileImageUrl = LocalStorageService().read('profileImageUrl');
+  static String profileImageUrl = LocalStorageService().read('userProfileImageUrl');
   static const dummyImageUrl =
       "https://firebasestorage.googleapis.com/v0/b/darpan-b94d6.appspot.com/o/user%2Fimages.jpeg?alt=media&token=a9889ba7-3958-4784-9708-e43ade1016d4";
   static const instagramUrl = "https://www.instagram.com/thedevcrew/";
