@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+import 'package:abhiyaan/theme/responsive_utils.dart';
 import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:abhiyaan/ui/views/community/detailed_blogs/detailed_blogs_view.dart';
@@ -31,7 +32,7 @@ class CommunityView extends StatelessWidget {
         final analyticsService = locator<AnalyticsService>();
         FontThemeClass fontThemeClass = FontThemeClass();
         return Scaffold(
-          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+          backgroundColor: context.colorScheme.scaffold,
           body: model.isBusy
               ? const CircularLoadingIndicator()
               : SafeArea(
@@ -60,6 +61,17 @@ class CommunityView extends StatelessWidget {
                                 style: fontThemeClass.title(context),
                               ),
                             ),
+                            QuoteCard(
+                              quote: model.affirmation,
+                              autherName: model.authorName,
+                            )
+                                .animate(
+                                  delay: 200.ms,
+                                )
+                                .fadeIn(
+                                  curve: Curves.easeInOutCubic,
+                                  duration: 600.ms,
+                                ),
                             const SectionText(title: "Blogs"),
                             // Add Blogs here
                             SizedBox(
@@ -105,7 +117,7 @@ class CommunityView extends StatelessWidget {
                                   dotColor:
                                       context.colorScheme.secondarySectionColor,
                                   activeDotColor:
-                                      context.colorScheme.primaryAccentColor,
+                                      context.colorScheme.accentColor,
                                   spacing: 4,
                                 ),
                               ),
@@ -145,18 +157,7 @@ class CommunityView extends StatelessWidget {
                                   ).animate(delay: 200.ms).fadeIn(
                                     curve: Curves.easeInOutCubic,
                                     duration: 600.ms),
-                            const SectionText(title: "Quote of the day"),
-                            QuoteCard(
-                              quote: model.affirmation,
-                              autherName: model.authorName,
-                            )
-                                .animate(
-                                  delay: 200.ms,
-                                )
-                                .fadeIn(
-                                  curve: Curves.easeInOutCubic,
-                                  duration: 600.ms,
-                                ),
+
                             Container(
                               padding: const EdgeInsets.all(10),
                               alignment: Alignment.center,

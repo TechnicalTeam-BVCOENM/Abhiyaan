@@ -66,7 +66,7 @@ class PreferencesViewModel extends BaseViewModel {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: context.colorScheme.primaryCardColor,
+          backgroundColor: context.colorScheme.card,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25),
           ),
@@ -109,7 +109,7 @@ class PreferencesViewModel extends BaseViewModel {
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.all(0),
                 foregroundColor: Colors.white,
-                backgroundColor: context.colorScheme.primaryAccentColor,
+                backgroundColor: context.colorScheme.accentColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10), // Rounded corners
                 ),
@@ -127,11 +127,11 @@ class PreferencesViewModel extends BaseViewModel {
               style: ElevatedButton.styleFrom(
                 side: BorderSide(
                   width: 2,
-                  color: context.colorScheme.primaryAccentColor,
+                  color: context.colorScheme.accentColor,
                 ),
                 padding: const EdgeInsets.all(0),
-                foregroundColor: context.colorScheme.primaryTextColor,
-                backgroundColor: context.colorScheme.primaryCardColor,
+                foregroundColor: context.colorScheme.primaryText,
+                backgroundColor: context.colorScheme.card,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10), // Rounded corners
                 ),
@@ -169,7 +169,7 @@ class PreferencesViewModel extends BaseViewModel {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
           clipBehavior: Clip.hardEdge,
           titlePadding: const EdgeInsets.all(0),
-          backgroundColor: context.colorScheme.primaryCardColor,
+          backgroundColor: context.colorScheme.card,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -209,7 +209,7 @@ class PreferencesViewModel extends BaseViewModel {
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.all(0),
                 foregroundColor: Colors.white,
-                backgroundColor: context.colorScheme.primaryAccentColor,
+                backgroundColor: context.colorScheme.accentColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10), // Rounded corners
                 ),
@@ -226,10 +226,10 @@ class PreferencesViewModel extends BaseViewModel {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 side: BorderSide(
-                    width: 2, color: context.colorScheme.primaryAccentColor),
+                    width: 2, color: context.colorScheme.accentColor),
                 padding: const EdgeInsets.all(0),
-                foregroundColor: context.colorScheme.primaryTextColor,
-                backgroundColor: context.colorScheme.primaryCardColor,
+                foregroundColor: context.colorScheme.primaryText,
+                backgroundColor: context.colorScheme.card,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10), // Rounded corners
                 ),

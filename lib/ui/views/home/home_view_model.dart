@@ -15,7 +15,7 @@ class HomeViewModel extends BaseViewModel {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         statusBarColor: themeService.brightness == Brightness.light
-            ? context.colorScheme.scaffoldBackgroundColor
+            ? context.colorScheme.scaffold
             : Colors.transparent,
         statusBarIconBrightness: themeService.brightness == Brightness.light
             ? Brightness.dark
@@ -143,17 +143,17 @@ class HomeViewModel extends BaseViewModel {
       url: 'https://www.bvcoenm.edu.in/',
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/home/abhiyaan.png",
+      imageUrl: "assets/images/home/quick_links/abhiyaan.png",
       title: "Abhiyaan",
       url: 'https://abhiyaan.tech/',
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/home/sigma.jpeg",
-      title: "Sigma",
-      view: const SocietiesView(),
+      imageUrl: "assets/images/home/quick_links/tdc_logo.png",
+      title: "TDC",
+      url: 'https://abhiyaan.tech/',
     ),
     QuickLinksModel(
-      imageUrl: "assets/images/cesa.png",
+      imageUrl: "assets/images/home/quick_links/cesa.png",
       title: "CESA",
       url: 'https://www.clubcesa.tech/',
     ),

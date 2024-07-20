@@ -13,22 +13,22 @@ class SocietiesView extends StatelessWidget {
       builder: (context, model, child) {
         FontThemeClass fontThemeClass = FontThemeClass();
         return Scaffold(
-            backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+            backgroundColor: context.colorScheme.scaffold,
             appBar: AppBar(
               iconTheme: IconThemeData(
-                color: context.colorScheme.primaryTextColor,
+                color: context.colorScheme.primaryText,
               ),
               elevation: 0,
-              surfaceTintColor: context.colorScheme.scaffoldBackgroundColor,
+              surfaceTintColor: context.colorScheme.scaffold,
               title: Text(
                 "Sigma's",
                 style: fontThemeClass.title(
                   context,
-                  color: context.colorScheme.primaryTextColor,
+                  color: context.colorScheme.primaryText,
                 ),
               ),
               centerTitle: true,
-              backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+              backgroundColor: context.colorScheme.scaffold,
             ),
             body: SafeArea(
               minimum: const EdgeInsets.symmetric(horizontal: 18).r,
@@ -57,7 +57,7 @@ class SocietiesView extends StatelessWidget {
                             textAlign: TextAlign.center,
                             style: fontThemeClass.caption(
                               context,
-                              color: context.colorScheme.primaryTextColor,
+                              color: context.colorScheme.primaryText,
                             ),
                           ),
                         ),

@@ -14,7 +14,7 @@ class BottomNavView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<BottomNavViewModel>.reactive(
       onViewModelReady: (model) => model.init(),
-      viewModelBuilder: () =>locator<BottomNavViewModel>(),
+      viewModelBuilder: () => locator<BottomNavViewModel>(),
       builder: (context, model, child) {
         return Scaffold(
           extendBody: true,
@@ -37,18 +37,18 @@ class BottomNavView extends StatelessWidget {
               highlightColor: Colors.transparent,
             ),
             child: BottomNavigationBar(
-              backgroundColor: context.colorScheme.primaryCardColor,
+              backgroundColor: context.colorScheme.card,
               elevation: 0,
               landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
-              selectedItemColor: context.colorScheme.primaryAccentColor,
-              unselectedItemColor: context.colorScheme.unSelectedBottomNavIcon,
+              selectedItemColor: context.colorScheme.accentColor,
+              unselectedItemColor: context.colorScheme.bottomNavIconInactive,
               type: BottomNavigationBarType.fixed,
               selectedLabelStyle: const TextStyle(fontSize: 0),
               currentIndex: model.currentIndex,
               onTap: model.setIndex,
               items: [
                 BottomNavigationBarItem(
-                  backgroundColor: context.colorScheme.primaryAccentColor,
+                  backgroundColor: context.colorScheme.accentColor,
                   label: '',
                   icon: const Icon(Icons.home_rounded),
                   activeIcon: const BottomNavActiveIcon(

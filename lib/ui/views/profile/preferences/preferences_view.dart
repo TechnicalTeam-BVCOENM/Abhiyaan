@@ -18,28 +18,28 @@ class PreferencesView extends StatelessWidget {
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+          backgroundColor: context.colorScheme.scaffold,
           appBar: AppBar(
             leading: GestureDetector(
               onTap: () {
                 model._navigationService.back();
               },
               child: Container(
-                color: context.colorScheme.scaffoldBackgroundColor,
+                color: context.colorScheme.scaffold,
                 child: Icon(
                   Icons.arrow_back_ios_new_rounded,
-                  color: context.colorScheme.primaryTextColor,
+                  color: context.colorScheme.primaryText,
                 ),
               ),
             ),
-            backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+            backgroundColor: context.colorScheme.scaffold,
             centerTitle: true,
             elevation: 0,
             title: Text(
               "My Details",
               style: model.fontTheme.title(
                 context,
-                color: context.colorScheme.primaryTextColor,
+                color: context.colorScheme.primaryText,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -71,7 +71,7 @@ class PreferencesView extends StatelessWidget {
                     model.localStorageService.read('userName'),
                     style: model.fontTheme.title2(
                       context,
-                      color: context.colorScheme.primaryTextColor,
+                      color: context.colorScheme.primaryText,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -110,7 +110,7 @@ class PreferencesView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Made with ❤️ by Technical Team ',
+                    'Made with ❤️ by TheDevCrew ',
                     style: model.fontTheme.caption(
                       context,
                       color: context.colorScheme.secondarySectionColor,

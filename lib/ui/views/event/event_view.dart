@@ -26,7 +26,7 @@ class EventView extends StatelessWidget {
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+          backgroundColor: context.colorScheme.scaffold,
           body: model.events.isEmpty
               ? const CircularLoadingIndicator()
               : SafeArea(
@@ -50,10 +50,8 @@ class EventView extends StatelessWidget {
                                     const SectionText(title: "Ongoing Events"),
                                     Card(
                                       clipBehavior: Clip.hardEdge,
-                                      color:
-                                          context.colorScheme.primaryCardColor,
-                                      shadowColor: context
-                                          .colorScheme.primaryCardColor
+                                      color: context.colorScheme.card,
+                                      shadowColor: context.colorScheme.card
                                           .withOpacity(0.8),
                                       elevation: 2,
                                       shape: ShapeBorder.lerp(
@@ -103,12 +101,11 @@ class EventView extends StatelessWidget {
                                             return SizedBox(
                                               child: Card(
                                                 clipBehavior: Clip.hardEdge,
-                                                shadowColor: context.colorScheme
-                                                    .primaryCardColor
+                                                shadowColor: context
+                                                    .colorScheme.card
                                                     .withOpacity(0.8),
                                                 elevation: 2,
-                                                color: context.colorScheme
-                                                    .primaryCardColor,
+                                                color: context.colorScheme.card,
                                                 shape: ShapeBorder.lerp(
                                                   RoundedRectangleBorder(
                                                     borderRadius:
@@ -199,8 +196,7 @@ class EventView extends StatelessWidget {
                                                 child: Card(
                                                   clipBehavior: Clip.hardEdge,
                                                   shadowColor: context
-                                                      .colorScheme
-                                                      .primaryCardColor
+                                                      .colorScheme.card
                                                       .withOpacity(0.8),
                                                   elevation: 1,
                                                   shape: ShapeBorder.lerp(
@@ -264,7 +260,8 @@ class EventView extends StatelessWidget {
                                     BestMemories(
                                       bestMemories: model._bestMemories,
                                     ).animate(delay: 1500.ms).fadeIn(
-                                        duration: const Duration(milliseconds: 1000))
+                                        duration:
+                                            const Duration(milliseconds: 1000))
                                   ],
                                 )
                               : 0.verticalSpace
