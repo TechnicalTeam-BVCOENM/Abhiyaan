@@ -3,7 +3,6 @@ import 'package:abhiyaan/ui/views/community/community_view.dart';
 import 'package:abhiyaan/ui/views/event/event_view.dart';
 import 'package:abhiyaan/ui/views/home/home_view.dart';
 import 'package:abhiyaan/ui/views/profile/profile_view.dart';
-
 part 'bottom_nav_view_model.dart';
 part 'bottom_nav_view_components.dart';
 
@@ -14,8 +13,8 @@ class BottomNavView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<BottomNavViewModel>.reactive(
       onViewModelReady: (model) => model.init(),
-      // viewModelBuilder: () => locator<BottomNavViewModel>(),
-      viewModelBuilder: () => BottomNavViewModel(),
+      viewModelBuilder: () => locator<BottomNavViewModel>(),
+      disposeViewModel: false,
       builder: (context, model, child) {
         return Scaffold(
           extendBody: true,

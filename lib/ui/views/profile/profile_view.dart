@@ -24,8 +24,9 @@ class ProfileView extends StatelessWidget {
       ),
     );
     return ViewModelBuilder<ProfileViewModel>.reactive(
-    viewModelBuilder: () => ProfileViewModel(),
+    viewModelBuilder: () => locator<ProfileViewModel>(),
       onViewModelReady: (viewModel) => viewModel.init(),
+      disposeViewModel: false,
       builder: (context, model, child) {
         return Scaffold(
           backgroundColor: context.colorScheme.scaffold,
