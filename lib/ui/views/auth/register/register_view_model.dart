@@ -111,6 +111,8 @@ class RegisterViewModel extends BaseViewModel {
         sendOtpCount = 3;
         await localStorageService.write("sendOtpCount", 3);
         await localStorageService.write("lastOtpCountUpdate", now);
+        await sendVerifyMail(context);
+        notifyListeners();
       } else if (sendOtpCount == 0) {
         showErrorMessage(context, "Exceeded email verification limit.");
         return;
@@ -205,7 +207,6 @@ class RegisterViewModel extends BaseViewModel {
 
   void verifyEmailDialogue(context) {
     FocusScope.of(context).requestFocus(FocusNode());
-
     showAdaptiveDialog(
       context: context,
       builder: (context) {
@@ -214,7 +215,7 @@ class RegisterViewModel extends BaseViewModel {
             insetPadding: const EdgeInsets.symmetric(horizontal: 15).r,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-            backgroundColor: context.colorScheme.card,
+            backgroundColor: context.colorScheme.scaffold,
             clipBehavior: Clip.hardEdge,
             title: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -278,7 +279,7 @@ class RegisterViewModel extends BaseViewModel {
                         width: 75.w,
                         textStyle: const TextStyle(fontSize: 22),
                         decoration: BoxDecoration(
-                          color: context.colorScheme.primaryText,
+                          color: context.colorScheme.card,
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),

@@ -127,6 +127,8 @@ class ProfileCard extends ViewModelWidget<ProfileViewModel> {
                 child: CachedNetworkImage(
                   imageUrl: AssetUrls.profileImageUrl==''||AssetUrls.profileImageUrl=='Not Available'?AssetUrls.dummyImageUrl:AssetUrls.profileImageUrl,
                   width: 50.w,
+                  height: 50.w,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
