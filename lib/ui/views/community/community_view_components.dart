@@ -281,7 +281,7 @@ class QuoteCard extends StatelessWidget {
               flipX: true,
               child:  Icon(
                 Icons.format_quote_outlined,
-                color: context.colorScheme.darkScaffold,
+                color: context.colorScheme.primary,
                 size: 40,
               ),
             ),

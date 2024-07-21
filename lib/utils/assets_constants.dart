@@ -1,3 +1,5 @@
+import 'package:abhiyaan/services/local_storage_service.dart';
+
 class AssetImagePath {
   static const String copyImg = 'assets/images/profile/copy.png';
   static const String login = 'assets/images/login.png';
@@ -42,6 +44,7 @@ class AssetImagePath {
 }
 
 class AssetUrls {
+  static String profileImageUrl = LocalStorageService().read('userProfileImageUrl');
   static const dummyImageUrl =
       "https://firebasestorage.googleapis.com/v0/b/darpan-b94d6.appspot.com/o/user%2Fimages.jpeg?alt=media&token=a9889ba7-3958-4784-9708-e43ade1016d4";
   static const instagramUrl = "https://www.instagram.com/thedevcrew/";

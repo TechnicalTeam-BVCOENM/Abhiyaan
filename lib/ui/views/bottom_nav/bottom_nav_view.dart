@@ -14,7 +14,8 @@ class BottomNavView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<BottomNavViewModel>.reactive(
       onViewModelReady: (model) => model.init(),
-      viewModelBuilder: () => locator<BottomNavViewModel>(),
+      // viewModelBuilder: () => locator<BottomNavViewModel>(),
+      viewModelBuilder: () => BottomNavViewModel(),
       builder: (context, model, child) {
         return Scaffold(
           extendBody: true,
