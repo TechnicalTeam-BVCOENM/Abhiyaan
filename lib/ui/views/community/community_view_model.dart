@@ -38,7 +38,7 @@ class CommunityViewModel extends BaseViewModel {
         context: context,
         elevation: 0,
         isDismissible: false,
-        backgroundColor: context.colorScheme.primaryCardColor,
+        backgroundColor: context.colorScheme.card,
         isScrollControlled: true,
         constraints: BoxConstraints(
           minHeight: MediaQuery.of(context).size.height * 0.9,

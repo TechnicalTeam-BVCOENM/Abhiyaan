@@ -23,8 +23,8 @@ class SocietyCard extends StatelessWidget {
         UrlLauncher().launchURL(url);
       },
       child: Card(
-        color: context.colorScheme.primaryCardColor,
-        shadowColor: context.colorScheme.primaryCardColor.withOpacity(0.5),
+        color: context.colorScheme.card,
+        shadowColor: context.colorScheme.card.withOpacity(0.5),
         elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
@@ -47,7 +47,7 @@ class SocietyCard extends StatelessWidget {
                   title,
                   style: fontThemeClass.body(
                     context,
-                    color: context.colorScheme.primaryTextColor,
+                    color: context.colorScheme.primaryText,
                   ),
                 ),
               ),
@@ -56,7 +56,7 @@ class SocietyCard extends StatelessWidget {
                 value,
                 style: fontThemeClass.small(
                   context,
-                  color: context.colorScheme.secondaryTextColor,
+                  color: context.colorScheme.secondaryText,
                 ),
               ),
             ],

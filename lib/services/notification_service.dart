@@ -1,5 +1,6 @@
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/auth_service.dart';
+import 'package:abhiyaan/ui/views/bottom_nav/bottom_nav_view.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -78,6 +79,7 @@ class NotificationsService {
         log.d('Message data: ${message.notification!.body}');
         log.d('Message data: ${message.notification!.title}');
         LocalNotificationService.displayMessage(message);
+        handleNotificationRoute(message);
       }
     });
   }
@@ -95,10 +97,19 @@ class NotificationsService {
     });
   }
 
-  void handleNotificationRoute(RemoteMessage message) {
-    final navigationService = locator<NavigationService>();
-    if (message.data['type'] == 'eventPage') {
-      navigationService.navigateToEventView();
+  Future<void> handleNotificationRoute(RemoteMessage message) async {
+    final bottomNavViewModel = locator<BottomNavViewModel>();
+    switch (message.data['type']) {
+      case 'community':
+        bottomNavViewModel.setIndex(1);
+        break;
+      case 'event':
+        bottomNavViewModel.setIndex(2);
+        break;
+      case 'profile':
+        bottomNavViewModel.setIndex(3);
+        break;
+      default:
     }
   }
 }

@@ -5,7 +5,6 @@ import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:abhiyaan/ui/views/community/community_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-
 part 'clubs_view_model.dart';
 part 'clubs_view_components.dart';
 
@@ -22,7 +21,7 @@ class ClubsView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+            backgroundColor: context.colorScheme.scaffold,
             elevation: 0,
             forceMaterialTransparency: true,
             leading: GestureDetector(
@@ -31,18 +30,18 @@ class ClubsView extends StatelessWidget {
               },
               child: Icon(
                 Icons.arrow_back_ios_new,
-                color: context.colorScheme.primaryTextColor,
+                color: context.colorScheme.primaryText,
               ),
             ),
             title: Text(
               clubsData.clubShortHand,
               style: FontThemeClass().header(
                 context,
-                color: context.colorScheme.primaryTextColor,
+                color: context.colorScheme.primaryText,
               ),
             ),
           ),
-          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+          backgroundColor: context.colorScheme.scaffold,
           body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(

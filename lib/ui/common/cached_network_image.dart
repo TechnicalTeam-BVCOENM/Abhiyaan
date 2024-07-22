@@ -6,15 +6,19 @@ class CachedNetworkImageWidget extends StatelessWidget {
   final String imageUrl;
   final double? height;
   final double? width;
+  final int? cachedHeight;
+  final int? cachedWidth;
   final double? maxHeightDiskCache;
   final BoxFit fit;
 
   const CachedNetworkImageWidget({
     super.key,
     required this.imageUrl,
-     this.height,
-     this.width,
-     this.maxHeightDiskCache,
+    this.height,
+    this.width,
+    this.maxHeightDiskCache,
+    this.cachedHeight,
+    this.cachedWidth,
     this.fit = BoxFit.cover,
   });
 
@@ -25,6 +29,8 @@ class CachedNetworkImageWidget extends StatelessWidget {
       fit: fit,
       height: height,
       width: width,
+      memCacheHeight: cachedHeight,
+      memCacheWidth: cachedWidth,
       maxHeightDiskCache: maxHeightDiskCache?.toInt(),
       progressIndicatorBuilder: (context, url, downloadProgress) {
         return const Padding(
@@ -79,7 +85,7 @@ Container horizontalStoryRow(
                     model[idx].title,
                     style: fontTheme.title2(
                       context,
-                      color: context.colorScheme.primaryTextColor,
+                      color: context.colorScheme.primaryText,
                     ),
                   ),
                 ],

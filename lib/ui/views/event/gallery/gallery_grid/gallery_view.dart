@@ -22,14 +22,14 @@ class GalleryView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             iconTheme: IconThemeData(
-              color: context.colorScheme.primaryTextColor,
+              color: context.colorScheme.primaryText,
             ),
             title: Text(
               title.toUpperCase(),
               style:
                   FontThemeClass().title2(context, fontWeight: FontWeight.w500),
             ),
-            backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+            backgroundColor: context.colorScheme.scaffold,
             centerTitle: true,
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios),
@@ -38,7 +38,7 @@ class GalleryView extends StatelessWidget {
               },
             ),
           ),
-          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+          backgroundColor: context.colorScheme.scaffold,
           body: SafeArea(
             child: Scrollbar(
               child: Column(
@@ -73,6 +73,7 @@ class GalleryView extends StatelessWidget {
                                           titlePadding:
                                               const EdgeInsets.symmetric(
                                                   vertical: 4, horizontal: 12),
+                                                  backgroundColor: Colors.transparent,
                                           content: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(20).r,
@@ -104,6 +105,7 @@ class GalleryView extends StatelessWidget {
                             ),
                             child: CachedNetworkImage(
                               imageUrl: images[index],
+                              memCacheHeight: 600,
                               fit: BoxFit.cover,
                               progressIndicatorBuilder:
                                   (context, url, downloadProgress) {

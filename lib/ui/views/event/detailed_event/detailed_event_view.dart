@@ -60,7 +60,7 @@ class DetailedEventView extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: FloatingActionButton(
-                  backgroundColor: context.colorScheme.primaryAccentColor,
+                  backgroundColor: context.colorScheme.accentColor,
                   heroTag: "share_event",
                   onPressed: () {
                     model.shareEvent(eventData);
@@ -77,7 +77,7 @@ class DetailedEventView extends StatelessWidget {
               ),
             ].animate(delay: 300.ms).fadeIn(),
           ),
-          backgroundColor: context.colorScheme.primaryCardColor,
+          backgroundColor: context.colorScheme.card,
           body: CustomScrollView(
             physics: const BouncingScrollPhysics(),
             slivers: <Widget>[

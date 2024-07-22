@@ -26,7 +26,7 @@ Widget quickLinksList(BuildContext context, List model,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(200).r,
                   child: Container(
-                    color: context.colorScheme.primaryCardColor,
+                    color: context.colorScheme.card,
                     height: 80.h,
                     width: 80.w,
                     child: Center(
@@ -44,7 +44,7 @@ Widget quickLinksList(BuildContext context, List model,
                 model[idx].title.toString().toUpperCase(),
                 style: FontThemeClass().small(
                   context,
-                  color: context.colorScheme.primaryTextColor.withOpacity(0.8),
+                  color: context.colorScheme.primaryText.withOpacity(0.8),
                   fontWeight: FontWeight.w600,
                 ),
                 textAlign: TextAlign.center,
@@ -106,10 +106,10 @@ Future showCelebrationModal(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(100).r,
                             ),
-                            color: context.colorScheme.primaryCardColor,
+                            color: context.colorScheme.card,
                             child: Icon(
                               Icons.close,
-                              color: context.colorScheme.primaryTextColor,
+                              color: context.colorScheme.primaryText,
                               size: 30.0.sp,
                             ),
                           ),
@@ -138,7 +138,7 @@ Future showCelebrationModal(
                           textAlign: TextAlign.justify,
                           style: fontThemeClass.caption(
                             context,
-                            color: context.colorScheme.secondaryTextColor,
+                            color: context.colorScheme.secondaryText,
                           ),
                         ),
                         14.verticalSpace,
@@ -154,7 +154,7 @@ Future showCelebrationModal(
                             width: 340.w,
                             height: 40.h,
                             decoration: BoxDecoration(
-                              color: context.colorScheme.primaryAccentColor,
+                              color: context.colorScheme.accentColor,
                               borderRadius: BorderRadius.circular(12).r,
                             ),
                             child: Center(
@@ -266,7 +266,7 @@ Future showWelcomPopUp(context,
         actions: <Widget>[
           Container(
             decoration: BoxDecoration(
-              color: context.colorScheme.primaryAccentColor,
+              color: context.colorScheme.accentColor,
               borderRadius: BorderRadius.circular(12).r,
             ),
             width: double.infinity,
@@ -312,7 +312,7 @@ class ShowAppExitPopUp {
         maxHeight: MediaQuery.of(context).size.height / 3,
         minWidth: double.infinity,
       ),
-      backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+      backgroundColor: context.colorScheme.scaffold,
       clipBehavior: Clip.hardEdge,
       elevation: 0,
       showDragHandle: true,
@@ -322,7 +322,7 @@ class ShowAppExitPopUp {
           width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10).r,
           decoration: BoxDecoration(
-            color: context.colorScheme.scaffoldBackgroundColor,
+            color: context.colorScheme.scaffold,
             borderRadius: BorderRadius.circular(32).r,
           ),
           child: Column(
@@ -331,7 +331,7 @@ class ShowAppExitPopUp {
               Icon(
                 Icons.exit_to_app_rounded,
                 size: 50.sp,
-                color: context.colorScheme.primaryAccentColor,
+                color: context.colorScheme.accentColor,
               ),
               12.verticalSpace,
               Text(
@@ -339,7 +339,7 @@ class ShowAppExitPopUp {
                 style: fontThemeClass.title2(
                   context,
                   fontWeight: FontWeight.w700,
-                  color: context.colorScheme.primaryTextColor,
+                  color: context.colorScheme.primaryText,
                 ),
               ).animate(delay: 300.ms).fadeIn(duration: 800.ms),
               Text(
@@ -347,7 +347,7 @@ class ShowAppExitPopUp {
                 textAlign: TextAlign.center,
                 style: fontThemeClass.caption(
                   context,
-                  color: context.colorScheme.secondaryTextColor,
+                  color: context.colorScheme.secondaryText,
                 ),
               ).animate(delay: 300.ms).fadeIn(duration: 800.ms),
               4.verticalSpace,
@@ -366,7 +366,7 @@ class ShowAppExitPopUp {
                       width: 120.w,
                       height: 45.h,
                       decoration: BoxDecoration(
-                        color: context.colorScheme.primaryAccentColor,
+                        color: context.colorScheme.accentColor,
                         borderRadius: BorderRadius.circular(12).r,
                       ),
                       child: Center(
@@ -395,7 +395,7 @@ class ShowAppExitPopUp {
                       decoration: BoxDecoration(
                         color: context.colorScheme.white,
                         border: Border.all(
-                          color: context.colorScheme.primaryAccentColor,
+                          color: context.colorScheme.accentColor,
                           width: 2.w,
                         ),
                         borderRadius: BorderRadius.circular(12).r,
@@ -459,7 +459,7 @@ class HighlightCarouselWidget extends ViewModelWidget<HomeViewModel> {
                           children: [
                             Icon(
                               Icons.info_rounded,
-                              color: context.colorScheme.primaryTextColor,
+                              color: context.colorScheme.primaryText,
                             ),
                             10.horizontalSpace,
                             Text(
@@ -526,12 +526,233 @@ class UserGreetingsWidget extends ViewModelWidget<HomeViewModel> {
               'Hey ${viewModel.splitusername()} 👋',
               style: fontTheme.title(
                 context,
-                color: context.colorScheme.primaryTextColor,
+                color: context.colorScheme.primaryText,
                 fontWeight: FontWeight.w600,
               ),
             ).animate().fadeIn(),
           ),
         ],
+      ),
+    );
+  }
+}
+
+Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
+  FontThemeClass fontTheme = FontThemeClass();
+  return ExpandableNotifier(
+    initialExpanded: false,
+    child: Expandable(
+      collapsed: Card(
+        margin: const EdgeInsets.only(bottom: 8).r,
+        color: context.colorScheme.card,
+        elevation: 0,
+        clipBehavior: Clip.hardEdge,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16).r,
+          side: BorderSide(
+            color: context.colorScheme.secondaryPurpleColor,
+            width: 1.w,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0).r,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CardTitle(title: updateList[i].title),
+                  CardDate(date: updateList[i].date),
+                ],
+              ),
+              2.verticalSpace,
+              CollapsedDescription(description: updateList[i].description),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    child: ExpandableButton(
+                      child: Text(
+                        "Read More",
+                        style: fontTheme.body(
+                          context,
+                          color: context.colorScheme.toggle,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+      expanded: Card(
+        margin: const EdgeInsets.only(bottom: 8).r,
+        color: context.colorScheme.card,
+        elevation: 0,
+        clipBehavior: Clip.hardEdge,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16).r,
+          side: BorderSide(
+            color: context.colorScheme.secondaryPurpleColor,
+            width: 1.w,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CardTitle(title: updateList[i].title),
+                  CardDate(date: updateList[i].date),
+                ],
+              ),
+              2.verticalSpace,
+              ExpandedDescription(
+                description: updateList[i].description,
+                url: updateList[i].url,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ExpandableButton(
+                    child: Text(
+                      "Read Less",
+                      style: fontTheme.body(
+                        context,
+                        color: context.colorScheme.toggle,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+class CollapsedDescription extends StatelessWidget {
+  final String description;
+  const CollapsedDescription({
+    super.key,
+    required this.description,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    FontThemeClass fontTheme = FontThemeClass();
+    return Text(
+      description,
+      maxLines: 2,
+      softWrap: true,
+      overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.justify,
+      style: fontTheme.caption(
+        context,
+        color: context.colorScheme.primaryText.withOpacity(0.6),
+      ),
+    );
+  }
+}
+
+class ExpandedDescription extends StatelessWidget {
+  final String description;
+  final String url;
+  const ExpandedDescription({
+    super.key,
+    required this.description,
+    required this.url,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    FontThemeClass fontTheme = FontThemeClass();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          description,
+          maxLines: 100,
+          softWrap: true,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.justify,
+          style: fontTheme.caption(
+            context,
+            color: context.colorScheme.primaryText.withOpacity(0.6),
+          ),
+        ),
+        4.verticalSpace,
+        Visibility(
+          visible: url.isNotEmpty || url != "",
+          child: Row(
+            children: [
+              const Text("For more details :-\t"),
+              2.horizontalSpace,
+              GestureDetector(
+                onTap: () {
+                  UrlLauncher().launchURL(url);
+                },
+                child: Text(
+                  url.split("/").last,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                  style: fontTheme.caption(
+                    context,
+                    color: Colors.blue,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class CardDate extends StatelessWidget {
+  final Timestamp date;
+  const CardDate({super.key, required this.date});
+
+  @override
+  Widget build(BuildContext context) {
+    FontThemeClass fontTheme = FontThemeClass();
+
+    return Text(
+      "Posted ${DateFormat("MMM d").format((date).toDate())}",
+      style: fontTheme.caption(
+        context,
+        color: context.colorScheme.secondaryText,
+      ),
+    );
+  }
+}
+
+class CardTitle extends StatelessWidget {
+  final String title;
+  const CardTitle({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    FontThemeClass fontTheme = FontThemeClass();
+
+    return Expanded(
+      child: Text(
+        title,
+        overflow: TextOverflow.ellipsis,
+        style: fontTheme.body(
+          context,
+          color: context.colorScheme.toggle,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }

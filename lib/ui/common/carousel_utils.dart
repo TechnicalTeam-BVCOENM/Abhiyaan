@@ -9,7 +9,7 @@ class CarouselUtils {
           dotHeight: 8.sp,
           dotWidth: 8.sp,
           dotColor: context.colorScheme.secondarySectionColor,
-          activeDotColor: context.colorScheme.primaryAccentColor,
+          activeDotColor: context.colorScheme.accentColor,
         ),
         activeIndex: activeIndex,
         count: length,
