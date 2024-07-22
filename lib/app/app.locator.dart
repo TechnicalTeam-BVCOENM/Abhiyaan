@@ -8,6 +8,7 @@
 
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/ui/views/bottom_nav/bottom_nav_view.dart';
+import 'package:abhiyaan/ui/views/profile/profile_view.dart';
 import 'package:stacked_shared/stacked_shared.dart';
 
 import '../services/auth_service.dart';
@@ -29,4 +30,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => AuthenticationService());
   locator.registerLazySingleton(() => AnalyticsService());
   locator.registerSingleton<BottomNavViewModel>(BottomNavViewModel());
+  locator.registerSingleton<ProfileViewModel>(ProfileViewModel());
 }

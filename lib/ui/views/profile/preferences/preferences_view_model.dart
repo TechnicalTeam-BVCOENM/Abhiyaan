@@ -5,6 +5,7 @@ class PreferencesViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
   final _analyticsService = locator<AnalyticsService>();
+  final _profileViewModel = locator<ProfileViewModel>();
   bool isProfileError = false;
   bool isPreview = true;
   final TextEditingController profileImageUrlController =
@@ -259,17 +260,15 @@ class PreferencesViewModel extends BaseViewModel {
   Future<void> logout(BuildContext context) async {
     setBusy(true);
     LocalStorageService localStorageService = locator<LocalStorageService>();
-
+    final bottomNavViewModel = locator<BottomNavViewModel>();
     final bool success = await _authenticationService.signOut().then((value) {
-      localStorageService.clear();
       return value;
     });
     if (success) {
-      // ignore: use_build_context_synchronously
-      NavigationService().back();
-      NavigationService().back();
       log.i('sign out success');
-      _navigationService.replaceWith(Routes.authView);
+      bottomNavViewModel.setIndex(0);
+      await _navigationService.clearStackAndShow(Routes.authView);
+      await localStorageService.clear();
     } else {
       log.i('sign out failed');
     }
@@ -402,6 +401,7 @@ class PreferencesViewModel extends BaseViewModel {
                         "userProfileImageUrl", profileImageUrlController.text);
                     AssetUrls.profileImageUrl = profileImageUrlController.text;
                     _navigationService.back();
+                    _profileViewModel.notifyListeners();
                     notifyListeners();
                     updateProfileImage(profileImageUrlController.text);
                     profileImageUrlController.text = '';

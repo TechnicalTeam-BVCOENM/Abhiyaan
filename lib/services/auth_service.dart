@@ -66,6 +66,7 @@ class AuthenticationService {
           await localStorageService.write(userTag[i], userData?[userTag[i]]);
         }
       }
+      AssetUrls.profileImageUrl = userData?['userProfileImageUrl'];
     } catch (e) {
       log.e("Error storing user data locally: ${e.toString()}");
     }
