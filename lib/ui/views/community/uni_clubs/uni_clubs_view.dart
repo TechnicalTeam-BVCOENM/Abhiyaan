@@ -21,7 +21,7 @@ class UniClubsView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+            backgroundColor: context.colorScheme.scaffold,
             elevation: 0,
             forceMaterialTransparency: true,
             leading: GestureDetector(
@@ -41,7 +41,7 @@ class UniClubsView extends StatelessWidget {
               ),
             ),
           ),
-          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+          backgroundColor: context.colorScheme.scaffold,
           body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(

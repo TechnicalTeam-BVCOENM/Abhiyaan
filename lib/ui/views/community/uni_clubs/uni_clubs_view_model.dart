@@ -1,16 +1,16 @@
-part of '../clubs/clubs_view.dart';
+part of '../uni_clubs/uni_clubs_view.dart';
 
-class ClubsViewModel extends BaseViewModel {
-  final DepartmentalClubsData clubsData;
+class UniClubsViewModel extends BaseViewModel {
+  final UniversalClubsData universalClubsData;
   final AnalyticsService _analyticsService = locator<AnalyticsService>();
 
-  ClubsViewModel(this.clubsData);
+  UniClubsViewModel(this.universalClubsData);
 
   void init() {
-    _analyticsService.logScreen(screenName: 'Departmental Clubs Screen Opened');
+    _analyticsService.logScreen(screenName: 'Universal Clubs Screen Opened');
   }
 
-  final log = getLogger('ClubsView');
+  final log = getLogger('UniClubsView');
   final _navigationService = locator<NavigationService>();
 
   navigateToEventView() {

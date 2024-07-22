@@ -19,7 +19,7 @@ class UniClubsAppBar extends ViewModelWidget<UniClubsViewModel> {
         ),
       ),
       centerTitle: true,
-      backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+      backgroundColor: context.colorScheme.scaffold,
     );
   }
 }
@@ -167,7 +167,7 @@ class MemberCard extends StatelessWidget {
     return Card(
       elevation: 4.0,
       margin: const EdgeInsets.all(16.0).r,
-      color: context.colorScheme.primaryCardColor,
+      color: context.colorScheme.card,
       child: Padding(
         padding: const EdgeInsets.all(16.0).r,
         child: SizedBox(
@@ -251,7 +251,7 @@ class FestCard extends StatelessWidget {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12).r),
         clipBehavior: Clip.hardEdge,
-        color: context.colorScheme.primaryCardColor,
+        color: context.colorScheme.card,
         elevation: 4.0,
         margin: const EdgeInsets.all(12.0).r,
         child: Column(
@@ -276,7 +276,7 @@ class FestCard extends StatelessWidget {
                   height: 52.h,
                   width: 150.w,
                   decoration: BoxDecoration(
-                    color: context.colorScheme.primaryCardColor,
+                    color: context.colorScheme.card,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0).r,
