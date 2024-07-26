@@ -17,14 +17,14 @@ class EventDetails {
         Icon(
           Icons.location_on,
           size: 18.sp,
-          color: context.colorScheme.primaryAccentColor,
+          color: context.colorScheme.accentColor,
         ),
         4.horizontalSpace,
         Text(
           location.length > 16 ? "${location.substring(0, 16)}..." : location,
           style: fontTheme.body(
             context,
-            color: context.colorScheme.secondaryTextColor,
+            color: context.colorScheme.secondaryText,
           ),
         ),
       ],
@@ -43,7 +43,7 @@ class EventDetails {
         Icon(
           Icons.event,
           size: 18.sp,
-          color: context.colorScheme.primaryAccentColor,
+          color: context.colorScheme.accentColor,
         ),
         4.horizontalSpace,
         SizedBox(
@@ -53,7 +53,7 @@ class EventDetails {
             overflow: TextOverflow.ellipsis,
             style: fontTheme.body(
               context,
-              color: context.colorScheme.secondaryTextColor,
+              color: context.colorScheme.secondaryText,
             ),
           ),
         ),
@@ -69,14 +69,14 @@ class EventDetails {
         Icon(
           Icons.timer,
           size: 18.sp,
-          color: context.colorScheme.primaryAccentColor,
+          color: context.colorScheme.accentColor,
         ),
         4.horizontalSpace,
         Text(
           time,
           style: fontTheme.body(
             context,
-            color: context.colorScheme.secondaryTextColor,
+            color: context.colorScheme.secondaryText,
           ),
         ),
       ],
@@ -148,8 +148,8 @@ class EventDateContainer extends ViewModelWidget<EventViewModel> {
       bottom: bottom,
       right: right,
       child: Card(
-        shadowColor: context.colorScheme.primaryTextColor,
-        color: context.colorScheme.primaryCardColor,
+        shadowColor: context.colorScheme.primaryText,
+        color: context.colorScheme.card,
         child: Column(
           children: [
             SizedBox(
@@ -161,12 +161,12 @@ class EventDateContainer extends ViewModelWidget<EventViewModel> {
                 style: isUpcomming!
                     ? fontTheme.title2(
                         context,
-                        color: context.colorScheme.primaryAccentColor,
+                        color: context.colorScheme.accentColor,
                         fontWeight: FontWeight.bold,
                       )
                     : fontTheme.title(
                         context,
-                        color: context.colorScheme.primaryAccentColor,
+                        color: context.colorScheme.accentColor,
                         fontWeight: FontWeight.bold,
                       ),
               ),
@@ -185,12 +185,12 @@ class EventDateContainer extends ViewModelWidget<EventViewModel> {
                 style: isUpcomming!
                     ? fontTheme.caption(
                         context,
-                        color: context.colorScheme.primaryTextColor,
+                        color: context.colorScheme.primaryText,
                         fontWeight: FontWeight.w700,
                       )
                     : fontTheme.body(
                         context,
-                        color: context.colorScheme.primaryTextColor,
+                        color: context.colorScheme.primaryText,
                         fontWeight: FontWeight.w700,
                       ),
               ),
@@ -225,7 +225,7 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
     EventDetails eventDetails = EventDetails();
     return Positioned(
       child: Container(
-        color: context.colorScheme.primaryCardColor.withOpacity(0.5),
+        color: context.colorScheme.card.withOpacity(0.5),
         height: 275.h,
         width: double.infinity,
         child: Column(
@@ -293,10 +293,10 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                         child: Container(
                           padding: const EdgeInsets.all(8).r,
                           decoration: BoxDecoration(
-                            color: context.colorScheme.primaryAccentColor,
+                            color: context.colorScheme.accentColor,
                             boxShadow: [
                               BoxShadow(
-                                color: context.colorScheme.primaryAccentColor
+                                color: context.colorScheme.accentColor
                                     .withOpacity(0.4),
                                 spreadRadius: spreadRadius,
                                 blurRadius: blurRadius,
@@ -357,7 +357,7 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
           );
         },
         child: Container(
-          color: context.colorScheme.primaryCardColor,
+          color: context.colorScheme.card,
           width: 232.w,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -399,10 +399,10 @@ class EventCardUpcoming extends ViewModelWidget<EventViewModel> {
                       height: 30.h,
                       width: 62.w,
                       decoration: BoxDecoration(
-                        color: context.colorScheme.primaryAccentColor,
+                        color: context.colorScheme.accentColor,
                         boxShadow: [
                           BoxShadow(
-                            color: context.colorScheme.primaryAccentColor
+                            color: context.colorScheme.accentColor
                                 .withOpacity(0.4),
                             spreadRadius: spreadRadius,
                             blurRadius: blurRadius,
@@ -447,7 +447,7 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
         borderRadius: BorderRadius.circular(18.0).r,
         child: Container(
           decoration: BoxDecoration(
-            color: context.colorScheme.primaryCardColor,
+            color: context.colorScheme.card,
           ),
           width: 80.w,
           height: 80.h,
@@ -465,6 +465,7 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
                   imageUrl: model.imageUrl,
                   height: 80.h,
                   width: 80.w,
+                  cachedHeight: 300,
                   maxHeightDiskCache: 100,
                   fit: BoxFit.cover,
                 ),
@@ -528,7 +529,7 @@ class GalleryYearWiseCards extends StatelessWidget {
           borderRadius: BorderRadius.circular(20).r,
         ),
         margin: const EdgeInsets.only(right: 20, bottom: 10).r,
-        color: context.colorScheme.primaryCardColor,
+        color: context.colorScheme.card,
         child: Container(
             width: 190.w,
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -538,7 +539,7 @@ class GalleryYearWiseCards extends StatelessWidget {
                 ClipRRect(
                     borderRadius: BorderRadius.circular(20).r,
                     child: Container(
-                      color: context.colorScheme.primaryCardColor,
+                      color: context.colorScheme.card,
                       child: CachedNetworkImage(
                         imageUrl: gallery[index].logoUrl,
                         height: 113.h,
@@ -568,8 +569,7 @@ class GalleryYearWiseCards extends StatelessWidget {
                           Text(gallery[index].themeName,
                               style: FontThemeClass().small(context,
                                   fontWeight: FontWeight.w500,
-                                  color:
-                                      context.colorScheme.secondaryTextColor)),
+                                  color: context.colorScheme.secondaryText)),
                         ],
                       ),
                       const Spacer(),
@@ -663,6 +663,7 @@ class MemoryCard extends StatelessWidget {
                     ),
                     child: AlertDialog(
                       contentPadding: EdgeInsets.zero,
+                      backgroundColor: Colors.transparent,
                       titlePadding: const EdgeInsets.symmetric(
                           vertical: 4, horizontal: 12),
                       content: ClipRRect(
@@ -686,7 +687,7 @@ class MemoryCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: context.colorScheme.primaryCardColor,
+          color: context.colorScheme.card,
           borderRadius: BorderRadius.all(
             const Radius.circular(12).r,
           ),
@@ -702,6 +703,7 @@ class MemoryCard extends StatelessWidget {
           child: CachedNetworkImageWidget(
             imageUrl: imageUrl!,
             fit: BoxFit.cover,
+            cachedHeight: 800,
           ),
         ),
       ),

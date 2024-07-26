@@ -26,12 +26,12 @@ class GalleryTabs extends StatelessWidget {
       child: DefaultTabController(
         length: myTabs.length,
         child: Scaffold(
-          backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+          backgroundColor: context.colorScheme.scaffold,
           appBar: AppBar(
             iconTheme: IconThemeData(
-              color: context.colorScheme.primaryTextColor,
+              color: context.colorScheme.primaryText,
             ),
-            backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+            backgroundColor: context.colorScheme.scaffold,
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios),
               onPressed: () {
@@ -84,7 +84,7 @@ class TabViewCard extends StatelessWidget {
           width: 190.w,
           height: 184.h,
           child: Card(
-            color: context.colorScheme.primaryCardColor,
+            color: context.colorScheme.card,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
@@ -100,6 +100,7 @@ class TabViewCard extends StatelessWidget {
                       imageUrl: imageUrl,
                       height: 130.h,
                       width: 190.w,
+                      memCacheHeight: 500,
                       fit: BoxFit.cover,
                       progressIndicatorBuilder:
                           (context, url, downloadProgress) {

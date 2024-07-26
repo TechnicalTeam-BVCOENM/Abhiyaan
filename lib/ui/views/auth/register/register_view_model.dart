@@ -111,6 +111,8 @@ class RegisterViewModel extends BaseViewModel {
         sendOtpCount = 3;
         await localStorageService.write("sendOtpCount", 3);
         await localStorageService.write("lastOtpCountUpdate", now);
+        await sendVerifyMail(context);
+        notifyListeners();
       } else if (sendOtpCount == 0) {
         showErrorMessage(context, "Exceeded email verification limit.");
         return;
@@ -205,7 +207,6 @@ class RegisterViewModel extends BaseViewModel {
 
   void verifyEmailDialogue(context) {
     FocusScope.of(context).requestFocus(FocusNode());
-
     showAdaptiveDialog(
       context: context,
       builder: (context) {
@@ -214,7 +215,7 @@ class RegisterViewModel extends BaseViewModel {
             insetPadding: const EdgeInsets.symmetric(horizontal: 15).r,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-            backgroundColor: context.colorScheme.primaryCardColor,
+            backgroundColor: context.colorScheme.scaffold,
             clipBehavior: Clip.hardEdge,
             title: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -278,7 +279,7 @@ class RegisterViewModel extends BaseViewModel {
                         width: 75.w,
                         textStyle: const TextStyle(fontSize: 22),
                         decoration: BoxDecoration(
-                          color: context.colorScheme.primaryTextColor,
+                          color: context.colorScheme.card,
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -302,7 +303,7 @@ class RegisterViewModel extends BaseViewModel {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   foregroundColor: Colors.white,
-                  backgroundColor: context.colorScheme.primaryAccentColor,
+                  backgroundColor: context.colorScheme.accentColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10), // Rounded corners
                   ),
@@ -320,10 +321,10 @@ class RegisterViewModel extends BaseViewModel {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   side: BorderSide(
-                      width: 2, color: context.colorScheme.primaryAccentColor),
+                      width: 2, color: context.colorScheme.accentColor),
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  foregroundColor: context.colorScheme.primaryTextColor,
-                  backgroundColor: context.colorScheme.primaryCardColor,
+                  foregroundColor: context.colorScheme.primaryText,
+                  backgroundColor: context.colorScheme.card,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10), // Rounded corners
                   ),

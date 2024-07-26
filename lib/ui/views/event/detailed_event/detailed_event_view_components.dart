@@ -14,8 +14,8 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
   Widget build(BuildContext context, DetailedEventViewModel viewModel) {
     FontThemeClass fontTheme = FontThemeClass();
     return SliverAppBar(
-      foregroundColor: context.colorScheme.primaryTextColor,
-      backgroundColor: context.colorScheme.scaffoldBackgroundColor,
+      foregroundColor: context.colorScheme.primaryText,
+      backgroundColor: context.colorScheme.scaffold,
       elevation: 0.0,
       pinned: false,
       stretch: true,
@@ -47,7 +47,7 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
               height: 30.h,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: context.colorScheme.primaryCardColor,
+                color: context.colorScheme.card,
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(15),
                   topRight: Radius.circular(15),
@@ -64,7 +64,7 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
               child: Container(
                 padding: const EdgeInsets.all(15).r,
                 decoration: BoxDecoration(
-                  color: context.colorScheme.primaryCardColor.withOpacity(0.4),
+                  color: context.colorScheme.card.withOpacity(0.4),
                   borderRadius: BorderRadius.circular(10).r,
                 ),
                 height: 60.h,
@@ -73,7 +73,7 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
                   children: [
                     Icon(
                       Icons.pin_drop,
-                      color: context.colorScheme.primaryAccentColor,
+                      color: context.colorScheme.accentColor,
                     ),
                     4.horizontalSpace,
                     Text(
@@ -81,7 +81,7 @@ class DetailedEventAppBar extends ViewModelWidget<DetailedEventViewModel> {
                       textAlign: TextAlign.center,
                       style: fontTheme.body(
                         context,
-                        color: context.colorScheme.primaryTextColor,
+                        color: context.colorScheme.primaryText,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -135,14 +135,14 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                   child: Icon(
                     Icons.calendar_month,
                     size: 20,
-                    color: context.colorScheme.primaryAccentColor,
+                    color: context.colorScheme.accentColor,
                   ),
                 ),
                 Text(
                   "${eventData.startDate.toDate().day}-${eventData.endDate.toDate().day} ${DateFormat('MMMM yyyy').format(eventData.startDate.toDate())}",
                   style: fontTheme.caption(
                     context,
-                    color: context.colorScheme.primaryTextColor,
+                    color: context.colorScheme.primaryText,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -158,7 +158,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                   margin: const EdgeInsets.only(right: 8.0).r,
                   child: Icon(
                     Icons.timer,
-                    color: context.colorScheme.primaryAccentColor,
+                    color: context.colorScheme.accentColor,
                     size: 20,
                   ),
                 ),
@@ -166,7 +166,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                   "${eventData.startDate.toDate().hour}:${eventData.startDate.toDate().minute} AM",
                   style: fontTheme.caption(
                     context,
-                    color: context.colorScheme.primaryTextColor,
+                    color: context.colorScheme.primaryText,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -186,7 +186,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
               textAlign: TextAlign.justify,
               style: fontTheme.caption(
                 context,
-                color: context.colorScheme.primaryTextColor.withOpacity(0.8),
+                color: context.colorScheme.primaryText.withOpacity(0.8),
               ),
             ),
             12.verticalSpace,
@@ -197,7 +197,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
-                      context.colorScheme.primaryAccentColor.withOpacity(0.7),
+                      context.colorScheme.accentColor.withOpacity(0.7),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10).r,
                   ),
@@ -217,7 +217,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
             ),
             20.verticalSpace,
             Divider(
-              color: context.colorScheme.primaryTextColor.withOpacity(0.2),
+              color: context.colorScheme.primaryText.withOpacity(0.2),
               height: 1.h,
             ),
             20.verticalSpace,
@@ -275,7 +275,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                         child: Icon(
                           Icons.account_circle,
                           size: 24.sp,
-                          color: context.colorScheme.primaryAccentColor,
+                          color: context.colorScheme.accentColor,
                         ),
                       ),
                       Text(
@@ -297,7 +297,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                         child: Icon(
                           Icons.email,
                           size: 24.h,
-                          color: context.colorScheme.primaryAccentColor,
+                          color: context.colorScheme.accentColor,
                         ),
                       ),
                       Text(eventData.cEmail,
@@ -323,7 +323,7 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                         child: Icon(
                           Icons.phone_in_talk_rounded,
                           size: 24.sp,
-                          color: context.colorScheme.primaryAccentColor,
+                          color: context.colorScheme.accentColor,
                         ),
                       ),
                       Text(

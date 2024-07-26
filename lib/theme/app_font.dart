@@ -6,7 +6,7 @@ class FontThemeClass {
       fontSize: 42.sp,
       fontFamily: 'Outfit',
       fontWeight: fontWeight ?? FontWeight.w300,
-      color: color ?? ctx.colorScheme.primaryTextColor,
+      color: color ?? ctx.colorScheme.primaryText,
     );
   }
 
@@ -15,7 +15,7 @@ class FontThemeClass {
       fontSize: 34.sp,
       fontFamily: 'Outfit',
       fontWeight: fontWeight ?? FontWeight.w700,
-      color: color ?? ctx.colorScheme.primaryTextColor,
+      color: color ?? ctx.colorScheme.primaryText,
     );
   }
 
@@ -25,7 +25,7 @@ class FontThemeClass {
       fontSize: 30.sp,
       fontFamily: 'Outfit',
       fontWeight: fontWeight ?? FontWeight.w600,
-      color: color ?? ctx.colorScheme.primaryTextColor,
+      color: color ?? ctx.colorScheme.primaryText,
     );
   }
 
@@ -34,7 +34,7 @@ class FontThemeClass {
       fontSize: 28.sp,
       fontFamily: 'Outfit',
       fontWeight: fontWeight ?? FontWeight.w500,
-      color: color ?? ctx.colorScheme.primaryTextColor,
+      color: color ?? ctx.colorScheme.primaryText,
     );
   }
 
@@ -43,7 +43,7 @@ class FontThemeClass {
       fontSize: 22.sp,
       fontFamily: 'Outfit',
       fontWeight: fontWeight ?? FontWeight.w300,
-      color: color ?? ctx.colorScheme.primaryTextColor,
+      color: color ?? ctx.colorScheme.primaryText,
     );
   }
 
@@ -53,7 +53,7 @@ class FontThemeClass {
       fontSize: 20.sp,
       fontFamily: 'Outfit',
       fontWeight: fontWeight ?? FontWeight.w400,
-      color: color ?? ctx.colorScheme.primaryTextColor,
+      color: color ?? ctx.colorScheme.primaryText,
     );
   }
 
@@ -62,7 +62,7 @@ class FontThemeClass {
       fontSize: 16.sp,
       fontFamily: 'Outfit',
       fontWeight: fontWeight ?? FontWeight.w400,
-      color: color ?? ctx.colorScheme.primaryTextColor,
+      color: color ?? ctx.colorScheme.primaryText,
     );
   }
 
@@ -71,7 +71,7 @@ class FontThemeClass {
       fontSize: 14.sp,
       fontFamily: 'Outfit',
       fontWeight: fontWeight ?? FontWeight.w400,
-      color: color ?? ctx.colorScheme.primaryTextColor,
+      color: color ?? ctx.colorScheme.primaryText,
     );
   }
 
@@ -80,7 +80,7 @@ class FontThemeClass {
       fontSize: 12.sp,
       fontFamily: 'Outfit',
       fontWeight: fontWeight ?? FontWeight.w400,
-      color: color ?? ctx.colorScheme.primaryTextColor,
+      color: color ?? ctx.colorScheme.primaryText,
     );
   }
 }

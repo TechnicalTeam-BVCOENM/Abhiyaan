@@ -10,7 +10,7 @@ class CircularLoadingIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: CupertinoActivityIndicator(
-        color: context.colorScheme.primaryTextColor,
+        color: context.colorScheme.primaryText,
       ),
     );
   }
