@@ -27,177 +27,298 @@ class SignInView extends StatelessWidget {
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.only(
-                  left: 20,
-                  right: 20,
                   top: 40,
-                  bottom: 10,
                 ).r,
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 90).r,
-                      child: SizedBox(
-                        width: 320.w,
-                        child: Image.asset(
-                          AssetImagePath.logoImg,
-                        ),
-                      ).animate(delay: 100.ms).fadeIn(
-                            delay: 100.ms,
-                            curve: Curves.easeInOut,
-                            duration: 500.ms,
-                          ),
-                    ),
-                    TextFormField(
-                      cursorColor: context.colorScheme.accentColor,
-                      controller: model.emailIdTextController,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 15,
-                          vertical: 15,
-                        ).r,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            const Radius.circular(15).r,
-                          ),
-                          borderSide: BorderSide.none,
-                        ),
-                        fillColor: context.colorScheme.card,
-                        filled: true,
-                        focusColor: context.colorScheme.card,
-                        hintText: 'Student Email ID',
-                        hintStyle: model.fontTheme.caption(
-                          context,
-                          color: context.colorScheme.secondaryText,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ).animate(delay: 300.ms).fadeIn(
-                          delay: 100.ms,
-                          curve: Curves.easeInOut,
-                          duration: 500.ms,
-                        ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    TextFormField(
-                      cursorColor: context.colorScheme.accentColor,
-                      controller: model.passwordTextController,
-                      obscureText: model.isPasswordVisible ? false : true,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 15)
-                            .r,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              const Radius.circular(15).r,
-                            ),
-                            borderSide: BorderSide.none),
-                        fillColor: context.colorScheme.card,
-                        filled: true,
-                        focusColor: Colors.white,
-                        suffixIcon: InkWell(
-                          splashColor: Colors.transparent,
-                          onTap: () {
-                            model.togglePasswordVisibility();
-                          },
-                          child: model.isPasswordVisible
-                              ? Icon(
-                                  Icons.visibility_off,
-                                  color: context.colorScheme.secondaryText,
-                                )
-                              : Icon(
-                                  Icons.visibility,
-                                  color: context.colorScheme.secondaryText,
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                      ).r,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 30).r,
+                            child: SizedBox(
+                              width: 320.w,
+                              child: Image.asset(
+                                AssetImagePath.logoImg,
+                              ),
+                            ).animate(delay: 100.ms).fadeIn(
+                                  delay: 100.ms,
+                                  curve: Curves.easeInOut,
+                                  duration: 500.ms,
                                 ),
-                        ),
-                        hintText: 'Password',
-                        hintStyle: model.fontTheme.caption(
-                          context,
-                          color: context.colorScheme.secondaryText,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        errorText: model.isPasswordValid
-                            ? null
-                            : model.passwordErrorText,
-                      ),
-                    ).animate(delay: 300.ms).fadeIn(
-                          delay: 100.ms,
-                          curve: Curves.easeInOut,
-                          duration: 500.ms,
-                        ),
-                    InkWell(
-                      onTap: () {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        model.changePassword(context);
-                      },
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.only(top: 10.r),
-                          child: Text(
-                            'Forgot password?',
-                            style: FontThemeClass().caption(
-                              context,
-                              color: context.colorScheme.accentColor,
-                              fontWeight: FontWeight.w500,
+                          ),
+                          Text("Abhiyaan",
+                              textAlign: TextAlign.center,
+                              style: FontThemeClass().header(
+                                context,
+                              )),
+                          Text("Connect with Students, Teachers & Alumni",
+                              textAlign: TextAlign.center,
+                              style: FontThemeClass().body(
+                                context,
+                                color: context.colorScheme.secondaryText,
+                                fontWeight: FontWeight.w500,
+                              )),
+                              SizedBox(
+                            height: 25.h,
+                              ),
+                          TextFormField(
+                            cursorColor: context.colorScheme.accentColor,
+                            controller: model.emailIdTextController,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 15,
+                                vertical: 15,
+                              ).r,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  const Radius.circular(15).r,
+                                ),
+                                borderSide: BorderSide.none,
+                              ),
+                              fillColor: context.colorScheme.card,
+                              filled: true,
+                              focusColor: context.colorScheme.card,
+                              hintText: 'Student Email ID',
+                              hintStyle: model.fontTheme.caption(
+                                context,
+                                color: context.colorScheme.secondaryText,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
+                          ).animate(delay: 300.ms).fadeIn(
+                                delay: 100.ms,
+                                curve: Curves.easeInOut,
+                                duration: 500.ms,
+                              ),
+                          SizedBox(
+                            height: 15.h,
                           ),
-                        ),
-                      ),
-                    ).animate(delay: 400.ms).fadeIn(
-                          delay: 100.ms,
-                          curve: Curves.easeInOut,
-                          duration: 500.ms,
-                        ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.only(top: 10.r),
-                      child: TextButton(
-                        onPressed: () async {
-                          await model.login(
-                            model.emailIdTextController.text,
-                            model.passwordTextController.text,
-                            context,
-                          );
-                        },
-                        style: ButtonStyle(
-                          minimumSize: const WidgetStatePropertyAll(
-                              Size(double.infinity, 50)),
-                          backgroundColor: WidgetStatePropertyAll(
-                              context.colorScheme.accentColor),
-                          shape: WidgetStatePropertyAll(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40.0).r,
+                          TextFormField(
+                            cursorColor: context.colorScheme.accentColor,
+                            controller: model.passwordTextController,
+                            obscureText: model.isPasswordVisible ? false : true,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 15)
+                                  .r,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    const Radius.circular(15).r,
+                                  ),
+                                  borderSide: BorderSide.none),
+                              fillColor: context.colorScheme.card,
+                              filled: true,
+                              focusColor: Colors.white,
+                              suffixIcon: InkWell(
+                                splashColor: Colors.transparent,
+                                onTap: () {
+                                  model.togglePasswordVisibility();
+                                },
+                                child: model.isPasswordVisible
+                                    ? Icon(
+                                        Icons.visibility_off,
+                                        color:
+                                            context.colorScheme.secondaryText,
+                                      )
+                                    : Icon(
+                                        Icons.visibility,
+                                        color:
+                                            context.colorScheme.secondaryText,
+                                      ),
+                              ),
+                              hintText: 'Password',
+                              hintStyle: model.fontTheme.caption(
+                                context,
+                                color: context.colorScheme.secondaryText,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              errorText: model.isPasswordValid
+                                  ? null
+                                  : model.passwordErrorText,
                             ),
-                          ),
-                        ),
-                        child: Text(
-                          'Sign In',
-                          style: FontThemeClass().title2(
-                            context,
-                            color: context.colorScheme.white,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                          ).animate(delay: 300.ms).fadeIn(
+                                delay: 100.ms,
+                                curve: Curves.easeInOut,
+                                duration: 500.ms,
+                              ),
+                          InkWell(
+                            onTap: () {
+                              FocusScope.of(context).requestFocus(FocusNode());
+                              model.changePassword(context);
+                            },
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.only(top: 10.r),
+                                child: Text(
+                                  'Forgot password?',
+                                  style: FontThemeClass().caption(
+                                    context,
+                                    color: context.colorScheme.accentColor,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ).animate(delay: 400.ms).fadeIn(
+                                delay: 100.ms,
+                                curve: Curves.easeInOut,
+                                duration: 500.ms,
+                              ),
+                        ],
                       ),
-                    ).animate(delay: 500.ms).fadeIn(
-                          delay: 100.ms,
-                          curve: Curves.easeInOut,
-                          duration: 500.ms,
-                        ),
-                    model.showRegister
-                        ? Padding(
-                            padding: EdgeInsetsDirectional.only(top: 15.r),
+                    ),
+                    // model.showRegister
+                    //     ? Padding(
+                    //         padding: EdgeInsetsDirectional.only(top: 15.r),
+                    //         child: RichText(
+                    //           text: TextSpan(
+                    //             text: 'Don\'t have an account? ',
+                    //             style: FontThemeClass().caption(
+                    //               context,
+                    //               color: context.colorScheme.secondaryText,
+                    //               fontWeight: FontWeight.w500,
+                    //             ),
+                    //             children: <TextSpan>[
+                    //               TextSpan(
+                    //                 text: 'Register Now',
+                    //                 style: FontThemeClass().caption(
+                    //                   context,
+                    //                   color: context.colorScheme.accentColor,
+                    //                   fontWeight: FontWeight.w500,
+                    //                 ),
+                    //                 recognizer: TapGestureRecognizer()
+                    //                   ..onTap = () {
+                    //                     model.toRegisterPage(context);
+                    //                   },
+                    //               ),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       ).animate(delay: 600.ms).fadeIn(
+                    //           delay: 100.ms,
+                    //           curve: Curves.easeInOut,
+                    //           duration: 500.ms,
+                    //         )
+                    //     : Container(),
+                    // model.showRegister ? const Spacer() : 10.verticalSpace,
+                    // Padding(
+                    //   padding: EdgeInsetsDirectional.only(top: 10.r),
+                    //   child: InkWell(
+                    //     onTap: () => model.navigateToHelpSupport(),
+                    //     child: RichText(
+                    //       text: TextSpan(
+                    //         text: 'Problem with Sign In? ',
+                    //         style: FontThemeClass().caption(
+                    //           context,
+                    //           color: context.colorScheme.secondaryText,
+                    //           fontWeight: FontWeight.w500,
+                    //         ),
+                    //         children: <TextSpan>[
+                    //           TextSpan(
+                    //             text: 'Report Issue',
+                    //             style: FontThemeClass().caption(
+                    //               context,
+                    //               color: context.colorScheme.accentColor,
+                    //               fontWeight: FontWeight.w500,
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ).animate(delay: 700.ms).fadeIn(
+                    //       delay: 100.ms,
+                    //       curve: Curves.easeInOut,
+                    //       duration: 500.ms,
+                    //     ),
+                    model.showRegister ? 10.verticalSpace : const Spacer(),
+                    // Container(
+                    //   alignment: Alignment.center,
+                    //   child: Text(
+                    //     'Abhiyaan v1.0.5',
+                    //     textAlign: TextAlign.center,
+                    //     style: FontThemeClass().caption(
+                    //       context,
+                    //       color: context.colorScheme.secondaryText,
+                    //       fontWeight: FontWeight.w500,
+                    //     ),
+                    //   ),
+                    // ),
+                    Container(
+                      height: 160.h,
+                      width: double.infinity,
+                      color: context.colorScheme
+                          .darkScaffold, // Change this to inverse of scaffold
+                      // decoration: const BoxDecoration(
+                      //   borderRadius: BorderRadius.only(
+                      //     topLeft: Radius.circular(15),
+                      //     topRight: Radius.circular(15),
+                      //   ),
+                      // ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 20,
+                              right: 20,
+                              top: 20,
+                              bottom: 0,
+                            ).r,
+                            child: TextButton(
+                              onPressed: () async {
+                                await model.login(
+                                  model.emailIdTextController.text,
+                                  model.passwordTextController.text,
+                                  context,
+                                );
+                              },
+                              style: ButtonStyle(
+                                minimumSize: const WidgetStatePropertyAll(
+                                    Size(double.infinity, 50)),
+                                backgroundColor: WidgetStatePropertyAll(
+                                    context.colorScheme.accentColor),
+                                shape: WidgetStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(40.0).r,
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                'Sign In',
+                                style: FontThemeClass().title2(
+                                  context,
+                                  color: context.colorScheme.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ).animate(delay: 500.ms).fadeIn(
+                                delay: 100.ms,
+                                curve: Curves.easeInOut,
+                                duration: 500.ms,
+                              ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.only(
+                                top: 10.r, bottom: 10.r),
                             child: RichText(
                               text: TextSpan(
-                                text: 'Don\'t have an account? ',
+                                text: 'New Here? ',
                                 style: FontThemeClass().caption(
                                   context,
-                                  color: context.colorScheme.secondaryText,
+                                  color: context.colorScheme
+                                      .white, // Change this to inverse of primaryText
                                   fontWeight: FontWeight.w500,
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text: 'Register Now',
+                                    text: 'Sign Up',
                                     style: FontThemeClass().caption(
                                       context,
                                       color: context.colorScheme.accentColor,
@@ -211,54 +332,38 @@ class SignInView extends StatelessWidget {
                                 ],
                               ),
                             ),
-                          ).animate(delay: 600.ms).fadeIn(
-                              delay: 100.ms,
-                              curve: Curves.easeInOut,
-                              duration: 500.ms,
-                            )
-                        : Container(),
-                    model.showRegister ? const Spacer() : 10.verticalSpace,
-                    Padding(
-                      padding: EdgeInsetsDirectional.only(top: 10.r),
-                      child: InkWell(
-                        onTap: () => model.navigateToHelpSupport(),
-                        child: RichText(
-                          text: TextSpan(
-                            text: 'Problem with Sign In? ',
-                            style: FontThemeClass().caption(
-                              context,
-                              color: context.colorScheme.secondaryText,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: 'Report Issue',
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.only(
+                                top: 20.r, bottom: 10.r),
+                            child: RichText(
+                              text: TextSpan(
+                                text:
+                                    'By Continuing, you agree Terms of Service & ',
                                 style: FontThemeClass().caption(
                                   context,
-                                  color: context.colorScheme.accentColor,
+                                  color: context.colorScheme
+                                      .white, // Change this to inverse of primaryText
                                   fontWeight: FontWeight.w500,
                                 ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: 'Privacy Policy',
+                                    style: FontThemeClass().caption(
+                                      context,
+                                      color: context.colorScheme.accentColor,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        model.navigateToPrivacyPolicy();
+                                      },
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                    ).animate(delay: 700.ms).fadeIn(
-                          delay: 100.ms,
-                          curve: Curves.easeInOut,
-                          duration: 500.ms,
-                        ),
-                    model.showRegister ? 10.verticalSpace : const Spacer(),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Abhiyaan v1.0.5',
-                        textAlign: TextAlign.center,
-                        style: FontThemeClass().caption(
-                          context,
-                          color: context.colorScheme.secondaryText,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        ],
                       ),
                     ),
                   ],
