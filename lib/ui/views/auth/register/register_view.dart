@@ -32,19 +32,41 @@ class RegisterView extends StatelessWidget {
               padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
               child: Column(
                 children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 50),
-                    width: 320.w,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+            child: Stack( // Use Stack for layering
+              children: [
+                Container(
+                  width: 200.w,
+                  height: 200.h,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: context.colorScheme.primary,
+                        spreadRadius: -35,
+                        blurRadius: 50.0, // Adjust for desired fade
+                      ),
+                    ],
+                  ),
+                ),
+                ClipOval( // Inner circle with image
+                  child: SizedBox(
+                    width: 200.w,
+                    height: 200.h,
                     child: Image.asset(
                       AssetImagePath.logoImg,
+                      fit: BoxFit.cover, // Adjust image fit as needed
                     ),
-                  ).animate(delay: 200.ms).fadeIn(
-                        delay: 100.ms,
-                        curve: Curves.easeInOut,
-                        duration: 700.ms,
-                      ),
-                  30.verticalSpace,
+                  ),
+                ),
+              ],
+            ),
+          ).animate(delay: 200.ms).fadeIn(
+  delay: 100.ms,
+  curve: Curves.easeInOut,
+  duration: 700.ms,
+),
+       30.verticalSpace,
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,
                     cursorColor: context.colorScheme.accentColor,
