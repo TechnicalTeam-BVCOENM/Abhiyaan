@@ -32,59 +32,66 @@ class RegisterView extends StatelessWidget {
               padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
               child: Column(
                 children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
-            child: Stack( // Use Stack for layering
-              children: [
-                Container(
-                  width: 200.w,
-                  height: 200.h,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: context.colorScheme.primary,
-                        spreadRadius: -35,
-                        blurRadius: 50.0, // Adjust for desired fade
+                  Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: context.colorScheme.primary,
+                                spreadRadius: -45,
+                                blurRadius: 70.0, // Adjust for desired fade
+                              ),
+                            ],
+                          ),
+                          child: SizedBox(
+                            width: 200.w,
+                            height: 200.h,
+                            child: Image.asset(
+                              AssetImagePath.logoImg,
+                            ),
+                          )).animate(delay: 100.ms).fadeIn(
+                        delay: 100.ms,
+                        curve: Curves.easeInOut,
+                        duration: 700.ms,
                       ),
-                    ],
-                  ),
-                ),
-                ClipOval( // Inner circle with image
-                  child: SizedBox(
-                    width: 200.w,
-                    height: 200.h,
-                    child: Image.asset(
-                      AssetImagePath.logoImg,
-                      fit: BoxFit.cover, // Adjust image fit as needed
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ).animate(delay: 200.ms).fadeIn(
-  delay: 100.ms,
-  curve: Curves.easeInOut,
-  duration: 700.ms,
-),
-       30.verticalSpace,
+                            Text("Abhiyaan",
+                                  textAlign: TextAlign.center,
+                                  style: FontThemeClass().header(
+                                    context,
+                                  )).animate(delay: 100.ms).fadeIn(
+                                delay: 200.ms,
+                                curve: Curves.easeInOut,
+                                duration: 500.ms,
+                              ),
+                          Text("Connect with Students, Teachers & Alumni",
+                                  textAlign: TextAlign.center,
+                                  style: FontThemeClass().body(
+                                    context,
+                                    color: context.colorScheme.secondaryText,
+                                    fontWeight: FontWeight.w500,
+                                  )).animate(delay: 200.ms).fadeIn(
+                                delay: 100.ms,
+                                curve: Curves.easeInOut,
+                                duration: 500.ms,
+                              ),
+                  40.verticalSpace,
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,
                     cursorColor: context.colorScheme.accentColor,
                     controller: model.emailIdTextController,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 15)
+                              horizontal: 30, vertical: 15)
                           .r,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
-                          const Radius.circular(15).r,
+                          const Radius.circular(150).r,
                         ),
                         borderSide: BorderSide.none,
                       ),
                       fillColor: context.colorScheme.card,
                       filled: true,
                       focusColor: context.colorScheme.card,
-                      hintText: 'Student Email ID',
+                      hintText: 'Email ID',
                       errorText:
                           model.isEmailIdValid ? null : model.emailIdErrorText,
                       hintStyle: model.fontTheme.caption(
@@ -104,18 +111,18 @@ class RegisterView extends StatelessWidget {
                     controller: model.userNameController,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 15)
+                              horizontal: 30, vertical: 15)
                           .r,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
-                          const Radius.circular(15).r,
+                          const Radius.circular(150).r,
                         ),
                         borderSide: BorderSide.none,
                       ),
                       fillColor: context.colorScheme.card,
                       filled: true,
                       focusColor: context.colorScheme.card,
-                      hintText: 'Enter Username',
+                      hintText: 'Username',
                       errorText:
                           model.isEmailIdValid ? null : model.emailIdErrorText,
                       hintStyle: model.fontTheme.caption(
@@ -137,11 +144,11 @@ class RegisterView extends StatelessWidget {
                     obscureText: model.isCreatePasswordVisible ? false : true,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 15)
+                              horizontal: 30, vertical: 15)
                           .r,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(
-                            const Radius.circular(15).r,
+                            const Radius.circular(150).r,
                           ),
                           borderSide: BorderSide.none),
                       fillColor: context.colorScheme.card,
@@ -182,11 +189,11 @@ class RegisterView extends StatelessWidget {
                     obscureText: model.isConfirmPasswordVisible ? false : true,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 15)
+                              horizontal: 30, vertical: 15)
                           .r,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
-                          const Radius.circular(15).r,
+                          const Radius.circular(150).r,
                         ),
                         borderSide: BorderSide.none,
                       ),

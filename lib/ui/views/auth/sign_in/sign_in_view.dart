@@ -39,70 +39,68 @@ class SignInView extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
-                            padding: const EdgeInsets.symmetric(vertical: 30).r,
-                                 decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: context.colorScheme.primary,
-                spreadRadius: -55,
-                blurRadius: 60.0, // Adjust for desired fade
-              ),
-            ],
-          ),
-                            child: SizedBox(
-                              width: 200.w,
-                              height: 200.h,
-                              child: Image.asset(
-                                AssetImagePath.logoImg,
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: context.colorScheme.primary,
+                                        spreadRadius: -45,
+                                        blurRadius:
+                                            70.0, // Adjust for desired fade
+                                      ),
+                                    ],
+                                  ),
+                                  child: SizedBox(
+                                    width: 200.w,
+                                    height: 200.h,
+                                    child: Image.asset(
+                                      AssetImagePath.logoImg,
+                                    ),
+                                  )).animate(delay: 100.ms).fadeIn(
+                                delay: 100.ms,
+                                curve: Curves.easeInOut,
+                                duration: 500.ms,
                               ),
-                            )).animate(delay: 100.ms).fadeIn(
-                                  delay: 100.ms,
-                                  curve: Curves.easeInOut,
-                                  duration: 500.ms,
-                                ),
-                        
                           Text("Abhiyaan",
-                              textAlign: TextAlign.center,
-                              style: FontThemeClass().header(
-                                context,
-                              )).animate(delay: 100.ms).fadeIn(
+                                  textAlign: TextAlign.center,
+                                  style: FontThemeClass().header(
+                                    context,
+                                  )).animate(delay: 100.ms).fadeIn(
                                 delay: 100.ms,
                                 curve: Curves.easeInOut,
                                 duration: 500.ms,
                               ),
                           Text("Connect with Students, Teachers & Alumni",
-                              textAlign: TextAlign.center,
-                              style: FontThemeClass().body(
-                                context,
-                                color: context.colorScheme.secondaryText,
-                                fontWeight: FontWeight.w500,
-                              )).animate(delay: 300.ms).fadeIn(
-                                  delay: 100.ms,
-                                  curve: Curves.easeInOut,
-                                  duration: 500.ms,
-                                ),
-                          
-                              SizedBox(
-                            height: 25.h,
+                                  textAlign: TextAlign.center,
+                                  style: FontThemeClass().body(
+                                    context,
+                                    color: context.colorScheme.secondaryText,
+                                    fontWeight: FontWeight.w500,
+                                  )).animate(delay: 300.ms).fadeIn(
+                                delay: 100.ms,
+                                curve: Curves.easeInOut,
+                                duration: 500.ms,
                               ),
+                          SizedBox(
+                            height: 50.h,
+                          ),
                           TextFormField(
                             cursorColor: context.colorScheme.accentColor,
                             controller: model.emailIdTextController,
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 15,
+                                horizontal: 30,
                                 vertical: 15,
                               ).r,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(
-                                  const Radius.circular(15).r,
+                                  const Radius.circular(150).r,
                                 ),
                                 borderSide: BorderSide.none,
                               ),
                               fillColor: context.colorScheme.card,
                               filled: true,
                               focusColor: context.colorScheme.card,
-                              hintText: 'Student Email ID',
+                              hintText: 'Email ID',
                               hintStyle: model.fontTheme.caption(
                                 context,
                                 color: context.colorScheme.secondaryText,
@@ -123,11 +121,11 @@ class SignInView extends StatelessWidget {
                             obscureText: model.isPasswordVisible ? false : true,
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 15, vertical: 15)
+                                      horizontal: 30, vertical: 15)
                                   .r,
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(
-                                    const Radius.circular(15).r,
+                                    const Radius.circular(150).r,
                                   ),
                                   borderSide: BorderSide.none),
                               fillColor: context.colorScheme.card,
@@ -192,86 +190,9 @@ class SignInView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    // model.showRegister
-                    //     ? Padding(
-                    //         padding: EdgeInsetsDirectional.only(top: 15.r),
-                    //         child: RichText(
-                    //           text: TextSpan(
-                    //             text: 'Don\'t have an account? ',
-                    //             style: FontThemeClass().caption(
-                    //               context,
-                    //               color: context.colorScheme.secondaryText,
-                    //               fontWeight: FontWeight.w500,
-                    //             ),
-                    //             children: <TextSpan>[
-                    //               TextSpan(
-                    //                 text: 'Register Now',
-                    //                 style: FontThemeClass().caption(
-                    //                   context,
-                    //                   color: context.colorScheme.accentColor,
-                    //                   fontWeight: FontWeight.w500,
-                    //                 ),
-                    //                 recognizer: TapGestureRecognizer()
-                    //                   ..onTap = () {
-                    //                     model.toRegisterPage(context);
-                    //                   },
-                    //               ),
-                    //             ],
-                    //           ),
-                    //         ),
-                    //       ).animate(delay: 600.ms).fadeIn(
-                    //           delay: 100.ms,
-                    //           curve: Curves.easeInOut,
-                    //           duration: 500.ms,
-                    //         )
-                    //     : Container(),
-                    // model.showRegister ? const Spacer() : 10.verticalSpace,
-                    // Padding(
-                    //   padding: EdgeInsetsDirectional.only(top: 10.r),
-                    //   child: InkWell(
-                    //     onTap: () => model.navigateToHelpSupport(),
-                    //     child: RichText(
-                    //       text: TextSpan(
-                    //         text: 'Problem with Sign In? ',
-                    //         style: FontThemeClass().caption(
-                    //           context,
-                    //           color: context.colorScheme.secondaryText,
-                    //           fontWeight: FontWeight.w500,
-                    //         ),
-                    //         children: <TextSpan>[
-                    //           TextSpan(
-                    //             text: 'Report Issue',
-                    //             style: FontThemeClass().caption(
-                    //               context,
-                    //               color: context.colorScheme.accentColor,
-                    //               fontWeight: FontWeight.w500,
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ).animate(delay: 700.ms).fadeIn(
-                    //       delay: 100.ms,
-                    //       curve: Curves.easeInOut,
-                    //       duration: 500.ms,
-                    //     ),
-                    model.showRegister ? 10.verticalSpace : const Spacer(),
-                    // Container(
-                    //   alignment: Alignment.center,
-                    //   child: Text(
-                    //     'Abhiyaan v1.0.5',
-                    //     textAlign: TextAlign.center,
-                    //     style: FontThemeClass().caption(
-                    //       context,
-                    //       color: context.colorScheme.secondaryText,
-                    //       fontWeight: FontWeight.w500,
-                    //     ),
-                    //   ),
-                    // ),
                     const Spacer(),
                     ClipRRect(
-                      borderRadius:  BorderRadius.only(
+                      borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30.r),
                         topRight: Radius.circular(30.r),
                       ),
@@ -279,12 +200,6 @@ class SignInView extends StatelessWidget {
                         width: double.infinity,
                         color: context.colorScheme
                             .darkScaffold, // Change this to inverse of scaffold
-                        // decoration: const BoxDecoration(
-                        //   borderRadius: BorderRadius.only(
-                        //     topLeft: Radius.circular(15),
-                        //     topRight: Radius.circular(15),
-                        //   ),
-                        // ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -310,7 +225,8 @@ class SignInView extends StatelessWidget {
                                       context.colorScheme.accentColor),
                                   shape: WidgetStatePropertyAll(
                                     RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(40.0).r,
+                                      borderRadius:
+                                          BorderRadius.circular(40.0).r,
                                     ),
                                   ),
                                 ),
@@ -328,12 +244,12 @@ class SignInView extends StatelessWidget {
                                   curve: Curves.easeInOut,
                                   duration: 500.ms,
                                 ),
-                            Padding(
+                           model.showRegister ?Padding(
                               padding: EdgeInsetsDirectional.only(
                                   top: 10.r, bottom: 10.r),
                               child: RichText(
                                 text: TextSpan(
-                                  text: 'New Here? ',
+                                  text: 'New Here?  ',
                                   style: FontThemeClass().caption(
                                     context,
                                     color: context.colorScheme
@@ -356,10 +272,10 @@ class SignInView extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                            ),
+                            ):30.verticalSpace,
                             Padding(
                               padding: EdgeInsetsDirectional.only(
-                                  top: 20.r, bottom: 10.r),
+                                  top: 10.r, bottom: 20.r),
                               child: RichText(
                                 text: TextSpan(
                                   text:
@@ -391,10 +307,10 @@ class SignInView extends StatelessWidget {
                         ),
                       ),
                     ).animate(delay: 600.ms).fadeIn(
-  delay: 100.ms,
-  curve: Curves.easeInOut,
-  duration: 700.ms,
-),
+                          delay: 100.ms,
+                          curve: Curves.easeInOut,
+                          duration: 700.ms,
+                        ),
                   ],
                 ),
               ),
