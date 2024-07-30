@@ -32,7 +32,9 @@ class AuthView extends StatelessWidget {
                     children: [
                       Image(
                         width: double.infinity.w,
-                        image: Image.asset(AssetImagePath.logoImg).image,
+                       image: const AssetImage(
+                          'assets/images/abhiyaan_logo1.png',
+                        ),
                       ),
                       Image(image: Image.asset(AssetImagePath.login).image),
                     ],

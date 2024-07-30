@@ -112,4 +112,11 @@ class SignInViewModel extends BaseViewModel {
     externalUrlHandler.launchEmail("technicalteam.bvcoenm@gmail.com");
     // Navigation
   }
+
+  void navigateToPrivacyPolicy() {
+    _analyticsService.logEvent(
+        eventName: "Privacy_policy", value: "Privacy policy button clicked");
+    UrlLauncher externalUrlHandler = UrlLauncher();
+    externalUrlHandler.launchURL("https://abhiyaan.tech/privacy-policy");
+  }
 }
