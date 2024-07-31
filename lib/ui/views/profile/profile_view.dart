@@ -2,7 +2,6 @@ import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/ui/common/url_launcher.dart';
-
 part 'profile_view_model.dart';
 part "profile_view_component.dart";
 
