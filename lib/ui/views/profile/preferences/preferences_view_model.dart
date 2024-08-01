@@ -261,6 +261,7 @@ class PreferencesViewModel extends BaseViewModel {
     setBusy(true);
     LocalStorageService localStorageService = locator<LocalStorageService>();
     final bottomNavViewModel = locator<BottomNavViewModel>();
+    final storageService = locator<LocalStorageService>();
     final bool success = await _authenticationService.signOut().then((value) {
       return value;
     });
@@ -269,6 +270,8 @@ class PreferencesViewModel extends BaseViewModel {
       bottomNavViewModel.setIndex(0);
       await _navigationService.clearStackAndShow(Routes.authView);
       await localStorageService.clear();
+      await storageService.write(
+          "showRegister", await FirestoreService().showRegistration());
     } else {
       log.i('sign out failed');
     }
