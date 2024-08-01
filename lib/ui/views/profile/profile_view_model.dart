@@ -6,6 +6,8 @@ class ProfileViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final localStorageService = locator<LocalStorageService>();
   final _themeService = locator<ThemeService>();
+  final fontTheme = FontThemeClass();
+
 
   navigateToHelpSupport() {
     _analyticsService.logEvent(

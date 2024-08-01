@@ -1,7 +1,7 @@
 import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/ui/common/url_launcher.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 part 'profile_view_model.dart';
 part "profile_view_component.dart";
@@ -24,7 +24,7 @@ class ProfileView extends StatelessWidget {
       ),
     );
     return ViewModelBuilder<ProfileViewModel>.reactive(
-    viewModelBuilder: () => locator<ProfileViewModel>(),
+      viewModelBuilder: () => locator<ProfileViewModel>(),
       onViewModelReady: (viewModel) => viewModel.init(),
       disposeViewModel: false,
       builder: (context, model, child) {
@@ -34,18 +34,17 @@ class ProfileView extends StatelessWidget {
               ? const CircularLoadingIndicator()
               : SafeArea(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20).r,
+                    padding: const EdgeInsets.symmetric(horizontal: 33).r,
                     child: Column(
                       children: [
-                        const AppBarWidget(),
+                        const ProfileImageWidget(),
+                        const ProfileSectionText(title: 'Settings'),
                         16.verticalSpace,
                         const ProfileCard(),
                         16.verticalSpace,
                         const DarkModeTile(),
-                        // 16.verticalSpace,
-                        // model.localStorageService.read('userProfile') == "Explorer" || model.localStorageService.read('userProfile') == "Faculty"
-                        //     ? const SizedBox()
-                        //     : const Cerificatation(),
+                        16.verticalSpace,
+                        const ProfileSectionText(title: 'Others'),
                         16.verticalSpace,
                         const HelpSupportTile(),
                         16.verticalSpace,

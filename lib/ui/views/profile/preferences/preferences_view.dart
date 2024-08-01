@@ -51,7 +51,7 @@ class PreferencesView extends StatelessWidget {
           ),
           body: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20).r,
+              padding: const EdgeInsets.symmetric(horizontal: 25).r,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
