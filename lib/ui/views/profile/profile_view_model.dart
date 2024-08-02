@@ -8,7 +8,6 @@ class ProfileViewModel extends BaseViewModel {
   final _themeService = locator<ThemeService>();
   final fontTheme = FontThemeClass();
 
-
   navigateToHelpSupport() {
     _analyticsService.logEvent(
         eventName: "Help_support", value: "Help and support button clicked");

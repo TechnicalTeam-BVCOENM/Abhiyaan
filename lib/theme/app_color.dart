@@ -5,7 +5,7 @@ extension ColorSchemeExtension on ColorScheme {
   Color get white => const Color(0xFFFFFFFF);
 
   // brand
-  Color get accentColor =>const Color(0xFF6764E2);
+  Color get accentColor => const Color(0xFF6764E2);
 
   // text
   Color get primaryText => brightness == Brightness.dark ? white : black;
