@@ -123,8 +123,7 @@ class ProfileImageWidget extends ViewModelWidget<ProfileViewModel> {
                         AssetUrls.profileImageUrl == 'Not Available'
                     ? AssetUrls.dummyImageUrl
                     : AssetUrls.profileImageUrl,
-                placeholder: (context, url) =>
-                    const CircularLoadingIndicator(),
+                placeholder: (context, url) => const CircularLoadingIndicator(),
                 errorWidget: (context, url, error) {
                   return const Icon(Icons.error);
                 },
@@ -323,12 +322,13 @@ class DarkModeTile extends ViewModelWidget<ProfileViewModel> {
             fontWeight: FontWeight.w500,
           ),
         ),
-        contentPadding:  EdgeInsets.only(left: 16.r,right: 10.r),
+        contentPadding: EdgeInsets.only(left: 16.r, right: 10.r),
         trailing: Transform.scale(
             scale: 0.85, // Adjust the scale factor as needed
             child: Switch.adaptive(
               activeColor: context.colorScheme.accentColor,
-              inactiveThumbColor: context.colorScheme.secondary.withOpacity(0.7),
+              inactiveThumbColor:
+                  context.colorScheme.secondary.withOpacity(0.7),
               inactiveTrackColor: context.colorScheme.lightScaffold,
               trackOutlineColor: WidgetStateColor.resolveWith(
                 (states) => context.colorScheme.secondary.withOpacity(0.7),
@@ -336,6 +336,5 @@ class DarkModeTile extends ViewModelWidget<ProfileViewModel> {
               value: viewModel._themeService.valueListenable.value,
               onChanged: (val) => viewModel.changeTheme(context),
             )));
-          
   }
 }

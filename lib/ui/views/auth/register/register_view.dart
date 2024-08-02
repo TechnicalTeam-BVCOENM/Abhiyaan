@@ -53,26 +53,26 @@ class RegisterView extends StatelessWidget {
                         curve: Curves.easeInOut,
                         duration: 700.ms,
                       ),
-                            Text("Abhiyaan",
-                                  textAlign: TextAlign.center,
-                                  style: FontThemeClass().header(
-                                    context,
-                                  )).animate(delay: 100.ms).fadeIn(
-                                delay: 200.ms,
-                                curve: Curves.easeInOut,
-                                duration: 500.ms,
-                              ),
-                          Text("Connect with Students, Teachers & Alumni",
-                                  textAlign: TextAlign.center,
-                                  style: FontThemeClass().body(
-                                    context,
-                                    color: context.colorScheme.secondaryText,
-                                    fontWeight: FontWeight.w500,
-                                  )).animate(delay: 200.ms).fadeIn(
-                                delay: 100.ms,
-                                curve: Curves.easeInOut,
-                                duration: 500.ms,
-                              ),
+                  Text("Abhiyaan",
+                          textAlign: TextAlign.center,
+                          style: FontThemeClass().header(
+                            context,
+                          )).animate(delay: 100.ms).fadeIn(
+                        delay: 200.ms,
+                        curve: Curves.easeInOut,
+                        duration: 500.ms,
+                      ),
+                  Text("Connect with Students, Teachers & Alumni",
+                          textAlign: TextAlign.center,
+                          style: FontThemeClass().body(
+                            context,
+                            color: context.colorScheme.secondaryText,
+                            fontWeight: FontWeight.w500,
+                          )).animate(delay: 200.ms).fadeIn(
+                        delay: 100.ms,
+                        curve: Curves.easeInOut,
+                        duration: 500.ms,
+                      ),
                   40.verticalSpace,
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,

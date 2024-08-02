@@ -147,7 +147,9 @@ class EventView extends StatelessWidget {
                                       ],
                                     ),
                           model.sponsors.isEmpty
-                              ? SizedBox(height: 145.h,)
+                              ? SizedBox(
+                                  height: 145.h,
+                                )
                               : Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -244,7 +246,9 @@ class EventView extends StatelessWidget {
                               : 0.verticalSpace,
                           4.verticalSpace,
                           model.gallery.isNotEmpty
-                              ? const SectionText(title: "Gallery").animate(delay: 1000.ms).fadeIn()
+                              ? const SectionText(title: "Gallery")
+                                  .animate(delay: 1000.ms)
+                                  .fadeIn()
                               : 0.verticalSpace,
                           model.gallery.isNotEmpty
                               ? GalleryYearWiseView(
@@ -259,11 +263,10 @@ class EventView extends StatelessWidget {
                                     const SectionText(title: "Best Memories"),
                                     BestMemories(
                                       bestMemories: model._bestMemories,
-                                    )],
+                                    )
+                                  ],
                                 ).animate(delay: 1000.ms).fadeIn(
-                                        duration:
-                                            const Duration(milliseconds: 1000))
-                                  
+                                  duration: const Duration(milliseconds: 1000))
                               : 0.verticalSpace
                         ].animate(delay: 100.ms, interval: 40.ms).fadeIn()),
                   ),
