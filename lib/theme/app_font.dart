@@ -57,9 +57,10 @@ class FontThemeClass {
     );
   }
 
-  TextStyle body(BuildContext ctx, {Color? color, FontWeight? fontWeight}) {
+  TextStyle body(BuildContext ctx,
+      {Color? color, FontWeight? fontWeight, double? fontSize}) {
     return TextStyle(
-      fontSize: 16.sp,
+      fontSize: fontSize ?? 16.sp,
       fontFamily: 'Outfit',
       fontWeight: fontWeight ?? FontWeight.w400,
       color: color ?? ctx.colorScheme.primaryText,

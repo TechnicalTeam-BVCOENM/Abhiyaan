@@ -16,6 +16,7 @@ class LogoutButton extends ViewModelWidget<PreferencesViewModel> {
             context,
             color: Colors.red.withOpacity(0.8),
             fontWeight: FontWeight.w700,
+            fontSize: 18.sp,
           ),
         ),
       ),
@@ -41,11 +42,10 @@ class PasswordChangeTile extends ViewModelWidget<PreferencesViewModel> {
           borderRadius: BorderRadius.circular(20).r,
         ),
         leading: SizedBox(
-          width: 60.w,
           child: Icon(
             Icons.lock_outline_rounded,
-            size: 30.r,
-            color: context.colorScheme.accentColor,
+            size: 35.r,
+            color: context.colorScheme.secondary.withOpacity(0.6),
           ),
         ),
         subtitle: Text(
@@ -70,7 +70,8 @@ class PasswordChangeTile extends ViewModelWidget<PreferencesViewModel> {
           },
           child: Icon(
             Icons.arrow_forward_ios_rounded,
-            color: context.colorScheme.primaryText,
+            size: 25.r,
+            color: context.colorScheme.primaryText.withOpacity(0.6),
           ),
         ),
       ),
@@ -91,14 +92,13 @@ class MisNumberTile extends ViewModelWidget<PreferencesViewModel> {
       minVerticalPadding: 15.r,
       tileColor: context.colorScheme.card,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20).r,
+        borderRadius: BorderRadius.circular(12).r,
       ),
       leading: SizedBox(
-        width: 60.w,
         child: Icon(
           Icons.school_outlined,
-          size: 30.r,
-          color: context.colorScheme.accentColor,
+          size: 35.r,
+          color: context.colorScheme.secondary.withOpacity(0.6),
         ),
       ),
       trailing: GestureDetector(
@@ -107,7 +107,8 @@ class MisNumberTile extends ViewModelWidget<PreferencesViewModel> {
         },
         child: Icon(
           Icons.copy_outlined,
-          color: context.colorScheme.primaryText,
+          color: context.colorScheme.primaryText.withOpacity(0.6),
+          size: 25.r,
         ),
       ),
       title: Column(
@@ -148,14 +149,13 @@ class EmailAdressTile extends ViewModelWidget<PreferencesViewModel> {
       minVerticalPadding: 15.r,
       tileColor: context.colorScheme.card,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20).r,
+        borderRadius: BorderRadius.circular(12).r,
       ),
       leading: SizedBox(
-        width: 60.w,
         child: Icon(
           Icons.email_outlined,
-          size: 30.r,
-          color: context.colorScheme.accentColor,
+          size: 35.r,
+          color: context.colorScheme.secondary.withOpacity(0.6),
         ),
       ),
       trailing: GestureDetector(
@@ -164,7 +164,8 @@ class EmailAdressTile extends ViewModelWidget<PreferencesViewModel> {
         },
         child: Icon(
           Icons.copy_outlined,
-          color: context.colorScheme.primaryText,
+          color: context.colorScheme.primaryText.withOpacity(0.6),
+          size: 25.r,
         ),
       ),
       title: Column(
