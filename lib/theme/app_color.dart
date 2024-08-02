@@ -5,7 +5,7 @@ extension ColorSchemeExtension on ColorScheme {
   Color get white => const Color(0xFFFFFFFF);
 
   // brand
-  Color get accentColor => const Color.fromARGB(255, 78, 75, 215);
+  Color get accentColor =>const Color(0xFF6764E2);
 
   // text
   Color get primaryText => brightness == Brightness.dark ? white : black;
@@ -14,7 +14,7 @@ extension ColorSchemeExtension on ColorScheme {
       : black.withOpacity(0.5);
 
   // scaffold
-  Color get lightScaffold => const Color(0xFFD6D5FA);
+  Color get lightScaffold => const Color(0xFFF3F3F3);
   Color get darkScaffold => const Color(0xFF121212);
   Color get scaffold =>
       brightness == Brightness.dark ? darkScaffold : lightScaffold;
