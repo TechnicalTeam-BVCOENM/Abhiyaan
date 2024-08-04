@@ -38,17 +38,23 @@ class ProfileView extends StatelessWidget {
                     child: Column(
                       children: [
                         const ProfileImageWidget(),
+
+                        // Settings
                         const ProfileSectionText(title: 'Settings'),
                         16.verticalSpace,
                         const ProfileCard(),
                         16.verticalSpace,
                         const DarkModeTile(),
                         16.verticalSpace,
+
+                        // Others
                         const ProfileSectionText(title: 'Others'),
                         16.verticalSpace,
                         const HelpSupportTile(),
                         16.verticalSpace,
                         const PrivacyPolicyTile(),
+
+                        // Socials
                         const Spacer(),
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
