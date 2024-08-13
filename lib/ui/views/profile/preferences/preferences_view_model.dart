@@ -302,16 +302,20 @@ class PreferencesViewModel extends BaseViewModel {
       context: context,
       builder: (context) {
         isProfileError = false;
-
         return Container(
           width: double.infinity,
-          height: 380.h,
-          padding: EdgeInsets.symmetric(vertical: 12.r, horizontal: 10.r),
+           padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+              top: 10.r,
+              left: 10.r,
+              right: 10.r),
           decoration: BoxDecoration(
             color: context.colorScheme.scaffold,
             borderRadius: BorderRadius.circular(32).r,
           ),
           child: Column(
+             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Center(
                 child: Text(
@@ -558,6 +562,7 @@ class PreferencesViewModel extends BaseViewModel {
                       duration: 700.ms,
                     ),
               ),
+              20.verticalSpace,
             ],
           ),
         );
