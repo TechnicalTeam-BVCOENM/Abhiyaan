@@ -541,7 +541,7 @@ class PreferencesViewModel extends BaseViewModel {
                         vertical: 10,
                       ).r,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15).r,
+                        borderRadius: BorderRadius.circular(15),
                         color: context.colorScheme.black,
                       ),
                       child: Center(

@@ -29,7 +29,7 @@ class ProfileView extends StatelessWidget {
       disposeViewModel: false,
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: context.colorScheme.scaffold,
+          backgroundColor: Colors.transparent,
           body: model.isBusy
               ? const CircularLoadingIndicator()
               : SafeArea(
@@ -37,7 +37,15 @@ class ProfileView extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 33).r,
                     child: Column(
                       children: [
-                        const ProfileImageWidget(),
+                        Container(
+                          width: double.infinity,
+                            decoration: BoxDecoration(
+                                color: context.colorScheme.scaffold,
+                                image: const DecorationImage(
+                                    image: AssetImage(
+                                        AssetImagePath.profileBackLines),
+                                    fit: BoxFit.cover)),
+                            child: const ProfileImageWidget()),
 
                         // Settings
                         const ProfileSectionText(title: 'Settings'),
