@@ -70,7 +70,6 @@ class EventViewModel extends BaseViewModel {
       _gallery = await runBusyFuture(_firestoreService.getGalleryImages());
       _bestMemories = await runBusyFuture(_firestoreService.getAllMemories());
       _gallery.sort((a, b) => b.year.compareTo(a.year));
-
       getRemainingEvents();
       notifyListeners();
       getTodaysEvent();

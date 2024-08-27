@@ -2,6 +2,7 @@ import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:in_app_review/in_app_review.dart';
 part 'profile_view_model.dart';
 part "profile_view_component.dart";
 
@@ -56,6 +57,8 @@ class ProfileView extends StatelessWidget {
 
                         // Others
                         const ProfileSectionText(title: 'Others'),
+                        16.verticalSpace,
+                        const RateAppTile(),
                         16.verticalSpace,
                         const HelpSupportTile(),
                         16.verticalSpace,
