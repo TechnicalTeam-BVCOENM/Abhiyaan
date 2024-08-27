@@ -1,6 +1,7 @@
 part of 'profile_view.dart';
 
 class ProfileViewModel extends BaseViewModel {
+  final InAppReview inAppReview = InAppReview.instance;
   final log = getLogger('ProfileView');
   final _analyticsService = locator<AnalyticsService>();
   final _navigationService = locator<NavigationService>();
@@ -58,5 +59,11 @@ class ProfileViewModel extends BaseViewModel {
     _themeService.updateTheme();
 
     notifyListeners();
+  }
+
+  void rateApp() async {
+      if (await inAppReview.isAvailable()) {
+        await inAppReview.requestReview();
+      }
   }
 }

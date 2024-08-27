@@ -253,6 +253,46 @@ class HelpSupportTile extends ViewModelWidget<ProfileViewModel> {
     );
   }
 }
+class RateAppTile extends ViewModelWidget<ProfileViewModel> {
+  const RateAppTile({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, ProfileViewModel viewModel) {
+    return GestureDetector(
+      onTap: () {
+        viewModel.rateApp();
+      },
+      child: ListTile(
+        tileColor: context.colorScheme.card,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        leading: SizedBox(
+          child: Icon(
+            Icons.star_border_outlined,
+            size: 30.r,
+            color: context.colorScheme.secondary.withOpacity(0.6),
+          ),
+        ),
+        title: Text(
+          "Rate App",
+          style: FontThemeClass().body(
+            context,
+            color: context.colorScheme.primaryText,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        trailing: Icon(
+          Icons.arrow_forward_ios_rounded,
+          size: 20.r,
+          color: context.colorScheme.primaryText.withOpacity(0.5),
+        ),
+      ),
+    );
+  }
+}
 
 class PrivacyPolicyTile extends ViewModelWidget<ProfileViewModel> {
   const PrivacyPolicyTile({
