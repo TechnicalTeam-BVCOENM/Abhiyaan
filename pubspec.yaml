@@ -69,14 +69,13 @@ flutter:
   uses-material-design: true
 
   fonts:
-    - family: Outfit
+    - family: Gilroy
       fonts:
-        - asset: fonts/Outfit/Outfit-Regular.ttf
-        - asset: fonts/Outfit/Outfit-SemiBold.ttf
-        - asset: fonts/Outfit/Outfit-Bold.ttf
-        - asset: fonts/Outfit/Outfit-Thin.ttf
-        - asset: fonts/Outfit/Outfit-Medium.ttf
-        - asset: fonts/Outfit/Outfit-Light.ttf
-        - asset: fonts/Outfit/Outfit-ExtraBold.ttf
-        - asset: fonts/Outfit/Outfit-ExtraLight.ttf
-        - asset: fonts/Outfit/Outfit-Black.ttf
+        - asset: fonts/Gilroy/Gilroy-Regular.ttf
+        - asset: fonts/Gilroy/Gilroy-SemiBold.ttf
+        - asset: fonts/Gilroy/Gilroy-Bold.ttf
+        - asset: fonts/Gilroy/Gilroy-Thin.ttf
+        - asset: fonts/Gilroy/Gilroy-Medium.ttf
+        - asset: fonts/Gilroy/Gilroy-Light.ttf
+        - asset: fonts/Gilroy/Gilroy-ExtraBold.ttf
+        - asset: fonts/Gilroy/Gilroy-Black.ttf
