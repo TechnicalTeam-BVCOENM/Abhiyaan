@@ -5,7 +5,7 @@ import 'package:abhiyaan/theme/responsive_utils.dart';
 import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:abhiyaan/ui/views/community/detailed_blogs/detailed_blogs_view.dart';
-import 'package:abhiyaan/ui/views/community/uni_clubs/uni_clubs_view.dart';
+// import 'package:abhiyaan/ui/views/community/uni_clubs/uni_clubs_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:http/http.dart' as http;
 import 'package:abhiyaan/file_exporter.dart';
@@ -185,16 +185,19 @@ class CommunityView extends StatelessWidget {
                                                   .r
                                               : const EdgeInsets.only(left: 8.0)
                                                   .r,
-                                          child: DepartmentClubs(
+                                          child:
+                                          //  const UniClubsView(universalClubsData:   model.universalClubsData[index])
+                                           UniversalClubs(
                                               data: model
-                                                  .departmentClubsData[index]),
+                                                  .universalClubsData[index])
+                                          ,
                                         );
                                       },
                                     ),
                                   ).animate(delay: 200.ms).fadeIn(
                                     curve: Curves.easeInOutCubic,
                                     duration: 600.ms),
-                                     const UniClubsView(),
+                            12.verticalSpace,
                             Container(
                               padding: const EdgeInsets.all(10),
                               alignment: Alignment.center,

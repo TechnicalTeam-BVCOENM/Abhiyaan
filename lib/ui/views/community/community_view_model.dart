@@ -26,6 +26,13 @@ class CommunityViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  final List<UniversalClubsData> _universalClubsData = [];
+  List<UniversalClubsData> get universalClubsData => _universalClubsData;
+  set universalClubsData(List<UniversalClubsData> universalClubsData) {
+    _universalClubsData.addAll(universalClubsData);
+    notifyListeners();
+  }
+
   void navigateToDetailedBlogPage(
       CommunityBlogsData blogData, BuildContext context) {
     try {
@@ -69,6 +76,16 @@ class CommunityViewModel extends BaseViewModel {
       return departmentClubsData;
     } on Exception catch (e) {
       log.e("Error in fetching department clubs data: ${e.toString()}");
+      return [];
+    }
+  }
+
+  Future<List<UniversalClubsData>> getUniversalClubsData() async {
+    try {
+      universalClubsData = await firestoreService.getUniversalClubsData();
+      return universalClubsData;
+    } on Exception catch (e) {
+      log.e("Error in fetching universal clubs data: ${e.toString()}");
       return [];
     }
   }
@@ -219,6 +236,23 @@ class DepartmentalClubsData {
     required this.clubLink,
   });
 }
+
+class  UniversalClubsData {
+  final String uniclubName;
+  final String uniclubImage;
+  final String uniclubShortHand;
+  final List<ClubMemberInfo> clubMembers;
+  final String uniclubLink;
+
+  UniversalClubsData({
+    required this.uniclubName,
+    required this.uniclubImage,
+    required this.uniclubShortHand,
+    required this.clubMembers,
+    required this.uniclubLink,
+  });
+}
+
 
 class FestInfo {
   final String festName;

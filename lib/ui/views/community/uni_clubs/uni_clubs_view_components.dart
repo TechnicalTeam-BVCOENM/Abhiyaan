@@ -28,9 +28,9 @@ class UniversalClubsData extends ViewModelWidget<UniClubsViewModel> {
   final String uniclubName;
   final String uniclubImage;
   final String uniclubShortHand;
+  final List<ClubMemberInfo> clubMembers;
   // final List<FestInfo> uniclubFest;
   final String uniclubLink;
-  final List<ClubMemberInfo> uniclubMembers;
 
   const UniversalClubsData({
     super.key,
@@ -38,7 +38,7 @@ class UniversalClubsData extends ViewModelWidget<UniClubsViewModel> {
     required this.uniclubImage,
     required this.uniclubShortHand,
     // required this.uniclubFest,
-    required this.uniclubMembers,
+    required this.clubMembers,
     required this.uniclubLink,
   });
 
@@ -103,10 +103,10 @@ class UniversalClubsData extends ViewModelWidget<UniClubsViewModel> {
               child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: uniclubMembers.length,
+                itemCount: clubMembers.length,
                 itemBuilder: (context, index) {
                   return MemberCard(
-                    clubMembers: uniclubMembers,
+                    clubMembers: clubMembers,
                     fontTheme: fontTheme,
                     index: index,
                   );

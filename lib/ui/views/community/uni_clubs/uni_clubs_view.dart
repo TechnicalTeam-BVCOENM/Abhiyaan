@@ -50,7 +50,7 @@ class UniClubsView extends StatelessWidget {
                   uniclubName: universalClubsData.uniclubName,
                   uniclubImage: universalClubsData.uniclubImage,
                   uniclubShortHand: universalClubsData.uniclubShortHand,
-                  uniclubMembers: universalClubsData.uniclubMembers,
+                  clubMembers: universalClubsData.clubMembers,
                   // uniclubFest: universalClubsData.uniclubFest,
                   uniclubLink: universalClubsData.uniclubLink,
                 ),
