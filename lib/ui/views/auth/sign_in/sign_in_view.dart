@@ -244,35 +244,38 @@ class SignInView extends StatelessWidget {
                                   curve: Curves.easeInOut,
                                   duration: 500.ms,
                                 ),
-                           model.showRegister ?Padding(
-                              padding: EdgeInsetsDirectional.only(
-                                  top: 10.r, bottom: 10.r),
-                              child: RichText(
-                                text: TextSpan(
-                                  text: 'New Here?  ',
-                                  style: FontThemeClass().caption(
-                                    context,
-                                    color: context.colorScheme
-                                        .white, // Change this to inverse of primaryText
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                      text: 'Sign Up',
-                                      style: FontThemeClass().caption(
-                                        context,
-                                        color: context.colorScheme.accentColor,
-                                        fontWeight: FontWeight.w500,
+                            model.showRegister
+                                ? Padding(
+                                    padding: EdgeInsetsDirectional.only(
+                                        top: 10.r, bottom: 10.r),
+                                    child: RichText(
+                                      text: TextSpan(
+                                        text: 'New Here?  ',
+                                        style: FontThemeClass().caption(
+                                          context,
+                                          color: context.colorScheme
+                                              .white, // Change this to inverse of primaryText
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text: 'Sign Up',
+                                            style: FontThemeClass().caption(
+                                              context,
+                                              color: context
+                                                  .colorScheme.accentColor,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                            recognizer: TapGestureRecognizer()
+                                              ..onTap = () {
+                                                model.toRegisterPage(context);
+                                              },
+                                          ),
+                                        ],
                                       ),
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          model.toRegisterPage(context);
-                                        },
                                     ),
-                                  ],
-                                ),
-                              ),
-                            ):30.verticalSpace,
+                                  )
+                                : 30.verticalSpace,
                             Padding(
                               padding: EdgeInsetsDirectional.only(
                                   top: 10.r, bottom: 20.r),

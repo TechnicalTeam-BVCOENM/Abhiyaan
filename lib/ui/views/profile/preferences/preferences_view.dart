@@ -1,5 +1,6 @@
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/auth_service.dart';
+import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:abhiyaan/ui/views/bottom_nav/bottom_nav_view.dart';
@@ -23,34 +24,10 @@ class PreferencesView extends StatelessWidget {
       builder: (context, model, child) {
         return Scaffold(
           backgroundColor: context.colorScheme.scaffold,
-          appBar: AppBar(
-            leading: GestureDetector(
-              onTap: () {
-                model._navigationService.back();
-              },
-              child: Container(
-                color: context.colorScheme.scaffold,
-                child: Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  color: context.colorScheme.primaryText,
-                ),
-              ),
-            ),
-            backgroundColor: context.colorScheme.scaffold,
-            centerTitle: true,
-            elevation: 0,
-            title: Text(
-              "My Details",
-              style: model.fontTheme.title(
-                context,
-                color: context.colorScheme.primaryText,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
+          appBar: _appBar(context),
           body: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20).r,
+              padding: const EdgeInsets.symmetric(horizontal: 25).r,
               child: SingleChildScrollView(
                 child: Column(
                   children: [

@@ -5,7 +5,7 @@ class PreferencesViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
   final _analyticsService = locator<AnalyticsService>();
-  final _profileViewModel = locator<ProfileViewModel>();
+  final profileViewModel = locator<ProfileViewModel>();
   bool isProfileError = false;
   bool isPreview = true;
   final TextEditingController profileImageUrlController =
@@ -14,6 +14,17 @@ class PreferencesViewModel extends BaseViewModel {
   final LocalStorageService localStorageService =
       locator<LocalStorageService>();
   final fontTheme = FontThemeClass();
+
+  final List<String> profileImages = [
+    "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%201.png?alt=media&token=054e3dfe-5c92-4241-8ac5-5607165b5e4e",
+    "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%202.png?alt=media&token=c4180bc7-dc1f-487e-9926-27d626248780",
+    "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%203.png?alt=media&token=f16a4169-22fe-4c3e-a8ae-83531d9d9105",
+    "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%204.png?alt=media&token=c84967eb-14f2-4abc-82b3-a00eaf6014f1",
+    "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%205.png?alt=media&token=52f70fac-0fbc-4b34-a1b1-397b8843cdb8",
+    "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%206.png?alt=media&token=cdea444d-bdcc-4f4e-b864-e2226fb23e69",
+    "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%207.png?alt=media&token=1cbfc91d-7f27-4540-a6a6-f2d16a7f9546",
+    "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%208.png?alt=media&token=68a1d6c1-2bae-4c94-ba6f-f12d11418e65",
+  ];
 
   void init() {
     _analyticsService.logScreen(screenName: 'Settings Screen Opened');
@@ -261,6 +272,7 @@ class PreferencesViewModel extends BaseViewModel {
     setBusy(true);
     LocalStorageService localStorageService = locator<LocalStorageService>();
     final bottomNavViewModel = locator<BottomNavViewModel>();
+    final storageService = locator<LocalStorageService>();
     final bool success = await _authenticationService.signOut().then((value) {
       return value;
     });
@@ -269,6 +281,8 @@ class PreferencesViewModel extends BaseViewModel {
       bottomNavViewModel.setIndex(0);
       await _navigationService.clearStackAndShow(Routes.authView);
       await localStorageService.clear();
+      await storageService.write(
+          "showRegister", await FirestoreService().showRegistration());
     } else {
       log.i('sign out failed');
     }
@@ -277,6 +291,7 @@ class PreferencesViewModel extends BaseViewModel {
 
   void updateImageSheet(BuildContext context) {
     isProfileError = false;
+    profileImageUrlController.text = '';
     showModalBottomSheet(
       useSafeArea: true,
       isScrollControlled: true,
@@ -290,57 +305,133 @@ class PreferencesViewModel extends BaseViewModel {
 
         return Container(
           width: double.infinity,
-          padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-              top: 20.r,
-              left: 20.r,
-              right: 20.r),
+          height: 380.h,
+          padding: EdgeInsets.symmetric(vertical: 12.r, horizontal: 10.r),
           decoration: BoxDecoration(
             color: context.colorScheme.scaffold,
             borderRadius: BorderRadius.circular(32).r,
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
             children: [
-              ClipOval(
-                child: profileImageUrlController.text == ''
-                    ? Container(
-                        width: 100.r,
-                        height: 100.r,
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.grey),
-                        child: const Icon(
-                          Icons.person,
-                          color: Colors.white,
-                          size: 70,
-                        ),
-                      )
-                    : CachedNetworkImage(
-                        width: 100.r,
-                        height: 100.r,
-                        fit: BoxFit.cover,
-                        imageUrl: profileImageUrlController.text,
-                        placeholder: (context, url) =>
-                            const CircularLoadingIndicator(),
-                        errorWidget: (context, url, error) {
-                          isProfileError = true;
-                          isPreview = true;
-                          return Container(
-                            width: 100.r,
-                            height: 100.r,
-                            decoration: const BoxDecoration(
-                                shape: BoxShape.circle, color: Colors.white),
-                            child: const Icon(
-                              Icons.error,
-                              color: Colors.red,
-                              size: 50,
-                            ),
-                          );
-                        },
-                      ),
+              Center(
+                child: Text(
+                  "Select Profile Image",
+                  style: FontThemeClass().caption(
+                    context,
+                    fontWeight: FontWeight.w600,
+                    color: context.colorScheme.primaryText,
+                  ),
+                ),
               ),
-              16.verticalSpace,
+              12.verticalSpace,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  for (int i = 0; i < 4; i++)
+                    GestureDetector(
+                      onTap: () async {
+                        profileImageUrlController.text = profileImages[i];
+                        await localStorageService.write("userProfileImageUrl",
+                            profileImageUrlController.text);
+                        AssetUrls.profileImageUrl =
+                            profileImageUrlController.text;
+                        _navigationService.back();
+                        profileViewModel.notifyListeners();
+                        notifyListeners();
+                        updateProfileImage(profileImageUrlController.text);
+                        profileImageUrlController.text = '';
+                      },
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          ClipOval(
+                            child: CachedNetworkImage(
+                              height: 80.h,
+                              width: 80.w,
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) {
+                                return const CircularLoadingIndicator();
+                              },
+                              imageUrl: profileImages[i],
+                            ),
+                          ).animate().tint(
+                              color: localStorageService
+                                          .read("userProfileImageUrl") ==
+                                      profileImages[i]
+                                  ? Colors.black.withOpacity(0.5)
+                                  : Colors.transparent),
+                          localStorageService.read("userProfileImageUrl") ==
+                                  profileImages[i]
+                              ? Icon(
+                                  Icons.check_rounded,
+                                  size: 30.r,
+                                  color: context.colorScheme.white,
+                                )
+                              : Container(),
+                        ],
+                      ),
+                    ),
+                ].animate(delay: 200.ms, interval: 200.ms).fadeIn(
+                      delay: 100.ms,
+                      curve: Curves.easeInOut,
+                      duration: 700.ms,
+                    ),
+              ),
+              12.verticalSpace,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  for (int i = 4; i < profileImages.length; i++)
+                    GestureDetector(
+                      onTap: () async {
+                        profileImageUrlController.text = profileImages[i];
+                        await localStorageService.write("userProfileImageUrl",
+                            profileImageUrlController.text);
+                        AssetUrls.profileImageUrl =
+                            profileImageUrlController.text;
+                        _navigationService.back();
+                        profileViewModel.notifyListeners();
+                        notifyListeners();
+                        updateProfileImage(profileImageUrlController.text);
+                        profileImageUrlController.text = '';
+                      },
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          ClipOval(
+                            child: CachedNetworkImage(
+                              height: 80.h,
+                              width: 80.w,
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) {
+                                return const CircularLoadingIndicator();
+                              },
+                              imageUrl: profileImages[i],
+                            ),
+                          ).animate().tint(
+                              color: localStorageService
+                                          .read("userProfileImageUrl") ==
+                                      profileImages[i]
+                                  ? Colors.black.withOpacity(0.5)
+                                  : Colors.transparent),
+                          localStorageService.read("userProfileImageUrl") ==
+                                  profileImages[i]
+                              ? Icon(
+                                  Icons.check_rounded,
+                                  size: 30.r,
+                                  color: context.colorScheme.white,
+                                )
+                              : Container(),
+                        ],
+                      ),
+                    ),
+                ].animate(delay: 400.ms, interval: 200.ms).fadeIn(
+                      delay: 100.ms,
+                      curve: Curves.easeInOut,
+                      duration: 700.ms,
+                    ),
+              ),
+              12.verticalSpace,
               TextFormField(
                 onTap: () {
                   if (!isPreview) {
@@ -349,10 +440,10 @@ class PreferencesViewModel extends BaseViewModel {
                   }
                 },
                 controller: profileImageUrlController,
-                // onChanged: (value) {
-                //   isPreview = true;
-                //   notifyListeners();
-                // },
+                onChanged: (value) {
+                  isPreview = true;
+                  notifyListeners();
+                },
                 keyboardType: TextInputType.name,
                 cursorColor: context.colorScheme.accentColor,
                 decoration: InputDecoration(
@@ -368,7 +459,7 @@ class PreferencesViewModel extends BaseViewModel {
                   fillColor: context.colorScheme.card,
                   filled: true,
                   focusColor: context.colorScheme.card,
-                  hintText: 'Enter Image Url.....',
+                  hintText: 'Enter Custom Image Url.....',
                   hintStyle: fontTheme.caption(
                     context,
                     color: context.colorScheme.secondaryText,
@@ -380,61 +471,92 @@ class PreferencesViewModel extends BaseViewModel {
                     curve: Curves.easeInOut,
                     duration: 700.ms,
                   ),
-              SizedBox(
-                height: 20.h,
-              ),
-              GestureDetector(
-                onTap: () async {
-                  if (isProfileError && isPreview) {
-                    profileImageUrlController.text = '';
-                    _navigationService.back();
-                    showErrorMessage(context, "Invalid Image URL");
-                  } else if (isPreview) {
-                    isPreview = false;
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    notifyListeners();
-                  } else if (isProfileError) {
-                    _navigationService.back();
-                    showErrorMessage(context, "Invalid Image URL");
-                  } else {
-                    await localStorageService.write(
-                        "userProfileImageUrl", profileImageUrlController.text);
-                    AssetUrls.profileImageUrl = profileImageUrlController.text;
-                    _navigationService.back();
-                    _profileViewModel.notifyListeners();
-                    notifyListeners();
-                    updateProfileImage(profileImageUrlController.text);
-                    profileImageUrlController.text = '';
-                  }
-                },
-                child: Container(
-                  width: 200,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ).r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15).r,
-                    color: context.colorScheme.accentColor,
-                  ),
-                  child: Center(
-                    child: Text(
-                      isPreview ? 'Preview' : 'Update',
-                      style: FontThemeClass().body(
-                        context,
-                        color: context.colorScheme.white,
-                        fontWeight: FontWeight.w500,
+              20.verticalSpace,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      _navigationService.back();
+                    },
+                    child: Container(
+                      width: 180.w,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ).r,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15).r,
+                        color: context.colorScheme.black,
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Cancel',
+                          style: FontThemeClass().body(
+                            context,
+                            color: context.colorScheme.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ).animate(delay: 200.ms).fadeIn(
-                    delay: 100.ms,
-                    curve: Curves.easeInOut,
-                    duration: 700.ms,
-                  ),
-              SizedBox(
-                height: 20.h,
+                  GestureDetector(
+                    onTap: () async {
+                      if (isProfileError && isPreview) {
+                        profileImageUrlController.text = '';
+                        _navigationService.back();
+                        showErrorMessage(context, "Invalid Image URL");
+                      } else if (isPreview) {
+                        isPreview = false;
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        notifyListeners();
+                      } else if (isProfileError) {
+                        _navigationService.back();
+                        showErrorMessage(context, "Invalid Image URL");
+                      } else {
+                        if (profileImageUrlController.text.isEmpty) {
+                          profileImageUrlController.text =
+                              localStorageService.read("userProfileImageUrl");
+                        }
+                        await localStorageService.write("userProfileImageUrl",
+                            profileImageUrlController.text);
+                        AssetUrls.profileImageUrl =
+                            profileImageUrlController.text;
+                        _navigationService.back();
+                        profileViewModel.notifyListeners();
+                        notifyListeners();
+                        updateProfileImage(profileImageUrlController.text);
+                        profileImageUrlController.text = '';
+                      }
+                    },
+                    child: Container(
+                      width: 180.w,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ).r,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15).r,
+                        color: context.colorScheme.black,
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Update',
+                          style: FontThemeClass().body(
+                            context,
+                            color: context.colorScheme.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ].animate(delay: 200.ms, interval: 20.ms).fadeIn(
+                      delay: 100.ms,
+                      curve: Curves.easeInOut,
+                      duration: 700.ms,
+                    ),
               ),
             ],
           ),
