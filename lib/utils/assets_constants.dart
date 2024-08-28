@@ -58,3 +58,7 @@ class AnimationAssets {
   static const String welcome = 'assets/animations/welcome.json';
   static const String handLoading = 'assets/animations/hand_loading.json';
 }
+
+class AppConstants {
+  static const String appVersion = '1.0.6';
+}

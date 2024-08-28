@@ -127,7 +127,7 @@ class PreferencesView extends StatelessWidget {
                     const LogoutButton(),
                     22.verticalSpace,
                     Text(
-                      'Abhiyaan v.1.0.5',
+                      'Abhiyaan v.${AppConstants.appVersion}',
                       style: model.fontTheme.paragraph(
                         context,
                         color: context.colorScheme.secondarySectionColor,
