@@ -365,7 +365,7 @@ class UniClubsViewArguments {
 
   final _i21.Key? key;
 
-  final _i15.UniversalClubsData universalClubsData;
+  final _i13.UniversalClubsData universalClubsData;
 
   @override
   String toString() {
@@ -686,7 +686,7 @@ extension NavigatorStateExtension on _i22.NavigationService {
 
   Future<dynamic> navigateToUniClubsView({
     _i21.Key? key,
-    required _i15.UniversalClubsData universalClubsData,
+    required _i13.UniversalClubsData universalClubsData,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -961,7 +961,7 @@ extension NavigatorStateExtension on _i22.NavigationService {
 
   Future<dynamic> replaceWithUniClubsView({
     _i21.Key? key,
-    required _i15.UniversalClubsData universalClubsData,
+    required _i13.UniversalClubsData universalClubsData,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,

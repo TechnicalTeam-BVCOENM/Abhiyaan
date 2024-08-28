@@ -46,7 +46,7 @@ class UniClubsView extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             child: Column(
               children: <Widget>[
-                UniversalClubsData(
+                UniversalClubsDatas(
                   uniclubName: universalClubsData.uniclubName,
                   uniclubImage: universalClubsData.uniclubImage,
                   uniclubShortHand: universalClubsData.uniclubShortHand,

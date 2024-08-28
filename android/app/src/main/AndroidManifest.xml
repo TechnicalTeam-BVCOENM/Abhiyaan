@@ -3,16 +3,7 @@
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <queries>
-    <intent-filter android:autoVerify="true">
-      <action android:name="android.intent.action.VIEW" />
-
-      <category android:name="android.intent.category.DEFAULT" />
-      <category android:name="android.intent.category.BROWSABLE" />
-
-      <data android:scheme="http" />
-      <data android:scheme="https" />
-      <data android:host="abhiyaan.dynalinks.app" />
-    </intent-filter>
+   
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.BROWSABLE" />
@@ -52,7 +43,16 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+          
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+          
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="abhiyaan.dynalinks.app" />
+              </intent-filter>
         </activity>
         <meta-data
             android:name="flutterEmbedding"

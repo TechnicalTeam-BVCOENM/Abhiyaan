@@ -24,7 +24,7 @@ class UniClubsAppBar extends ViewModelWidget<UniClubsViewModel> {
   }
 }
 
-class UniversalClubsData extends ViewModelWidget<UniClubsViewModel> {
+class UniversalClubsDatas extends ViewModelWidget<UniClubsViewModel> {
   final String uniclubName;
   final String uniclubImage;
   final String uniclubShortHand;
@@ -32,7 +32,7 @@ class UniversalClubsData extends ViewModelWidget<UniClubsViewModel> {
   // final List<FestInfo> uniclubFest;
   final String uniclubLink;
 
-  const UniversalClubsData({
+  const UniversalClubsDatas({
     super.key,
     required this.uniclubName,
     required this.uniclubImage,
