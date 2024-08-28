@@ -32,70 +32,80 @@ class PreferencesView extends StatelessWidget {
                 child: Column(
                   children: [
                     35.verticalSpace,
-                    InkWell(
-                      onTap: () {
-                        model.updateImageSheet(context);
-                      },
-                      splashColor: Colors.transparent,
-                      child: Stack(
-                        children: [
-                          Hero(
-                            tag: "profileImage",
-                            child: ClipOval(
-                              child: CachedNetworkImage(
-                                width: 100.r,
-                                height: 100.r,
-                                fit: BoxFit.cover,
-                                imageUrl: AssetUrls.profileImageUrl == '' ||
-                                        AssetUrls.profileImageUrl ==
-                                            'Not Available'
-                                    ? AssetUrls.dummyImageUrl
-                                    : AssetUrls.profileImageUrl,
-                                placeholder: (context, url) =>
-                                    const CircularLoadingIndicator(),
-                                errorWidget: (context, url, error) {
-                                  return const Icon(Icons.error);
-                                },
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                              bottom: 0,
-                              right: 0,
-                              child: Container(
-                                padding: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    color: context
-                                        .colorScheme.bottomNavIconActive),
-                                child: Transform.flip(
-                                  child: Icon(
-                                    Icons.edit,
-                                    size: 25.r,
-                                    color: context.colorScheme.scaffold,
+                    Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            model.updateImageSheet(context);
+                          },
+                          splashColor: Colors.transparent,
+                          child: Stack(
+                            children: [
+                              Hero(
+                                tag: "profileImage",
+                                child: ClipOval(
+                                  child: CachedNetworkImage(
+                                    width: 100.r,
+                                    height: 100.r,
+                                    fit: BoxFit.cover,
+                                    imageUrl: AssetUrls.profileImageUrl == '' ||
+                                            AssetUrls.profileImageUrl ==
+                                                'Not Available'
+                                        ? AssetUrls.dummyImageUrl
+                                        : AssetUrls.profileImageUrl,
+                                    placeholder: (context, url) =>
+                                        const CircularLoadingIndicator(),
+                                    errorWidget: (context, url, error) {
+                                      return Container(
+                                          color: context.colorScheme.card,
+                                          child: const Icon(
+                                            Icons.error,
+                                            color: Colors.red,
+                                          ));
+                                    },
                                   ),
                                 ),
-                              )).animate(delay: 400.ms).scale(),
-                        ],
-                      ),
-                    ),
-                    8.verticalSpace,
-                    Text(
-                      model.localStorageService.read('userName'),
-                      style: model.fontTheme.title2(
-                        context,
-                        color: context.colorScheme.primaryText,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    2.verticalSpace,
-                    Text(
-                      model.localStorageService.read('userProfile'),
-                      style: model.fontTheme.body(
-                        context,
-                        color: context.colorScheme.secondarySectionColor,
-                        fontWeight: FontWeight.w500,
-                      ),
+                              ),
+                              Positioned(
+                                  bottom: 0,
+                                  right: 0,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        color: context
+                                            .colorScheme.bottomNavIconActive),
+                                    child: Transform.flip(
+                                      child: Icon(
+                                        Icons.edit,
+                                        size: 25.r,
+                                        color: context.colorScheme.scaffold,
+                                      ),
+                                    ),
+                                  )).animate(delay: 400.ms).scale(),
+                            ],
+                          ),
+                        ),
+                        8.verticalSpace,
+                        Text(
+                          model.localStorageService.read('userName'),
+                          style: model.fontTheme.title2(
+                            context,
+                            color: context.colorScheme.primaryText,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        2.verticalSpace,
+                        Text(
+                          model.localStorageService.read('userProfile'),
+                          style: model.fontTheme.body(
+                            context,
+                            color: context.colorScheme.secondarySectionColor,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
                     ),
                     30.verticalSpace,
                     model.localStorageService.read('userProfile') ==

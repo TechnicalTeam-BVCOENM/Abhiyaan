@@ -29,63 +29,62 @@ class ProfileView extends StatelessWidget {
       disposeViewModel: false,
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: Colors.transparent,
+          backgroundColor: context.colorScheme.scaffold,
           body: model.isBusy
               ? const CircularLoadingIndicator()
               : SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 33).r,
-                    child: Column(
-                      children: [
-                        Container(
-                          width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: context.colorScheme.scaffold,
-                                image: const DecorationImage(
-                                    image: AssetImage(
-                                        AssetImagePath.profileBackLines),
-                                    fit: BoxFit.cover)),
-                            child: const ProfileImageWidget()),
+                  minimum: const EdgeInsets.symmetric(horizontal: 33).r,
+                  child: Column(
+                    children: [
+                      const ProfileImageWidget(),
+                      // Container(
+                      // width: double.infinity,
+                      // decoration: BoxDecoration(
+                      //     color: context.colorScheme.scaffold,
+                      //     image: const DecorationImage(
+                      //         image: AssetImage(
+                      //             AssetImagePath.profileBackLines),
+                      //         fit: BoxFit.cover)),
+                      // child: const ProfileImageWidget()),
 
-                        // Settings
-                        const ProfileSectionText(title: 'Settings'),
-                        16.verticalSpace,
-                        const ProfileCard(),
-                        16.verticalSpace,
-                        const DarkModeTile(),
-                        16.verticalSpace,
+                      // Settings
+                      const ProfileSectionText(title: 'Settings'),
+                      16.verticalSpace,
+                      const ProfileCard(),
+                      16.verticalSpace,
+                      const DarkModeTile(),
+                      16.verticalSpace,
 
-                        // Others
-                        const ProfileSectionText(title: 'Others'),
-                        16.verticalSpace,
-                        const RateAppTile(),
-                        16.verticalSpace,
-                        const HelpSupportTile(),
-                        16.verticalSpace,
-                        const PrivacyPolicyTile(),
+                      // Others
+                      const ProfileSectionText(title: 'Others'),
+                      16.verticalSpace,
+                      const RateAppTile(),
+                      16.verticalSpace,
+                      const HelpSupportTile(),
+                      16.verticalSpace,
+                      const PrivacyPolicyTile(),
 
-                        // Socials
-                        const Spacer(),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SocialLinks(
-                              iconpath: AssetImagePath.instagramImg,
-                              url: AssetUrls.instagramUrl,
-                            ),
-                            SocialLinks(
-                              iconpath: AssetImagePath.linkedinImg,
-                              url: AssetUrls.linkedinUrl,
-                            ),
-                            SocialLinks(
-                              iconpath: AssetImagePath.xImg,
-                              url: AssetUrls.twitterUrl,
-                            ),
-                          ],
-                        ),
-                        20.verticalSpace,
-                      ],
-                    ),
+                      // Socials
+                      const Spacer(),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SocialLinks(
+                            iconpath: AssetImagePath.instagramImg,
+                            url: AssetUrls.instagramUrl,
+                          ),
+                          SocialLinks(
+                            iconpath: AssetImagePath.linkedinImg,
+                            url: AssetUrls.linkedinUrl,
+                          ),
+                          SocialLinks(
+                            iconpath: AssetImagePath.xImg,
+                            url: AssetUrls.twitterUrl,
+                          ),
+                        ],
+                      ),
+                      20.verticalSpace,
+                    ],
                   ),
                 ),
         );
