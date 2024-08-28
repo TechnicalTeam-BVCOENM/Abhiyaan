@@ -317,7 +317,7 @@ class RegisterView extends StatelessWidget {
                       ),
                   10.verticalSpace,
                   Text(
-                    'Abhiyaan v.${AppConstants.appVersion}',
+                    'Abhiyaan v${AppConstants.appVersion}',
                     textAlign: TextAlign.center,
                     style: FontThemeClass().caption(
                       context,
