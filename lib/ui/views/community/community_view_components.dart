@@ -361,7 +361,7 @@ class QuoteCard extends StatelessWidget {
             child: Transform.flip(
               flipY: true,
               flipX: true,
-              child:  Icon(
+              child: Icon(
                 Icons.format_quote_outlined,
                 color: context.colorScheme.primary,
                 size: 40,

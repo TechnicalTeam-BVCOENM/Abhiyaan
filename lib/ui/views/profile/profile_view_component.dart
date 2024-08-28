@@ -41,17 +41,15 @@ class Cerificatation extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: ListTile(
-        minVerticalPadding: 15.r,
         tileColor: context.colorScheme.card,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.r),
+          borderRadius: BorderRadius.circular(12.r),
         ),
         leading: SizedBox(
-          width: 60.w,
           child: Icon(
             Icons.credit_card_outlined,
             size: 30.r,
-            color: context.colorScheme.accentColor,
+            color: context.colorScheme.secondary.withOpacity(0.6),
           ),
         ),
         title: Text(
@@ -59,7 +57,7 @@ class Cerificatation extends StatelessWidget {
           style: FontThemeClass().body(
             context,
             color: context.colorScheme.primaryText,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
           ),
         ),
         subtitle: Text(
@@ -73,8 +71,8 @@ class Cerificatation extends StatelessWidget {
         ),
         trailing: Icon(
           Icons.arrow_forward_ios_rounded,
-          size: 25.r,
-          color: context.colorScheme.primaryText,
+          size: 20.r,
+          color: context.colorScheme.primaryText.withOpacity(0.5),
         ),
       ),
     );
@@ -103,6 +101,79 @@ class AppBarWidget extends ViewModelWidget<ProfileViewModel> {
   }
 }
 
+class ProfileImageWidget extends ViewModelWidget<ProfileViewModel> {
+  const ProfileImageWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, ProfileViewModel viewModel) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 30.r),
+      child: Column(
+        children: [
+          InkWell(
+            splashColor: Colors.transparent,
+            child: ClipOval(
+              child: CachedNetworkImage(
+                width: 100.r,
+                height: 100.r,
+                fit: BoxFit.cover,
+                imageUrl: AssetUrls.profileImageUrl == '' ||
+                        AssetUrls.profileImageUrl == 'Not Available'
+                    ? AssetUrls.dummyImageUrl
+                    : AssetUrls.profileImageUrl,
+                placeholder: (context, url) => const CircularLoadingIndicator(),
+                errorWidget: (context, url, error) {
+                  return const Icon(Icons.error);
+                },
+              ),
+            ),
+          ),
+          Text(
+            viewModel.localStorageService.read('userName'),
+            style: viewModel.fontTheme.title2(
+              context,
+              color: context.colorScheme.primaryText,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          Text(
+            viewModel.localStorageService.read('userProfile'),
+            style: viewModel.fontTheme.body(
+              context,
+              color: context.colorScheme.secondarySectionColor,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProfileSectionText extends ViewModelWidget<ProfileViewModel> {
+  final String title;
+  const ProfileSectionText({
+    required this.title,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, ProfileViewModel viewModel) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      child: Text(title,
+          style: FontThemeClass().body(
+            context,
+            color: context.colorScheme.primaryText,
+            fontWeight: FontWeight.w700,
+            fontSize: 18.sp,
+          )),
+    );
+  }
+}
+
 class ProfileCard extends ViewModelWidget<ProfileViewModel> {
   const ProfileCard({
     super.key,
@@ -113,68 +184,29 @@ class ProfileCard extends ViewModelWidget<ProfileViewModel> {
     return GestureDetector(
       onTap: () => viewModel._navigationService.navigateToPreferencesView(),
       child: ListTile(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.r),
-        ),
         tileColor: context.colorScheme.card,
-        minVerticalPadding: 10.r,
-        title: Row(
-          children: [
-            Hero(
-              tag: "profileImage",
-              child: ClipOval(
-                clipBehavior: Clip.hardEdge,
-                child: CachedNetworkImage(
-                  imageUrl: AssetUrls.profileImageUrl==''||AssetUrls.profileImageUrl=='Not Available'?AssetUrls.dummyImageUrl:AssetUrls.profileImageUrl,
-                  width: 50.w,
-                  height: 50.w,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            12.horizontalSpace,
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  viewModel.localStorageService.read('userName'),
-                  style: FontThemeClass().title2(
-                    context,
-                    color: context.colorScheme.primaryText,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Text(
-                  "View Profile Information",
-                  style: FontThemeClass().caption(
-                    context,
-                    color: context.colorScheme.secondaryText,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-            const Spacer(),
-            Row(
-              children: [
-                Text(
-                  "View",
-                  style: FontThemeClass().body(
-                    context,
-                    color: context.colorScheme.secondaryText,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                4.horizontalSpace,
-                Icon(
-                  Icons.arrow_forward_ios_sharp,
-                  color: context.colorScheme.secondaryText,
-                  size: 15.r,
-                ),
-              ],
-            ),
-          ],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        leading: SizedBox(
+          child: Icon(
+            Icons.person_2_outlined,
+            size: 30.r,
+            color: context.colorScheme.secondary.withOpacity(0.6),
+          ),
+        ),
+        title: Text(
+          "Personal Info",
+          style: FontThemeClass().body(
+            context,
+            color: context.colorScheme.primaryText,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        trailing: Icon(
+          Icons.arrow_forward_ios_rounded,
+          size: 20.r,
+          color: context.colorScheme.primaryText.withOpacity(0.5),
         ),
       ),
     );
@@ -193,17 +225,15 @@ class HelpSupportTile extends ViewModelWidget<ProfileViewModel> {
         viewModel.navigateToHelpSupport();
       },
       child: ListTile(
-        minVerticalPadding: 25.r,
         tileColor: context.colorScheme.card,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.r),
+          borderRadius: BorderRadius.circular(12.r),
         ),
         leading: SizedBox(
-          width: 60.w,
           child: Icon(
             Icons.warning_amber_rounded,
             size: 30.r,
-            color: context.colorScheme.accentColor,
+            color: context.colorScheme.secondary.withOpacity(0.6),
           ),
         ),
         title: Text(
@@ -211,13 +241,53 @@ class HelpSupportTile extends ViewModelWidget<ProfileViewModel> {
           style: FontThemeClass().body(
             context,
             color: context.colorScheme.primaryText,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
           ),
         ),
         trailing: Icon(
           Icons.arrow_forward_ios_rounded,
-          size: 25.r,
-          color: context.colorScheme.primaryText,
+          size: 20.r,
+          color: context.colorScheme.primaryText.withOpacity(0.5),
+        ),
+      ),
+    );
+  }
+}
+class RateAppTile extends ViewModelWidget<ProfileViewModel> {
+  const RateAppTile({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, ProfileViewModel viewModel) {
+    return GestureDetector(
+      onTap: () {
+        viewModel.rateApp();
+      },
+      child: ListTile(
+        tileColor: context.colorScheme.card,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        leading: SizedBox(
+          child: Icon(
+            Icons.star_border_outlined,
+            size: 30.r,
+            color: context.colorScheme.secondary.withOpacity(0.6),
+          ),
+        ),
+        title: Text(
+          "Rate App",
+          style: FontThemeClass().body(
+            context,
+            color: context.colorScheme.primaryText,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        trailing: Icon(
+          Icons.arrow_forward_ios_rounded,
+          size: 20.r,
+          color: context.colorScheme.primaryText.withOpacity(0.5),
         ),
       ),
     );
@@ -236,17 +306,15 @@ class PrivacyPolicyTile extends ViewModelWidget<ProfileViewModel> {
         viewModel.navigateToPrivacyPolicy();
       },
       child: ListTile(
-        minVerticalPadding: 25.r,
         tileColor: context.colorScheme.card,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.r),
+          borderRadius: BorderRadius.circular(12.r),
         ),
         leading: SizedBox(
-          width: 60.w,
           child: Icon(
             Icons.privacy_tip_outlined,
             size: 30.r,
-            color: context.colorScheme.accentColor,
+            color: context.colorScheme.secondary.withOpacity(0.6),
           ),
         ),
         title: Text(
@@ -254,13 +322,13 @@ class PrivacyPolicyTile extends ViewModelWidget<ProfileViewModel> {
           style: FontThemeClass().body(
             context,
             color: context.colorScheme.primaryText,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
           ),
         ),
         trailing: Icon(
           Icons.arrow_forward_ios_rounded,
-          size: 25.r,
-          color: context.colorScheme.primaryText,
+          size: 20.r,
+          color: context.colorScheme.primaryText.withOpacity(0.5),
         ),
       ),
     );
@@ -275,37 +343,38 @@ class DarkModeTile extends ViewModelWidget<ProfileViewModel> {
   @override
   Widget build(BuildContext context, ProfileViewModel viewModel) {
     return ListTile(
-      minVerticalPadding: 25.r,
-      tileColor: context.colorScheme.card,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.r),
-      ),
-      leading: SizedBox(
-        width: 60.w,
-        child: Icon(
-          Icons.dark_mode_outlined,
-          size: 30.r,
-          color: context.colorScheme.accentColor,
+        tileColor: context.colorScheme.card,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
         ),
-      ),
-      title: Text(
-        "Dark Mode",
-        style: FontThemeClass().body(
-          context,
-          color: context.colorScheme.primaryText,
-          fontWeight: FontWeight.w600,
+        leading: SizedBox(
+          child: Icon(
+            Icons.dark_mode_outlined,
+            size: 30.r,
+            color: context.colorScheme.secondary.withOpacity(0.6),
+          ),
         ),
-      ),
-      trailing: Switch.adaptive(
-        activeColor: context.colorScheme.accentColor,
-        inactiveThumbColor: context.colorScheme.accentColor,
-        inactiveTrackColor: context.colorScheme.lightScaffold,
-        trackOutlineColor: WidgetStateColor.resolveWith(
-          (states) => context.colorScheme.accentColor,
+        title: Text(
+          "Dark Mode",
+          style: FontThemeClass().body(
+            context,
+            color: context.colorScheme.primaryText,
+            fontWeight: FontWeight.w500,
+          ),
         ),
-        value: viewModel._themeService.valueListenable.value,
-        onChanged: (val) => viewModel.changeTheme(context),
-      ),
-    );
+        contentPadding: EdgeInsets.only(left: 16.r, right: 10.r),
+        trailing: Transform.scale(
+            scale: 0.85, // Adjust the scale factor as needed
+            child: Switch.adaptive(
+              activeColor: context.colorScheme.accentColor,
+              inactiveThumbColor:
+                  context.colorScheme.secondary.withOpacity(0.7),
+              inactiveTrackColor: context.colorScheme.lightScaffold,
+              trackOutlineColor: WidgetStateColor.resolveWith(
+                (states) => context.colorScheme.secondary.withOpacity(0.7),
+              ),
+              value: viewModel._themeService.valueListenable.value,
+              onChanged: (val) => viewModel.changeTheme(context),
+            )));
   }
 }

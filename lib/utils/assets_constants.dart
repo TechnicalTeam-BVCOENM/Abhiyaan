@@ -23,6 +23,7 @@ class AssetImagePath {
   static const String events = 'assets/images/onboarding/events.png';
 
   static const String darkMode = 'assets/images/profile/dark_mode.png';
+  static const String profileBackLines = 'assets/images/profile/lines.png';
   static const String help = 'assets/images/profile/help.png';
   static const String logout = 'assets/images/profile/logout.png';
   static const String pass = 'assets/images/profile/pass.png';
@@ -44,7 +45,8 @@ class AssetImagePath {
 }
 
 class AssetUrls {
-  static String profileImageUrl = LocalStorageService().read('userProfileImageUrl');
+  static String profileImageUrl =
+      LocalStorageService().read('userProfileImageUrl');
   static const dummyImageUrl =
       "https://firebasestorage.googleapis.com/v0/b/darpan-b94d6.appspot.com/o/user%2Fimages.jpeg?alt=media&token=a9889ba7-3958-4784-9708-e43ade1016d4";
   static const instagramUrl = "https://www.instagram.com/thedevcrew/";

@@ -47,6 +47,7 @@ dependencies:
   mailer: ^6.0.1
   flutter_staggered_grid_view: ^0.7.0
   add_2_calendar: ^3.0.1
+  in_app_review: ^2.0.9
 
 dev_dependencies:
   flutter_test:
@@ -69,14 +70,13 @@ flutter:
   uses-material-design: true
 
   fonts:
-    - family: Outfit
+    - family: Gilroy
       fonts:
-        - asset: fonts/Outfit/Outfit-Regular.ttf
-        - asset: fonts/Outfit/Outfit-SemiBold.ttf
-        - asset: fonts/Outfit/Outfit-Bold.ttf
-        - asset: fonts/Outfit/Outfit-Thin.ttf
-        - asset: fonts/Outfit/Outfit-Medium.ttf
-        - asset: fonts/Outfit/Outfit-Light.ttf
-        - asset: fonts/Outfit/Outfit-ExtraBold.ttf
-        - asset: fonts/Outfit/Outfit-ExtraLight.ttf
-        - asset: fonts/Outfit/Outfit-Black.ttf
+        - asset: fonts/Gilroy/Gilroy-Regular.ttf
+        - asset: fonts/Gilroy/Gilroy-SemiBold.ttf
+        - asset: fonts/Gilroy/Gilroy-Bold.ttf
+        - asset: fonts/Gilroy/Gilroy-Thin.ttf
+        - asset: fonts/Gilroy/Gilroy-Medium.ttf
+        - asset: fonts/Gilroy/Gilroy-Light.ttf
+        - asset: fonts/Gilroy/Gilroy-ExtraBold.ttf
+        - asset: fonts/Gilroy/Gilroy-Black.ttf
