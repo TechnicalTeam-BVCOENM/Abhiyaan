@@ -40,7 +40,10 @@ class EventView extends StatelessWidget {
                           Center(
                             child: Text(
                               "Events",
-                              style: FontThemeClass().title(context),
+                              style: FontThemeClass().title(
+                                context,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                           model.todayEvent?.length == 1
@@ -143,7 +146,7 @@ class EventView extends StatelessWidget {
                                               ),
                                             );
                                           },
-                                        ).animate(delay: 100.ms).fadeIn(),
+                                        ).animate(delay: 110.ms).fadeIn(),
                                       ],
                                     ),
                           model.sponsors.isEmpty
@@ -164,7 +167,7 @@ class EventView extends StatelessWidget {
                                       },
                                     )
                                   ],
-                                ).animate(delay: 200.ms).fadeIn(),
+                                ).animate(delay: 130.ms).fadeIn(),
                           model.upcomingEvents.isNotEmpty
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -240,14 +243,14 @@ class EventView extends StatelessWidget {
                                                 ),
                                               );
                                             },
-                                          ).animate(delay: 300.ms).fadeIn(),
+                                          ).animate(delay: 140.ms).fadeIn(),
                                   ],
                                 )
                               : 0.verticalSpace,
                           4.verticalSpace,
                           model.gallery.isNotEmpty
                               ? const SectionText(title: "Gallery")
-                                  .animate(delay: 1000.ms)
+                                  .animate(delay: 800.ms)
                                   .fadeIn()
                               : 0.verticalSpace,
                           model.gallery.isNotEmpty

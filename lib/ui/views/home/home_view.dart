@@ -28,10 +28,13 @@ class HomeView extends StatelessWidget {
       viewModelBuilder: () => HomeViewModel(context),
       disposeViewModel: false,
       onViewModelReady: (viewModel) {
+        // ignore: use_build_context_synchronously
         viewModel.init(context).then((value) => viewModel.afterInit(context));
       },
       builder: (context, model, child) {
         return UpgradeAlert(
+          showLater: false,
+          showIgnore: false,
           upgrader: Upgrader(
             durationUntilAlertAgain: const Duration(days: 2),
           ),

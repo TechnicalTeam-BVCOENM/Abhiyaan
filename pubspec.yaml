@@ -1,7 +1,11 @@
 name: abhiyaan
 description: A new Flutter project.
 publish_to: "none"
-version: 1.0.5+6
+version: 1.0.6+10
+# Major.Minor.Patch+Build  
+#  Major - Major changes like UI/UX changes, new features, etc. Those changes that are not backward compatible.
+#  Minor - Minor changes like bug fixes, performance improvements, etc. Those changes that are backward compatible.
+#  Patch - Patch changes like small bug fixes, small improvements, etc. Those changes that are backward compatible.
 environment:
   sdk: ">=3.1.1 <4.0.0"
 
@@ -32,12 +36,12 @@ dependencies:
   cached_network_image: ^3.3.0
   url_launcher: ^6.2.1
   intl: ^0.19.0
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.0.0
   flutter_native_splash: ^2.3.5
   expandable: ^5.0.1
   flutter_screenutil: ^5.9.0
   share_plus: ^7.2.1
-  flutter_local_notifications: ^16.2.0
+  flutter_local_notifications: ^17.2.2
   app_settings: ^5.1.1
   lottie: ^3.0.0
   flutter_animate: ^4.3.0
