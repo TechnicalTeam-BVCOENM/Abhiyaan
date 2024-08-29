@@ -131,18 +131,18 @@ class RegisterViewModel extends BaseViewModel {
     AuthenticationService().showLoadingOverlay(context);
     final message = Message()
       ..from = const Address(
-          "technicalteam.bvcoenm@gmail.com", "Abhiyaan Technical Team")
+          "technicalteam.bvcoenm@gmail.com", "The Dev Crew Technical Team")
       ..recipients.add(
           emailIdTextController.text) // Set the recipient to niranjan@gmail.com
-      ..subject = 'Abhiyaan Email OTP Verification'
+      ..subject = 'TDC Email OTP Verification'
       ..html = ''' <html>
     <body>
-      <h1>Abhiyaan App Email Verification</h1>
+      <h1>TDC App Email Verification</h1>
       <p>Dear user,</p>
       <p>Your verification code is: <b>$otp</b></p>
       <p>Please enter this code in the app to complete the registration process.</p>
       <p>Thank you!</p>
-      <p>Abhiyaan Technical Team</p>
+      <p>The Dev Crew Technical Team</p>
     </body>
   </html>''';
 

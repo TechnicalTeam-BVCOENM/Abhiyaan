@@ -304,7 +304,7 @@ class PreferencesViewModel extends BaseViewModel {
         isProfileError = false;
         return Container(
           width: double.infinity,
-           padding: EdgeInsets.only(
+          padding: EdgeInsets.only(
               bottom: MediaQuery.of(context).viewInsets.bottom,
               top: 10.r,
               left: 10.r,
@@ -314,7 +314,7 @@ class PreferencesViewModel extends BaseViewModel {
             borderRadius: BorderRadius.circular(32).r,
           ),
           child: Column(
-             crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
               Center(
@@ -339,11 +339,11 @@ class PreferencesViewModel extends BaseViewModel {
                             profileImageUrlController.text);
                         AssetUrls.profileImageUrl =
                             profileImageUrlController.text;
-                        _navigationService.back();
                         profileViewModel.notifyListeners();
                         notifyListeners();
                         updateProfileImage(profileImageUrlController.text);
                         profileImageUrlController.text = '';
+                        _navigationService.back();
                       },
                       child: Stack(
                         alignment: Alignment.center,

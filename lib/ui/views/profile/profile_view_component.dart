@@ -115,18 +115,22 @@ class ProfileImageWidget extends ViewModelWidget<ProfileViewModel> {
           InkWell(
             splashColor: Colors.transparent,
             child: ClipOval(
-              child: CachedNetworkImage(
-                width: 100.r,
-                height: 100.r,
-                fit: BoxFit.cover,
-                imageUrl: AssetUrls.profileImageUrl == '' ||
-                        AssetUrls.profileImageUrl == 'Not Available'
-                    ? AssetUrls.dummyImageUrl
-                    : AssetUrls.profileImageUrl,
-                placeholder: (context, url) => const CircularLoadingIndicator(),
-                errorWidget: (context, url, error) {
-                  return const Icon(Icons.error);
-                },
+              child: Hero(
+                tag: "profileImage",
+                child: CachedNetworkImage(
+                  width: 100.r,
+                  height: 100.r,
+                  fit: BoxFit.cover,
+                  imageUrl: AssetUrls.profileImageUrl == '' ||
+                          AssetUrls.profileImageUrl == 'Not Available'
+                      ? AssetUrls.dummyImageUrl
+                      : AssetUrls.profileImageUrl,
+                  placeholder: (context, url) =>
+                      const CircularLoadingIndicator(),
+                  errorWidget: (context, url, error) {
+                    return const Icon(Icons.error);
+                  },
+                ),
               ),
             ),
           ),
@@ -253,6 +257,7 @@ class HelpSupportTile extends ViewModelWidget<ProfileViewModel> {
     );
   }
 }
+
 class RateAppTile extends ViewModelWidget<ProfileViewModel> {
   const RateAppTile({
     super.key,
@@ -378,3 +383,11 @@ class DarkModeTile extends ViewModelWidget<ProfileViewModel> {
             )));
   }
 }
+
+
+// Widget PaddingWrapper(List<Widget> children) {
+//   return Padding(
+//     padding: EdgeInsets.symmetric(horizontal: 16.r),
+//     child: children,
+//   );
+// }
