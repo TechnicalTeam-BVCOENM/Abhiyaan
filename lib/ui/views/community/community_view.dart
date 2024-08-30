@@ -58,7 +58,10 @@ class CommunityView extends StatelessWidget {
                             Center(
                               child: Text(
                                 "Community",
-                                style: fontThemeClass.title(context),
+                                style: fontThemeClass.title(
+                                  context,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             QuoteCard(

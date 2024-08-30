@@ -527,7 +527,7 @@ class UserGreetingsWidget extends ViewModelWidget<HomeViewModel> {
               style: fontTheme.title(
                 context,
                 color: context.colorScheme.primaryText,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.bold,
               ),
             ).animate().fadeIn(),
           ),
