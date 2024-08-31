@@ -384,7 +384,6 @@ class DarkModeTile extends ViewModelWidget<ProfileViewModel> {
   }
 }
 
-
 // Widget PaddingWrapper(List<Widget> children) {
 //   return Padding(
 //     padding: EdgeInsets.symmetric(horizontal: 16.r),

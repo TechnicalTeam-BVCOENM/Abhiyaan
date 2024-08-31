@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <queries>
@@ -16,7 +16,6 @@
             <action android:name="android.intent.action.INSERT" />
             <data android:mimeType="vnd.android.cursor.item/event" />
         </intent>
-        
     </queries>
 
     <application
@@ -39,12 +38,12 @@
             />
 
             <intent-filter android:autoVerify="true">
-                 <action android:name="android.intent.action.VIEW" />
-                 <category android:name="android.intent.category.DEFAULT" />
-                 <category android:name="android.intent.category.BROWSABLE" />
-                 <data android:scheme="http" />
-                 <data android:scheme="https" />
-                 <data android:host="abhiyaan.dynalinks.app" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="abhiyaan.dynalinks.app" />
             </intent-filter>
 
             <intent-filter>
@@ -53,14 +52,14 @@
             </intent-filter>
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
-          
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-          
+
                 <data android:scheme="http" />
                 <data android:scheme="https" />
                 <data android:host="abhiyaan.dynalinks.app" />
-              </intent-filter>
+            </intent-filter>
         </activity>
         <meta-data
             android:name="flutterEmbedding"

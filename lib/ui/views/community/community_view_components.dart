@@ -257,6 +257,7 @@ class DepartmentClubs extends ViewModelWidget<CommunityViewModel> {
     );
   }
 }
+
 class UniversalClubs extends ViewModelWidget<CommunityViewModel> {
   final UniversalClubsData data;
   const UniversalClubs({super.key, required this.data});
@@ -271,7 +272,8 @@ class UniversalClubs extends ViewModelWidget<CommunityViewModel> {
           _analyticsService.logEvent(
               eventName: "Universal_Club_View",
               value: "${data.uniclubShortHand} Club Viewed");
-          viewModel.navigationService.navigateToUniClubsView(universalClubsData: data);
+          viewModel.navigationService
+              .navigateToUniClubsView(universalClubsData: data);
         },
         child: SizedBox(
           height: 120.h,

@@ -114,6 +114,7 @@ class FirestoreService {
       return [];
     }
   }
+
   Future<List<UniversalClubsData>> getUniversalClubsData() async {
     try {
       final QuerySnapshot snapshot = await _firestore

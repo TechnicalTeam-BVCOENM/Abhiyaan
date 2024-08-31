@@ -141,10 +141,10 @@ class UniversalClubsDatas extends ViewModelWidget<UniClubsViewModel> {
           //               clubFest: uniclubFest,
           //               fontTheme: fontTheme,
           //               index: index,
-                //       );
-                //     },
-                //   ),
-                // ),
+          //       );
+          //     },
+          //   ),
+          // ),
           15.verticalSpace,
         ]));
   }

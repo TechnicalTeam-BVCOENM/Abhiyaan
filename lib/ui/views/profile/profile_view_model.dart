@@ -62,8 +62,8 @@ class ProfileViewModel extends BaseViewModel {
   }
 
   void rateApp() async {
-      if (await inAppReview.isAvailable()) {
-        await inAppReview.requestReview();
-      }
+    if (await inAppReview.isAvailable()) {
+      await inAppReview.requestReview();
+    }
   }
 }

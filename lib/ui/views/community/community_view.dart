@@ -161,7 +161,7 @@ class CommunityView extends StatelessWidget {
                                   ).animate(delay: 200.ms).fadeIn(
                                     curve: Curves.easeInOutCubic,
                                     duration: 600.ms),
-                           
+
                             model.departmentClubsData.isEmpty
                                 ? Container()
                                 : const SectionText(title: "Universal Clubs")
@@ -189,11 +189,11 @@ class CommunityView extends StatelessWidget {
                                               : const EdgeInsets.only(left: 8.0)
                                                   .r,
                                           child:
-                                          //  const UniClubsView(universalClubsData:   model.universalClubsData[index])
-                                           UniversalClubs(
-                                              data: model
-                                                  .universalClubsData[index])
-                                          ,
+                                              //  const UniClubsView(universalClubsData:   model.universalClubsData[index])
+                                              UniversalClubs(
+                                                  data:
+                                                      model.universalClubsData[
+                                                          index]),
                                         );
                                       },
                                     ),

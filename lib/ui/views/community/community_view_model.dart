@@ -237,7 +237,7 @@ class DepartmentalClubsData {
   });
 }
 
-class  UniversalClubsData {
+class UniversalClubsData {
   final String uniclubName;
   final String uniclubImage;
   final String uniclubShortHand;
@@ -252,7 +252,6 @@ class  UniversalClubsData {
     required this.uniclubLink,
   });
 }
-
 
 class FestInfo {
   final String festName;
