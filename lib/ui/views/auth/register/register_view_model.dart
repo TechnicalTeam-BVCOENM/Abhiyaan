@@ -54,6 +54,7 @@ class RegisterViewModel extends BaseViewModel {
   Future<void> register(
     context,
   ) async {
+    emailIdTextController.text = emailIdTextController.text.trim();
     FocusScope.of(context).requestFocus(FocusNode());
     if (createpasswordTextController.text == "" ||
         confirmpasswordTextController.text == "" ||

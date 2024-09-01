@@ -78,6 +78,10 @@ class RegisterView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     cursorColor: context.colorScheme.accentColor,
                     controller: model.emailIdTextController,
+                    onChanged: (value) {
+                      model.emailIdTextController.text =
+                          model.emailIdTextController.text.trim();
+                    },
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
                               horizontal: 30, vertical: 15)

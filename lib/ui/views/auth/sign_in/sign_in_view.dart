@@ -86,6 +86,10 @@ class SignInView extends StatelessWidget {
                           TextFormField(
                             cursorColor: context.colorScheme.accentColor,
                             controller: model.emailIdTextController,
+                            onChanged: (value) {
+                              model.emailIdTextController.text =
+                                  model.emailIdTextController.text.trim();
+                            },
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 30,
