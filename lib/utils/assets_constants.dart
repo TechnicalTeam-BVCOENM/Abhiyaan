@@ -60,5 +60,5 @@ class AnimationAssets {
 }
 
 class AppConstants {
-  static const String appVersion = '1.0.6';
+  static const String appVersion = '1.1.5';
 }
