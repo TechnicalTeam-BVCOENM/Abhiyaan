@@ -47,6 +47,8 @@ import 'package:abhiyaan/ui/views/splash/splash_view.dart';
     LazySingleton(classType: ThemeService),
     LazySingleton(classType: AuthenticationService),
     LazySingleton(classType: AnalyticsService),
+    Singleton(classType: BottomNavViewModel, asType: BottomNavViewModel),
+    Singleton(classType: ProfileViewModel, asType: ProfileViewModel)
   ],
   logger: StackedLogger(),
 )
