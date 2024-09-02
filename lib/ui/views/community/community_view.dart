@@ -188,12 +188,9 @@ class CommunityView extends StatelessWidget {
                                                   .r
                                               : const EdgeInsets.only(left: 8.0)
                                                   .r,
-                                          child:
-                                              //  const UniClubsView(universalClubsData:   model.universalClubsData[index])
-                                              UniversalClubs(
-                                                  data:
-                                                      model.universalClubsData[
-                                                          index]),
+                                          child: UniversalClubs(
+                                              data: model
+                                                  .universalClubsData[index]),
                                         );
                                       },
                                     ),

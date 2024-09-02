@@ -242,12 +242,14 @@ class UniversalClubsData {
   final String uniclubImage;
   final String uniclubShortHand;
   final List<ClubMemberInfo> clubMembers;
+  final List<FestInfo> clubFest;
   final String uniclubLink;
 
   UniversalClubsData({
     required this.uniclubName,
     required this.uniclubImage,
     required this.uniclubShortHand,
+    required this.clubFest,
     required this.clubMembers,
     required this.uniclubLink,
   });

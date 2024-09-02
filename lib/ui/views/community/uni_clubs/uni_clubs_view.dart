@@ -1,6 +1,6 @@
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
-// import 'package:abhiyaan/ui/common/toast_message.dart';
+import 'package:abhiyaan/ui/common/toast_message.dart';
 import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:abhiyaan/ui/views/community/community_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -51,7 +51,7 @@ class UniClubsView extends StatelessWidget {
                   uniclubImage: universalClubsData.uniclubImage,
                   uniclubShortHand: universalClubsData.uniclubShortHand,
                   clubMembers: universalClubsData.clubMembers,
-                  // uniclubFest: universalClubsData.uniclubFest,
+                  clubFest: universalClubsData.clubFest,
                   uniclubLink: universalClubsData.uniclubLink,
                 ),
               ],

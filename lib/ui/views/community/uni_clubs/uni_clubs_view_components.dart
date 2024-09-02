@@ -29,7 +29,7 @@ class UniversalClubsDatas extends ViewModelWidget<UniClubsViewModel> {
   final String uniclubImage;
   final String uniclubShortHand;
   final List<ClubMemberInfo> clubMembers;
-  // final List<FestInfo> uniclubFest;
+  final List<FestInfo> clubFest;
   final String uniclubLink;
 
   const UniversalClubsDatas({
@@ -37,7 +37,7 @@ class UniversalClubsDatas extends ViewModelWidget<UniClubsViewModel> {
     required this.uniclubName,
     required this.uniclubImage,
     required this.uniclubShortHand,
-    // required this.uniclubFest,
+    required this.clubFest,
     required this.clubMembers,
     required this.uniclubLink,
   });
@@ -114,37 +114,37 @@ class UniversalClubsDatas extends ViewModelWidget<UniClubsViewModel> {
               ),
             ),
           ),
-          // uniclubFest.isEmpty
-          //     ? Container()
-          //     : Padding(
-          //         padding: const EdgeInsets.only(left: 16.0).r,
-          //         child: Text(
-          //           "Fests | ${uniclubFest.length}",
-          //           style: fontTheme.body(
-          //             context,
-          //             fontWeight: FontWeight.w500,
-          //           ),
-          //         ),
-          //       ),
-          // uniclubFest.isEmpty
-          //     ? Container()
-          //     : SizedBox(
-          //         height: 230.h,
-          //         width: double.infinity,
-          //         child: ListView.builder(
-          //           physics: const BouncingScrollPhysics(),
-          //           scrollDirection: Axis.horizontal,
-          //           itemCount: uniclubFest.length,
-          //           shrinkWrap: true,
-          //           itemBuilder: (context, index) {
-          //             return FestCard(
-          //               clubFest: uniclubFest,
-          //               fontTheme: fontTheme,
-          //               index: index,
-          //       );
-          //     },
-          //   ),
-          // ),
+          clubFest.isEmpty
+              ? Container()
+              : Padding(
+                  padding: const EdgeInsets.only(left: 16.0).r,
+                  child: Text(
+                    "Fests | ${clubFest.length}",
+                    style: fontTheme.body(
+                      context,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+          clubFest.isEmpty
+              ? Container()
+              : SizedBox(
+                  height: 230.h,
+                  width: double.infinity,
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: clubFest.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return FestCard(
+                        clubFest: clubFest,
+                        fontTheme: fontTheme,
+                        index: index,
+                      );
+                    },
+                  ),
+                ),
           15.verticalSpace,
         ]));
   }
@@ -222,80 +222,80 @@ class MemberCard extends StatelessWidget {
   }
 }
 
-// class FestCard extends StatelessWidget {
-//   const FestCard({
-//     super.key,
-//     required this.clubFest,
-//     required this.fontTheme,
-//     required this.index,
-//   });
+class FestCard extends StatelessWidget {
+  const FestCard({
+    super.key,
+    required this.clubFest,
+    required this.fontTheme,
+    required this.index,
+  });
 
-//   final List<FestInfo> clubFest;
-//   final FontThemeClass fontTheme;
-//   final int index;
+  final List<FestInfo> clubFest;
+  final FontThemeClass fontTheme;
+  final int index;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: () {
-//         clubFest[index].festLink != "" || clubFest[index].festLink.isEmpty
-//             ? UrlLauncher().launchURL(
-//                 clubFest[index].festLink,
-//               )
-//             : showNormalMessage(
-//                 context,
-//                 " Direct link not found for this event!",
-//               );
-//       },
-//       child: Card(
-//         shape:
-//             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12).r),
-//         clipBehavior: Clip.hardEdge,
-//         color: context.colorScheme.card,
-//         elevation: 4.0,
-//         margin: const EdgeInsets.all(12.0).r,
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.center,
-//           mainAxisAlignment:
-//               MainAxisAlignment.start, // Align children to the start
-//           children: [
-//             SizedBox(
-//               width: 150.w,
-//               height: 150.h,
-//               child: CachedNetworkImage(
-//                 fit: BoxFit.cover,
-//                 imageUrl: clubFest[index].festImage,
-//                 placeholder: (context, url) => const CircularLoadingIndicator(),
-//                 errorWidget: (context, url, error) => const Icon(Icons.error),
-//               ),
-//             ),
-//             Wrap(
-//               clipBehavior: Clip.hardEdge,
-//               children: [
-//                 Container(
-//                   height: 52.h,
-//                   width: 150.w,
-//                   decoration: BoxDecoration(
-//                     color: context.colorScheme.card,
-//                   ),
-//                   child: Padding(
-//                     padding: const EdgeInsets.all(8.0).r,
-//                     child: Center(
-//                       child: Text(
-//                         clubFest[index].festName,
-//                         overflow: TextOverflow.ellipsis,
-//                         maxLines: 1,
-//                         style: fontTheme.body(context,
-//                             fontWeight: FontWeight.w500),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ].animate(delay: 200.ms, interval: 80.ms).scale(),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        clubFest[index].festLink != "" || clubFest[index].festLink.isEmpty
+            ? UrlLauncher().launchURL(
+                clubFest[index].festLink,
+              )
+            : showNormalMessage(
+                context,
+                " Direct link not found for this event!",
+              );
+      },
+      child: Card(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12).r),
+        clipBehavior: Clip.hardEdge,
+        color: context.colorScheme.card,
+        elevation: 4.0,
+        margin: const EdgeInsets.all(12.0).r,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment:
+              MainAxisAlignment.start, // Align children to the start
+          children: [
+            SizedBox(
+              width: 150.w,
+              height: 150.h,
+              child: CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: clubFest[index].festImage,
+                placeholder: (context, url) => const CircularLoadingIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
+            ),
+            Wrap(
+              clipBehavior: Clip.hardEdge,
+              children: [
+                Container(
+                  height: 52.h,
+                  width: 150.w,
+                  decoration: BoxDecoration(
+                    color: context.colorScheme.card,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0).r,
+                    child: Center(
+                      child: Text(
+                        clubFest[index].festName,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: fontTheme.body(context,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ].animate(delay: 200.ms, interval: 80.ms).scale(),
+        ),
+      ),
+    );
+  }
+}
