@@ -106,17 +106,15 @@ class CommunityViewModel extends BaseViewModel {
 
   Future<void> fetchAffirmation() async {
     try {
-      Random random = Random();
-      int randomNumber = random.nextInt(15);
       List<String> author;
-      var response = await http.get(Uri.parse('https://type.fit/api/quotes'));
+      var response = await http.get(Uri.parse('https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en'));
 
       if (response.statusCode != 200) {
         return;
       } else if (response.statusCode == 200) {
         final data = jsonDecode(response.body.toString());
-        affirmation = data[randomNumber]['text'];
-        authorName = data[randomNumber]['author'];
+        affirmation = data['quoteText'];
+        authorName = data['quoteAuthor'];
         author = authorName.split(",");
         authorName = author[0];
       }
