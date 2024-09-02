@@ -112,9 +112,9 @@ class ProfileImageWidget extends ViewModelWidget<ProfileViewModel> {
       padding: EdgeInsets.symmetric(vertical: 30.r),
       child: Column(
         children: [
-          InkWell(
-            splashColor: Colors.transparent,
-            child: ClipOval(
+          ClipOval(
+            child: ColoredBox(
+              color: context.colorScheme.card,
               child: Hero(
                 tag: "profileImage",
                 child: CachedNetworkImage(
