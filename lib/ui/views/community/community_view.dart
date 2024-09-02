@@ -162,7 +162,7 @@ class CommunityView extends StatelessWidget {
                                     curve: Curves.easeInOutCubic,
                                     duration: 600.ms),
 
-                            model.departmentClubsData.isEmpty
+                            model.universalClubsData.isEmpty
                                 ? Container()
                                 : const SectionText(title: "Universal Clubs")
                                     .animate(
@@ -172,14 +172,14 @@ class CommunityView extends StatelessWidget {
                                       curve: Curves.easeInOutCubic,
                                       duration: 600.ms,
                                     ),
-                            model.departmentClubsData.isEmpty
+                            model.universalClubsData.isEmpty
                                 ? Container()
                                 : SizedBox(
                                     height: 120.h,
                                     width: double.infinity,
                                     child: CarouselSlider.builder(
                                       itemCount:
-                                          model.departmentClubsData.length,
+                                          model.universalClubsData.length,
                                       options: model.clubsCarosoulOptions,
                                       itemBuilder: (context, index, realIndex) {
                                         return Padding(
