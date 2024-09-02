@@ -115,6 +115,53 @@ class FirestoreService {
     }
   }
 
+  Future<List<UniversalClubsData>> getUniversalClubsData() async {
+    try {
+      final QuerySnapshot snapshot = await _firestore
+          .collection("Community")
+          .doc("data")
+          .collection("CollegeClubs")
+          .get();
+      return snapshot.docs.map((doc) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        Map<String, dynamic> aClubData = data["data"] as Map<String, dynamic>;
+        List<dynamic> clubMm = data["data"]["clubMember"];
+        List<dynamic> clubFst = data["data"]["clubFest"];
+
+        String clubName = aClubData['clubName'];
+        String clubLink = aClubData['clubLink'] ?? '';
+        String clubShortHand = aClubData['clubShortHand'];
+        String clubImage = aClubData['clubImage'];
+        List<ClubMemberInfo> clubMembers = clubMm.map((e) {
+          return ClubMemberInfo(
+            memberName: e['memberName'],
+            memberImage: e['memberImage'],
+            memberPosition: e['memberPosition'],
+          );
+        }).toList();
+        List<FestInfo> clubFests = clubFst.map((e) {
+          return FestInfo(
+            festName: e['festName'] ?? '',
+            festImage: e['festImage'] ?? '',
+            festLink: e['festLink'] ?? '',
+          );
+        }).toList();
+
+        return UniversalClubsData(
+          uniclubName: clubName,
+          uniclubShortHand: clubShortHand,
+          uniclubImage: clubImage,
+          clubMembers: clubMembers,
+          clubFest: clubFests,
+          uniclubLink: clubLink,
+        );
+      }).toList();
+    } on Exception catch (e) {
+      log.e("Error in getting Universal clubs data : ${e.toString()}");
+      return [];
+    }
+  }
+
   Future<List<Map<String, dynamic>>> getHighlights() async {
     try {
       final QuerySnapshot snapshot = await _firestore
