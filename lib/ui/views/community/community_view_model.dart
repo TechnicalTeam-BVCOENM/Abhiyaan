@@ -176,6 +176,8 @@ class CommunityViewModel extends BaseViewModel {
       await runBusyFuture(getBlogData());
       await getDepartmentClubsData();
       notifyListeners();
+      await getUniversalClubsData();
+      notifyListeners();
       await fetchAffirmation();
       notifyListeners();
     } catch (e) {
