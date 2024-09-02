@@ -43,6 +43,29 @@ class HomeViewModel extends BaseViewModel {
   List<CelebrationData> get celebrationData => _celebrationData;
   int get activeIndex => _activeIndex;
 
+  List<QuickLinksModel> quickLinksList = [
+    QuickLinksModel(
+      imageUrl: "assets/images/android_splash_logo.png",
+      title: "BVCOENM",
+      url: 'https://www.bvcoenm.edu.in/',
+    ),
+    QuickLinksModel(
+      imageUrl: "assets/images/home/quick_links/abhiyaan.png",
+      title: "Abhiyaan",
+      url: 'https://abhiyaan.tech/',
+    ),
+    QuickLinksModel(
+      imageUrl: "assets/images/home/quick_links/tdc_logo.png",
+      title: "TDC",
+      url: 'https://abhiyaan.tech/',
+    ),
+    QuickLinksModel(
+      imageUrl: "assets/images/home/quick_links/cesa.png",
+      title: "CESA",
+      url: 'https://www.clubcesa.tech/',
+    ),
+  ];
+
   bool toggleCelebrationShown() {
     try {
       isCelebrationShown = true;
@@ -135,29 +158,6 @@ class HomeViewModel extends BaseViewModel {
       log.e("Error in showing welcome and celebration : ${e.toString()}");
     }
   }
-
-  List<QuickLinksModel> quickLinksList = [
-    QuickLinksModel(
-      imageUrl: "assets/images/android_splash_logo.png",
-      title: "BVCOENM",
-      url: 'https://www.bvcoenm.edu.in/',
-    ),
-    QuickLinksModel(
-      imageUrl: "assets/images/home/quick_links/abhiyaan.png",
-      title: "Abhiyaan",
-      url: 'https://abhiyaan.tech/',
-    ),
-    QuickLinksModel(
-      imageUrl: "assets/images/home/quick_links/tdc_logo.png",
-      title: "TDC",
-      url: 'https://abhiyaan.tech/',
-    ),
-    QuickLinksModel(
-      imageUrl: "assets/images/home/quick_links/cesa.png",
-      title: "CESA",
-      url: 'https://www.clubcesa.tech/',
-    ),
-  ];
 
   Future<void> afterInit(context) async {
     try {

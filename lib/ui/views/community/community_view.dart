@@ -61,7 +61,6 @@ class CommunityView extends StatelessWidget {
                                 duration: 600.ms,
                               ),
                         const SectionText(title: "Blogs"),
-                        // Add Blogs here
                         SizedBox(
                           height: 270.h,
                           width: double.infinity,
@@ -135,7 +134,6 @@ class CommunityView extends StatelessWidget {
                             ),
                           ).animate(delay: 200.ms).fadeIn(
                               curve: Curves.easeInOutCubic, duration: 600.ms),
-
                         if (model.universalClubsData.isNotEmpty)
                           const SectionText(title: "Universal Clubs")
                               .animate(
@@ -165,18 +163,6 @@ class CommunityView extends StatelessWidget {
                           ).animate(delay: 200.ms).fadeIn(
                               curve: Curves.easeInOutCubic, duration: 600.ms),
                         12.verticalSpace,
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Scroll Down To Refresh",
-                            style: FontThemeClass().caption(
-                              context,
-                              color: context.colorScheme.secondarySectionColor,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
                       ].animate(delay: 100.ms, interval: 80.ms).fadeIn(),
                     ),
                   ),
