@@ -49,20 +49,16 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
         padding: const EdgeInsets.symmetric(horizontal: 18).r,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           10.verticalSpace,
-          Hero(
-            tag: clubShortHand,
-            child: Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16.0).r,
-                child: CachedNetworkImage(
-                  height: 276.h,
-                  width: 395.w,
-                  fit: BoxFit.fill,
-                  imageUrl: clubImage,
-                  placeholder: (context, url) =>
-                      const CircularLoadingIndicator(),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
+          Center(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16.0).r,
+              child: CachedNetworkImage(
+                height: 276.h,
+                width: 395.w,
+                fit: BoxFit.fill,
+                imageUrl: clubImage,
+                placeholder: (context, url) => const CircularLoadingIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
           ),

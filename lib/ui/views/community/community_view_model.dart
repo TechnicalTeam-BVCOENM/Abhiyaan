@@ -121,25 +121,6 @@ class CommunityViewModel extends BaseViewModel {
     }
   }
 
-  Future<void> fetchAffirmation() async {
-    try {
-      List<String> author;
-      var response = await http.get(Uri.parse('https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en'));
-
-      if (response.statusCode != 200) {
-        return;
-      } else if (response.statusCode == 200) {
-        final data = jsonDecode(response.body.toString());
-        affirmation = data['quoteText'];
-        authorName = data['quoteAuthor'];
-        author = authorName.split(",");
-        authorName = author[0];
-      }
-    } on Exception catch (e) {
-      log.e("Error in fetching affirmation: ${e.toString()}");
-    }
-  }
-
   Future<void> updateLikes(String blogId, BuildContext context) async {
     final currentBlog = localStorageService.read("isLiked_$blogId");
     AuthenticationService authenticationService =
@@ -171,12 +152,11 @@ class CommunityViewModel extends BaseViewModel {
   Future<void> init(context) async {
     try {
       _analyticsService.logScreen(screenName: 'CommunityView Screen Opened');
-      await runBusyFuture(getBlogData());
-      await getDepartmentClubsData();
-      notifyListeners();
-      await getUniversalClubsData();
-      notifyListeners();
-      await fetchAffirmation();
+      Future.wait([
+        getBlogData(),
+        getDepartmentClubsData(),
+        getUniversalClubsData(),
+      ]);
       notifyListeners();
     } catch (e) {
       log.e(e.toString());

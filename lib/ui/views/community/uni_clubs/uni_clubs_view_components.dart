@@ -114,38 +114,8 @@ class UniversalClubsDatas extends ViewModelWidget<UniClubsViewModel> {
               ),
             ),
           ),
-          clubFest.isEmpty
-              ? Container()
-              : Padding(
-                  padding: const EdgeInsets.only(left: 16.0).r,
-                  child: Text(
-                    "Fests | ${clubFest.length}",
-                    style: fontTheme.body(
-                      context,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-          clubFest.isEmpty
-              ? Container()
-              : SizedBox(
-                  height: 230.h,
-                  width: double.infinity,
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: clubFest.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return FestCard(
-                        clubFest: clubFest,
-                        fontTheme: fontTheme,
-                        index: index,
-                      );
-                    },
-                  ),
-                ),
-          15.verticalSpace,
+          12.verticalSpace,
+          // TODO: Add button to join the club
         ]));
   }
 }

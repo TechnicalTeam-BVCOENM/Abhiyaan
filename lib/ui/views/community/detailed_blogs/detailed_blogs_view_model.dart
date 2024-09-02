@@ -10,7 +10,7 @@ class DettailedBlogPageModel extends BaseViewModel {
         eventName: "Detailed_Blog_View",
         value: "${blogData.title} Blog Viewed : ${blogData.documentId}");
 
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   }
 
   void shareBlog(BuildContext context, CommunityBlogsData blogData) async {
@@ -26,7 +26,7 @@ class DettailedBlogPageModel extends BaseViewModel {
   }
 
   void disposeModel() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+    //     overlays: SystemUiOverlay.values);
   }
 }
