@@ -1,18 +1,18 @@
-part of '../clubs/clubs_view.dart';
+part of '../uni_clubs/uni_clubs_view.dart';
 
-class ClubsAppBar extends ViewModelWidget<ClubsViewModel> {
-  final String clubShortHand;
-  const ClubsAppBar({super.key, required this.clubShortHand});
+class UniClubsAppBar extends ViewModelWidget<UniClubsViewModel> {
+  final String uniClubShortHand;
+  const UniClubsAppBar({super.key, required this.uniClubShortHand});
 
   @override
-  Widget build(BuildContext context, ClubsViewModel viewModel) {
+  Widget build(BuildContext context, UniClubsViewModel viewModel) {
     return SliverAppBar(
       iconTheme: IconThemeData(
         color: context.colorScheme.primaryText, //change your color here
       ),
       elevation: 0,
       title: Text(
-        clubShortHand,
+        uniClubShortHand,
         style: FontThemeClass().header(
           context,
           color: context.colorScheme.primaryText,
@@ -24,41 +24,45 @@ class ClubsAppBar extends ViewModelWidget<ClubsViewModel> {
   }
 }
 
-class ClubsData extends ViewModelWidget<ClubsViewModel> {
-  final String clubName;
-  final String clubImage;
-  final String clubShortHand;
-  final List<FestInfo> clubFest;
-  final String clubLink;
+class UniversalClubsDatas extends ViewModelWidget<UniClubsViewModel> {
+  final String uniclubName;
+  final String uniclubImage;
+  final String uniclubShortHand;
   final List<ClubMemberInfo> clubMembers;
+  final List<FestInfo> clubFest;
+  final String uniclubLink;
 
-  const ClubsData({
+  const UniversalClubsDatas({
     super.key,
-    required this.clubName,
-    required this.clubImage,
-    required this.clubShortHand,
+    required this.uniclubName,
+    required this.uniclubImage,
+    required this.uniclubShortHand,
     required this.clubFest,
     required this.clubMembers,
-    required this.clubLink,
+    required this.uniclubLink,
   });
 
   @override
-  Widget build(BuildContext context, ClubsViewModel viewModel) {
+  Widget build(BuildContext context, UniClubsViewModel viewModel) {
     FontThemeClass fontTheme = FontThemeClass();
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18).r,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           10.verticalSpace,
-          Center(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16.0).r,
-              child: CachedNetworkImage(
-                height: 276.h,
-                width: 395.w,
-                fit: BoxFit.fill,
-                imageUrl: clubImage,
-                placeholder: (context, url) => const CircularLoadingIndicator(),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+          Hero(
+            tag: uniclubShortHand,
+            child: Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16.0).r,
+                child: CachedNetworkImage(
+                  height: 276.h,
+                  width: 395.w,
+                  fit: BoxFit.fill,
+                  imageUrl: uniclubImage,
+                  placeholder: (context, url) =>
+                      const CircularLoadingIndicator(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
               ),
             ),
           ),
@@ -67,7 +71,7 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
             width: double.infinity,
             child: Center(
               child: Text(
-                clubName,
+                uniclubName,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
                 style: fontTheme.body(context, fontWeight: FontWeight.w500),
@@ -79,13 +83,13 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
             child: InkWell(
               onTap: () {
                 try {
-                  UrlLauncher().launchURL(clubLink);
+                  UrlLauncher().launchURL(uniclubLink);
                 } catch (e) {
                   viewModel.log.e(e.toString());
                 }
               },
               child: Text(
-                "Let's Explore the $clubShortHand",
+                "Let's Explore the $uniclubShortHand",
                 style: fontTheme.body(context,
                     fontWeight: FontWeight.w500,
                     color: context.colorScheme.secondarySectionColor),
@@ -110,38 +114,8 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
               ),
             ),
           ),
-          clubFest.isEmpty
-              ? Container()
-              : Padding(
-                  padding: const EdgeInsets.only(left: 16.0).r,
-                  child: Text(
-                    "Fests | ${clubFest.length}",
-                    style: fontTheme.body(
-                      context,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-          clubFest.isEmpty
-              ? Container()
-              : SizedBox(
-                  height: 230.h,
-                  width: double.infinity,
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: clubFest.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return FestCard(
-                        clubFest: clubFest,
-                        fontTheme: fontTheme,
-                        index: index,
-                      );
-                    },
-                  ),
-                ),
-          15.verticalSpace,
+          12.verticalSpace,
+          // TODO: Add button to join the club
         ]));
   }
 }

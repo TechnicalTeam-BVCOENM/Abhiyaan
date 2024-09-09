@@ -62,7 +62,6 @@ class FontThemeClass {
     return TextStyle(
       fontSize: 16.sp,
       fontFamily: 'Gilroy',
-
       fontWeight: fontWeight ?? FontWeight.w400,
       color: color ?? ctx.colorScheme.primaryText,
     );

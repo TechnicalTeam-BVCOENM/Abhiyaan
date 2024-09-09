@@ -26,6 +26,13 @@ class CommunityViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  final List<UniversalClubsData> _universalClubsData = [];
+  List<UniversalClubsData> get universalClubsData => _universalClubsData;
+  set universalClubsData(List<UniversalClubsData> universalClubsData) {
+    _universalClubsData.addAll(universalClubsData);
+    notifyListeners();
+  }
+
   void navigateToDetailedBlogPage(
       CommunityBlogsData blogData, BuildContext context) {
     try {
@@ -73,6 +80,16 @@ class CommunityViewModel extends BaseViewModel {
     }
   }
 
+  Future<List<UniversalClubsData>> getUniversalClubsData() async {
+    try {
+      universalClubsData = await firestoreService.getUniversalClubsData();
+      return universalClubsData;
+    } on Exception catch (e) {
+      log.e("Error in fetching universal clubs data: ${e.toString()}");
+      return [];
+    }
+  }
+
   void updateBlogIndex(int newIndex) {
     try {
       _currentBlogIndex = newIndex;
@@ -101,27 +118,6 @@ class CommunityViewModel extends BaseViewModel {
     } on Exception catch (e) {
       log.e("Error in getting likes stream: ${e.toString()}");
       return const Stream.empty();
-    }
-  }
-
-  Future<void> fetchAffirmation() async {
-    try {
-      Random random = Random();
-      int randomNumber = random.nextInt(15);
-      List<String> author;
-      var response = await http.get(Uri.parse('https://type.fit/api/quotes'));
-
-      if (response.statusCode != 200) {
-        return;
-      } else if (response.statusCode == 200) {
-        final data = jsonDecode(response.body.toString());
-        affirmation = data[randomNumber]['text'];
-        authorName = data[randomNumber]['author'];
-        author = authorName.split(",");
-        authorName = author[0];
-      }
-    } on Exception catch (e) {
-      log.e("Error in fetching affirmation: ${e.toString()}");
     }
   }
 
@@ -156,10 +152,11 @@ class CommunityViewModel extends BaseViewModel {
   Future<void> init(context) async {
     try {
       _analyticsService.logScreen(screenName: 'CommunityView Screen Opened');
-      await runBusyFuture(getBlogData());
-      await getDepartmentClubsData();
-      notifyListeners();
-      await fetchAffirmation();
+      Future.wait([
+        getBlogData(),
+        getDepartmentClubsData(),
+        getUniversalClubsData(),
+      ]);
       notifyListeners();
     } catch (e) {
       log.e(e.toString());
@@ -217,6 +214,24 @@ class DepartmentalClubsData {
     required this.clubFest,
     required this.clubMembers,
     required this.clubLink,
+  });
+}
+
+class UniversalClubsData {
+  final String uniclubName;
+  final String uniclubImage;
+  final String uniclubShortHand;
+  final List<ClubMemberInfo> clubMembers;
+  final List<FestInfo> clubFest;
+  final String uniclubLink;
+
+  UniversalClubsData({
+    required this.uniclubName,
+    required this.uniclubImage,
+    required this.uniclubShortHand,
+    required this.clubFest,
+    required this.clubMembers,
+    required this.uniclubLink,
   });
 }
 

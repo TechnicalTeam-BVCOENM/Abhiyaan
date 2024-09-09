@@ -1,8 +1,8 @@
 name: abhiyaan
 description: A new Flutter project.
 publish_to: "none"
-version: 1.1.5+10
-# Major.Minor.Patch+Build  
+version: 1.1.6+11
+# Major.Minor.Patch+Build
 #  Major - Major changes like UI/UX changes, new features, etc. Those changes that are not backward compatible.
 #  Minor - Minor changes like bug fixes, performance improvements, etc. Those changes that are backward compatible.
 #  Patch - Patch changes like small bug fixes, small improvements, etc. Those changes that are backward compatible.

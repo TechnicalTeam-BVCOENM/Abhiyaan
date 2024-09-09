@@ -61,9 +61,9 @@ class ProfileViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void rateApp() async {
-      if (await inAppReview.isAvailable()) {
-        await inAppReview.requestReview();
-      }
+  Future<void> rateApp() async {
+    if (await inAppReview.isAvailable()) {
+      await inAppReview.requestReview();
+    }
   }
 }

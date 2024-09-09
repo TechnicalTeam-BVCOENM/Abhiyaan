@@ -40,6 +40,7 @@ class SignInViewModel extends BaseViewModel {
   }
 
   Future<void> changePassword(context) async {
+    emailIdTextController.text = emailIdTextController.text.trim();
     if (emailIdTextController.text.isEmpty) {
       showErrorMessage(context, "email field is empty");
     } else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
@@ -49,7 +50,7 @@ class SignInViewModel extends BaseViewModel {
         "Invalid email format",
       );
     } else if (await RegisterViewModel()
-        .checkEmailExists(emailIdTextController.text, context)) {
+        .checkEmailExists(emailIdTextController.text, context)) { 
       preferencesViewModel.passwordChangeAlert(
           context, emailIdTextController.text);
     } else {
@@ -105,6 +106,10 @@ class SignInViewModel extends BaseViewModel {
 
   void passwordResetMail() {
     FirebaseAuth.instance.sendPasswordResetEmail(email: "");
+  }
+
+  void onEmailAdressValueChanged() {
+    
   }
 
   void navigateToHelpSupport() {
