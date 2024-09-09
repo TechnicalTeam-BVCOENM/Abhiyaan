@@ -60,7 +60,7 @@ void _showmessage(BuildContext context, String message, String type) {
         content: Center(
           child: SizedBox(
             height: 60.h,
-            width: double.infinity,
+            // width: double.infinity,
             child: Card(
               color: context.colorScheme.card,
               clipBehavior: Clip.hardEdge,
@@ -70,8 +70,7 @@ void _showmessage(BuildContext context, String message, String type) {
               child: Row(
                 children: [
                   Container(
-                    height: 60.h,
-                    width: 60.w,
+                    padding: EdgeInsets.all(10.r),
                     decoration: BoxDecoration(
                       color: backgroundColor,
                     ),
@@ -80,13 +79,15 @@ void _showmessage(BuildContext context, String message, String type) {
                       color: Colors.white,
                     ),
                   ),
-                  20.horizontalSpace,
+                  const Spacer(),
                   Text(
                     message,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: fontTheme.body(context),
                   ),
+                  const Spacer(),
+
                 ],
               ),
             ),
