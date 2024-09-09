@@ -87,7 +87,6 @@ void _showmessage(BuildContext context, String message, String type) {
                     style: fontTheme.body(context),
                   ),
                   const Spacer(),
-
                 ],
               ),
             ),
