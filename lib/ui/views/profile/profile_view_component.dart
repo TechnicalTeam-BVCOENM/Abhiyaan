@@ -267,7 +267,7 @@ class RateAppTile extends ViewModelWidget<ProfileViewModel> {
   Widget build(BuildContext context, ProfileViewModel viewModel) {
     return GestureDetector(
       onTap: () {
-        viewModel.rateApp();
+        viewModel.rateApp(context);
       },
       child: ListTile(
         tileColor: context.colorScheme.card,
