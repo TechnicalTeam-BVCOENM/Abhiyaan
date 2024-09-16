@@ -175,9 +175,9 @@ class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
   }
 }
 
-class DepartmentClubs extends ViewModelWidget<CommunityViewModel> {
-  final DepartmentalClubsData data;
-  const DepartmentClubs({super.key, required this.data});
+class ClubsViewWidget extends ViewModelWidget<CommunityViewModel> {
+  final ClubsDataModel data;
+  const ClubsViewWidget({super.key, required this.data});
 
   @override
   Widget build(BuildContext context, CommunityViewModel viewModel) {
@@ -255,86 +255,86 @@ class DepartmentClubs extends ViewModelWidget<CommunityViewModel> {
   }
 }
 
-class UniversalClubs extends ViewModelWidget<CommunityViewModel> {
-  final UniversalClubsData data;
-  const UniversalClubs({super.key, required this.data});
+// class UniversalClubs extends ViewModelWidget<CommunityViewModel> {
+//   final UniversalClubsData data;
+//   const UniversalClubs({super.key, required this.data});
 
-  @override
-  Widget build(BuildContext context, CommunityViewModel viewModel) {
-    FontThemeClass fontThemeClass = FontThemeClass();
-    return Padding(
-      padding: const EdgeInsets.only(right: 10).r,
-      child: GestureDetector(
-        onTap: () {
-          _analyticsService.logEvent(
-              eventName: "Universal_Club_View",
-              value: "${data.uniclubShortHand} Club Viewed");
-          viewModel.navigationService
-              .navigateToUniClubsView(universalClubsData: data);
-        },
-        child: SizedBox(
-          height: 120.h,
-          width: 120.w,
-          child: Card(
-            clipBehavior: Clip.hardEdge,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CachedNetworkImage(
-                  imageUrl: data.uniclubImage,
-                  height: 80.h,
-                  width: 120.w,
-                  fit: BoxFit.fitHeight,
-                  maxHeightDiskCache: 200,
-                  imageBuilder: (context, imageProvider) {
-                    return Container(
-                      height: 80.h,
-                      width: 120.w,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                Container(
-                  height: 30.h,
-                  width: 120.w,
-                  decoration: BoxDecoration(
-                    color: context.colorScheme.card,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.bookmark_rounded,
-                        color: context.colorScheme.accentColor,
-                        size: 18.sp,
-                      ),
-                      4.horizontalSpace,
-                      Center(
-                        child: Text(
-                          data.uniclubShortHand,
-                          style: fontThemeClass.caption(
-                            context,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ].animate(delay: 300.ms).fadeIn(),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context, CommunityViewModel viewModel) {
+//     FontThemeClass fontThemeClass = FontThemeClass();
+//     return Padding(
+//       padding: const EdgeInsets.only(right: 10).r,
+//       child: GestureDetector(
+//         onTap: () {
+//           _analyticsService.logEvent(
+//               eventName: "Universal_Club_View",
+//               value: "${data.uniclubShortHand} Club Viewed");
+//           viewModel.navigationService
+//               .navigateToUniClubsView(universalClubsData: data);
+//         },
+//         child: SizedBox(
+//           height: 120.h,
+//           width: 120.w,
+//           child: Card(
+//             clipBehavior: Clip.hardEdge,
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.center,
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 CachedNetworkImage(
+//                   imageUrl: data.uniclubImage,
+//                   height: 80.h,
+//                   width: 120.w,
+//                   fit: BoxFit.fitHeight,
+//                   maxHeightDiskCache: 200,
+//                   imageBuilder: (context, imageProvider) {
+//                     return Container(
+//                       height: 80.h,
+//                       width: 120.w,
+//                       decoration: BoxDecoration(
+//                         image: DecorationImage(
+//                           image: imageProvider,
+//                           fit: BoxFit.cover,
+//                         ),
+//                       ),
+//                     );
+//                   },
+//                 ),
+//                 Container(
+//                   height: 30.h,
+//                   width: 120.w,
+//                   decoration: BoxDecoration(
+//                     color: context.colorScheme.card,
+//                   ),
+//                   child: Row(
+//                     mainAxisAlignment: MainAxisAlignment.center,
+//                     children: [
+//                       Icon(
+//                         Icons.bookmark_rounded,
+//                         color: context.colorScheme.accentColor,
+//                         size: 18.sp,
+//                       ),
+//                       4.horizontalSpace,
+//                       Center(
+//                         child: Text(
+//                           data.uniclubShortHand,
+//                           style: fontThemeClass.caption(
+//                             context,
+//                             fontWeight: FontWeight.w500,
+//                           ),
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ].animate(delay: 300.ms).fadeIn(),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class QuoteCard extends StatelessWidget {
   final String? quote;

@@ -9,7 +9,7 @@ part 'clubs_view_model.dart';
 part 'clubs_view_components.dart';
 
 class ClubsView extends StatelessWidget {
-  final DepartmentalClubsData clubsData;
+  final ClubsDataModel clubsData;
   const ClubsView({super.key, required this.clubsData});
 
   @override

@@ -177,7 +177,7 @@ class MemberCard extends StatelessWidget {
                   width: 80.r,
                   height: 80.r,
                   fit: BoxFit.cover,
-                  imageUrl: clubMembers[index].memberImage,
+                  imageUrl: clubMembers[index].image,
                   placeholder: (context, url) {
                     return const CircularLoadingIndicator();
                   },
@@ -191,7 +191,7 @@ class MemberCard extends StatelessWidget {
                   width: double.infinity,
                   child: Center(
                     child: Text(
-                      clubMembers[index].memberName,
+                      clubMembers[index].name,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: fontTheme.body(
@@ -204,7 +204,7 @@ class MemberCard extends StatelessWidget {
               ),
               // Position
               Text(
-                clubMembers[index].memberPosition,
+                clubMembers[index].position,
                 style: fontTheme.caption(
                   context,
                   color: context.colorScheme.secondarySectionColor,
