@@ -50,7 +50,7 @@ class SignInViewModel extends BaseViewModel {
         "Invalid email format",
       );
     } else if (await RegisterViewModel()
-        .checkEmailExists(emailIdTextController.text, context)) { 
+        .checkEmailExists(emailIdTextController.text, context)) {
       preferencesViewModel.passwordChangeAlert(
           context, emailIdTextController.text);
     } else {
@@ -108,9 +108,7 @@ class SignInViewModel extends BaseViewModel {
     FirebaseAuth.instance.sendPasswordResetEmail(email: "");
   }
 
-  void onEmailAdressValueChanged() {
-    
-  }
+  void onEmailAdressValueChanged() {}
 
   void navigateToHelpSupport() {
     UrlLauncher externalUrlHandler = UrlLauncher();

@@ -29,6 +29,7 @@ PreferredSizeWidget _appBar(BuildContext context) {
   );
 }
 
+// Logout Button Widget for the Preferences View Page
 class LogoutButton extends ViewModelWidget<PreferencesViewModel> {
   const LogoutButton({
     super.key,
@@ -53,6 +54,7 @@ class LogoutButton extends ViewModelWidget<PreferencesViewModel> {
   }
 }
 
+// Password Change Tile Widget for the Preferences View Page
 class PasswordChangeTile extends ViewModelWidget<PreferencesViewModel> {
   const PasswordChangeTile({
     super.key,
@@ -108,6 +110,7 @@ class PasswordChangeTile extends ViewModelWidget<PreferencesViewModel> {
   }
 }
 
+// Mis Number Tile Widget for the Preferences View Page
 class MisNumberTile extends ViewModelWidget<PreferencesViewModel> {
   const MisNumberTile({
     super.key,
@@ -166,6 +169,7 @@ class MisNumberTile extends ViewModelWidget<PreferencesViewModel> {
   }
 }
 
+// Email Address Tile Widget for the Preferences View Page
 class EmailAdressTile extends ViewModelWidget<PreferencesViewModel> {
   const EmailAdressTile({
     super.key,
