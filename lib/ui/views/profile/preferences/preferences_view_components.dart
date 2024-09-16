@@ -132,7 +132,7 @@ class MisNumberTile extends ViewModelWidget<PreferencesViewModel> {
       ),
       trailing: GestureDetector(
         onTap: () {
-          viewModel.copyText("MIS Number", misNumber, context);
+          viewModel.copyText("Unique ID", misNumber, context);
         },
         child: Icon(
           Icons.copy_outlined,
@@ -145,7 +145,7 @@ class MisNumberTile extends ViewModelWidget<PreferencesViewModel> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "MIS Number",
+            "Unique ID",
             style: FontThemeClass().body(
               context,
               color: context.colorScheme.primaryText,
