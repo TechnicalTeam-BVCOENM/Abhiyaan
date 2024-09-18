@@ -1,6 +1,7 @@
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/ui/views/community/community_view.dart';
 import 'package:abhiyaan/ui/views/home/celebration/celebration_model.dart';
+import 'package:abhiyaan/utils/firebase_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/ui/views/event/event_view.dart';
 import 'package:abhiyaan/ui/views/home/home_view.dart';
@@ -13,7 +14,7 @@ class FirestoreService {
   Future updateUserStatus() async {
     try {
       await _firestore
-          .collection('Users')
+          .collection(FirebaseConstants.users)
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({'isUserNew': false}).then(
               (value) => debugPrint("Updated status of user"));
@@ -25,7 +26,7 @@ class FirestoreService {
 
   Future updateLikes(String id) async {
     try {
-      final userId = _firestore.collection("Users").doc().id;
+      final userId = _firestore.collection(FirebaseConstants.users).doc().id;
       await _firestore
           .collection('Community')
           .doc("data")
@@ -162,7 +163,7 @@ class FirestoreService {
   Future<List<DepartmentUpdates>> getCollegeUpdates() async {
     try {
       final QuerySnapshot snapshot = await _firestore
-          .collection("updates")
+          .collection(FirebaseConstants.updates)
           .orderBy("date", descending: true)
           .limit(6)
           .get();
@@ -235,7 +236,7 @@ class FirestoreService {
   Future<Map<String, dynamic>?> getUserData() async {
     try {
       final DocumentSnapshot snapshot = await _firestore
-          .collection('Users')
+          .collection(FirebaseConstants.users)
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .get();
 
@@ -294,43 +295,16 @@ class FirestoreService {
     }
   }
 
-// Future<List<EventModel>> getGalleryImages() async {
-//   try {
-//     final QuerySnapshot snapshot = await _firestore.collection("gallery").get();
-//     return snapshot.docs.map((doc) {
-//       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-//       return EventModel(
-//           title: data['title'],
-//           startDate: data['startDate'],
-//           endDate: data['endDate'],
-//           location: data['location'],
-//           imageUrl: data['imageUrl'],
-//           cName: data['coordinatorName'],
-//           cEmail: data['coordinatorEmail'],
-//           cPhone: data['coordinatorPhone'],
-//           about: data['about'],
-//           registerUrl: data['registerUrl'],
-//           docID: doc.id);
-//     }).toList();
-//   } on Exception catch (e) {
-//     log.e("Error in getting events : ${e.toString()}");
-//     return []; // return an empty list on error
-//   }
-// }
-
   Future<List<GalleryModel>> getGalleryImages() async {
     try {
-      final QuerySnapshot snapshot =
-          await FirebaseFirestore.instance.collection("Gallery").get();
+      final QuerySnapshot snapshot = await FirebaseFirestore.instance
+          .collection(FirebaseConstants.gallery)
+          .get();
 
       List<GalleryModel> galleryList = [];
 
-      // Iterate over each document in the snapshot
-      for (QueryDocumentSnapshot doc in snapshot.docs) {
-        // Access the data of each document using doc.data()
-        final data =
-            doc.data() as Map<String, dynamic>; // Cast to Map<String, dynamic>
-        // Add null check before accessing properties of data
+      snapshot.docs.map((doc) {
+        final data = doc.data() as Map<String, dynamic>;
         galleryList.add(
           GalleryModel(
             logoUrl: data['LogoUrl'] ?? "null",
@@ -341,9 +315,20 @@ class FirestoreService {
             sports: data['sports'] ?? {},
           ),
         );
-      }
-
-      // Return the list of GalleryModel objects
+      }).toList();
+      // for (QueryDocumentSnapshot doc in snapshot.docs) {
+      //   final data = doc.data() as Map<String, dynamic>;
+      //   galleryList.add(
+      //     GalleryModel(
+      //       logoUrl: data['LogoUrl'] ?? "null",
+      //       themeName: data['ThemeName'] ?? "null",
+      //       year: data['year'] ?? 0,
+      //       abhiyaan: data['abhiyaan'] ?? {},
+      //       cultural: data['cultural'] ?? {},
+      //       sports: data['sports'] ?? {},
+      //     ),
+      //   );
+      // }
 
       return galleryList;
     } catch (e) {
