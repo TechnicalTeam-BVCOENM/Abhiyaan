@@ -1,7 +1,7 @@
 part of '../clubs/clubs_view.dart';
 
 class ClubsViewModel extends BaseViewModel {
-  final DepartmentalClubsData clubsData;
+  final ClubsDataModel clubsData;
   final AnalyticsService _analyticsService = locator<AnalyticsService>();
 
   ClubsViewModel(this.clubsData);
