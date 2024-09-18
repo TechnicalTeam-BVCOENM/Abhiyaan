@@ -15,6 +15,7 @@ class PreferencesViewModel extends BaseViewModel {
       locator<LocalStorageService>();
   final fontTheme = FontThemeClass();
 
+//Profile Images List for Profile Image Selection Sheet in Settings Screen
   final List<String> profileImages = [
     "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%201.png?alt=media&token=054e3dfe-5c92-4241-8ac5-5607165b5e4e",
     "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%202.png?alt=media&token=c4180bc7-dc1f-487e-9926-27d626248780",
@@ -26,10 +27,12 @@ class PreferencesViewModel extends BaseViewModel {
     "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%208.png?alt=media&token=68a1d6c1-2bae-4c94-ba6f-f12d11418e65",
   ];
 
+//Initialise the Settings Screen
   void init() {
     _analyticsService.logScreen(screenName: 'Settings Screen Opened');
   }
 
+//Copy the text to clipboard and show a message that the text is copied
   void copyText(String title, String value, BuildContext context) async {
     _analyticsService.logEvent(
       eventName: "Profile_Details_Copy",
@@ -43,6 +46,7 @@ class PreferencesViewModel extends BaseViewModel {
     );
   }
 
+//Change the password of the user
   Future<void> changePassword(context) async {
     final localStorageService = locator<LocalStorageService>();
     String storedEmail = localStorageService.read('userEmail');
@@ -61,6 +65,7 @@ class PreferencesViewModel extends BaseViewModel {
     }
   }
 
+//Change the password of the user if the user is not signed in
   Future<void> changePasswordForSignin(context, String? email) async {
     setBusy(true);
 
@@ -78,6 +83,7 @@ class PreferencesViewModel extends BaseViewModel {
     // Change password logic
   }
 
+//Show a alert dialog to confirm the password change
   void passwordChangeAlert(context, [String? email]) {
     showAdaptiveDialog(
       context: context,
@@ -177,6 +183,7 @@ class PreferencesViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+//Show a alert dialog to confirm the logout
   void logoutAlert(BuildContext context) {
     showAdaptiveDialog(
       context: context,
@@ -268,6 +275,7 @@ class PreferencesViewModel extends BaseViewModel {
     );
   }
 
+//Logout the user
   Future<void> logout(BuildContext context) async {
     setBusy(true);
     LocalStorageService localStorageService = locator<LocalStorageService>();
@@ -289,6 +297,7 @@ class PreferencesViewModel extends BaseViewModel {
     setBusy(false);
   }
 
+//Show a alert dialog to confirm the deletion of the account
   void updateImageSheet(BuildContext context) {
     isProfileError = false;
     profileImageUrlController.text = '';
@@ -570,6 +579,7 @@ class PreferencesViewModel extends BaseViewModel {
     );
   }
 
+//Update the profile image of the user
   Future<void> updateProfileImage(String imageUrl) async {
     await FirebaseFirestore.instance
         .collection("Users")
