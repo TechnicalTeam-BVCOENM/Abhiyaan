@@ -15,7 +15,7 @@ class ProfileViewModel extends BaseViewModel {
     _analyticsService.logEvent(
         eventName: "Help_support", value: "Help and support button clicked");
     UrlLauncher externalUrlHandler = UrlLauncher();
-    externalUrlHandler.launchEmail("technicalteam.bvcoenm@gmail.com");
+    externalUrlHandler.launchEmail("thedevcrew.bvcoenm@gmail.com");
   }
 
   navigateToPrivacyPolicy() {

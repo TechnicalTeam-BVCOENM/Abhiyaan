@@ -37,8 +37,8 @@ class HomeViewModel extends BaseViewModel {
   List<String> firstname = [];
   List<DepartmentUpdates> _collegeUpdates = [];
   final List<CelebrationData> _celebrationData = [];
-  List<Map<String, dynamic>> _highlights = [];
-  List<Map<String, dynamic>> get highlights => _highlights;
+  List<String> _highlights = [];
+  List<String> get highlights => _highlights;
   List<DepartmentUpdates> get collegeUpdates => _collegeUpdates;
   List<CelebrationData> get celebrationData => _celebrationData;
   int get activeIndex => _activeIndex;

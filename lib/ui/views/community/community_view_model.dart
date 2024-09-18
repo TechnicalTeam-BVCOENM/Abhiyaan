@@ -19,16 +19,16 @@ class CommunityViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  final List<DepartmentalClubsData> _departmentClubsData = [];
-  List<DepartmentalClubsData> get departmentClubsData => _departmentClubsData;
-  set departmentClubsData(List<DepartmentalClubsData> departmentClubsData) {
+  final List<ClubsDataModel> _departmentClubsData = [];
+  List<ClubsDataModel> get departmentClubsData => _departmentClubsData;
+  set departmentClubsData(List<ClubsDataModel> departmentClubsData) {
     _departmentClubsData.addAll(departmentClubsData);
     notifyListeners();
   }
 
-  final List<UniversalClubsData> _universalClubsData = [];
-  List<UniversalClubsData> get universalClubsData => _universalClubsData;
-  set universalClubsData(List<UniversalClubsData> universalClubsData) {
+  final List<ClubsDataModel> _universalClubsData = [];
+  List<ClubsDataModel> get universalClubsData => _universalClubsData;
+  set universalClubsData(List<ClubsDataModel> universalClubsData) {
     _universalClubsData.addAll(universalClubsData);
     notifyListeners();
   }
@@ -70,19 +70,19 @@ class CommunityViewModel extends BaseViewModel {
     }
   }
 
-  Future<List<DepartmentalClubsData>> getDepartmentClubsData() async {
+  Future<void> getDepartmentClubsData() async {
     try {
-      departmentClubsData = await firestoreService.getDepartmentClubsData();
-      return departmentClubsData;
+      departmentClubsData =
+          await firestoreService.getClubsData(collectionName: "clubs");
     } on Exception catch (e) {
       log.e("Error in fetching department clubs data: ${e.toString()}");
-      return [];
     }
   }
 
-  Future<List<UniversalClubsData>> getUniversalClubsData() async {
+  Future<List<ClubsDataModel>> getUniversalClubsData() async {
     try {
-      universalClubsData = await firestoreService.getUniversalClubsData();
+      universalClubsData =
+          await firestoreService.getClubsData(collectionName: "globalClubs");
       return universalClubsData;
     } on Exception catch (e) {
       log.e("Error in fetching universal clubs data: ${e.toString()}");
@@ -152,7 +152,7 @@ class CommunityViewModel extends BaseViewModel {
   Future<void> init(context) async {
     try {
       _analyticsService.logScreen(screenName: 'CommunityView Screen Opened');
-      Future.wait([
+      await Future.wait([
         getBlogData(),
         getDepartmentClubsData(),
         getUniversalClubsData(),
@@ -199,7 +199,7 @@ class CommunityBlogsData {
   });
 }
 
-class DepartmentalClubsData {
+class ClubsDataModel {
   final String clubName;
   final String clubImage;
   final String clubShortHand;
@@ -207,31 +207,13 @@ class DepartmentalClubsData {
   final List<ClubMemberInfo> clubMembers;
   final String clubLink;
 
-  DepartmentalClubsData({
+  ClubsDataModel({
     required this.clubName,
     required this.clubImage,
     required this.clubShortHand,
     required this.clubFest,
     required this.clubMembers,
     required this.clubLink,
-  });
-}
-
-class UniversalClubsData {
-  final String uniclubName;
-  final String uniclubImage;
-  final String uniclubShortHand;
-  final List<ClubMemberInfo> clubMembers;
-  final List<FestInfo> clubFest;
-  final String uniclubLink;
-
-  UniversalClubsData({
-    required this.uniclubName,
-    required this.uniclubImage,
-    required this.uniclubShortHand,
-    required this.clubFest,
-    required this.clubMembers,
-    required this.uniclubLink,
   });
 }
 
@@ -248,13 +230,13 @@ class FestInfo {
 }
 
 class ClubMemberInfo {
-  final String memberName;
-  final String memberImage;
-  final String memberPosition;
+  final String name;
+  final String image;
+  final String position;
 
   ClubMemberInfo({
-    required this.memberName,
-    required this.memberImage,
-    required this.memberPosition,
+    required this.name,
+    required this.image,
+    required this.position,
   });
 }
