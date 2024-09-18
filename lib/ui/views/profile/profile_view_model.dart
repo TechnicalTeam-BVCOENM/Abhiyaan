@@ -1,5 +1,6 @@
 part of 'profile_view.dart';
 
+// Profile View Model
 class ProfileViewModel extends BaseViewModel {
   final InAppReview inAppReview = InAppReview.instance;
   final log = getLogger('ProfileView');
@@ -9,6 +10,7 @@ class ProfileViewModel extends BaseViewModel {
   final _themeService = locator<ThemeService>();
   final fontTheme = FontThemeClass();
 
+  // Navigation Functions for the Profile View Page
   navigateToHelpSupport() {
     _analyticsService.logEvent(
         eventName: "Help_support", value: "Help and support button clicked");
@@ -27,11 +29,13 @@ class ProfileViewModel extends BaseViewModel {
     _navigationService.navigateToPreferencesView();
   }
 
+  // Initialization Function for the Profile View Page
   Future init() async {
     _analyticsService.logScreen(screenName: 'Profile Screen Opened');
     await runBusyFuture(Future.delayed(const Duration(milliseconds: 500)));
   }
 
+  // User Data Tags for the Profile View Page
   List<String> userStorageTag = [
     "userCollegeId",
     "userLibNo",
@@ -53,6 +57,7 @@ class ProfileViewModel extends BaseViewModel {
     "prnImg",
   ];
 
+//Dark Mode Toggle Function for the Profile View Page
   changeTheme(BuildContext context) async {
     _analyticsService.logEvent(
         eventName: "Dark_mode", value: "Dark mode toggle button clicked");
@@ -61,7 +66,10 @@ class ProfileViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> rateApp(context) async {
+
+// Rate App Function for the Profile View Page
+  Future<void> rateApp() async {
+
     if (await inAppReview.isAvailable()) {
       log.i("hi");
       try {
@@ -70,13 +78,13 @@ class ProfileViewModel extends BaseViewModel {
         if (androidVersion >= 10) {
           // Attempt to request the in-app review
           await inAppReview.requestReview();
-          showSuccessMessage(context, "Requested in-app review");
+//           showSuccessMessage(context, "Requested in-app review");
         } else {
           await inAppReview.openStoreListing(
             appStoreId:
                 'com.bvcoenm.abhiyaan', // Replace with your actual Play Store app ID
           );
-          showSuccessMessage(context, "Opened Play Store for older device");
+//           showSuccessMessage(context, "Opened Play Store for older device");
         }
       } catch (e) {
         await inAppReview.openStoreListing();
