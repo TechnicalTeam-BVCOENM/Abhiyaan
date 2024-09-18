@@ -66,8 +66,10 @@ class ProfileViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+
 // Rate App Function for the Profile View Page
   Future<void> rateApp(context) async {
+
     if (await inAppReview.isAvailable()) {
       log.i("hi");
       try {
@@ -76,13 +78,17 @@ class ProfileViewModel extends BaseViewModel {
         if (androidVersion >= 10) {
           // Attempt to request the in-app review
           await inAppReview.requestReview();
-          showSuccessMessage(context, "Requested in-app review");
+
+//           showSuccessMessage(context, "Requested in-app review");
+
         } else {
           await inAppReview.openStoreListing(
             appStoreId:
                 'com.bvcoenm.abhiyaan', // Replace with your actual Play Store app ID
           );
-          showSuccessMessage(context, "Opened Play Store for older device");
+
+//           showSuccessMessage(context, "Opened Play Store for older device");
+
         }
       } catch (e) {
         await inAppReview.openStoreListing();
