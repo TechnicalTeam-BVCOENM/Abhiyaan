@@ -66,10 +66,31 @@ class ProfileViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+
 // Rate App Function for the Profile View Page
   Future<void> rateApp() async {
+
     if (await inAppReview.isAvailable()) {
-      await inAppReview.requestReview();
+      log.i("hi");
+      try {
+        final int androidVersion = int.parse(
+            Platform.operatingSystemVersion.split(' ')[0].split('.')[0]);
+        if (androidVersion >= 10) {
+          // Attempt to request the in-app review
+          await inAppReview.requestReview();
+//           showSuccessMessage(context, "Requested in-app review");
+        } else {
+          await inAppReview.openStoreListing(
+            appStoreId:
+                'com.bvcoenm.abhiyaan', // Replace with your actual Play Store app ID
+          );
+//           showSuccessMessage(context, "Opened Play Store for older device");
+        }
+      } catch (e) {
+        await inAppReview.openStoreListing();
+      }
+    } else {
+      showSuccessMessage(context, "InAppReview not available.");
     }
   }
 }
