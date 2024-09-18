@@ -34,11 +34,11 @@ class PreferencesView extends StatelessWidget {
                     35.verticalSpace,
                     Column(
                       children: [
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
                             model.updateImageSheet(context);
                           },
-                          splashColor: Colors.transparent,
+                        
                           child: Stack(
                             children: [
                               Hero(
