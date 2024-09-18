@@ -74,6 +74,7 @@ class CommunityViewModel extends BaseViewModel {
     try {
       departmentClubsData =
           await firestoreService.getClubsData(collectionName: FirebaseConstants.clubs);
+
     } on Exception catch (e) {
       log.e("Error in fetching department clubs data: ${e.toString()}");
     }
@@ -83,6 +84,7 @@ class CommunityViewModel extends BaseViewModel {
     try {
       universalClubsData =
           await firestoreService.getClubsData(collectionName: FirebaseConstants.globalClubs);
+
       return universalClubsData;
     } on Exception catch (e) {
       log.e("Error in fetching universal clubs data: ${e.toString()}");

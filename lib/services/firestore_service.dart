@@ -110,6 +110,7 @@ class FirestoreService {
         String clubShortHand = dataMap?['clubShortHand'] ?? '';
         String clubImage = dataMap?['clubImage'] ?? '';
 
+
         return ClubsDataModel(
           clubName: clubName,
           clubShortHand: clubShortHand,

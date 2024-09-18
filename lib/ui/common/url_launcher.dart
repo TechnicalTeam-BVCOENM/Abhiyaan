@@ -25,6 +25,7 @@ class UrlLauncher {
         path: email,
         query: encodeQueryParameters(<String, String>{
           'subject': 'Regarding help in Abhiyaan App',
+          'body': 'Hey, how can we help you?',
         }),
       );
       if (await canLaunchUrl(sendMail)) {
