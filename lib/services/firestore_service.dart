@@ -68,111 +68,73 @@ class FirestoreService {
     }
   }
 
-  Future<List<DepartmentalClubsData>> getDepartmentClubsData() async {
+  Future<List<ClubsDataModel>> getClubsData(
+      {required String collectionName}) async {
     try {
-      final QuerySnapshot snapshot = await _firestore
-          .collection("Community")
-          .doc("data")
-          .collection("clubs")
-          .get();
-      return snapshot.docs.map((doc) {
-        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-        Map<String, dynamic> aClubData = data["data"] as Map<String, dynamic>;
-        List<dynamic> clubMm = data["data"]["clubMember"];
-        List<dynamic> clubFst = data["data"]["clubFest"];
+      final QuerySnapshot snapshot =
+          await _firestore.collection(collectionName).get();
 
-        String clubName = aClubData['clubName'];
-        String clubLink = aClubData['clubLink'] ?? '';
-        String clubShortHand = aClubData['clubShortHand'];
-        String clubImage = aClubData['clubImage'];
-        List<ClubMemberInfo> clubMembers = clubMm.map((e) {
-          return ClubMemberInfo(
-            memberName: e['memberName'],
-            memberImage: e['memberImage'],
-            memberPosition: e['memberPosition'],
-          );
-        }).toList();
-        List<FestInfo> clubFests = clubFst.map((e) {
-          return FestInfo(
-            festName: e['festName'] ?? '',
-            festImage: e['festImage'] ?? '',
-            festLink: e['festLink'] ?? '',
-          );
-        }).toList();
+      final List<ClubsDataModel> result = snapshot.docs.map((doc) {
+        final Object? data = doc.data();
+        final Map<String, dynamic>? dataMap = data as Map<String, dynamic>?;
 
-        return DepartmentalClubsData(
+        // Safely cast dynamic data to List<Map<String, dynamic>> for clubMembers
+        final List<dynamic>? leadsData = dataMap?["leads"] as List<dynamic>?;
+        final List<ClubMemberInfo> leads = leadsData != null
+            ? leadsData.map((e) {
+                final Map<String, dynamic> leadData = e as Map<String, dynamic>;
+                return ClubMemberInfo(
+                  name: leadData['name'] ?? '',
+                  image: leadData['image'] ?? '',
+                  position: leadData['position'] ?? '',
+                );
+              }).toList()
+            : [];
+
+        // Safely cast dynamic data to List<Map<String, dynamic>> for fests
+        final List<dynamic>? festsData = dataMap?["fests"] as List<dynamic>?;
+        final List<FestInfo> fests = festsData != null
+            ? festsData.map((e) {
+                final Map<String, dynamic> festData = e as Map<String, dynamic>;
+                return FestInfo(
+                  festName: festData['name'] ?? '',
+                  festImage: festData['image'] ?? '',
+                  festLink: festData['link'] ?? '',
+                );
+              }).toList()
+            : [];
+
+        String clubName = dataMap?['clubName'] ?? '';
+        String clubLink = dataMap?['clubLink'] ?? '';
+        String clubShortHand = dataMap?['clubShortHand'] ?? '';
+        String clubImage = dataMap?['clubImage'] ?? '';
+
+        return ClubsDataModel(
           clubName: clubName,
           clubShortHand: clubShortHand,
           clubImage: clubImage,
-          clubMembers: clubMembers,
-          clubFest: clubFests,
+          clubMembers: leads,
+          clubFest: fests,
           clubLink: clubLink,
         );
       }).toList();
+
+      return result;
     } on Exception catch (e) {
-      log.e("Error in getting departmental clubs data : ${e.toString()}");
+      log.e("Error in getting $collectionName clubs data : ${e.toString()}");
       return [];
     }
   }
 
-  Future<List<UniversalClubsData>> getUniversalClubsData() async {
+  Future<List<String>> getHighlights() async {
     try {
-      final QuerySnapshot snapshot = await _firestore
-          .collection("Community")
-          .doc("data")
-          .collection("CollegeClubs")
-          .get();
-      return snapshot.docs.map((doc) {
-        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-        Map<String, dynamic> aClubData = data["data"] as Map<String, dynamic>;
-        List<dynamic> clubMm = data["data"]["clubMember"];
-        List<dynamic> clubFst = data["data"]["clubFest"];
+      final QuerySnapshot snapshot =
+          await _firestore.collection("highlights").limit(4).get();
 
-        String clubName = aClubData['clubName'];
-        String clubLink = aClubData['clubLink'] ?? '';
-        String clubShortHand = aClubData['clubShortHand'];
-        String clubImage = aClubData['clubImage'];
-        List<ClubMemberInfo> clubMembers = clubMm.map((e) {
-          return ClubMemberInfo(
-            memberName: e['memberName'],
-            memberImage: e['memberImage'],
-            memberPosition: e['memberPosition'],
-          );
-        }).toList();
-        List<FestInfo> clubFests = clubFst.map((e) {
-          return FestInfo(
-            festName: e['festName'] ?? '',
-            festImage: e['festImage'] ?? '',
-            festLink: e['festLink'] ?? '',
-          );
-        }).toList();
-
-        return UniversalClubsData(
-          uniclubName: clubName,
-          uniclubShortHand: clubShortHand,
-          uniclubImage: clubImage,
-          clubMembers: clubMembers,
-          clubFest: clubFests,
-          uniclubLink: clubLink,
-        );
-      }).toList();
-    } on Exception catch (e) {
-      log.e("Error in getting Universal clubs data : ${e.toString()}");
-      return [];
-    }
-  }
-
-  Future<List<Map<String, dynamic>>> getHighlights() async {
-    try {
-      final QuerySnapshot snapshot = await _firestore
-          .collection('CollegeUpdates')
-          .doc("data")
-          .collection("highlights")
-          .limit(4)
-          .get();
-      return snapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
+      if (snapshot.docs.isEmpty) {
+        return [];
+      }
+      return snapshot.docs.map((doc) => doc["imageUrl"] as String).toList();
     } on Exception catch (e) {
       log.e("Error in getting highlights : ${e.toString()}");
       return [];
@@ -200,11 +162,9 @@ class FirestoreService {
   Future<List<DepartmentUpdates>> getCollegeUpdates() async {
     try {
       final QuerySnapshot snapshot = await _firestore
-          .collection('CollegeUpdates')
-          .doc("data")
           .collection("updates")
           .orderBy("date", descending: true)
-          .limit(8)
+          .limit(6)
           .get();
 
       if (snapshot.docs.isEmpty) {

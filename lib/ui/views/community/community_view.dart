@@ -127,7 +127,7 @@ class CommunityView extends StatelessWidget {
                                   padding: index == 0
                                       ? const EdgeInsets.only(right: 0).r
                                       : const EdgeInsets.only(left: 8.0).r,
-                                  child: DepartmentClubs(
+                                  child: ClubsViewWidget(
                                       data: model.departmentClubsData[index]),
                                 );
                               },
@@ -155,7 +155,7 @@ class CommunityView extends StatelessWidget {
                                   padding: index == 0
                                       ? const EdgeInsets.only(right: 0).r
                                       : const EdgeInsets.only(left: 8.0).r,
-                                  child: UniversalClubs(
+                                  child: ClubsViewWidget(
                                       data: model.universalClubsData[index]),
                                 );
                               },

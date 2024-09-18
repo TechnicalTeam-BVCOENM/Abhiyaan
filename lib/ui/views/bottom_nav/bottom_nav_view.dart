@@ -20,7 +20,7 @@ class BottomNavView extends StatelessWidget {
           extendBody: true,
           body: PopScope(
             canPop: model._canPopNow,
-            onPopInvoked: (bool didPop) async {
+            onPopInvokedWithResult: (bool didPop, Object? result) async {
               if (!didPop) {
                 await ShowAppExitPopUp.showAppExitPopUp(context).then(
                   (value) => {

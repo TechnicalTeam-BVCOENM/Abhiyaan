@@ -476,7 +476,7 @@ class HighlightCarouselWidget extends ViewModelWidget<HomeViewModel> {
                     itemBuilder: (context, index, realIndex) {
                       return CarouselUtils.buildImage(
                         context,
-                        viewModel.highlights[index]['imageUrl'],
+                        viewModel.highlights[index],
                         viewModel._activeIndex,
                       );
                     },
