@@ -69,35 +69,79 @@ class SignInViewModel extends BaseViewModel {
           "Invalid email format",
         );
       } else {
-        try {
+       try {
           // Show a loading indicator over your UI
           _authenticationService.showLoadingOverlay(context);
-          _analyticsService.logSignUp(method: 'SignIn - Email');
+
+          // Attempt to sign in with email and password
           await _firebaseAuth.signInWithEmailAndPassword(
             email: email,
             password: password,
           );
-          _analyticsService.setUserProperties(
-              userId: _firebaseAuth.currentUser!.uid);
+
+          // Log the sign-in event with analytics
+          await _analyticsService.logSignUp(method: 'SignIn - Email');
+
+          // Set user properties for analytics
+          await _analyticsService.setUserProperties(
+            userId: _firebaseAuth.currentUser!.uid,
+          );
+
+          // Store user data locally
           await _authenticationService.storeUserDataLocally();
+
+          // Close the loading indicator
           _navigationService.back();
 
+          // Show success message
           showSuccessMessage(
             context,
             "Login successful",
           );
 
-          // await _authenticationService.checkPermission(Permission.appTrackingTransparency,context);
-
+          // Navigate to the main view (clear the stack)
           await _navigationService.clearStackAndShow(Routes.bottomNavView);
         } on FirebaseAuthException catch (e) {
+          // Close the loading indicator
+          _navigationService.back();
+
+          // Set flags to update UI (e.g., to show error messages or highlight input fields)
           isPasswordValid = false;
           isEmailIdValid = false;
-          _navigationService.back();
-          showErrorMessage(context, e.code);
           notifyListeners();
-        }
-      }
+
+          // Show appropriate error message based on Firebase error code
+          switch (e.code) {
+            case 'invalid-email':
+              showErrorMessage(context, "The email address is not valid.");
+              break;
+            case 'user-disabled':
+              showErrorMessage(context, "This user account has been disabled.");
+              break;
+            case 'user-not-found':
+              showErrorMessage(context, "No user found with this email.");
+              break;
+            case 'wrong-password':
+              showErrorMessage(context, "The password is incorrect.");
+              break;
+            case 'network-request-failed':
+              showErrorMessage(
+                  context, "Network error. Please check your connection.");
+              break;
+            default:
+              showErrorMessage(
+                  context, "An unexpected error occurred: ${e.message}");
+          }
+        } catch (e) {
+          // Handle any other errors (non-Firebase related)
+          _navigationService.back(); // Close the loading indicator
+          showErrorMessage(
+              context, "An unexpected error occurred: ${e.toString()}");
+        } finally {
+          // Ensure the loading overlay is hidden, even if an error occurred
+          _navigationService.back();
+          
+        }      }
     } else {
       showErrorMessage(context, "Email or Password is empty");
     }
