@@ -23,7 +23,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FontThemeClass fontTheme = FontThemeClass();
+    final font = FontThemeClass();
     return ViewModelBuilder<HomeViewModel>.reactive(
       viewModelBuilder: () => HomeViewModel(context),
       disposeViewModel: false,
@@ -92,7 +92,7 @@ class HomeView extends StatelessWidget {
                                         10.horizontalSpace,
                                         Text(
                                           "No updates yet, Stay Tuned",
-                                          style: fontTheme.body(context),
+                                          style: font.body(context),
                                         ),
                                       ],
                                     ),
@@ -117,7 +117,7 @@ class HomeView extends StatelessWidget {
                             maxLines: 2,
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,
-                            style: fontTheme.display(
+                            style: font.display(
                               context,
                               fontWeight: FontWeight.bold,
                               color: context.colorScheme.secondarySectionColor
@@ -129,7 +129,7 @@ class HomeView extends StatelessWidget {
                             maxLines: 2,
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,
-                            style: fontTheme.display(
+                            style: font.display(
                               context,
                               fontWeight: FontWeight.bold,
                               color: context.colorScheme.secondarySectionColor
@@ -144,7 +144,7 @@ class HomeView extends StatelessWidget {
                             },
                             child: Text(
                               'Made with ❤️ by TheDevCrew',
-                              style: fontTheme.caption(
+                              style: font.caption(
                                 context,
                                 color: context.colorScheme.primaryText
                                     .withOpacity(0.8),

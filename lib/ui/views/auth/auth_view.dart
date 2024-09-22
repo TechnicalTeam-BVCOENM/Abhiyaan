@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:abhiyaan/file_exporter.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:story/story_page_view.dart';
 
 part 'auth_view_model.dart';
 
@@ -11,183 +11,168 @@ class AuthView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final font = FontThemeClass();
     return ViewModelBuilder<AuthViewModel>.reactive(
       viewModelBuilder: () => AuthViewModel(),
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: context.colorScheme.scaffold,
+          backgroundColor: context.colorScheme.white,
           body: SafeArea(
-            bottom: true,
-            minimum: const EdgeInsets.symmetric(horizontal: 18).r,
+            bottom: false,
             child: Column(
               children: [
-                4.verticalSpace,
-                Container(
-                  width: double.infinity,
-                  height: 500.h,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30).r,
-                    color: context.colorScheme.accentColor.withOpacity(0.3),
+                Expanded(
+                  child: StoryPageView(
+                    indicatorDuration: const Duration(seconds: 3),
+                    indicatorVisitedColor: Colors.transparent,
+                    indicatorUnvisitedColor: Colors.transparent,
+                    indicatorPadding:
+                        EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
+                    itemBuilder: (context, pageIndex, storyIndex) {
+                      return Stack(
+                        children: [
+                          // App Name
+                          Positioned(
+                            top: 65.h,
+                            width: MediaQuery.of(context).size.width,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20.0.w),
+                              child: Column(
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      "Abhiyaan",
+                                      style: font.display(
+                                        context,
+                                        color: context.colorScheme.accentColor,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                  ),
+                                  45.verticalSpace,
+                                  Center(
+                                    child: SvgPicture.asset(
+                                      "assets/logo_c_dk.svg",
+                                      semanticsLabel: "Abhiyaan Logo",
+                                      height: 150.h,
+                                      width: 150.w,
+                                    ),
+                                  ),
+                                  45.verticalSpace,
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20.0.w),
+                                    child: Text(
+                                      "A place where you can connect, share, and\nexplore",
+                                      style: font.title(
+                                        context,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      "${model.story[storyIndex]}."
+                                          .toLowerCase(),
+                                      style: font.title(
+                                        context,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                    pageLength: 1,
+                    storyLength: (int pageIndex) {
+                      return model.story.length;
+                    },
+                    onPageLimitReached: () {},
                   ),
+                ),
+
+                // Login Buttons
+                Container(
+                  padding: EdgeInsets.all(20.dg),
+                  decoration: BoxDecoration(
+                    color: context.colorScheme.black,
+                    borderRadius: BorderRadius.only(
+                      topLeft: const Radius.circular(30).r,
+                      topRight: const Radius.circular(30).r,
+                    ),
+                  ),
+                  height: 190.h,
+                  width: MediaQuery.of(context).size.width,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image(
-                        width: double.infinity.w,
-                        image: const AssetImage(
-                          'assets/images/abhiyaan_logo1.png',
+                      GestureDetector(
+                        onTap: () {
+                          model.toSignInPage(context);
+                        },
+                        child: Container(
+                          width: double.infinity.w,
+                          padding: const EdgeInsets.all(8).r,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12).r,
+                            color: context.colorScheme.accentColor,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Sign In',
+                              style: FontThemeClass().title2(
+                                context,
+                                color: context.colorScheme.white,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                      Image(image: Image.asset(AssetImagePath.login).image),
+                      12.verticalSpace,
+                      GestureDetector(
+                        onTap: () {
+                          model.toRegisterPage(context);
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          padding: const EdgeInsets.all(8).r,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12).r,
+                            color: context.colorScheme.white,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Register',
+                              style: FontThemeClass().title2(
+                                context,
+                                color: context.colorScheme.primaryText,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const Spacer(),
+                      Center(
+                        child: Text(
+                          "By continuing, you agree to our Terms of Service and Privacy Policy",
+                          style: font.small(
+                            context,
+                            color: context.colorScheme.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      )
                     ],
                   ),
                 )
-                    .animate(delay: 200.ms)
-                    .slideY(
-                      curve: Curves.easeInOut,
-                      duration: 600.ms,
-                    )
-                    .fadeIn(
-                      delay: 100.ms,
-                      curve: Curves.easeInOut,
-                      duration: 600.ms,
-                    ),
-                24.verticalSpace,
-                Text(
-                  "A place to discover",
-                  textAlign: TextAlign.center,
-                  style: FontThemeClass().title(
-                    context,
-                    color: context.colorScheme.primaryText,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ).animate(delay: 200.ms).fadeIn(
-                      delay: 100.ms,
-                      curve: Curves.easeInOut,
-                      duration: 700.ms,
-                    ),
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 200),
-                  transitionBuilder:
-                      (Widget child, Animation<double> animation) {
-                    return SlideTransition(
-                      position: Tween<Offset>(
-                        begin: const Offset(0.0, 0.4), // Slide from the right
-                        end: Offset.zero, // To the original position
-                      ).animate(animation),
-                      child: FadeTransition(
-                        opacity:animation,
-                        child: child,
-                      ),
-                    );
-                  },
-                  child: Text(
-                    model.onboardingTextNotifier.value,
-                    key: ValueKey<String>(model.onboardingTextNotifier
-                        .value), // Ensures a unique key for animation
-                    style: const TextStyle(fontSize: 24),
-                  ),
-                ),
-                6.verticalSpace,
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 7.0).r,
-                  child: Text(
-                    "Connect to access exclusive event details, college updates, and connect with the community. Sign in or register now to stay in the loop!",
-                    textAlign: TextAlign.center,
-                    style: FontThemeClass().caption(
-                      context,
-                      color: context.colorScheme.secondaryText,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ).animate(delay: 200.ms).fadeIn(
-                        delay: 100.ms,
-                        curve: Curves.easeInOut,
-                        duration: 700.ms,
-                      ),
-                ),
-                30.verticalSpace,
-                GestureDetector(
-                  onTap: () {
-                    model.toSignInPage(context);
-                  },
-                  child: Container(
-                    width: double.infinity.w,
-                    padding: const EdgeInsets.all(8).r,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15).r,
-                      color: context.colorScheme.accentColor,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Sign In',
-                        style: FontThemeClass().title2(
-                          context,
-                          color: context.colorScheme.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                ).animate(delay: 200.ms).fadeIn(
-                      delay: 100.ms,
-                      curve: Curves.easeInOut,
-                      duration: 700.ms,
-                    ),
-                12.verticalSpace,
-                StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection('AppCheck')
-                        .snapshots(),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
-                      if (snapshot.hasError) {
-                        return const SizedBox();
-                      }
-
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const SizedBox();
-                      }
-                      return snapshot.data!.docs[0]['value']
-                          ? GestureDetector(
-                              onTap: () {
-                                model.toRegisterPage(context);
-                              },
-                              child: Container(
-                                width: double.infinity.w,
-                                padding: const EdgeInsets.all(8).r,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15).r,
-                                  border: Border.all(
-                                    width: 2,
-                                    color: context.colorScheme.accentColor,
-                                  ),
-                                  color: context.colorScheme.scaffold,
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'Register',
-                                    style: FontThemeClass().title2(
-                                      context,
-                                      color: context.colorScheme.primaryText,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ).animate(delay: 200.ms).fadeIn(
-                                delay: 100.ms,
-                                curve: Curves.easeInOut,
-                                duration: 700.ms,
-                              )
-                          : Container();
-                    }),
-                10.verticalSpace,
-              ].animate(interval: 50.ms).fadeIn(
-                    delay: 100.ms,
-                    curve: Curves.easeInOut,
-                    duration: 500.ms,
-                  ),
+              ],
             ),
           ),
         );
