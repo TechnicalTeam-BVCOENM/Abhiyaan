@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:story/story_page_view.dart';
@@ -24,7 +22,7 @@ class AuthView extends StatelessWidget {
               children: [
                 Expanded(
                   child: StoryPageView(
-                    indicatorDuration: const Duration(seconds: 3),
+                    indicatorDuration: const Duration(seconds: 2),
                     indicatorVisitedColor: Colors.transparent,
                     indicatorUnvisitedColor: Colors.transparent,
                     indicatorPadding:
@@ -63,25 +61,39 @@ class AuthView extends StatelessWidget {
                                   Padding(
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 20.0.w),
-                                    child: Text(
-                                      "A place where you can connect, share, and\nexplore",
-                                      style: font.title(
-                                        context,
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                                    child: RichText(
                                       textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      "${model.story[storyIndex]}."
-                                          .toLowerCase(),
-                                      style: font.title(
-                                        context,
-                                        fontWeight: FontWeight.w700,
+                                      text: TextSpan(
+                                        text:
+                                            "A place where you can connect, share and explore ",
+                                        style: font.title(
+                                          context,
+                                          fontWeight: FontWeight.w500,
+                                          color: context.colorScheme.black,
+                                        ),
+                                        children: [
+                                          TextSpan(
+                                            text: model.story[storyIndex]
+                                                .toLowerCase(),
+                                            style: font.title(
+                                              context,
+                                              fontWeight: FontWeight.w800,
+                                              color: context.colorScheme.black,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
+                                  // Center(
+                                  //   child: Text(
+                                  //     model.story[storyIndex].toLowerCase(),
+                                  //     style: font.title(
+                                  //       context,
+                                  //       fontWeight: FontWeight.w700,
+                                  //     ),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),

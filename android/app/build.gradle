@@ -29,7 +29,7 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
-  
+
 
 android {
     namespace "com.bvcoenm.abhiyaan"
@@ -80,8 +80,9 @@ flutter {
 
 dependencies {
         implementation 'androidx.multidex:multidex:2.0.1'
-        implementation platform('com.google.firebase:firebase-bom:32.7.0')
+        implementation platform('com.google.firebase:firebase-bom:33.3.0')
         implementation 'com.google.firebase:firebase-analytics'
-        
+        implementation 'com.google.firebase:firebase-crashlytics'
+
 
 }

@@ -16,7 +16,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 Future<void> servicesToInitializeBeforeAppStart() async {
   WidgetsFlutterBinding.ensureInitialized();
-  NotificationsService notificationsService = NotificationsService();
+  final notificationsService = NotificationsService();
   LocalNotificationService.initialize();
   if (Firebase.apps.isEmpty) {
     await Firebase.initializeApp(

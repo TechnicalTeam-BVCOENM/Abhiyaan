@@ -108,6 +108,7 @@ class ProfileImageWidget extends ViewModelWidget<ProfileViewModel> {
 
   @override
   Widget build(BuildContext context, ProfileViewModel viewModel) {
+    final font = FontThemeClass();
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 30.r),
       child: Column(
@@ -136,7 +137,7 @@ class ProfileImageWidget extends ViewModelWidget<ProfileViewModel> {
           ),
           Text(
             viewModel.localStorageService.read('userName'),
-            style: viewModel.fontTheme.title2(
+            style: font.title2(
               context,
               color: context.colorScheme.primaryText,
               fontWeight: FontWeight.w600,
@@ -144,7 +145,7 @@ class ProfileImageWidget extends ViewModelWidget<ProfileViewModel> {
           ),
           Text(
             viewModel.localStorageService.read('userProfile'),
-            style: viewModel.fontTheme.body(
+            style: font.body(
               context,
               color: context.colorScheme.secondarySectionColor,
               fontWeight: FontWeight.w500,
@@ -379,7 +380,7 @@ class DarkModeTile extends ViewModelWidget<ProfileViewModel> {
                 (states) => context.colorScheme.secondary.withOpacity(0.7),
               ),
               value: viewModel._themeService.valueListenable.value,
-              onChanged: (val) => viewModel.changeTheme(context),
+              onChanged: (val) => viewModel.changeTheme(),
             )));
   }
 }
