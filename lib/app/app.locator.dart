@@ -23,11 +23,13 @@ Future<void> setupLocator({
       environment: environment, environmentFilter: environmentFilter);
 
 // Register dependencies
+  locator.registerLazySingleton(() => ThemeService());
+  locator.registerLazySingleton(() => DialogService());
+  locator.registerLazySingleton(() => AnalyticsService());
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => LocalStorageService());
-  locator.registerLazySingleton(() => ThemeService());
+  locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => AuthenticationService());
-  locator.registerLazySingleton(() => AnalyticsService());
   locator.registerSingleton<BottomNavViewModel>(BottomNavViewModel());
   locator.registerSingleton<ProfileViewModel>(ProfileViewModel());
 }
