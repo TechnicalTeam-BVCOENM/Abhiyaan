@@ -4,13 +4,16 @@ bool isCelebrationShown = false;
 
 class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
+  final _firestoreService = FirestoreService();
+  final _notificationService = NotificationsService();
+  final _analyticsService = locator<AnalyticsService>();
+  static final _localStorage = locator<LocalStorageService>();
+  // final _carouselUtils = CarouselUtils();
 
   // Contructor
   HomeViewModel(BuildContext context) {
-    NotificationsService notificationsService = NotificationsService();
+    _notificationService.registerNotification();
     final themeService = locator<ThemeService>();
-
-    notificationsService.registerNotification();
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
@@ -24,24 +27,33 @@ class HomeViewModel extends BaseViewModel {
     );
   }
 
-  final FirestoreService _firestoreService = FirestoreService();
-  final navigationService = locator<NavigationService>();
-  NotificationsService notificationService = NotificationsService();
-  final AnalyticsService _analyticsService = locator<AnalyticsService>();
-
-  FontThemeClass fontThemeClass = FontThemeClass();
-  CarouselUtils carouselUtils = CarouselUtils();
-  late bool isUserNew = LocalStorageService().read('isUserNew');
-
   int _activeIndex = 0;
-  List<String> firstname = [];
+
+  // Added setter and getter for firstname
+  final List<String> _firstname = [];
+  List<String> get firstname => _firstname;
+  set firstname(List<String> value) {
+    _firstname.addAll(value);
+    notifyListeners();
+  }
+
   List<DepartmentUpdates> _collegeUpdates = [];
+  List<DepartmentUpdates> get collegeUpdates => _collegeUpdates;
+
   final List<CelebrationData> _celebrationData = [];
+  List<CelebrationData> get celebrationData => _celebrationData;
+
   List<String> _highlights = [];
   List<String> get highlights => _highlights;
-  List<DepartmentUpdates> get collegeUpdates => _collegeUpdates;
-  List<CelebrationData> get celebrationData => _celebrationData;
+
   int get activeIndex => _activeIndex;
+
+  bool _isUserNew = _localStorage.read('isUserNew') ?? true;
+  bool get isUserNew => _isUserNew;
+  set isUserNew(bool value) {
+    _isUserNew = value;
+    notifyListeners();
+  }
 
   List<QuickLinksModel> quickLinksList = [
     QuickLinksModel(
@@ -65,6 +77,32 @@ class HomeViewModel extends BaseViewModel {
       url: 'https://www.clubcesa.tech/',
     ),
   ];
+
+  // Initialisation Method
+  Future<void> init(context) async {
+    try {
+      setBusy(true);
+      _analyticsService.logScreen(screenName: 'HomeView Screen Opened');
+
+      final results = await Future.wait([
+        _firestoreService.getHighlights(),
+        _firestoreService.getCollegeUpdates(),
+        // Future.delayed(2.seconds),
+      ]);
+
+      _highlights = results[0] as List<String>;
+      _collegeUpdates = results[1] as List<DepartmentUpdates>;
+
+      notifyListeners();
+      setBusy(false);
+
+      _notificationService.onTokenRefresh();
+      _notificationService.getToken();
+    } catch (e) {
+      log.e(e);
+      showErrorMessage(context, "Something went wrong");
+    }
+  }
 
   bool toggleCelebrationShown() {
     try {
@@ -166,27 +204,6 @@ class HomeViewModel extends BaseViewModel {
       notifyListeners();
     } on Exception catch (e) {
       log.e("Error in after init : ${e.toString()}");
-    }
-  }
-
-  Future<void> init(context) async {
-    try {
-      _analyticsService.logScreen(screenName: 'HomeView Screen Opened');
-
-      setBusy(true);
-      _highlights = await _firestoreService.getHighlights();
-      _collegeUpdates = await _firestoreService.getCollegeUpdates();
-      // await _authenticationService.checkPermission(Permission.appTrackingTransparency,context);
-      // await _authenticationService.checkPermission(
-      //     Permission.notification, context);
-      notifyListeners();
-      setBusy(false);
-      await Future.delayed(2.seconds);
-      notificationService.onTokenRefresh();
-      notificationService.getToken();
-    } catch (e) {
-      log.e(e);
-      showErrorMessage(context, "Error in getting data");
     }
   }
 

@@ -127,6 +127,10 @@ class RegisterViewModel extends BaseViewModel {
     }
   }
 
+  void navigateToAuth() {
+    _navigationService.clearStackAndShow(Routes.authView);
+  }
+
   Future<void> sendVerifyMail(context) async {
     generateRandomOTP();
     AuthenticationService().showLoadingOverlay(context);
