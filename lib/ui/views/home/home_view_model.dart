@@ -34,7 +34,6 @@ class HomeViewModel extends BaseViewModel {
   List<String> get firstname => _firstname;
   set firstname(List<String> value) {
     _firstname.addAll(value);
-    notifyListeners();
   }
 
   List<DepartmentUpdates> _collegeUpdates = [];
@@ -87,20 +86,21 @@ class HomeViewModel extends BaseViewModel {
       final results = await Future.wait([
         _firestoreService.getHighlights(),
         _firestoreService.getCollegeUpdates(),
-        // Future.delayed(2.seconds),
+        Future.delayed(2.seconds),
       ]);
 
       _highlights = results[0] as List<String>;
       _collegeUpdates = results[1] as List<DepartmentUpdates>;
 
       notifyListeners();
-      setBusy(false);
 
       _notificationService.onTokenRefresh();
       _notificationService.getToken();
     } catch (e) {
       log.e(e);
       showErrorMessage(context, "Something went wrong");
+    } finally {
+      setBusy(false);
     }
   }
 

@@ -69,7 +69,7 @@ class SignInViewModel extends BaseViewModel {
           "Invalid email format",
         );
       } else {
-       try {
+        try {
           // Show a loading indicator over your UI
           _authenticationService.showLoadingOverlay(context);
 
@@ -140,8 +140,8 @@ class SignInViewModel extends BaseViewModel {
         } finally {
           // Ensure the loading overlay is hidden, even if an error occurred
           _navigationService.back();
-          
-        }      }
+        }
+      }
     } else {
       showErrorMessage(context, "Email or Password is empty");
     }

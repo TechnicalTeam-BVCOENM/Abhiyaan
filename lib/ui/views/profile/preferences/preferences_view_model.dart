@@ -6,25 +6,22 @@ class PreferencesViewModel extends BaseViewModel {
   final _authenticationService = locator<AuthenticationService>();
   final _analyticsService = locator<AnalyticsService>();
   final profileViewModel = locator<ProfileViewModel>();
-  bool isProfileError = false;
+  final localStorageService = locator<LocalStorageService>();
+
   bool isPreview = true;
-  final TextEditingController profileImageUrlController =
-      TextEditingController();
-
-  final LocalStorageService localStorageService =
-      locator<LocalStorageService>();
-  final fontTheme = FontThemeClass();
-
-//Profile Images List for Profile Image Selection Sheet in Settings Screen
+  bool isProfileError = false;
+  final profileImageUrlController = TextEditingController();
+  static const String _baseUrl =
+      "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/";
   final List<String> profileImages = [
-    "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%201.png?alt=media&token=054e3dfe-5c92-4241-8ac5-5607165b5e4e",
-    "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%202.png?alt=media&token=c4180bc7-dc1f-487e-9926-27d626248780",
-    "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%203.png?alt=media&token=f16a4169-22fe-4c3e-a8ae-83531d9d9105",
-    "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%204.png?alt=media&token=c84967eb-14f2-4abc-82b3-a00eaf6014f1",
-    "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%205.png?alt=media&token=52f70fac-0fbc-4b34-a1b1-397b8843cdb8",
-    "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%206.png?alt=media&token=cdea444d-bdcc-4f4e-b864-e2226fb23e69",
-    "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%207.png?alt=media&token=1cbfc91d-7f27-4540-a6a6-f2d16a7f9546",
-    "https://firebasestorage.googleapis.com/v0/b/abhiyaan-9f241.appspot.com/o/Avatars%2FAvatar%208.png?alt=media&token=68a1d6c1-2bae-4c94-ba6f-f12d11418e65",
+    "${_baseUrl}Avatars%2FAvatar%201.png?alt=media&token=054e3dfe-5c92-4241-8ac5-5607165b5e4e",
+    "${_baseUrl}Avatars%2FAvatar%202.png?alt=media&token=c4180bc7-dc1f-487e-9926-27d626248780",
+    "${_baseUrl}Avatars%2FAvatar%203.png?alt=media&token=f16a4169-22fe-4c3e-a8ae-83531d9d9105",
+    "${_baseUrl}Avatars%2FAvatar%204.png?alt=media&token=c84967eb-14f2-4abc-82b3-a00eaf6014f1",
+    "${_baseUrl}Avatars%2FAvatar%205.png?alt=media&token=52f70fac-0fbc-4b34-a1b1-397b8843cdb8",
+    "${_baseUrl}Avatars%2FAvatar%206.png?alt=media&token=cdea444d-bdcc-4f4e-b864-e2226fb23e69",
+    "${_baseUrl}Avatars%2FAvatar%207.png?alt=media&token=1cbfc91d-7f27-4540-a6a6-f2d16a7f9546",
+    "${_baseUrl}Avatars%2FAvatar%208.png?alt=media&token=68a1d6c1-2bae-4c94-ba6f-f12d11418e65",
   ];
 
 //Initialise the Settings Screen
@@ -277,28 +274,34 @@ class PreferencesViewModel extends BaseViewModel {
 
 //Logout the user
   Future<void> logout(BuildContext context) async {
-    setBusy(true);
-    LocalStorageService localStorageService = locator<LocalStorageService>();
-    final bottomNavViewModel = locator<BottomNavViewModel>();
-    final storageService = locator<LocalStorageService>();
-    final bool success = await _authenticationService.signOut().then((value) {
-      return value;
-    });
-    if (success) {
-      log.i('sign out success');
-      bottomNavViewModel.setIndex(0);
-      await _navigationService.clearStackAndShow(Routes.authView);
-      await localStorageService.clear();
-      await storageService.write(
-          "showRegister", await FirestoreService().showRegistration());
-    } else {
-      log.i('sign out failed');
+    try {
+      setBusy(true);
+      LocalStorageService localStorageService = locator<LocalStorageService>();
+      final bottomNavViewModel = locator<BottomNavViewModel>();
+      final storageService = locator<LocalStorageService>();
+      final bool success = await _authenticationService.signOut().then((value) {
+        return value;
+      });
+      if (success) {
+        log.i('sign out success');
+        bottomNavViewModel.setIndex(0);
+        await _navigationService.clearStackAndShow(Routes.authView);
+        await localStorageService.clear();
+        await storageService.write(
+            "showRegister", await FirestoreService().showRegistration());
+      } else {
+        log.i('sign out failed');
+      }
+    } on Exception catch (e) {
+      log.e(e.toString());
+    } finally {
+      setBusy(false);
     }
-    setBusy(false);
   }
 
 //Show a alert dialog to confirm the deletion of the account
   void updateImageSheet(BuildContext context) {
+    final font = FontThemeClass();
     isProfileError = false;
     profileImageUrlController.text = '';
     showModalBottomSheet(
@@ -473,7 +476,7 @@ class PreferencesViewModel extends BaseViewModel {
                   filled: true,
                   focusColor: context.colorScheme.card,
                   hintText: 'Enter Custom Image Url.....',
-                  hintStyle: fontTheme.caption(
+                  hintStyle: font.caption(
                     context,
                     color: context.colorScheme.secondaryText,
                     fontWeight: FontWeight.w500,

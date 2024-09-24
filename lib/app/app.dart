@@ -1,5 +1,6 @@
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/auth_service.dart';
+import 'package:abhiyaan/ui/bottom_sheets/event/event_sheet.dart';
 import 'package:abhiyaan/ui/views/auth/auth_view.dart';
 import 'package:abhiyaan/ui/views/auth/onboarding/onboarding_view.dart';
 import 'package:abhiyaan/ui/views/auth/register/register_view.dart';
@@ -19,6 +20,7 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:abhiyaan/ui/views/home/home_view.dart';
 import 'package:abhiyaan/ui/views/splash/splash_view.dart';
 
+// @stacked-import
 @StackedApp(
   routes: [
     MaterialRoute(page: SplashView, initial: true),
@@ -38,18 +40,32 @@ import 'package:abhiyaan/ui/views/splash/splash_view.dart';
     MaterialRoute(page: GalleryTabView),
     MaterialRoute(page: GalleryView),
     MaterialRoute(page: ExpandImageView),
+    // @stacked-route
   ],
   dependencies: [
+    LazySingleton(classType: ThemeService),
+    LazySingleton(classType: DialogService),
+    LazySingleton(classType: AnalyticsService),
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: LocalStorageService),
-    LazySingleton(classType: ThemeService),
+    LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: AuthenticationService),
-    LazySingleton(classType: AnalyticsService),
     Singleton(classType: BottomNavViewModel, asType: BottomNavViewModel),
-    Singleton(classType: ProfileViewModel, asType: ProfileViewModel)
+    Singleton(classType: ProfileViewModel, asType: ProfileViewModel),
+    // @stacked-service
+  ],
+  bottomsheets: [
+    StackedBottomsheet(classType: EventSheet),
+    // @stacked-bottom-sheet
+  ],
+  dialogs: [
+    StackedDialog(classType: AlertDialog),
+    // @stacked-dialog
   ],
   logger: StackedLogger(),
 )
 class $AppRouter {}
 
 // dart run build_runner build --delete-conflicting-outputs
+
+// Don't remove the above comments. Those are used by the build system

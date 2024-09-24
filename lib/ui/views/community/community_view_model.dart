@@ -72,9 +72,8 @@ class CommunityViewModel extends BaseViewModel {
 
   Future<void> getDepartmentClubsData() async {
     try {
-      departmentClubsData =
-          await firestoreService.getClubsData(collectionName: FirebaseConstants.clubs);
-
+      departmentClubsData = await firestoreService.getClubsData(
+          collectionName: FirebaseConstants.clubs);
     } on Exception catch (e) {
       log.e("Error in fetching department clubs data: ${e.toString()}");
     }
@@ -82,8 +81,8 @@ class CommunityViewModel extends BaseViewModel {
 
   Future<List<ClubsDataModel>> getUniversalClubsData() async {
     try {
-      universalClubsData =
-          await firestoreService.getClubsData(collectionName: FirebaseConstants.globalClubs);
+      universalClubsData = await firestoreService.getClubsData(
+          collectionName: FirebaseConstants.globalClubs);
 
       return universalClubsData;
     } on Exception catch (e) {

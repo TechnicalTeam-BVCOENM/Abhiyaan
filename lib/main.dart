@@ -1,8 +1,13 @@
+import 'package:abhiyaan/app/app.bottomsheets.dart';
+import 'package:abhiyaan/app/app.dialogs.dart';
+
 import 'package:abhiyaan/firebase_options.dart';
 import 'package:abhiyaan/services/notification_service.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -16,7 +21,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 Future<void> servicesToInitializeBeforeAppStart() async {
   WidgetsFlutterBinding.ensureInitialized();
-  NotificationsService notificationsService = NotificationsService();
+  final notificationsService = NotificationsService();
   LocalNotificationService.initialize();
   if (Firebase.apps.isEmpty) {
     await Firebase.initializeApp(
@@ -26,22 +31,41 @@ Future<void> servicesToInitializeBeforeAppStart() async {
     notificationsService.onForegroundMessage();
     notificationsService.onBackgroundMessage();
   }
-  setupLocator();
+  await setupLocator();
   await Future.wait([
     locator<LocalStorageService>().initStorage(),
   ]);
 }
 
+void setupBeforeAppRun() {
+  setupDialogUi();
+  setupBottomSheetUi();
+
+  if (kDebugMode) {
+    FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
+  } else {
+    FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  }
+}
+
 void main() async {
   await servicesToInitializeBeforeAppStart();
+
   final analytics = FirebaseAnalytics.instance;
   await analytics.logAppOpen();
+  setupBeforeAppRun();
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final themeService = locator<ThemeService>();

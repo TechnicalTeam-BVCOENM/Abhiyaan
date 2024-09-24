@@ -2,6 +2,7 @@ part of 'preferences_view.dart';
 
 PreferredSizeWidget _appBar(BuildContext context) {
   final model = PreferencesViewModel();
+  final font = FontThemeClass();
   return AppBar(
     leading: GestureDetector(
       onTap: () {
@@ -20,7 +21,7 @@ PreferredSizeWidget _appBar(BuildContext context) {
     elevation: 0,
     title: Text(
       "My Details",
-      style: model.fontTheme.title(
+      style: font.title(
         context,
         color: context.colorScheme.primaryText,
         fontWeight: FontWeight.w600,
@@ -37,12 +38,13 @@ class LogoutButton extends ViewModelWidget<PreferencesViewModel> {
 
   @override
   Widget build(BuildContext context, PreferencesViewModel viewModel) {
+    final font = FontThemeClass();
     return GestureDetector(
       onTap: () => viewModel.logoutAlert(context),
       child: Center(
         child: Text(
           "Logout",
-          style: viewModel.fontTheme.body(
+          style: font.body(
             context,
             color: Colors.red.withOpacity(0.8),
             fontWeight: FontWeight.w700,
@@ -62,6 +64,7 @@ class PasswordChangeTile extends ViewModelWidget<PreferencesViewModel> {
 
   @override
   Widget build(BuildContext context, PreferencesViewModel viewModel) {
+    final font = FontThemeClass();
     return GestureDetector(
       onTap: () {
         viewModel.passwordChangeAlert(context);
@@ -89,7 +92,7 @@ class PasswordChangeTile extends ViewModelWidget<PreferencesViewModel> {
         ),
         title: Text(
           "Change Password",
-          style: viewModel.fontTheme.body(
+          style: font.body(
             context,
             color: context.colorScheme.primaryText,
             fontWeight: FontWeight.w600,

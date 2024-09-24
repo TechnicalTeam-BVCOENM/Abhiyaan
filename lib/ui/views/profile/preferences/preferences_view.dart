@@ -22,6 +22,7 @@ class PreferencesView extends StatelessWidget {
       viewModelBuilder: () => PreferencesViewModel(),
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
+        final font = FontThemeClass();
         return Scaffold(
           backgroundColor: context.colorScheme.scaffold,
           appBar: _appBar(context),
@@ -38,7 +39,6 @@ class PreferencesView extends StatelessWidget {
                           onTap: () {
                             model.updateImageSheet(context);
                           },
-                        
                           child: Stack(
                             children: [
                               Hero(
@@ -90,7 +90,7 @@ class PreferencesView extends StatelessWidget {
                         8.verticalSpace,
                         Text(
                           model.localStorageService.read('userName'),
-                          style: model.fontTheme.title2(
+                          style: font.title2(
                             context,
                             color: context.colorScheme.primaryText,
                             fontWeight: FontWeight.w600,
@@ -99,7 +99,7 @@ class PreferencesView extends StatelessWidget {
                         2.verticalSpace,
                         Text(
                           model.localStorageService.read('userProfile'),
-                          style: model.fontTheme.body(
+                          style: font.body(
                             context,
                             color: context.colorScheme.secondarySectionColor,
                             fontWeight: FontWeight.w500,
@@ -128,7 +128,7 @@ class PreferencesView extends StatelessWidget {
                     22.verticalSpace,
                     Text(
                       'Abhiyaan v${AppConstants.appVersion}',
-                      style: model.fontTheme.paragraph(
+                      style: font.paragraph(
                         context,
                         color: context.colorScheme.secondarySectionColor,
                         fontWeight: FontWeight.w500,
@@ -136,7 +136,7 @@ class PreferencesView extends StatelessWidget {
                     ),
                     Text(
                       'Made with ❤️ by TheDevCrew ',
-                      style: model.fontTheme.caption(
+                      style: font.caption(
                         context,
                         color: context.colorScheme.secondarySectionColor,
                       ),
