@@ -8,7 +8,7 @@ class CarouselUtils {
         effect: JumpingDotEffect(
           dotHeight: 8.sp,
           dotWidth: 8.sp,
-          dotColor: context.colorScheme.secondarySectionColor,
+          dotColor: context.colorScheme.accentColor.withOpacity(0.4),
           activeDotColor: context.colorScheme.accentColor,
         ),
         activeIndex: activeIndex,

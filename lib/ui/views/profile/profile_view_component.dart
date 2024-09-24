@@ -135,19 +135,20 @@ class ProfileImageWidget extends ViewModelWidget<ProfileViewModel> {
               ),
             ),
           ),
+          4.verticalSpace,
           Text(
             viewModel.localStorageService.read('userName'),
             style: font.title2(
               context,
               color: context.colorScheme.primaryText,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w700,
             ),
           ),
           Text(
             viewModel.localStorageService.read('userProfile'),
             style: font.body(
               context,
-              color: context.colorScheme.secondarySectionColor,
+              color: context.colorScheme.secondaryText,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -375,7 +376,7 @@ class DarkModeTile extends ViewModelWidget<ProfileViewModel> {
               activeColor: context.colorScheme.accentColor,
               inactiveThumbColor:
                   context.colorScheme.secondary.withOpacity(0.7),
-              inactiveTrackColor: context.colorScheme.lightScaffold,
+              inactiveTrackColor: context.colorScheme.backgroundLight,
               trackOutlineColor: WidgetStateColor.resolveWith(
                 (states) => context.colorScheme.secondary.withOpacity(0.7),
               ),

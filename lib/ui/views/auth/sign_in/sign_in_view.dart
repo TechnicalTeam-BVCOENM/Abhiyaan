@@ -203,8 +203,7 @@ class SignInView extends StatelessWidget {
                       ),
                       child: Container(
                         width: double.infinity,
-                        color: context.colorScheme
-                            .darkScaffold, // Change this to inverse of scaffold
+                        color: context.colorScheme.backgroundDark,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

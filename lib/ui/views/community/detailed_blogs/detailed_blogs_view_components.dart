@@ -40,9 +40,11 @@ class BlogAuthorDetailes extends StatelessWidget {
         Text(
           " | ${DateFormat.MMMM().format(blogData.date.toDate())} ${blogData.date.toDate().day}",
           textAlign: TextAlign.center,
-          style: fontThemeClass.caption(context,
-              fontWeight: FontWeight.normal,
-              color: context.colorScheme.secondarySectionColor),
+          style: fontThemeClass.caption(
+            context,
+            fontWeight: FontWeight.normal,
+            color: context.colorScheme.secondaryText,
+          ),
         ),
         const Spacer(),
         SizedBox(

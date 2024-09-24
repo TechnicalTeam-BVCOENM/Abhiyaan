@@ -449,8 +449,8 @@ class HighlightCarouselWidget extends ViewModelWidget<HomeViewModel> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16).r,
                         side: BorderSide(
-                          color: context.colorScheme.secondarySectionColor,
-                          width: 1.0,
+                          color: context.colorScheme.secondaryText,
+                          width: 1.w,
                         ),
                       ),
                       child: Center(
@@ -550,7 +550,7 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16).r,
           side: BorderSide(
-            color: context.colorScheme.secondaryPurpleColor,
+            color: context.colorScheme.secondaryText.withOpacity(0.2),
             width: 1.w,
           ),
         ),
@@ -595,7 +595,7 @@ Widget updatesCard(List updateList, int i, BuildContext context, viewModel) {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16).r,
           side: BorderSide(
-            color: context.colorScheme.secondaryPurpleColor,
+            color: context.colorScheme.secondaryText.withOpacity(0.2),
             width: 1.w,
           ),
         ),
@@ -655,7 +655,7 @@ class CollapsedDescription extends StatelessWidget {
       textAlign: TextAlign.justify,
       style: fontTheme.caption(
         context,
-        color: context.colorScheme.primaryText.withOpacity(0.6),
+        color: context.colorScheme.secondaryText,
       ),
     );
   }
@@ -685,7 +685,7 @@ class ExpandedDescription extends StatelessWidget {
           textAlign: TextAlign.justify,
           style: fontTheme.caption(
             context,
-            color: context.colorScheme.primaryText.withOpacity(0.6),
+            color: context.colorScheme.secondaryText,
           ),
         ),
         4.verticalSpace,
