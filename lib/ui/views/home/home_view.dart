@@ -120,8 +120,8 @@ class HomeView extends StatelessWidget {
                             style: font.display(
                               context,
                               fontWeight: FontWeight.bold,
-                              color: context.colorScheme.secondarySectionColor
-                                  .withOpacity(1),
+                              color: context.colorScheme.secondaryText
+                                  .withOpacity(0.35),
                             ),
                           ),
                           Text(
@@ -132,8 +132,8 @@ class HomeView extends StatelessWidget {
                             style: font.display(
                               context,
                               fontWeight: FontWeight.bold,
-                              color: context.colorScheme.secondarySectionColor
-                                  .withOpacity(1),
+                              color: context.colorScheme.secondaryText
+                                  .withOpacity(0.35),
                             ),
                           ),
                           3.verticalSpace,
@@ -146,9 +146,8 @@ class HomeView extends StatelessWidget {
                               'Made with ❤️ by TheDevCrew',
                               style: font.caption(
                                 context,
-                                color: context.colorScheme.primaryText
-                                    .withOpacity(0.8),
-                                fontWeight: FontWeight.w500,
+                                color: context.colorScheme.primaryText,
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
                           ),

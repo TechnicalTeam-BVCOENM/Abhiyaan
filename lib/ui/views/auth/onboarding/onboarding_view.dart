@@ -60,8 +60,7 @@ class OnboardingView extends StatelessWidget {
                                     },
                                     child: Icon(
                                       Icons.arrow_back,
-                                      color: context
-                                          .colorScheme.secondarySectionColor,
+                                      color: context.colorScheme.secondaryText,
                                     ))
                                 : Container()),
                         SizedBox(
@@ -83,8 +82,7 @@ class OnboardingView extends StatelessWidget {
                               child: model.activeindex != 2
                                   ? Icon(
                                       Icons.arrow_forward,
-                                      color: context
-                                          .colorScheme.secondarySectionColor,
+                                      color: context.colorScheme.secondaryText,
                                     )
                                   : const Icon(
                                       Icons.done_rounded,

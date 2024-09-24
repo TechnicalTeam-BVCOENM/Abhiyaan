@@ -87,13 +87,13 @@ class PreferencesView extends StatelessWidget {
                             ],
                           ),
                         ),
-                        8.verticalSpace,
+                        4.verticalSpace,
                         Text(
                           model.localStorageService.read('userName'),
                           style: font.title2(
                             context,
                             color: context.colorScheme.primaryText,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                         2.verticalSpace,
@@ -101,7 +101,7 @@ class PreferencesView extends StatelessWidget {
                           model.localStorageService.read('userProfile'),
                           style: font.body(
                             context,
-                            color: context.colorScheme.secondarySectionColor,
+                            color: context.colorScheme.secondaryText,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -123,14 +123,14 @@ class PreferencesView extends StatelessWidget {
                     const EmailAdressTile(),
                     16.verticalSpace,
                     const PasswordChangeTile(),
-                    170.verticalSpace,
+                    180.verticalSpace,
                     const LogoutButton(),
                     22.verticalSpace,
                     Text(
                       'Abhiyaan v${AppConstants.appVersion}',
                       style: font.paragraph(
                         context,
-                        color: context.colorScheme.secondarySectionColor,
+                        color: context.colorScheme.secondaryText,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -138,7 +138,8 @@ class PreferencesView extends StatelessWidget {
                       'Made with ❤️ by TheDevCrew ',
                       style: font.caption(
                         context,
-                        color: context.colorScheme.secondarySectionColor,
+                        color: context.colorScheme.secondaryText,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     18.verticalSpace,

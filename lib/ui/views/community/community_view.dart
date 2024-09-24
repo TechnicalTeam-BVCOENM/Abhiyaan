@@ -100,8 +100,8 @@ class CommunityView extends StatelessWidget {
                             effect: JumpingDotEffect(
                               dotHeight: 8,
                               dotWidth: 8,
-                              dotColor:
-                                  context.colorScheme.secondarySectionColor,
+                              dotColor: context.colorScheme.accentColor
+                                  .withOpacity(0.4),
                               activeDotColor: context.colorScheme.accentColor,
                               spacing: 4,
                             ),

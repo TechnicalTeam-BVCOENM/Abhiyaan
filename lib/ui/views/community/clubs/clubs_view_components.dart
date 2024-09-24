@@ -86,9 +86,11 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
               },
               child: Text(
                 "Let's Explore the $clubShortHand",
-                style: fontTheme.body(context,
-                    fontWeight: FontWeight.w500,
-                    color: context.colorScheme.secondarySectionColor),
+                style: fontTheme.body(
+                  context,
+                  fontWeight: FontWeight.w500,
+                  color: context.colorScheme.secondaryText,
+                ),
               ),
             ),
           ),
@@ -172,6 +174,7 @@ class MemberCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // Image
               ClipOval(
                 child: CachedNetworkImage(
                   width: 80.r,
@@ -196,7 +199,7 @@ class MemberCard extends StatelessWidget {
                       maxLines: 1,
                       style: fontTheme.body(
                         context,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
@@ -207,7 +210,7 @@ class MemberCard extends StatelessWidget {
                 clubMembers[index].position,
                 style: fontTheme.caption(
                   context,
-                  color: context.colorScheme.secondarySectionColor,
+                  color: context.colorScheme.secondaryText,
                 ),
               ),
             ].animate(delay: 100.ms, interval: 80.ms).scale(),
