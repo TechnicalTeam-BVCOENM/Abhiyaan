@@ -1,6 +1,7 @@
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/auth_service.dart';
 import 'package:abhiyaan/ui/bottom_sheets/event/event_sheet.dart';
+import 'package:abhiyaan/ui/dialogs/alert/logout_dialog.dart';
 import 'package:abhiyaan/ui/views/auth/auth_view.dart';
 import 'package:abhiyaan/ui/views/auth/onboarding/onboarding_view.dart';
 import 'package:abhiyaan/ui/views/auth/register/register_view.dart';
@@ -59,7 +60,7 @@ import 'package:abhiyaan/ui/views/splash/splash_view.dart';
     // @stacked-bottom-sheet
   ],
   dialogs: [
-    StackedDialog(classType: AlertDialog),
+    StackedDialog(classType: LogoutDialog),
     // @stacked-dialog
   ],
   logger: StackedLogger(),

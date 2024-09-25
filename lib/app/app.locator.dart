@@ -7,10 +7,10 @@
 // ignore_for_file: public_member_api_docs, implementation_imports, depend_on_referenced_packages
 
 import 'package:abhiyaan/file_exporter.dart';
-import 'package:abhiyaan/services/auth_service.dart';
-import 'package:abhiyaan/ui/views/bottom_nav/bottom_nav_view.dart';
-import 'package:abhiyaan/ui/views/profile/profile_view.dart';
 import 'package:stacked_shared/stacked_shared.dart';
+import 'package:abhiyaan/services/auth_service.dart';
+import 'package:abhiyaan/ui/views/profile/profile_view.dart';
+import 'package:abhiyaan/ui/views/bottom_nav/bottom_nav_view.dart';
 
 final locator = StackedLocator.instance;
 

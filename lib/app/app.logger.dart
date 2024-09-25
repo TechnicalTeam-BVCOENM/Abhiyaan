@@ -6,6 +6,9 @@
 
 // ignore_for_file: avoid_print, depend_on_referenced_packages
 
+/// Maybe this should be generated for the user as well?
+///
+/// import 'package:customer_app/services/stackdriver/stackdriver_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 
