@@ -316,20 +316,20 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                         width: 28.w,
                         alignment: Alignment.center,
                         margin: const EdgeInsets.only(right: 8.0),
-                        // decoration: BoxDecoration(
-                        //   shape: BoxShape.circle,
-                        //   color: Colors.white,
-                        // ),
                         child: Icon(
                           Icons.phone_in_talk_rounded,
                           size: 24.sp,
                           color: context.colorScheme.accentColor,
                         ),
                       ),
+                       GestureDetector(
+            onTap: () => viewModel.makePhoneCall(eventData.cPhone.toString()), // Trigger the phone call
+            child:
                       Text(
                         eventData.cPhone.toString(),
                         style: fontTheme.caption(context),
                       ),
+                       )
                     ],
                   )
                 : const SizedBox(),

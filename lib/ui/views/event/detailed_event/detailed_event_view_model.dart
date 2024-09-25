@@ -41,6 +41,18 @@ class DetailedEventViewModel extends BaseViewModel {
     );
   }
 
+ Future<void> makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    if (await canLaunchUrl(launchUri)) {
+      await launchUrl(launchUri);
+    } else {
+      throw 'Could not launch $phoneNumber';
+    }
+  }
+  
   void updateActiveIndex(int newIndex) {
     try {
       activeIndex = newIndex;
