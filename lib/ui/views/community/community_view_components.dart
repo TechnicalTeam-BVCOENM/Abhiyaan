@@ -1,6 +1,111 @@
 part of "community_view.dart";
 
-// final AnalyticsService _analyticsService = locator<AnalyticsService>();
+Widget _buildClubs(List<ClubsDataModel> clubsData, String title) {
+  if (clubsData.isEmpty) return const SizedBox.shrink();
+
+  return Column(
+    children: [
+      SectionText(title: title, showArrow: true),
+      SizedBox(
+        height: 110.h,
+        width: double.infinity,
+        child: CarouselSlider.builder(
+          itemCount: clubsData.length,
+          options: CarouselOptions(
+            autoPlay: true,
+            padEnds: false,
+            viewportFraction: 0.658.w,
+            autoPlayInterval: 4.seconds,
+            autoPlayCurve: Curves.easeInOutCubic,
+            autoPlayAnimationDuration: 900.milliseconds,
+            scrollPhysics: const ClampingScrollPhysics(),
+            enableInfiniteScroll: clubsData.length < 2 ? false : true,
+          ),
+          itemBuilder: (context, index, _) {
+            return ClubsViewWidget(
+              data: clubsData[index],
+            );
+          },
+        ),
+      ).animate().fadeIn(
+            duration: 400.milliseconds,
+          ),
+    ],
+  );
+}
+
+Widget _buildQuote(CommunityViewModel model) {
+  if (model.universalClubsData.isEmpty && model.departmentClubsData.isEmpty) {
+    return QuoteCard(
+      quote: model.affirmation,
+      autherName: model.authorName,
+    );
+  }
+  return const SizedBox.shrink();
+}
+
+Widget _buildTitle(FontThemeClass font, BuildContext context) {
+  return Center(
+    child: Text(
+      "Community",
+      style: font.title(
+        context,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  );
+}
+
+Widget _buildCommunityBlogs(CommunityViewModel model, BuildContext context) {
+  if (model.blogsData.isEmpty) return const SizedBox.shrink();
+  return Column(
+    children: [
+      const SectionText(title: "Community Blogs"),
+      SizedBox(
+        height: 270.h,
+        width: double.infinity,
+        child: CarouselSlider(
+            options: CarouselOptions(
+              onPageChanged: (index, reason) {
+                model.updateBlogIndex(index);
+              },
+              height: 270.h,
+              viewportFraction: 1,
+              autoPlay: true,
+              initialPage: 0,
+              autoPlayAnimationDuration: 900.milliseconds,
+              autoPlayCurve: Curves.easeInOutCubic,
+              autoPlayInterval: 4.seconds,
+              pauseAutoPlayOnTouch: true,
+              scrollPhysics: const BouncingScrollPhysics(),
+            ),
+            items: model.blogsData
+                .map(
+                  (data) => GestureDetector(
+                    onTap: () {
+                      model.navigateToDetailedBlogPage(data, context);
+                    },
+                    child: CommunityBlogs(blogsData: data),
+                  ),
+                )
+                .toList()),
+      ),
+      Center(
+        child: AnimatedSmoothIndicator(
+          activeIndex: model.currentBlogIndex,
+          count: model.blogsData.length,
+          effect: JumpingDotEffect(
+            dotHeight: 8,
+            dotWidth: 8,
+            dotColor: context.colorScheme.accentColor.withOpacity(0.4),
+            activeDotColor: context.colorScheme.accentColor,
+            spacing: 4,
+          ),
+        ),
+      )
+    ],
+  );
+}
 
 class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
   final CommunityBlogsData blogsData;
@@ -225,8 +330,8 @@ class ClubsViewWidget extends ViewModelWidget<CommunityViewModel> {
                           right: 0,
                           child: SvgPicture.asset(
                             "assets/images/community/verified.svg",
-                            height: 16.h,
-                            width: 16.w,
+                            height: 20.h,
+                            width: 20.w,
                           ),
                         ),
                       ],
@@ -468,7 +573,9 @@ class CommunityInviteCard extends ViewModelWidget<CommunityViewModel> {
           ),
         ],
       ),
-    );
+    ).animate().fadeIn(
+          duration: 400.milliseconds,
+        );
   }
 }
 
