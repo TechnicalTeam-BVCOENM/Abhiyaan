@@ -155,6 +155,7 @@ class CommunityViewModel extends BaseViewModel {
 
   Future<void> init(context) async {
     try {
+      setBusy(true);
       _analyticsService.logScreen(screenName: 'CommunityView Screen Opened');
       await Future.wait([
         getBlogData(),
@@ -165,6 +166,8 @@ class CommunityViewModel extends BaseViewModel {
       notifyListeners();
     } catch (e) {
       log.e(e.toString());
+    } finally {
+      setBusy(false);
     }
   }
 
