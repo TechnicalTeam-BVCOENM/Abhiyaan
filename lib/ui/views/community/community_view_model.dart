@@ -12,6 +12,9 @@ class CommunityViewModel extends BaseViewModel {
   String authorName = "";
   int _currentBlogIndex = 0;
   int get currentBlogIndex => _currentBlogIndex;
+  static const String communityLink =
+      "https://chat.whatsapp.com/LhqxEZ1qapJKVg38g2Lhhi";
+
   final List<CommunityBlogsData> _blogsData = [];
   List<CommunityBlogsData> get blogsData => _blogsData;
   set blogsData(List<CommunityBlogsData> blogsData) {
@@ -158,10 +161,26 @@ class CommunityViewModel extends BaseViewModel {
         getDepartmentClubsData(),
         getUniversalClubsData(),
       ]);
+
       notifyListeners();
     } catch (e) {
       log.e(e.toString());
     }
+  }
+
+  void joinCommunity() {
+    UrlLauncher().launchURL(communityLink);
+  }
+
+  void shareCommunity() {
+    Share.share("""Hey there! 👋,
+
+I saw this community called The Dev Crew and thought you might be interested! 🚀 It’s a community focused on practical learning and solving real-world problems. 💡 Sounds like something you’d be into, right? 🤔
+
+Let’s join together and learn something new! 💪
+
+Community Link :- $communityLink
+""", subject: "Join The Dev Crew Community");
   }
 
   var clubsCarosoulOptions = CarouselOptions(

@@ -74,6 +74,7 @@ flutter:
     - assets/images/home/
     - assets/images/home/quick_links/
     - assets/images/community/
+    - assets/images/community/avatars/
     - assets/images/home/societies/
     - assets/animations/
 

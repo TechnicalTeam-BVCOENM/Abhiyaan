@@ -1,6 +1,6 @@
 part of "community_view.dart";
 
-final AnalyticsService _analyticsService = locator<AnalyticsService>();
+// final AnalyticsService _analyticsService = locator<AnalyticsService>();
 
 class CommunityBlogs extends ViewModelWidget<CommunityViewModel> {
   final CommunityBlogsData blogsData;
@@ -181,72 +181,88 @@ class ClubsViewWidget extends ViewModelWidget<CommunityViewModel> {
 
   @override
   Widget build(BuildContext context, CommunityViewModel viewModel) {
-    FontThemeClass fontThemeClass = FontThemeClass();
-    return Padding(
-      padding: const EdgeInsets.only(right: 10).r,
-      child: GestureDetector(
-        onTap: () {
-          _analyticsService.logEvent(
-              eventName: "Departmental_Club_View",
-              value: "${data.clubShortHand} Club Viewed");
-          viewModel.navigationService.navigateToClubsView(clubsData: data);
-        },
-        child: SizedBox(
-          height: 120.h,
-          width: 120.w,
+    final font = FontThemeClass();
+    return GestureDetector(
+      onTap: () {
+        viewModel.navigationService.navigateToClubsView(clubsData: data);
+      },
+      child: SizedBox(
+        width: 248.w,
+        child: Center(
           child: Card(
-            clipBehavior: Clip.hardEdge,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CachedNetworkImage(
-                  imageUrl: data.clubImage,
-                  height: 80.h,
-                  width: 120.w,
-                  fit: BoxFit.fitHeight,
-                  maxHeightDiskCache: 200,
-                  imageBuilder: (context, imageProvider) {
-                    return Container(
-                      height: 80.h,
-                      width: 120.w,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                        ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30).r,
+            ),
+            elevation: 0.1,
+            color: context.colorScheme.card,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0).r,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.all(2.0).r,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color:
+                            context.colorScheme.secondaryText.withOpacity(0.1),
+                        width: 2,
                       ),
-                    );
-                  },
-                ),
-                Container(
-                  height: 30.h,
-                  width: 120.w,
-                  decoration: BoxDecoration(
-                    color: context.colorScheme.card,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.bookmark_rounded,
-                        color: context.colorScheme.accentColor,
-                        size: 18.sp,
-                      ),
-                      4.horizontalSpace,
-                      Center(
-                        child: Text(
-                          data.clubShortHand,
-                          style: fontThemeClass.caption(
-                            context,
-                            fontWeight: FontWeight.w500,
+                    ),
+                    child: Stack(
+                      children: [
+                        ClipOval(
+                          child: CachedNetworkImage(
+                            imageUrl: data.clubImage,
+                            height: 65.h,
+                            width: 65.w,
+                            fit: BoxFit.cover,
                           ),
                         ),
-                      ),
-                    ],
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: SvgPicture.asset(
+                            "assets/images/community/verified.svg",
+                            height: 16.h,
+                            width: 16.w,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ].animate(delay: 300.ms).fadeIn(),
+                  10.horizontalSpace,
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          data.clubShortHand,
+                          style: font.body(
+                            context,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        Text(
+                          data.clubName,
+                          maxLines: 4,
+                          overflow: TextOverflow.clip,
+                          style: font.small(
+                            context,
+                            color: context.colorScheme.secondaryText
+                                .withOpacity(0.7),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -254,87 +270,6 @@ class ClubsViewWidget extends ViewModelWidget<CommunityViewModel> {
     );
   }
 }
-
-// class UniversalClubs extends ViewModelWidget<CommunityViewModel> {
-//   final UniversalClubsData data;
-//   const UniversalClubs({super.key, required this.data});
-
-//   @override
-//   Widget build(BuildContext context, CommunityViewModel viewModel) {
-//     FontThemeClass fontThemeClass = FontThemeClass();
-//     return Padding(
-//       padding: const EdgeInsets.only(right: 10).r,
-//       child: GestureDetector(
-//         onTap: () {
-//           _analyticsService.logEvent(
-//               eventName: "Universal_Club_View",
-//               value: "${data.uniclubShortHand} Club Viewed");
-//           viewModel.navigationService
-//               .navigateToUniClubsView(universalClubsData: data);
-//         },
-//         child: SizedBox(
-//           height: 120.h,
-//           width: 120.w,
-//           child: Card(
-//             clipBehavior: Clip.hardEdge,
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.center,
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               children: [
-//                 CachedNetworkImage(
-//                   imageUrl: data.uniclubImage,
-//                   height: 80.h,
-//                   width: 120.w,
-//                   fit: BoxFit.fitHeight,
-//                   maxHeightDiskCache: 200,
-//                   imageBuilder: (context, imageProvider) {
-//                     return Container(
-//                       height: 80.h,
-//                       width: 120.w,
-//                       decoration: BoxDecoration(
-//                         image: DecorationImage(
-//                           image: imageProvider,
-//                           fit: BoxFit.cover,
-//                         ),
-//                       ),
-//                     );
-//                   },
-//                 ),
-//                 Container(
-//                   height: 30.h,
-//                   width: 120.w,
-//                   decoration: BoxDecoration(
-//                     color: context.colorScheme.card,
-//                   ),
-//                   child: Row(
-//                     mainAxisAlignment: MainAxisAlignment.center,
-//                     children: [
-//                       Icon(
-//                         Icons.bookmark_rounded,
-//                         color: context.colorScheme.accentColor,
-//                         size: 18.sp,
-//                       ),
-//                       4.horizontalSpace,
-//                       Center(
-//                         child: Text(
-//                           data.uniclubShortHand,
-//                           style: fontThemeClass.caption(
-//                             context,
-//                             fontWeight: FontWeight.w500,
-//                           ),
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ].animate(delay: 300.ms).fadeIn(),
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 class QuoteCard extends StatelessWidget {
   final String? quote;
@@ -390,5 +325,168 @@ class QuoteCard extends StatelessWidget {
         15.verticalSpace,
       ],
     ).animate(delay: 500.ms).fadeIn();
+  }
+}
+
+class CommunityInviteCard extends ViewModelWidget<CommunityViewModel> {
+  const CommunityInviteCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, CommunityViewModel viewModel) {
+    final font = FontThemeClass();
+    return Card(
+      clipBehavior: Clip.hardEdge,
+      elevation: 0.1,
+      color: context.colorScheme.card,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20).r,
+      ),
+      child: Stack(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(14).r,
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Want to know more about us ?",
+                  style: font.body(
+                    context,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                8.verticalSpace,
+                Text(
+                  "Join our community of practical learners. Build skills, solve problems.",
+                  style: font.small(
+                    context,
+                    color: context.colorScheme.secondaryText.withOpacity(0.5),
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                16.verticalSpace,
+                SizedBox(
+                  width: double.infinity,
+                  height: 34.h,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          viewModel.joinCommunity();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: context.colorScheme.accentColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20).r,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              "assets/images/community/whatsapp.svg",
+                              height: 20.h,
+                              width: 20.w,
+                            ),
+                            8.horizontalSpace,
+                            Text(
+                              "Join Community",
+                              style: font.caption(
+                                context,
+                                fontWeight: FontWeight.w700,
+                                color: context.colorScheme.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          viewModel.shareCommunity();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          side: BorderSide(
+                            color: context.colorScheme.accentColor,
+                            width: 1.5.w,
+                          ),
+                          backgroundColor: context.colorScheme.card,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20).r,
+                          ),
+                        ),
+                        child: Text(
+                          "Share",
+                          style: font.caption(
+                            context,
+                            fontWeight: FontWeight.w700,
+                            color: context.colorScheme.primaryText,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            right: 10,
+            bottom: MediaQuery.of(context).size.height * 0.04,
+            child: Transform.rotate(
+              angle: 0.4,
+              child: const CustomAvatar(
+                  image: "assets/images/community/avatars/avtr1.jpg"),
+            ),
+          ),
+          Positioned(
+            left: 14,
+            top: MediaQuery.of(context).size.height * 0.012,
+            child: Transform.rotate(
+              angle: 0.4,
+              child: const CustomAvatar(
+                  image: "assets/images/community/avatars/avtr2.jpg"),
+            ),
+          ),
+          Positioned(
+            left: 78,
+            bottom: MediaQuery.of(context).size.height * 0.06,
+            height: 24.h,
+            width: 24.w,
+            child: const CustomAvatar(
+                image: "assets/images/community/avatars/avtr3.jpg"),
+          ),
+          Positioned(
+            right: 24,
+            top: MediaQuery.of(context).size.height * 0.01,
+            child: const CustomAvatar(
+                image: "assets/images/community/avatars/avtr4.jpg"),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomAvatar extends StatelessWidget {
+  final String image;
+  const CustomAvatar({
+    super.key,
+    required this.image,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipOval(
+      child: Image.asset(
+        image,
+        width: 28.w,
+        height: 28.h,
+      ),
+    );
   }
 }

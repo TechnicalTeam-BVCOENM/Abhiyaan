@@ -87,6 +87,7 @@ class _MyAppState extends State<MyApp> {
             return MaterialApp(
               title: 'Abhiyaan',
               debugShowCheckedModeBanner: false,
+              showSemanticsDebugger: false,
               theme: ThemeData(
                 textTheme: const TextTheme(),
                 primaryColor: context.colorScheme.accentColor,
