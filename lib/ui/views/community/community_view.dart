@@ -18,6 +18,7 @@ import 'package:share_plus/share_plus.dart';
 
 part "community_view_components.dart";
 part "community_view_model.dart";
+part 'data_model.dart';
 
 class CommunityView extends StatelessWidget {
   const CommunityView({super.key});
@@ -76,7 +77,6 @@ class CommunityView extends StatelessWidget {
                                   autoPlayCurve: Curves.easeInOutCubic,
                                   autoPlayInterval: 4.seconds,
                                   enableInfiniteScroll: true,
-                                  pauseAutoPlayOnTouch: true,
                                   scrollPhysics: const ClampingScrollPhysics(),
                                 ),
                                 itemBuilder:

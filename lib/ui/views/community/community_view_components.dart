@@ -369,7 +369,7 @@ class CommunityInviteCard extends ViewModelWidget<CommunityViewModel> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                16.verticalSpace,
+                24.verticalSpace,
                 SizedBox(
                   width: double.infinity,
                   height: 34.h,
@@ -436,7 +436,7 @@ class CommunityInviteCard extends ViewModelWidget<CommunityViewModel> {
           ),
           Positioned(
             right: 10,
-            bottom: MediaQuery.of(context).size.height * 0.04,
+            bottom: MediaQuery.of(context).size.height * 0.045,
             child: Transform.rotate(
               angle: 0.4,
               child: const CustomAvatar(
@@ -453,8 +453,8 @@ class CommunityInviteCard extends ViewModelWidget<CommunityViewModel> {
             ),
           ),
           Positioned(
-            left: 78,
-            bottom: MediaQuery.of(context).size.height * 0.06,
+            left: 80,
+            bottom: MediaQuery.of(context).size.height * 0.062,
             height: 24.h,
             width: 24.w,
             child: const CustomAvatar(
