@@ -40,4 +40,7 @@ extension ColorSchemeExtension on ColorScheme {
   Color get bottomNavIconActive => brightness == Brightness.dark
       ? const Color.fromARGB(255, 189, 188, 255)
       : accentColor;
+
+  // Error
+  Color get errorColor => const Color(0xFFCA3434);
 }

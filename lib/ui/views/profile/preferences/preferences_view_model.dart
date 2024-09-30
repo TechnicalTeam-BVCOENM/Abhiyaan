@@ -3,10 +3,10 @@ part of 'preferences_view.dart';
 class PreferencesViewModel extends BaseViewModel {
   final log = getLogger('SettingsView');
   final _navigationService = locator<NavigationService>();
-  final _authenticationService = locator<AuthenticationService>();
   final _analyticsService = locator<AnalyticsService>();
   final profileViewModel = locator<ProfileViewModel>();
   final localStorageService = locator<LocalStorageService>();
+  final dialogs = locator<DialogService>();
 
   bool isPreview = true;
   bool isProfileError = false;
@@ -182,122 +182,13 @@ class PreferencesViewModel extends BaseViewModel {
 
 //Show a alert dialog to confirm the logout
   void logoutAlert(BuildContext context) {
-    showAdaptiveDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-          clipBehavior: Clip.hardEdge,
-          titlePadding: const EdgeInsets.all(0),
-          backgroundColor: context.colorScheme.card,
-          title: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Divider(
-                height: 20,
-                thickness: 100,
-                color: Colors.red,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24.0,
-                  vertical: 10,
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.warning_rounded,
-                      color: Colors.red,
-                      size: 36,
-                    ),
-                    10.horizontalSpace,
-                    const Text(
-                      "Alert",
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          content: SizedBox(
-            width: 400.w,
-            child: const Text("Are you sure you want to Logout ?"),
-          ),
-          actions: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.all(0),
-                foregroundColor: Colors.white,
-                backgroundColor: context.colorScheme.accentColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-              ),
-              onPressed: () {
-                _analyticsService.logEvent(
-                  eventName: "Logout_popup",
-                  value: "Logout cancel button clicked",
-                );
-                Navigator.pop(context);
-              },
-              child: const Text("Cancel"),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                side: BorderSide(
-                    width: 2, color: context.colorScheme.accentColor),
-                padding: const EdgeInsets.all(0),
-                foregroundColor: context.colorScheme.primaryText,
-                backgroundColor: context.colorScheme.card,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-              ),
-              onPressed: () async {
-                _analyticsService.logEvent(
-                  eventName: "Logout_popup",
-                  value: "Logout yes button clicked",
-                );
-                await logout(context).then(
-                  (value) => showSuccessMessage(context, "Logout successful"),
-                );
-              },
-              child: const Text("Yes"),
-            ),
-          ],
-        );
-      },
+    dialogs.showCustomDialog(
+      variant: DialogType.logout,
+      barrierDismissible: true,
     );
   }
 
 //Logout the user
-  Future<void> logout(BuildContext context) async {
-    try {
-      setBusy(true);
-      LocalStorageService localStorageService = locator<LocalStorageService>();
-      final bottomNavViewModel = locator<BottomNavViewModel>();
-      final storageService = locator<LocalStorageService>();
-      final bool success = await _authenticationService.signOut().then((value) {
-        return value;
-      });
-      if (success) {
-        log.i('sign out success');
-        bottomNavViewModel.setIndex(0);
-        await _navigationService.clearStackAndShow(Routes.authView);
-        await localStorageService.clear();
-        await storageService.write(
-            "showRegister", await FirestoreService().showRegistration());
-      } else {
-        log.i('sign out failed');
-      }
-    } on Exception catch (e) {
-      log.e(e.toString());
-    } finally {
-      setBusy(false);
-    }
-  }
 
 //Show a alert dialog to confirm the deletion of the account
   void updateImageSheet(BuildContext context) {

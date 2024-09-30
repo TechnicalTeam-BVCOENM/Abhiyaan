@@ -12,6 +12,9 @@ class CommunityViewModel extends BaseViewModel {
   String authorName = "";
   int _currentBlogIndex = 0;
   int get currentBlogIndex => _currentBlogIndex;
+  static const String communityLink =
+      "https://chat.whatsapp.com/LhqxEZ1qapJKVg38g2Lhhi";
+
   final List<CommunityBlogsData> _blogsData = [];
   List<CommunityBlogsData> get blogsData => _blogsData;
   set blogsData(List<CommunityBlogsData> blogsData) {
@@ -152,16 +155,35 @@ class CommunityViewModel extends BaseViewModel {
 
   Future<void> init(context) async {
     try {
+      setBusy(true);
       _analyticsService.logScreen(screenName: 'CommunityView Screen Opened');
       await Future.wait([
         getBlogData(),
         getDepartmentClubsData(),
         getUniversalClubsData(),
       ]);
+
       notifyListeners();
     } catch (e) {
       log.e(e.toString());
+    } finally {
+      setBusy(false);
     }
+  }
+
+  void joinCommunity() {
+    UrlLauncher().launchURL(communityLink);
+  }
+
+  void shareCommunity() {
+    Share.share("""Hey there! 👋,
+
+I saw this community called The Dev Crew and thought you might be interested! 🚀 It’s a community focused on practical learning and solving real-world problems. 💡 Sounds like something you’d be into, right? 🤔
+
+Let’s join together and learn something new! 💪
+
+Community Link :- $communityLink
+""", subject: "Join The Dev Crew Community");
   }
 
   var clubsCarosoulOptions = CarouselOptions(
@@ -176,68 +198,4 @@ class CommunityViewModel extends BaseViewModel {
     viewportFraction: 0.35,
     height: 120.h,
   );
-}
-
-class CommunityBlogsData {
-  final String documentId;
-  final String author;
-  final String authorImageUrl;
-  final String content;
-  final String title;
-  final String imageUrl;
-  final Timestamp date;
-  final List<dynamic> likes;
-
-  CommunityBlogsData({
-    required this.documentId,
-    required this.author,
-    required this.authorImageUrl,
-    required this.content,
-    required this.title,
-    required this.imageUrl,
-    required this.date,
-    required this.likes,
-  });
-}
-
-class ClubsDataModel {
-  final String clubName;
-  final String clubImage;
-  final String clubShortHand;
-  final List<FestInfo> clubFest;
-  final List<ClubMemberInfo> clubMembers;
-  final String clubLink;
-
-  ClubsDataModel({
-    required this.clubName,
-    required this.clubImage,
-    required this.clubShortHand,
-    required this.clubFest,
-    required this.clubMembers,
-    required this.clubLink,
-  });
-}
-
-class FestInfo {
-  final String festName;
-  final String festImage;
-  final String festLink;
-
-  FestInfo({
-    required this.festName,
-    required this.festImage,
-    required this.festLink,
-  });
-}
-
-class ClubMemberInfo {
-  final String name;
-  final String image;
-  final String position;
-
-  ClubMemberInfo({
-    required this.name,
-    required this.image,
-    required this.position,
-  });
 }
