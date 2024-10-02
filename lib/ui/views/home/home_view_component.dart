@@ -494,11 +494,12 @@ class HighlightCarouselWidget extends ViewModelWidget<HomeViewModel> {
                     ),
                   ),
             20.verticalSpace,
-            CarouselUtils.buildIndicator(
-              context,
-              viewModel.activeIndex,
-              viewModel.highlights.length,
-            ),
+            if (viewModel._highlights.isNotEmpty)
+              CarouselUtils.buildIndicator(
+                context,
+                viewModel.activeIndex,
+                viewModel.highlights.length,
+              ),
           ],
         ),
       ),

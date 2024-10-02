@@ -1,7 +1,7 @@
 import 'package:abhiyaan/app/app.bottomsheets.dart';
 import 'package:abhiyaan/app/app.dialogs.dart';
-
-import 'package:abhiyaan/firebase_options.dart';
+import 'package:abhiyaan/firebase_options_prod.dart' as prod_options;
+import 'package:abhiyaan/firebase_options_dev.dart' as dev_options;
 import 'package:abhiyaan/services/notification_service.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,9 +14,16 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   if (Firebase.apps.isNotEmpty) {
     return;
   }
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
+  if (const bool.fromEnvironment('dart.vm.product')) {
+    await Firebase.initializeApp(
+      options: prod_options.DefaultFirebaseOptions.currentPlatform,
+    );
+  } else {
+    await Firebase.initializeApp(
+      options: dev_options.DefaultFirebaseOptions.currentPlatform,
+    );
+  }
 }
 
 Future<void> servicesToInitializeBeforeAppStart() async {
@@ -24,9 +31,15 @@ Future<void> servicesToInitializeBeforeAppStart() async {
   final notificationsService = NotificationsService();
   LocalNotificationService.initialize();
   if (Firebase.apps.isEmpty) {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+    if (const bool.fromEnvironment('dart.vm.product')) {
+      await Firebase.initializeApp(
+        options: prod_options.DefaultFirebaseOptions.currentPlatform,
+      );
+    } else {
+      await Firebase.initializeApp(
+        options: dev_options.DefaultFirebaseOptions.currentPlatform,
+      );
+    }
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
     notificationsService.onForegroundMessage();
     notificationsService.onBackgroundMessage();

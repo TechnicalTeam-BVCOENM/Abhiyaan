@@ -34,7 +34,8 @@ class HomeView extends StatelessWidget {
       builder: (context, model, child) {
         return UpgradeAlert(
           showLater: false,
-          showIgnore: false,
+          showIgnore:
+              const bool.fromEnvironment('dart.vm.product') ? false : true,
           upgrader: Upgrader(
             durationUntilAlertAgain: const Duration(days: 2),
           ),
