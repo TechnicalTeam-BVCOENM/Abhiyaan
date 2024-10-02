@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyAwj_Q1dYOvMYgMJstQsoO6z53u85iKXZc</string>
+	<string>AIzaSyC6h9qlml4mCSBg-KCK00jFABLztAalD7A</string>
 	<key>GCM_SENDER_ID</key>
-	<string>28627991579</string>
+	<string>476908246659</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.bvcoenm.abhiyaan</string>
+	<string>com.bvcoenm.darpan</string>
 	<key>PROJECT_ID</key>
-	<string>abhiyaan-9f241</string>
+	<string>abhiyaan-dev</string>
 	<key>STORAGE_BUCKET</key>
-	<string>abhiyaan-9f241.appspot.com</string>
+	<string>abhiyaan-dev.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:28627991579:ios:182db7274da42c780e0cbe</string>
+	<string>1:476908246659:ios:45ff6bcbd750c1f135edb6</string>
 </dict>
 </plist>
