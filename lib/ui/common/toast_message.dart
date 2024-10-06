@@ -70,8 +70,8 @@ void _showmessage(BuildContext context, String message, String type) {
               child: Row(
                 children: [
                   Container(
-                    // width: double.infinity,
-                    // padding: EdgeInsets.all(20.r),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
                     decoration: BoxDecoration(
                       color: backgroundColor,
                     ),
