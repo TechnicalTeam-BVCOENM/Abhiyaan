@@ -6,7 +6,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:abhiyaan/file_exporter.dart' as _i20;
-import 'package:abhiyaan/ui/views/auth/auth_view.dart' as _i4;
+import 'package:abhiyaan/ui/views/auth/authentication/auth_view.dart' as _i4;
 import 'package:abhiyaan/ui/views/auth/onboarding/onboarding_view.dart' as _i12;
 import 'package:abhiyaan/ui/views/auth/register/register_view.dart' as _i11;
 import 'package:abhiyaan/ui/views/auth/sign_in/sign_in_view.dart' as _i10;
