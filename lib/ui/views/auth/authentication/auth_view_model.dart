@@ -21,21 +21,21 @@ class AuthViewModel extends BaseViewModel {
     _analytic.logScreen(screenName: "Auth Screen");
   }
 
-  void toSignInPage(BuildContext context) {
+  Future<void> toSignInPage(BuildContext context) async {
     try {
       _analytic.logEvent(
           eventName: "Auth_Screen", value: "SignIn Button clicked");
-      _navigation.replaceWith(Routes.signInView);
+      await _navigation.navigateTo(Routes.signInView);
     } on Exception catch (e) {
       log.e(e.toString());
     }
   }
 
-  void toRegisterPage(BuildContext context) {
+  void toRegisterPage(BuildContext context) async {
     try {
       _analytic.logEvent(
           eventName: "Auth_Screen", value: "Register Button clicked");
-      _navigation.replaceWith(Routes.registerView);
+      await _navigation.navigateTo(Routes.registerView);
     } on Exception catch (e) {
       log.e(e.toString());
     }
