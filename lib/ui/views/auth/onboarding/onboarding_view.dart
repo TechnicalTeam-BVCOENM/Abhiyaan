@@ -11,86 +11,12 @@ class OnboardingView extends StatelessWidget {
       builder: (context, model, child) {
         return Scaffold(
           backgroundColor: context.colorScheme.scaffold,
-          body: SafeArea(
+          body: const SafeArea(
             child: Stack(
               children: [
-                PageView(
-                  onPageChanged: (index) {
-                    model.index(index);
-                  },
-                  controller: model.pageController,
-                  children: [
-                    for (var onboardingPages
-                        in OnboardingComponents.getOnboardingPages(context))
-                      onboardingPages,
-                  ],
-                ),
-                Container(
-                  alignment: const Alignment(0, 0.65),
-                  child: SmoothPageIndicator(
-                      effect: const WormEffect(dotHeight: 10, dotWidth: 10),
-                      onDotClicked: (index) {
-                        model.pageController.jumpToPage(index);
-                      },
-                      controller: model.pageController,
-                      count: 3),
-                ),
-                Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 40),
-                    alignment: const Alignment(0, 0.85),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                            width: 60.r,
-                            height: 60.r,
-                            child: model.activeindex != 0
-                                ? ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      padding: const EdgeInsets.all(0),
-                                      foregroundColor: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            300), // Rounded corners
-                                      ),
-                                    ),
-                                    onPressed: () {
-                                      model.updateindex(
-                                          context, false, model.activeindex);
-                                    },
-                                    child: Icon(
-                                      Icons.arrow_back,
-                                      color: context.colorScheme.secondaryText,
-                                    ))
-                                : Container()),
-                        SizedBox(
-                          width: 60.r,
-                          height: 60.r,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.all(0),
-                                foregroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      300), // Rounded corners
-                                ),
-                              ),
-                              onPressed: () {
-                                model.updateindex(
-                                    context, true, model.activeindex);
-                              },
-                              child: model.activeindex != 2
-                                  ? Icon(
-                                      Icons.arrow_forward,
-                                      color: context.colorScheme.secondaryText,
-                                    )
-                                  : const Icon(
-                                      Icons.done_rounded,
-                                      color: Colors.green,
-                                    )),
-                        )
-                      ],
-                    ))
+                OnboardingPageView(),
+                PageIndicator(),
+                PageControllerIcons()
               ],
             ),
           ),
