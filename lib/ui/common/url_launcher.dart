@@ -11,6 +11,16 @@ class UrlLauncher {
     }
   }
 
+  makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    if (!await launchUrl(launchUri)) {
+      throw 'Could not launch $launchUri';
+    }
+  }
+
   launchEmail(String email) async {
     String? encodeQueryParameters(Map<String, String> params) {
       return params.entries
