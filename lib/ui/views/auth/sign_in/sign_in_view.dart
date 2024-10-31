@@ -2,13 +2,13 @@ import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/auth_service.dart';
 import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
+import 'package:abhiyaan/ui/views/auth/sign_in/sign_in_components.dart';
 import "package:abhiyaan/ui/views/profile/preferences/preferences_view.dart";
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:abhiyaan/ui/views/auth/register/register_view.dart';
-
 part 'sign_in_view_model.dart';
 
 class SignInView extends StatelessWidget {
@@ -35,19 +35,7 @@ class SignInView extends StatelessWidget {
                     ).r,
                     child: Column(
                       children: [
-                        Container(
-                          width: double.maxFinite,
-                          alignment: Alignment.centerLeft,
-                          child: IconButton(
-                            style: IconButton.styleFrom(
-                                padding: const EdgeInsets.all(0)),
-                            onPressed: () => model._navigationService.back(),
-                            icon: const Icon(
-                              Icons.arrow_back_rounded,
-                              size: 30,
-                            ),
-                          ),
-                        ),
+                        const SigninNavigateBack(),
                         Container(
                                 decoration: BoxDecoration(
                                   boxShadow: [

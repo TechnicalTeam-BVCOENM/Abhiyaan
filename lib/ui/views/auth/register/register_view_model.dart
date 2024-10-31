@@ -5,16 +5,13 @@ int min = 10000; // Minimum value for a 5-digit number
 int max = 99999; // Maximum value for a 5-digit number
 
 class RegisterViewModel extends BaseViewModel {
-  final _navigationService = locator<NavigationService>();
-  final _authenticationService = locator<AuthenticationService>();
-  final AnalyticsService _analyticsService = locator<AnalyticsService>();
-  final TextEditingController userNameController = TextEditingController();
-  String? signupStatus;
-  late int otp;
+  final registerStream =
+      FirebaseFirestore.instance.collection('AppCheck').snapshots();
   final log = getLogger('AuthViewModel');
   final fontTheme = FontThemeClass();
   final smtpServer =
       gmail("technicalteam.bvcoenm@gmail.com", "wqme jjtx lerr zkkg");
+
   final TextEditingController emailIdTextController = TextEditingController();
   final TextEditingController otpController = TextEditingController();
   final TextEditingController createpasswordTextController =
@@ -24,12 +21,19 @@ class RegisterViewModel extends BaseViewModel {
 
   final String emailIdErrorText = "Please enter a valid email id";
   final localStorageService = locator<LocalStorageService>();
+
   int? sendOtpCount = LocalStorageService().read('sendOtpCount');
   DateTime? lastUpdate = LocalStorageService().read("lastOtpCountUpdate");
-
+  String? signupStatus;
   bool isCreatePasswordVisible = false;
   bool isConfirmPasswordVisible = false;
   bool isEmailIdValid = true;
+  late int otp;
+  final font = FontThemeClass();
+  final _navigationService = locator<NavigationService>();
+  final _authenticationService = locator<AuthenticationService>();
+  final AnalyticsService _analyticsService = locator<AnalyticsService>();
+  final TextEditingController userNameController = TextEditingController();
 
   void init() {
     _analyticsService.logScreen(screenName: 'RegisterView');
@@ -131,6 +135,10 @@ class RegisterViewModel extends BaseViewModel {
     _navigationService.clearStackAndShow(Routes.authView);
   }
 
+  void navigateBack() {
+    _navigationService.back();
+  }
+
   Future<void> sendVerifyMail(context) async {
     generateRandomOTP();
     AuthenticationService().showLoadingOverlay(context);
@@ -164,41 +172,6 @@ class RegisterViewModel extends BaseViewModel {
         debugPrint('Problem: ${p.code}: ${p.msg}');
       }
     }
-//     var template = '''
-//   <html>
-//     <body>
-//       <h1>Abhiyaan App Email Verification</h1>
-//       <p>Dear user,</p>
-//       <p>Your verification code is: {{OTP}}</p>
-//       <p>Please enter this code in the app to complete the registration process.</p>
-//       <p>Thank you!</p>
-//       <p>Abhiyaan Technical Team</p>
-//     </body>
-//   </html>
-// ''';
-    // await myauth.setConfig(
-    //     appEmail: "technicalteam.bvcoenm@gmail.com",
-    //     appName: "Abhiyaan",
-    //     userEmail: emailIdTextController.text,
-    //     otpLength: 5,
-    //     otpType: OTPType.digitsOnly);
-    // await myauth.setTemplate(render: template);
-    // await myauth.setSMTP(
-    //     host: "abhiyaan-2023.netlify.app",
-    //     auth: true,
-    //     username: "email-otp@rohitchouhan.com",
-    //     password: "*************",
-    //     secure: "TLS",
-    // port: 576);
-    //   if (await myauth.sendOTP() == false) {
-    //     NavigationService().back();
-    //     verifyEmailDialogue(context);
-    //     showSuccessMessage(context, "OTP Sent");
-    //   } else {
-    //     NavigationService().back();
-    //     print(emailIdTextController.text);
-    //     showErrorMessage(context, "Oops, OTP send failed");
-    //   }
   }
 
   navigateToHelpSupport() async {
@@ -419,7 +392,6 @@ class RegisterViewModel extends BaseViewModel {
           });
 
           await AuthenticationService().storeUserDataLocally();
-          // ignore: use_build_context_synchronously
           NavigationService().back();
           await _navigationService
               .replaceWithTransition(

@@ -39,6 +39,10 @@ class SignInViewModel extends BaseViewModel {
     _navigationService.replaceWith(Routes.registerView);
   }
 
+  void navigateBack() {
+    _navigationService.back();
+  }
+
   Future<void> changePassword(context) async {
     emailIdTextController.text = emailIdTextController.text.trim();
     if (emailIdTextController.text.isEmpty) {
