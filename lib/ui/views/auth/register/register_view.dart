@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
 import 'package:abhiyaan/ui/views/auth/onboarding/onboarding_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/file_exporter.dart';
@@ -62,30 +63,19 @@ class RegisterView extends StatelessWidget {
           //         ),
           //       )
           //     : Container();
-          return GestureDetector(
-              onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-              child: Scaffold(
-                resizeToAvoidBottomInset: false,
-                backgroundColor: context.colorScheme.scaffold,
-                body: Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
-                  child: StreamBuilder(
-                      stream: FirebaseFirestore.instance
-                          .collection('AppCheck')
-                          .snapshots(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
-                          return const SizedBox();
-                        }
-
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const SizedBox();
-                        }
-                        return Column(
-                          children: [
+          return model.isBusy
+              ? const CircularLoadingIndicator()
+              : GestureDetector(
+                  onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+                  child: Scaffold(
+                      resizeToAvoidBottomInset: false,
+                      backgroundColor: context.colorScheme.scaffold,
+                      body: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, top: 40),
+                          child: Column(children: [
                             // 40.verticalSpace,
-                            snapshot.data!.docs[0]['value']
+                            model.shouldShowUI
                                 ? Column(
                                     children: [
                                       Container(
@@ -442,7 +432,7 @@ class RegisterView extends StatelessWidget {
                                     ],
                                   ),
                             const Spacer(),
-                            snapshot.data!.docs[0]['value']
+                            model.shouldShowUI
                                 ? GestureDetector(
                                     onTap: () => model.navigateToHelpSupport(),
                                     child: RichText(
@@ -489,11 +479,7 @@ class RegisterView extends StatelessWidget {
                                   duration: 700.ms,
                                 ),
                             10.verticalSpace,
-                          ],
-                        );
-                      }),
-                ),
-              ));
+                          ]))));
         });
   }
 }
