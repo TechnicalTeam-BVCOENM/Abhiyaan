@@ -23,6 +23,7 @@ class SignInView extends StatelessWidget {
         return GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
           child: Scaffold(
+            drawerEnableOpenDragGesture: false,
             resizeToAvoidBottomInset: false,
             backgroundColor: context.colorScheme.scaffold,
             body: SafeArea(

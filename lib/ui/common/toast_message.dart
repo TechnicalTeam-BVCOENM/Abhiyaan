@@ -1,50 +1,31 @@
 import 'package:abhiyaan/file_exporter.dart';
 
-void showSuccessMessage(BuildContext context, String message) {
-  _showmessage(context, message, 'success');
-}
+enum MessageType { success, error, warning, normal }
 
-void showErrorMessage(BuildContext context, String message) {
-  _showmessage(context, message, 'error');
-}
-
-void showWarningMessage(BuildContext context, String message) {
-  _showmessage(context, message, 'warning');
-}
-
-void showNormalMessage(BuildContext context, String message) {
-  _showmessage(context, message, 'normal');
-}
-
-void _showmessage(BuildContext context, String message, String type) {
-  // assert(message.length < 50, "message should be smaller than 50 characters");
+void showMessage(BuildContext context, String message, MessageType type) {
   FontThemeClass fontTheme = FontThemeClass();
   Color backgroundColor;
   IconData icon;
 
   switch (type) {
-    case 'success':
-      backgroundColor = Colors.green.shade400;
+    case MessageType.success:
+      backgroundColor = Colors.green.shade600;
       icon = Icons.check_circle;
       break;
-    case 'error':
-      backgroundColor = Colors.red.shade400;
+    case MessageType.error:
+      backgroundColor = Colors.red.shade600;
       icon = Icons.error;
       break;
-    case 'warning':
-      backgroundColor = Colors.amber.shade400;
+    case MessageType.warning:
+      backgroundColor = Colors.amber.shade500;
       icon = Icons.warning;
       break;
-    case 'normal':
+    case MessageType.normal:
       backgroundColor = context.colorScheme.accentColor;
       icon = Icons.message;
       break;
-    default:
-      backgroundColor = Colors.blue.shade400;
-      icon = Icons.info;
   }
 
-  // Check if a snackbar is currently being shown
   if (ScaffoldMessenger.of(context).mounted) {
     ScaffoldMessenger.of(context).removeCurrentSnackBar();
   }
@@ -54,13 +35,12 @@ void _showmessage(BuildContext context, String message, String type) {
       SnackBar(
         padding: const EdgeInsets.all(10),
         elevation: 300,
-        duration: const Duration(milliseconds: 1500),
+        duration: const Duration(milliseconds: 500),
         backgroundColor: Colors.transparent,
         clipBehavior: Clip.hardEdge,
         content: Center(
           child: SizedBox(
             height: 60.h,
-            // width: double.infinity,
             child: Card(
               color: context.colorScheme.card,
               clipBehavior: Clip.hardEdge,
@@ -70,8 +50,8 @@ void _showmessage(BuildContext context, String message, String type) {
               child: Row(
                 children: [
                   Container(
-                    // width: double.infinity,
-                    // padding: EdgeInsets.all(20.r),
+                    height: 60.h,
+                    width: 60.w,
                     decoration: BoxDecoration(
                       color: backgroundColor,
                     ),
@@ -96,6 +76,22 @@ void _showmessage(BuildContext context, String message, String type) {
       ),
     );
   } catch (e) {
-    debugPrint("error is $e");
+    debugPrint("Error displaying message: $e");
   }
+}
+
+void showSuccessMessage(BuildContext context, String message) {
+  showMessage(context, message, MessageType.success);
+}
+
+void showErrorMessage(BuildContext context, String message) {
+  showMessage(context, message, MessageType.error);
+}
+
+void showWarningMessage(BuildContext context, String message) {
+  showMessage(context, message, MessageType.warning);
+}
+
+void showNormalMessage(BuildContext context, String message) {
+  showMessage(context, message, MessageType.normal);
 }
