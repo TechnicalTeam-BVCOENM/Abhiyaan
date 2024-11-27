@@ -20,21 +20,30 @@ class OnboardingView extends StatelessWidget {
                   },
                   controller: model.pageController,
                   children: [
+                    // ONBOARDING PAGES
                     for (var onboardingPages
                         in OnboardingComponents.getOnboardingPages(context))
                       onboardingPages,
                   ],
                 ),
+
+                // INDICATOR
                 Container(
                   alignment: const Alignment(0, 0.65),
                   child: SmoothPageIndicator(
-                      effect: const WormEffect(dotHeight: 10, dotWidth: 10),
+                      effect: WormEffect(
+                        dotHeight: 10,
+                        dotWidth: 10,
+                        dotColor: Colors.grey.shade300,
+                      ),
                       onDotClicked: (index) {
                         model.pageController.jumpToPage(index);
                       },
                       controller: model.pageController,
                       count: 3),
                 ),
+
+                // BUTTON
                 Container(
                     margin: const EdgeInsets.symmetric(horizontal: 40),
                     alignment: const Alignment(0, 0.85),
@@ -49,9 +58,11 @@ class OnboardingView extends StatelessWidget {
                                     style: ElevatedButton.styleFrom(
                                       padding: const EdgeInsets.all(0),
                                       foregroundColor: Colors.white,
+                                      backgroundColor:
+                                          context.colorScheme.black,
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            300), // Rounded corners
+                                        borderRadius:
+                                            BorderRadius.circular(300),
                                       ),
                                     ),
                                     onPressed: () {
@@ -59,8 +70,8 @@ class OnboardingView extends StatelessWidget {
                                           context, false, model.activeindex);
                                     },
                                     child: Icon(
-                                      Icons.arrow_back,
-                                      color: context.colorScheme.secondaryText,
+                                      Icons.arrow_back_rounded,
+                                      color: context.colorScheme.white,
                                     ))
                                 : Container()),
                         SizedBox(
@@ -70,9 +81,11 @@ class OnboardingView extends StatelessWidget {
                               style: ElevatedButton.styleFrom(
                                 padding: const EdgeInsets.all(0),
                                 foregroundColor: Colors.white,
+                                backgroundColor: model.activeindex != 2
+                                    ? context.colorScheme.black
+                                    : Colors.grey.shade100,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      300), // Rounded corners
+                                  borderRadius: BorderRadius.circular(300),
                                 ),
                               ),
                               onPressed: () {
@@ -81,12 +94,13 @@ class OnboardingView extends StatelessWidget {
                               },
                               child: model.activeindex != 2
                                   ? Icon(
-                                      Icons.arrow_forward,
-                                      color: context.colorScheme.secondaryText,
+                                      Icons.arrow_forward_rounded,
+                                      color: context.colorScheme.white,
                                     )
-                                  : const Icon(
+                                  : Icon(
                                       Icons.done_rounded,
-                                      color: Colors.green,
+                                      size: 35.r,
+                                      color: Colors.green.shade600,
                                     )),
                         )
                       ],

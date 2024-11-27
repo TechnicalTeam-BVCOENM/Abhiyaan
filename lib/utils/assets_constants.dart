@@ -17,10 +17,9 @@ class AssetImagePath {
   static const String certificateImg = 'assets/images/profile/certificate.png';
   static const String linkedinImg = 'assets/images/profile/linkedin_square.png';
   static const String logoImg = 'assets/images/abhiyaan_logo.png';
-  static const String boy = 'assets/images/onboarding/boy1.png';
-  static const String heart = 'assets/images/onboarding/heart.png';
-  static const String connect = 'assets/images/onboarding/connect.png';
-  static const String events = 'assets/images/onboarding/events.png';
+  static const String screen1 = 'assets/images/onboarding/screen1.png';
+  static const String screen2 = 'assets/images/onboarding/screen2.png';
+  static const String screen3 = 'assets/images/onboarding/screen3.png';
 
   static const String darkMode = 'assets/images/profile/dark_mode.png';
   static const String profileBackLines = 'assets/images/profile/lines.png';
