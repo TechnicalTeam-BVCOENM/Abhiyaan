@@ -20,6 +20,7 @@ class AuthViewModel extends BaseViewModel {
     _analytic.logScreen(screenName: "Auth Screen");
   }
 
+
   void navigateToSignInPage(BuildContext context) {
     try {
       _analytic.logEvent(

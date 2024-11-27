@@ -104,6 +104,7 @@ class RegisterView extends StatelessWidget {
                         10.verticalSpace,
                       ],
                     ),
+
                   ),
                 ),
               );
