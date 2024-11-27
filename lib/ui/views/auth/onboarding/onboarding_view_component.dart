@@ -10,6 +10,7 @@ class OnboardingComponents {
         AssetImagePath.screen1,
         "Join the community, connect, and share ideas",
         "Become a part of vibrant community where students, teachers, and alumni connect, collaborate, and exchange ideas to enhance learning and growth.",
+        isFirstPage: true,
       ),
       onboardingPage(
         context,
@@ -30,12 +31,14 @@ class OnboardingComponents {
     BuildContext context,
     String imagePath,
     String quote,
-    String description,
-  ) {
+    String description, {
+    bool isFirstPage = false,
+  }) {
     return Container(
       color: context.colorScheme.white,
       child: Column(
         children: [
+          isFirstPage ? 0.verticalSpace : 34.verticalSpace,
           // IMAGE
           SizedBox(
             width: double.infinity,
@@ -52,7 +55,7 @@ class OnboardingComponents {
                   textAlign: TextAlign.center,
                   style: FontThemeClass().header(
                     context,
-                    color: context.colorScheme.primaryText,
+                    color: context.colorScheme.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -62,7 +65,7 @@ class OnboardingComponents {
                   textAlign: TextAlign.center,
                   style: FontThemeClass().body(
                     context,
-                    color: context.colorScheme.primaryText.withOpacity(0.5),
+                    color: context.colorScheme.black.withOpacity(0.5),
                     fontWeight: FontWeight.w500,
                   ),
                 ),

@@ -101,19 +101,12 @@ class SignInViewModel extends BaseViewModel {
 
           // Navigate to the main view (clear the stack)
           // TODO: Replace with onboarding view
-          await _navigationService
-              .replaceWithTransition(
-                const OnboardingView(),
-                transitionStyle: Transition.rightToLeftWithFade,
-                curve: Curves.fastEaseInToSlowEaseOut,
-                duration: const Duration(milliseconds: 1500),
-              )
-              ?.then(
-                (value) => showSuccessMessage(
-                  context,
-                  "Login Successful",
-                ),
-              );
+          await _navigationService.replaceWithTransition(
+            const OnboardingView(),
+            transitionStyle: Transition.rightToLeftWithFade,
+            curve: Curves.fastEaseInToSlowEaseOut,
+            duration: const Duration(milliseconds: 1500),
+          );
         } on FirebaseAuthException catch (e) {
           // Close the loading indicator
           _navigationService.back();

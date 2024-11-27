@@ -433,19 +433,12 @@ class RegisterViewModel extends BaseViewModel {
 
           await AuthenticationService().storeUserDataLocally();
           NavigationService().back();
-          await _navigationService
-              .replaceWithTransition(
-                const OnboardingView(),
-                transitionStyle: Transition.rightToLeftWithFade,
-                curve: Curves.fastEaseInToSlowEaseOut,
-                duration: const Duration(milliseconds: 1500),
-              )
-              ?.then(
-                (value) => showSuccessMessage(
-                  context,
-                  "Registration Successful",
-                ),
-              );
+          await _navigationService.replaceWithTransition(
+            const OnboardingView(),
+            transitionStyle: Transition.rightToLeftWithFade,
+            curve: Curves.fastEaseInToSlowEaseOut,
+            duration: const Duration(milliseconds: 1500),
+          );
         } else {
           NavigationService().back();
           showErrorMessage(context, "something went wrong");
