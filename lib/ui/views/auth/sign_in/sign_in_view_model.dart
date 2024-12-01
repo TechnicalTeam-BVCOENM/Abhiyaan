@@ -100,7 +100,13 @@ class SignInViewModel extends BaseViewModel {
           );
 
           // Navigate to the main view (clear the stack)
-          await _navigationService.clearStackAndShow(Routes.bottomNavView);
+          // TODO: Replace with onboarding view
+          await _navigationService.replaceWithTransition(
+            const OnboardingView(),
+            transitionStyle: Transition.rightToLeftWithFade,
+            curve: Curves.fastEaseInToSlowEaseOut,
+            duration: const Duration(milliseconds: 1500),
+          );
         } on FirebaseAuthException catch (e) {
           // Close the loading indicator
           _navigationService.back();
@@ -151,8 +157,6 @@ class SignInViewModel extends BaseViewModel {
   void passwordResetMail() {
     FirebaseAuth.instance.sendPasswordResetEmail(email: "");
   }
-
-  void onEmailAdressValueChanged() {}
 
   void navigateToHelpSupport() {
     UrlLauncher externalUrlHandler = UrlLauncher();

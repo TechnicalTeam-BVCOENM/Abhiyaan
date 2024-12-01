@@ -36,6 +36,10 @@ class HomeView extends StatelessWidget {
           showLater: false,
           showIgnore:
               const bool.fromEnvironment('dart.vm.product') ? false : true,
+          onUpdate: () {
+            UrlLauncher().launchURL(AssetUrls.appUrl);
+            return false;
+          },
           upgrader: Upgrader(
             durationUntilAlertAgain: const Duration(days: 2),
           ),

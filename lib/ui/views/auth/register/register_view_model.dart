@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 part of 'register_view.dart';
 
 final Random random = Random();
@@ -73,75 +75,109 @@ class RegisterViewModel extends BaseViewModel {
   ) async {
     emailIdTextController.text = emailIdTextController.text.trim();
     FocusScope.of(context).requestFocus(FocusNode());
-    if (createpasswordTextController.text == "" ||
-        confirmpasswordTextController.text == "" ||
-        emailIdTextController.text == "" ||
-        userNameController.text == "") {
-      showErrorMessage(context, "some fields are empty!");
+    if (!_areFieldsFilled()) {
+      showErrorMessage(context, "Fields are empty!");
       return;
-    } else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
-        .hasMatch(emailIdTextController.text)) {
-      showErrorMessage(
-        context,
-        "Invalid email format",
-      );
+    }
+    if (!_isEmailValid()) {
+      showErrorMessage(context, "Invalid email format");
       return;
-    } else if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(userNameController.text)) {
+    }
+    if (!_isUsernameValid()) {
       showErrorMessage(context, "Username should contain only alphabets");
       return;
-    } else if (userNameController.text[0] !=
-        userNameController.text[0].toUpperCase()) {
+    }
+    if (!_isUsernameCapitalized()) {
       showErrorMessage(context, "Username should start with a capital letter");
       return;
-    } else if (createpasswordTextController.text !=
-        confirmpasswordTextController.text) {
+    }
+    if (!_arePasswordsMatching()) {
       showErrorMessage(context, "Passwords do not match");
       return;
-    } else if (confirmpasswordTextController.text.length < 8) {
-      showErrorMessage(context, "weak password length !");
+    }
+    if (!_isPasswordStrong()) {
+      showErrorMessage(context,
+          "Password must be at least 8 characters long, contain letters and digits");
       return;
-    } else if (!RegExp(r'[a-zA-Z]')
-        .hasMatch(confirmpasswordTextController.text)) {
-      showErrorMessage(context, "Password should contain a alphabet");
-      return;
-    } else if (!RegExp(r'[0-9]').hasMatch(confirmpasswordTextController.text)) {
-      showErrorMessage(context, "Password should contain a digit");
-      return;
-    } else if (await checkEmailExists(emailIdTextController.text, context)) {
-      // ignore: use_build_context_synchronously
+    }
+    if (await checkEmailExists(emailIdTextController.text, context)) {
       showErrorMessage(context, "Email Already Exists");
       return;
-    } else {
-      DateTime now = DateTime.now();
-      if (lastUpdate != null) {
-        Duration difference = now.difference(lastUpdate!);
-        log.i("difference:- $difference");
-        if (difference.inHours >= 24) {
-          // Reset count if 24 hours have passed
-          await localStorageService.write("sendOtpCount", 3);
-          await localStorageService.write("lastOtpCountUpdate", now);
-          lastUpdate = now;
-          sendOtpCount = 3;
-        }
-      }
-      if (sendOtpCount == null) {
-        lastUpdate = now;
-        sendOtpCount = 3;
-        await localStorageService.write("sendOtpCount", 3);
-        await localStorageService.write("lastOtpCountUpdate", now);
-        await sendVerifyMail(context);
-        notifyListeners();
-      } else if (sendOtpCount == 0) {
-        showErrorMessage(context, "Exceeded email verification limit.");
-        return;
-      } else {
-        sendOtpCount = sendOtpCount! - 1;
-        await localStorageService.write("sendOtpCount", sendOtpCount);
-        await sendVerifyMail(context);
-        notifyListeners();
-        return;
+    }
+
+    await _handleOtpLogic(context);
+  }
+
+  Future<void> _handleOtpLogic(BuildContext context) async {
+    DateTime now = DateTime.now();
+
+    if (lastUpdate != null) {
+      Duration difference = now.difference(lastUpdate!);
+      if (difference.inHours >= 24) {
+        await _resetOtpCount(now);
       }
     }
+
+    if (sendOtpCount == null) {
+      await _initializeOtpCount(now, context);
+    } else if (sendOtpCount == 0) {
+      showErrorMessage(context, "Exceeded email verification limit.");
+    } else {
+      sendOtpCount = sendOtpCount! - 1;
+      await localStorageService.write("sendOtpCount", sendOtpCount);
+      await sendVerifyMail(context);
+      notifyListeners();
+    }
+  }
+
+  Future<void> _resetOtpCount(DateTime now) async {
+    await localStorageService.write("sendOtpCount", 3);
+    await localStorageService.write("lastOtpCountUpdate", now);
+    sendOtpCount = 3;
+    lastUpdate = now;
+  }
+
+  Future<void> _initializeOtpCount(DateTime now, BuildContext context) async {
+    sendOtpCount = 3;
+    lastUpdate = now;
+    await localStorageService.write("sendOtpCount", 3);
+    await localStorageService.write("lastOtpCountUpdate", now);
+    await sendVerifyMail(context);
+    notifyListeners();
+  }
+
+  bool _areFieldsFilled() {
+    return emailIdTextController.text.isNotEmpty &&
+        createpasswordTextController.text.isNotEmpty &&
+        confirmpasswordTextController.text.isNotEmpty &&
+        userNameController.text.isNotEmpty;
+  }
+
+  bool _isEmailValid() {
+    final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+    return emailRegex.hasMatch(emailIdTextController.text);
+  }
+
+  bool _isUsernameValid() {
+    final usernameRegex = RegExp(r'^[a-zA-Z ]+$');
+    return usernameRegex.hasMatch(userNameController.text);
+  }
+
+  bool _isUsernameCapitalized() {
+    return userNameController.text[0] ==
+        userNameController.text[0].toUpperCase();
+  }
+
+  bool _arePasswordsMatching() {
+    return createpasswordTextController.text ==
+        confirmpasswordTextController.text;
+  }
+
+  bool _isPasswordStrong() {
+    final password = confirmpasswordTextController.text;
+    return password.length >= 8 &&
+        RegExp(r'[a-zA-Z]').hasMatch(password) &&
+        RegExp(r'[0-9]').hasMatch(password);
   }
 
   void navigateToAuth() {
@@ -154,8 +190,7 @@ class RegisterViewModel extends BaseViewModel {
     final message = Message()
       ..from = const Address(
           "technicalteam.bvcoenm@gmail.com", "The Dev Crew Technical Team")
-      ..recipients.add(
-          emailIdTextController.text) // Set the recipient to niranjan@gmail.com
+      ..recipients.add(emailIdTextController.text)
       ..subject = 'TDC Email OTP Verification'
       ..html = ''' <html>
     <body>
@@ -176,55 +211,16 @@ class RegisterViewModel extends BaseViewModel {
       showSuccessMessage(context, 'Message sent: $sendReport');
     } on MailerException catch (e) {
       NavigationService().back();
-      showErrorMessage(context, 'something went wrong');
+      showErrorMessage(context, 'Something went wrong');
       for (var p in e.problems) {
         debugPrint('Problem: ${p.code}: ${p.msg}');
       }
     }
-//     var template = '''
-//   <html>
-//     <body>
-//       <h1>Abhiyaan App Email Verification</h1>
-//       <p>Dear user,</p>
-//       <p>Your verification code is: {{OTP}}</p>
-//       <p>Please enter this code in the app to complete the registration process.</p>
-//       <p>Thank you!</p>
-//       <p>Abhiyaan Technical Team</p>
-//     </body>
-//   </html>
-// ''';
-    // await myauth.setConfig(
-    //     appEmail: "technicalteam.bvcoenm@gmail.com",
-    //     appName: "Abhiyaan",
-    //     userEmail: emailIdTextController.text,
-    //     otpLength: 5,
-    //     otpType: OTPType.digitsOnly);
-    // await myauth.setTemplate(render: template);
-    // await myauth.setSMTP(
-    //     host: "abhiyaan-2023.netlify.app",
-    //     auth: true,
-    //     username: "email-otp@rohitchouhan.com",
-    //     password: "*************",
-    //     secure: "TLS",
-    // port: 576);
-    //   if (await myauth.sendOTP() == false) {
-    //     NavigationService().back();
-    //     verifyEmailDialogue(context);
-    //     showSuccessMessage(context, "OTP Sent");
-    //   } else {
-    //     NavigationService().back();
-    //     print(emailIdTextController.text);
-    //     showErrorMessage(context, "Oops, OTP send failed");
-    //   }
   }
 
-  navigateToHelpSupport() async {
+  void navigateToHelpSupport() async {
     UrlLauncher externalUrlHandler = UrlLauncher();
     await externalUrlHandler.launchEmail("technicalteam.bvcoenm@gmail.com");
-  }
-
-  navigateToSignIn() async {
-    _navigationService.replaceWith(Routes.signInView);
   }
 
   void verifyEmailDialogue(context) {
@@ -436,21 +432,13 @@ class RegisterViewModel extends BaseViewModel {
           });
 
           await AuthenticationService().storeUserDataLocally();
-          // ignore: use_build_context_synchronously
           NavigationService().back();
-          await _navigationService
-              .replaceWithTransition(
-                const OnboardingView(),
-                transitionStyle: Transition.rightToLeftWithFade,
-                curve: Curves.fastEaseInToSlowEaseOut,
-                duration: const Duration(milliseconds: 1500),
-              )
-              ?.then(
-                (value) => showSuccessMessage(
-                  context,
-                  "Registration successful",
-                ),
-              );
+          await _navigationService.replaceWithTransition(
+            const OnboardingView(),
+            transitionStyle: Transition.rightToLeftWithFade,
+            curve: Curves.fastEaseInToSlowEaseOut,
+            duration: const Duration(milliseconds: 1500),
+          );
         } else {
           NavigationService().back();
           showErrorMessage(context, "something went wrong");
