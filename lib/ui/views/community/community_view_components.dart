@@ -7,7 +7,7 @@ Widget _buildClubs(List<ClubsDataModel> clubsData, String title) {
     children: [
       SectionText(title: title, showArrow: true),
       SizedBox(
-        height: 115.h,
+        height: 125.h,
         width: double.infinity,
         child: CarouselSlider.builder(
           itemCount: clubsData.length,
