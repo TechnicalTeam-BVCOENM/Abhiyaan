@@ -1,3 +1,4 @@
+import 'package:abhiyaan/app/app.packageInfo.dart';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,7 +33,7 @@ class SplashView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Version ${AppConstants.appVersion}',
+                    'Version ${PackageInfoService.version}',
                     style: FontThemeClass().caption(
                       context,
                       color: context.colorScheme.secondaryText,

@@ -59,6 +59,7 @@ class AnimationAssets {
   static const String handLoading = 'assets/animations/hand_loading.json';
 }
 
-class AppConstants {
-  static const String appVersion = '1.1.5';
-}
+// class AppConstants {
+//   static const String appVersion = '1.1.5';
+// }
+// TODO(Niranjan-Dorage): remove abouve comments

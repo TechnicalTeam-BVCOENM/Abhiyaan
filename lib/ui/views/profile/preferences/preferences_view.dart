@@ -1,4 +1,5 @@
 import 'package:abhiyaan/app/app.dialogs.dart';
+import 'package:abhiyaan/app/app.packageInfo.dart';
 import 'package:abhiyaan/file_exporter.dart';
 import 'package:abhiyaan/ui/common/circular_loading_indicator.dart';
 import 'package:abhiyaan/ui/common/toast_message.dart';
@@ -125,7 +126,7 @@ class PreferencesView extends StatelessWidget {
                     const LogoutButton(),
                     22.verticalSpace,
                     Text(
-                      'Abhiyaan v${AppConstants.appVersion}',
+                      'Abhiyaan v${PackageInfoService.version}',
                       style: font.paragraph(
                         context,
                         color: context.colorScheme.secondaryText,
