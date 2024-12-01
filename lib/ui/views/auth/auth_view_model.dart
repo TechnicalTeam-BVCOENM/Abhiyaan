@@ -4,6 +4,8 @@ class AuthViewModel extends BaseViewModel {
   final log = getLogger('auth_view');
   final _navigation = locator<NavigationService>();
   final _analytic = locator<AnalyticsService>();
+  final font = FontThemeClass();
+
 
   final List<String> onboardingText = ['Events', 'College Updates', 'Memories'];
   final List<String> story = [
