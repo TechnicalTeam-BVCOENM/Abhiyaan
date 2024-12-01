@@ -154,14 +154,13 @@ class AuthButtons extends ViewModelWidget<AuthViewModel> {
           topRight: const Radius.circular(30).r,
         ),
       ),
-      height: 190.h,
       width: MediaQuery.of(context).size.width,
       child: Column(
         children: [
           buildLoginButton(viewModel, context),
           12.verticalSpace,
           buildRegisterButton(viewModel, context),
-          const Spacer(),
+          12.verticalSpace,
           Center(
             child: Text(
               "By continuing, you agree to our Terms of Service and Privacy Policy", // TODO: Add Terms of Service and Privacy Policy links
