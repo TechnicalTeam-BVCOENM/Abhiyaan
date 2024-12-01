@@ -263,15 +263,15 @@ Column buildInfoWidget(BuildContext context) {
 }
 
 Text buildVersionInfoWidget(BuildContext context) {
-  return Text(
-    'Abhiyaan v${AppConstants.appVersion}',
-    textAlign: TextAlign.center,
-    style: FontThemeClass().caption(
-      context,
-      color: context.colorScheme.secondaryText.withOpacity(0.18),
-      fontWeight: FontWeight.w500,
-    ),
-  );
+  return  Text(
+                              'Abhiyaan v${PackageInfoService.version}',
+                                textAlign: TextAlign.center,
+                                style: FontThemeClass().caption(
+                                  context,
+                                  color: context.colorScheme.secondaryText,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              );
 }
 
 Column buildRegisterDisabledWidget(
