@@ -7,7 +7,7 @@ Widget _buildClubs(List<ClubsDataModel> clubsData, String title) {
     children: [
       SectionText(title: title, showArrow: true),
       SizedBox(
-        height: 110.h,
+        height: 115.h,
         width: double.infinity,
         child: CarouselSlider.builder(
           itemCount: clubsData.length,
@@ -292,7 +292,7 @@ class ClubsViewWidget extends ViewModelWidget<CommunityViewModel> {
         viewModel.navigationService.navigateToClubsView(clubsData: data);
       },
       child: SizedBox(
-        width: 248.w,
+        width: 252.w,
         child: Center(
           child: Card(
             shape: RoundedRectangleBorder(

@@ -38,8 +38,7 @@ class CommunityView extends StatelessWidget {
               : SafeArea(
                   minimum: const EdgeInsets.symmetric(horizontal: 18).r,
                   child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(
-                        parent: AlwaysScrollableScrollPhysics()),
+                    physics: const BouncingScrollPhysics(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

@@ -30,9 +30,26 @@ class RegisterViewModel extends BaseViewModel {
   bool isCreatePasswordVisible = false;
   bool isConfirmPasswordVisible = false;
   bool isEmailIdValid = true;
+  bool shouldShowUI = false;
 
-  void init() {
+  void init() async {
+    setBusy(true);
     _analyticsService.logScreen(screenName: 'RegisterView');
+    await _shouldRenderUI();
+    setBusy(false);
+  }
+
+  Future<void> _shouldRenderUI() async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('AppCheck')
+        .doc("showRegistration")
+        .get();
+
+    if (snapshot.exists) {
+      final data = snapshot.data();
+      shouldShowUI = data?['value'] ?? false;
+    }
+    notifyListeners();
   }
 
   bool toggleCreatePasswordVisibility() {

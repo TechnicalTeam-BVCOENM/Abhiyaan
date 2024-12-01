@@ -17,7 +17,7 @@ void showNormalMessage(BuildContext context, String message) {
 }
 
 void _showmessage(BuildContext context, String message, String type) {
-  assert(message.length < 50, "message should be smaller than 50 characters");
+  // assert(message.length < 50, "message should be smaller than 50 characters");
   FontThemeClass fontTheme = FontThemeClass();
   Color backgroundColor;
   IconData icon;
