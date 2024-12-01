@@ -320,8 +320,7 @@ class ClubsViewWidget extends ViewModelWidget<CommunityViewModel> {
                         ClipOval(
                           child: CachedNetworkImage(
                             imageUrl: data.clubImage,
-                            height: 65.h,
-                            width: 65.w,
+                            width: 60.w,
                             fit: BoxFit.cover,
                           ),
                         ),
