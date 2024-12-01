@@ -51,6 +51,7 @@ class AssetUrls {
   static const instagramUrl = "https://www.instagram.com/thedevcrew/";
   static const linkedinUrl = "https://www.linkedin.com/company/the-dev-crew/";
   static const twitterUrl = "https://x.com/thedevcrew_";
+  static const appUrl="https://play.google.com/store/apps/details?id=com.bvcoenm.abhiyaan";
 }
 
 class AnimationAssets {
