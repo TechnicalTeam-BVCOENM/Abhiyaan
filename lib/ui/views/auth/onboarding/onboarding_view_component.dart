@@ -1,6 +1,7 @@
 // ignore_for_file: unused_element
 
 import 'package:abhiyaan/file_exporter.dart';
+import 'package:abhiyaan/ui/views/auth/onboarding/onboarding_view.dart';
 
 class OnboardingComponents {
   static List<Widget> getOnboardingPages(BuildContext context) {
@@ -75,5 +76,104 @@ class OnboardingComponents {
         ],
       ),
     );
+  }
+}
+class OnboardingPageView extends ViewModelWidget<OnboardingViewModel> {
+  const OnboardingPageView({super.key});
+
+  @override
+  Widget build(BuildContext context, OnboardingViewModel viewModel) {
+    return PageView(
+      onPageChanged: (index) {
+        viewModel.index(index);
+      },
+      controller: viewModel.pageController,
+      children: [
+        for (var onboardingPages
+            in OnboardingComponents.getOnboardingPages(context))
+          onboardingPages,
+      ],
+    );
+  }
+}
+
+class PageIndicator extends ViewModelWidget<OnboardingViewModel> {
+  const PageIndicator({super.key});
+
+  @override
+  Widget build(BuildContext context, OnboardingViewModel viewModel) {
+    return Container(
+      alignment: const Alignment(0, 0.65),
+      child: SmoothPageIndicator(
+          effect: const WormEffect(dotHeight: 10, dotWidth: 10),
+          onDotClicked: (index) {
+            viewModel.pageController.jumpToPage(index);
+          },
+          controller: viewModel.pageController,
+          count: 3),
+    );
+  }
+}
+
+class PageControllerIcons extends ViewModelWidget<OnboardingViewModel> {
+  const PageControllerIcons({super.key});
+
+  @override
+  Widget build(BuildContext context, OnboardingViewModel viewModel) {
+    return Container(
+        margin: const EdgeInsets.symmetric(horizontal: 40),
+        alignment: const Alignment(0, 0.85),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+                width: 60.r,
+                height: 60.r,
+                child: viewModel.activeindex != 0
+                    ? ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(0),
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(300), // Rounded corners
+                          ),
+                        ),
+                        onPressed: () {
+                          viewModel.updateindex(
+                              context, false, viewModel.activeindex);
+                        },
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: context.colorScheme.secondaryText,
+                        ))
+                    : Container()),
+            SizedBox(
+              width: 60.r,
+              height: 60.r,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.all(0),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(300), // Rounded corners
+                    ),
+                  ),
+                  onPressed: () {
+                    viewModel.updateindex(context, true, viewModel.activeindex);
+                  },
+                  child: viewModel.activeindex != 2
+                      ? Icon(
+                          Icons.arrow_forward,
+                          color: context.colorScheme.secondaryText,
+                        )
+                      : const Icon(
+                          Icons.done_rounded,
+                          color: Colors.green,
+                        )),
+            )
+          ],
+        ));
   }
 }

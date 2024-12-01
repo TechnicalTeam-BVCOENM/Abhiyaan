@@ -11,100 +11,15 @@ class OnboardingView extends StatelessWidget {
       builder: (context, model, child) {
         return Scaffold(
           backgroundColor: context.colorScheme.scaffold,
-          body: SafeArea(
+          body: const SafeArea(
             child: Stack(
               children: [
-                PageView(
-                  onPageChanged: (index) {
-                    model.index(index);
-                  },
-                  controller: model.pageController,
-                  children: [
-                    // ONBOARDING PAGES
-                    for (var onboardingPages
-                        in OnboardingComponents.getOnboardingPages(context))
-                      onboardingPages,
-                  ],
-                ),
-
+                // PAGE VIEW
+                OnboardingPageView(),
                 // INDICATOR
-                Container(
-                  alignment: const Alignment(0, 0.65),
-                  child: SmoothPageIndicator(
-                      effect: WormEffect(
-                        dotHeight: 10,
-                        dotWidth: 10,
-                        dotColor: Colors.grey.shade300,
-                      ),
-                      onDotClicked: (index) {
-                        model.pageController.jumpToPage(index);
-                      },
-                      controller: model.pageController,
-                      count: 3),
-                ),
-
+                PageIndicator(),
                 // BUTTON
-                Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 40),
-                    alignment: const Alignment(0, 0.85),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                            width: 60.r,
-                            height: 60.r,
-                            child: model.activeindex != 0
-                                ? ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      padding: const EdgeInsets.all(0),
-                                      foregroundColor: Colors.white,
-                                      backgroundColor:
-                                          context.colorScheme.black,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(300),
-                                      ),
-                                    ),
-                                    onPressed: () {
-                                      model.updateindex(
-                                          context, false, model.activeindex);
-                                    },
-                                    child: Icon(
-                                      Icons.arrow_back_rounded,
-                                      color: context.colorScheme.white,
-                                    ))
-                                : Container()),
-                        SizedBox(
-                          width: 60.r,
-                          height: 60.r,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.all(0),
-                                foregroundColor: Colors.white,
-                                backgroundColor: model.activeindex != 2
-                                    ? context.colorScheme.black
-                                    : Colors.grey.shade100,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(300),
-                                ),
-                              ),
-                              onPressed: () {
-                                model.updateindex(
-                                    context, true, model.activeindex);
-                              },
-                              child: model.activeindex != 2
-                                  ? Icon(
-                                      Icons.arrow_forward_rounded,
-                                      color: context.colorScheme.white,
-                                    )
-                                  : Icon(
-                                      Icons.done_rounded,
-                                      size: 35.r,
-                                      color: Colors.green.shade600,
-                                    )),
-                        )
-                      ],
-                    ))
+                PageControllerIcons()
               ],
             ),
           ),
