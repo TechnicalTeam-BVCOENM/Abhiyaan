@@ -190,28 +190,23 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
               ),
             ),
             12.verticalSpace,
-            GestureDetector(
-              onTap: () {
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor:
+                    context.colorScheme.accentColor.withOpacity(0.7),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10).r,
+                ),
+              ),
+              onPressed: () {
                 viewModel.addEventToCalender(eventData);
               },
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      context.colorScheme.accentColor.withOpacity(0.7),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10).r,
-                  ),
-                ),
-                onPressed: () {
-                  viewModel.addEventToCalender(eventData);
-                },
-                child: Text(
-                  "Add to Calender",
-                  style: fontTheme.body(
-                    context,
-                    color: context.colorScheme.white,
-                    fontWeight: FontWeight.w600,
-                  ),
+              child: Text(
+                "Add to Calender",
+                style: fontTheme.body(
+                  context,
+                  color: context.colorScheme.white,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
@@ -309,33 +304,44 @@ class DetailedEventData extends ViewModelWidget<DetailedEventViewModel> {
                 : const SizedBox(),
             8.verticalSpace,
             eventData.cPhone.toString().isNotEmpty
-                ? Row(
-                    children: [
-                      Container(
-                        height: 28.h,
-                        width: 28.w,
-                        alignment: Alignment.center,
-                        margin: const EdgeInsets.only(right: 8.0),
-                        // decoration: BoxDecoration(
-                        //   shape: BoxShape.circle,
-                        //   color: Colors.white,
-                        // ),
-                        child: Icon(
-                          Icons.phone_in_talk_rounded,
-                          size: 24.sp,
-                          color: context.colorScheme.accentColor,
+                ? ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          context.colorScheme.accentColor.withOpacity(0.7),
+                      padding: const EdgeInsets.all(0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10).r,
+                      ),
+                    ),
+                    onPressed: () async {
+                      await UrlLauncher()
+                          .makePhoneCall(eventData.cPhone.toString());
+                    },
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 28.h,
+                          width: 28.w,
+                          margin: EdgeInsets.symmetric(horizontal: 8.r),
+                          child: Icon(
+                            Icons.phone_in_talk_rounded,
+                            size: 24.sp,
+                            color: context.colorScheme.white,
+                          ),
                         ),
-                      ),
-                      Text(
-                        eventData.cPhone.toString(),
-                        style: fontTheme.caption(context),
-                      ),
-                    ],
+                        Text(
+                          "Call:  ${eventData.cPhone}",
+                          style: fontTheme.caption(
+                            context,
+                            color: context.colorScheme.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
                   )
                 : const SizedBox(),
-            40.verticalSpace,
-            const Text(""),
-            32.verticalSpace,
+            100.verticalSpace,
           ].animate(delay: 0.ms, interval: 100.ms).fadeIn(curve: Curves.easeIn),
         ),
       ),
