@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:abhiyaan/app/app.packageInfo.dart';
 import 'package:abhiyaan/ui/views/auth/onboarding/onboarding_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/file_exporter.dart';

@@ -1,5 +1,6 @@
 import 'package:abhiyaan/app/app.bottomsheets.dart';
 import 'package:abhiyaan/app/app.dialogs.dart';
+import 'package:abhiyaan/app/app.packageInfo.dart';
 import 'package:abhiyaan/firebase_options_prod.dart' as prod_options;
 import 'package:abhiyaan/firebase_options_dev.dart' as dev_options;
 import 'package:abhiyaan/services/notification_service.dart';
@@ -50,9 +51,10 @@ Future<void> servicesToInitializeBeforeAppStart() async {
   ]);
 }
 
-void setupBeforeAppRun() {
+Future<void> setupBeforeAppRun() async {
   setupDialogUi();
   setupBottomSheetUi();
+  PackageInfoService.setUpPackageInfo();
 
   if (kDebugMode) {
     FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
@@ -67,7 +69,7 @@ void main() async {
 
   final analytics = FirebaseAnalytics.instance;
   await analytics.logAppOpen();
-  setupBeforeAppRun();
+  await setupBeforeAppRun();
   runApp(const MyApp());
 }
 
