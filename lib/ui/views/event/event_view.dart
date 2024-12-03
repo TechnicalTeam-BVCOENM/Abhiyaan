@@ -50,7 +50,7 @@ class EventView extends StatelessWidget {
                           10.verticalSpace,
                           Center(
                             child: Text(
-                                "dimag ka bhosda karneki ninja technique",
+                                "karneki ninja technique",
                                 style: model.fontTheme.small(context)),
                           ),
                           18.verticalSpace,
