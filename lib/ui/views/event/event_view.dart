@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:abhiyaan/ui/common/url_launcher.dart';
 import 'package:abhiyaan/services/firestore_service.dart';
 import 'package:abhiyaan/theme/responsive_utils.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
@@ -46,6 +47,14 @@ class EventView extends StatelessWidget {
                               ),
                             ),
                           ),
+                          10.verticalSpace,
+                          Center(
+                            child: Text(
+                                "dimag ka bhosda karneki ninja technique",
+                                style: model.fontTheme.small(context)),
+                          ),
+                          18.verticalSpace,
+                          const EventsTabview(),
                           // model.todayEvent?.length == 1
                           //     ? Column(
                           //         crossAxisAlignment: CrossAxisAlignment.start,

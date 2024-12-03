@@ -710,3 +710,61 @@ class MemoryCard extends StatelessWidget {
     );
   }
 }
+
+class EventsTabview extends ViewModelWidget<EventViewModel> {
+  const EventsTabview({super.key});
+
+  @override
+  Widget build(BuildContext context, EventViewModel viewModel) {
+    final List<Tab> myTabs = <Tab>[
+      const Tab(text: 'Events'),
+      const Tab(text: 'Seminar'),
+      const Tab(text: 'Workshop'),
+      const Tab(text: 'Gallery'),
+    ];
+
+    final TabController tabController =
+        TabController(length: myTabs.length, vsync: Scaffold.of(context));
+
+    return SizedBox(
+      height: 1000.h,
+      width: double.infinity,
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 0,
+          bottom: TabBar(
+            controller: tabController,
+            tabs: myTabs,
+            labelColor: context.colorScheme.white,
+            labelPadding: const EdgeInsets.all(0),
+            padding: const EdgeInsets.symmetric(horizontal: 10).r,
+            unselectedLabelColor: context.colorScheme.black,
+            dividerColor: context.colorScheme.scaffold,
+            indicatorSize: TabBarIndicatorSize.tab,
+            labelStyle: FontThemeClass().caption(
+              context,
+              fontWeight: FontWeight.w600,
+            ),
+            indicator: BoxDecoration(
+              color: context.colorScheme.accentColor,
+              borderRadius: BorderRadius.circular(10).r,
+            ),
+          ),
+        ),
+        body: PageView(
+          controller: PageController(),
+          physics: const NeverScrollableScrollPhysics(), // Disable swipe
+          onPageChanged: (index) {
+            tabController.index = index; // Sync the TabBar with the PageView
+          },
+          children: const [
+            Center(child: Text("A")),
+            Center(child: Text("B")),
+            Center(child: Text("C")),
+            Center(child: Text("D")),
+          ],
+        ),
+      ),
+    );
+  }
+}

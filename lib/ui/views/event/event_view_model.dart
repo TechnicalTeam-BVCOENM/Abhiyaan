@@ -6,9 +6,12 @@ class EventViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
   final _navigationService = locator<NavigationService>();
   final _analyticsService = locator<AnalyticsService>();
+  FontThemeClass fontTheme = FontThemeClass();
+
   List<SponsorsModel> _sponsors = [];
   List<MemoriesModel> _bestMemories = [];
   List<SponsorsModel> get sponsors => _sponsors;
+  List<MemoriesModel> get bestMemories => _bestMemories;
   List<EventModel> _events = [];
   List<GalleryModel> _gallery = [];
   List<EventModel> get events => _events;
@@ -152,6 +155,7 @@ class EventViewModel extends BaseViewModel {
 }
 
 // Models
+
 class EventModel {
   String title;
   Timestamp startDate;
@@ -165,18 +169,87 @@ class EventModel {
   String registerUrl;
   String docID;
 
-  EventModel(
-      {required this.title,
-      required this.startDate,
-      required this.endDate,
-      required this.location,
-      required this.imageUrl,
-      required this.cName,
-      required this.cEmail,
-      required this.cPhone,
-      required this.about,
-      required this.registerUrl,
-      required this.docID});
+  EventModel({
+    required this.title,
+    required this.startDate,
+    required this.endDate,
+    required this.imageUrl,
+    required this.location,
+    required this.cName,
+    required this.cEmail,
+    required this.cPhone,
+    required this.about,
+    required this.registerUrl,
+    required this.docID,
+  });
+
+  // Factory constructor to create an EventModel from a Firestore document
+  factory EventModel.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    return EventModel(
+      title: data['title'] ?? '',
+      startDate: data['startDate'] ?? Timestamp.now(),
+      endDate: data['endDate'] ?? Timestamp.now(),
+      imageUrl: data['imageUrl'] ?? '',
+      location: data['location'] ?? '',
+      cName: data['cName'] ?? '',
+      cEmail: data['cEmail'] ?? '',
+      cPhone: data['cPhone'] ?? 0,
+      about: data['about'] ?? '',
+      registerUrl: data['registerUrl'] ?? '',
+      docID: doc.id,
+    );
+  }
+
+  // Convert an EventModel instance to a Map for Firestore
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'startDate': startDate,
+      'endDate': endDate,
+      'imageUrl': imageUrl,
+      'location': location,
+      'cName': cName,
+      'cEmail': cEmail,
+      'cPhone': cPhone,
+      'about': about,
+      'registerUrl': registerUrl,
+    };
+  }
+
+  // Factory constructor to create an EventModel from a JSON Map
+  factory EventModel.fromJson(Map<String, dynamic> json) {
+    return EventModel(
+      title: json['title'] ?? '',
+      startDate: json['startDate'] ?? Timestamp.now(),
+      endDate: json['endDate'] ?? Timestamp.now(),
+      imageUrl: json['imageUrl'] ?? '',
+      location: json['location'] ?? '',
+      cName: json['cName'] ?? '',
+      cEmail: json['cEmail'] ?? '',
+      cPhone: json['cPhone'] ?? 0,
+      about: json['about'] ?? '',
+      registerUrl: json['registerUrl'] ?? '',
+      docID: json['docID'] ?? '',
+    );
+  }
+
+  // Convert an EventModel instance to a JSON Map
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'startDate': startDate,
+      'endDate': endDate,
+      'imageUrl': imageUrl,
+      'location': location,
+      'cName': cName,
+      'cEmail': cEmail,
+      'cPhone': cPhone,
+      'about': about,
+      'registerUrl': registerUrl,
+      'docID': docID,
+    };
+  }
 }
 
 class SponsorsModel {
