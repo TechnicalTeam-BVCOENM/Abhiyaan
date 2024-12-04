@@ -6,6 +6,7 @@ class EventViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = FirestoreService();
   final _navigationService = locator<NavigationService>();
   final _analyticsService = locator<AnalyticsService>();
+  EventDetails eventDetails = EventDetails();
   FontThemeClass fontTheme = FontThemeClass();
 
   List<SponsorsModel> _sponsors = [];
@@ -73,13 +74,14 @@ class EventViewModel extends BaseViewModel {
       _gallery = await runBusyFuture(_firestoreService.getGalleryImages());
       _bestMemories = await runBusyFuture(_firestoreService.getAllMemories());
       _gallery.sort((a, b) => b.year.compareTo(a.year));
-      getRemainingEvents();
-      notifyListeners();
-      getTodaysEvent();
       _sponsors = await _firestoreService.getAllSponsors();
+      sortEventsByDateTime(events);
       notifyListeners();
-      getTodaysEvent();
-      notifyListeners();
+      // getRemainingEvents();
+      // getTodaysEvent();
+      // notifyListeners();
+      // getTodaysEvent();
+      // notifyListeners();
     } catch (e) {
       log.e("Error Loading Sponsors: ${e.toString()}");
     }
@@ -155,6 +157,18 @@ class EventViewModel extends BaseViewModel {
 }
 
 // Models
+void sortEventsByDateTime(List<EventModel> events) {
+  events.sort((a, b) {
+    int dateComparison = a.startDate.toDate().compareTo(b.startDate.toDate());
+    if (dateComparison == 0) {
+      return a.endDate.toDate().compareTo(b.endDate.toDate());
+    }
+    return dateComparison;
+  });
+  for (EventModel event in events) {
+    print(event.startDate.toDate());
+  }
+}
 
 class EventModel {
   String title;

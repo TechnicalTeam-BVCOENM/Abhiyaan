@@ -50,11 +50,13 @@ class EventView extends StatelessWidget {
                           10.verticalSpace,
                           Center(
                             child: Text(
-                                "karneki ninja technique",
-                                style: model.fontTheme.small(context)),
+                              "karneki ninja technique",
+                              style: model.fontTheme.small(context),
+                            ),
                           ),
                           18.verticalSpace,
                           const EventsTabview(),
+
                           // model.todayEvent?.length == 1
                           //     ? Column(
                           //         crossAxisAlignment: CrossAxisAlignment.start,

@@ -221,26 +221,26 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
       spreadRadius = 0;
       blurRadius = 0;
     }
-    FontThemeClass fontTheme = FontThemeClass();
-    EventDetails eventDetails = EventDetails();
+
     return Positioned(
       child: Container(
-        color: context.colorScheme.card.withOpacity(0.5),
-        height: 275.h,
-        width: double.infinity,
+        // color: context.colorScheme.card.withOpacity(0.5),
+        padding: const EdgeInsets.symmetric(horizontal: 20).r,
         child: Column(
           children: [
             Hero(
               tag: "eventImage+${model.imageUrl}-${model.title}",
-              child: CachedNetworkImageWidget(
-                imageUrl: model.imageUrl,
-                height: 178.h,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                maxHeightDiskCache: 400,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(24).r,
+                child: CachedNetworkImageWidget(
+                  imageUrl: model.imageUrl,
+                  width: double.infinity,
+                  height: 400.h,
+                  fit: BoxFit.cover,
+                  maxHeightDiskCache: 400,
+                ),
               ),
             ),
-            const Spacer(),
             Column(
               children: [
                 Row(
@@ -256,7 +256,7 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                             model.title.length > 15
                                 ? "${model.title.substring(0, 15)}.."
                                 : model.title,
-                            style: fontTheme.title2(
+                            style: viewModel.fontTheme.title2(
                               context,
                               fontWeight: FontWeight.w700,
                             ),
@@ -264,12 +264,12 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              eventDetails.eventTime(
+                              viewModel.eventDetails.eventTime(
                                 context,
                                 "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}",
                               ),
                               10.horizontalSpace,
-                              eventDetails.eventLocation(
+                              viewModel.eventDetails.eventLocation(
                                 context,
                                 model.location,
                               ),
@@ -308,7 +308,7 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
                           child: Center(
                             child: Text(
                               "Dive Deeper",
-                              style: fontTheme.caption(
+                              style: viewModel.fontTheme.caption(
                                 context,
                                 color: context.colorScheme.white,
                                 fontWeight: FontWeight.w600,
@@ -727,7 +727,7 @@ class EventsTabview extends ViewModelWidget<EventViewModel> {
         TabController(length: myTabs.length, vsync: Scaffold.of(context));
 
     return SizedBox(
-      height: 1000.h,
+      height: 700.h,
       width: double.infinity,
       child: Scaffold(
         appBar: AppBar(
@@ -751,18 +751,20 @@ class EventsTabview extends ViewModelWidget<EventViewModel> {
             ),
           ),
         ),
-        body: PageView(
-          controller: PageController(),
-          physics: const NeverScrollableScrollPhysics(), // Disable swipe
-          onPageChanged: (index) {
-            tabController.index = index; // Sync the TabBar with the PageView
-          },
-          children: const [
-            Center(child: Text("A")),
-            Center(child: Text("B")),
-            Center(child: Text("C")),
-            Center(child: Text("D")),
-          ],
+        body: Padding(
+          padding: const EdgeInsets.only(top: 18).r,
+          child: TabBarView(
+            controller: tabController,
+            physics: const NeverScrollableScrollPhysics(), // Disable swipe
+            children: [
+              EventCardInfo(
+                model: viewModel.events[0],
+              ),
+              Center(child: Text("B")),
+              Center(child: Text("C")),
+              Center(child: Text("D")),
+            ],
+          ),
         ),
       ),
     );
