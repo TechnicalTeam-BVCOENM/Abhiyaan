@@ -221,110 +221,105 @@ class EventCardInfo extends ViewModelWidget<EventViewModel> {
       spreadRadius = 0;
       blurRadius = 0;
     }
-
-    return Positioned(
-      child: Container(
-        // color: context.colorScheme.card.withOpacity(0.5),
-        padding: const EdgeInsets.symmetric(horizontal: 20).r,
-        child: Column(
-          children: [
-            Hero(
-              tag: "eventImage+${model.imageUrl}-${model.title}",
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(24).r,
-                child: CachedNetworkImageWidget(
-                  imageUrl: model.imageUrl,
-                  width: double.infinity,
-                  height: 400.h,
-                  fit: BoxFit.cover,
-                  maxHeightDiskCache: 400,
-                ),
-              ),
+    return Container(
+      color: context.colorScheme.card.withOpacity(0.5),
+      height: 275.h,
+      // width: double.infinity,
+      child: Column(
+        children: [
+          Hero(
+            tag: "eventImage+${model.imageUrl}-${model.title}",
+            child: CachedNetworkImageWidget(
+              imageUrl: model.imageUrl,
+              height: 178.h,
+              width: double.infinity,
+              fit: BoxFit.cover,
+              maxHeightDiskCache: 400,
             ),
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 18).r,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          8.verticalSpace,
-                          Text(
-                            model.title.length > 15
-                                ? "${model.title.substring(0, 15)}.."
-                                : model.title,
-                            style: viewModel.fontTheme.title2(
+          ),
+          // const Spacer(),
+          Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 18).r,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        8.verticalSpace,
+                        Text(
+                          model.title.length > 15
+                              ? "${model.title.substring(0, 15)}.."
+                              : model.title,
+                          style: viewModel.fontTheme.title2(
+                            context,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            viewModel.eventDetails.eventTime(
                               context,
-                              fontWeight: FontWeight.w700,
+                              "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}",
                             ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              viewModel.eventDetails.eventTime(
-                                context,
-                                "${model.startDate.toDate().hour}:${model.startDate.toDate().minute}",
-                              ),
-                              10.horizontalSpace,
-                              viewModel.eventDetails.eventLocation(
-                                context,
-                                model.location,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                            10.horizontalSpace,
+                            viewModel.eventDetails.eventLocation(
+                              context,
+                              model.location,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    // Event Button
-                    Padding(
-                      padding: const EdgeInsets.only(right: 18).r,
-                      child: GestureDetector(
-                        onTap: () {
-                          _analyticsService.logEvent(
-                            eventName: "Event_Screen",
-                            value: " ${model.title} Event Opened",
-                          );
-                          viewModel._navigationService
-                              .navigateToDetailedEventView(eventData: model);
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(8).r,
-                          decoration: BoxDecoration(
-                            color: context.colorScheme.accentColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: context.colorScheme.accentColor
-                                    .withOpacity(0.4),
-                                spreadRadius: spreadRadius,
-                                blurRadius: blurRadius,
-                                offset: const Offset(0, 1),
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "Dive Deeper",
-                              style: viewModel.fontTheme.caption(
-                                context,
-                                color: context.colorScheme.white,
-                                fontWeight: FontWeight.w600,
-                              ),
+                  ),
+                  // Event Button
+                  Padding(
+                    padding: const EdgeInsets.only(right: 18).r,
+                    child: GestureDetector(
+                      onTap: () {
+                        _analyticsService.logEvent(
+                          eventName: "Event_Screen",
+                          value: " ${model.title} Event Opened",
+                        );
+                        viewModel._navigationService
+                            .navigateToDetailedEventView(eventData: model);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(8).r,
+                        decoration: BoxDecoration(
+                          color: context.colorScheme.accentColor,
+                          boxShadow: [
+                            BoxShadow(
+                              color: context.colorScheme.accentColor
+                                  .withOpacity(0.4),
+                              spreadRadius: spreadRadius,
+                              blurRadius: blurRadius,
+                              offset: const Offset(0, 1),
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Dive Deeper",
+                            style: viewModel.fontTheme.caption(
+                              context,
+                              color: context.colorScheme.white,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
                       ),
-                    )
-                  ],
-                )
-              ],
-            ),
-            const Spacer(),
-          ],
-        ),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -757,15 +752,222 @@ class EventsTabview extends ViewModelWidget<EventViewModel> {
             controller: tabController,
             physics: const NeverScrollableScrollPhysics(), // Disable swipe
             children: [
-              EventCardInfo(
-                model: viewModel.events[0],
-              ),
+              CategoryTabPage(),
               Center(child: Text("B")),
               Center(child: Text("C")),
               Center(child: Text("D")),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class CategoryTabPage extends ViewModelWidget<EventViewModel> {
+  const CategoryTabPage({super.key});
+
+  @override
+  Widget build(BuildContext context, EventViewModel viewModel) {
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        children: [
+          viewModel.todayEvent?.length == 1
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SectionText(title: "Ongoing Events"),
+                    Card(
+                      clipBehavior: Clip.hardEdge,
+                      color: context.colorScheme.card,
+                      shadowColor: context.colorScheme.card.withOpacity(0.8),
+                      elevation: 2,
+                      shape: ShapeBorder.lerp(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25).r,
+                        ),
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25).r,
+                        ),
+                        1,
+                      ),
+                      child: Stack(
+                        children: [
+                          EventCardInfo(
+                            model: viewModel.todayEvent![0],
+                          ),
+                          EventDateContainer(
+                            top: 118.h,
+                            left: 10.w,
+                            height: 70.r,
+                            width: 70.r,
+                            timeFontSize: 30.sp,
+                            textFontSize: 20.sp,
+                            event: viewModel.todayEvent![0],
+                            isUpcomming: false,
+                          ),
+                        ],
+                      ),
+                    ).animate(delay: 100.ms).fadeIn(),
+                  ],
+                )
+              : viewModel.todayEvent!.isEmpty
+                  ? 0.verticalSpace
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SectionText(title: "Ongoing Events"),
+                        CarouselSlider.builder(
+                          itemCount: viewModel._todayEvent.length,
+                          options: viewModel.ongoingCarosoulOptions,
+                          itemBuilder: (context, index, realIndex) {
+                            return SizedBox(
+                              child: Card(
+                                clipBehavior: Clip.hardEdge,
+                                shadowColor:
+                                    context.colorScheme.card.withOpacity(0.8),
+                                elevation: 2,
+                                color: context.colorScheme.card,
+                                shape: ShapeBorder.lerp(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25).r,
+                                  ),
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25).r,
+                                  ),
+                                  1,
+                                ),
+                                child: Stack(
+                                  children: [
+                                    EventCardInfo(
+                                      model: viewModel.todayEvent![index],
+                                    ),
+                                    EventDateContainer(
+                                      top: 118.h,
+                                      left: 10.w,
+                                      height: 70.r,
+                                      width: 70.r,
+                                      timeFontSize: 30.sp,
+                                      textFontSize: 20.sp,
+                                      event: viewModel.todayEvent![index],
+                                      isUpcomming: false,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ).animate(delay: 110.ms).fadeIn(),
+                      ],
+                    ),
+          viewModel.sponsors.isEmpty
+              ? SizedBox(
+                  height: 145.h,
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SectionText(title: "Sponsors"),
+                    CarouselSlider.builder(
+                      itemCount: viewModel.sponsors.length,
+                      options: viewModel.sponsorsCarosoulOptions,
+                      itemBuilder: (context, index, realIndex) {
+                        return Sponsors(
+                          model: viewModel.sponsors[index],
+                        );
+                      },
+                    )
+                  ],
+                ).animate(delay: 130.ms).fadeIn(),
+          viewModel.upcomingEvents.isNotEmpty
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SectionText(
+                        title:
+                            "Upcoming Events | ${viewModel.upcomingEvents.length}"),
+                    viewModel.upcomingEvents.isEmpty
+                        ? Container()
+                        : CarouselSlider.builder(
+                            itemCount: viewModel.upcomingEvents.length,
+                            options: CarouselOptions(
+                              scrollPhysics: const BouncingScrollPhysics(),
+                              autoPlayCurve: Curves.easeInOutCubic,
+                              enableInfiniteScroll: true,
+                              autoPlay: true,
+                              autoPlayInterval: 4.seconds,
+                              autoPlayAnimationDuration: 1.seconds,
+                              pauseAutoPlayOnTouch: true,
+                              pauseAutoPlayInFiniteScroll: true,
+                              viewportFraction: 0.65,
+                            ),
+                            itemBuilder: (context, index, realIndex) {
+                              return SizedBox(
+                                height: 210.h,
+                                child: Card(
+                                  clipBehavior: Clip.hardEdge,
+                                  shadowColor:
+                                      context.colorScheme.card.withOpacity(0.8),
+                                  elevation: 1,
+                                  shape: ShapeBorder.lerp(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18).r,
+                                    ),
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18).r,
+                                    ),
+                                    1,
+                                  ),
+                                  child: Stack(
+                                    children: [
+                                      EventCardUpcoming(
+                                        model: viewModel.upcomingEvents[index],
+                                      ),
+                                      EventDateContainer(
+                                        top: 2.h,
+                                        right: 2.w,
+                                        height: 65.r,
+                                        width: 60.r,
+                                        timeFontSize: 30.sp,
+                                        textFontSize: 20.sp,
+                                        event: viewModel.upcomingEvents[index],
+                                        isUpcomming: true,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ).animate(delay: 140.ms).fadeIn(),
+                  ],
+                )
+              : 0.verticalSpace,
+          4.verticalSpace,
+          viewModel.gallery.isNotEmpty
+              ? const SectionText(title: "Gallery")
+                  .animate(delay: 800.ms)
+                  .fadeIn()
+              : 0.verticalSpace,
+          viewModel.gallery.isNotEmpty
+              ? GalleryYearWiseView(
+                  gallery: viewModel.gallery,
+                ).animate(delay: 800.ms).fadeIn()
+              : 0.verticalSpace,
+          viewModel.todayEvent!.isEmpty && viewModel.upcomingEvents.isEmpty
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SectionText(title: "Best Memories"),
+                    BestMemories(
+                      bestMemories: viewModel._bestMemories,
+                    )
+                  ],
+                )
+                  .animate(delay: 1000.ms)
+                  .fadeIn(duration: const Duration(milliseconds: 1000))
+              : 0.verticalSpace
+        ],
       ),
     );
   }
