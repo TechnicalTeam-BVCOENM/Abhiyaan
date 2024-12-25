@@ -76,12 +76,9 @@ class EventViewModel extends BaseViewModel {
       _gallery.sort((a, b) => b.year.compareTo(a.year));
       _sponsors = await _firestoreService.getAllSponsors();
       sortEventsByDateTime(events);
+      getRemainingEvents();
+      getTodaysEvent();
       notifyListeners();
-      // getRemainingEvents();
-      // getTodaysEvent();
-      // notifyListeners();
-      // getTodaysEvent();
-      // notifyListeners();
     } catch (e) {
       log.e("Error Loading Sponsors: ${e.toString()}");
     }
@@ -165,9 +162,6 @@ void sortEventsByDateTime(List<EventModel> events) {
     }
     return dateComparison;
   });
-  for (EventModel event in events) {
-    print(event.startDate.toDate());
-  }
 }
 
 class EventModel {

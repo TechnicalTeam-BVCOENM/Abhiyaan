@@ -725,7 +725,9 @@ class EventsTabview extends ViewModelWidget<EventViewModel> {
       height: 700.h,
       width: double.infinity,
       child: Scaffold(
+        backgroundColor: context.colorScheme.scaffold,
         appBar: AppBar(
+          backgroundColor: context.colorScheme.scaffold,
           toolbarHeight: 0,
           bottom: TabBar(
             controller: tabController,
@@ -733,7 +735,10 @@ class EventsTabview extends ViewModelWidget<EventViewModel> {
             labelColor: context.colorScheme.white,
             labelPadding: const EdgeInsets.all(0),
             padding: const EdgeInsets.symmetric(horizontal: 10).r,
-            unselectedLabelColor: context.colorScheme.black,
+            unselectedLabelColor:
+                context.colorScheme.brightness == Brightness.light
+                    ? context.colorScheme.black
+                    : context.colorScheme.white,
             dividerColor: context.colorScheme.scaffold,
             indicatorSize: TabBarIndicatorSize.tab,
             labelStyle: FontThemeClass().caption(
@@ -751,7 +756,7 @@ class EventsTabview extends ViewModelWidget<EventViewModel> {
           child: TabBarView(
             controller: tabController,
             physics: const NeverScrollableScrollPhysics(), // Disable swipe
-            children: [
+            children: const [
               CategoryTabPage(),
               Center(child: Text("B")),
               Center(child: Text("C")),
