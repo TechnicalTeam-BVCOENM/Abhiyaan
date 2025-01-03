@@ -50,14 +50,12 @@ class EventView extends StatelessWidget {
                           10.verticalSpace,
                           Center(
                             child: Text(
-                              "karneki ninja technique",
+                              "Experience engage and create memories!",
                               style: model.fontTheme.small(context),
                             ),
                           ),
                           18.verticalSpace,
                           const EventsTabview(),
-
-                       
                         ].animate(delay: 100.ms, interval: 40.ms).fadeIn()),
                   ),
                 ),

@@ -486,25 +486,31 @@ class GalleryYearWiseView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 210.h,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        itemCount: gallery.length,
-        itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-              onTap: () {
-                NavigationService().navigateTo(Routes.galleryTabView,
-                    arguments:
-                        GalleryTabViewArguments(gallery: gallery[index]));
-              },
-              child: GalleryYearWiseCards(
-                gallery: gallery,
-                index: index,
-              ));
-        },
-      ),
+    return Column(
+      children: [
+        15.verticalSpace,
+        SizedBox(
+          height: 210.h,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            itemCount: gallery.length,
+            itemBuilder: (BuildContext context, int index) {
+              return GestureDetector(
+                  onTap: () {
+                    NavigationService().navigateTo(Routes.galleryTabView,
+                        arguments:
+                            GalleryTabViewArguments(gallery: gallery[index]));
+                  },
+                  child: GalleryYearWiseCards(
+                    gallery: gallery,
+                    index: index,
+                  ));
+            },
+          ),
+        ),
+        10.verticalSpace,
+      ],
     );
   }
 }
@@ -756,11 +762,13 @@ class EventsTabview extends ViewModelWidget<EventViewModel> {
           child: TabBarView(
             controller: tabController,
             physics: const NeverScrollableScrollPhysics(), // Disable swipe
-            children: const [
-              CategoryTabPage(),
-              Center(child: Text("B")),
-              Center(child: Text("C")),
-              Center(child: Text("D")),
+            children: [
+              const CategoryTabPage(),
+              const CategoryTabPage(),
+              const CategoryTabPage(),
+              GalleryYearWiseView(
+                gallery: viewModel.gallery,
+              )
             ],
           ),
         ),
@@ -949,29 +957,19 @@ class CategoryTabPage extends ViewModelWidget<EventViewModel> {
                 )
               : 0.verticalSpace,
           4.verticalSpace,
-          viewModel.gallery.isNotEmpty
-              ? const SectionText(title: "Gallery")
-                  .animate(delay: 800.ms)
-                  .fadeIn()
-              : 0.verticalSpace,
-          viewModel.gallery.isNotEmpty
-              ? GalleryYearWiseView(
-                  gallery: viewModel.gallery,
-                ).animate(delay: 800.ms).fadeIn()
-              : 0.verticalSpace,
-          viewModel.todayEvent!.isEmpty && viewModel.upcomingEvents.isEmpty
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SectionText(title: "Best Memories"),
-                    BestMemories(
-                      bestMemories: viewModel._bestMemories,
-                    )
-                  ],
-                )
-                  .animate(delay: 1000.ms)
-                  .fadeIn(duration: const Duration(milliseconds: 1000))
-              : 0.verticalSpace
+          // viewModel.todayEvent!.isEmpty && viewModel.upcomingEvents.isEmpty
+          //     ? Column(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           const SectionText(title: "Best Memories"),
+          //           BestMemories(
+          //             bestMemories: viewModel._bestMemories,
+          //           )
+          //         ],
+          //       )
+          //         .animate(delay: 1000.ms)
+          //         .fadeIn(duration: const Duration(milliseconds: 1000))
+          //     : 0.verticalSpace
         ],
       ),
     );
