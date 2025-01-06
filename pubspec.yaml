@@ -41,7 +41,7 @@ dependencies:
   expandable: ^5.0.1
   flutter_screenutil: ^5.9.0
   share_plus: ^10.0.2
-  flutter_local_notifications: ^17.2.2
+  flutter_local_notifications: ^18.0.1
   app_settings: ^5.1.1
   lottie: ^3.0.0
   flutter_animate: ^4.3.0

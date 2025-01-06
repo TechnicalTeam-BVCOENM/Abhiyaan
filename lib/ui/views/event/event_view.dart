@@ -13,6 +13,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
 import 'package:abhiyaan/ui/common/cached_network_image.dart';
 import 'package:abhiyaan/file_exporter.dart';
+import 'package:lottie/lottie.dart';
 
 part 'event_view_model.dart';
 part 'event_view_components.dart';

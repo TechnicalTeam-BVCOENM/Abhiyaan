@@ -764,8 +764,8 @@ class EventsTabview extends ViewModelWidget<EventViewModel> {
             physics: const NeverScrollableScrollPhysics(), // Disable swipe
             children: [
               const CategoryTabPage(),
-              const CategoryTabPage(),
-              const CategoryTabPage(),
+              const Center(child: Text("Coming Soon...")),
+              const Center(child: Text("Coming Soon...")),
               GalleryYearWiseView(
                 gallery: viewModel.gallery,
               )
@@ -790,7 +790,24 @@ class CategoryTabPage extends ViewModelWidget<EventViewModel> {
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SectionText(title: "Ongoing Events"),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          child: Lottie.asset(
+                            AnimationAssets.livePing,
+                            repeat: true,
+                            reverse: false,
+                            frameRate: const FrameRate(60),
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        const SectionText(
+                          title: "Ongoing Events",
+                          height: 8,
+                        ),
+                      ],
+                    ),
                     Card(
                       clipBehavior: Clip.hardEdge,
                       color: context.colorScheme.card,
@@ -811,8 +828,8 @@ class CategoryTabPage extends ViewModelWidget<EventViewModel> {
                             model: viewModel.todayEvent![0],
                           ),
                           EventDateContainer(
-                            top: 118.h,
-                            left: 10.w,
+                            right: 10.w,
+                            top: 10.h,
                             height: 70.r,
                             width: 70.r,
                             timeFontSize: 30.sp,

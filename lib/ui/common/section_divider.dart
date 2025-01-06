@@ -1,14 +1,15 @@
 import 'package:abhiyaan/file_exporter.dart';
 
 class SectionText extends StatelessWidget {
-  const SectionText({super.key, required this.title, this.showArrow = false});
+  const SectionText({super.key, required this.title, this.showArrow = false, this.height = 18});
   final String title;
   final bool showArrow;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 18, bottom: 8),
+      margin: EdgeInsets.only(top: height, bottom: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
