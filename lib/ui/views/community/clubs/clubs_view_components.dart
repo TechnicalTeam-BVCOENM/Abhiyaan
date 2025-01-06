@@ -31,6 +31,7 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
   final List<FestInfo> clubFest;
   final String clubLink;
   final List<ClubMemberInfo> clubMembers;
+  final bool isUniversal;
 
   const ClubsData({
     super.key,
@@ -40,6 +41,7 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
     required this.clubFest,
     required this.clubMembers,
     required this.clubLink,
+    this.isUniversal = false,
   });
 
   @override
@@ -85,33 +87,49 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
                 }
               },
               child: Text(
-                "Let's Explore the $clubShortHand",
+                "Tap to Explore the $clubShortHand",
                 style: fontTheme.body(
                   context,
                   fontWeight: FontWeight.w500,
-                  color: context.colorScheme.secondaryText,
+                  color: context.colorScheme.primary,
                 ),
               ),
             ),
           ),
           10.verticalSpace,
-          SizedBox(
-            height: 220.h,
-            child: Center(
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: clubMembers.length,
-                itemBuilder: (context, index) {
-                  return MemberCard(
-                    clubMembers: clubMembers,
-                    fontTheme: fontTheme,
-                    index: index,
-                  );
-                },
-              ),
-            ),
-          ),
+          isUniversal
+              ? SizedBox(
+                  height: 220.h,
+                  child: Center(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: clubMembers.length,
+                      itemBuilder: (context, index) {
+                        return MemberCard(
+                          clubMembers: clubMembers,
+                          fontTheme: fontTheme,
+                          index: index,
+                        );
+                      },
+                    ),
+                  ),
+                )
+              : GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                  ),
+                  itemCount: clubMembers.length,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return MemberCard(
+                      clubMembers: clubMembers,
+                      fontTheme: fontTheme,
+                      index: index,
+                    );
+                  },
+                ),
           clubFest.isEmpty
               ? Container()
               : Padding(

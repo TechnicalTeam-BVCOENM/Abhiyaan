@@ -10,7 +10,9 @@ part 'clubs_view_components.dart';
 
 class ClubsView extends StatelessWidget {
   final ClubsDataModel clubsData;
-  const ClubsView({super.key, required this.clubsData});
+  final bool isUniversal;
+  const ClubsView(
+      {super.key, required this.clubsData, this.isUniversal = false});
 
   @override
   Widget build(BuildContext context) {

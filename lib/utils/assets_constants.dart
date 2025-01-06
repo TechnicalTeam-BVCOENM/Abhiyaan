@@ -59,7 +59,3 @@ class AnimationAssets {
   static const String livePing = 'assets/animations/live.json';
 }
 
-// class AppConstants {
-//   static const String appVersion = '1.1.5';
-// }
-// TODO(Niranjan-Dorage): remove abouve comments
