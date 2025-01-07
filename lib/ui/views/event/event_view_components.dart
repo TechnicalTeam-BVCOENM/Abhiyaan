@@ -803,7 +803,7 @@ class CategoryTabPage extends ViewModelWidget<EventViewModel> {
                           ),
                         ),
                         const SectionText(
-                          title: "Ongoing Events",
+                          title: "Today's Events",
                           height: 8,
                         ),
                       ],

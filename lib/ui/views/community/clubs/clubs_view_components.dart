@@ -31,7 +31,6 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
   final List<FestInfo> clubFest;
   final String clubLink;
   final List<ClubMemberInfo> clubMembers;
-  final bool isUniversal;
 
   const ClubsData({
     super.key,
@@ -41,7 +40,6 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
     required this.clubFest,
     required this.clubMembers,
     required this.clubLink,
-    this.isUniversal = false,
   });
 
   @override
@@ -97,7 +95,7 @@ class ClubsData extends ViewModelWidget<ClubsViewModel> {
             ),
           ),
           10.verticalSpace,
-          isUniversal
+          clubMembers.length <= 2
               ? SizedBox(
                   height: 220.h,
                   child: Center(
