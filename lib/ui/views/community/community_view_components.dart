@@ -7,7 +7,7 @@ Widget _buildClubs(List<ClubsDataModel> clubsData, String title) {
     children: [
       SectionText(title: title, showArrow: true),
       SizedBox(
-        height: 115.h,
+        height: 125.h,
         width: double.infinity,
         child: CarouselSlider.builder(
           itemCount: clubsData.length,
@@ -320,8 +320,7 @@ class ClubsViewWidget extends ViewModelWidget<CommunityViewModel> {
                         ClipOval(
                           child: CachedNetworkImage(
                             imageUrl: data.clubImage,
-                            height: 65.h,
-                            width: 65.w,
+                            width: 60.w,
                             fit: BoxFit.cover,
                           ),
                         ),

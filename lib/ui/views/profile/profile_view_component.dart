@@ -243,7 +243,7 @@ class HelpSupportTile extends ViewModelWidget<ProfileViewModel> {
           ),
         ),
         title: Text(
-          "Help & Support",
+          "Support & Suggestions",
           style: FontThemeClass().body(
             context,
             color: context.colorScheme.primaryText,

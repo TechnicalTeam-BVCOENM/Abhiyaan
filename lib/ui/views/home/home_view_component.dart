@@ -4,57 +4,48 @@ final AnalyticsService _analyticsService = locator<AnalyticsService>();
 
 Widget quickLinksList(BuildContext context, List model,
     [double? borderRadius]) {
-  return SizedBox(
-    height: 110.h,
-    width: 386.w,
-    child: ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      scrollDirection: Axis.horizontal,
-      itemCount: model.length,
-      // itemExtent: 98.w,
-      itemBuilder: (context, idx) {
-        return Padding(
-          padding: EdgeInsets.only(right: 22.w, left: 0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  handleQuickLinksNavigation(model, idx);
-                },
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(200).r,
-                  child: Container(
-                    color: context.colorScheme.card,
-                    height: 80.h,
-                    width: 80.w,
-                    child: Center(
-                      child: Image.asset(
-                        model[idx].imageUrl,
-                        width: 80.w,
-                        height: 80.h,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+  return GridView.builder(
+    shrinkWrap: true,
+    scrollDirection: Axis.vertical,
+    itemCount: model.length,
+    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 4,
+      mainAxisSpacing: 10,
+      childAspectRatio: 0.85,
+    ),
+    itemBuilder: (BuildContext context, int idx) {
+      return Column(
+        children: [
+          GestureDetector(
+            onTap: () => handleQuickLinksNavigation(model, idx),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(300).r,
+              child: Container(
+                color: context.colorScheme.card,
+                width: 75.w,
+                child: Center(
+                  child: Image.asset(
+                    model[idx].imageUrl,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
-              Text(
-                model[idx].title.toString().toUpperCase(),
-                style: FontThemeClass().small(
-                  context,
-                  color: context.colorScheme.primaryText.withOpacity(0.8),
-                  fontWeight: FontWeight.w600,
-                ),
-                textAlign: TextAlign.center,
-                softWrap: false,
-              ),
-            ],
+            ),
           ),
-        );
-      },
-    ),
+          8.verticalSpace,
+          Text(
+            model[idx].title.toString().toUpperCase(),
+            style: FontThemeClass().small(
+              context,
+              color: context.colorScheme.primaryText.withOpacity(0.8),
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.center,
+            softWrap: false,
+          ),
+        ],
+      );
+    },
   );
 }
 
