@@ -6,11 +6,16 @@ class PackageInfoService {
   static String? version;
   static String? buildNumber;
 
-  static void setUpPackageInfo() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    appName = packageInfo.appName;
-    packageName = packageInfo.packageName;
-    version = packageInfo.version;
-    buildNumber = packageInfo.buildNumber;
+  static Future<void> setUpPackageInfo() async {
+    try {
+      PackageInfo packageInfo = await PackageInfo.fromPlatform();
+      appName = packageInfo.appName;
+      packageName = packageInfo.packageName;
+      version = packageInfo.version;
+      buildNumber = packageInfo.buildNumber;
+    } catch (e) {
+      appName = "Abhiyaan";
+      version = "0.0.0";
+    }
   }
 }

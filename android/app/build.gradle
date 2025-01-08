@@ -60,15 +60,19 @@ android {
 
     signingConfigs {
        release {
-           keyAlias keystoreProperties['keyAlias']
-           keyPassword keystoreProperties['keyPassword']
-           storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-           storePassword keystoreProperties['storePassword']
+            keyAlias "abhiyaan-alias"          // Replace with the alias you used
+            keyPassword "abhiyaan"  // Use the password you set
+            storeFile file("android/app/keystore.jks")
+            storePassword "abhiyaan" // U
        }
    }
    buildTypes {
        release {
            signingConfig signingConfigs.release
+           minifyEnabled true
+           shrinkResources true
+           proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+   
        }
    }
 
@@ -96,6 +100,4 @@ dependencies {
         implementation platform('com.google.firebase:firebase-bom:33.3.0')
         implementation 'com.google.firebase:firebase-analytics'
         implementation 'com.google.firebase:firebase-crashlytics'
-
-
 }

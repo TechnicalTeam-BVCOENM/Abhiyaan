@@ -56,10 +56,6 @@ class AssetUrls {
 
 class AnimationAssets {
   static const String welcome = 'assets/animations/welcome.json';
-  static const String handLoading = 'assets/animations/hand_loading.json';
+  static const String livePing = 'assets/animations/live.json';
 }
 
-// class AppConstants {
-//   static const String appVersion = '1.1.5';
-// }
-// TODO(Niranjan-Dorage): remove abouve comments

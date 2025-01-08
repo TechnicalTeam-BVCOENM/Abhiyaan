@@ -54,7 +54,7 @@ Future<void> servicesToInitializeBeforeAppStart() async {
 Future<void> setupBeforeAppRun() async {
   setupDialogUi();
   setupBottomSheetUi();
-  PackageInfoService.setUpPackageInfo();
+  await PackageInfoService.setUpPackageInfo(); // Await the async function
 
   if (kDebugMode) {
     FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
