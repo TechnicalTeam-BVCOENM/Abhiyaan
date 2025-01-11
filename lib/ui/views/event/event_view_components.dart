@@ -480,37 +480,44 @@ class Sponsors extends ViewModelWidget<EventViewModel> {
   }
 }
 
-class GalleryYearWiseView extends StatelessWidget {
+class GalleryYearWiseView extends ViewModelWidget<EventViewModel> {
   final List<GalleryModel> gallery;
   const GalleryYearWiseView({super.key, required this.gallery});
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        15.verticalSpace,
-        SizedBox(
-          height: 210.h,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
-            itemCount: gallery.length,
-            itemBuilder: (BuildContext context, int index) {
-              return GestureDetector(
-                  onTap: () {
-                    NavigationService().navigateTo(Routes.galleryTabView,
-                        arguments:
-                            GalleryTabViewArguments(gallery: gallery[index]));
-                  },
-                  child: GalleryYearWiseCards(
-                    gallery: gallery,
-                    index: index,
-                  ));
-            },
+  Widget build(BuildContext context, EventViewModel viewModel) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          15.verticalSpace,
+          SizedBox(
+            height: 210.h,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemCount: gallery.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                    onTap: () {
+                      NavigationService().navigateTo(Routes.galleryTabView,
+                          arguments:
+                              GalleryTabViewArguments(gallery: gallery[index]));
+                    },
+                    child: GalleryYearWiseCards(
+                      gallery: gallery,
+                      index: index,
+                    ));
+              },
+            ),
           ),
-        ),
-        10.verticalSpace,
-      ],
+          10.verticalSpace,
+          const SectionText(title: "Best Memories"),
+          BestMemories(
+            bestMemories: viewModel._bestMemories,
+          ),
+          10.verticalSpace,
+        ],
+      ),
     );
   }
 }
@@ -974,19 +981,19 @@ class CategoryTabPage extends ViewModelWidget<EventViewModel> {
                 )
               : 0.verticalSpace,
           4.verticalSpace,
-          // viewModel.todayEvent!.isEmpty && viewModel.upcomingEvents.isEmpty
-          //     ? Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         children: [
-          //           const SectionText(title: "Best Memories"),
-          //           BestMemories(
-          //             bestMemories: viewModel._bestMemories,
-          //           )
-          //         ],
-          //       )
-          //         .animate(delay: 1000.ms)
-          //         .fadeIn(duration: const Duration(milliseconds: 1000))
-          //     : 0.verticalSpace
+          viewModel.todayEvent!.isEmpty && viewModel.upcomingEvents.isEmpty
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SectionText(title: "Best Memories"),
+                    BestMemories(
+                      bestMemories: viewModel._bestMemories,
+                    )
+                  ],
+                )
+                  .animate(delay: 1000.ms)
+                  .fadeIn(duration: const Duration(milliseconds: 1000))
+              : 0.verticalSpace
         ],
       ),
     );

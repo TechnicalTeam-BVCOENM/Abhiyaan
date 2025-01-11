@@ -43,7 +43,7 @@ GestureDetector buildRegisterButton(AuthViewModel model, BuildContext context) {
           'Register',
           style: FontThemeClass().title2(
             context,
-            color: context.colorScheme.primaryText,
+            color: context.colorScheme.black,
             fontWeight: FontWeight.w600,
           ),
         ),

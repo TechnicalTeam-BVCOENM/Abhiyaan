@@ -16,4 +16,8 @@ class ThemeService {
     valueListenable.value = !valueListenable.value;
     _localStorageService.write(_key, valueListenable.value);
   }
+
+  void getTheme() {
+    valueListenable.value = _localStorageService.read<bool>(_key) ?? false;
+  }
 }
