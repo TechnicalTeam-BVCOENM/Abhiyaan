@@ -29,6 +29,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 Future<void> servicesToInitializeBeforeAppStart() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   final notificationsService = NotificationsService();
   LocalNotificationService.initialize();
   if (Firebase.apps.isEmpty) {
@@ -84,6 +85,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final themeService = locator<ThemeService>();
+    themeService.getTheme();
     SystemChrome.setPreferredOrientations(
       [
         DeviceOrientation.portraitUp,

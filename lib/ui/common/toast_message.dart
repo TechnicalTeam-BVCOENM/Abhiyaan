@@ -3,7 +3,6 @@ import 'package:abhiyaan/file_exporter.dart';
 enum MessageType { success, error, warning, normal }
 
 void showMessage(BuildContext context, String message, MessageType type) {
-
   FontThemeClass fontTheme = FontThemeClass();
   Color backgroundColor;
   IconData icon;
@@ -36,7 +35,7 @@ void showMessage(BuildContext context, String message, MessageType type) {
       SnackBar(
         padding: const EdgeInsets.all(10),
         elevation: 300,
-        duration: const Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 1000),
         backgroundColor: Colors.transparent,
         clipBehavior: Clip.hardEdge,
         content: Center(
@@ -62,11 +61,14 @@ void showMessage(BuildContext context, String message, MessageType type) {
                     ),
                   ),
                   const Spacer(),
-                  Text(
-                    message,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: fontTheme.body(context),
+                  SizedBox(
+                    width: 300.w,
+                    child: Text(
+                      message,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: fontTheme.body(context),
+                    ),
                   ),
                   const Spacer(),
                 ],

@@ -49,7 +49,7 @@ class ProfileViewModel extends BaseViewModel {
     _analyticsService.logEvent(
         eventName: "Privacy_policy", value: "Privacy policy button clicked");
     UrlLauncher externalUrlHandler = UrlLauncher();
-    externalUrlHandler.launchURL("https://abhiyaan.tech/privacy-policy");
+    externalUrlHandler.launchURL("https://abhiyaan.vercel.app/privacy-policy");
   }
 
   void navigateToProfileDetails() {

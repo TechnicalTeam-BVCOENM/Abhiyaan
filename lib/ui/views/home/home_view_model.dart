@@ -63,17 +63,17 @@ class HomeViewModel extends BaseViewModel {
     QuickLinksModel(
       imageUrl: "assets/images/home/quick_links/abhiyaan.png",
       title: "Abhiyaan",
-      url: 'https://abhiyaan.tech/',
+      url: 'https://abhiyaan.vercel.app/',
     ),
     QuickLinksModel(
       imageUrl: "assets/images/home/quick_links/tdc_logo.png",
       title: "TDC",
-      url: 'https://abhiyaan.tech/',
+      url: 'https://abhiyaan.vercel.app/',
     ),
     QuickLinksModel(
       imageUrl: "assets/images/home/quick_links/cesa.png",
       title: "CESA",
-      url: 'https://www.clubcesa.tech/',
+      url: 'https://clubcesa.vercel.app/',
     ),
   ];
 
