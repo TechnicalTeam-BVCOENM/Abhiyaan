@@ -145,7 +145,7 @@ class HomeView extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               UrlLauncher()
-                                  .launchURL("https://abhiyaan.tech/web-team");
+                                  .launchURL("https://abhiyaan.vercel.app/web-team");
                             },
                             child: Text(
                               'Made with ❤️ by TheDevCrew',
