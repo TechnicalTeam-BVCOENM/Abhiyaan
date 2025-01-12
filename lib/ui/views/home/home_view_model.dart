@@ -73,7 +73,7 @@ class HomeViewModel extends BaseViewModel {
     QuickLinksModel(
       imageUrl: "assets/images/home/quick_links/cesa.png",
       title: "CESA",
-      url: 'https://www.clubcesa.tech/',
+      url: 'https://clubcesa.vercel.app/',
     ),
   ];
 

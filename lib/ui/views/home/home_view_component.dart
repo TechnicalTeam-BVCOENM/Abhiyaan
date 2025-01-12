@@ -5,6 +5,7 @@ final AnalyticsService _analyticsService = locator<AnalyticsService>();
 Widget quickLinksList(BuildContext context, List model,
     [double? borderRadius]) {
   return GridView.builder(
+    physics: const NeverScrollableScrollPhysics(),
     shrinkWrap: true,
     scrollDirection: Axis.vertical,
     itemCount: model.length,
